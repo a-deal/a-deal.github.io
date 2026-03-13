@@ -364,8 +364,41 @@
     padding: 20px; margin-bottom: 32px; font-size: 13px; line-height: 1.7; color: #555;
   }
   .context-block strong { color: #1a1a1a; }
-  .trail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
-  @media (max-width: 600px) { .trail-grid { grid-template-columns: 1fr; } }
+  /* ── Lane layout ── */
+  .lane {
+    margin-bottom: 32px;
+  }
+  .lane-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .lane-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .lane-icon.today-lane { background: #e8f0ea; color: #4a8c5c; }
+  .lane-icon.gate-lane { background: #1a1a1a; color: #fff; }
+  .lane-icon.pulse-lane { background: #e8ecf0; color: #5a7c9c; }
+  .lane-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .lane-subtitle {
+    font-size: 12px;
+    color: #aaa;
+  }
+  .lane-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .lane-grid { grid-template-columns: 1fr; } }
+
   .trail-card {
     background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px;
     padding: 22px; cursor: pointer; transition: border-color 0.2s, transform 0.15s;
@@ -385,8 +418,38 @@
   }
   .trail-tag.today { background: #e8f0ea; color: #4a8c5c; }
   .trail-tag.pulse { background: #e8ecf0; color: #5a7c9c; }
-  .dep-note { font-size: 12px; color: #bbb; line-height: 1.6; }
-  .dep-note strong { color: #999; }
+
+  /* Gate card — T2 */
+  .gate-card {
+    background: #1a1a1a; border: none; border-radius: 16px;
+    padding: 22px; cursor: pointer; transition: transform 0.15s;
+    display: flex; flex-direction: column; color: #fff;
+  }
+  .gate-card:hover { transform: translateY(-2px); }
+  .gate-card .trail-num { color: #666; }
+  .gate-card .trail-title { color: #fff; }
+  .gate-card .trail-desc { color: #999; }
+  .gate-card .trail-tag { background: rgba(255,255,255,0.12); color: #aaa; }
+  .gate-card .trail-tag.pulse { background: rgba(90,124,156,0.25); color: #8ab0d0; }
+
+  /* Connector arrow */
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    color: #ccc;
+  }
+  .connector svg { width: 20px; height: 20px; }
+
+  /* Locked state hint */
+  .lane-locked-hint {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: -8px;
+    margin-bottom: 14px;
+    padding-left: 42px;
+  }
 
   /* ── Page visibility ── */
   .page { display: none; }
@@ -416,54 +479,94 @@
 <div class="page visible" id="page-index">
 <div class="index-wrap">
   <h1>Integration Trailheads</h1>
-  <p class="index-subtitle">Six places the coaching layer connects to the existing app. Each trailhead is independent — pick whichever feels most valuable to build first.</p>
+  <p class="index-subtitle">Six places the coaching layer connects to the existing app. Organized by build order — Today tab first (no prerequisites), then Pulse.</p>
 
   <div class="context-block">
     <strong>Converge summary:</strong> The coaching engine has depth (21-day sandbox, phases, weekly reflections, evidence protocols). But it doesn't need to ship all at once. These six trailheads are the <em>surfaces</em> where coaching intelligence becomes visible to the user. Each one is a small, shippable piece.<br><br>
     <strong>How I got here:</strong> Ran through Paul's latest main build. Mapped every screen where the coaching layer could surface without breaking what's already working. Cross-referenced with IRL debrief (small iterations, converged work, "wow" gap). Each trailhead is 1-2 PRs.
   </div>
 
-  <div class="trail-grid">
-    <div class="trail-card" onclick="showPage('t1')">
-      <div class="trail-num">Trailhead 1</div>
-      <div class="trail-title">Coach Whispers</div>
-      <div class="trail-desc">Inline messages in Today at inflection points — first check-in, return after a gap, graduation. Uses CoachMessageEngine already on main.</div>
-      <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Low lift</span></div>
+  <!-- ── LANE 1: TODAY (no prerequisites) ── -->
+  <div class="lane">
+    <div class="lane-header">
+      <div class="lane-icon today-lane">✓</div>
+      <div>
+        <div class="lane-title">Ships into Today</div>
+        <div class="lane-subtitle">No prerequisites — plugs into the existing tab right now</div>
+      </div>
     </div>
-    <div class="trail-card" onclick="showPage('t2')">
-      <div class="trail-num">Trailhead 2</div>
-      <div class="trail-title">Pulse Tab Shell</div>
-      <div class="trail-desc">The third tab. Day counter, forming habit status, one coach observation. The structural home for "how am I doing lately?"</div>
-      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">New surface</span></div>
-    </div>
-    <div class="trail-card" onclick="showPage('t3')">
-      <div class="trail-num">Trailhead 3</div>
-      <div class="trail-title">Activity Path</div>
-      <div class="trail-desc">90-day visualization. Apple Health fills the past, check-ins color the present. The user sees their story taking shape.</div>
-      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Visual</span></div>
-    </div>
-    <div class="trail-card" onclick="showPage('t4')">
-      <div class="trail-num">Trailhead 4</div>
-      <div class="trail-title">Coached Check-In</div>
-      <div class="trail-desc">"How'd it go?" — emoji response after the tap. Coach builds patterns over time. Always skippable.</div>
-      <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Interaction</span></div>
-    </div>
-    <div class="trail-card" onclick="showPage('t5')">
-      <div class="trail-num">Trailhead 5</div>
-      <div class="trail-title">Health Context Cards</div>
-      <div class="trail-desc">Apple Health data as coach observations. "Your RHR dropped 3 bpm." The "oh damn" moment from the layers doc.</div>
-      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag today">Today</span></div>
-    </div>
-    <div class="trail-card" onclick="showPage('t6')">
-      <div class="trail-num">Trailhead 6</div>
-      <div class="trail-title">Weekly Pulse</div>
-      <div class="trail-desc">Day 7/14/21 reflection moments. Week-shaped observations with health data connections.</div>
-      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Cadence</span></div>
+    <div class="lane-grid">
+      <div class="trail-card" onclick="showPage('t1')">
+        <div class="trail-num">Trailhead 1</div>
+        <div class="trail-title">Coach Whispers</div>
+        <div class="trail-desc">Inline messages at inflection points — first check-in, return after a gap, graduation. Uses CoachMessageEngine already on main.</div>
+        <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Low lift</span></div>
+      </div>
+      <div class="trail-card" onclick="showPage('t4')">
+        <div class="trail-num">Trailhead 4</div>
+        <div class="trail-title">Coached Check-In</div>
+        <div class="trail-desc">"How'd it go?" — emoji response after the tap. Coach builds patterns over time. Always skippable.</div>
+        <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Interaction</span></div>
+      </div>
     </div>
   </div>
 
-  <div class="dep-note">
-    <strong>Dependencies:</strong> Trailheads 1 + 4 plug into Today (existing tab). Trailheads 2, 3, 5, 6 need Pulse — but T2 (the shell) is the prerequisite, not the others. Activity Path (3) and Health Context (5) ship independently once Pulse exists.
+  <!-- ── CONNECTOR ── -->
+  <div class="connector">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="10" y1="2" x2="10" y2="14"/><polyline points="6,10 10,14 14,10"/></svg>
+  </div>
+
+  <!-- ── LANE 2: GATE (Pulse prerequisite) ── -->
+  <div class="lane">
+    <div class="lane-header">
+      <div class="lane-icon gate-lane">〜</div>
+      <div>
+        <div class="lane-title">Unlock Pulse</div>
+        <div class="lane-subtitle">This creates the third tab — everything below needs it</div>
+      </div>
+    </div>
+    <div class="gate-card" onclick="showPage('t2')">
+      <div class="trail-num">Trailhead 2</div>
+      <div class="trail-title">Pulse Tab Shell</div>
+      <div class="trail-desc">The third tab. Day counter, forming habit status, one coach observation. The structural home for "how am I doing lately?" — everything in the next section lives here.</div>
+      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">New surface</span><span class="trail-tag">Prerequisite</span></div>
+    </div>
+  </div>
+
+  <!-- ── CONNECTOR ── -->
+  <div class="connector">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="10" y1="2" x2="10" y2="14"/><polyline points="6,10 10,14 14,10"/></svg>
+  </div>
+
+  <!-- ── LANE 3: PULSE (after shell exists) ── -->
+  <div class="lane">
+    <div class="lane-header">
+      <div class="lane-icon pulse-lane">◆</div>
+      <div>
+        <div class="lane-title">Ships into Pulse</div>
+        <div class="lane-subtitle">Independent of each other — ship in any order once the shell exists</div>
+      </div>
+    </div>
+    <div class="lane-grid">
+      <div class="trail-card" onclick="showPage('t3')">
+        <div class="trail-num">Trailhead 3</div>
+        <div class="trail-title">Activity Path</div>
+        <div class="trail-desc">90-day visualization. Apple Health fills the past, check-ins color the present. The user sees their story taking shape.</div>
+        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Visual</span></div>
+      </div>
+      <div class="trail-card" onclick="showPage('t5')">
+        <div class="trail-num">Trailhead 5</div>
+        <div class="trail-title">Health Context Cards</div>
+        <div class="trail-desc">Apple Health data as coach observations. "Your RHR dropped 3 bpm." The "oh damn" moment from the layers doc.</div>
+        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag today">Today</span></div>
+      </div>
+      <div class="trail-card" onclick="showPage('t6')">
+        <div class="trail-num">Trailhead 6</div>
+        <div class="trail-title">Weekly Pulse</div>
+        <div class="trail-desc">Day 7/14/21 reflection moments. Week-shaped observations with health data connections.</div>
+        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Cadence</span></div>
+      </div>
+    </div>
   </div>
 </div>
 </div>
