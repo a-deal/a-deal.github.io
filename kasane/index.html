@@ -634,6 +634,88 @@
   /* Scenario visibility */
   .scenario { display: none; }
   .scenario.visible { display: block; }
+
+  /* ── Peakspan page ── */
+  .ps-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+  .ps-wrap h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 6px;
+  }
+  .ps-wrap .ps-sub {
+    font-size: 14px; color: #888; line-height: 1.6; margin-bottom: 28px; max-width: 640px;
+  }
+
+  .ps-tier-strip {
+    display: flex; gap: 0; margin-bottom: 32px; border-radius: 12px; overflow: hidden;
+    border: 1px solid #e8e8e4;
+  }
+  .ps-tier {
+    flex: 1; padding: 16px 18px; background: #fff;
+    border-right: 1px solid #e8e8e4;
+  }
+  .ps-tier:last-child { border-right: none; }
+  .ps-tier .ps-tier-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .ps-tier .ps-tier-q {
+    font-size: 13px; font-weight: 500; margin-bottom: 4px;
+  }
+  .ps-tier .ps-tier-desc {
+    font-size: 11px; color: #888; line-height: 1.5;
+  }
+
+  .ps-section-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    color: #aaa; margin-bottom: 14px; margin-top: 32px;
+  }
+
+  .ps-domain-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px; margin-bottom: 24px;
+  }
+  .ps-domain-card {
+    background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 16px 18px;
+  }
+  .ps-domain-card .psd-head {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+  .ps-domain-card .psd-icon {
+    width: 32px; height: 32px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; font-size: 16px;
+  }
+  .ps-domain-card .psd-name { font-size: 14px; font-weight: 600; }
+  .ps-domain-card .psd-layer { font-size: 10px; color: #888; }
+  .ps-domain-card .psd-body { font-size: 11px; color: #666; line-height: 1.6; }
+  .ps-domain-card .psd-habits {
+    margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px;
+  }
+  .ps-domain-card .psd-habit {
+    font-size: 10px; background: #f4f3f0; border-radius: 4px; padding: 3px 8px; color: #666;
+  }
+
+  /* Voice check-in section */
+  .ps-phones {
+    display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+    margin-top: 16px;
+  }
+  .ps-phone-col {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .ps-phone-label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: #aaa;
+  }
+  .ps-annotation {
+    max-width: 300px; background: #fff; border: 1px solid #e8e8e4;
+    border-radius: 10px; padding: 14px 16px; margin-top: 8px;
+  }
+  .ps-annotation .psa-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .ps-annotation p { font-size: 11px; color: #888; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -648,6 +730,7 @@
   <button class="nav-btn" onclick="showPage('t5')">5. Health Context</button>
   <button class="nav-btn" onclick="showPage('t6')">6. Weekly Pulse</button>
   <button class="nav-btn" style="border-left: 1px solid #333; margin-left: 4px; padding-left: 16px;" onclick="showPage('journey')">Journey Map</button>
+  <button class="nav-btn" onclick="showPage('peakspan')">Peakspan + Voice</button>
 </nav>
 
 <!-- ═══════════════════════════════════════ -->
@@ -1713,6 +1796,344 @@
   </div><!-- /timeline -->
 </div><!-- /journey-wrap -->
 </div><!-- /page-journey -->
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PEAKSPAN + VOICE                        -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-peakspan">
+<div class="ps-wrap">
+
+  <h1>Peakspan + Voice Check-In</h1>
+  <p class="ps-sub">Peakspan reframes the goal: not just avoiding disease (healthspan), but staying near your personal best. Kasane's layers are how you maintain peak across domains. Voice check-in + sentiment are how we know if it's working.</p>
+
+  <!-- ── Three tiers ── -->
+  <div class="ps-tier-strip">
+    <div class="ps-tier">
+      <div class="ps-tier-label" style="color:#ccc;">Longevity</div>
+      <div class="ps-tier-q">How long do I live?</div>
+      <div class="ps-tier-desc">Binary. Not our lane.</div>
+    </div>
+    <div class="ps-tier">
+      <div class="ps-tier-label" style="color:#5a7c9c;">Healthspan</div>
+      <div class="ps-tier-q">How long do I avoid major disease?</div>
+      <div class="ps-tier-desc">Clinical markers, labs, diagnostics. Baseline's measurement layer (Ring 2).</div>
+    </div>
+    <div class="ps-tier" style="background:#fafdf9;">
+      <div class="ps-tier-label" style="color:#4a8c5c;">Peakspan</div>
+      <div class="ps-tier-q">How long do I stay near my personal best?</div>
+      <div class="ps-tier-desc">~90% of lifetime best in a specific domain. Kasane's behavior layer (Ring 1) — the habits that maintain peak.</div>
+    </div>
+  </div>
+
+  <div style="background:#f8f7f4; border-radius:10px; padding:16px 18px; margin-bottom:32px; font-size:12px; color:#666; line-height:1.6;">
+    <strong style="color:#1a1a1a;">The gap Kasane fills:</strong> You can pass every clinical marker while silently drifting from your personal best. A healthy A1C doesn't mean your VO2 max isn't declining. Normal bloodwork doesn't mean your sleep quality is where it was two years ago. Peakspan asks: are you still operating near your best? Kasane's layers are how you stay there.
+  </div>
+
+  <!-- ── Domain → Layer mapping ── -->
+  <div class="ps-section-label">Peakspan domains → Kasane layers</div>
+
+  <div class="ps-domain-grid">
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#e8f5e9;">💨</div>
+        <div><div class="psd-name">Cardiorespiratory</div><div class="psd-layer">Movement layer</div></div>
+      </div>
+      <div class="psd-body">Stay near your VO2 max peak. The Levine protocol: 4-5 days aerobic, weekly Norwegian 4x4, zone 2 base. Sauna extends cardiovascular benefit post-workout.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Morning walk</span>
+        <span class="psd-habit">Zone 2 session</span>
+        <span class="psd-habit">4x4 intervals</span>
+        <span class="psd-habit">Post-workout sauna</span>
+      </div>
+    </div>
+
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#e3f2fd;">💪</div>
+        <div><div class="psd-name">Muscle</div><div class="psd-layer">Movement + Nutrition layers</div></div>
+      </div>
+      <div class="psd-body">Preserve force generation and lean mass. Resistance train 2-3x/wk, 1.2-1.6g protein/kg/day. Creatine 5-10g/day. Avoid cold immersion immediately post-strength.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Strength training</span>
+        <span class="psd-habit">Protein target</span>
+        <span class="psd-habit">Creatine</span>
+      </div>
+    </div>
+
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#fce4ec;">🛡</div>
+        <div><div class="psd-name">Immunity</div><div class="psd-layer">Recovery + Nutrition layers</div></div>
+      </div>
+      <div class="psd-body">Preserve immune responsiveness, not just avoid illness. Sleep is non-negotiable. Vitamin D, omega-3s, sauna, healthy weight. Obesity is a risk factor across pathogen types.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Sleep routine</span>
+        <span class="psd-habit">Vitamin D</span>
+        <span class="psd-habit">Omega-3s</span>
+        <span class="psd-habit">Sauna</span>
+      </div>
+    </div>
+
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#f3e5f5;">🧠</div>
+        <div><div class="psd-name">Cognition</div><div class="psd-layer">Recovery + Connect layers</div></div>
+      </div>
+      <div class="psd-body">Mental sharpness, focus, processing speed. Sleep again as foundation. Exercise is neuroprotective. Stress management and social connection preserve cognitive reserve.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Evening wind-down</span>
+        <span class="psd-habit">Meditation</span>
+        <span class="psd-habit">Social check-in</span>
+      </div>
+    </div>
+
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#fff3e0;">🌿</div>
+        <div><div class="psd-name">Digestion</div><div class="psd-layer">Nutrition layer</div></div>
+      </div>
+      <div class="psd-body">Microbiome-forward preservation. Fermented foods, fiber diversity, targeted probiotics. Digestive function doesn't wait for old age to change.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Fermented foods</span>
+        <span class="psd-habit">Fiber variety</span>
+        <span class="psd-habit">Probiotic</span>
+      </div>
+    </div>
+
+    <div class="ps-domain-card">
+      <div class="psd-head">
+        <div class="psd-icon" style="background:#e0f2f1;">🧬</div>
+        <div><div class="psd-name">Fertility</div><div class="psd-layer">Recovery + Nutrition layers</div></div>
+      </div>
+      <div class="psd-body">Reproductive quality and capacity. Healthy weight, micronutrient status, toxicant avoidance (BPA, microplastics, PFAS). Gender-specific protocols.</div>
+      <div class="psd-habits">
+        <span class="psd-habit">Supplement protocol</span>
+        <span class="psd-habit">Clean food storage</span>
+        <span class="psd-habit">Water filtration</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:14px 18px; margin-bottom:8px;">
+    <div style="font-size:12px; font-weight:600; margin-bottom:6px;">What the mapping reveals</div>
+    <ul style="font-size:11px; color:#666; line-height:1.7; margin-left:16px;">
+      <li><strong>Domains cross layers.</strong> Muscle peakspan requires Movement AND Nutrition habits together. You don't optimize one domain with one habit — you layer.</li>
+      <li><strong>Sleep is the universal foundation.</strong> Appears in cardiorespiratory, immunity, cognition, indirectly in muscle. Recovery layer is the base everything builds on.</li>
+      <li><strong>Measurement lives in Baseline, behavior lives in Kasane.</strong> VO2 max, RHR, strength benchmarks — Ring 2 metrics. The habits that maintain them — Ring 1. Peakspan is the reason you need both rings.</li>
+    </ul>
+  </div>
+
+  <!-- ── Voice Check-In: Prominence ── -->
+  <div class="ps-section-label" style="margin-top:40px;">Voice check-in — center stage, not sidebar</div>
+
+  <div style="background:#f8f7f4; border-radius:10px; padding:16px 18px; margin-bottom:20px; font-size:12px; color:#666; line-height:1.6;">
+    <strong style="color:#1a1a1a;">The tension:</strong> Check-in should be "insanely, humiliatingly easy" (Paul). But sentiment + voice capture is where the richest coaching signal lives. Resolution: <strong>voice IS the easy path.</strong> Talking is faster than tapping an emoji grid. Paul's voice check-in on main proves this — "so much smoother than tapping a few check-ins." Make voice the primary check-in, not an optional add-on.
+  </div>
+
+  <div class="ps-phones">
+
+    <!-- Phone 1: Voice as primary -->
+    <div class="ps-phone-col">
+      <div class="ps-phone-label">Voice-first check-in</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 12</div></div>
+        <div class="ms">
+          <div class="ms-label">Forming</div>
+          <div class="mini-fc done">
+            <div class="mfc-top"><span class="mfc-emoji">🚶</span><span class="mfc-title">Walk after breakfast</span></div>
+            <div class="mfc-anchor">12 day streak</div>
+            <div class="mfc-btn" style="background:#4a8c5c;">Done ✓</div>
+          </div>
+
+          <!-- Voice prompt slides up -->
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:14px; padding:16px; margin-top:14px; text-align:center;">
+            <div style="font-size:14px; font-weight:600; margin-bottom:10px;">How'd it go?</div>
+
+            <!-- Voice button — prominent -->
+            <div style="width:56px; height:56px; border-radius:50%; background:#1a1a1a; margin:0 auto 10px; display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:22px; color:#fff;">🎙</span>
+            </div>
+            <div style="font-size:10px; color:#aaa; margin-bottom:14px;">Tap to talk — or choose below</div>
+
+            <!-- Emoji as secondary -->
+            <div style="display:flex; justify-content:center; gap:12px;">
+              <div style="text-align:center;"><div style="font-size:20px;">😤</div><div style="font-size:9px; color:#aaa;">Tough</div></div>
+              <div style="text-align:center;"><div style="font-size:20px;">😐</div><div style="font-size:9px; color:#aaa;">Meh</div></div>
+              <div style="text-align:center;"><div style="font-size:20px;">🙂</div><div style="font-size:9px; color:#aaa;">Good</div></div>
+              <div style="text-align:center;"><div style="font-size:20px;">🔥</div><div style="font-size:9px; color:#aaa;">Great</div></div>
+            </div>
+
+            <div style="font-size:10px; color:#ccc; margin-top:12px; cursor:pointer;">Skip — just log it</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="ps-annotation">
+        <div class="psa-title">Voice is the easy path</div>
+        <p>"Felt great, the cold air woke me up" — 2 seconds, richer than any emoji. The coach extracts sentiment + context from natural speech. Emoji grid stays as fallback for quiet moments or preference.</p>
+      </div>
+    </div>
+
+    <!-- Phone 2: What the coach hears -->
+    <div class="ps-phone-col">
+      <div class="ps-phone-label">What the coach hears</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 12</div></div>
+        <div class="ms">
+          <div class="ms-label">Voice captured</div>
+
+          <div style="background:#f0f7f1; border-left:3px solid #4a8c5c; border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:12px;">
+            <div style="font-size:10px; color:#4a8c5c; font-weight:600; margin-bottom:4px;">🎙 You said:</div>
+            <p style="font-size:12px; color:#444; line-height:1.5; font-style:italic;">"Felt great today, did the longer route through the park. Cold air really woke me up."</p>
+          </div>
+
+          <div class="ms-label">Coach extracts</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;">
+            <span style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:3px 8px; border-radius:4px;">sentiment: great</span>
+            <span style="font-size:10px; background:#e3f2fd; color:#1565c0; padding:3px 8px; border-radius:4px;">context: longer route</span>
+            <span style="font-size:10px; background:#fff3e0; color:#e65100; padding:3px 8px; border-radius:4px;">trigger: cold air</span>
+          </div>
+
+          <div class="ms-label">Over 12 days</div>
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:12px 14px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="font-size:11px; font-weight:600;">🚶 Walk after breakfast</span>
+              <span style="font-size:10px; color:#4a8c5c; font-weight:600;">anchor habit</span>
+            </div>
+            <div style="display:flex; gap:3px; margin-bottom:8px;">
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#8bc34a;" title="good"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#8bc34a;" title="good"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#8bc34a;" title="good"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#cddc39;" title="meh"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+              <div style="width:20px; height:16px; border-radius:3px; background:#4a8c5c;" title="great"></div>
+            </div>
+            <div style="font-size:10px; color:#888;">9 great · 2 good · 1 meh · 0 tough</div>
+            <div style="font-size:10px; color:#4a8c5c; margin-top:4px;">This habit consistently makes your day better.</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="ps-annotation">
+        <div class="psa-title">Sentiment becomes signal</div>
+        <p>Voice gives sentiment + context + triggers. Over time: anchor habit detection (consistently great), struggle routing (consistently tough), lifestyle fit (sentiment x consistency). This is subjective peakspan tracking.</p>
+      </div>
+    </div>
+
+    <!-- Phone 3: Peakspan in Pulse -->
+    <div class="ps-phone-col">
+      <div class="ps-phone-label">Peakspan in Pulse</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Week 6</div></div>
+        <div class="ms">
+          <div class="ms-label">Your layers</div>
+
+          <!-- Cardiorespiratory domain -->
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:12px 14px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:14px;">💨</span>
+                <span style="font-size:12px; font-weight:600;">Cardiorespiratory</span>
+              </div>
+              <span style="font-size:9px; color:#4a8c5c; font-weight:600; background:#e8f5e9; padding:2px 6px; border-radius:3px;">near peak</span>
+            </div>
+            <div style="display:flex; gap:6px; margin-bottom:6px;">
+              <div style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:4px;">🚶 Walk — practicing</div>
+              <div style="font-size:10px; background:#fff3e0; color:#e65100; padding:2px 6px; border-radius:4px;">🏃 Zone 2 — forming</div>
+            </div>
+            <div style="font-size:10px; color:#888;">RHR 50 bpm · trending ↓ · sentiment: mostly great</div>
+          </div>
+
+          <!-- Muscle domain -->
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:12px 14px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:14px;">💪</span>
+                <span style="font-size:12px; font-weight:600;">Muscle</span>
+              </div>
+              <span style="font-size:9px; color:#e65100; font-weight:600; background:#fff3e0; padding:2px 6px; border-radius:3px;">building</span>
+            </div>
+            <div style="display:flex; gap:6px; margin-bottom:6px;">
+              <div style="font-size:10px; background:#fff3e0; color:#e65100; padding:2px 6px; border-radius:4px;">🏋️ Strength — forming</div>
+              <div style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:4px;">🥩 Protein — practicing</div>
+            </div>
+            <div style="font-size:10px; color:#888;">Creatine 5g/day · sentiment: mixed (strength is tough)</div>
+          </div>
+
+          <!-- Recovery domain -->
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:12px 14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="font-size:14px;">🛡</span>
+                <span style="font-size:12px; font-weight:600;">Recovery</span>
+              </div>
+              <span style="font-size:9px; color:#4a8c5c; font-weight:600; background:#e8f5e9; padding:2px 6px; border-radius:3px;">near peak</span>
+            </div>
+            <div style="display:flex; gap:6px; margin-bottom:6px;">
+              <div style="font-size:10px; background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:4px;">😴 Sleep routine — practicing</div>
+            </div>
+            <div style="font-size:10px; color:#888;">Sleep avg 7.1h · sentiment: great · anchor layer</div>
+          </div>
+
+          <div style="margin-top:12px; background:#f8f7f4; border-radius:8px; padding:10px 12px;">
+            <p style="font-size:11px; color:#666; line-height:1.5;">✦ Three domains active. Recovery and cardiorespiratory are near peak — your sleep and walk are holding strong. Strength training is building but feeling tough. Want to talk about what's making it hard?</p>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab active"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="ps-annotation">
+        <div class="psa-title">Domain-level coaching</div>
+        <p>Pulse groups habits by peakspan domain. Each domain shows: layers active, gap health, objective metrics (from Apple Health / Baseline), and sentiment trend. The coach reads across domains — "strength is tough" triggers investigation, not just encouragement.</p>
+      </div>
+    </div>
+
+  </div><!-- /ps-phones -->
+
+  <!-- ── How it all connects ── -->
+  <div class="ps-section-label" style="margin-top:40px;">How it connects</div>
+
+  <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px;">
+    <div style="flex:1; min-width:200px; background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:14px 16px;">
+      <div style="font-size:12px; font-weight:600; margin-bottom:6px;">Voice check-in captures</div>
+      <p style="font-size:11px; color:#888; line-height:1.6;">Natural language → sentiment + context + triggers. Richer than emoji, faster than typing. The coach hears what you said, not just what you tapped.</p>
+    </div>
+    <div style="flex:1; min-width:200px; background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:14px 16px;">
+      <div style="font-size:12px; font-weight:600; margin-bottom:6px;">Sentiment signals over time</div>
+      <p style="font-size:11px; color:#888; line-height:1.6;">Anchor habits (joy), struggle habits (intervention), lifestyle fit (sustainability). Subjective peakspan — are you still near your best, or just going through the motions?</p>
+    </div>
+    <div style="flex:1; min-width:200px; background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:14px 16px;">
+      <div style="font-size:12px; font-weight:600; margin-bottom:6px;">Domain view in Pulse</div>
+      <p style="font-size:11px; color:#888; line-height:1.6;">Habits grouped by peakspan domain. Objective metrics + sentiment = full picture. The coach reads across domains to spot where you're maintaining peak and where you're drifting.</p>
+    </div>
+  </div>
+
+  <div style="background:#f8f7f4; border-radius:10px; padding:16px 18px; font-size:12px; color:#666; line-height:1.6;">
+    <strong style="color:#1a1a1a;">On the word "peakspan":</strong> Both Paul and Andrew: "weird word, great concept." The user-facing language doesn't need to be "peakspan" — it could be "staying near your best" or simply embedded in how the coach talks. The concept matters: your layers aren't just habits, they're maintaining your peak across domains. The word is negotiable. The philosophy isn't.
+  </div>
+
+</div><!-- /ps-wrap -->
+</div><!-- /page-peakspan -->
 
 <!-- ═══════════════════════════════════════ -->
 <!-- JAVASCRIPT                              -->
