@@ -1071,6 +1071,10 @@
         <div class="emoji-col"><div class="emoji-option selected">🙂</div><div class="emoji-label">Good</div></div>
         <div class="emoji-col"><div class="emoji-option">🔥</div><div class="emoji-label">Great</div></div>
       </div>
+      <div style="background:#f8f7f4; border:1px solid #e8e8e4; border-radius:8px; padding:10px 12px; margin-top:10px; font-size:11px; color:#aaa; line-height:1.5; display:flex; align-items:center; justify-content:space-between;">
+        <span>Anything else? <span style="color:#ccc;">(optional)</span></span>
+        <span style="font-size:14px; opacity:0.5;" title="Voice input">🎙</span>
+      </div>
       <div class="skip-btn">Skip — just log it</div>
     </div>
   </div>
@@ -1119,7 +1123,16 @@
 </div>
 <div class="note-panel"><div class="design-note">
   <div class="note-label">Design intent</div>
-  <p>Adds reflection depth without adding friction. The emoji response takes 1 second. Over time, the coach builds patterns: "you feel best about morning walks on Tuesdays." Always skippable — the one-tap path still works. The coach sheet only slides up when there's pattern data worth surfacing.</p>
+  <p>Adds reflection depth without adding friction. The emoji response takes 1 second. The optional free-text field ("Anything else?") captures richer context — voice input makes this nearly zero-effort. Always skippable — the one-tap path still works.</p>
+  <div class="note-label" style="margin-top:12px;">Sentiment as signal layer (new — not yet in coaching engine)</div>
+  <p>Emoji + free-text over time becomes a <strong>sentiment signal</strong> that powers multiple coaching decisions:</p>
+  <ul style="font-size:12px; color:#666; line-height:1.7; margin:8px 0 0 16px;">
+    <li><strong>Anchor habit detection:</strong> Consistently "great" ratings identify the habit that fits your life best. Protect it. This is the one to build layers around.</li>
+    <li><strong>Struggle detection:</strong> Persistent "tough" ratings trigger coach intervention — rescope the habit, suggest group accountability, or bench it before it drags other habits down.</li>
+    <li><strong>Lifestyle fit scoring:</strong> Sentiment + consistency together reveal whether a habit is sustainable identity-level or just grinding. A habit with perfect streaks but "meh" ratings is fragile.</li>
+    <li><strong>Seasonal adaptation:</strong> As your health baseline rises and more habits graduate to practicing, sentiment reveals which layers still bring energy vs. which are coasting. Priorities shift by season — the data shows when.</li>
+  </ul>
+  <p style="margin-top:8px;">Requires new field on CDCheckIn (reaction enum + optional note). Currently the model has: id, date, completed, note. The coaching engine (AIService) uses only behavioral signals today — this would be the first qualitative input fed to the AI prompt context.</p>
 </div></div>
 </div>
 
