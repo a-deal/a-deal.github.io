@@ -454,6 +454,8 @@
   /* ── Page visibility ── */
   .page { display: none; }
   .page.visible { display: block; }
+  .subpage { display: none; }
+  .subpage.visible { display: block; }
 
   /* ── Journey Map ── */
   .journey-wrap {
@@ -765,6 +767,50 @@
   .ps-annotation .psa-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
   .ps-annotation p { font-size: 11px; color: #888; line-height: 1.5; }
 
+  /* ── Trailhead selector ── */
+  .th-selector {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    padding: 20px 24px 0; background: #fafaf8;
+  }
+  .th-sel-btn {
+    padding: 8px 14px; border: 1px solid #e8e8e4; border-radius: 8px;
+    background: #fff; font-family: 'DM Sans', sans-serif; font-size: 11px;
+    font-weight: 600; cursor: pointer; color: #888; transition: all 0.15s;
+    position: relative;
+  }
+  .th-sel-btn:hover { border-color: #ccc; color: #444; }
+  .th-sel-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+  .th-sel-btn .th-status {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .th-status.shipped { background: #4a8c5c; }
+  .th-status.partial { background: #e6a817; }
+  .th-status.next { background: #d44; }
+
+  /* ── Concept tabs ── */
+  .concept-selector {
+    display: flex; gap: 6px; padding: 20px 24px 0; background: #fafaf8;
+  }
+  .concept-btn {
+    padding: 8px 14px; border: 1px solid #e8e8e4; border-radius: 8px;
+    background: #fff; font-family: 'DM Sans', sans-serif; font-size: 11px;
+    font-weight: 600; cursor: pointer; color: #888; transition: all 0.15s;
+  }
+  .concept-btn:hover { border-color: #ccc; color: #444; }
+  .concept-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  /* ── Roadmap status ── */
+  .rm-status {
+    display: inline-block; font-size: 9px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .rm-status.shipped { background: #e8f5e9; color: #2e7d32; }
+  .rm-status.partial { background: #fff8e1; color: #f57f17; }
+  .rm-status.next { background: #fce4ec; color: #c62828; }
+  .rm-status.blocked { background: #f5f5f5; color: #999; }
+
   /* ── Time-of-day labels ── */
   .tod-label {
     font-size: 9px; font-weight: 600; text-transform: uppercase;
@@ -886,17 +932,10 @@
 <!-- ─── TOP NAV ─── -->
 <nav class="top-nav">
   <button class="nav-btn active" onclick="showPage('index')">Overview</button>
-  <button class="nav-btn" style="border-left: 1px solid #333; margin-left: 4px; padding-left: 16px;" onclick="showPage('t1')">1. Coach Whispers</button>
-  <button class="nav-btn" onclick="showPage('t2')">2. Pulse Shell</button>
-  <button class="nav-btn" onclick="showPage('t3')">3. Activity Path</button>
-  <button class="nav-btn" onclick="showPage('t4')">4. Coached Check-In</button>
-  <button class="nav-btn" onclick="showPage('t5')">5. Health Context</button>
-  <button class="nav-btn" onclick="showPage('t6')">6. Weekly Pulse</button>
-  <button class="nav-btn" style="border-left: 1px solid #333; margin-left: 4px; padding-left: 16px;" onclick="showPage('journey')">Journey Map</button>
-  <button class="nav-btn" onclick="showPage('peakspan')">Peakspan</button>
-  <button class="nav-btn" onclick="showPage('voice')">Voice + Sentiment</button>
-  <button class="nav-btn" onclick="showPage('engine')">Coaching Engine</button>
-  <button class="nav-btn" style="border-left: 1px solid #333; margin-left: 4px; padding-left: 16px;" onclick="showPage('changelog')">Changelog</button>
+  <button class="nav-btn" onclick="showPage('trailheads')">Trailheads</button>
+  <button class="nav-btn" onclick="showPage('journey')">Journey Map</button>
+  <button class="nav-btn" onclick="showPage('concepts')">Concepts</button>
+  <button class="nav-btn" onclick="showPage('changelog')">Changelog</button>
 </nav>
 
 <!-- ═══════════════════════════════════════ -->
@@ -1013,7 +1052,7 @@
     </div>
     <div style="font-size:11px; color:#666; line-height:1.6;">
       <strong>Key insight:</strong> Every domain maps to existing layers. Domains cross layers — muscle peakspan needs Movement AND Nutrition together. Recovery (sleep) is the universal foundation, appearing in 4 of 6 domains. The four layers hold up.
-      <span style="color:#4a8c5c; cursor:pointer; font-weight:500;" onclick="showPage('peakspan')">Deep dive →</span>
+      <span style="color:#4a8c5c; cursor:pointer; font-weight:500;" onclick="selectConcept('peakspan')">Deep dive →</span>
     </div>
   </div>
 
@@ -1053,101 +1092,115 @@
     </div>
   </div>
 
-  <!-- ── TRAILHEADS SECTION ── -->
-  <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#aaa; margin-bottom:8px; margin-top:32px;">Integration trailheads</div>
+  <!-- ── ROADMAP ── -->
+  <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#aaa; margin-bottom:8px; margin-top:32px;">Roadmap — what's shipped vs. what's next</div>
   <div style="font-size:12px; color:#666; line-height:1.6; margin-bottom:20px; max-width:640px;">
-    Six places the coaching layer connects to the existing app. Organized by build order — Today tab first (no prerequisites), then Pulse. Each trailhead is 1-2 PRs. The coaching engine has depth (sandbox phases, weekly reflections, evidence protocols), but it ships in small, visible pieces.
+    Current state of main as of March 13. ~70% of the wireframe vision is shipped. Green = live, yellow = engine exists but UI needs work, red = not yet built.
+    <span style="color:#5a7c9c; cursor:pointer; font-weight:500;" onclick="showPage('trailheads')">See wireframes →</span>
   </div>
 
-  <!-- ── LANE 1: TODAY (no prerequisites) ── -->
-  <div class="lane">
-    <div class="lane-header">
-      <div class="lane-icon today-lane">✓</div>
-      <div>
-        <div class="lane-title">Ships into Today</div>
-        <div class="lane-subtitle">No prerequisites — plugs into the existing tab right now</div>
+  <!-- ── SHIPPED ── -->
+  <div style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:#2e7d32; margin-bottom:10px;">Shipped on main</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px;">
+    <div style="background:#fafdf9; border:1px solid #d4e8d0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t5')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T5: Health Context</span>
+        <span class="rm-status shipped">Shipped</span>
       </div>
+      <div style="font-size:10px; color:#666;">5-source card, completeness ring, source-level pitches. Fully built.</div>
     </div>
-    <div class="lane-grid">
-      <div class="trail-card" onclick="showPage('t1')">
-        <div class="trail-num">Trailhead 1</div>
-        <div class="trail-title">Coach Whispers</div>
-        <div class="trail-desc">Inline messages at inflection points — first check-in, return after a gap, graduation. Uses CoachMessageEngine already on main.</div>
-        <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Low lift</span></div>
+    <div style="background:#fafdf9; border:1px solid #d4e8d0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t6')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T6: Weekly Reflection</span>
+        <span class="rm-status shipped">Shipped</span>
       </div>
-      <div class="trail-card" onclick="showPage('t4')">
-        <div class="trail-num">Trailhead 4</div>
-        <div class="trail-title">Coached Check-In</div>
-        <div class="trail-desc">"How'd it go?" — emoji response after the tap. Coach builds patterns over time. Always skippable.</div>
-        <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Interaction</span></div>
-      </div>
+      <div style="font-size:10px; color:#666;">3-step flow (evidence → coach → what's next). Phase-aware. 1,684 lines.</div>
     </div>
-  </div>
-
-  <!-- ── CONNECTOR ── -->
-  <div class="connector">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="10" y1="2" x2="10" y2="14"/><polyline points="6,10 10,14 14,10"/></svg>
-  </div>
-
-  <!-- ── LANE 2: GATE (Pulse prerequisite) ── -->
-  <div class="lane">
-    <div class="lane-header">
-      <div class="lane-icon gate-lane">〜</div>
-      <div>
-        <div class="lane-title">Unlock Pulse</div>
-        <div class="lane-subtitle">This creates the third tab — everything below needs it</div>
+    <div style="background:#fafdf9; border:1px solid #d4e8d0; border-radius:10px; padding:12px 14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">Voice Check-In</span>
+        <span class="rm-status shipped">Shipped</span>
       </div>
+      <div style="font-size:10px; color:#666;">SFSpeechRecognizer, fuzzy habit matching via Haiku 4.5, 640 lines.</div>
     </div>
-    <div class="gate-card" onclick="showPage('t2')">
-      <div class="trail-num">Trailhead 2</div>
-      <div class="trail-title">Pulse Tab Shell</div>
-      <div class="trail-desc">The third tab. Day counter, forming habit status, one coach observation. The structural home for "how am I doing lately?" — everything in the next section lives here.</div>
-      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">New surface</span><span class="trail-tag">Prerequisite</span></div>
+    <div style="background:#fafdf9; border:1px solid #d4e8d0; border-radius:10px; padding:12px 14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">Foundation engine</span>
+        <span class="rm-status shipped">Shipped</span>
+      </div>
+      <div style="font-size:10px; color:#666;">Sandbox phases, InterventionCatalog (5 stacks), gap health, graduation logic.</div>
     </div>
   </div>
 
-  <!-- ── CONNECTOR ── -->
-  <div class="connector">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="10" y1="2" x2="10" y2="14"/><polyline points="6,10 10,14 14,10"/></svg>
+  <!-- ── ENGINE EXISTS, UI NEEDED ── -->
+  <div style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:#f57f17; margin-bottom:10px;">Engine exists — needs UI</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:20px;">
+    <div style="background:#fffdf5; border:1px solid #f0e6c0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t1')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T1: Coach Whispers</span>
+        <span class="rm-status partial">Next up</span>
+      </div>
+      <div style="font-size:10px; color:#666;">CoachMessageEngine generates messages. Not rendered inline on Today. <strong>Lowest lift PR.</strong></div>
+    </div>
+    <div style="background:#fffdf5; border:1px solid #f0e6c0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t4')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T4: Sentiment Capture</span>
+        <span class="rm-status partial">Partial</span>
+      </div>
+      <div style="font-size:10px; color:#666;">3-step coached flow exists (text reflection). Missing emoji picker + CDCheckIn.reaction field.</div>
+    </div>
   </div>
 
-  <!-- ── LANE 3: PULSE (after shell exists) ── -->
-  <div class="lane">
-    <div class="lane-header">
-      <div class="lane-icon pulse-lane">◆</div>
-      <div>
-        <div class="lane-title">Ships into Pulse</div>
-        <div class="lane-subtitle">Independent of each other — ship in any order once the shell exists</div>
+  <!-- ── NOT YET BUILT ── -->
+  <div style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color:#c62828; margin-bottom:10px;">Not yet built</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:20px;">
+    <div style="background:#fff; border:1px solid #f0d0d0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t2')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T2: Pulse Tab</span>
+        <span class="rm-status next">Not built</span>
       </div>
+      <div style="font-size:10px; color:#666;">Third tab doesn't exist. Weekly reflection lives in a sheet, not a persistent surface.</div>
     </div>
-    <div class="lane-grid">
-      <div class="trail-card" onclick="showPage('t3')">
-        <div class="trail-num">Trailhead 3</div>
-        <div class="trail-title">Activity Path</div>
-        <div class="trail-desc">90-day visualization. Apple Health fills the past, check-ins color the present. The user sees their story taking shape.</div>
-        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Visual</span></div>
+    <div style="background:#fff; border:1px solid #f0d0d0; border-radius:10px; padding:12px 14px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t3')">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">T3: Activity Path</span>
+        <span class="rm-status next">Not built</span>
       </div>
-      <div class="trail-card" onclick="showPage('t5')">
-        <div class="trail-num">Trailhead 5</div>
-        <div class="trail-title">Health Context Cards</div>
-        <div class="trail-desc">Apple Health data as coach observations. "Your RHR dropped 3 bpm." The "oh damn" moment from the layers doc.</div>
-        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag today">Today</span></div>
-      </div>
-      <div class="trail-card" onclick="showPage('t6')">
-        <div class="trail-num">Trailhead 6</div>
-        <div class="trail-title">Weekly Pulse</div>
-        <div class="trail-desc">Day 7/14/21 reflection moments. Week-shaped observations with health data connections.</div>
-        <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Cadence</span></div>
-      </div>
+      <div style="font-size:10px; color:#666;">90-day visualization. Sparklines exist for metrics, but no habit × health overlay.</div>
     </div>
+    <div style="background:#fff; border:1px solid #f0d0d0; border-radius:10px; padding:12px 14px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:12px; font-weight:600;">Time-of-day</span>
+        <span class="rm-status next">Not built</span>
+      </div>
+      <div style="font-size:10px; color:#666;">Anchor text + reminderTime exist. Morning/evening grouping not rendered on Today.</div>
+    </div>
+  </div>
+
+  <!-- ── RECOMMENDED NEXT ── -->
+  <div style="background:#1a1a1a; color:#fff; border-radius:12px; padding:18px 20px; margin-bottom:20px; cursor:pointer;" onclick="showPage('trailheads');selectTrailhead('t1')">
+    <div style="font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:#4a8c5c; margin-bottom:6px;">Recommended next iteration</div>
+    <div style="font-size:16px; font-weight:600; margin-bottom:6px;">T1: Coach Whispers → inline on Today</div>
+    <div style="font-size:12px; color:#aaa; line-height:1.6;">CoachMessageEngine already generates contextual messages (first check-in, gap return, milestone). Wire it into TodayView above the forming cards. No new architecture. 1 PR, ~50 lines of UI. The coach starts speaking.</div>
   </div>
 </div>
 </div>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- T1: COACH WHISPERS                      -->
+<!-- TRAILHEADS (combined)                   -->
 <!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t1">
+<div class="page" id="page-trailheads">
+<div class="th-selector">
+  <button class="th-sel-btn active" onclick="selectTrailhead('t1')">T1: Coach Whispers <span class="th-status partial"></span></button>
+  <button class="th-sel-btn" onclick="selectTrailhead('t2')">T2: Pulse Shell <span class="th-status next"></span></button>
+  <button class="th-sel-btn" onclick="selectTrailhead('t3')">T3: Activity Path <span class="th-status next"></span></button>
+  <button class="th-sel-btn" onclick="selectTrailhead('t4')">T4: Coached Check-In <span class="th-status partial"></span></button>
+  <button class="th-sel-btn" onclick="selectTrailhead('t5')">T5: Health Context <span class="th-status shipped"></span></button>
+  <button class="th-sel-btn" onclick="selectTrailhead('t6')">T6: Weekly Pulse <span class="th-status shipped"></span></button>
+</div>
+
+<!-- T1: COACH WHISPERS -->
+<div class="subpage visible" id="sub-t1">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1221,10 +1274,8 @@
 </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- T2: PULSE SHELL                         -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t2">
+<!-- T2: PULSE SHELL -->
+<div class="subpage" id="sub-t2">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1316,10 +1367,8 @@
 </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- T3: ACTIVITY PATH                       -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t3">
+<!-- T3: ACTIVITY PATH -->
+<div class="subpage" id="sub-t3">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1400,10 +1449,8 @@
 </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- T4: COACHED CHECK-IN                    -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t4">
+<!-- T4: COACHED CHECK-IN -->
+<div class="subpage" id="sub-t4">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1504,10 +1551,8 @@
 </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- T5: HEALTH CONTEXT CARDS                -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t5">
+<!-- T5: HEALTH CONTEXT CARDS -->
+<div class="subpage" id="sub-t5">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1599,10 +1644,8 @@
 </div></div>
 </div>
 
-<!-- ═══════════════════════════════════════ -->
-<!-- T6: WEEKLY PULSE                        -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-t6">
+<!-- T6: WEEKLY PULSE -->
+<div class="subpage" id="sub-t6">
 <div class="phone-wrap">
 <div class="phone-frame">
   <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
@@ -1708,6 +1751,7 @@
   <p>Cadence-based, not date-based. Week 1 is a shape observation. Week 2 connects habits to health data + offers a midpoint reflection. Week 3 is graduation with cumulative evidence. Each card stays in Pulse until dismissed. The reflection prompt at Week 2 is optional — skip is always there.</p>
 </div></div>
 </div>
+</div><!-- /page-trailheads -->
 
 <!-- ═══════════════════════════════════════ -->
 <!-- JOURNEY MAP                             -->
@@ -2247,9 +2291,17 @@
 </div><!-- /page-journey -->
 
 <!-- ═══════════════════════════════════════ -->
-<!-- PEAKSPAN + VOICE                        -->
+<!-- CONCEPTS (combined)                     -->
 <!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-peakspan">
+<div class="page" id="page-concepts">
+<div class="concept-selector">
+  <button class="concept-btn active" onclick="selectConcept('peakspan')">Peakspan</button>
+  <button class="concept-btn" onclick="selectConcept('voice')">Voice + Sentiment</button>
+  <button class="concept-btn" onclick="selectConcept('engine')">Coaching Engine</button>
+</div>
+
+<!-- PEAKSPAN -->
+<div class="subpage visible" id="sub-peakspan">
 <div class="ps-wrap">
 
   <h1>Peakspan</h1>
@@ -2450,12 +2502,10 @@
   </div>
 
 </div><!-- /ps-wrap -->
-</div><!-- /page-peakspan -->
+</div><!-- /sub-peakspan -->
 
-<!-- ═══════════════════════════════════════ -->
-<!-- VOICE + SENTIMENT                       -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-voice">
+<!-- VOICE + SENTIMENT -->
+<div class="subpage" id="sub-voice">
 <div class="ps-wrap">
 
   <h1>Voice + Sentiment</h1>
@@ -2623,12 +2673,10 @@
   </div>
 
 </div><!-- /ps-wrap -->
-</div><!-- /page-voice -->
+</div><!-- /sub-voice -->
 
-<!-- ═══════════════════════════════════════ -->
-<!-- COACHING ENGINE                         -->
-<!-- ═══════════════════════════════════════ -->
-<div class="page" id="page-engine">
+<!-- COACHING ENGINE -->
+<div class="subpage" id="sub-engine">
 <div class="ps-wrap">
 
   <h1>Coaching Engine</h1>
@@ -2792,7 +2840,8 @@
   </div>
 
 </div><!-- /ps-wrap -->
-</div><!-- /page-engine -->
+</div><!-- /sub-engine -->
+</div><!-- /page-concepts -->
 
 <!-- ═══════════════════════════════════════ -->
 <!-- CHANGELOG                               -->
@@ -2803,15 +2852,26 @@
   <p class="cl-sub">Version history of the Kasane product wireframes. Each version captures a snapshot, what changed, and why. The living record of how this product took shape.</p>
 
   <div class="cl-version current">
+    <div class="cl-version-tag">v0.4 — Reality Check + Nav Consolidation</div>
+    <div class="cl-version-date">March 13, 2026 · Session D</div>
+    <ul>
+      <li><strong>Nav condensed from 12 tabs to 5:</strong> Overview, Trailheads (with selector), Journey Map, Concepts (with selector), Changelog.</li>
+      <li><strong>Codebase audit:</strong> Mapped every wireframe feature against habica-ios main. ~70% shipped. Status badges (green/yellow/red) on each trailhead.</li>
+      <li><strong>Roadmap on Overview:</strong> Shipped / Engine exists / Not built sections replace the old trailhead lanes. "Recommended next" card highlights T1: Coach Whispers.</li>
+      <li><strong>Feedback simplified:</strong> Paul pre-set as default author. Section auto-follows current page.</li>
+    </ul>
+  </div>
+
+  <div class="cl-version">
     <div class="cl-version-tag">v0.3 — Surface Map + Feedback</div>
     <div class="cl-version-date">March 13, 2026 · Session D</div>
     <ul>
-      <li><strong>Journey Map v2:</strong> Surface badges on each moment (Today/Pulse/Onboarding). Surface × Moment summary table mapping interactions to tabs and trailheads.</li>
-      <li><strong>Decision Log:</strong> 7 decisions captured with date, who, context. Living doc for tracking choices.</li>
-      <li><strong>Time-of-day grouping:</strong> Subtle morning/evening labels on Today. Derived from anchor text. Infrastructure exists (CDHabit.anchor, reminderTime).</li>
-      <li><strong>Feedback system:</strong> Inline comment panel. Paul (or anyone) can leave section-level feedback directly on the wireframes. Exportable as markdown.</li>
+      <li><strong>Journey Map v2:</strong> Surface badges on each moment (Today/Pulse/Onboarding). Surface × Moment summary table.</li>
+      <li><strong>Decision Log:</strong> 8 decisions captured with date, who, context.</li>
+      <li><strong>Time-of-day grouping:</strong> Subtle morning/evening labels on Today. Derived from anchor text.</li>
+      <li><strong>Feedback system:</strong> Inline comment panel, section-level, exportable as markdown.</li>
       <li><strong>Changelog:</strong> This page. Version history with snapshots.</li>
-      <li><strong>Peakspan in Overview:</strong> Domain-to-layer mapping grid on overview page with deep dive link. Open question: user-facing lens vs internal coaching signal.</li>
+      <li><strong>Peakspan in Overview:</strong> Domain-to-layer mapping grid with deep dive link.</li>
     </ul>
   </div>
 
@@ -2862,9 +2922,10 @@
   <div style="margin-top:32px; background:#f8f7f4; border-radius:12px; padding:18px 20px;">
     <div style="font-size:13px; font-weight:600; margin-bottom:8px;">What's next</div>
     <ul style="font-size:12px; color:#444; line-height:1.8; margin-left:16px;">
-      <li><strong>v0.4 — Paul's feedback round.</strong> Share wireframes, collect feedback via the comment system, make decisions, update decision log.</li>
-      <li><strong>v0.5 — Implementation prep.</strong> Pick first trailhead (T1: Coach Whispers), create feature branch, bridge wireframe to Swift.</li>
-      <li><strong>v1.0 — First PR.</strong> Coach whispers shipping in Habica. Wireframe becomes spec, spec becomes code.</li>
+      <li><strong>v0.5 — Paul's feedback round.</strong> Share wireframes, collect feedback via comment system, update decision log.</li>
+      <li><strong>v0.6 — Implementation: T1 Coach Whispers.</strong> Feature branch, wire CoachMessageEngine to TodayView. ~50 lines of UI.</li>
+      <li><strong>v0.7 — Implementation: T4 Sentiment.</strong> Emoji picker + CDCheckIn.reaction field. Small Core Data migration.</li>
+      <li><strong>v1.0 — Pulse tab.</strong> Third tab, persistent home for weekly reflections + coaching surface.</li>
     </ul>
   </div>
 
@@ -2896,8 +2957,8 @@
       <option value="Coaching Engine">Coaching Engine</option>
       <option value="General">General</option>
     </select>
-    <input type="text" id="fb-author" placeholder="Your name" style="width:100%; padding:8px 10px; border:1px solid #e8e8e4; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:12px; margin-bottom:8px; color:#1a1a1a;">
-    <textarea id="fb-text" placeholder="What's on your mind?"></textarea>
+    <input type="text" id="fb-author" placeholder="Your name (e.g. Paul)" value="Paul" style="width:100%; padding:8px 10px; border:1px solid #e8e8e4; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:11px; margin-bottom:8px; color:#aaa;">
+    <textarea id="fb-text" placeholder="What's on your mind? Feedback, questions, ideas..."></textarea>
     <div class="fb-btn-row">
       <button class="fb-submit" onclick="submitFeedback()">Add note</button>
       <button class="fb-export" onclick="exportFeedback()">Export</button>
@@ -2913,7 +2974,54 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
   document.getElementById('page-' + id).classList.add('visible');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  // Find the nav button that matches
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+      b.classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+function selectTrailhead(id) {
+  const thPage = document.getElementById('page-trailheads');
+  if (!thPage.classList.contains('visible')) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+    thPage.classList.add('visible');
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.classList.remove('active');
+      if (b.textContent.includes('Trailheads')) b.classList.add('active');
+    });
+  }
+  thPage.querySelectorAll('.subpage').forEach(s => s.classList.remove('visible'));
+  document.getElementById('sub-' + id).classList.add('visible');
+  thPage.querySelectorAll('.th-sel-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+      b.classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+function selectConcept(id) {
+  const cPage = document.getElementById('page-concepts');
+  if (!cPage.classList.contains('visible')) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+    cPage.classList.add('visible');
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.classList.remove('active');
+      if (b.textContent.includes('Concepts')) b.classList.add('active');
+    });
+  }
+  cPage.querySelectorAll('.subpage').forEach(s => s.classList.remove('visible'));
+  document.getElementById('sub-' + id).classList.add('visible');
+  cPage.querySelectorAll('.concept-btn').forEach(b => {
+    b.classList.remove('active');
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) {
+      b.classList.add('active');
+    }
+  });
   window.scrollTo(0, 0);
 }
 
