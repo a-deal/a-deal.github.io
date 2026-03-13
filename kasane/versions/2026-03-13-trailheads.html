@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasane — Integration Trailheads</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #f4f3f0;
+    color: #1a1a1a;
+    min-height: 100vh;
+  }
+
+  /* ── Top nav ── */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 2px;
+  }
+  .top-nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 12px 14px;
+    border: none;
+    background: transparent;
+    color: #888;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #fff; border-bottom-color: #fff; }
+
+  /* ── Phone frame ── */
+  .phone-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px 40px;
+  }
+  .phone-frame {
+    width: 390px;
+    min-height: 760px;
+    background: #fafaf8;
+    border-radius: 40px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* ── Shared phone elements ── */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 28px 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .ph-header {
+    padding: 8px 24px 18px;
+  }
+  .ph-header h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .ph-header .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #aaa;
+    margin-bottom: 12px;
+  }
+  .sect { padding: 0 24px; margin-bottom: 20px; }
+
+  /* Tab bar */
+  .tab-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0 28px;
+    border-top: 1px solid #eee;
+    background: #fafaf8;
+    margin-top: auto;
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 500; color: #bbb;
+  }
+  .tab.active { color: #1a1a1a; }
+  .tab-icon {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .tab.active .tab-icon { background: #1a1a1a; color: #fff; font-size: 12px; }
+
+  /* ── State toggle (inside phone) ── */
+  .state-toggle {
+    display: flex; margin: 0 24px 14px; background: #f0eeea;
+    border-radius: 10px; padding: 3px; gap: 2px;
+  }
+  .state-toggle button {
+    flex: 1; padding: 7px 4px; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+    cursor: pointer; background: transparent; color: #999; transition: all 0.2s;
+  }
+  .state-toggle button.active {
+    background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  /* ── Design note (outside phone) ── */
+  .note-panel {
+    max-width: 390px;
+    margin: -16px auto 40px;
+    padding: 0 16px;
+  }
+  .design-note {
+    padding: 16px 18px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e8e8e4;
+  }
+  .design-note .note-label {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: #bbb; margin-bottom: 6px;
+  }
+  .design-note p { font-size: 13px; color: #888; line-height: 1.6; }
+
+  /* ── Forming card ── */
+  .forming-card {
+    background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px; padding: 20px;
+  }
+  .forming-card .card-top {
+    display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;
+  }
+  .forming-card .emoji { font-size: 32px; line-height: 1; }
+  .forming-badge {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;
+    color: #c47a2a; background: #fef3e2; padding: 4px 10px; border-radius: 100px;
+  }
+  .forming-card .habit-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .forming-card .habit-anchor { font-size: 13px; color: #888; }
+  .check-in-btn {
+    display: flex; align-items: center; justify-content: center; margin-top: 16px; padding: 14px;
+    background: #1a1a1a; color: #fff; border: none; border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; width: 100%;
+  }
+  .forming-card.done { border-color: #4a8c5c; background: #fafdf9; }
+  .forming-card.done .check-in-btn { background: #4a8c5c; }
+
+  /* ── Coach card ── */
+  .coach-card {
+    background: #f8f7f4; border-radius: 14px; padding: 18px 20px;
+  }
+  .coach-card .coach-icon { font-size: 16px; margin-bottom: 8px; }
+  .coach-card p { font-size: 14px; color: #666; line-height: 1.6; }
+  .coach-card .coach-source { font-size: 11px; color: #bbb; margin-top: 8px; }
+
+  /* ── Whisper (T1) ── */
+  .whisper {
+    padding: 12px 16px; border-radius: 12px; margin: 12px 0;
+    font-size: 13px; line-height: 1.6; color: #666;
+  }
+  .whisper.celebration { background: #f0f7f1; border-left: 3px solid #4a8c5c; }
+  .whisper.gap { background: #faf6f0; border-left: 3px solid #c4a02a; }
+  .whisper.quiet { background: transparent; color: #bbb; font-style: italic; text-align: center; }
+  .whisper .source { font-size: 10px; color: #bbb; margin-top: 4px; }
+
+  /* ── Day counter (T2) ── */
+  .day-counter { text-align: center; padding: 24px 24px 28px; }
+  .day-number {
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 64px; font-weight: 600; line-height: 1;
+  }
+  .day-word { font-size: 13px; color: #aaa; margin-top: 4px; font-weight: 500; }
+
+  /* ── Pulse habit card (T2) ── */
+  .pulse-habit-card {
+    background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px; padding: 18px 20px;
+  }
+  .pulse-habit-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .pulse-habit-emoji { font-size: 24px; }
+  .pulse-habit-title { font-size: 15px; font-weight: 600; }
+  .pulse-habit-meta { font-size: 12px; color: #888; }
+  .week-dots { display: flex; gap: 6px; }
+  .week-dot {
+    width: 36px; height: 36px; border-radius: 10px; background: #f5f5f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #ccc; font-weight: 500;
+  }
+  .week-dot.today { border: 1.5px solid #1a1a1a; color: #1a1a1a; background: #fff; }
+  .week-dot.checked { background: #4a8c5c; color: #fff; }
+  .empty-well {
+    border: 1.5px dashed #e0deda; border-radius: 14px; padding: 28px 20px; text-align: center;
+  }
+  .empty-well p { font-size: 13px; color: #bbb; line-height: 1.6; }
+  .empty-well .empty-icon { font-size: 24px; margin-bottom: 8px; opacity: 0.4; }
+
+  /* ── Activity Path dots (T3) ── */
+  .activity-path { display: flex; gap: 3px; flex-wrap: wrap; align-items: flex-end; }
+  .day-dot { width: 10px; border-radius: 3px; background: #e8e5df; height: 8px; }
+  .day-dot.ah-high { background: #b8d4be; height: 16px; }
+  .day-dot.ah-med { background: #c8dece; height: 12px; }
+  .day-dot.ah-low { background: #dce8de; height: 9px; }
+  .day-dot.rest { background: #eae7e2; height: 6px; }
+  .day-dot.k-checked { background: #4a8c5c; height: 18px; }
+  .day-dot.k-missed { background: #eae7e2; height: 6px; }
+  .day-dot.today { background: #1a1a1a; height: 12px; border: 2px solid #1a1a1a; }
+  .path-legend { display: flex; gap: 14px; margin-top: 12px; font-size: 10px; color: #aaa; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+  .callout {
+    margin: 0 24px 20px; padding: 12px 16px; background: #f0f7f1;
+    border-radius: 10px; font-size: 12px; color: #4a8c5c; line-height: 1.5; font-weight: 500;
+  }
+
+  /* ── Coached check-in (T4) ── */
+  .micro-card {
+    background: #fff; border-radius: 20px 20px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.08); padding: 24px;
+  }
+  .micro-card .handle {
+    width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 20px;
+  }
+  .micro-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 16px; }
+  .step-strip { display: flex; gap: 4px; margin-bottom: 16px; }
+  .step-pip { height: 3px; flex: 1; border-radius: 2px; background: #e0deda; }
+  .step-pip.active { background: #1a1a1a; }
+  .step-pip.done { background: #4a8c5c; }
+  .emoji-grid { display: flex; gap: 12px; margin-bottom: 20px; justify-content: center; }
+  .emoji-col { display: flex; flex-direction: column; align-items: center; }
+  .emoji-option {
+    width: 56px; height: 56px; border-radius: 16px; border: 1.5px solid #e8e8e4;
+    display: flex; align-items: center; justify-content: center; font-size: 24px; background: #fff;
+  }
+  .emoji-option.selected { border-color: #4a8c5c; background: #f0f7f1; }
+  .emoji-label { font-size: 10px; color: #aaa; text-align: center; margin-top: 4px; }
+  .skip-btn { display: block; text-align: center; font-size: 13px; color: #bbb; }
+  .coach-response {
+    background: #f8f7f4; border-radius: 14px; padding: 16px; margin-bottom: 16px;
+  }
+  .coach-response p { font-size: 14px; color: #666; line-height: 1.6; }
+  .done-btn {
+    width: 100%; padding: 14px; background: #1a1a1a; color: #fff; border: none;
+    border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+  }
+  .dimmed-bg { padding: 0 24px; opacity: 0.4; }
+
+  /* ── Health context (T5) ── */
+  .health-insight {
+    background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px; padding: 20px;
+  }
+  .insight-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .insight-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .insight-icon.sleep { background: #eee8f4; }
+  .insight-icon.heart { background: #fce8e8; }
+  .insight-title { font-size: 15px; font-weight: 600; }
+  .insight-meta { font-size: 11px; color: #aaa; }
+  .insight-body { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 12px; }
+  .sparkline-container { background: #fafaf8; border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; }
+  .sparkline-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .sparkline-label { font-size: 11px; color: #aaa; }
+  .sparkline-value { font-size: 14px; font-weight: 600; }
+  .sparkline-trend { font-size: 11px; font-weight: 600; }
+  .sparkline-trend.good { color: #4a8c5c; }
+  .mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 32px; margin-top: 8px; }
+  .mini-bar { flex: 1; border-radius: 2px 2px 0 0; min-height: 3px; }
+  .mini-bar.good { background: #4a8c5c; }
+  .mini-bar.ok { background: #b8d4be; }
+  .mini-bar.low { background: #dce8de; }
+  .connection-line {
+    font-size: 12px; color: #888; font-style: italic; padding: 8px 0;
+    border-top: 1px solid #f0f0ec; margin-top: 4px;
+  }
+  .health-nudge {
+    background: #f0f7f1; border-radius: 12px; padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .health-nudge-text { font-size: 13px; color: #4a7a5c; line-height: 1.5; }
+  .health-nudge-source { font-size: 10px; color: #8ab89a; margin-top: 4px; }
+
+  /* ── Weekly Pulse (T6) ── */
+  .week-card {
+    background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px; padding: 20px;
+  }
+  .week-card-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+  }
+  .week-card-title {
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600;
+  }
+  .week-badge {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px;
+    padding: 4px 10px; border-radius: 100px; background: #f0eeea; color: #999;
+  }
+  .week-badge.milestone { background: #e8f0ea; color: #4a8c5c; }
+  .day-grid { display: flex; gap: 4px; margin-bottom: 16px; }
+  .day-cell { flex: 1; text-align: center; }
+  .day-cell-label { font-size: 10px; color: #bbb; margin-bottom: 6px; font-weight: 500; }
+  .day-cell-dot {
+    width: 100%; aspect-ratio: 1; border-radius: 8px; background: #f0eeea;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .day-cell-dot.checked { background: #e8f0ea; }
+  .day-cell-dot.checked::after { content: '\2713'; color: #4a8c5c; font-size: 14px; font-weight: 600; }
+  .day-cell-dot.missed { background: #f5f4f0; }
+  .day-cell-dot.td { border: 1.5px solid #1a1a1a; background: #fff; }
+  .week-stats { display: flex; gap: 16px; padding: 12px 0; border-top: 1px solid #f0f0ec; border-bottom: 1px solid #f0f0ec; margin-bottom: 14px; }
+  .stat { flex: 1; text-align: center; }
+  .stat-value { font-size: 18px; font-weight: 600; margin-bottom: 2px; }
+  .stat-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+  .week-observation { font-size: 14px; color: #555; line-height: 1.6; }
+  .week-observation .hl { color: #1a1a1a; font-weight: 600; }
+  .reflection-prompt {
+    background: #faf6f0; border-radius: 14px; padding: 18px 20px; margin-top: 12px;
+  }
+  .reflection-prompt h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .reflection-prompt p { font-size: 13px; color: #888; line-height: 1.6; margin-bottom: 12px; }
+  .reflection-btn {
+    padding: 10px 20px; background: #1a1a1a; color: #fff; border: none;
+    border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  }
+  .reflection-skip { font-size: 12px; color: #bbb; margin-left: 12px; }
+
+  /* ── Index page ── */
+  .index-wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px; }
+  .index-wrap h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 32px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .index-subtitle {
+    font-size: 15px; color: #888; line-height: 1.6; margin-bottom: 32px; max-width: 560px;
+  }
+  .context-block {
+    background: #fff; border-radius: 12px; border: 1px solid #e8e8e4;
+    padding: 20px; margin-bottom: 32px; font-size: 13px; line-height: 1.7; color: #555;
+  }
+  .context-block strong { color: #1a1a1a; }
+  .trail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+  @media (max-width: 600px) { .trail-grid { grid-template-columns: 1fr; } }
+  .trail-card {
+    background: #fff; border: 1.5px solid #e8e8e4; border-radius: 16px;
+    padding: 22px; cursor: pointer; transition: border-color 0.2s, transform 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .trail-card:hover { border-color: #ccc; transform: translateY(-2px); }
+  .trail-num {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.2px; color: #bbb; margin-bottom: 8px;
+  }
+  .trail-title { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .trail-desc { font-size: 13px; color: #888; line-height: 1.6; flex: 1; }
+  .trail-tags { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .trail-tag {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 3px 8px; border-radius: 100px; background: #f0eeea; color: #999;
+  }
+  .trail-tag.today { background: #e8f0ea; color: #4a8c5c; }
+  .trail-tag.pulse { background: #e8ecf0; color: #5a7c9c; }
+  .dep-note { font-size: 12px; color: #bbb; line-height: 1.6; }
+  .dep-note strong { color: #999; }
+
+  /* ── Page visibility ── */
+  .page { display: none; }
+  .page.visible { display: block; }
+
+  /* Scenario visibility */
+  .scenario { display: none; }
+  .scenario.visible { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ─── TOP NAV ─── -->
+<nav class="top-nav">
+  <button class="nav-btn active" onclick="showPage('index')">Overview</button>
+  <button class="nav-btn" onclick="showPage('t1')">1. Coach Whispers</button>
+  <button class="nav-btn" onclick="showPage('t2')">2. Pulse Shell</button>
+  <button class="nav-btn" onclick="showPage('t3')">3. Activity Path</button>
+  <button class="nav-btn" onclick="showPage('t4')">4. Coached Check-In</button>
+  <button class="nav-btn" onclick="showPage('t5')">5. Health Context</button>
+  <button class="nav-btn" onclick="showPage('t6')">6. Weekly Pulse</button>
+</nav>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- INDEX PAGE                              -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page visible" id="page-index">
+<div class="index-wrap">
+  <h1>Integration Trailheads</h1>
+  <p class="index-subtitle">Six places the coaching layer connects to the existing app. Each trailhead is independent — pick whichever feels most valuable to build first.</p>
+
+  <div class="context-block">
+    <strong>Converge summary:</strong> The coaching engine has depth (21-day sandbox, phases, weekly reflections, evidence protocols). But it doesn't need to ship all at once. These six trailheads are the <em>surfaces</em> where coaching intelligence becomes visible to the user. Each one is a small, shippable piece.<br><br>
+    <strong>How I got here:</strong> Ran through Paul's latest main build. Mapped every screen where the coaching layer could surface without breaking what's already working. Cross-referenced with IRL debrief (small iterations, converged work, "wow" gap). Each trailhead is 1-2 PRs.
+  </div>
+
+  <div class="trail-grid">
+    <div class="trail-card" onclick="showPage('t1')">
+      <div class="trail-num">Trailhead 1</div>
+      <div class="trail-title">Coach Whispers</div>
+      <div class="trail-desc">Inline messages in Today at inflection points — first check-in, return after a gap, graduation. Uses CoachMessageEngine already on main.</div>
+      <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Low lift</span></div>
+    </div>
+    <div class="trail-card" onclick="showPage('t2')">
+      <div class="trail-num">Trailhead 2</div>
+      <div class="trail-title">Pulse Tab Shell</div>
+      <div class="trail-desc">The third tab. Day counter, forming habit status, one coach observation. The structural home for "how am I doing lately?"</div>
+      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">New surface</span></div>
+    </div>
+    <div class="trail-card" onclick="showPage('t3')">
+      <div class="trail-num">Trailhead 3</div>
+      <div class="trail-title">Activity Path</div>
+      <div class="trail-desc">90-day visualization. Apple Health fills the past, check-ins color the present. The user sees their story taking shape.</div>
+      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Visual</span></div>
+    </div>
+    <div class="trail-card" onclick="showPage('t4')">
+      <div class="trail-num">Trailhead 4</div>
+      <div class="trail-title">Coached Check-In</div>
+      <div class="trail-desc">"How'd it go?" — emoji response after the tap. Coach builds patterns over time. Always skippable.</div>
+      <div class="trail-tags"><span class="trail-tag today">Today</span><span class="trail-tag">Interaction</span></div>
+    </div>
+    <div class="trail-card" onclick="showPage('t5')">
+      <div class="trail-num">Trailhead 5</div>
+      <div class="trail-title">Health Context Cards</div>
+      <div class="trail-desc">Apple Health data as coach observations. "Your RHR dropped 3 bpm." The "oh damn" moment from the layers doc.</div>
+      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag today">Today</span></div>
+    </div>
+    <div class="trail-card" onclick="showPage('t6')">
+      <div class="trail-num">Trailhead 6</div>
+      <div class="trail-title">Weekly Pulse</div>
+      <div class="trail-desc">Day 7/14/21 reflection moments. Week-shaped observations with health data connections.</div>
+      <div class="trail-tags"><span class="trail-tag pulse">Pulse</span><span class="trail-tag">Cadence</span></div>
+    </div>
+  </div>
+
+  <div class="dep-note">
+    <strong>Dependencies:</strong> Trailheads 1 + 4 plug into Today (existing tab). Trailheads 2, 3, 5, 6 need Pulse — but T2 (the shell) is the prerequisite, not the others. Activity Path (3) and Health Context (5) ship independently once Pulse exists.
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T1: COACH WHISPERS                      -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t1">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t1','first')">First check-in</button>
+    <button onclick="toggleState(this,'t1','gap')">After 2-day gap</button>
+    <button onclick="toggleState(this,'t1','quiet')">Normal day</button>
+  </div>
+
+  <div class="ph-header">
+    <h1>Today</h1>
+    <div class="subtitle" id="t1-sub">Friday, March 13 · Day 1</div>
+  </div>
+
+  <!-- First check-in -->
+  <div class="scenario visible" id="t1-first">
+    <div class="sect">
+      <div class="forming-card done">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+        <button class="check-in-btn" style="background:#4a8c5c;">Done</button>
+      </div>
+      <div class="whisper celebration">
+        First one down. The whole point today was just showing up — and you did.
+        <div class="source">Coach · just now</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gap return -->
+  <div class="scenario" id="t1-gap">
+    <div class="sect">
+      <div class="whisper gap">
+        Hey — been a couple days. No pressure. Your walk is here when you're ready.
+        <div class="source">Coach · this morning</div>
+      </div>
+      <div class="forming-card">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+        <button class="check-in-btn">Check in</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiet (silence) -->
+  <div class="scenario" id="t1-quiet">
+    <div class="sect">
+      <div class="forming-card">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+        <button class="check-in-btn">Check in</button>
+      </div>
+      <div class="whisper quiet">Silence is the coach's default. Everything's working.</div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Voice rules</div>
+  <p>Never says "missed," "failed," "behind." No denominators ("3 of 21"). Observations over instructions. Speaks at inflection only: first check-in, 2+ day gap, graduation, weekly cadence. One message then quiet — never stacks.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T2: PULSE SHELL                         -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t2">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t2','day1')">Day 1</button>
+    <button onclick="toggleState(this,'t2','day7')">Day 7</button>
+    <button onclick="toggleState(this,'t2','day21')">Day 21</button>
+  </div>
+
+  <div class="ph-header">
+    <h1>Pulse</h1>
+    <div class="subtitle" id="t2-sub">Andrew · Day 1</div>
+  </div>
+
+  <!-- Day 1 -->
+  <div class="scenario visible" id="t2-day1">
+    <div class="day-counter"><div class="day-number">1</div><div class="day-word">day</div></div>
+    <div class="sect">
+      <div class="section-label">Forming</div>
+      <div class="pulse-habit-card">
+        <div class="pulse-habit-header">
+          <span class="pulse-habit-emoji">🚶</span>
+          <div><div class="pulse-habit-title">Walk after breakfast</div><div class="pulse-habit-meta">Just started · Every morning</div></div>
+        </div>
+        <div class="week-dots">
+          <div class="week-dot">M</div><div class="week-dot">T</div><div class="week-dot">W</div><div class="week-dot">T</div><div class="week-dot today">F</div><div class="week-dot">S</div><div class="week-dot">S</div>
+        </div>
+      </div>
+    </div>
+    <div class="sect">
+      <div class="section-label">Coach</div>
+      <div class="empty-well"><div class="empty-icon">✦</div><p>Check in on Today when you're ready.<br>I'll have something to say after a few days.</p></div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="scenario" id="t2-day7">
+    <div class="day-counter"><div class="day-number">7</div><div class="day-word">days</div></div>
+    <div class="sect">
+      <div class="section-label">Forming</div>
+      <div class="pulse-habit-card">
+        <div class="pulse-habit-header">
+          <span class="pulse-habit-emoji">🚶</span>
+          <div><div class="pulse-habit-title">Walk after breakfast</div><div class="pulse-habit-meta">5 check-ins · Every morning</div></div>
+        </div>
+        <div class="week-dots">
+          <div class="week-dot checked">M</div><div class="week-dot checked">T</div><div class="week-dot">W</div><div class="week-dot checked">T</div><div class="week-dot checked">F</div><div class="week-dot checked">S</div><div class="week-dot today">S</div>
+        </div>
+      </div>
+    </div>
+    <div class="sect">
+      <div class="section-label">Coach</div>
+      <div class="coach-card"><div class="coach-icon">✦</div><p>Your first week. You checked in 5 of the last 7 days — mornings stuck better than evenings. That's a real pattern forming.</p><div class="coach-source">Weekly observation · Day 7</div></div>
+    </div>
+  </div>
+
+  <!-- Day 21 — graduation -->
+  <div class="scenario" id="t2-day21">
+    <div class="day-counter"><div class="day-number">21</div><div class="day-word">days</div></div>
+    <div class="sect">
+      <div class="section-label" style="color:#4a8c5c;">Graduated</div>
+      <div class="pulse-habit-card" style="border-color:#4a8c5c; background:#fafdf9;">
+        <div class="pulse-habit-header">
+          <span class="pulse-habit-emoji">🚶</span>
+          <div><div class="pulse-habit-title">Walk after breakfast</div><div class="pulse-habit-meta" style="color:#4a8c5c;">This one's yours now</div></div>
+        </div>
+        <div class="week-dots">
+          <div class="week-dot checked">M</div><div class="week-dot checked">T</div><div class="week-dot checked">W</div><div class="week-dot">T</div><div class="week-dot checked">F</div><div class="week-dot checked">S</div><div class="week-dot today">S</div>
+        </div>
+      </div>
+    </div>
+    <div class="sect">
+      <div class="section-label">Coach</div>
+      <div class="coach-card"><div class="coach-icon">✦</div><p>Walk after breakfast just graduated. 18 check-ins in 21 days — it's sticking. This moves to your practiced habits. Ready for a new layer when you are.</p><div class="coach-source">Graduation · Day 21</div></div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab active"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Design intent</div>
+  <p>The structural home for "how am I doing lately?" — the third tab. This shell makes it alive from Day 1. The day counter is the anchor. No Activity Path yet (that's Trailhead 3). Coach is quiet until there's data, then it speaks at cadence points.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T3: ACTIVITY PATH                       -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t3">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t3','ah')">Day 1 (with AH)</button>
+    <button onclick="toggleState(this,'t3','d14')">Day 14</button>
+    <button onclick="toggleState(this,'t3','cold')">No Apple Health</button>
+  </div>
+
+  <div class="ph-header">
+    <h1>Pulse</h1>
+    <div class="subtitle" id="t3-sub">Andrew · Day 1</div>
+  </div>
+
+  <!-- Day 1 with Apple Health -->
+  <div class="scenario visible" id="t3-ah">
+    <div class="sect">
+      <div class="section-label">Your path · Last 90 days</div>
+      <div class="activity-path">
+        <div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot today"></div>
+      </div>
+      <div class="path-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#b8d4be"></div> Apple Health</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4a8c5c"></div> Check-in</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#eae7e2"></div> Rest</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a"></div> Today</div>
+      </div>
+    </div>
+    <div class="callout">You've been active 5-6 days a week for 3 months. That's not nothing — that's a foundation.</div>
+  </div>
+
+  <!-- Day 14 -->
+  <div class="scenario" id="t3-d14">
+    <div class="sect">
+      <div class="section-label">Your path · Last 90 days</div>
+      <div class="activity-path">
+        <div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot rest"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot ah-high"></div><div class="day-dot rest"></div><div class="day-dot ah-med"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div><div class="day-dot ah-low"></div><div class="day-dot rest"></div><div class="day-dot ah-high"></div><div class="day-dot ah-med"></div>
+        <div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot k-missed"></div><div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot k-missed"></div><div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot k-missed"></div><div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot k-checked"></div><div class="day-dot today"></div>
+      </div>
+      <div class="path-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#b8d4be"></div> Apple Health</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#4a8c5c"></div> Check-in</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#eae7e2"></div> Rest</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a"></div> Today</div>
+      </div>
+    </div>
+    <div class="callout">Two weeks in. Apple Health shows what your body did. Kasane shows what you chose to do.</div>
+  </div>
+
+  <!-- No Apple Health -->
+  <div class="scenario" id="t3-cold">
+    <div class="sect">
+      <div class="section-label">Your path · This week</div>
+      <div class="activity-path" style="justify-content:center; gap:8px;">
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot today" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+        <div class="day-dot rest" style="width:24px;height:24px;border-radius:6px;"></div>
+      </div>
+      <div style="text-align:center; margin-top:16px; font-size:13px; color:#bbb; line-height:1.6;">Your path starts here. Each check-in adds a day.</div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab active"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Design intent</div>
+  <p>Apple Health fills the past so the user sees they weren't starting from zero. Kasane check-ins color the present. Two data sources, one continuous path. The visual distinction between "body data" and "intentional data" is the key insight. Without Apple Health, the path starts empty — slower payoff but still works.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T4: COACHED CHECK-IN                    -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t4">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t4','prompt')">1. Prompt</button>
+    <button onclick="toggleState(this,'t4','resp')">2. Coach responds</button>
+    <button onclick="toggleState(this,'t4','skip')">Skip path</button>
+  </div>
+
+  <div class="ph-header">
+    <h1>Today</h1>
+    <div class="subtitle">Friday, March 20 · Day 8</div>
+  </div>
+
+  <!-- Prompt -->
+  <div class="scenario visible" id="t4-prompt">
+    <div class="dimmed-bg">
+      <div class="forming-card" style="opacity:0.6;">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+      </div>
+    </div>
+    <div style="flex:1;"></div>
+    <div class="micro-card">
+      <div class="handle"></div>
+      <div class="step-strip"><div class="step-pip active"></div><div class="step-pip"></div></div>
+      <h3>How'd it go? 🚶</h3>
+      <div class="emoji-grid">
+        <div class="emoji-col"><div class="emoji-option">😤</div><div class="emoji-label">Tough</div></div>
+        <div class="emoji-col"><div class="emoji-option">😐</div><div class="emoji-label">Meh</div></div>
+        <div class="emoji-col"><div class="emoji-option selected">🙂</div><div class="emoji-label">Good</div></div>
+        <div class="emoji-col"><div class="emoji-option">🔥</div><div class="emoji-label">Great</div></div>
+      </div>
+      <div class="skip-btn">Skip — just log it</div>
+    </div>
+  </div>
+
+  <!-- Coach response -->
+  <div class="scenario" id="t4-resp">
+    <div class="dimmed-bg">
+      <div class="forming-card" style="opacity:0.6;">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+      </div>
+    </div>
+    <div style="flex:1;"></div>
+    <div class="micro-card">
+      <div class="handle"></div>
+      <div class="step-strip"><div class="step-pip done"></div><div class="step-pip active"></div></div>
+      <div class="coach-response"><p>✦ Good mornings seem to be your thing. 6 of your last 7 walks were "good" or better. That's not willpower — that's a rhythm forming.</p></div>
+      <button class="done-btn">Done</button>
+    </div>
+  </div>
+
+  <!-- Skip -->
+  <div class="scenario" id="t4-skip">
+    <div class="sect">
+      <div class="forming-card done">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+        <button class="check-in-btn" style="background:#4a8c5c;">Done ✓</button>
+      </div>
+    </div>
+    <div class="sect" style="margin-top:auto;">
+      <div style="background:#f8f7f4; border-radius:12px; padding:14px 16px; font-size:12px; color:#999; line-height:1.5;">
+        If you skip 3+ times in a row, the coached moment stops appearing for this habit. It learns your preference. One-tap path is always available.
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Design intent</div>
+  <p>Adds reflection depth without adding friction. The emoji response takes 1 second. Over time, the coach builds patterns: "you feel best about morning walks on Tuesdays." Always skippable — the one-tap path still works. The coach sheet only slides up when there's pattern data worth surfacing.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T5: HEALTH CONTEXT CARDS                -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t5">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t5','sleep')">Sleep correlation</button>
+    <button onclick="toggleState(this,'t5','hr')">Heart rate</button>
+    <button onclick="toggleState(this,'t5','today')">In Today tab</button>
+  </div>
+
+  <div class="ph-header">
+    <h1 id="t5-title">Pulse</h1>
+    <div class="subtitle" id="t5-sub">Andrew · Day 14</div>
+  </div>
+
+  <!-- Sleep -->
+  <div class="scenario visible" id="t5-sleep">
+    <div class="sect">
+      <div class="section-label">Coach observation</div>
+      <div class="health-insight">
+        <div class="insight-header">
+          <div class="insight-icon sleep">🌙</div>
+          <div><div class="insight-title">Sleep is responding</div><div class="insight-meta">Based on 14 days of Apple Health</div></div>
+        </div>
+        <div class="insight-body">Your average sleep went from 6.4 to 7.1 hours since you started your morning walk. Nights after walk days average 38 minutes more sleep.</div>
+        <div class="sparkline-container">
+          <div class="sparkline-row"><span class="sparkline-label">Sleep avg (14d)</span><span class="sparkline-value">7.1 hrs</span><span class="sparkline-trend good">+42 min</span></div>
+          <div class="mini-bars">
+            <div class="mini-bar low" style="height:40%"></div><div class="mini-bar ok" style="height:55%"></div><div class="mini-bar ok" style="height:50%"></div><div class="mini-bar good" style="height:70%"></div><div class="mini-bar good" style="height:85%"></div><div class="mini-bar ok" style="height:60%"></div><div class="mini-bar low" style="height:35%"></div><div class="mini-bar good" style="height:75%"></div><div class="mini-bar good" style="height:90%"></div><div class="mini-bar ok" style="height:65%"></div><div class="mini-bar good" style="height:80%"></div><div class="mini-bar good" style="height:95%"></div><div class="mini-bar ok" style="height:60%"></div><div class="mini-bar good" style="height:88%"></div>
+          </div>
+        </div>
+        <div class="connection-line">✦ Connected to: Walk after breakfast (forming)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Heart rate -->
+  <div class="scenario" id="t5-hr">
+    <div class="sect">
+      <div class="section-label">Coach observation</div>
+      <div class="health-insight">
+        <div class="insight-header">
+          <div class="insight-icon heart">❤️</div>
+          <div><div class="insight-title">Resting heart rate dropping</div><div class="insight-meta">Apple Health · Last 21 days</div></div>
+        </div>
+        <div class="insight-body">Your resting HR went from 54 to 50 bpm over three weeks. Cardiovascular adaptation — your heart is getting more efficient. Tracks with your consistent walking pattern.</div>
+        <div class="sparkline-container">
+          <div class="sparkline-row"><span class="sparkline-label">Resting HR</span><span class="sparkline-value">50 bpm</span><span class="sparkline-trend good">↓4 bpm</span></div>
+          <div class="mini-bars">
+            <div class="mini-bar ok" style="height:80%"></div><div class="mini-bar ok" style="height:75%"></div><div class="mini-bar ok" style="height:70%"></div><div class="mini-bar good" style="height:65%"></div><div class="mini-bar good" style="height:60%"></div><div class="mini-bar good" style="height:55%"></div><div class="mini-bar good" style="height:50%"></div><div class="mini-bar good" style="height:48%"></div><div class="mini-bar good" style="height:45%"></div><div class="mini-bar good" style="height:42%"></div><div class="mini-bar good" style="height:40%"></div><div class="mini-bar good" style="height:38%"></div><div class="mini-bar good" style="height:36%"></div><div class="mini-bar good" style="height:34%"></div>
+          </div>
+        </div>
+        <div class="connection-line">✦ This is the "oh damn" moment. The number proves the habit is working.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- In Today -->
+  <div class="scenario" id="t5-today">
+    <div class="sect">
+      <div class="forming-card">
+        <div class="card-top"><span class="emoji">🚶</span><span class="forming-badge">Forming</span></div>
+        <div class="habit-title">Walk after breakfast</div>
+        <div class="habit-anchor">Every morning · 15 min</div>
+        <button class="check-in-btn">Check in</button>
+      </div>
+    </div>
+    <div class="sect">
+      <div class="health-nudge">
+        <span style="font-size:14px;">✦</span>
+        <div>
+          <div class="health-nudge-text">You slept 7.5 hrs last night — your best this week. Walk days and good sleep are starting to track together.</div>
+          <div class="health-nudge-source">Apple Health · this morning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar" id="t5-tabs">
+    <div class="tab" id="t5-tab-today"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab active" id="t5-tab-pulse"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Design intent</div>
+  <p>The "oh damn" moment from the layers doc — the number proves it, the feeling sells it. Full insight cards live in Pulse. A lightweight nudge version can appear in Today, bridging "do the thing" and "see the impact." Only surfaces when Apple Health has enough data to make a real connection.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- T6: WEEKLY PULSE                        -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-t6">
+<div class="phone-wrap">
+<div class="phone-frame">
+  <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+
+  <div class="state-toggle">
+    <button class="active" onclick="toggleState(this,'t6','w1')">Week 1</button>
+    <button onclick="toggleState(this,'t6','w2')">Week 2</button>
+    <button onclick="toggleState(this,'t6','w3')">Week 3</button>
+  </div>
+
+  <div class="ph-header">
+    <h1>Pulse</h1>
+    <div class="subtitle" id="t6-sub">Andrew · Day 7</div>
+  </div>
+
+  <!-- Week 1 -->
+  <div class="scenario visible" id="t6-w1">
+    <div class="sect">
+      <div class="week-card">
+        <div class="week-card-header"><div class="week-card-title">Your first week</div><span class="week-badge">Week 1</span></div>
+        <div class="day-grid">
+          <div class="day-cell"><div class="day-cell-label">M</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">W</div><div class="day-cell-dot missed"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">F</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot td"></div></div>
+        </div>
+        <div class="week-stats">
+          <div class="stat"><div class="stat-value">5</div><div class="stat-label">Check-ins</div></div>
+          <div class="stat"><div class="stat-value">Mon</div><div class="stat-label">Best day</div></div>
+          <div class="stat"><div class="stat-value">8:12a</div><div class="stat-label">Avg time</div></div>
+        </div>
+        <div class="week-observation">✦ You checked in <span class="hl">5 of 7 days</span>. Mornings stuck — average check-in was 8:12am. Wednesday was the gap, but you came right back Thursday. That's the pattern that matters.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="scenario" id="t6-w2">
+    <div class="sect">
+      <div class="week-card">
+        <div class="week-card-header"><div class="week-card-title">Two weeks in</div><span class="week-badge milestone">Week 2</span></div>
+        <div class="day-grid">
+          <div class="day-cell"><div class="day-cell-label">M</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">W</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot missed"></div></div>
+          <div class="day-cell"><div class="day-cell-label">F</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot td"></div></div>
+        </div>
+        <div class="week-stats">
+          <div class="stat"><div class="stat-value">10</div><div class="stat-label">Total</div></div>
+          <div class="stat"><div class="stat-value">7.1h</div><div class="stat-label">Sleep avg</div></div>
+          <div class="stat"><div class="stat-value">↓3</div><div class="stat-label">RHR bpm</div></div>
+        </div>
+        <div class="week-observation">✦ <span class="hl">10 check-ins in 14 days.</span> Sleep average climbed to 7.1 hours — up from 6.4 when you started. Resting HR dropped 3 bpm. The research says this is where most people decide if it sticks. Your body's already answering.</div>
+      </div>
+      <div class="reflection-prompt">
+        <h4>Midpoint reflection</h4>
+        <p>What's changed since you started this walk? Not just the numbers — how does your morning feel different?</p>
+        <button class="reflection-btn">Reflect</button>
+        <span class="reflection-skip">Not now</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 — graduation -->
+  <div class="scenario" id="t6-w3">
+    <div class="sect">
+      <div class="week-card" style="border-color:#4a8c5c;">
+        <div class="week-card-header"><div class="week-card-title">Three weeks</div><span class="week-badge milestone">Graduation</span></div>
+        <div class="day-grid">
+          <div class="day-cell"><div class="day-cell-label">M</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">W</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">T</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">F</div><div class="day-cell-dot missed"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot checked"></div></div>
+          <div class="day-cell"><div class="day-cell-label">S</div><div class="day-cell-dot td"></div></div>
+        </div>
+        <div class="week-stats">
+          <div class="stat"><div class="stat-value">16</div><div class="stat-label">Total</div></div>
+          <div class="stat"><div class="stat-value">7.4h</div><div class="stat-label">Sleep avg</div></div>
+          <div class="stat"><div class="stat-value">↓5</div><div class="stat-label">RHR bpm</div></div>
+        </div>
+        <div class="week-observation" style="color:#4a7a5c;">✦ <span class="hl" style="color:#2d6b3f;">Walk after breakfast just graduated.</span> 16 check-ins in 21 days. Sleep improved by nearly an hour. Resting HR dropped 5 bpm. This isn't willpower — this is who you are now. It moves to your practiced habits.<br><br>Ready for your next layer when you are.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab"><div class="tab-icon">✓</div><span>Today</span></div>
+    <div class="tab active"><div class="tab-icon">〜</div><span>Pulse</span></div>
+    <div class="tab"><div class="tab-icon">●</div><span>Profile</span></div>
+  </div>
+</div>
+</div>
+<div class="note-panel"><div class="design-note">
+  <div class="note-label">Design intent</div>
+  <p>Cadence-based, not date-based. Week 1 is a shape observation. Week 2 connects habits to health data + offers a midpoint reflection. Week 3 is graduation with cumulative evidence. Each card stays in Pulse until dismissed. The reflection prompt at Week 2 is optional — skip is always there.</p>
+</div></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- JAVASCRIPT                              -->
+<!-- ═══════════════════════════════════════ -->
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+  document.getElementById('page-' + id).classList.add('visible');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function toggleState(btn, trailhead, state) {
+  // Clear all scenarios in this trailhead's phone
+  const page = document.getElementById('page-' + trailhead);
+  page.querySelectorAll('.scenario').forEach(s => s.classList.remove('visible'));
+  document.getElementById(trailhead + '-' + state).classList.add('visible');
+
+  // Toggle active button
+  btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Update subtitles per trailhead
+  const subs = {
+    t1: { first: 'Friday, March 13 · Day 1', gap: 'Monday, March 16 · Day 4', quiet: 'Sunday, March 15 · Day 3' },
+    t2: { day1: 'Andrew · Day 1', day7: 'Andrew · Day 7', day21: 'Andrew · Day 21' },
+    t3: { ah: 'Andrew · Day 1', d14: 'Andrew · Day 14', cold: 'Andrew · Day 1 (no Apple Health)' },
+    t5: { sleep: 'Andrew · Day 14', hr: 'Andrew · Day 21', today: 'Monday, March 27 · Day 14' },
+    t6: { w1: 'Andrew · Day 7', w2: 'Andrew · Day 14', w3: 'Andrew · Day 21' }
+  };
+  if (subs[trailhead]) {
+    const subEl = document.getElementById(trailhead + '-sub');
+    if (subEl) subEl.textContent = subs[trailhead][state];
+  }
+
+  // T5 special: toggle tab highlight
+  if (trailhead === 't5') {
+    const todayTab = document.getElementById('t5-tab-today');
+    const pulseTab = document.getElementById('t5-tab-pulse');
+    const title = document.getElementById('t5-title');
+    if (state === 'today') {
+      todayTab.classList.add('active'); pulseTab.classList.remove('active');
+      title.textContent = 'Today';
+    } else {
+      pulseTab.classList.add('active'); todayTab.classList.remove('active');
+      title.textContent = 'Pulse';
+    }
+  }
+}
+</script>
+
+</body>
+</html>
