@@ -455,6 +455,182 @@
   .page { display: none; }
   .page.visible { display: block; }
 
+  /* ── Journey Map ── */
+  .journey-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 32px 24px 40px;
+  }
+  .journey-intro {
+    max-width: 640px;
+    margin-bottom: 32px;
+  }
+  .journey-intro h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px;
+  }
+  .journey-intro p {
+    font-size: 14px; color: #888; line-height: 1.6;
+  }
+
+  .timeline {
+    display: flex;
+    gap: 0;
+    padding-bottom: 16px;
+    min-width: max-content;
+  }
+
+  .moment {
+    flex-shrink: 0;
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Timeline connector */
+  .moment-connector {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .moment-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #ddd; flex-shrink: 0; z-index: 2;
+    border: 3px solid #f4f3f0;
+  }
+  .moment-dot.today-dot { background: #4a8c5c; }
+  .moment-dot.pulse-dot { background: #5a7c9c; }
+  .moment-dot.gate-dot { background: #1a1a1a; }
+  .moment-dot.grad-dot { background: #c47a2a; }
+  .moment-line {
+    height: 2px; flex: 1; background: #ddd;
+  }
+  .moment:first-child .moment-line:first-child { display: none; }
+  .moment:last-child .moment-line:last-child { display: none; }
+
+  .moment-day {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: #aaa; margin-bottom: 10px;
+  }
+
+  /* Mini phone in journey */
+  .mini-phone {
+    width: 300px;
+    min-height: 480px;
+    background: #fafaf8;
+    border-radius: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+  }
+  .mini-phone .status-bar { padding: 10px 20px 4px; font-size: 10px; }
+  .mini-phone .mph { padding: 6px 18px 12px; }
+  .mini-phone .mph h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 20px; font-weight: 600; letter-spacing: -0.3px;
+  }
+  .mini-phone .mph .sub { font-size: 11px; color: #888; margin-top: 2px; }
+  .mini-phone .ms { padding: 0 18px; margin-bottom: 14px; }
+  .mini-phone .ms-label {
+    font-size: 9px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: #aaa; margin-bottom: 8px;
+  }
+
+  /* Mini forming card */
+  .mini-fc {
+    background: #fff; border: 1px solid #e8e8e4; border-radius: 12px; padding: 12px 14px;
+  }
+  .mini-fc .mfc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .mini-fc .mfc-emoji { font-size: 18px; }
+  .mini-fc .mfc-title { font-size: 13px; font-weight: 600; }
+  .mini-fc .mfc-anchor { font-size: 10px; color: #888; }
+  .mini-fc .mfc-btn {
+    margin-top: 8px; padding: 8px; background: #1a1a1a; color: #fff;
+    border: none; border-radius: 8px; font-size: 11px; font-weight: 600;
+    width: 100%; text-align: center;
+  }
+  .mini-fc.done { border-color: #4a8c5c; background: #fafdf9; }
+  .mini-fc.done .mfc-btn { background: #4a8c5c; }
+  .mini-fc.grad { border-color: #c47a2a; background: #fffcf7; }
+
+  /* Mini whisper */
+  .mini-whisper {
+    padding: 8px 12px; border-radius: 8px; font-size: 11px; line-height: 1.5; color: #666;
+    margin-top: 8px;
+  }
+  .mini-whisper.celeb { background: #f0f7f1; border-left: 2px solid #4a8c5c; }
+  .mini-whisper.nudge { background: #faf6f0; border-left: 2px solid #c4a02a; }
+  .mini-whisper.insight { background: #f0f3f7; border-left: 2px solid #5a7c9c; }
+  .mini-whisper.identity { background: #f7f0fa; border-left: 2px solid #8a5ca0; }
+
+  /* Mini coach card */
+  .mini-coach {
+    background: #f8f7f4; border-radius: 10px; padding: 12px 14px;
+  }
+  .mini-coach p { font-size: 11px; color: #666; line-height: 1.5; }
+  .mini-coach .mc-source { font-size: 9px; color: #bbb; margin-top: 4px; }
+
+  /* Mini week dots */
+  .mini-wdots { display: flex; gap: 4px; margin-top: 8px; }
+  .mini-wd {
+    width: 28px; height: 28px; border-radius: 6px; background: #f5f5f0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: #ccc; font-weight: 500;
+  }
+  .mini-wd.chk { background: #4a8c5c; color: #fff; }
+  .mini-wd.tod { border: 1px solid #1a1a1a; color: #1a1a1a; background: #fff; }
+
+  /* Mini activity dots */
+  .mini-adots { display: flex; gap: 2px; flex-wrap: wrap; align-items: flex-end; }
+  .mini-ad { width: 7px; border-radius: 2px; background: #e8e5df; height: 5px; }
+  .mini-ad.h { background: #b8d4be; height: 11px; }
+  .mini-ad.m { background: #c8dece; height: 8px; }
+  .mini-ad.l { background: #dce8de; height: 6px; }
+  .mini-ad.k { background: #4a8c5c; height: 12px; }
+  .mini-ad.r { background: #eae7e2; height: 4px; }
+  .mini-ad.t { background: #1a1a1a; height: 7px; }
+
+  /* Mini tab bar */
+  .mini-tabs {
+    display: flex; justify-content: space-around; align-items: center;
+    padding: 8px 0 18px; border-top: 1px solid #eee; margin-top: auto;
+  }
+  .mini-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    font-size: 8px; font-weight: 500; color: #ccc;
+  }
+  .mini-tab.active { color: #1a1a1a; }
+  .mini-tab-icon {
+    width: 18px; height: 18px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; font-size: 10px;
+  }
+  .mini-tab.active .mini-tab-icon { background: #1a1a1a; color: #fff; font-size: 9px; }
+
+  /* Moment annotation below phone */
+  .moment-note {
+    margin-top: 14px;
+    width: 300px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #e8e8e4;
+    border-radius: 10px;
+  }
+  .moment-note .mn-title {
+    font-size: 12px; font-weight: 600; margin-bottom: 4px;
+  }
+  .moment-note p {
+    font-size: 11px; color: #888; line-height: 1.5;
+  }
+  .moment-note .mn-source {
+    font-size: 9px; color: #bbb; margin-top: 6px; font-style: italic;
+  }
+
   /* Scenario visibility */
   .scenario { display: none; }
   .scenario.visible { display: block; }
@@ -471,6 +647,7 @@
   <button class="nav-btn" onclick="showPage('t4')">4. Coached Check-In</button>
   <button class="nav-btn" onclick="showPage('t5')">5. Health Context</button>
   <button class="nav-btn" onclick="showPage('t6')">6. Weekly Pulse</button>
+  <button class="nav-btn" style="border-left: 1px solid #333; margin-left: 4px; padding-left: 16px;" onclick="showPage('journey')">Journey Map</button>
 </nav>
 
 <!-- ═══════════════════════════════════════ -->
@@ -1122,6 +1299,376 @@
   <p>Cadence-based, not date-based. Week 1 is a shape observation. Week 2 connects habits to health data + offers a midpoint reflection. Week 3 is graduation with cumulative evidence. Each card stays in Pulse until dismissed. The reflection prompt at Week 2 is optional — skip is always there.</p>
 </div></div>
 </div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- JOURNEY MAP                             -->
+<!-- ═══════════════════════════════════════ -->
+<div class="page" id="page-journey">
+<div class="journey-wrap">
+  <div class="journey-intro">
+    <h1>Journey Map</h1>
+    <p>One user's first 42 days — from onboarding through behavioral graduation. Each screen is a real moment in the app. Scroll right to follow the timeline. The coach is always there, but speaks only when it has something worth saying.</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- ── Onboarding ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line" style="visibility:hidden"></div>
+        <div class="moment-dot gate-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Onboarding</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Welcome to Kasane</h2><div class="sub">Let's build something that sticks.</div></div>
+        <div class="ms">
+          <div class="ms-label">Three beats</div>
+
+          <div style="background:#f8f7f4; border-radius:10px; padding:14px; margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:600; margin-bottom:4px;">1 · Philosophy</div>
+            <p style="font-size:11px; color:#666; line-height:1.5;">Small, sustainable habits — not 30-day challenges. One thing at a time. We go at your pace.</p>
+          </div>
+
+          <div style="background:#f8f7f4; border-radius:10px; padding:14px; margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:600; margin-bottom:4px;">2 · Context</div>
+            <p style="font-size:11px; color:#666; line-height:1.5;">What are you working on? Sleep? Movement? Stress? Pick an outcome, not a habit — we'll suggest the intervention.</p>
+          </div>
+
+          <div style="background:#f8f7f4; border-radius:10px; padding:14px;">
+            <div style="font-size:13px; font-weight:600; margin-bottom:4px;">3 · Your Plan</div>
+            <p style="font-size:11px; color:#666; line-height:1.5;">One forming habit. One daily anchor. Apple Health connected (optional). That's it. You're ready.</p>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Outcome-first onboarding</div>
+        <p>User picks an outcome ("I want better sleep"), we map it to a pillar + intervention via OutcomeRouter. They leave with one concrete habit, not a menu of options.</p>
+        <div class="mn-source">Source: main branch (Paul's 12-screen flow, compressed)</div>
+      </div>
+    </div>
+
+    <!-- ── Day 1 ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot today-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 1</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 1</div></div>
+        <div class="ms">
+          <div class="ms-label">Forming</div>
+          <div class="mini-fc">
+            <div class="mfc-top"><span class="mfc-emoji">🚶</span><span class="mfc-title">Walk after breakfast</span></div>
+            <div class="mfc-anchor">Anchor: after coffee</div>
+            <div class="mfc-btn">I did this today</div>
+          </div>
+
+          <div class="mini-whisper celeb" style="margin-top:12px;">
+            ✦ You started. That's the hardest part.
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">One tap. Coach is quiet.</div>
+        <p>sandboxPhase: <strong>early</strong> (days 0-2). No expand nudges. No reflections. Just the habit and one small celebration after check-in. The coach earns trust by not over-talking.</p>
+        <div class="mn-source">Source: Trailhead 1 (Coach Whispers) + coaching engine</div>
+      </div>
+    </div>
+
+    <!-- ── Day 3-6 ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot today-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 3 – 6</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 5</div></div>
+        <div class="ms">
+          <div class="ms-label">Forming</div>
+          <div class="mini-fc done">
+            <div class="mfc-top"><span class="mfc-emoji">🚶</span><span class="mfc-title">Walk after breakfast</span></div>
+            <div class="mfc-anchor">5 day streak · 🔥</div>
+            <div class="mfc-btn">Done ✓</div>
+          </div>
+
+          <div class="mini-whisper nudge" style="margin-top:12px;">
+            ✦ 5 days strong. Room for one more? <span style="text-decoration:underline; cursor:pointer;">See suggestions →</span>
+          </div>
+
+          <div class="mini-wdots">
+            <div class="mini-wd chk">M</div>
+            <div class="mini-wd chk">T</div>
+            <div class="mini-wd chk">W</div>
+            <div class="mini-wd chk">T</div>
+            <div class="mini-wd chk">F</div>
+            <div class="mini-wd">S</div>
+            <div class="mini-wd">S</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Expand nudge fires</div>
+        <p>sandboxPhase: <strong>exploring</strong> (days 3-6). SandboxNudge gate: streak ≥ 5, all gaps == 0, forming count &lt; 3. First opportunity to add a second habit. Fully optional — dismiss and it won't nag.</p>
+        <div class="mn-source">Source: coaching engine (SandboxNudge)</div>
+      </div>
+    </div>
+
+    <!-- ── Day 7 ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot pulse-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 7</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Week 1</div></div>
+        <div class="ms">
+          <div class="ms-label">Your first week</div>
+
+          <div style="background:#fff; border:1px solid #e8e8e4; border-radius:10px; padding:12px 14px; margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; font-weight:600;">🚶 Walk after breakfast</span>
+              <span style="font-size:11px; color:#4a8c5c; font-weight:600;">clean</span>
+            </div>
+            <div class="mini-wdots" style="margin-top:6px;">
+              <div class="mini-wd chk">M</div><div class="mini-wd chk">T</div><div class="mini-wd chk">W</div><div class="mini-wd chk">T</div><div class="mini-wd chk">F</div><div class="mini-wd chk">S</div><div class="mini-wd chk">S</div>
+            </div>
+          </div>
+
+          <div class="mini-coach" style="margin-top:8px;">
+            <p>✦ 7 for 7 your first week. Your body is learning this is what mornings look like now.</p>
+            <div class="mc-source">Week 1 reflection</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab active"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">First weekly reflection</div>
+        <p>sandboxPhase: <strong>calibrating</strong> (days 7-13). Weekly Pulse card with day grid + gap health label. 3-step reflection fires: Evidence → Coach Conversation → What's next. This is the first time the user sees their data reflected back at them.</p>
+        <div class="mn-source">Source: Trailhead 6 (Weekly Pulse) + coaching engine</div>
+      </div>
+    </div>
+
+    <!-- ── Day 14 ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot pulse-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 14</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Day 14</div></div>
+        <div class="ms">
+          <div class="ms-label">Coach observation</div>
+          <div style="background:#f0f3f7; border-left:3px solid #5a7c9c; border-radius:0 10px 10px 0; padding:12px 14px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <span style="font-size:14px;">🌙</span>
+              <span style="font-size:13px; font-weight:600;">Sleep is responding</span>
+            </div>
+            <p style="font-size:11px; color:#666; line-height:1.5;">Your average sleep went from 6.4 to 7.1 hours since you started walking. Nights after walk days average 38 min more sleep.</p>
+            <div style="font-size:9px; color:#bbb; margin-top:6px;">Based on 14 days of Apple Health</div>
+          </div>
+
+          <div class="ms-label" style="margin-top:8px;">Midpoint reflection</div>
+          <div class="mini-coach">
+            <p>✦ Two weeks in. Your walk is doing more than you think — sleep data shows it. What's feeling different?</p>
+            <div style="background:#fff; border:1px solid #e8e8e4; border-radius:8px; padding:10px; margin-top:8px; font-size:11px; color:#aaa;">Tap to respond...</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab active"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Health context + midpoint</div>
+        <p>sandboxPhase: <strong>deepening</strong> (days 14-20). Apple Health data surfaces as coach observations — sleep correlation to habit. Midpoint reflection is optional free-text. This is the "oh damn" moment — the habit is doing something measurable.</p>
+        <div class="mn-source">Source: Trailhead 5 (Health Context) + coaching engine</div>
+      </div>
+    </div>
+
+    <!-- ── Day 21 ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot gate-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 21</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Week 3</div></div>
+        <div class="ms">
+          <div class="ms-label">Sandbox calibrated</div>
+
+          <div style="background:#f8f6f0; border:1px solid #d4c89a; border-radius:10px; padding:14px; margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:600; margin-bottom:6px;">Your plan is ready</div>
+            <p style="font-size:11px; color:#666; line-height:1.5;">Started with 1. Explored 2. Benched 1. Landed on 2 forming habits that are actually sticking.</p>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+              <div style="flex:1; background:#fff; border:1px solid #e8e8e4; border-radius:8px; padding:8px 10px; text-align:center;">
+                <div style="font-size:16px;">🚶</div>
+                <div style="font-size:10px; font-weight:600; margin-top:2px;">Walk</div>
+                <div style="font-size:9px; color:#4a8c5c;">clean</div>
+              </div>
+              <div style="flex:1; background:#fff; border:1px solid #e8e8e4; border-radius:8px; padding:8px 10px; text-align:center;">
+                <div style="font-size:16px;">📖</div>
+                <div style="font-size:10px; font-weight:600; margin-top:2px;">Read</div>
+                <div style="font-size:9px; color:#4a8c5c;">clean</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-coach">
+            <p>✦ This is your rhythm — not what you hoped for, but what held up. 21 days of data say these two work for you.</p>
+            <div class="mc-source">Sandbox calibration · Day 21</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab active"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Calibration, not graduation</div>
+        <p>sandboxPhase: <strong>calibrated</strong> (21+). Third reflection fires with journey summary. Critical distinction: this is NOT graduation. Graduation is behavioral (42+ days, zero 2-day gaps in rolling 60-day window). Day 21 means "we know your plan" — now the real work begins.</p>
+        <div class="mn-source">Source: coaching engine (sandbox calibration)</div>
+      </div>
+    </div>
+
+    <!-- ── Day 42+ ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot grad-dot"></div>
+        <div class="moment-line"></div>
+      </div>
+      <div class="moment-day">Day 42+</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 47</div></div>
+        <div class="ms">
+          <div class="ms-label">Graduation</div>
+          <div class="mini-fc grad">
+            <div style="text-align:center; padding:12px 0;">
+              <div style="font-size:28px; margin-bottom:8px;">🚶</div>
+              <div style="font-size:15px; font-weight:600; margin-bottom:4px;">Walk after breakfast</div>
+              <div style="font-size:11px; color:#c47a2a; font-weight:600; margin-bottom:10px;">is part of who you are now.</div>
+              <div style="font-size:10px; color:#888; line-height:1.6;">
+                47 days · 42 check-ins<br>
+                Sleep improved +42 min avg<br>
+                Resting HR ↓ 5 bpm<br>
+                Zero 2-day gaps in 60-day window
+              </div>
+            </div>
+            <div class="mfc-btn" style="background:#c47a2a;">Move to Practicing →</div>
+          </div>
+
+          <div class="mini-whisper identity" style="margin-top:12px;">
+            ✦ This isn't willpower anymore. This is just what mornings look like for you.
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab active"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Behavioral graduation</div>
+        <p>Minimum 42 days (Kaushal & Rhodes 2015). Zero 2+ consecutive gap episodes in rolling 60-day window. Currently clean. No countdown, no progress bar — it arrives when earned. Fires as fullScreenCover from TodayView. Moves habit to Practicing, frees a Forming slot.</p>
+        <div class="mn-source">Source: coaching engine (graduation criteria)</div>
+      </div>
+    </div>
+
+    <!-- ── Post-Graduation ── -->
+    <div class="moment">
+      <div class="moment-connector">
+        <div class="moment-line"></div>
+        <div class="moment-dot grad-dot"></div>
+        <div class="moment-line" style="visibility:hidden"></div>
+      </div>
+      <div class="moment-day">Post-Graduation</div>
+      <div class="mini-phone">
+        <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
+        <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Layer discovery</div></div>
+        <div class="ms">
+          <div class="ms-label">What's next</div>
+
+          <div style="background:#f8f7f4; border-radius:10px; padding:14px; margin-bottom:10px;">
+            <div style="font-size:12px; font-weight:600; margin-bottom:8px;">Recovery stack</div>
+            <p style="font-size:11px; color:#666; margin-bottom:8px;">You've got morning movement locked. These build on that momentum:</p>
+
+            <div style="background:#fff; border:1px solid #e8e8e4; border-radius:8px; padding:10px 12px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:12px; font-weight:600;">🧊 Cold exposure</div>
+                <div style="font-size:10px; color:#888;">2 min cold shower · after walk</div>
+              </div>
+              <div style="font-size:10px; color:#4a8c5c; font-weight:600;">+ Add</div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #e8e8e4; border-radius:8px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:12px; font-weight:600;">🫁 Breathwork</div>
+                <div style="font-size:10px; color:#888;">5 min box breathing · morning</div>
+              </div>
+              <div style="font-size:10px; color:#aaa;">Coming up next</div>
+            </div>
+          </div>
+
+          <div class="mini-coach">
+            <p>✦ Your walk graduated. You've earned a slot. Recovery stack pairs well — cold exposure anchors right after your walk. One tap to try it.</p>
+            <div class="mc-source">InterventionCatalog · OutcomeRouter</div>
+          </div>
+        </div>
+        <div class="mini-tabs">
+          <div class="mini-tab"><div class="mini-tab-icon">✓</div><span>Today</span></div>
+          <div class="mini-tab active"><div class="mini-tab-icon">〜</div><span>Pulse</span></div>
+          <div class="mini-tab"><div class="mini-tab-icon">●</div><span>Profile</span></div>
+        </div>
+      </div>
+      <div class="moment-note">
+        <div class="mn-title">Layer discovery</div>
+        <p>InterventionCatalog suggests from pillars where user has momentum. OutcomeRouter weights: 60% stored outcome + 40% gap fraction. Shows next 1-2 unadopted interventions. No auto-suggest at graduation — this comes via nudge or weekly reflection. The compounding begins.</p>
+        <div class="mn-source">Source: coaching engine (InterventionCatalog + OutcomeRouter)</div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+</div><!-- /journey-wrap -->
+</div><!-- /page-journey -->
 
 <!-- ═══════════════════════════════════════ -->
 <!-- JAVASCRIPT                              -->
