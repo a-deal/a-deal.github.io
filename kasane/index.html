@@ -514,8 +514,56 @@
 
   .moment-day {
     font-size: 11px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 1px; color: #aaa; margin-bottom: 10px;
+    letter-spacing: 1px; color: #aaa; margin-bottom: 4px;
   }
+  .surface-badge {
+    font-size: 9px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.8px; padding: 2px 8px; border-radius: 4px;
+    margin-bottom: 8px; display: inline-block;
+  }
+  .surface-badge.sb-today { background: #e8f5e9; color: #2e7d32; }
+  .surface-badge.sb-pulse { background: #e3f2fd; color: #1565c0; }
+  .surface-badge.sb-onboard { background: #f5f5f5; color: #666; }
+  .surface-badge.sb-gate { background: #f5f5f5; color: #1a1a1a; }
+  .surface-badge.sb-grad { background: #fef3e2; color: #c47a2a; }
+
+  /* Journey summary table */
+  .journey-summary {
+    max-width: 960px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid #e8e8e4;
+  }
+  .journey-summary h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 20px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 6px;
+  }
+  .journey-summary .js-sub {
+    font-size: 13px; color: #888; line-height: 1.5; margin-bottom: 20px;
+  }
+  .js-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+  .js-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #aaa;
+    border-bottom: 2px solid #e8e8e4;
+  }
+  .js-table td {
+    padding: 10px 10px;
+    border-bottom: 1px solid #f0eeea;
+    vertical-align: top;
+    color: #444;
+    line-height: 1.5;
+  }
+  .js-table tr:last-child td { border-bottom: none; }
 
   /* Mini phone in journey */
   .mini-phone {
@@ -1565,6 +1613,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Onboarding</div>
+      <div class="surface-badge sb-onboard">Onboarding</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Welcome to Kasane</h2><div class="sub">Let's build something that sticks.</div></div>
@@ -1610,6 +1659,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 1</div>
+      <div class="surface-badge sb-today">Today tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 1</div></div>
@@ -1646,6 +1696,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 3 – 6</div>
+      <div class="surface-badge sb-today">Today tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 5</div></div>
@@ -1692,6 +1743,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 7</div>
+      <div class="surface-badge sb-pulse">Pulse tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Week 1</div></div>
@@ -1734,6 +1786,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 14</div>
+      <div class="surface-badge sb-pulse">Pulse tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Day 14</div></div>
@@ -1775,6 +1828,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 21</div>
+      <div class="surface-badge sb-pulse">Pulse tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Week 3</div></div>
@@ -1824,6 +1878,7 @@
         <div class="moment-line"></div>
       </div>
       <div class="moment-day">Day 42+</div>
+      <div class="surface-badge sb-grad">Today tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Today</h2><div class="sub">Andrew · Day 47</div></div>
@@ -1869,6 +1924,7 @@
         <div class="moment-line" style="visibility:hidden"></div>
       </div>
       <div class="moment-day">Post-Graduation</div>
+      <div class="surface-badge sb-pulse">Pulse tab</div>
       <div class="mini-phone">
         <div class="status-bar"><span>9:41</span><span style="font-size:10px;">●●●●○</span></div>
         <div class="mph"><h2>Pulse</h2><div class="sub">Andrew · Layer discovery</div></div>
@@ -1915,6 +1971,159 @@
     </div>
 
   </div><!-- /timeline -->
+
+  <!-- ── Surface × Moment Summary ── -->
+  <div class="journey-summary">
+    <h2>Surface × Moment Map</h2>
+    <p class="js-sub">Where each interaction lives, what it does, and what needs to be built. The bridge from wireframes to PRs.</p>
+
+    <table class="js-table">
+      <thead>
+        <tr>
+          <th>Moment</th>
+          <th>Surface</th>
+          <th>Interaction model</th>
+          <th>What ships</th>
+          <th>Trailhead</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Onboarding</strong></td>
+          <td><span class="surface-badge sb-onboard">Onboarding</span></td>
+          <td>3-beat flow: philosophy → context → plan. Outcome-first, not habit-first. Optional Apple Health.</td>
+          <td>Paul's 12-screen flow (on main). OutcomeRouter wiring TBD.</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Day 1</strong></td>
+          <td><span class="surface-badge sb-today">Today</span></td>
+          <td>Single tap check-in. One forming card. Coach whisper after first check-in. Under 10 seconds.</td>
+          <td>CoachMessageEngine whisper at first check-in.</td>
+          <td>T1</td>
+        </tr>
+        <tr>
+          <td><strong>Day 3–6</strong></td>
+          <td><span class="surface-badge sb-today">Today</span></td>
+          <td>Same check-in. Expand nudge (inline whisper) if streak ≥ 5 + forming &lt; 3. Dismissable.</td>
+          <td>SandboxNudge expand gate. "See suggestions" link.</td>
+          <td>T1</td>
+        </tr>
+        <tr>
+          <td><strong>Day 7</strong></td>
+          <td><span class="surface-badge sb-pulse">Pulse</span></td>
+          <td>Weekly reflection. Day grid + gap health. 3-step: Evidence → Coach → What's next.</td>
+          <td>Pulse tab shell + weekly card. First real Pulse content.</td>
+          <td>T2, T6</td>
+        </tr>
+        <tr>
+          <td><strong>Day 14</strong></td>
+          <td><span class="surface-badge sb-pulse">Pulse</span></td>
+          <td>Health context card (Apple Health correlation). Midpoint reflection with response field.</td>
+          <td>Health Context Cards. "Sleep is responding" observation.</td>
+          <td>T5, T6</td>
+        </tr>
+        <tr>
+          <td><strong>Day 21</strong></td>
+          <td><span class="surface-badge sb-pulse">Pulse</span></td>
+          <td>Sandbox calibration summary. Journey recap. "Your plan is ready" — not graduation.</td>
+          <td>Calibration card + sandbox phase transition to calibrated.</td>
+          <td>T6</td>
+        </tr>
+        <tr>
+          <td><strong>Day 42+</strong></td>
+          <td><span class="surface-badge sb-grad">Today</span></td>
+          <td>Graduation fires as fullScreenCover. Stats, identity message. Move to Practicing.</td>
+          <td>GraduationCelebrationView (exists on main). Criteria wiring TBD.</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Post-grad</strong></td>
+          <td><span class="surface-badge sb-pulse">Pulse</span></td>
+          <td>Layer discovery. InterventionCatalog suggestions. "What's next" with add action.</td>
+          <td>OutcomeRouter + InterventionCatalog integration. Nudge via reflection.</td>
+          <td>T6</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px; background:#e8f5e9; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:600; color:#2e7d32; margin-bottom:4px;">Today tab</div>
+        <div style="font-size:11px; color:#444; line-height:1.5;">Day 1 → Day 6: sole surface. Day 42+: graduation fires here. Daily check-in never moves. Voice check-in lives here too (Paul's FAB).</div>
+      </div>
+      <div style="flex:1; min-width:200px; background:#e3f2fd; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:600; color:#1565c0; margin-bottom:4px;">Pulse tab</div>
+        <div style="font-size:11px; color:#444; line-height:1.5;">Day 7+: weekly reflections, health context, calibration, layer discovery. The coaching engine's primary home. Grows richer over time.</div>
+      </div>
+      <div style="flex:1; min-width:200px; background:#f5f5f5; border-radius:10px; padding:14px 16px;">
+        <div style="font-size:11px; font-weight:600; color:#666; margin-bottom:4px;">Profile tab</div>
+        <div style="font-size:11px; color:#444; line-height:1.5;">Low frequency. Habit deck (identity portfolio), settings, plan management. Not yet on the journey timeline — arrives when the deck has depth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Decision Log ── -->
+  <div class="journey-summary" style="margin-top:32px;">
+    <h2>Decision Log</h2>
+    <p class="js-sub">Decisions made, by whom, and when. Updated as feedback comes in. The source of truth for "why did we do it this way?"</p>
+
+    <table class="js-table">
+      <thead>
+        <tr>
+          <th style="width:100px;">Date</th>
+          <th style="width:80px;">Who</th>
+          <th>Decision</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Layers, not pillars.</strong> All user-facing language uses "layers" — foundation layers, layer discovery, "habits are layers."</td>
+          <td>product-direction.md, Kasane brand lexicon. "Pillars" implies fixed structure; "layers" implies stacking and accumulation.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Both</td>
+          <td><strong>Peakspan: weird word, great concept.</strong> The philosophy (staying near personal best) is core. The word is negotiable.</td>
+          <td>Paul forwarded Rhonda Patrick newsletter. Both agree on concept, skeptical on user-facing term.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Four foundation layers hold up.</strong> Recovery, Movement, Nutrition, Connect map all 6 peakspan domains. Connect is weakest, Cognition has no explicit home, Recovery is overloaded — but they work.</td>
+          <td>Deep analysis of domain→layer mapping. Domains are a lens on top, not a replacement for layers.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Voice is the easy path, not a sidebar.</strong> Resolves "insanely easy" vs "rich signal" tension. Talking is faster than tapping.</td>
+          <td>Paul shipped voice check-in to main (17 commits). Needs elevated prominence.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Sentiment is the first qualitative signal.</strong> Emoji reaction + free-text. Powers: anchor detection, struggle detection, lifestyle fit scoring.</td>
+          <td>CDCheckIn currently has no reaction field. Gap identified, product doc written.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Take Paul's TodayView, add coaching on top.</strong> His flat layout is production. Coaching engine's TodayView was exploration.</td>
+          <td>Merge conflict between coaching-engine branch and main. Cherry-pick features, don't wholesale merge.</td>
+        </tr>
+        <tr>
+          <td>Mar 13</td>
+          <td>Andrew</td>
+          <td><strong>Apple Health: optional but optimal.</strong> "The more you give, the more we can show you." Payoff lands at Day 14.</td>
+          <td>Onboarding beat 3 framing. Connects to health context cards and the "oh damn" moment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div><!-- /journey-wrap -->
 </div><!-- /page-journey -->
 
