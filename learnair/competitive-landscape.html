@@ -3,181 +3,431 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LearnAIR Competitive Positioning Analysis</title>
+<title>LearnAIR | Competitive Positioning Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #1a2332;
-    --olive: #4a5a3a;
-    --gold: #c9a84c;
-    --sand: #f5f0e8;
-    --steel: #6b7b8d;
-    --red: #c0392b;
-    --green: #27ae60;
-    --blue: #2980b9;
-    --dark: #2c3e50;
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: var(--sand);
-    color: var(--navy);
-    line-height: 1.6;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-  h1 {
-    font-size: 2.2rem;
-    color: var(--navy);
-    border-bottom: 3px solid var(--gold);
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-  .subtitle {
-    color: var(--steel);
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-    font-style: italic;
-  }
-  h2 {
-    font-size: 1.5rem;
-    color: var(--navy);
-    margin: 2.5rem 0 1rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid var(--olive);
-  }
-  h3 {
-    font-size: 1.15rem;
-    color: var(--olive);
-    margin: 1.5rem 0 0.5rem;
-  }
-  p, li { font-size: 0.95rem; }
-  .section { margin-bottom: 2rem; }
 
-  /* Competitor cards */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  /* --- KEY QUESTION CALLOUT --- */
+  .key-question {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .key-question strong {
+    color: var(--accent);
+  }
+
+  /* --- COMPETITOR CARDS --- */
   .card-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
-    margin: 1rem 0;
+    margin: 1rem 0 1.5rem;
   }
+
   .card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    background: var(--white);
+    border: 1px solid var(--faint);
     padding: 1.25rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
+
   .card h4 {
-    font-size: 1.05rem;
-    color: var(--navy);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
     margin-bottom: 0.25rem;
   }
+
   .card .tag {
     display: inline-block;
-    font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    padding: 2px 7px;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
   }
-  .tag-vet { background: var(--olive); color: #fff; }
-  .tag-general { background: var(--blue); color: #fff; }
-  .tag-gov { background: var(--steel); color: #fff; }
-  .tag-corp { background: var(--dark); color: #fff; }
-  .card ul { padding-left: 1.2rem; margin-top: 0.5rem; }
-  .card li { font-size: 0.88rem; margin-bottom: 0.3rem; }
+
+  .tag-vet { background: var(--green); color: var(--white); }
+  .tag-general { background: var(--accent); color: var(--white); }
+  .tag-gov { background: var(--muted); color: var(--paper); }
+  .tag-corp { background: var(--ink); color: var(--paper); }
+
+  .card ul { padding-left: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+  .card li { font-size: 0.88rem; margin-bottom: 0.3rem; line-height: 1.55; }
+
   .card .verdict {
     margin-top: 0.75rem;
     padding-top: 0.5rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--faint);
     font-size: 0.85rem;
-    color: var(--steel);
+    color: var(--muted);
     font-style: italic;
+    line-height: 1.6;
   }
 
-  /* Positioning matrix */
+  /* --- POSITIONING MATRIX --- */
   .matrix-container {
     position: relative;
     width: 100%;
     max-width: 820px;
     height: 620px;
     margin: 2rem auto;
-    background: #fff;
-    border: 2px solid var(--navy);
-    border-radius: 6px;
+    background: var(--white);
+    border: 2px solid var(--ink);
     overflow: hidden;
   }
+
   .matrix-container .axis-label-x {
     position: absolute;
     bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--navy);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.06em;
   }
+
   .matrix-container .axis-label-y {
     position: absolute;
     left: -48px;
     top: 50%;
     transform: rotate(-90deg) translateX(-50%);
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--navy);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--ink);
     white-space: nowrap;
+    letter-spacing: 0.06em;
   }
+
   .matrix-container .axis-min-x {
     position: absolute;
     bottom: 28px;
     left: 80px;
-    font-size: 0.72rem;
-    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
   }
+
   .matrix-container .axis-max-x {
     position: absolute;
     bottom: 28px;
     right: 20px;
-    font-size: 0.72rem;
-    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
   }
+
   .matrix-container .axis-min-y {
     position: absolute;
     left: 62px;
     bottom: 44px;
-    font-size: 0.72rem;
-    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
   }
+
   .matrix-container .axis-max-y {
     position: absolute;
     left: 62px;
     top: 14px;
-    font-size: 0.72rem;
-    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
   }
+
   .matrix-inner {
     position: absolute;
     top: 35px;
     left: 80px;
     right: 20px;
     bottom: 45px;
-    border-left: 2px solid var(--navy);
-    border-bottom: 2px solid var(--navy);
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
   }
+
   .matrix-inner .quadrant-label {
     position: absolute;
-    font-size: 0.68rem;
-    color: #bbb;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--faint);
     font-style: italic;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.08em;
   }
+
   .matrix-inner .ql-tl { top: 8px; left: 8px; }
   .matrix-inner .ql-tr { top: 8px; right: 8px; text-align: right; }
   .matrix-inner .ql-bl { bottom: 8px; left: 8px; }
   .matrix-inner .ql-br { bottom: 8px; right: 8px; text-align: right; }
+
   .dot {
     position: absolute;
     width: 12px;
@@ -186,606 +436,651 @@
     transform: translate(-50%, -50%);
     z-index: 2;
   }
+
   .dot-label {
     position: absolute;
-    font-size: 0.68rem;
-    font-weight: bold;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 500;
     white-space: nowrap;
     z-index: 3;
-    color: var(--navy);
-    background: rgba(255,255,255,0.85);
+    color: var(--ink);
+    background: rgba(254, 253, 251, 0.85);
     padding: 1px 4px;
-    border-radius: 2px;
   }
+
   .dot-learnair {
     width: 20px;
     height: 20px;
-    background: var(--gold);
-    border: 3px solid var(--navy);
-    box-shadow: 0 0 0 4px rgba(201,168,76,0.3);
+    background: var(--accent);
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 4px rgba(180, 74, 45, 0.3);
     z-index: 10;
   }
 
-  /* Differentiation block */
-  .diff-block {
-    background: var(--navy);
-    color: #fff;
-    padding: 2rem;
-    border-radius: 6px;
-    margin: 1.5rem 0;
-    line-height: 1.7;
-  }
-  .diff-block strong { color: var(--gold); }
+  .dot-vet { background: var(--green); }
+  .dot-general { background: var(--accent-light); }
+  .dot-corp { background: var(--ink); }
 
-  /* Risk table */
-  .risk-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-  }
-  .risk-table th {
-    background: var(--navy);
-    color: #fff;
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-size: 0.85rem;
-  }
-  .risk-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #ddd;
-    font-size: 0.88rem;
-    vertical-align: top;
-  }
-  .risk-table tr:nth-child(even) { background: #f9f7f2; }
-  .severity-high { color: var(--red); font-weight: bold; }
-  .severity-med { color: #e67e22; font-weight: bold; }
-  .severity-low { color: var(--green); font-weight: bold; }
-
-  .source-list {
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid #ccc;
+  .matrix-legend {
+    text-align: center;
     font-size: 0.78rem;
-    color: var(--steel);
-  }
-  .source-list a { color: var(--steel); }
-  .source-list li { margin-bottom: 0.25rem; }
-
-  .timestamp {
-    text-align: right;
-    font-size: 0.8rem;
-    color: var(--steel);
-    margin-top: 2rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
   }
 
+  .matrix-legend .legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* --- DIFFERENTIATION BLOCK --- */
+  .diff-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem;
+    margin: 1.5rem 0;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .diff-block strong { color: var(--accent-light); }
+  .diff-block em { color: var(--faint); }
+
+  /* --- RISK TABLE --- */
+  .severity-high { color: #c0392b; font-weight: 600; }
+  .severity-med { color: #e67e22; font-weight: 600; }
+  .severity-low { color: var(--green); font-weight: 600; }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
   @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
     .card-grid { grid-template-columns: 1fr; }
     .matrix-container { height: 500px; }
-    body { padding: 1rem; }
-    h1 { font-size: 1.6rem; }
+    footer { flex-direction: column; gap: 1rem; }
   }
 </style>
 </head>
 <body>
 
-<h1>LearnAIR: Competitive Positioning Analysis</h1>
-<p class="subtitle">Veteran AI Workforce Training &mdash; Landscape, Gaps, and Strategic Position &bull; March 2026</p>
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Research</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
 
-<!-- ============================================================ -->
-<h2>1. Competitive Landscape Map</h2>
+<section class="doc-header">
+  <div class="kicker">Competitive Analysis</div>
+  <h1>Competitive Positioning Analysis</h1>
+  <p class="doc-subtitle">Veteran AI Workforce Training &mdash; Landscape, Gaps, and Strategic Position</p>
+  <div class="doc-date">March 2026</div>
+</section>
 
-<!-- VETERAN-SPECIFIC -->
-<h3>A. Veteran-Specific Programs</h3>
-<div class="card-grid">
+<div class="article">
 
-  <div class="card">
-    <h4>Hiring Our Heroes (U.S. Chamber)</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Corporate Fellowship Program embeds fellows at Google, Microsoft, Salesforce, Amazon — some rotations touch AI/data teams</li>
-      <li>Google partnership: "Gen AI Leader" certification track (3-week virtual, free)</li>
-      <li>Microsoft fellowship (May-Jul 2026): Azure, AI, datacenter ops</li>
-      <li>Salesforce: AI career pipeline via Trailhead + HOH network</li>
-    </ul>
-    <p class="verdict">AI exposure is incidental to corporate placements — no dedicated AI workflow management curriculum. Fellows learn whatever their host team does. Strong brand, weak AI depth.</p>
+  <!-- 1. COMPETITIVE LANDSCAPE MAP -->
+  <hr>
+  <h2>1. Competitive Landscape Map</h2>
+
+  <!-- VETERAN-SPECIFIC -->
+  <h3>A. Veteran-Specific Programs</h3>
+  <div class="card-grid">
+
+    <div class="card">
+      <h4>Hiring Our Heroes (U.S. Chamber)</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Corporate Fellowship Program embeds fellows at Google, Microsoft, Salesforce, Amazon — some rotations touch AI/data teams</li>
+        <li>Google partnership: "Gen AI Leader" certification track (3-week virtual, free)</li>
+        <li>Microsoft fellowship (May-Jul 2026): Azure, AI, datacenter ops</li>
+        <li>Salesforce: AI career pipeline via Trailhead + HOH network</li>
+      </ul>
+      <p class="verdict">AI exposure is incidental to corporate placements — no dedicated AI workflow management curriculum. Fellows learn whatever their host team does. Strong brand, weak AI depth.</p>
+    </div>
+
+    <div class="card">
+      <h4>BreakLine Education</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Free, remote immersive sprints for veterans, women, and underrepresented groups</li>
+        <li>Business education + industry leader discussions</li>
+        <li>Hiring partners include Anduril, Meta, Google, Palantir</li>
+        <li>No dedicated AI curriculum — focus is on career transition, networking, and soft skills</li>
+      </ul>
+      <p class="verdict">Career accelerator, not a training program. Zero AI technical depth. Helps veterans get hired, not upskilled in AI supervision.</p>
+    </div>
+
+    <div class="card">
+      <h4>FourBlock</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Career Readiness Program (free, twice/year in major metros)</li>
+        <li>USAA-funded expansion of Careerflow.ai tools — AI-powered resume, LinkedIn optimization, job matching</li>
+        <li>AI is used <em>for</em> veterans (career tools), not taught <em>to</em> veterans</li>
+      </ul>
+      <p class="verdict">Uses AI to serve veterans, does not train veterans to use or manage AI. No AI curriculum at all.</p>
+    </div>
+
+    <div class="card">
+      <h4>50strong (Univ. of Arizona)</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Free platform connecting veterans with employers, mentors, virtual events</li>
+        <li>Weekly networking events with recruiters</li>
+        <li>Job board with SkillBridge pathways and paid training links</li>
+        <li>No AI training content; purely a matching/networking platform</li>
+      </ul>
+      <p class="verdict">Job marketplace. Zero training component. Not a competitor on content.</p>
+    </div>
+
+    <div class="card">
+      <h4>Vets2Industry</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Free resource library, mentorship, career tool webinars</li>
+        <li>AI Consultation Tool for personalized career assistance</li>
+        <li>Annual networking cruise and events</li>
+        <li>No structured AI training program</li>
+      </ul>
+      <p class="verdict">Community and resource hub. AI is a feature of their tools, not a subject they teach.</p>
+    </div>
+
+    <div class="card">
+      <h4>American Corporate Partners (ACP)</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>1-on-1 mentorship matching (34,000+ veterans since 2010)</li>
+        <li>Webinar: "How AI Is Shaping Work" at Neuberger Berman</li>
+        <li>AI is a discussion topic in mentorship, not a training track</li>
+        <li>Post-9/11 veterans and spouses eligible</li>
+      </ul>
+      <p class="verdict">Mentorship network with occasional AI awareness events. Not a training competitor.</p>
+    </div>
+
+    <div class="card">
+      <h4>VetsinTech / Vets in AI</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Dedicated "Vets in AI" program launched 2025 — ML, data analytics, AI ethics</li>
+        <li>Events with Nvidia, Microsoft, Google, Scale AI (Feb 2026 at JPMorgan DC)</li>
+        <li>Partners with leading tech companies for structured training</li>
+        <li>Covers technical AI skills, not AI workflow management or supervision</li>
+      </ul>
+      <p class="verdict">Closest veteran-specific competitor on AI depth. Teaches AI skills (building/using), but focused on making veterans into AI practitioners — NOT training them to supervise AI-enabled workflows.</p>
+    </div>
+
+    <div class="card">
+      <h4>OpenAI Academy + Veterans Forge</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Pilot: 4-hour hands-on AI sprint (Mar 2026, Reston VA, 100 cap)</li>
+        <li>Free ChatGPT Plus for transitioning veterans (1 year, since Nov 2025)</li>
+        <li>"AI Ready Veteran" resource collection on OpenAI Academy</li>
+        <li>Practical prompt workflows for career transition, not enterprise management</li>
+      </ul>
+      <p class="verdict">Tool literacy, not workflow supervision. Teaches veterans to use ChatGPT, not to manage AI-enabled teams. Still in pilot phase, tiny scale.</p>
+    </div>
+
+    <div class="card">
+      <h4>Vets Who Code</h4>
+      <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Free software engineering training (300+ veterans placed)</li>
+        <li>AI-powered curriculum for coding productivity</li>
+        <li>Veteran-led 501(c)(3)</li>
+        <li>Focus: make veterans into software engineers, not AI managers</li>
+      </ul>
+      <p class="verdict">Technical coding bootcamp with AI as a tool. Does not address AI workflow management.</p>
+    </div>
+
+    <div class="card">
+      <h4>Accenture Veterans Initiative (2025)</h4>
+      <span class="tag tag-corp">Corporate</span> <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>New national initiative targeting Officers and Senior Enlisted</li>
+        <li>LearnVantage platform: courses including "agentic AI" and nanodegrees</li>
+        <li>Technical mentorship, interview prep, resume support</li>
+        <li>White House AI Education Taskforce participant</li>
+        <li>Designed to funnel veterans into Accenture pipeline</li>
+      </ul>
+      <p class="verdict"><strong>Most direct competitive threat.</strong> Veteran-specific, AI-focused, backed by massive resources. But it is a corporate hiring funnel, not an independent training program. Veterans become Accenture employees, not broadly skilled AI supervisors. Curriculum serves Accenture's delivery model.</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h4>BreakLine Education</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Free, remote immersive sprints for veterans, women, and underrepresented groups</li>
-      <li>Business education + industry leader discussions</li>
-      <li>Hiring partners include Anduril, Meta, Google, Palantir</li>
-      <li>No dedicated AI curriculum — focus is on career transition, networking, and soft skills</li>
-    </ul>
-    <p class="verdict">Career accelerator, not a training program. Zero AI technical depth. Helps veterans get hired, not upskilled in AI supervision.</p>
+  <!-- GENERAL AI UPSKILLING -->
+  <h3>B. General AI Upskilling Programs</h3>
+  <div class="card-grid">
+
+    <div class="card">
+      <h4>Google AI Professional Certificate</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>Coursera-hosted, $59/mo (3-4 months typical = $177-$236)</li>
+        <li>Free for veterans via Google Launchpad (3-week virtual + cert voucher)</li>
+        <li>$4M Google.org grant to Student Veterans of America for access</li>
+        <li>$3.5M to Syracuse IVMF for cybersecurity + AI training</li>
+        <li>Covers: AI fundamentals, prompt engineering, responsible AI</li>
+      </ul>
+      <p class="verdict">Strong veteran accessibility through grants. Teaches AI literacy and tool use. No workflow management, no supervision framework, no leadership integration.</p>
+    </div>
+
+    <div class="card">
+      <h4>Microsoft Azure AI Fundamentals (AI-900)</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>Exam: $99 (free for veterans via MSSA and Military Datacenter Pathway)</li>
+        <li>MSSA: free cohort-based program leading to Microsoft certs</li>
+        <li>Army COOL approved for AI-900</li>
+        <li>Covers: ML concepts, computer vision, NLP, generative AI fundamentals</li>
+      </ul>
+      <p class="verdict">Technical certification. Good veteran access. Teaches AI concepts, not how to manage AI-augmented teams or workflows.</p>
+    </div>
+
+    <div class="card">
+      <h4>AWS AI/ML Training</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>AWS Educate: free for 10,000 veterans and spouses</li>
+        <li>GI Bill reimburses AWS cert exams (up to $2,000)</li>
+        <li>SkillStorm 16-week Tech Accelerator (AWS partner)</li>
+        <li>Amazon Technical Apprenticeship (paid, cloud computing)</li>
+        <li>Covers: cloud architecture, data engineering, ML deployment</li>
+      </ul>
+      <p class="verdict">Infrastructure-level AI training. Makes veterans into cloud/ML engineers. Zero content on AI supervision, workflow management, or human-AI teaming.</p>
+    </div>
+
+    <div class="card">
+      <h4>Coursera AI Courses (IBM, DeepLearning.AI, etc.)</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>$39-49/mo per course; Coursera Plus $240-399/yr</li>
+        <li>IBM AI Enterprise Workflow certification available</li>
+        <li>DeepLearning.AI specializations (Andrew Ng)</li>
+        <li>Financial aid available (up to 100% of costs)</li>
+        <li>No veteran-specific tracks or pricing</li>
+      </ul>
+      <p class="verdict">Deep technical content at low cost. IBM's "AI Enterprise Workflow" cert is the closest to LearnAIR's territory, but it is a developer certification — building ML pipelines, not supervising AI-enabled operations.</p>
+    </div>
+
+    <div class="card">
+      <h4>Udemy / SSGI AI Workflow Certs</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>Certified AI Workflow and Automation Specialist (CAWAS) on Udemy</li>
+        <li>SSGI AI Workflow & Prompt Engineering Certification</li>
+        <li>Low cost ($15-50 typical Udemy pricing)</li>
+        <li>Self-paced, no veteran-specific support</li>
+      </ul>
+      <p class="verdict">Cheap, generic, self-paced. Covers prompt engineering and automation. No leadership framework, no veteran context, no cohort experience.</p>
+    </div>
+
+    <div class="card">
+      <h4>University of Arizona AI Automation Certificate</h4>
+      <span class="tag tag-general">General</span>
+      <ul>
+        <li>5-week program, online</li>
+        <li>Covers AI agents, agentic AI, no-code automation</li>
+        <li>Academic credential</li>
+        <li>No veteran-specific track</li>
+      </ul>
+      <p class="verdict">Closest general-market program to AI workflow management. Covers agentic AI and where it fits in workflows. But no veteran lens, no mission command framework, no supervision-specific training.</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h4>FourBlock</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Career Readiness Program (free, twice/year in major metros)</li>
-      <li>USAA-funded expansion of Careerflow.ai tools — AI-powered resume, LinkedIn optimization, job matching</li>
-      <li>AI is used <em>for</em> veterans (career tools), not taught <em>to</em> veterans</li>
-    </ul>
-    <p class="verdict">Uses AI to serve veterans, does not train veterans to use or manage AI. No AI curriculum at all.</p>
+  <!-- GOVERNMENT -->
+  <h3>C. Government-Funded Programs</h3>
+  <div class="card-grid">
+
+    <div class="card">
+      <h4>VET TEC 2.0</h4>
+      <span class="tag tag-gov">Government</span>
+      <ul>
+        <li>Reauthorized Dec 2024 (Dole Act), funded from Oct 2025</li>
+        <li><strong>Still not operational as of Mar 2026</strong> — VA has not approved any providers yet</li>
+        <li>Expected: ~4,000 spots/year, partial GI Bill usage may be required</li>
+        <li>Previous providers (Code Platoon, Intellectual Point, ACI Tech) reapplying</li>
+        <li>Applications may open June 2026</li>
+      </ul>
+      <p class="verdict">Major funding channel, currently frozen. When it reopens, approved AI training providers will have a massive distribution advantage. LearnAIR should be in the VET TEC 2.0 application pipeline immediately.</p>
+    </div>
+
+    <div class="card">
+      <h4>Code Platoon (GI Bill + VET TEC)</h4>
+      <span class="tag tag-gov">Government</span> <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>AI + Fullstack Engineering bootcamp (VA-approved, GI Bill eligible)</li>
+        <li>AI Cloud and DevOps track (remote, approved as Certificate Prep)</li>
+        <li>Integrates AI ethics, security, and coding productivity tools</li>
+        <li>Veteran-focused nonprofit, strong community</li>
+        <li>Applying for VET TEC 2.0</li>
+      </ul>
+      <p class="verdict">Strongest current competitor combining veteran focus + AI content + government funding. But it trains coders who use AI, not managers who supervise AI workflows. The gap is leadership-level AI management.</p>
+    </div>
+
+    <div class="card">
+      <h4>GI Bill AI Degree Programs</h4>
+      <span class="tag tag-gov">Government</span>
+      <ul>
+        <li>Noble Desktop: VA-approved AI bootcamps (data science, ML, generative AI)</li>
+        <li>General Assembly: GI Bill-eligible bootcamps (6-8 months entitlement)</li>
+        <li>CU Boulder AI Graduate Certificate via Coursera ($6,300)</li>
+        <li>Traditional degree programs at accredited universities</li>
+      </ul>
+      <p class="verdict">Long, expensive, academic. Produces AI specialists and data scientists. Does not address the "AI supervisor" role or bridge military leadership to civilian AI management.</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h4>50strong (Univ. of Arizona)</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Free platform connecting veterans with employers, mentors, virtual events</li>
-      <li>Weekly networking events with recruiters</li>
-      <li>Job board with SkillBridge pathways and paid training links</li>
-      <li>No AI training content; purely a matching/networking platform</li>
-    </ul>
-    <p class="verdict">Job marketplace. Zero training component. Not a competitor on content.</p>
+  <!-- CORPORATE -->
+  <h3>D. Corporate AI Training with Veteran Pipelines</h3>
+  <div class="card-grid">
+
+    <div class="card">
+      <h4>Accenture National Veterans Initiative</h4>
+      <span class="tag tag-corp">Corporate</span>
+      <ul>
+        <li>See above (Veteran-Specific section) — most relevant corporate competitor</li>
+        <li>LearnVantage AI-powered learning, agentic AI courses</li>
+        <li>Officers and Senior Enlisted focus</li>
+        <li>White House AI Taskforce alignment</li>
+      </ul>
+      <p class="verdict">Pipeline to Accenture consulting. Not open ecosystem training.</p>
+    </div>
+
+    <div class="card">
+      <h4>Deloitte AI Academy</h4>
+      <span class="tag tag-corp">Corporate</span>
+      <ul>
+        <li>Internal + client-facing GenAI curriculum</li>
+        <li>Partnership with universities and tech institutions</li>
+        <li>Cloud Institute for AI specialists</li>
+        <li>No veteran-specific track identified</li>
+      </ul>
+      <p class="verdict">Enterprise training for Deloitte clients and staff. No veteran pipeline. Not accessible to individual veterans.</p>
+    </div>
+
+    <div class="card">
+      <h4>McKinsey / Bain AI Training</h4>
+      <span class="tag tag-corp">Corporate</span>
+      <ul>
+        <li>McKinsey: 20,000+ AI agents deployed internally, Lilli platform</li>
+        <li>Internal "prompt anxiety" training programs</li>
+        <li>Bain: "ChatGPT Olympics" for employee upskilling</li>
+        <li>Hiring 12% more in 2026, but no veteran-specific AI track</li>
+      </ul>
+      <p class="verdict">Internal capability building. Not accessible to veterans. No external training program.</p>
+    </div>
+
+    <div class="card">
+      <h4>Salesforce Military Program</h4>
+      <span class="tag tag-corp">Corporate</span> <span class="tag tag-vet">Veteran-Specific</span>
+      <ul>
+        <li>Relaunched 2025 with AI career focus</li>
+        <li>Trailhead learning platform (free, self-paced)</li>
+        <li>Partnership with Hiring Our Heroes</li>
+        <li>Upskilling for "new age of AI" roles</li>
+      </ul>
+      <p class="verdict">Salesforce ecosystem training for veterans. Narrow platform (Salesforce products), not broad AI management training.</p>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h4>Vets2Industry</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Free resource library, mentorship, career tool webinars</li>
-      <li>AI Consultation Tool for personalized career assistance</li>
-      <li>Annual networking cruise and events</li>
-      <li>No structured AI training program</li>
-    </ul>
-    <p class="verdict">Community and resource hub. AI is a feature of their tools, not a subject they teach.</p>
+  <!-- 2. POSITIONING MATRIX -->
+  <hr>
+  <h2>2. Positioning Matrix</h2>
+  <p>Each competitor plotted on two axes: <strong>veteran-specificity</strong> (horizontal, generic to veteran-focused) and <strong>AI depth</strong> (vertical, basic tool usage to workflow management/supervision).</p>
+
+  <div class="matrix-container">
+    <span class="axis-label-x">VETERAN SPECIFICITY &rarr;</span>
+    <span class="axis-label-y">AI DEPTH &rarr;</span>
+    <span class="axis-min-x">Generic</span>
+    <span class="axis-max-x">Veteran-Focused</span>
+    <span class="axis-min-y">Tool Usage</span>
+    <span class="axis-max-y">Workflow Supervision</span>
+
+    <div class="matrix-inner">
+      <!-- Quadrant labels -->
+      <span class="quadrant-label ql-tl">Deep AI, Generic Audience</span>
+      <span class="quadrant-label ql-tr">Deep AI, Veteran-Focused</span>
+      <span class="quadrant-label ql-bl">Basic AI, Generic Audience</span>
+      <span class="quadrant-label ql-br">Basic AI, Veteran-Focused</span>
+
+      <!-- Dots: position as % from left and % from bottom -->
+      <!-- IBM AI Enterprise Workflow -->
+      <div class="dot dot-general" style="left:8%;bottom:78%;"></div>
+      <span class="dot-label" style="left:14%;bottom:78%;">IBM AI Enterprise Workflow</span>
+
+      <!-- UofA AI Automation -->
+      <div class="dot dot-general" style="left:12%;bottom:62%;"></div>
+      <span class="dot-label" style="left:18%;bottom:62%;">UofA AI Automation Cert</span>
+
+      <!-- Coursera/DeepLearning.AI -->
+      <div class="dot dot-general" style="left:10%;bottom:48%;"></div>
+      <span class="dot-label" style="left:16%;bottom:48%;">Coursera / DeepLearning.AI</span>
+
+      <!-- Google AI Cert -->
+      <div class="dot dot-general" style="left:42%;bottom:38%;"></div>
+      <span class="dot-label" style="left:48%;bottom:38%;">Google AI Cert (vet grants)</span>
+
+      <!-- MS AI-900 -->
+      <div class="dot dot-general" style="left:38%;bottom:28%;"></div>
+      <span class="dot-label" style="left:44%;bottom:28%;">MS Azure AI Fundamentals</span>
+
+      <!-- AWS -->
+      <div class="dot dot-general" style="left:32%;bottom:35%;"></div>
+      <span class="dot-label" style="left:38%;bottom:35%;">AWS AI Training</span>
+
+      <!-- Udemy CAWAS -->
+      <div class="dot dot-general" style="left:5%;bottom:22%;"></div>
+      <span class="dot-label" style="left:11%;bottom:22%;">Udemy / SSGI Certs</span>
+
+      <!-- Code Platoon -->
+      <div class="dot dot-vet" style="left:78%;bottom:45%;"></div>
+      <span class="dot-label" style="left:63%;bottom:51%;">Code Platoon</span>
+
+      <!-- VetsinTech -->
+      <div class="dot dot-vet" style="left:82%;bottom:40%;"></div>
+      <span class="dot-label" style="left:63%;bottom:40%;">VetsinTech / Vets in AI</span>
+
+      <!-- Accenture -->
+      <div class="dot dot-corp" style="left:72%;bottom:55%;"></div>
+      <span class="dot-label" style="left:55%;bottom:60%;">Accenture Vet Initiative</span>
+
+      <!-- OpenAI Veterans Forge -->
+      <div class="dot dot-vet" style="left:76%;bottom:18%;"></div>
+      <span class="dot-label" style="left:60%;bottom:12%;">OpenAI Veterans Forge</span>
+
+      <!-- Hiring Our Heroes -->
+      <div class="dot dot-vet" style="left:90%;bottom:15%;"></div>
+      <span class="dot-label" style="left:71%;bottom:7%;">Hiring Our Heroes</span>
+
+      <!-- BreakLine -->
+      <div class="dot dot-vet" style="left:85%;bottom:8%;"></div>
+      <span class="dot-label" style="left:71%;bottom:2%;">BreakLine</span>
+
+      <!-- FourBlock -->
+      <div class="dot dot-vet" style="left:88%;bottom:5%;"></div>
+      <span class="dot-label" style="left:93%;bottom:5%;">FourBlock</span>
+
+      <!-- ACP -->
+      <div class="dot dot-vet" style="left:86%;bottom:10%;"></div>
+      <span class="dot-label" style="left:91%;bottom:10%;">ACP</span>
+
+      <!-- Deloitte -->
+      <div class="dot dot-corp" style="left:5%;bottom:68%;"></div>
+      <span class="dot-label" style="left:11%;bottom:68%;">Deloitte AI Academy</span>
+
+      <!-- Salesforce Military -->
+      <div class="dot dot-corp" style="left:75%;bottom:22%;"></div>
+      <span class="dot-label" style="left:60%;bottom:22%;">Salesforce Military</span>
+
+      <!-- LEARNAIR -->
+      <div class="dot dot-learnair" style="left:85%;bottom:85%;"></div>
+      <span class="dot-label" style="left:68%;bottom:87%;font-size:0.72rem;color:var(--ink);background:rgba(180,74,45,0.15);padding:3px 8px;border:2px solid var(--accent);">LearnAIR</span>
+
+    </div>
   </div>
 
-  <div class="card">
-    <h4>American Corporate Partners (ACP)</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>1-on-1 mentorship matching (34,000+ veterans since 2010)</li>
-      <li>Webinar: "How AI Is Shaping Work" at Neuberger Berman</li>
-      <li>AI is a discussion topic in mentorship, not a training track</li>
-      <li>Post-9/11 veterans and spouses eligible</li>
-    </ul>
-    <p class="verdict">Mentorship network with occasional AI awareness events. Not a training competitor.</p>
+  <p class="matrix-legend">
+    <span class="legend-dot" style="background:var(--green);"></span> Veteran-specific orgs &nbsp;&nbsp;
+    <span class="legend-dot" style="background:var(--accent-light);"></span> General AI upskilling &nbsp;&nbsp;
+    <span class="legend-dot" style="background:var(--ink);"></span> Corporate programs &nbsp;&nbsp;
+    <span class="legend-dot" style="background:var(--accent);border:2px solid var(--ink);width:14px;height:14px;"></span> LearnAIR
+  </p>
+
+  <p style="margin-top:1rem;"><strong>The gap is the upper-right quadrant.</strong> No current program combines deep AI workflow supervision training with veteran-specific design. Veteran programs cluster in the lower-right (high veteran focus, low AI depth). General AI programs cluster in the left column (deep AI, no veteran context). Accenture's new initiative is the closest to the upper-right, but it is a corporate hiring funnel, not an independent credentialing program. LearnAIR owns the open space.</p>
+
+  <!-- 3. DIFFERENTIATION STATEMENT -->
+  <hr>
+  <h2>3. Differentiation Statement</h2>
+
+  <div class="diff-block">
+    <p>Every veteran AI program in 2026 does one of two things: it teaches veterans to <em>use</em> AI tools (Google certs, OpenAI sprints, VetsinTech workshops), or it helps veterans get <em>hired</em> (Hiring Our Heroes, BreakLine, FourBlock, ACP). None trains veterans to <strong>supervise AI-enabled workflows</strong> &mdash; to be the human in the loop who sets intent, monitors autonomous agents, intervenes on exceptions, and maintains accountability across AI-augmented operations. This is the exact skill that enterprise AI adoption demands and that military service uniquely prepares people to deliver. Veterans already operate in <strong>mission command</strong> environments: decentralized execution under commander's intent, where human judgment governs semi-autonomous systems under uncertainty. LearnAIR is the only program that translates this military operating model into a civilian AI management framework, producing graduates who are not AI users or AI builders, but <strong>AI operations supervisors</strong> &mdash; the missing role in every organization deploying agents, copilots, and automated workflows at scale. The market has AI literacy programs and veteran career programs. It has no veteran AI leadership program. LearnAIR fills that gap.</p>
   </div>
 
-  <div class="card">
-    <h4>VetsinTech / Vets in AI</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Dedicated "Vets in AI" program launched 2025 — ML, data analytics, AI ethics</li>
-      <li>Events with Nvidia, Microsoft, Google, Scale AI (Feb 2026 at JPMorgan DC)</li>
-      <li>Partners with leading tech companies for structured training</li>
-      <li>Covers technical AI skills, not AI workflow management or supervision</li>
-    </ul>
-    <p class="verdict">Closest veteran-specific competitor on AI depth. Teaches AI skills (building/using), but focused on making veterans into AI practitioners — NOT training them to supervise AI-enabled workflows.</p>
-  </div>
+  <!-- 4. COMPETITIVE RISKS -->
+  <hr>
+  <h2>4. Competitive Risks</h2>
 
-  <div class="card">
-    <h4>OpenAI Academy + Veterans Forge</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Pilot: 4-hour hands-on AI sprint (Mar 2026, Reston VA, 100 cap)</li>
-      <li>Free ChatGPT Plus for transitioning veterans (1 year, since Nov 2025)</li>
-      <li>"AI Ready Veteran" resource collection on OpenAI Academy</li>
-      <li>Practical prompt workflows for career transition, not enterprise management</li>
-    </ul>
-    <p class="verdict">Tool literacy, not workflow supervision. Teaches veterans to use ChatGPT, not to manage AI-enabled teams. Still in pilot phase, tiny scale.</p>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:22%;">Risk</th>
+        <th style="width:12%;">Severity</th>
+        <th style="width:33%;">Scenario</th>
+        <th style="width:33%;">Mitigation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Hiring Our Heroes adds "AI Management" track</strong></td>
+        <td class="severity-high">HIGH</td>
+        <td>HOH already partners with Google, Microsoft, and Salesforce on AI content. They could bundle an "AI Leadership Fellowship" in 6-12 months using existing corporate relationships. Their brand, reach (U.S. Chamber backing), and government access dwarf any startup.</td>
+        <td>Move fast. Establish the "mission command" framework as the recognized vocabulary before HOH can co-opt it. Build curriculum IP (case studies, simulations, assessment rubrics) that cannot be replicated by bolting a webinar onto an existing fellowship. Pursue co-branding with HOH rather than competing &mdash; become their AI supervision curriculum partner.</td>
+      </tr>
+      <tr>
+        <td><strong>Accenture scales its veteran AI initiative</strong></td>
+        <td class="severity-high">HIGH</td>
+        <td>Accenture's 2025 initiative already targets Officers and Senior Enlisted with AI training including agentic AI. They have LearnVantage, White House access, and massive scale. If they open it beyond Accenture pipeline hires, it is a direct competitor.</td>
+        <td>Accenture's incentive is to funnel talent into Accenture. LearnAIR's value is vendor-neutral, open-market credentials. Emphasize independence: "We don't train you for one employer, we train you to lead AI operations anywhere." Also pursue Accenture as an employer partner that hires LearnAIR graduates.</td>
+      </tr>
+      <tr>
+        <td><strong>VET TEC 2.0 approval gatekeeping</strong></td>
+        <td class="severity-med">MEDIUM</td>
+        <td>VET TEC 2.0 has ~4,000 spots/year and the VA has not approved any providers yet. If LearnAIR is not in the first cohort of approved providers, competitors with established VA relationships (Code Platoon, Intellectual Point) capture the funded veteran market.</td>
+        <td>File VET TEC 2.0 provider application immediately. Simultaneously pursue GI Bill approval as a parallel funding path. Build relationships with VA education benefits staff now, before the approval window opens (expected June 2026).</td>
+      </tr>
+      <tr>
+        <td><strong>Google/OpenAI deepen free veteran AI training</strong></td>
+        <td class="severity-med">MEDIUM</td>
+        <td>Google already runs free 3-week Gen AI Leader certs for veterans. OpenAI gives free ChatGPT Plus and is piloting sprints. If either adds a "managing AI workflows" module to their free veteran offering, it undercuts LearnAIR's price point.</td>
+        <td>Depth beats breadth. Google/OpenAI teach tool usage, not organizational AI governance. LearnAIR's curriculum should be rich enough (cohort-based, simulation-driven, leadership-integrated) that a free 3-week sprint cannot substitute. Position as post-certification advanced training: "You got your Google AI cert. Now learn to lead AI operations."</td>
+      </tr>
+      <tr>
+        <td><strong>"AI supervisor" role does not materialize as a distinct job category</strong></td>
+        <td class="severity-med">MEDIUM</td>
+        <td>If enterprises integrate AI oversight into existing management roles rather than creating dedicated AI supervisor positions, LearnAIR's graduates have no clear hiring signal.</td>
+        <td>Frame the credential as additive, not replacement. "AI Operations Leadership" is a skill overlay on existing management, not a standalone job title. Partner with employers to define the role and embed it in job descriptions. Use early cohort placement data to prove demand.</td>
+      </tr>
+      <tr>
+        <td><strong>Market conflation with prompt engineering</strong></td>
+        <td class="severity-low">LOW</td>
+        <td>The market may lump LearnAIR in with the dozens of "AI prompt engineering" certificates, missing the distinction between tool use and workflow supervision.</td>
+        <td>Clear messaging: "We don't teach you to write prompts. We teach you to run operations where AI does the work and you maintain command." The mission command language is itself a differentiator &mdash; lean into military metaphor as brand identity.</td>
+      </tr>
+      <tr>
+        <td><strong>DoD develops internal AI leadership training</strong></td>
+        <td class="severity-low">LOW</td>
+        <td>The Army is actively integrating AI into mission command doctrine (War on the Rocks, Mar 2025). If DoD builds robust AI management training for active duty, transitioning veterans arrive pre-trained.</td>
+        <td>DoD training serves active duty, not the civilian transition. LearnAIR translates military AI doctrine into civilian enterprise context. A DoD program actually validates the thesis and creates a warmer market of veterans who already understand the framework.</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="card">
-    <h4>Vets Who Code</h4>
-    <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Free software engineering training (300+ veterans placed)</li>
-      <li>AI-powered curriculum for coding productivity</li>
-      <li>Veteran-led 501(c)(3)</li>
-      <li>Focus: make veterans into software engineers, not AI managers</li>
-    </ul>
-    <p class="verdict">Technical coding bootcamp with AI as a tool. Does not address AI workflow management.</p>
-  </div>
+  <!-- KEY TAKEAWAY -->
+  <hr>
+  <h2>Key Takeaway</h2>
+  <p>The competitive landscape has two crowded zones and one empty one. The <strong>lower-right</strong> (veteran career services, minimal AI content) is saturated with well-funded nonprofits. The <strong>left column</strong> (deep AI training, generic audience) is dominated by tech giants offering free or cheap certifications. The <strong>upper-right</strong> (deep AI workflow supervision, veteran-specific) is unoccupied. That is where LearnAIR plants its flag.</p>
+  <p style="margin-top:1rem;">The window is 12-18 months. Accenture's veteran initiative and the reopening of VET TEC 2.0 will reshape the landscape by late 2026 or early 2027. LearnAIR's advantage is being first to name the role (AI operations supervisor), first to connect it to a military framework (mission command), and first to build a credentialing program around it. Speed and curriculum depth are the moat.</p>
 
-  <div class="card">
-    <h4>Accenture Veterans Initiative (2025)</h4>
-    <span class="tag tag-corp">Corporate</span> <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>New national initiative targeting Officers and Senior Enlisted</li>
-      <li>LearnVantage platform: courses including "agentic AI" and nanodegrees</li>
-      <li>Technical mentorship, interview prep, resume support</li>
-      <li>White House AI Education Taskforce participant</li>
-      <li>Designed to funnel veterans into Accenture pipeline</li>
-    </ul>
-    <p class="verdict"><strong>Most direct competitive threat.</strong> Veteran-specific, AI-focused, backed by massive resources. But it is a corporate hiring funnel, not an independent training program. Veterans become Accenture employees, not broadly skilled AI supervisors. Curriculum serves Accenture's delivery model.</p>
-  </div>
+  <!-- SOURCES -->
+  <hr>
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://www.hiringourheroes.org/" target="_blank">Hiring Our Heroes</a> &mdash; U.S. Chamber of Commerce Foundation</li>
+    <li><a href="https://cloud.google.com/blog/topics/training-certifications/register-for-the-gen-ai-training-and-certification-program-for-veterans" target="_blank">Google Launchpad for Veterans</a> &mdash; Gen AI certification program</li>
+    <li><a href="https://blog.google/outreach-initiatives/creating-opportunity/google-veterans-day-2025/" target="_blank">Google Veterans Commitment 2025</a></li>
+    <li><a href="https://newsroom.accenture.com/news/2025/accenture-launches-national-career-training-initiative-to-support-officers-and-senior-enlisted-personnel-transitioning-to-civilian-careers" target="_blank">Accenture National Veterans Initiative (2025)</a></li>
+    <li><a href="https://fourblock.org/usaa-propels-fourblocks-expansion-of-ai-career-tools-to-empower-veterans-and-military-spouses-in-transition" target="_blank">FourBlock AI Career Tools Expansion</a></li>
+    <li><a href="https://vetsintech.co/vetsinai/" target="_blank">VetsinTech &mdash; Vets in AI Program</a></li>
+    <li><a href="https://www.edtechinnovationhub.com/news/openai-academy-backs-hands-on-ai-sprint-for-veterans-in-virginia-pilot" target="_blank">OpenAI Academy + Veterans Forge AI Sprint</a></li>
+    <li><a href="https://www.military.com/feature/2025/11/10/openai-offers-chatgpt-plus-free-veterans.html" target="_blank">OpenAI ChatGPT Plus Free for Veterans</a> &mdash; Military.com</li>
+    <li><a href="https://www.codeplatoon.org/blog/artificial-intelligence-training-for-veterans" target="_blank">Code Platoon AI Curriculum</a></li>
+    <li><a href="https://www.va.gov/education/other-va-education-benefits/vet-tec-2/" target="_blank">VET TEC 2.0</a> &mdash; VA.gov</li>
+    <li><a href="https://www.coursereport.com/blog/vet-tec-in-2025-what-s-new-for-veterans-coding-bootcamps" target="_blank">VET TEC 2025 Update</a> &mdash; Course Report</li>
+    <li><a href="https://warontherocks.com/2025/03/the-u-s-army-artificial-intelligence-and-mission-command/" target="_blank">U.S. Army, AI, and Mission Command</a> &mdash; War on the Rocks</li>
+    <li><a href="https://www.military.com/feature/2025/11/21/why-veterans-are-built-ai-shift-all-veterans-need-know.html" target="_blank">Why Veterans Are Built for AI</a> &mdash; Military.com</li>
+    <li><a href="https://www.military.com/feature/2026/03/04/6-ai-proof-sweet-spot-careers-where-veterans-dominate-2026-new-report-reveals-winners.html" target="_blank">AI-Proof Careers for Veterans 2026</a> &mdash; Military.com</li>
+    <li><a href="https://military.microsoft.com/your-path-to-tech/" target="_blank">Microsoft Military Affairs</a></li>
+    <li><a href="https://aws.amazon.com/certification/veterans-reimbursement/" target="_blank">AWS Certification Veterans Reimbursement</a></li>
+    <li><a href="https://www.salesforce.com/news/stories/military-veteran-program-announcement-2025/" target="_blank">Salesforce Military Program 2025</a></li>
+    <li><a href="https://www.nobledesktop.com/topics/ai-training-for-veterans" target="_blank">Noble Desktop &mdash; AI Training for Veterans</a></li>
+    <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" target="_blank">Microsoft Azure AI Fundamentals (AI-900)</a></li>
+    <li><a href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/about/deloitte-ai-academy.html" target="_blank">Deloitte AI Academy</a></li>
+    <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/building-a-talent-pipeline-for-the-ai-era" target="_blank">McKinsey &mdash; Building AI Talent Pipeline</a></li>
+    <li><a href="https://vetswhocode.io" target="_blank">Vets Who Code</a></li>
+    <li><a href="https://vets2industry.org/" target="_blank">Vets2Industry</a></li>
+    <li><a href="https://www.acp-usa.org/" target="_blank">American Corporate Partners</a></li>
+    <li><a href="https://vets.arizona.edu/50-strong" target="_blank">50strong &mdash; University of Arizona</a></li>
+  </ul>
+
+  <p style="margin-top:2rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);">Analysis prepared March 18, 2026. Data sourced from public web research.</p>
 
 </div>
 
-<!-- GENERAL AI UPSKILLING -->
-<h3>B. General AI Upskilling Programs</h3>
-<div class="card-grid">
-
-  <div class="card">
-    <h4>Google AI Professional Certificate</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>Coursera-hosted, $59/mo (3-4 months typical = $177-$236)</li>
-      <li>Free for veterans via Google Launchpad (3-week virtual + cert voucher)</li>
-      <li>$4M Google.org grant to Student Veterans of America for access</li>
-      <li>$3.5M to Syracuse IVMF for cybersecurity + AI training</li>
-      <li>Covers: AI fundamentals, prompt engineering, responsible AI</li>
-    </ul>
-    <p class="verdict">Strong veteran accessibility through grants. Teaches AI literacy and tool use. No workflow management, no supervision framework, no leadership integration.</p>
-  </div>
-
-  <div class="card">
-    <h4>Microsoft Azure AI Fundamentals (AI-900)</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>Exam: $99 (free for veterans via MSSA and Military Datacenter Pathway)</li>
-      <li>MSSA: free cohort-based program leading to Microsoft certs</li>
-      <li>Army COOL approved for AI-900</li>
-      <li>Covers: ML concepts, computer vision, NLP, generative AI fundamentals</li>
-    </ul>
-    <p class="verdict">Technical certification. Good veteran access. Teaches AI concepts, not how to manage AI-augmented teams or workflows.</p>
-  </div>
-
-  <div class="card">
-    <h4>AWS AI/ML Training</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>AWS Educate: free for 10,000 veterans and spouses</li>
-      <li>GI Bill reimburses AWS cert exams (up to $2,000)</li>
-      <li>SkillStorm 16-week Tech Accelerator (AWS partner)</li>
-      <li>Amazon Technical Apprenticeship (paid, cloud computing)</li>
-      <li>Covers: cloud architecture, data engineering, ML deployment</li>
-    </ul>
-    <p class="verdict">Infrastructure-level AI training. Makes veterans into cloud/ML engineers. Zero content on AI supervision, workflow management, or human-AI teaming.</p>
-  </div>
-
-  <div class="card">
-    <h4>Coursera AI Courses (IBM, DeepLearning.AI, etc.)</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>$39-49/mo per course; Coursera Plus $240-399/yr</li>
-      <li>IBM AI Enterprise Workflow certification available</li>
-      <li>DeepLearning.AI specializations (Andrew Ng)</li>
-      <li>Financial aid available (up to 100% of costs)</li>
-      <li>No veteran-specific tracks or pricing</li>
-    </ul>
-    <p class="verdict">Deep technical content at low cost. IBM's "AI Enterprise Workflow" cert is the closest to LearnAIR's territory, but it is a developer certification — building ML pipelines, not supervising AI-enabled operations.</p>
-  </div>
-
-  <div class="card">
-    <h4>Udemy / SSGI AI Workflow Certs</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>Certified AI Workflow and Automation Specialist (CAWAS) on Udemy</li>
-      <li>SSGI AI Workflow & Prompt Engineering Certification</li>
-      <li>Low cost ($15-50 typical Udemy pricing)</li>
-      <li>Self-paced, no veteran-specific support</li>
-    </ul>
-    <p class="verdict">Cheap, generic, self-paced. Covers prompt engineering and automation. No leadership framework, no veteran context, no cohort experience.</p>
-  </div>
-
-  <div class="card">
-    <h4>University of Arizona AI Automation Certificate</h4>
-    <span class="tag tag-general">General</span>
-    <ul>
-      <li>5-week program, online</li>
-      <li>Covers AI agents, agentic AI, no-code automation</li>
-      <li>Academic credential</li>
-      <li>No veteran-specific track</li>
-    </ul>
-    <p class="verdict">Closest general-market program to AI workflow management. Covers agentic AI and where it fits in workflows. But no veteran lens, no mission command framework, no supervision-specific training.</p>
-  </div>
-
-</div>
-
-<!-- GOVERNMENT -->
-<h3>C. Government-Funded Programs</h3>
-<div class="card-grid">
-
-  <div class="card">
-    <h4>VET TEC 2.0</h4>
-    <span class="tag tag-gov">Government</span>
-    <ul>
-      <li>Reauthorized Dec 2024 (Dole Act), funded from Oct 2025</li>
-      <li><strong>Still not operational as of Mar 2026</strong> — VA has not approved any providers yet</li>
-      <li>Expected: ~4,000 spots/year, partial GI Bill usage may be required</li>
-      <li>Previous providers (Code Platoon, Intellectual Point, ACI Tech) reapplying</li>
-      <li>Applications may open June 2026</li>
-    </ul>
-    <p class="verdict">Major funding channel, currently frozen. When it reopens, approved AI training providers will have a massive distribution advantage. LearnAIR should be in the VET TEC 2.0 application pipeline immediately.</p>
-  </div>
-
-  <div class="card">
-    <h4>Code Platoon (GI Bill + VET TEC)</h4>
-    <span class="tag tag-gov">Government</span> <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>AI + Fullstack Engineering bootcamp (VA-approved, GI Bill eligible)</li>
-      <li>AI Cloud and DevOps track (remote, approved as Certificate Prep)</li>
-      <li>Integrates AI ethics, security, and coding productivity tools</li>
-      <li>Veteran-focused nonprofit, strong community</li>
-      <li>Applying for VET TEC 2.0</li>
-    </ul>
-    <p class="verdict">Strongest current competitor combining veteran focus + AI content + government funding. But it trains coders who use AI, not managers who supervise AI workflows. The gap is leadership-level AI management.</p>
-  </div>
-
-  <div class="card">
-    <h4>GI Bill AI Degree Programs</h4>
-    <span class="tag tag-gov">Government</span>
-    <ul>
-      <li>Noble Desktop: VA-approved AI bootcamps (data science, ML, generative AI)</li>
-      <li>General Assembly: GI Bill-eligible bootcamps (6-8 months entitlement)</li>
-      <li>CU Boulder AI Graduate Certificate via Coursera ($6,300)</li>
-      <li>Traditional degree programs at accredited universities</li>
-    </ul>
-    <p class="verdict">Long, expensive, academic. Produces AI specialists and data scientists. Does not address the "AI supervisor" role or bridge military leadership to civilian AI management.</p>
-  </div>
-
-</div>
-
-<!-- CORPORATE -->
-<h3>D. Corporate AI Training with Veteran Pipelines</h3>
-<div class="card-grid">
-
-  <div class="card">
-    <h4>Accenture National Veterans Initiative</h4>
-    <span class="tag tag-corp">Corporate</span>
-    <ul>
-      <li>See above (Veteran-Specific section) — most relevant corporate competitor</li>
-      <li>LearnVantage AI-powered learning, agentic AI courses</li>
-      <li>Officers and Senior Enlisted focus</li>
-      <li>White House AI Taskforce alignment</li>
-    </ul>
-    <p class="verdict">Pipeline to Accenture consulting. Not open ecosystem training.</p>
-  </div>
-
-  <div class="card">
-    <h4>Deloitte AI Academy</h4>
-    <span class="tag tag-corp">Corporate</span>
-    <ul>
-      <li>Internal + client-facing GenAI curriculum</li>
-      <li>Partnership with universities and tech institutions</li>
-      <li>Cloud Institute for AI specialists</li>
-      <li>No veteran-specific track identified</li>
-    </ul>
-    <p class="verdict">Enterprise training for Deloitte clients and staff. No veteran pipeline. Not accessible to individual veterans.</p>
-  </div>
-
-  <div class="card">
-    <h4>McKinsey / Bain AI Training</h4>
-    <span class="tag tag-corp">Corporate</span>
-    <ul>
-      <li>McKinsey: 20,000+ AI agents deployed internally, Lilli platform</li>
-      <li>Internal "prompt anxiety" training programs</li>
-      <li>Bain: "ChatGPT Olympics" for employee upskilling</li>
-      <li>Hiring 12% more in 2026, but no veteran-specific AI track</li>
-    </ul>
-    <p class="verdict">Internal capability building. Not accessible to veterans. No external training program.</p>
-  </div>
-
-  <div class="card">
-    <h4>Salesforce Military Program</h4>
-    <span class="tag tag-corp">Corporate</span> <span class="tag tag-vet">Veteran-Specific</span>
-    <ul>
-      <li>Relaunched 2025 with AI career focus</li>
-      <li>Trailhead learning platform (free, self-paced)</li>
-      <li>Partnership with Hiring Our Heroes</li>
-      <li>Upskilling for "new age of AI" roles</li>
-    </ul>
-    <p class="verdict">Salesforce ecosystem training for veterans. Narrow platform (Salesforce products), not broad AI management training.</p>
-  </div>
-
-</div>
-
-<!-- ============================================================ -->
-<h2>2. Positioning Matrix</h2>
-<p>Each competitor plotted on two axes: <strong>veteran-specificity</strong> (horizontal, generic to veteran-focused) and <strong>AI depth</strong> (vertical, basic tool usage to workflow management/supervision).</p>
-
-<div class="matrix-container">
-  <span class="axis-label-x">VETERAN SPECIFICITY &rarr;</span>
-  <span class="axis-label-y">AI DEPTH &rarr;</span>
-  <span class="axis-min-x">Generic</span>
-  <span class="axis-max-x">Veteran-Focused</span>
-  <span class="axis-min-y">Tool Usage</span>
-  <span class="axis-max-y">Workflow Supervision</span>
-
-  <div class="matrix-inner">
-    <!-- Quadrant labels -->
-    <span class="quadrant-label ql-tl">Deep AI, Generic Audience</span>
-    <span class="quadrant-label ql-tr">Deep AI, Veteran-Focused</span>
-    <span class="quadrant-label ql-bl">Basic AI, Generic Audience</span>
-    <span class="quadrant-label ql-br">Basic AI, Veteran-Focused</span>
-
-    <!-- Dots: position as % from left and % from bottom -->
-    <!-- IBM AI Enterprise Workflow: high AI depth, zero vet focus -->
-    <div class="dot" style="background:var(--blue);left:8%;bottom:78%;"></div>
-    <span class="dot-label" style="left:14%;bottom:78%;">IBM AI Enterprise Workflow</span>
-
-    <!-- UofA AI Automation: moderate-high AI, zero vet -->
-    <div class="dot" style="background:var(--blue);left:12%;bottom:62%;"></div>
-    <span class="dot-label" style="left:18%;bottom:62%;">UofA AI Automation Cert</span>
-
-    <!-- Coursera/DeepLearning.AI: moderate AI, zero vet -->
-    <div class="dot" style="background:var(--blue);left:10%;bottom:48%;"></div>
-    <span class="dot-label" style="left:16%;bottom:48%;">Coursera / DeepLearning.AI</span>
-
-    <!-- Google AI Cert: moderate AI, moderate vet (free for vets) -->
-    <div class="dot" style="background:var(--blue);left:42%;bottom:38%;"></div>
-    <span class="dot-label" style="left:48%;bottom:38%;">Google AI Cert (vet grants)</span>
-
-    <!-- MS AI-900: low-moderate AI, moderate vet -->
-    <div class="dot" style="background:var(--blue);left:38%;bottom:28%;"></div>
-    <span class="dot-label" style="left:44%;bottom:28%;">MS Azure AI Fundamentals</span>
-
-    <!-- AWS: moderate AI, low-moderate vet -->
-    <div class="dot" style="background:var(--blue);left:32%;bottom:35%;"></div>
-    <span class="dot-label" style="left:38%;bottom:35%;">AWS AI Training</span>
-
-    <!-- Udemy CAWAS: low AI, zero vet -->
-    <div class="dot" style="background:var(--blue);left:5%;bottom:22%;"></div>
-    <span class="dot-label" style="left:11%;bottom:22%;">Udemy / SSGI Certs</span>
-
-    <!-- Code Platoon: moderate AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:78%;bottom:45%;"></div>
-    <span class="dot-label" style="left:63%;bottom:51%;">Code Platoon</span>
-
-    <!-- VetsinTech Vets in AI: moderate AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:82%;bottom:40%;"></div>
-    <span class="dot-label" style="left:63%;bottom:40%;">VetsinTech / Vets in AI</span>
-
-    <!-- Accenture Vet Initiative: moderate-high AI, high vet -->
-    <div class="dot" style="background:var(--dark);left:72%;bottom:55%;"></div>
-    <span class="dot-label" style="left:55%;bottom:60%;">Accenture Vet Initiative</span>
-
-    <!-- OpenAI Veterans Forge: low AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:76%;bottom:18%;"></div>
-    <span class="dot-label" style="left:60%;bottom:12%;">OpenAI Veterans Forge</span>
-
-    <!-- Hiring Our Heroes: very low AI, very high vet -->
-    <div class="dot" style="background:var(--olive);left:90%;bottom:15%;"></div>
-    <span class="dot-label" style="left:71%;bottom:7%;">Hiring Our Heroes</span>
-
-    <!-- BreakLine: zero AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:85%;bottom:8%;"></div>
-    <span class="dot-label" style="left:71%;bottom:2%;">BreakLine</span>
-
-    <!-- FourBlock: zero AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:88%;bottom:5%;"></div>
-    <span class="dot-label" style="left:93%;bottom:5%;">FourBlock</span>
-
-    <!-- ACP: zero AI, high vet -->
-    <div class="dot" style="background:var(--olive);left:86%;bottom:10%;"></div>
-    <span class="dot-label" style="left:91%;bottom:10%;">ACP</span>
-
-    <!-- Deloitte AI Academy: high AI, zero vet -->
-    <div class="dot" style="background:var(--dark);left:5%;bottom:68%;"></div>
-    <span class="dot-label" style="left:11%;bottom:68%;">Deloitte AI Academy</span>
-
-    <!-- Salesforce Military: low AI, high vet -->
-    <div class="dot" style="background:var(--dark);left:75%;bottom:22%;"></div>
-    <span class="dot-label" style="left:60%;bottom:22%;">Salesforce Military</span>
-
-    <!-- LEARNAIR: high vet, high AI depth -->
-    <div class="dot dot-learnair" style="left:85%;bottom:85%;"></div>
-    <span class="dot-label" style="left:68%;bottom:87%;font-size:0.85rem;color:var(--navy);background:rgba(201,168,76,0.25);padding:3px 8px;border:2px solid var(--gold);border-radius:4px;">&#9733; LearnAIR</span>
-
-  </div>
-</div>
-
-<p style="text-align:center;font-size:0.85rem;color:var(--steel);margin-top:0.5rem;">
-  <span style="display:inline-block;width:10px;height:10px;background:var(--olive);border-radius:50%;margin-right:4px;vertical-align:middle;"></span> Veteran-specific orgs &nbsp;&nbsp;
-  <span style="display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:50%;margin-right:4px;vertical-align:middle;"></span> General AI upskilling &nbsp;&nbsp;
-  <span style="display:inline-block;width:10px;height:10px;background:var(--dark);border-radius:50%;margin-right:4px;vertical-align:middle;"></span> Corporate programs &nbsp;&nbsp;
-  <span style="display:inline-block;width:14px;height:14px;background:var(--gold);border:2px solid var(--navy);border-radius:50%;margin-right:4px;vertical-align:middle;"></span> LearnAIR
-</p>
-
-<p style="margin-top:1rem;"><strong>The gap is the upper-right quadrant.</strong> No current program combines deep AI workflow supervision training with veteran-specific design. Veteran programs cluster in the lower-right (high veteran focus, low AI depth). General AI programs cluster in the left column (deep AI, no veteran context). Accenture's new initiative is the closest to the upper-right, but it is a corporate hiring funnel, not an independent credentialing program. LearnAIR owns the open space.</p>
-
-<!-- ============================================================ -->
-<h2>3. Differentiation Statement</h2>
-
-<div class="diff-block">
-<p>Every veteran AI program in 2026 does one of two things: it teaches veterans to <em>use</em> AI tools (Google certs, OpenAI sprints, VetsinTech workshops), or it helps veterans get <em>hired</em> (Hiring Our Heroes, BreakLine, FourBlock, ACP). None trains veterans to <strong>supervise AI-enabled workflows</strong> — to be the human in the loop who sets intent, monitors autonomous agents, intervenes on exceptions, and maintains accountability across AI-augmented operations. This is the exact skill that enterprise AI adoption demands and that military service uniquely prepares people to deliver. Veterans already operate in <strong>mission command</strong> environments: decentralized execution under commander's intent, where human judgment governs semi-autonomous systems under uncertainty. LearnAIR is the only program that translates this military operating model into a civilian AI management framework, producing graduates who are not AI users or AI builders, but <strong>AI operations supervisors</strong> — the missing role in every organization deploying agents, copilots, and automated workflows at scale. The market has AI literacy programs and veteran career programs. It has no veteran AI leadership program. LearnAIR fills that gap.</p>
-</div>
-
-<!-- ============================================================ -->
-<h2>4. Competitive Risks</h2>
-
-<table class="risk-table">
-<thead>
-  <tr>
-    <th style="width:22%;">Risk</th>
-    <th style="width:12%;">Severity</th>
-    <th style="width:33%;">Scenario</th>
-    <th style="width:33%;">Mitigation</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><strong>Hiring Our Heroes adds "AI Management" track</strong></td>
-    <td class="severity-high">HIGH</td>
-    <td>HOH already partners with Google, Microsoft, and Salesforce on AI content. They could bundle an "AI Leadership Fellowship" in 6-12 months using existing corporate relationships. Their brand, reach (U.S. Chamber backing), and government access dwarf any startup.</td>
-    <td>Move fast. Establish the "mission command" framework as the recognized vocabulary before HOH can co-opt it. Build curriculum IP (case studies, simulations, assessment rubrics) that cannot be replicated by bolting a webinar onto an existing fellowship. Pursue co-branding with HOH rather than competing — become their AI supervision curriculum partner.</td>
-  </tr>
-  <tr>
-    <td><strong>Accenture scales its veteran AI initiative</strong></td>
-    <td class="severity-high">HIGH</td>
-    <td>Accenture's 2025 initiative already targets Officers and Senior Enlisted with AI training including agentic AI. They have LearnVantage, White House access, and massive scale. If they open it beyond Accenture pipeline hires, it is a direct competitor.</td>
-    <td>Accenture's incentive is to funnel talent into Accenture. LearnAIR's value is vendor-neutral, open-market credentials. Emphasize independence: "We don't train you for one employer, we train you to lead AI operations anywhere." Also pursue Accenture as an employer partner that hires LearnAIR graduates.</td>
-  </tr>
-  <tr>
-    <td><strong>VET TEC 2.0 approval gatekeeping</strong></td>
-    <td class="severity-med">MEDIUM</td>
-    <td>VET TEC 2.0 has ~4,000 spots/year and the VA has not approved any providers yet. If LearnAIR is not in the first cohort of approved providers, competitors with established VA relationships (Code Platoon, Intellectual Point) capture the funded veteran market.</td>
-    <td>File VET TEC 2.0 provider application immediately. Simultaneously pursue GI Bill approval as a parallel funding path. Build relationships with VA education benefits staff now, before the approval window opens (expected June 2026).</td>
-  </tr>
-  <tr>
-    <td><strong>Google/OpenAI deepen free veteran AI training</strong></td>
-    <td class="severity-med">MEDIUM</td>
-    <td>Google already runs free 3-week Gen AI Leader certs for veterans. OpenAI gives free ChatGPT Plus and is piloting sprints. If either adds a "managing AI workflows" module to their free veteran offering, it undercuts LearnAIR's price point.</td>
-    <td>Depth beats breadth. Google/OpenAI teach tool usage, not organizational AI governance. LearnAIR's curriculum should be rich enough (cohort-based, simulation-driven, leadership-integrated) that a free 3-week sprint cannot substitute. Position as post-certification advanced training: "You got your Google AI cert. Now learn to lead AI operations."</td>
-  </tr>
-  <tr>
-    <td><strong>"AI supervisor" role does not materialize as a distinct job category</strong></td>
-    <td class="severity-med">MEDIUM</td>
-    <td>If enterprises integrate AI oversight into existing management roles rather than creating dedicated AI supervisor positions, LearnAIR's graduates have no clear hiring signal.</td>
-    <td>Frame the credential as additive, not replacement. "AI Operations Leadership" is a skill overlay on existing management, not a standalone job title. Partner with employers to define the role and embed it in job descriptions. Use early cohort placement data to prove demand.</td>
-  </tr>
-  <tr>
-    <td><strong>Market conflation with prompt engineering</strong></td>
-    <td class="severity-low">LOW</td>
-    <td>The market may lump LearnAIR in with the dozens of "AI prompt engineering" certificates, missing the distinction between tool use and workflow supervision.</td>
-    <td>Clear messaging: "We don't teach you to write prompts. We teach you to run operations where AI does the work and you maintain command." The mission command language is itself a differentiator — lean into military metaphor as brand identity.</td>
-  </tr>
-  <tr>
-    <td><strong>DoD develops internal AI leadership training</strong></td>
-    <td class="severity-low">LOW</td>
-    <td>The Army is actively integrating AI into mission command doctrine (War on the Rocks, Mar 2025). If DoD builds robust AI management training for active duty, transitioning veterans arrive pre-trained.</td>
-    <td>DoD training serves active duty, not the civilian transition. LearnAIR translates military AI doctrine into civilian enterprise context. A DoD program actually validates the thesis and creates a warmer market of veterans who already understand the framework.</td>
-  </tr>
-</tbody>
-</table>
-
-<!-- ============================================================ -->
-<h2>Key Takeaway</h2>
-<p>The competitive landscape has two crowded zones and one empty one. The <strong>lower-right</strong> (veteran career services, minimal AI content) is saturated with well-funded nonprofits. The <strong>left column</strong> (deep AI training, generic audience) is dominated by tech giants offering free or cheap certifications. The <strong>upper-right</strong> (deep AI workflow supervision, veteran-specific) is unoccupied. That is where LearnAIR plants its flag.</p>
-<p style="margin-top:1rem;">The window is 12-18 months. Accenture's veteran initiative and the reopening of VET TEC 2.0 will reshape the landscape by late 2026 or early 2027. LearnAIR's advantage is being first to name the role (AI operations supervisor), first to connect it to a military framework (mission command), and first to build a credentialing program around it. Speed and curriculum depth are the moat.</p>
-
-<!-- ============================================================ -->
-<div class="source-list">
-<h3>Sources</h3>
-<ul>
-  <li><a href="https://www.hiringourheroes.org/" target="_blank">Hiring Our Heroes</a> — U.S. Chamber of Commerce Foundation</li>
-  <li><a href="https://cloud.google.com/blog/topics/training-certifications/register-for-the-gen-ai-training-and-certification-program-for-veterans" target="_blank">Google Launchpad for Veterans</a> — Gen AI certification program</li>
-  <li><a href="https://blog.google/outreach-initiatives/creating-opportunity/google-veterans-day-2025/" target="_blank">Google Veterans Commitment 2025</a></li>
-  <li><a href="https://newsroom.accenture.com/news/2025/accenture-launches-national-career-training-initiative-to-support-officers-and-senior-enlisted-personnel-transitioning-to-civilian-careers" target="_blank">Accenture National Veterans Initiative (2025)</a></li>
-  <li><a href="https://fourblock.org/usaa-propels-fourblocks-expansion-of-ai-career-tools-to-empower-veterans-and-military-spouses-in-transition" target="_blank">FourBlock AI Career Tools Expansion</a></li>
-  <li><a href="https://vetsintech.co/vetsinai/" target="_blank">VetsinTech — Vets in AI Program</a></li>
-  <li><a href="https://www.edtechinnovationhub.com/news/openai-academy-backs-hands-on-ai-sprint-for-veterans-in-virginia-pilot" target="_blank">OpenAI Academy + Veterans Forge AI Sprint</a></li>
-  <li><a href="https://www.military.com/feature/2025/11/10/openai-offers-chatgpt-plus-free-veterans.html" target="_blank">OpenAI ChatGPT Plus Free for Veterans</a> — Military.com</li>
-  <li><a href="https://www.codeplatoon.org/blog/artificial-intelligence-training-for-veterans" target="_blank">Code Platoon AI Curriculum</a></li>
-  <li><a href="https://www.va.gov/education/other-va-education-benefits/vet-tec-2/" target="_blank">VET TEC 2.0</a> — VA.gov</li>
-  <li><a href="https://www.coursereport.com/blog/vet-tec-in-2025-what-s-new-for-veterans-coding-bootcamps" target="_blank">VET TEC 2025 Update</a> — Course Report</li>
-  <li><a href="https://warontherocks.com/2025/03/the-u-s-army-artificial-intelligence-and-mission-command/" target="_blank">U.S. Army, AI, and Mission Command</a> — War on the Rocks</li>
-  <li><a href="https://www.military.com/feature/2025/11/21/why-veterans-are-built-ai-shift-all-veterans-need-know.html" target="_blank">Why Veterans Are Built for AI</a> — Military.com</li>
-  <li><a href="https://www.military.com/feature/2026/03/04/6-ai-proof-sweet-spot-careers-where-veterans-dominate-2026-new-report-reveals-winners.html" target="_blank">AI-Proof Careers for Veterans 2026</a> — Military.com</li>
-  <li><a href="https://military.microsoft.com/your-path-to-tech/" target="_blank">Microsoft Military Affairs</a></li>
-  <li><a href="https://aws.amazon.com/certification/veterans-reimbursement/" target="_blank">AWS Certification Veterans Reimbursement</a></li>
-  <li><a href="https://www.salesforce.com/news/stories/military-veteran-program-announcement-2025/" target="_blank">Salesforce Military Program 2025</a></li>
-  <li><a href="https://www.nobledesktop.com/topics/ai-training-for-veterans" target="_blank">Noble Desktop — AI Training for Veterans</a></li>
-  <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" target="_blank">Microsoft Azure AI Fundamentals (AI-900)</a></li>
-  <li><a href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/about/deloitte-ai-academy.html" target="_blank">Deloitte AI Academy</a></li>
-  <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/building-a-talent-pipeline-for-the-ai-era" target="_blank">McKinsey — Building AI Talent Pipeline</a></li>
-  <li><a href="https://vetswhocode.io" target="_blank">Vets Who Code</a></li>
-  <li><a href="https://vets2industry.org/" target="_blank">Vets2Industry</a></li>
-  <li><a href="https://www.acp-usa.org/" target="_blank">American Corporate Partners</a></li>
-  <li><a href="https://vets.arizona.edu/50-strong" target="_blank">50strong — University of Arizona</a></li>
-</ul>
-</div>
-
-<p class="timestamp">Analysis prepared March 18, 2026. Data sourced from public web research.</p>
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
 
 </body>
 </html>
