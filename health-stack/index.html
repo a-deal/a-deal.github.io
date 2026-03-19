@@ -205,7 +205,6 @@
   section:nth-child(6) { animation-delay: 0.3s; }
   section:nth-child(7) { animation-delay: 0.35s; }
   section:nth-child(8) { animation-delay: 0.4s; }
-  section:nth-child(9) { animation-delay: 0.45s; }
 
   .section-number {
     font-family: var(--font-mono);
@@ -434,18 +433,6 @@
     font-weight: 600;
   }
 
-  /* Graveyard section cards */
-  .graveyard-card {
-    margin: 2rem 0;
-    padding: 0;
-  }
-
-  .graveyard-card h3 {
-    border-bottom: none;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0;
-  }
-
   /* Phase cards */
   .phase-card {
     background: var(--bg-surface);
@@ -467,6 +454,7 @@
   .phase-card.phase-1::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-teal)); }
   .phase-card.phase-2::before { background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
   .phase-card.phase-3::before { background: linear-gradient(90deg, var(--accent-amber), #e3b341); }
+  .phase-card.phase-4::before { background: linear-gradient(90deg, #bc8cff, var(--accent-blue)); }
 
   .phase-card h3 {
     border-bottom: none;
@@ -477,6 +465,7 @@
   .phase-card.phase-1 h3 { color: var(--accent-green); }
   .phase-card.phase-2 h3 { color: var(--accent-blue); }
   .phase-card.phase-3 h3 { color: var(--accent-amber); }
+  .phase-card.phase-4 h3 { color: #bc8cff; }
 
   .phase-card p:first-of-type {
     font-size: 0.92rem;
@@ -496,10 +485,10 @@
   .closing {
     text-align: center;
     padding: 3rem 0;
-    font-style: italic;
     font-size: 1.15rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     line-height: 1.6;
+    font-weight: 600;
   }
 
   .closing::before {
@@ -562,6 +551,51 @@
     border-radius: 2px;
   }
 
+  /* Numbered list for invite flow */
+  .invite-flow {
+    counter-reset: invite-step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .invite-flow li {
+    counter-increment: invite-step;
+    padding-left: 2.5rem;
+    position: relative;
+    margin-bottom: 0.85rem;
+  }
+
+  .invite-flow li::before {
+    content: counter(invite-step);
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: rgba(63, 184, 175, 0.12);
+    border: 1px solid var(--accent-teal);
+    color: var(--accent-teal);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* YAML code label */
+  .code-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
   /* Animations */
   @keyframes fadeUp {
     from {
@@ -613,15 +647,14 @@
 <nav>
   <div class="nav-inner">
     <div class="nav-brand">BASELINE</div>
-    <a href="#analysis" class="active" onclick="setActive(this)">Analysis</a>
+    <a href="#thesis" class="active" onclick="setActive(this)">Thesis</a>
     <a href="#running" onclick="setActive(this)">Running Today</a>
-    <a href="#graveyard" onclick="setActive(this)">Graveyard</a>
+    <a href="#why" onclick="setActive(this)">Why It Works</a>
     <a href="#architecture" onclick="setActive(this)">Architecture</a>
-    <a href="#dogfood" onclick="setActive(this)">Dogfood</a>
+    <a href="#production" onclick="setActive(this)">Production</a>
     <a href="#integration" onclick="setActive(this)">Integration</a>
-    <a href="#market" onclick="setActive(this)">Market</a>
     <a href="#path" onclick="setActive(this)">Path Forward</a>
-    <a href="#principle" onclick="setActive(this)">Principle</a>
+    <a href="#moat" onclick="setActive(this)">The Moat</a>
   </div>
 </nav>
 
@@ -633,23 +666,19 @@
       BASELINE <span>/</span> STRATEGY BRIEF <span>/</span> MARCH 19, 2026
     </div>
     <h1>The Health Intelligence Stack</h1>
-    <p class="subtitle">From Analysis to Evidence</p>
+    <p class="subtitle">From Dogfood to Platform</p>
     <p class="byline">For Paul &amp; Andrew &mdash; March 19, 2026</p>
     <hr class="hero-divider">
   </header>
 
   <!-- SECTION 1 -->
-  <section id="analysis">
+  <section id="thesis">
     <span class="section-number">01</span>
-    <h2>Your Analysis Is Right</h2>
+    <h2>The Thesis</h2>
 
-    <p>Paul, your &ldquo;App vs. Agent&rdquo; artifact is the best strategic analysis I&rsquo;ve read on this question. The conversational UI graveyard is real. The operator-era economics are real. The conclusion&mdash;agent-first, app optional&mdash;is correct.</p>
+    <p>Your &ldquo;App vs. Agent&rdquo; analysis is correct. Conversational UI failed in 2016 because the AI wasn&rsquo;t real. Operator-era coaching failed because the economics weren&rsquo;t real. The conclusion&mdash;agent-first, app optional&mdash;holds.</p>
 
-    <p>Here&rsquo;s what it looks like when you build it.</p>
-
-    <p>What follows is not a competing vision. It&rsquo;s a status report. Everything described below is running today on a Mac Mini in my apartment, coaching me through a structured cut via WhatsApp. I&rsquo;m user zero, and I&rsquo;ve been dogfooding this daily since March 18.</p>
-
-    <p>This document is the complement to yours: you mapped the territory, I built the road.</p>
+    <p>This document is the complement: you mapped the territory, this is the road. Everything in Sections 2&ndash;4 is running today. Section 5 is how it becomes a product.</p>
 
     <hr class="section-divider">
   </section>
@@ -657,146 +686,152 @@
   <!-- SECTION 2 -->
   <section id="running">
     <span class="section-number">02</span>
-    <h2>What&rsquo;s Running Today</h2>
+    <h2>What Exists Today</h2>
 
-    <p>This is not a roadmap. Every line below describes something that is operational right now.</p>
+    <p>Every line below describes something operational&mdash;not planned.</p>
 
-    <h3>The Agent Layer</h3>
+    <h3>Agent Layer</h3>
 
     <ul>
-      <li><strong>OpenClaw</strong> running on an M4 Pro Mac Mini, connected bidirectionally to <strong>WhatsApp</strong></li>
-      <li><strong>health-engine MCP server</strong> exposing 15+ tools that the agent calls in real-time:</li>
+      <li>LLM agent on always-on hardware, connected bidirectionally to <strong>WhatsApp</strong></li>
+      <li><strong>health-engine MCP server</strong>&mdash;15+ tools the agent calls in real-time:</li>
     </ul>
 
     <ul class="tool-list">
-      <li><span class="tool-name">checkin</span> <span class="tool-desc">full coaching briefing (scores, insights, weight, nutrition, habits, protocols, Garmin data)</span></li>
+      <li><span class="tool-name">checkin</span> <span class="tool-desc">full coaching briefing (scores, insights, weight, nutrition, habits, protocols, wearable data)</span></li>
       <li><span class="tool-name">score</span> <span class="tool-desc">20 metrics scored against NHANES percentiles with clinical zone assessment</span></li>
-      <li><span class="tool-name">log_weight</span> <span class="tool-desc">log_bp, log_habits, log_meal, log_medication, log_supplements, log_sleep</span></li>
+      <li><span class="tool-name">log_weight</span> <span class="tool-desc">log_bp, log_habits, log_meal, log_medication, log_supplements &mdash; structured daily tracking</span></li>
       <li><span class="tool-name">get_protocols</span> <span class="tool-desc">active protocol progress with phase tracking, habit completion, nudges</span></li>
-      <li><span class="tool-name">get_status</span> <span class="tool-desc">data inventory across all files</span></li>
       <li><span class="tool-name">setup_profile</span> <span class="tool-desc">onboarding via conversation</span></li>
-      <li><span class="tool-name">pull_garmin</span> <span class="tool-desc">live data pull from Garmin Connect API</span></li>
-      <li><span class="tool-name">import_apple_health</span> <span class="tool-desc">SAX streaming parser for large Apple Health XML exports</span></li>
-      <li><span class="tool-name">auth_garmin</span> <span class="tool-desc">secure browser-based OAuth flow</span></li>
-      <li><span class="tool-name">connect_garmin</span> <span class="tool-desc">connection status and freshness check</span></li>
-      <li><span class="tool-name">open_dashboard</span> <span class="tool-desc">browser-based visualization</span></li>
-      <li><span class="tool-name">onboard</span> <span class="tool-desc">full coverage map with ranked next steps for new users</span></li>
+      <li><span class="tool-name">pull_garmin</span> <span class="tool-desc">live wearable data pull</span></li>
+      <li><span class="tool-name">import_apple_health</span> <span class="tool-desc">streaming parser for Apple Health XML exports</span></li>
+      <li><span class="tool-name">onboard</span> <span class="tool-desc">coverage map with ranked next steps for new users</span></li>
     </ul>
 
     <ul>
-      <li><strong>Whisper</strong> voice transcription running locally on M4 Pro (<code>ggml-base.en.bin</code>), processing WhatsApp voice notes</li>
-      <li><strong>Gemini web search</strong> for nutrition lookups (calorie/macro estimation from natural language meal descriptions)</li>
+      <li>Local voice transcription for voice note processing</li>
+      <li>Web search for nutrition lookups (calorie/macro estimation from natural language)</li>
     </ul>
 
-    <h3>The Intelligence Layer</h3>
+    <h3>Intelligence Layer</h3>
 
-    <h4>Scoring Engine <code>engine/scoring/</code></h4>
+    <p>This is the shared asset. Everything else is a surface.</p>
+
+    <h4>Scoring engine</h4>
     <ul>
       <li>20 health metrics across 2 tiers (Foundation + Enhanced)</li>
-      <li>NHANES 2017&ndash;2020 Pre-Pandemic continuous percentiles, survey-weighted, stratified by age bucket and sex</li>
-      <li>Clinical zone assessment (Optimal / Healthy / Borderline / Elevated) sourced from:</li>
+      <li>NHANES 2017&ndash;2020 continuous percentiles, survey-weighted, stratified by age and sex</li>
+      <li>Clinical zone assessment (Optimal / Healthy / Borderline / Elevated) from published guidelines:</li>
     </ul>
     <ul class="source-list">
       <li>AHA/ACC 2017 (blood pressure)</li>
       <li>ESC/EAS 2019 (ApoB)</li>
       <li>ADA 2023 (glucose, HbA1c)</li>
-      <li>ACSM (VO2 max, age/sex stratified)</li>
+      <li>ACSM (VO2 max)</li>
       <li>AHA/CDC (hs-CRP)</li>
       <li>Endocrine Society (TSH, Vitamin D)</li>
       <li>NHLBI/AHA (waist circumference)</li>
     </ul>
     <ul>
-      <li>Freshness decay&mdash;a lipid panel from 18 months ago gets ~33% credit, not full weight</li>
-      <li>Reliability multipliers&mdash;single BP readings count less than 7-day protocol averages</li>
-      <li>Weighted percentile composite using standing weights (Lp(a) downweighted since genetically fixed)</li>
+      <li>Freshness decay&mdash;stale labs get discounted, not full credit</li>
+      <li>Reliability multipliers&mdash;protocol-averaged readings weighted higher than single measurements</li>
       <li>Gap analysis ranked by coverage leverage with cost-to-close for every missing metric</li>
     </ul>
 
-    <h4>Insights Engine <code>engine/insights/</code></h4>
+    <h4>Insights engine</h4>
     <ul>
-      <li>Threshold-based coaching rules loaded from <code>rules.yaml</code> (configurable, not hardcoded)</li>
+      <li>Threshold-based coaching rules loaded from configurable YAML</li>
       <li>Compound signals that connect metrics across domains:</li>
     </ul>
     <ul class="source-list">
-      <li>Sleep debt accumulation (weekly tracking against target)</li>
+      <li>Sleep debt accumulation vs. target</li>
       <li>Deficit sustainability (weight loss rate &times; HRV &times; RHR interaction)</li>
-      <li>Sleep-deficit interaction&mdash;flags muscle loss risk citing Nedeltcheva 2010 (60% more muscle lost under sleep restriction at same deficit)</li>
-      <li>Taper readiness (when to start reverse diet based on proximity to target)</li>
-      <li>Nutrition deviation (unplanned surplus detection, late-meal sleep impact)</li>
+      <li>Sleep-deficit interaction&mdash;flags muscle loss risk under caloric restriction (Nedeltcheva 2010)</li>
+      <li>Nutrition deviation&mdash;unplanned surplus detection, late-meal sleep impact</li>
     </ul>
     <ul>
-      <li>90-day trend computation for HRV and RHR with directional interpretation</li>
-      <li>Four severity levels: <strong>critical</strong>, <strong>warning</strong>, <strong>positive</strong>, <strong>neutral</strong>&mdash;the agent uses these to prioritize what to surface</li>
+      <li>90-day trend computation with directional interpretation</li>
+      <li>Four severity levels: <strong>critical</strong>, <strong>warning</strong>, <strong>positive</strong>, <strong>neutral</strong></li>
     </ul>
 
-    <h4>Protocols Engine <code>engine/coaching/protocols.py</code> + <code>protocols/</code></h4>
+    <h4>Protocols engine</h4>
     <ul>
       <li>YAML-defined phased protocols with habit tracking and outcome metrics</li>
-      <li>Active protocols today:</li>
-    </ul>
-    <ul class="source-list">
-      <li><strong>Sleep Stack</strong>&mdash;6-week progressive protocol with 9 habits, 3 phases, nicotine taper integrated, outcome tracking against Garmin sleep duration and regularity</li>
-      <li><strong>Hair Recovery</strong>&mdash;finasteride/minoxidil protocol with phase tracking</li>
-      <li><strong>Skincare</strong>&mdash;morning/evening routines with product-specific tracking</li>
-    </ul>
-    <ul>
-      <li>Each protocol computes: day number, week number, current phase, last night&rsquo;s habit completion, phase average completion rate, top nudge (highest-priority missed habit), outcome metric status vs targets</li>
-      <li>Nudges are opinionated: &ldquo;Hit your cutoff time,&rdquo; not &ldquo;consider your caffeine intake&rdquo;</li>
+      <li>Any domain: sleep, metabolic, cardiovascular, dermatologic, hormonal, training&mdash;the template is the same</li>
+      <li>Each protocol computes: day/week/phase, last completion rate, top nudge (highest-priority missed habit), outcome metrics vs. targets</li>
+      <li>Protocols are opinionated: &ldquo;Hit your cutoff time,&rdquo; not &ldquo;consider your sleep hygiene&rdquo;</li>
     </ul>
 
-    <h3>The Data Layer</h3>
-    <ul>
-      <li><strong>Garmin integration</strong>&mdash;live pull every 4 hours via cron job. RHR, HRV, sleep duration, sleep regularity, steps, VO2 max, Zone 2 minutes, daily calorie burn, workout sets with exercise-level detail</li>
-      <li><strong>Apple Health import</strong>&mdash;SAX streaming parser handles arbitrarily large XML exports. Parses RHR, HRV (SDNN), steps, VO2 max, sleep. Garmin takes priority when both exist</li>
-      <li><strong>Lab results</strong>&mdash;structured JSON with draw dates, LOINC-compatible keys, multi-draw history</li>
-      <li><strong>Daily tracking</strong>&mdash;CSVs for weight, blood pressure, meals, habits, supplements, medication, strength</li>
-      <li><strong>11 data files</strong> actively populated: <code>weight_log.csv</code> (43 entries), <code>bp_log.csv</code>, <code>meal_log.csv</code>, <code>daily_habits.csv</code>, <code>strength_log.csv</code>, <code>medication_log.csv</code>, <code>supplement_log.csv</code>, <code>garmin_latest.json</code>, <code>garmin_daily.json</code>, <code>garmin_workouts.json</code>, <code>lab_results.json</code></li>
-    </ul>
+    <h3>Data Layer</h3>
 
-    <h3>The Automation Layer</h3>
+    <p>Four categories of health data, each with established ingestion paths:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Sources</th>
+            <th>Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Wearables</strong></td>
+            <td>Garmin Connect API (live pull, 4hr cron), Apple Health XML, Oura/WHOOP (planned)</td>
+            <td>RHR, HRV, sleep, steps, VO2 max, Zone 2, workouts</td>
+          </tr>
+          <tr>
+            <td><strong>Labs</strong></td>
+            <td>Structured JSON with draw dates, LOINC-compatible keys, multi-draw history</td>
+            <td>Lipids, metabolic panel, hormones, inflammation markers</td>
+          </tr>
+          <tr>
+            <td><strong>Daily tracking</strong></td>
+            <td>Conversational logging via agent</td>
+            <td>Weight, blood pressure, meals, habits, supplements, medication</td>
+          </tr>
+          <tr>
+            <td><strong>Documents</strong></td>
+            <td>OCR pipeline (planned&mdash;Paul&rsquo;s iOS work)</td>
+            <td>Lab PDFs, insurance docs, specialist reports</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Automation Layer</h3>
     <ul>
-      <li><strong>7:00 AM cron</strong>&mdash;morning health briefing delivered via WhatsApp. The agent calls <code>checkin</code>, reads the briefing, and coaches forward with 1&ndash;2 nudges for the day</li>
-      <li><strong>Every 4 hours</strong>&mdash;Garmin data pull keeps wearable metrics fresh without manual intervention</li>
-      <li><strong>Self-improvement framework</strong>&mdash;the agent journals its own failures and self-authors standard meal macros based on observed patterns</li>
+      <li><strong>Morning cron</strong>&mdash;daily coaching briefing delivered via messaging channel</li>
+      <li><strong>Wearable sync</strong>&mdash;data pull every 4 hours, no manual intervention</li>
+      <li><strong>Self-improvement framework</strong>&mdash;the agent logs its own coaching failures and iterates on delivery</li>
     </ul>
 
     <hr class="section-divider">
   </section>
 
   <!-- SECTION 3 -->
-  <section id="graveyard">
+  <section id="why">
     <span class="section-number">03</span>
-    <h2>The Graveyard Lesson, Applied</h2>
+    <h2>Why This Approach Works</h2>
 
-    <p>Your graveyard analysis identified four failure modes. Here&rsquo;s how the running stack addresses each one.</p>
+    <p>Your graveyard analysis identified four failure modes. The running stack addresses each one.</p>
 
-    <div class="graveyard-card">
-      <h3>Lark failed because scripted AI couldn&rsquo;t adapt</h3>
-      <p>Lark&rsquo;s conversational AI was rule trees pretending to be intelligent. When a user went off-script, it broke.</p>
-      <p>The health-engine doesn&rsquo;t script conversations. It provides structured data&mdash;NHANES percentiles, clinical zones, compound coaching signals&mdash;to an LLM that has genuine reasoning capability. The insights engine generates severity-ranked observations; the LLM decides how to deliver them based on context. The coaching voice in <code>CLAUDE.md</code> sets the personality (&ldquo;direct, warm but not soft, like a trainer who knows your numbers&rdquo;), but the conversation itself is emergent.</p>
-      <blockquote><p>The difference: Lark had to anticipate every user path. The health-engine provides ground truth; the LLM navigates.</p></blockquote>
-    </div>
+    <p><strong>Lark failed because scripted AI couldn&rsquo;t adapt.</strong> The health-engine doesn&rsquo;t script conversations. It provides structured data&mdash;NHANES percentiles, clinical zones, compound coaching signals&mdash;to an LLM with genuine reasoning. The insights engine generates severity-ranked observations; the LLM decides how to deliver them contextually.</p>
 
-    <div class="graveyard-card">
-      <h3>Operator-era companies died on unit economics</h3>
-      <p>Every &ldquo;AI health coach&rdquo; from 2015&ndash;2020 that put a human in the loop eventually hit the same wall: per-user costs scaled linearly with users. Noom&rsquo;s coaches handle 200+ users each, diluting the coaching to the point of irrelevance.</p>
-      <p>The health-engine&rsquo;s marginal cost per user is approximately zero. The intelligence layer runs locally. The LLM call is the only variable cost, and at current Sonnet pricing, a full daily coaching session costs roughly $0.02. There are no human operators in the loop.</p>
-      <blockquote><p>The difference: MCP tools + LLM replaces the human operator entirely. The program runs the coaching; the LLM runs the conversation.</p></blockquote>
-    </div>
+    <blockquote><p>The difference: Lark anticipated user paths. The health-engine provides ground truth; the LLM navigates.</p></blockquote>
 
-    <div class="graveyard-card">
-      <h3>Noom proved that programs work</h3>
-      <p>Noom&rsquo;s insight was correct: structured behavior change programs outperform pure tracking. Their problem was delivery&mdash;watered-down coaching at scale.</p>
-      <p>The protocols engine is opinionated by design. The sleep stack has 9 habits with evidence-based rationale for each, 3 phases that progressively tighten constraints, and outcome metrics that close the loop against Garmin data. It doesn&rsquo;t ask what you want to do. It tells you what to do this week and tracks whether you did it.</p>
-      <blockquote><p>The difference: Same programmatic structure as Noom, zero dilution in delivery. The protocol runs at full fidelity for every user.</p></blockquote>
-    </div>
+    <p><strong>Operator-era companies died on unit economics.</strong> Every &ldquo;AI health coach&rdquo; from 2015&ndash;2020 with a human in the loop hit the same wall: per-user costs scaled linearly. Noom&rsquo;s coaches handle 200+ users each, diluting coaching to irrelevance. This stack&rsquo;s marginal cost per user is approximately zero. The intelligence layer runs locally. The LLM call costs ~$0.02 per daily session. No human operators.</p>
 
-    <div class="graveyard-card">
-      <h3>Omada proved that specificity wins</h3>
-      <p>Omada&rsquo;s diabetes prevention program worked because it was clinically specific&mdash;targeted population, validated protocol, measurable outcomes. But it required clinical staff and health plan integration to operate.</p>
-      <p>The scoring engine is built on the same clinical foundations. ApoB thresholds from ESC/EAS 2019. Fasting glucose zones from ADA 2023. VO2 max stratified by age and sex from ACSM. The gap analysis doesn&rsquo;t just say &ldquo;get a blood test&rdquo;&mdash;it says &ldquo;a $30 lipid panel with ApoB add-on would close your highest-leverage coverage gap.&rdquo; Clinical specificity without clinical overhead.</p>
-      <blockquote><p>The difference: Clinical-grade assessment delivered through an agent, not a clinic. Population health infrastructure at individual scale.</p></blockquote>
-    </div>
+    <blockquote><p>The difference: MCP tools + LLM replaces the human operator entirely.</p></blockquote>
+
+    <p><strong>Noom proved that programs work.</strong> Structured behavior change outperforms pure tracking. Noom&rsquo;s problem was delivery&mdash;watered-down coaching at scale. The protocols engine delivers at full fidelity for every user. Phased progression, evidence-backed habits, outcome metrics closed against real wearable data.</p>
+
+    <blockquote><p>The difference: Same programmatic structure, zero dilution in delivery.</p></blockquote>
+
+    <p><strong>Omada proved that specificity wins.</strong> Clinically specific programs with measurable outcomes work. Omada required clinical staff and health plan integration. This scoring engine uses the same clinical foundations&mdash;ApoB thresholds from ESC/EAS, fasting glucose from ADA, VO2 max from ACSM&mdash;delivered through an agent, not a clinic.</p>
+
+    <blockquote><p>The difference: Clinical-grade assessment at individual scale, without clinical overhead.</p></blockquote>
 
     <hr class="section-divider">
   </section>
@@ -806,8 +841,6 @@
     <span class="section-number">04</span>
     <h2>Architecture</h2>
 
-    <p>The key insight is that the intelligence layer is the shared asset. Everything else is a surface.</p>
-
     <pre><code><span class="arch-border">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
 <span class="arch-border">&#9474;</span>                  <span class="arch-layer">VISUAL LAYER</span>                    <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9474;</span>   <span class="arch-detail">Dashboard  |  iOS Companion  |  Web View</span>      <span class="arch-border">&#9474;</span>
@@ -816,8 +849,8 @@
                        <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
 <span class="arch-border">&#9474;</span>                  <span class="arch-layer">AGENT LAYER</span>                     <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">OpenClaw + MCP + WhatsApp (or any channel)</span>     <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">Voice (Whisper) | Cron automation</span>              <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">LLM + MCP + Messaging (WhatsApp, SMS, etc.)</span>   <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">Voice  |  Cron automation  |  Per-user agents</span> <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9474;</span>              <span class="arch-label">(primary surface)</span>                   <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>
                        <span class="arch-border">&#9474;</span>
@@ -827,49 +860,151 @@
 <span class="arch-border">&#9474;</span>   <span class="arch-detail">Insights Engine   (compound coaching signals)</span>  <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9474;</span>   <span class="arch-detail">Protocols Engine  (phased programs + tracking)</span> <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9474;</span>   <span class="arch-detail">Coaching Briefing (assembled snapshot)</span>         <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>            <span class="arch-label">(the shared asset &#8212; the moat)</span>         <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>            <span class="arch-label">(the shared asset &mdash; the moat)</span>         <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span>
                        <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;</span>
 <span class="arch-border">&#9474;</span>                  <span class="arch-layer">DATA LAYER</span>                      <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">CSVs (weight, BP, meals, habits, meds)</span>         <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">Garmin Connect API (live pull, 4hr cron)</span>       <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">Apple Health XML (SAX streaming import)</span>        <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">Lab results (structured JSON, multi-draw)</span>      <span class="arch-border">&#9474;</span>
-<span class="arch-border">&#9474;</span>   <span class="arch-detail">Protocols (YAML definitions)</span>                   <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">Per-user isolated data (wearables, labs,</span>       <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">meals, habits, meds, protocols)</span>                <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">Wearable APIs  |  Apple Health  |  OCR docs</span>    <span class="arch-border">&#9474;</span>
+<span class="arch-border">&#9474;</span>   <span class="arch-detail">Lab results (LOINC-keyed JSON)</span>                 <span class="arch-border">&#9474;</span>
 <span class="arch-border">&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;</span></code></pre>
 
-    <p>The intelligence layer doesn&rsquo;t care what surface calls it. Today it&rsquo;s an MCP server consumed by an agent on WhatsApp. Tomorrow it could be called by an iOS app, a web dashboard, a Slack bot, or an Alexa skill. The scoring engine returns the same NHANES percentiles regardless of who&rsquo;s asking.</p>
+    <p>The intelligence layer doesn&rsquo;t care what surface calls it. Today it&rsquo;s an MCP server consumed by an agent on WhatsApp. Tomorrow it could be called by an iOS app, a web dashboard, or an API. The scoring engine returns the same NHANES percentiles regardless of who&rsquo;s asking.</p>
 
-    <p>This is the architectural bet: <strong>build the intelligence once, deliver it through whatever surface the user actually lives in.</strong></p>
+    <p><strong>Build the intelligence once, deliver it through whatever surface the user actually lives in.</strong></p>
 
     <hr class="section-divider">
   </section>
 
   <!-- SECTION 5 -->
-  <section id="dogfood">
+  <section id="production">
     <span class="section-number">05</span>
-    <h2>Andrew&rsquo;s ApoB</h2>
+    <h2>From Dogfood to Production</h2>
 
-    <p>Your artifact says Paul&rsquo;s ApoB story is the proof of concept&mdash;the moment where a single data point changed behavior.</p>
+    <p>This is the section the first draft was missing. The intelligence layer works for one user. Here&rsquo;s how it serves many.</p>
 
-    <p>Here&rsquo;s the equivalent story, happening in real-time.</p>
+    <h3>The Protocol Template</h3>
 
-    <p>I&rsquo;m running a structured cut: 192.4 lbs this morning, targeting 188, with a hard stop at week 16 (mid-May). The health-engine has 43 weigh-ins logged. It computes my rolling 7-day average, weekly loss rate, and projects time-to-target. It cross-references my weight trajectory against Garmin HRV and RHR to assess whether my deficit is sustainable. When my HRV dropped below 55ms last week, the insights engine flagged a &ldquo;Deficit may be unsustainable&rdquo; critical signal and recommended a +200&ndash;300 cal bump.</p>
+    <p>The personal protocols running today (sleep optimization, body composition, etc.) are instances of a general template:</p>
 
-    <p>The protocol stack running alongside: tirzepatide 2.5mg subcutaneous (logged via <code>log_medication</code>), 5-day resistance training split (Sun/Mon/Thu/Fri/Sat, tracked in <code>strength_log.csv</code>), sleep stack with 9 habits tracked nightly, morning supplement stack logged daily. Garmin pulls every 4 hours feed sleep duration, HRV, RHR, and Zone 2 minutes into the scoring engine.</p>
+    <span class="code-label">Protocol Template &mdash; any health domain</span>
+    <pre><code><span style="color: var(--accent-teal);">name:</span> <span style="color: var(--text-secondary);">"Protocol Name"</span>
+<span style="color: var(--accent-teal);">domain:</span> <span style="color: var(--text-secondary);">sleep | metabolic | cardiovascular | training | dermatologic | hormonal | ...</span>
+<span style="color: var(--accent-teal);">duration_weeks:</span> <span style="color: var(--accent-amber);">6</span>
+<span style="color: var(--accent-teal);">phases:</span>
+  - <span style="color: var(--accent-teal);">name:</span> <span style="color: var(--text-secondary);">"Build"</span>
+    <span style="color: var(--accent-teal);">weeks:</span> <span style="color: var(--text-secondary);">[1, 2]</span>
+    <span style="color: var(--accent-teal);">habits:</span> <span style="color: var(--text-secondary);">[max 3 per phase]</span>
+    <span style="color: var(--accent-teal);">focus:</span> <span style="color: var(--text-secondary);">"Establish baseline behaviors"</span>
+  - <span style="color: var(--accent-teal);">name:</span> <span style="color: var(--text-secondary);">"Dial In"</span>
+    <span style="color: var(--accent-teal);">weeks:</span> <span style="color: var(--text-secondary);">[3, 4]</span>
+    <span style="color: var(--accent-teal);">habits:</span> <span style="color: var(--text-secondary);">[progressive additions]</span>
+    <span style="color: var(--accent-teal);">focus:</span> <span style="color: var(--text-secondary);">"Tighten constraints, measure response"</span>
+  - <span style="color: var(--accent-teal);">name:</span> <span style="color: var(--text-secondary);">"Sustain"</span>
+    <span style="color: var(--accent-teal);">weeks:</span> <span style="color: var(--text-secondary);">[5, 6]</span>
+    <span style="color: var(--accent-teal);">habits:</span> <span style="color: var(--text-secondary);">[full stack]</span>
+    <span style="color: var(--accent-teal);">focus:</span> <span style="color: var(--text-secondary);">"Lock in, measure outcomes"</span>
+<span style="color: var(--accent-teal);">outcome_metrics:</span>
+  - <span style="color: var(--accent-teal);">metric:</span> <span style="color: var(--text-secondary);">"sleep_duration"</span>
+    <span style="color: var(--accent-teal);">target:</span> <span style="color: var(--accent-amber);">7.5</span>
+    <span style="color: var(--accent-teal);">source:</span> <span style="color: var(--text-secondary);">wearable</span>
+  - <span style="color: var(--accent-teal);">metric:</span> <span style="color: var(--text-secondary);">"hrv_trend"</span>
+    <span style="color: var(--accent-teal);">direction:</span> <span style="color: var(--text-secondary);">"increasing"</span>
+    <span style="color: var(--accent-teal);">source:</span> <span style="color: var(--text-secondary);">wearable</span></code></pre>
 
-    <p>This isn&rsquo;t a demo. It&rsquo;s my actual health management system. Every morning at 7am, I get a WhatsApp message that opens with something like:</p>
+    <p>Every protocol&mdash;sleep, weight management, cardiovascular risk reduction, stress management&mdash;follows this shape. Phased. Habit-tracked. Outcome-measured against real data. The system ships with a starter library of evidence-based protocols. Users can also define custom ones.</p>
 
-    <blockquote>
-      <p>&ldquo;Weight trending well at 192.4&mdash;rolling avg 194.1, so the scale is catching up to the trend. HRV at 58ms, down from 64 last week. That tracks with the sleep debt you&rsquo;ve been building. Sleep stack compliance was 7/9 last night&mdash;missed the hot shower and earplugs. Those two are your highest-leverage gaps right now.&rdquo;</p>
-    </blockquote>
+    <h3>Multi-User Architecture</h3>
 
-    <p>The dogfood IS the proof of concept. The system doesn&rsquo;t need a hypothetical user&mdash;it has a real one generating real data through a real protocol, with outcomes measured against population benchmarks.</p>
+    <p>The production system isolates user data while sharing intelligence:</p>
 
-    <blockquote>
-      <p><strong>My background matters here.</strong> I&rsquo;m a former personal trainer and CrossFit gym owner. The coaching engine isn&rsquo;t academic&mdash;it&rsquo;s built from years of programming clients through exactly these kinds of protocols. When the sleep stack says &ldquo;hot shower 1 hour before bed,&rdquo; that&rsquo;s not a wellness blog recommendation. It&rsquo;s based on the vasodilation-mediated core temperature drop mechanism, timed to put the thermal nadir at lights out. Every habit has an evidence-backed &ldquo;why&rdquo; field because I&rsquo;ve had to explain these things to real people who needed to believe the program to follow it.</p>
-    </blockquote>
+    <pre><code><span style="color: var(--accent-teal);">/users/</span>
+  <span style="color: var(--accent-teal);">/{user_id}/</span>
+    <span style="color: var(--text-secondary);">config.yaml</span>          <span style="color: var(--text-muted);"># age, sex, targets, preferences</span>
+    <span style="color: var(--accent-teal);">data/</span>
+      <span style="color: var(--text-secondary);">weight_log.csv</span>
+      <span style="color: var(--text-secondary);">meal_log.csv</span>
+      <span style="color: var(--text-secondary);">daily_habits.csv</span>
+      <span style="color: var(--text-secondary);">lab_results.json</span>
+      <span style="color: var(--text-secondary);">garmin_daily.json</span>
+      <span style="color: var(--text-secondary);">...</span>
+    <span style="color: var(--accent-teal);">protocols/</span>
+      <span style="color: var(--accent-teal);">active/</span>            <span style="color: var(--text-muted);"># user's current protocols</span>
+      <span style="color: var(--accent-teal);">completed/</span>         <span style="color: var(--text-muted);"># archived with outcomes</span></code></pre>
+
+    <p><strong>What&rsquo;s shared:</strong> The scoring engine, NHANES percentile tables, clinical thresholds, insights rules, protocol templates, coaching personality. This is the intelligence layer&mdash;it never holds user data.</p>
+
+    <p><strong>What&rsquo;s isolated:</strong> Every user&rsquo;s measurements, meals, habits, lab results, protocol progress, wearable data. Fully siloed. One user&rsquo;s data never touches another&rsquo;s.</p>
+
+    <h3>The Invite Flow</h3>
+
+    <p>What onboarding looks like for user N+1:</p>
+
+    <ol class="invite-flow">
+      <li><strong>Receive invite link</strong>&mdash;opens a conversational onboarding via WhatsApp (or preferred channel)</li>
+      <li><strong>Profile setup</strong>&mdash;agent asks: age, sex, goals. 2-minute conversation, not a form</li>
+      <li><strong>Connect wearable</strong>&mdash;Garmin OAuth, Apple Health export, or Oura PAT. Agent walks through it</li>
+      <li><strong>Upload labs</strong> (optional)&mdash;photograph a lab report, OCR extracts values, scored immediately</li>
+      <li><strong>Select protocols</strong>&mdash;agent recommends based on profile and goals: &ldquo;Based on your age and the fact that you haven&rsquo;t had a lipid panel, I&rsquo;d start with the Cardiovascular Baseline protocol and the Sleep Foundation protocol&rdquo;</li>
+      <li><strong>First morning briefing</strong>&mdash;next day at their preferred time, the agent delivers the first coaching message with their initial scores and day-1 protocol habits</li>
+    </ol>
+
+    <p>Time from invite to first briefing: under 24 hours.</p>
+
+    <h3>Agent Architecture at Scale</h3>
+
+    <p>Two viable models, not mutually exclusive:</p>
+
+    <p><strong>Model A: Shared agent, per-user context.</strong> One LLM agent handles all users. Each conversation loads the user&rsquo;s data directory and config before responding. The MCP server routes tool calls to the correct user&rsquo;s data. Lower infrastructure cost. Works well up to ~100 users.</p>
+
+    <p><strong>Model B: Agent per user.</strong> Each user gets a dedicated agent instance with persistent memory and conversation history. Better personalization&mdash;the agent remembers that this user tends to skip meals on Thursdays, or that they respond better to direct nudges than gentle suggestions. Higher infrastructure cost. The right model at scale.</p>
+
+    <p><strong>The transition:</strong> Start with Model A. The intelligence layer is identical in both&mdash;the MCP tools accept a <code>user_id</code> parameter and route to isolated data. The agent layer is the only thing that changes.</p>
+
+    <h3>Cost Model</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Per-user/month</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>LLM (daily briefing + 2-3 check-ins)</td>
+            <td>~$1.50</td>
+            <td>Sonnet pricing, ~$0.05/session</td>
+          </tr>
+          <tr>
+            <td>Wearable sync (cron)</td>
+            <td>~$0.00</td>
+            <td>Local compute</td>
+          </tr>
+          <tr>
+            <td>Intelligence layer</td>
+            <td>~$0.00</td>
+            <td>Local compute</td>
+          </tr>
+          <tr>
+            <td>Infrastructure (shared)</td>
+            <td>~$2-5/user at 100 users</td>
+            <td>Hosting, storage, messaging API</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>~$4-7/user/month</strong></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>At $10/month subscription, margins are 30-60% at 100 users and improve with scale. No human operators in the loop at any point.</p>
 
     <hr class="section-divider">
   </section>
@@ -879,11 +1014,7 @@
     <span class="section-number">06</span>
     <h2>Where Paul&rsquo;s Work Fits</h2>
 
-    <p>Your 24 commits on March 18&mdash;Health Documents v1 with on-device OCR, Claude API summarization, CoreData&mdash;solve a real problem that the agent stack doesn&rsquo;t currently handle well.</p>
-
-    <p><strong>Document ingestion from the iOS side.</strong> Today, when I get lab results, I manually enter values into <code>lab_results.json</code>. That&rsquo;s friction. Your OCR pipeline could photograph a lab report, extract structured values, and feed them directly into the scoring engine. The P5 Biomarkers plan with 25 LOINC-coded markers maps cleanly onto the health-engine&rsquo;s existing lab schema.</p>
-
-    <p>Here&rsquo;s how every piece of work finds a home:</p>
+    <p>Your 24 commits on March 18&mdash;Health Documents v1 with on-device OCR, Claude API summarization, CoreData&mdash;solve a real problem the agent stack doesn&rsquo;t currently handle well: <strong>document ingestion.</strong></p>
 
     <div class="table-wrap">
       <table>
@@ -896,15 +1027,15 @@
         <tbody>
           <tr>
             <td>Health Documents v1 (OCR + summarization)</td>
-            <td><strong>Data layer</strong>&mdash;document ingestion surface. Lab PDFs, insurance docs, specialist reports all become structured data that feeds the intelligence layer</td>
+            <td><strong>Data layer</strong>&mdash;document ingestion surface. Lab PDFs, insurance docs, specialist reports become structured data for the intelligence layer</td>
           </tr>
           <tr>
             <td>P5 Biomarkers (25 LOINC-coded markers)</td>
-            <td><strong>Intelligence layer</strong>&mdash;extends the 20-metric scoring engine. The LOINC coding means we can auto-match OCR output to scoring inputs</td>
+            <td><strong>Intelligence layer</strong>&mdash;extends the scoring engine. LOINC coding enables auto-matching OCR output to scoring inputs</td>
           </tr>
           <tr>
             <td>HealthKit integration</td>
-            <td><strong>Data layer</strong>&mdash;real-time iOS wearable data (Apple Watch HR, sleep, steps) flowing into the same engine that Garmin feeds today</td>
+            <td><strong>Data layer</strong>&mdash;real-time iOS wearable data flowing into the same engine that Garmin feeds today</td>
           </tr>
           <tr>
             <td>CoreData persistence</td>
@@ -912,112 +1043,94 @@
           </tr>
           <tr>
             <td>Habit tracking UI</td>
-            <td><strong>Visual layer</strong>&mdash;beautiful capture surface for the same habits the agent tracks via conversation</td>
+            <td><strong>Visual layer</strong>&mdash;capture surface for the same habits the agent tracks via conversation</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <p>The pattern: <strong>the app becomes the capture surface, the engine becomes the intelligence layer, the agent becomes the delivery surface.</strong> The iOS app excels at things the agent can&rsquo;t do well&mdash;camera-based document capture, HealthKit integration, glanceable dashboards, quick data entry. The agent excels at things the app can&rsquo;t do well&mdash;proactive coaching, contextual nudges, conversational check-ins, voice interaction.</p>
-
-    <p>They don&rsquo;t compete. They compose.</p>
+    <p><strong>The app becomes the capture surface. The engine becomes the intelligence layer. The agent becomes the delivery surface.</strong> They compose, not compete.</p>
 
     <hr class="section-divider">
   </section>
 
   <!-- SECTION 7 -->
-  <section id="market">
+  <section id="path">
     <span class="section-number">07</span>
-    <h2>Market Signal</h2>
+    <h2>The Path Forward</h2>
 
-    <p>On March 18, 2026&mdash;the same day I shipped the agent stack&mdash;Brit Morin (Offline Ventures founding partner) publicly posted her OpenClaw agent configuration on LinkedIn. Daily briefings, health monitoring, financial tracking. She described the same infrastructure pattern: agent on always-on hardware, tools for domain-specific intelligence, proactive scheduling via cron.</p>
+    <p>Four phases, grounded in what exists.</p>
 
-    <p>This is not a coincidence. The agent-as-personal-staff pattern is emerging among technically sophisticated early adopters. Health is the deepest vertical for this pattern because:</p>
+    <div class="phase-card phase-1">
+      <h3>Phase 1: Validate the Template &mdash; Now through May</h3>
+      <p>User zero is live. The work is proving the template generalizes:</p>
+      <ul class="feature-list">
+        <li><strong>Harden multi-protocol support</strong>&mdash;run 3+ protocols simultaneously, prove the engine handles domain interactions (sleep affects metabolic, training affects recovery)</li>
+        <li><strong>Build the protocol starter library</strong>&mdash;sleep foundation, cardiovascular baseline, weight management, metabolic health. Evidence-based, ready to assign to any new user</li>
+        <li><strong>Fix data sync</strong>&mdash;Syncthing bridge between development and agent host</li>
+        <li><strong>Resume content distribution</strong>&mdash;the build-in-public narrative is the early distribution channel</li>
+      </ul>
+    </div>
 
-    <ol>
-      <li><strong>Data density</strong>&mdash;health generates more heterogeneous data streams than any other personal domain (wearables, labs, meals, habits, medications, symptoms, biometrics)</li>
-      <li><strong>Longitudinal value</strong>&mdash;health data compounds over months and years in ways that financial or productivity data doesn&rsquo;t</li>
-      <li><strong>Coaching leverage</strong>&mdash;the gap between knowing what to do and doing it is largest in health, which is exactly where a proactive agent adds value</li>
-      <li><strong>Clinical grounding</strong>&mdash;health has established population benchmarks (NHANES) and clinical thresholds (AHA, ADA) that give the intelligence layer real authority</li>
-    </ol>
+    <div class="phase-card phase-2">
+      <h3>Phase 2: Second User &mdash; May through August</h3>
+      <p>Paul becomes user two. The critical validation:</p>
+      <ul class="feature-list">
+        <li>Onboard through the invite flow&mdash;not manual setup</li>
+        <li>Paul&rsquo;s own protocols, scored by the same engine, tracked by the same system</li>
+        <li>Morning briefings delivered via his preferred channel</li>
+        <li><strong>The hypothesis:</strong> the system works for someone who isn&rsquo;t the builder</li>
+      </ul>
+    </div>
 
-    <p>The question isn&rsquo;t whether agents will run health coaching. It&rsquo;s who builds the intelligence layer that makes them good at it.</p>
+    <div class="phase-card phase-3">
+      <h3>Phase 3: Controlled Expansion &mdash; August through December</h3>
+      <p>10 users. Hand-selected. The goal is stress-testing, not growth:</p>
+      <ul class="feature-list">
+        <li>Does the protocol template cover the domains people actually care about?</li>
+        <li>Where does the agent fail? What coaching moments require intervention?</li>
+        <li>What wearable integrations are blocking adoption? (Apple Watch, Oura, WHOOP)</li>
+        <li>What&rsquo;s the retention curve? Do people still engage at week 6? Week 12?</li>
+      </ul>
+    </div>
+
+    <div class="phase-card phase-4">
+      <h3>Phase 4: Product &mdash; 2027</h3>
+      <p>With validated templates, proven retention, and multi-user infrastructure:</p>
+      <ul class="feature-list">
+        <li>Public invite system with waitlist</li>
+        <li>Protocol marketplace&mdash;community-contributed protocols reviewed for clinical validity</li>
+        <li>iOS companion app (Paul&rsquo;s surface) for capture, dashboards, quick entry</li>
+        <li>API access for third-party surfaces</li>
+      </ul>
+    </div>
 
     <hr class="section-divider">
   </section>
 
   <!-- SECTION 8 -->
-  <section id="path">
+  <section id="moat">
     <span class="section-number">08</span>
-    <h2>The Path Forward</h2>
+    <h2>The Moat</h2>
 
-    <p>Three phases, grounded in what exists.</p>
+    <p>The intelligence layer is the moat. Not the app. Not the agent. Not the channel.</p>
 
-    <div class="phase-card phase-1">
-      <h3>Phase 1: Dogfood &mdash; Now through May</h3>
-      <p>Andrew is user zero. The stack is live. The work is:</p>
-      <ul class="feature-list">
-        <li><strong>Fix data sync.</strong> Build a Syncthing bridge so health-engine data flows between Mac Mini (agent host) and laptop (development). Right now, data edits on one machine don&rsquo;t propagate</li>
-        <li><strong>Structured journaling.</strong> Add Pennebaker-style expressive writing via the agent&mdash;the weekly review format is already defined, the agent just needs a journaling tool and prompts</li>
-        <li><strong>Resume Baseline content.</strong> The build-in-public narrative is the distribution channel. 39 content hooks already drafted. X thread live. Show the stack, show the data, show the outcomes</li>
-        <li><strong>Garmin reliability.</strong> Token refresh is fragile. Harden the 4-hour cron job with automatic re-auth and failure alerting</li>
-        <li><strong>Dashboard polish.</strong> The browser-based dashboard exists but needs the same editorial quality as the engine itself</li>
-      </ul>
-    </div>
+    <p>The scoring engine that knows ApoB matters more than LDL-C. The insights engine that connects sleep debt to muscle loss during a deficit. The protocols engine that runs real programs&mdash;phased, habit-tracked, outcome-measured&mdash;not feature tours.</p>
 
-    <div class="phase-card phase-2">
-      <h3>Phase 2: Onboard Paul &mdash; May through August</h3>
-      <p>Paul becomes user two. This is the critical validation:</p>
-      <ul class="feature-list">
-        <li>Paul&rsquo;s iOS capture (Health Documents, HealthKit) feeds the health-engine&rsquo;s data layer</li>
-        <li>Paul&rsquo;s lab results, scored by the same NHANES engine, with the same clinical thresholds</li>
-        <li>Paul&rsquo;s protocols (his own sleep stack, training program) defined in YAML, tracked by the same protocols engine</li>
-        <li>Morning briefings delivered to Paul via WhatsApp (or whatever channel he prefers)</li>
-        <li><strong>The hypothesis:</strong> the system works for someone who isn&rsquo;t the builder. If Paul&rsquo;s experience is compelling, the intelligence layer is validated</li>
-      </ul>
-    </div>
-
-    <div class="phase-card phase-3">
-      <h3>Phase 3: Decide &mdash; August onward</h3>
-      <p>With two users generating real data through the full stack, the decision becomes empirical:</p>
-      <ul class="feature-list">
-        <li><strong>Scale the agent?</strong> WhatsApp Business API for multi-user. The MCP server already handles per-user config; the agent layer needs session management</li>
-        <li><strong>Build the iOS companion?</strong> Paul&rsquo;s iOS work becomes the visual surface. HealthKit feeds the engine, the app renders the dashboard, the agent delivers the coaching</li>
-        <li><strong>Or both?</strong> The architecture supports it. The intelligence layer is surface-agnostic by design</li>
-        <li>Usage data from Phase 2 tells us which surface drives engagement, retention, and outcomes. We don&rsquo;t have to guess</li>
-      </ul>
-    </div>
-
-    <hr class="section-divider">
-  </section>
-
-  <!-- SECTION 9 -->
-  <section id="principle">
-    <span class="section-number">09</span>
-    <h2>The One Thing That Cannot Change</h2>
-
-    <p>Your closing is right, and I want to echo it with the same emphasis.</p>
-
-    <p><strong>The program must stay opinionated.</strong></p>
-
-    <p>The protocols engine enforces this structurally:</p>
+    <p>Five structural constraints that keep the system opinionated:</p>
 
     <ul class="feature-list">
-      <li><strong>3 habits max per focus area</strong>&mdash;not a suggestion, a constraint in the protocol YAML</li>
-      <li><strong>Phased progression</strong>&mdash;the sleep stack doesn&rsquo;t give you all 9 habits on day 1. Weeks 1&ndash;2 build the routine. Weeks 3&ndash;4 dial it in. Weeks 5&ndash;6 sustain</li>
-      <li><strong>Clinical thresholds, not vibes</strong>&mdash;ApoB &lt; 80 mg/dL is the ESC/EAS 2019 target. We don&rsquo;t soften it</li>
-      <li><strong>Outcome tracking</strong>&mdash;every protocol defines measurable outcomes and checks them against real data. The sleep stack targets 7.5hr duration and &lt; 30min regularity stddev, measured by Garmin, not self-report</li>
+      <li><strong>3 habits max per focus area</strong>&mdash;a constraint in the protocol schema, not a suggestion</li>
+      <li><strong>Phased progression</strong>&mdash;protocols don&rsquo;t front-load. Week 1 builds the routine. Week 3 tightens. Week 5 sustains</li>
+      <li><strong>Clinical thresholds, not vibes</strong>&mdash;ApoB &lt; 80 mg/dL is the ESC/EAS 2019 target. The system doesn&rsquo;t soften it</li>
+      <li><strong>Outcome tracking</strong>&mdash;every protocol defines measurable outcomes checked against real data, not self-report</li>
       <li><strong>Nudges, not lectures</strong>&mdash;&ldquo;Get to bed by 11 tonight&rdquo; beats &ldquo;prioritize sleep hygiene&rdquo;</li>
     </ul>
-
-    <p>The intelligence layer is the moat. Not the app. Not the agent. Not the channel. The scoring engine that knows ApoB matters more than LDL-C. The insights engine that connects sleep debt to muscle loss during a deficit. The protocols engine that runs a real program, not a feature tour.</p>
-
-    <p><strong>The agent runs the program. The program is the moat.</strong></p>
   </section>
 
   <!-- CLOSING -->
   <div class="closing">
-    &ldquo;Your analysis mapped the territory. This is the road. Let&rsquo;s walk it together.&rdquo;
+    The agent runs the program. The program is the moat.
   </div>
 
 </main>
