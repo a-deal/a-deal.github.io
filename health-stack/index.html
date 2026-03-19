@@ -649,7 +649,7 @@
     <div class="nav-brand">BASELINE</div>
     <a href="#thesis" class="active" onclick="setActive(this)">Thesis</a>
     <a href="#running" onclick="setActive(this)">Running Today</a>
-    <a href="#why" onclick="setActive(this)">Why It Works</a>
+    <a href="#market" onclick="setActive(this)">Market Position</a>
     <a href="#architecture" onclick="setActive(this)">Architecture</a>
     <a href="#production" onclick="setActive(this)">Production</a>
     <a href="#integration" onclick="setActive(this)">Integration</a>
@@ -678,7 +678,7 @@
 
     <p>Your &ldquo;App vs. Agent&rdquo; analysis is correct. Conversational UI failed in 2016 because the AI wasn&rsquo;t real. Operator-era coaching failed because the economics weren&rsquo;t real. The conclusion&mdash;agent-first, app optional&mdash;holds.</p>
 
-    <p>This document is the complement: you mapped the territory, this is the road. Everything in Sections 2&ndash;4 is running today. Section 5 is how it becomes a product.</p>
+    <p>This document is the complement: you mapped the territory, this is the road. Section 2 is what&rsquo;s running today. Section 3 is where it sits in the market. Sections 4&ndash;6 are how it becomes a product.</p>
 
     <hr class="section-divider">
   </section>
@@ -811,27 +811,120 @@
   </section>
 
   <!-- SECTION 3 -->
-  <section id="why">
+  <section id="market">
     <span class="section-number">03</span>
-    <h2>Why This Approach Works</h2>
+    <h2>Market Position (March 2026)</h2>
 
-    <p>Your graveyard analysis identified four failure modes. The running stack addresses each one.</p>
+    <p>Every major platform is moving into health AI. None of them ship the full loop.</p>
 
-    <p><strong>Lark failed because scripted AI couldn&rsquo;t adapt.</strong> The health-engine doesn&rsquo;t script conversations. It provides structured data&mdash;NHANES percentiles, clinical zones, compound coaching signals&mdash;to an LLM with genuine reasoning. The insights engine generates severity-ranked observations; the LLM decides how to deliver them contextually.</p>
+    <h3>What&rsquo;s Shipping Now</h3>
 
-    <blockquote><p>The difference: Lark anticipated user paths. The health-engine provides ground truth; the LLM navigates.</p></blockquote>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Data Sources</th>
+            <th>Population Scoring</th>
+            <th>Protocol Engine</th>
+            <th>Proactive Agent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ChatGPT Health</strong> (Jan 2026)</td>
+            <td>EHR + Apple Health + apps</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>Reactive chat</td>
+          </tr>
+          <tr>
+            <td><strong>Claude + HealthEx</strong> (Jan 2026)</td>
+            <td>EHR via MCP (50K+ providers)</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>Reactive chat</td>
+          </tr>
+          <tr>
+            <td><strong>Microsoft Copilot Health</strong> (Mar 2026)</td>
+            <td>EHR + 50 wearables</td>
+            <td>Pattern detection</td>
+            <td>&mdash;</td>
+            <td>&ldquo;Proactive insights&rdquo; (vague)</td>
+          </tr>
+          <tr>
+            <td><strong>Amazon Health AI</strong> (Mar 2026)</td>
+            <td>EHR + One Medical + retail</td>
+            <td>Triage scoring</td>
+            <td>Appointment routing</td>
+            <td>Multi-agent (navigation, not coaching)</td>
+          </tr>
+          <tr>
+            <td><strong>WHOOP Coach</strong></td>
+            <td>WHOOP data</td>
+            <td>Strain/recovery</td>
+            <td>Workout suggestions</td>
+            <td>In-app chat</td>
+          </tr>
+          <tr>
+            <td><strong>Oura AI Advisor</strong></td>
+            <td>Oura ring data</td>
+            <td>Sleep/readiness</td>
+            <td>&mdash;</td>
+            <td>In-app</td>
+          </tr>
+          <tr>
+            <td><strong>InsideTracker Terra</strong></td>
+            <td>Blood + wearables + habits</td>
+            <td>Healthspan scores (proprietary zones)</td>
+            <td>Recommendations (not sequenced)</td>
+            <td>In-app</td>
+          </tr>
+          <tr>
+            <td><strong>Function Health</strong> ($2.5B)</td>
+            <td>160+ blood tests + MRI</td>
+            <td>Medical Intelligence</td>
+            <td>&mdash;</td>
+            <td>In-app</td>
+          </tr>
+          <tr>
+            <td><strong>Google PHA</strong> (research)</td>
+            <td>Fitbit + blood + questionnaire</td>
+            <td>Multi-agent analysis</td>
+            <td>Coach agent (MI-based)</td>
+            <td>Paper only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <p><strong>Operator-era companies died on unit economics.</strong> Every &ldquo;AI health coach&rdquo; from 2015&ndash;2020 with a human in the loop hit the same wall: per-user costs scaled linearly. Noom&rsquo;s coaches handle 200+ users each, diluting coaching to irrelevance. This stack&rsquo;s marginal cost per user is approximately zero. The intelligence layer runs locally. The LLM call costs ~$0.02 per daily session. No human operators.</p>
+    <h3>What Nobody Does</h3>
 
-    <blockquote><p>The difference: MCP tools + LLM replaces the human operator entirely.</p></blockquote>
+    <p><strong>1. Proactive outbound coaching.</strong> Every product in market is &ldquo;open the app and ask.&rdquo; Nobody sends a scheduled morning briefing that comes to you, informed by last night&rsquo;s wearable data and yesterday&rsquo;s protocol compliance.</p>
 
-    <p><strong>Noom proved that programs work.</strong> Structured behavior change outperforms pure tracking. Noom&rsquo;s problem was delivery&mdash;watered-down coaching at scale. The protocols engine delivers at full fidelity for every user. Phased progression, evidence-backed habits, outcome metrics closed against real wearable data.</p>
+    <p><strong>2. Transparent population-benchmarked scoring.</strong> InsideTracker uses proprietary &ldquo;optimal zones.&rdquo; Function Health explains results. Nobody gives consumers a direct answer: &ldquo;Here is where you rank against the US population on 20 metrics, scored against NHANES survey data with published clinical thresholds.&rdquo;</p>
 
-    <blockquote><p>The difference: Same programmatic structure, zero dilution in delivery.</p></blockquote>
+    <p><strong>3. Protocol engines that sequence interventions.</strong> InsideTracker recommends changes. Noom suggests habits. Nobody builds a sequenced program: &ldquo;Weeks 1&ndash;2 fix sleep timing, week 3 add creatine, week 4 adjust training volume, then retest.&rdquo; The closest is a Singapore government research pilot (<em>npj Digital Medicine</em>, 2026).</p>
 
-    <p><strong>Omada proved that specificity wins.</strong> Clinically specific programs with measurable outcomes work. Omada required clinical staff and health plan integration. This scoring engine uses the same clinical foundations&mdash;ApoB thresholds from ESC/EAS, fasting glucose from ADA, VO2 max from ACSM&mdash;delivered through an agent, not a clinic.</p>
+    <p><strong>4. The integrated loop.</strong> Scoring + protocols + wearable data + proactive agent delivery as one closed system. The components exist across dozens of products. The full loop ships in none of them.</p>
 
-    <blockquote><p>The difference: Clinical-grade assessment at individual scale, without clinical overhead.</p></blockquote>
+    <p><strong>5. The builder-in-public narrative.</strong> Exactly three people are publicly documenting personal health agent builds (a FHIR engineer on Substack, a former VP of Agents on Medium, a developer on Medium). The person who owns this narrative&mdash;building a clinical-grade health intelligence system in public&mdash;has an open lane.</p>
+
+    <h3>Where This System Sits</h3>
+
+    <p>This is the only system that checks all four boxes: clinical-grade scoring against population benchmarks, a protocol engine that sequences interventions, live wearable data feeding outcome metrics, and proactive agent delivery via scheduled coaching. The thesis is not that each piece is novel&mdash;it&rsquo;s that the integrated loop is what nobody ships.</p>
+
+    <h3>Why This Approach Works (Historical)</h3>
+
+    <p>The graveyard validates the architecture:</p>
+
+    <p><strong>Lark failed because scripted AI couldn&rsquo;t adapt.</strong> Rule trees pretending to be intelligent. The health-engine provides structured data to an LLM with genuine reasoning&mdash;the insights engine generates severity-ranked observations; the LLM decides how to deliver them contextually.</p>
+
+    <p><strong>Operator-era companies died on unit economics.</strong> Per-user costs scaled linearly with human coaches. This stack&rsquo;s marginal cost is ~$0.02 per daily coaching session. No human operators at any point.</p>
+
+    <p><strong>Noom proved that programs work, then diluted the delivery.</strong> Structured behavior change outperforms tracking. The protocols engine delivers at full fidelity for every user&mdash;phased progression, evidence-backed habits, outcome metrics closed against real wearable data.</p>
+
+    <p><strong>Omada proved that clinical specificity wins.</strong> ApoB thresholds from ESC/EAS, fasting glucose from ADA, VO2 max from ACSM&mdash;delivered through an agent, not a clinic. Clinical-grade assessment at individual scale, without clinical overhead.</p>
 
     <hr class="section-divider">
   </section>
