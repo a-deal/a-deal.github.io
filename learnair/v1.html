@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR v1 | Complete Briefing — Veterans + AI Workforce Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --section-gap: 5.5rem;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red-bg: #fdf2f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .version-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--white);
+    padding: 2px 6px;
+    font-weight: 500;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  nav .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  nav .nav-links a:hover { color: var(--ink); }
+
+  /* --- HERO --- */
+  .hero {
+    padding: 5rem 2rem 3.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 28ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 62ch;
+    line-height: 1.65;
+  }
+
+  /* --- POSITIONING CARDS --- */
+  .position-cards {
+    max-width: 960px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+  }
+
+  .position-cards .pos-card {
+    background: var(--paper);
+    padding: 1.5rem 1.6rem;
+  }
+
+  .position-cards .pos-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .position-cards .pos-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .position-cards .pos-body {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #2a2724;
+    margin-top: 0.5rem;
+  }
+
+  /* --- STAT BAR --- */
+  .stat-bar {
+    max-width: 960px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+  }
+
+  .stat-bar .stat {
+    background: var(--paper);
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+  }
+
+  .stat-bar .stat-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-bar .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* --- TOC --- */
+  .toc-container {
+    max-width: 960px;
+    margin: 0 auto 3rem;
+    padding: 0 2rem;
+  }
+
+  .toc {
+    background: var(--warm);
+    padding: 2rem 2.5rem;
+    columns: 2;
+    column-gap: 3rem;
+  }
+
+  .toc-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    column-span: all;
+  }
+
+  .toc a {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    break-inside: avoid;
+  }
+
+  .toc a:hover { border-bottom-color: var(--accent); }
+
+  .toc .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+
+  /* --- DOCUMENT SECTIONS --- */
+  .doc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .doc-section {
+    margin-bottom: var(--section-gap);
+  }
+
+  .doc-section:last-child { margin-bottom: 0; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  .doc-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--ink);
+    padding: 0.3rem 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  /* --- CONTENT TYPOGRAPHY --- */
+  .content h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+
+  .content h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .content p {
+    margin-bottom: 1.1rem;
+    color: #2a2724;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .content ul, .content ol {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .content ul li {
+    padding: 0.35rem 0 0.35rem 1.6rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #2a2724;
+  }
+
+  .content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .content strong { font-weight: 600; color: var(--ink); }
+
+  /* --- CALLOUT --- */
+  .callout {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  .callout p { margin-bottom: 0; }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* --- TABLE --- */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+
+  .data-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 1rem 1.2rem;
+    border-bottom: 2px solid var(--ink);
+    font-weight: 500;
+  }
+
+  .data-table td {
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--faint);
+    line-height: 1.6;
+    color: #2a2724;
+    font-size: 0.88rem;
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  /* --- NUMBERED LIST --- */
+  .numbered-list {
+    counter-reset: item;
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+  }
+
+  .numbered-list li {
+    counter-increment: item;
+    padding: 0.5rem 0 0.5rem 2.5rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #2a2724;
+  }
+
+  .numbered-list li::before {
+    content: counter(item, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* --- DIVIDER --- */
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--faint);
+    margin: var(--section-gap) 0;
+  }
+
+  .thick-divider {
+    border: none;
+    height: 3px;
+    background: var(--ink);
+    margin: 4.5rem 0 3.5rem;
+  }
+
+  /* --- CARD GRID --- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 1.6rem 1.8rem;
+  }
+
+  .card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .card-body {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .card-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .card-body ul li {
+    padding: 0.2rem 0 0.2rem 1rem;
+    position: relative;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .card-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* --- WATCH-OUT BOX --- */
+  .watchout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 2.5rem;
+    margin: 2.5rem 0;
+  }
+
+  .watchout h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1.2rem;
+  }
+
+  .watchout p, .watchout li, .watchout ul li,
+  .watchout h3, .watchout h4, .watchout h5,
+  .watchout strong, .watchout span, .watchout a,
+  .watchout ol li, .watchout div {
+    color: #ffffff !important;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .watchout h4 {
+    color: var(--accent-light) !important;
+  }
+
+  .watchout strong {
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+
+  .watchout ul li::before { background: var(--accent-light); }
+
+  /* --- WEEK BLOCK --- */
+  .week-block {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 2rem 2.2rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .week-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .week-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+
+  .week-block p, .week-block li {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #2a2724;
+  }
+
+  .week-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+
+  .week-block ul li {
+    padding: 0.25rem 0 0.25rem 1.4rem;
+    position: relative;
+  }
+
+  .week-block ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* --- WORKFLOW VISUAL --- */
+  .workflow-steps {
+    display: flex;
+    gap: 0;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .wf-step {
+    flex: 1;
+    min-width: 150px;
+    padding: 1.4rem 1.2rem;
+    background: var(--white);
+    border: 1px solid var(--faint);
+    border-right: none;
+    position: relative;
+    text-align: center;
+  }
+
+  .wf-step:last-child { border-right: 1px solid var(--faint); }
+
+  .wf-step .wf-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .wf-step .wf-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .wf-step .wf-desc {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    line-height: 1.45;
+  }
+
+  .wf-step::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid var(--faint);
+    z-index: 2;
+  }
+
+  .wf-step:last-child::after { display: none; }
+
+  /* --- OUTCOME BOX --- */
+  .outcome-box {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .outcome-box p {
+    font-size: 0.88rem;
+    margin: 0;
+    color: #2a2724;
+  }
+
+  .outcome-box strong { color: var(--accent); }
+
+  /* --- MATRIX / VISUAL --- */
+  .matrix-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    height: 540px;
+    margin: 2rem auto;
+    background: var(--white);
+    border: 2px solid var(--ink);
+  }
+
+  .matrix-wrap .ax-x {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .matrix-wrap .ax-y {
+    position: absolute;
+    left: -42px;
+    top: 50%;
+    transform: rotate(-90deg) translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .matrix-inner {
+    position: absolute;
+    top: 25px; left: 60px; right: 15px; bottom: 30px;
+    border-left: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .matrix-inner .qlabel {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .matrix-inner .ql-tl { top: 6px; left: 6px; }
+  .matrix-inner .ql-tr { top: 6px; right: 6px; text-align: right; }
+  .matrix-inner .ql-bl { bottom: 6px; left: 6px; }
+  .matrix-inner .ql-br { bottom: 6px; right: 6px; text-align: right; }
+
+  .mdot {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .mdot-label {
+    position: absolute;
+    font-size: 0.6rem;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 3;
+    color: var(--ink);
+    background: rgba(254,253,251,0.88);
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  .mdot-star {
+    width: 18px; height: 18px;
+    background: var(--accent);
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 4px rgba(180,74,45,0.25);
+    z-index: 10;
+  }
+
+  /* empty quadrant highlight */
+  .empty-quad {
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%; height: 50%;
+    background: rgba(180,74,45,0.04);
+    border-left: 1px dashed var(--faint);
+    border-bottom: 1px dashed var(--faint);
+  }
+
+  /* --- ECON BAR --- */
+  .econ-bars {
+    margin: 1.5rem 0;
+  }
+
+  .econ-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .econ-bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 130px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .econ-bar-track {
+    flex: 1;
+    height: 34px;
+    background: var(--warm);
+    position: relative;
+    overflow: visible;
+  }
+
+  .econ-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    padding-right: 0.6rem;
+    min-width: fit-content;
+    padding-left: 0.6rem;
+  }
+
+  .econ-bar-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--white);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .econ-bar-fill.dark { background: var(--ink); }
+  .econ-bar-fill.light {
+    background: var(--accent-light);
+  }
+
+  /* --- TIMELINE VISUAL --- */
+  .timeline-vis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .tl-month {
+    background: var(--paper);
+    padding: 1.5rem 1.6rem;
+  }
+
+  .tl-month-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-month-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+
+  .tl-month ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tl-month li {
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    position: relative;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: #2a2724;
+  }
+
+  .tl-month li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* --- KILL CRITERIA --- */
+  .kill-box {
+    background: var(--red-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .kill-box h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .kill-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .kill-box li {
+    padding: 0.25rem 0 0.25rem 1.4rem;
+    position: relative;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #2a2724;
+  }
+
+  .kill-box li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* --- VALIDATION SCRIPTS --- */
+  .script-block {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 2rem 2.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .script-context {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.4rem;
+    margin-bottom: 1.2rem;
+    font-size: 0.88rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: #2a2724;
+  }
+
+  .script-q {
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .script-q strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+
+  .script-q em {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .signal-col {
+    padding: 1.4rem 1.6rem;
+    border-radius: 0;
+    font-size: 0.85rem;
+  }
+
+  .signal-col.green { background: var(--green-bg); border: 1px solid #c6ddd0; }
+  .signal-col.red { background: var(--red-bg); border: 1px solid #e8ccc8; }
+
+  .signal-col h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .signal-col.green h5 { color: var(--green); }
+  .signal-col.red h5 { color: var(--accent); }
+
+  .signal-col ul { list-style: none; padding: 0; margin: 0; }
+  .signal-col li {
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .signal-col.green li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.35rem;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .signal-col.red li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.35rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .commitment-ask {
+    background: var(--warm);
+    padding: 1rem 1.4rem;
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .commitment-ask strong { color: var(--accent); }
+
+  /* --- TEAM TEMPLATE --- */
+  .template-field {
+    background: var(--warm);
+    border: 1px dashed var(--faint);
+    padding: 0.7rem 1rem;
+    margin: 0.5rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .example-bio {
+    background: var(--white);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    margin: 0.8rem 0;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #2a2724;
+  }
+
+  /* --- RISK TABLE --- */
+  .risk-severity {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .sev-high { color: var(--accent); }
+  .sev-med { color: #b87a1e; }
+  .sev-low { color: var(--green); }
+
+  /* --- COMPETITOR TAG --- */
+  .comp-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .comp-tag.vet { background: var(--accent); color: var(--white); }
+  .comp-tag.general { background: var(--muted); color: var(--white); }
+  .comp-tag.corp { background: var(--ink); color: var(--white); }
+  .comp-tag.gov { background: #6b7b5a; color: var(--white); }
+
+  .comp-verdict {
+    margin-top: 0.5rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--faint);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* --- SOURCES --- */
+  #sources .content ul {
+    margin-bottom: 2rem;
+  }
+
+  #sources .content ul li {
+    padding: 0.45rem 0 0.45rem 1.6rem;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    border-bottom: 1px solid rgba(201, 195, 184, 0.4);
+  }
+
+  #sources .content ul li:last-child {
+    border-bottom: none;
+  }
+
+  #sources .content ul li a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  #sources .content ul li a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  footer a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- GAP SECTION --- */
+  .gap-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+
+  .gap-list li {
+    padding: 0.8rem 0 0.8rem 1.6rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #2a2724;
+    border-bottom: 1px solid rgba(201, 195, 184, 0.3);
+  }
+
+  .gap-list li:last-child { border-bottom: none; }
+
+  .gap-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.15rem;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .gap-highlight {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .doc-container { padding: 0 1.5rem 4rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .position-cards { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+    .timeline-vis { grid-template-columns: 1fr; }
+    .workflow-steps { flex-direction: column; }
+    .wf-step::after { display: none; }
+    .signal-grid { grid-template-columns: 1fr; }
+    .toc { columns: 1; }
+    nav .nav-links { gap: 0.6rem; }
+    nav .nav-links a { font-size: 0.62rem; }
+    .section-header { flex-direction: column; gap: 0.3rem; }
+    footer { flex-direction: column; gap: 1rem; }
+    .matrix-wrap { height: 420px; }
+    .econ-bar-label { width: 90px; font-size: 0.55rem; }
+  }
+
+  /* --- PRINT --- */
+  @media print {
+    nav { display: none; }
+    .hero { padding-top: 2rem; }
+    body { font-size: 10pt; }
+    .stat-bar, .doc-section, .week-block { break-inside: avoid; }
+    .watchout { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">LearnAIR <span class="version-badge">v1</span></div>
+    <ul class="nav-links">
+      <li><a href="#what-this-is">What This Is</a></li>
+      <li><a href="#gap">The Gap</a></li>
+      <li><a href="#landscape">Landscape</a></li>
+      <li><a href="#business">Business</a></li>
+      <li><a href="#pilot">Pilot</a></li>
+      <li><a href="#workflows">Workflows</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#validation">Validation</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#risk">Risk</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="kicker">Veterans + AI Workforce Initiative</div>
+  <h1>Veterans are built to <em>command</em> AI. We train them to do it.</h1>
+  <p class="subtitle">A training program that teaches veterans to supervise AI systems -- managing agents, validating outputs, and running human-AI hybrid operations. Employers get AI operations supervisors they can't find. Veterans get careers that leverage their military judgment. Government workforce funding covers the cost.</p>
+</section>
+
+<!-- ==================== WHAT THIS IS ==================== -->
+<div class="position-cards" id="what-this-is">
+  <div class="pos-card">
+    <span class="pos-label">The Student</span>
+    <div class="pos-text">Veterans at any stage of transition.</div>
+    <div class="pos-body">Military mission command translates directly to AI operations supervision -- managing systems under ambiguity, validating outputs, maintaining accountability chains.</div>
+  </div>
+  <div class="pos-card">
+    <span class="pos-label">The Employer</span>
+    <div class="pos-text">Defense contractors, federal agencies, and SMBs modernizing with AI.</div>
+    <div class="pos-body">They need people who can sit between AI systems and business outcomes. That role doesn't exist in any job board yet. We're creating it.</div>
+  </div>
+  <div class="pos-card">
+    <span class="pos-label">The Funder</span>
+    <div class="pos-text">DOL workforce grants, GI Bill, SkillBridge, employer training budgets.</div>
+    <div class="pos-body">Easter Seals HVRP, WIOA, VET TEC 2.0 pipeline. Veterans train for free.</div>
+  </div>
+</div>
+
+<!-- ==================== STAT BAR ==================== -->
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-number">24th</div>
+    <div class="stat-label">U.S. AI usage rank globally</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">78%</div>
+    <div class="stat-label">Orgs using AI in 2024</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">$109B</div>
+    <div class="stat-label">U.S. private AI investment</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">0</div>
+    <div class="stat-label">Programs training vet AI supervisors</div>
+  </div>
+</div>
+
+<!-- ==================== TABLE OF CONTENTS ==================== -->
+<div class="toc-container">
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#gap"><span class="toc-num">01</span> Why This Gap Exists</a>
+    <a href="#landscape"><span class="toc-num">02</span> Competitive Landscape</a>
+    <a href="#business"><span class="toc-num">03</span> Business Model + Unit Economics</a>
+    <a href="#pilot"><span class="toc-num">04</span> Pilot Design</a>
+    <a href="#workflows"><span class="toc-num">05</span> Sector Workflows</a>
+    <a href="#timeline"><span class="toc-num">06</span> 90-Day Execution Timeline</a>
+    <a href="#validation"><span class="toc-num">07</span> Validation Playbook</a>
+    <a href="#team"><span class="toc-num">08</span> Team</a>
+    <a href="#risk"><span class="toc-num">09</span> Risk Matrix</a>
+    <a href="#sources"><span class="toc-num">10</span> Sources</a>
+  </div>
+</div>
+
+<!-- ==================== DOCUMENT CONTAINER ==================== -->
+<div class="doc-container">
+
+  <!-- ===== 01. WHY THIS GAP EXISTS ===== -->
+  <section class="doc-section" id="gap">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">Why This Gap Exists</h2>
+    </div>
+    <div class="content">
+
+      <p>Every enterprise deploying AI agents hits the same bottleneck: who supervises the machines? Not who builds them. Not who prompts them. Who sets the intent, monitors execution, catches errors, and maintains accountability when automated systems make decisions that affect real operations?</p>
+
+      <p>That role does not have a training pipeline. Veterans already possess the operating habits it requires.</p>
+
+      <h3>What exists today</h3>
+      <ul class="gap-list">
+        <li><strong>Deloitte AI Academy</strong> teaches prompt engineering -- how to talk to AI tools. It does not teach how to manage the operations those tools run.</li>
+        <li><strong>Code Platoon</strong> teaches coding -- how to build software. It does not teach how to supervise AI systems that are already built.</li>
+        <li><strong>SkillBridge</strong> teaches existing job skills -- placing veterans into roles that already exist. It does not create the new role that AI deployment demands.</li>
+        <li><strong>OpenAI Veterans Forge</strong> teaches tool literacy -- a 4-hour sprint on ChatGPT. It does not teach workflow command.</li>
+      </ul>
+
+      <p><strong>Nobody teaches the person who sits between the AI system and the business outcome and makes sure it actually works.</strong></p>
+
+      <p>That is what mission command trained you for -- managing complex systems under uncertainty, validating information before it moves up the chain, maintaining human accountability when execution is delegated.</p>
+
+      <p>Military mission command is decentralized execution under commander's intent. Service members learn to define objectives, set left and right limits, delegate execution, monitor outcomes, and escalate exceptions. That is a direct translation of AI workflow supervision: set the goal, configure the guardrails, review outputs, intervene when the system drifts.</p>
+
+      <ul>
+        <li><strong>Process discipline under pressure.</strong> Veterans validate information before passing it up, catch errors in workflows, and maintain quality when stakes are high.</li>
+        <li><strong>Judgment under ambiguity.</strong> Current AI systems still require human interpretation, contextual reasoning, and accountable decision-making, especially in messy operational environments.</li>
+        <li><strong>Trust and clearances.</strong> Many veterans hold active security clearances and bring credibility in government, healthcare, and defense-adjacent sectors where AI oversight demands high-trust operators.</li>
+      </ul>
+
+      <div class="gap-highlight">
+        "The AI operations supervisor is the most important role nobody is hiring for yet."
+      </div>
+
+      <h3>What LearnAIR does</h3>
+      <p>Short, applied training that produces AI operations supervisors. Not tool literacy. Not prompt engineering. Workflow command. Participants graduate with a portfolio of real artifacts: workflow redesigns, guardrail documents, productivity analyses, and before-and-after operational cases that prove competence to employers.</p>
+
+      <div class="callout">
+        <span class="callout-label">The pitch</span>
+        <p>The market has AI literacy programs. It has veteran career programs. It has no veteran AI leadership program. LearnAIR fills that gap. The window is 12-18 months before Accenture, VET TEC 2.0, and big tech close it.</p>
+      </div>
+
+      <div class="watchout">
+        <h4>What we are testing</h4>
+        <ul>
+          <li>Will employers pay for this pipeline, or does the "AI supervisor" role fold into existing management without a distinct hiring signal?</li>
+          <li>Does the mission command framing land with civilian hiring managers, or is it only compelling to veterans?</li>
+          <li>Can a short-format program (4 weeks) produce graduates that employers rate as "would hire"?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 02. COMPETITIVE LANDSCAPE ===== -->
+  <section class="doc-section" id="landscape">
+    <div class="doc-label">Competitive Intelligence</div>
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Competitive Landscape</h2>
+    </div>
+    <div class="content">
+
+      <p>We analyzed 20 competitors across four categories: veteran-specific programs, general AI upskilling, government-funded training, and corporate pipelines. The finding is unambiguous: <strong>no program combines deep AI workflow supervision training with veteran-specific design.</strong></p>
+
+      <h3>Positioning matrix</h3>
+      <p>Each competitor plotted on two axes: veteran-specificity (horizontal) and AI depth (vertical, from basic tool usage to workflow management/supervision).</p>
+
+      <div class="matrix-wrap">
+        <span class="ax-x">Veteran Specificity &rarr;</span>
+        <span class="ax-y">AI Depth &rarr;</span>
+
+        <div class="matrix-inner">
+          <div class="empty-quad"></div>
+          <span class="qlabel ql-tl">Deep AI / Generic</span>
+          <span class="qlabel ql-tr">Deep AI / Veteran</span>
+          <span class="qlabel ql-bl">Basic AI / Generic</span>
+          <span class="qlabel ql-br">Basic AI / Veteran</span>
+
+          <!-- General AI programs: left side -->
+          <div class="mdot" style="background:var(--muted);left:5%;bottom:68%;"></div>
+          <span class="mdot-label" style="left:10%;bottom:68%;">Deloitte AI Academy</span>
+
+          <div class="mdot" style="background:var(--muted);left:10%;bottom:48%;"></div>
+          <span class="mdot-label" style="left:15%;bottom:48%;">Coursera / DeepLearning.AI</span>
+
+          <div class="mdot" style="background:var(--muted);left:38%;bottom:28%;"></div>
+          <span class="mdot-label" style="left:43%;bottom:28%;">MS Azure AI-900</span>
+
+          <!-- Veteran programs: right side, low AI -->
+          <div class="mdot" style="background:var(--accent-light);left:90%;bottom:15%;"></div>
+          <span class="mdot-label" style="left:72%;bottom:8%;">Hiring Our Heroes</span>
+
+          <div class="mdot" style="background:var(--accent-light);left:76%;bottom:18%;"></div>
+          <span class="mdot-label" style="left:60%;bottom:12%;">OpenAI Veterans Forge</span>
+
+          <!-- Veteran programs: right side, moderate AI -->
+          <div class="mdot" style="background:var(--accent-light);left:78%;bottom:45%;"></div>
+          <span class="mdot-label" style="left:63%;bottom:51%;">Code Platoon</span>
+
+          <div class="mdot" style="background:var(--accent-light);left:82%;bottom:40%;"></div>
+          <span class="mdot-label" style="left:63%;bottom:40%;">VetsinTech / Vets in AI</span>
+
+          <!-- Biggest threat -->
+          <div class="mdot" style="background:var(--ink);left:72%;bottom:55%;width:12px;height:12px;"></div>
+          <span class="mdot-label" style="left:55%;bottom:60%;font-weight:600;">Accenture Vet Initiative</span>
+
+          <!-- LEARNAIR -->
+          <div class="mdot mdot-star" style="left:85%;bottom:87%;"></div>
+          <span class="mdot-label" style="left:63%;bottom:89%;font-size:0.78rem;font-weight:700;background:rgba(180,74,45,0.12);padding:3px 8px;border:2px solid var(--accent);">LearnAIR</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-bottom:2rem;">
+        <span style="display:inline-block;width:8px;height:8px;background:var(--accent-light);border-radius:50%;margin-right:3px;vertical-align:middle;"></span> Veteran orgs &nbsp;&nbsp;
+        <span style="display:inline-block;width:8px;height:8px;background:var(--muted);border-radius:50%;margin-right:3px;vertical-align:middle;"></span> General AI &nbsp;&nbsp;
+        <span style="display:inline-block;width:8px;height:8px;background:var(--ink);border-radius:50%;margin-right:3px;vertical-align:middle;"></span> Corporate &nbsp;&nbsp;
+        <span style="display:inline-block;width:12px;height:12px;background:var(--accent);border:2px solid var(--ink);border-radius:50%;margin-right:3px;vertical-align:middle;"></span> LearnAIR
+      </p>
+
+      <p><strong>The upper-right quadrant is empty.</strong> Veteran programs cluster in the lower-right (career services, minimal AI content). General AI programs cluster in the left column (deep tech, no veteran context). LearnAIR plants its flag in the only open space: deep AI workflow supervision, veteran-specific design.</p>
+
+      <h3>Key competitors, assessed</h3>
+
+      <div class="card-grid">
+        <div class="card">
+          <span class="comp-tag corp">Corporate</span> <span class="comp-tag vet">Veteran</span>
+          <div class="card-title">Accenture Veterans Initiative</div>
+          <div class="card-body">
+            <ul>
+              <li>Targets Officers and Senior Enlisted with AI training including agentic AI</li>
+              <li>LearnVantage platform, White House AI Taskforce participant</li>
+              <li>Massive resources, deep enterprise relationships</li>
+            </ul>
+          </div>
+          <p class="comp-verdict"><strong>Most direct threat.</strong> But it is a corporate hiring funnel, not an independent credential. Veterans become Accenture employees, not broadly skilled AI supervisors.</p>
+        </div>
+        <div class="card">
+          <span class="comp-tag vet">Veteran</span>
+          <div class="card-title">VetsinTech / Vets in AI</div>
+          <div class="card-body">
+            <ul>
+              <li>Dedicated "Vets in AI" program (ML, data analytics, AI ethics)</li>
+              <li>Events with Nvidia, Microsoft, Google, Scale AI</li>
+              <li>Teaches AI building/using, not AI supervision</li>
+            </ul>
+          </div>
+          <p class="comp-verdict">Closest vet-specific competitor on AI depth. But trains AI practitioners, not operations supervisors. Different role entirely.</p>
+        </div>
+        <div class="card">
+          <span class="comp-tag gov">Government</span> <span class="comp-tag vet">Veteran</span>
+          <div class="card-title">Code Platoon</div>
+          <div class="card-body">
+            <ul>
+              <li>AI + Fullstack bootcamp (VA-approved, GI Bill eligible)</li>
+              <li>Applying for VET TEC 2.0</li>
+              <li>Trains coders who use AI, not managers who supervise AI</li>
+            </ul>
+          </div>
+          <p class="comp-verdict">Strong veteran focus + government funding. But the gap is leadership-level AI management, which they do not address.</p>
+        </div>
+        <div class="card">
+          <span class="comp-tag vet">Veteran</span>
+          <div class="card-title">OpenAI + Veterans Forge</div>
+          <div class="card-body">
+            <ul>
+              <li>4-hour AI sprint (pilot, 100-cap, Reston VA)</li>
+              <li>Free ChatGPT Plus for transitioning veterans</li>
+              <li>Tool literacy, not workflow supervision</li>
+            </ul>
+          </div>
+          <p class="comp-verdict">Teaches veterans to use ChatGPT. Does not teach them to manage AI-enabled operations. Tiny scale, still in pilot.</p>
+        </div>
+        <div class="card">
+          <span class="comp-tag vet">Veteran</span>
+          <div class="card-title">Hiring Our Heroes</div>
+          <div class="card-body">
+            <ul>
+              <li>Corporate Fellowship with Google, Microsoft, Salesforce, Amazon</li>
+              <li>AI exposure incidental to corporate placements</li>
+              <li>Strong brand, weak AI depth</li>
+            </ul>
+          </div>
+          <p class="comp-verdict">Career accelerator, not AI training. Could add an "AI Management" track in 6-12 months. Pursue co-branding, not competition.</p>
+        </div>
+        <div class="card">
+          <span class="comp-tag general">General</span>
+          <div class="card-title">Google / Microsoft / AWS Certs</div>
+          <div class="card-body">
+            <ul>
+              <li>Free or low-cost for veterans via grants and military programs</li>
+              <li>AI fundamentals, cloud architecture, prompt engineering</li>
+              <li>No supervision framework, no leadership integration</li>
+            </ul>
+          </div>
+          <p class="comp-verdict">Tool-level training. LearnAIR positions as post-certification: "You got your Google AI cert. Now learn to lead AI operations."</p>
+        </div>
+      </div>
+
+      <h3>Competitive risks</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Severity</th>
+            <th>Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>HOH adds AI Management track</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td>Move fast. Establish mission command vocabulary first. Build curriculum IP that cannot be replicated by bolting a webinar onto an existing fellowship. Pursue co-branding as their AI curriculum partner.</td>
+          </tr>
+          <tr>
+            <td><strong>Accenture scales beyond its pipeline</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td>Emphasize vendor-neutrality: "We train you to lead AI operations anywhere, not for one employer." Pursue Accenture as an employer that hires LearnAIR graduates.</td>
+          </tr>
+          <tr>
+            <td><strong>VET TEC 2.0 gatekeeping</strong></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>File provider application immediately. Build VA relationships before the approval window opens (expected June 2026). GI Bill as parallel path.</td>
+          </tr>
+          <tr>
+            <td><strong>Google/OpenAI deepen free vet training</strong></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Depth beats breadth. Cohort-based, simulation-driven curriculum cannot be substituted by a free 3-week sprint.</td>
+          </tr>
+          <tr>
+            <td><strong>"AI supervisor" role does not materialize</strong></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Frame the credential as additive: AI operations leadership is a skill overlay on existing management, not a standalone job title.</td>
+          </tr>
+          <tr>
+            <td><strong>Market conflates us with prompt engineering</strong></td>
+            <td><span class="risk-severity sev-low">Low</span></td>
+            <td>Clear messaging: "We don't teach you to write prompts. We teach you to run operations where AI does the work and you maintain command."</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 03. BUSINESS MODEL ===== -->
+  <section class="doc-section" id="business">
+    <div class="doc-label">Business Model</div>
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Unit Economics + Revenue Model</h2>
+    </div>
+    <div class="content">
+
+      <h3>Customer segments</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">Transitioning NCOs (E-5 to E-7)</div>
+          <div class="card-body">Core audience. Process discipline, team leadership, security clearances. Target operations, logistics, intelligence, medical backgrounds.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Junior Officers (O-1 to O-3)</div>
+          <div class="card-body">Mission command is native. Higher salary expectations. Strongest fit for "AI operations leadership" framing.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Guard/Reserve</div>
+          <div class="card-body">Already in civilian workforce. Dual-status creates unique employer value. Part-time format required.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Defense Contractors (B2B)</div>
+          <div class="card-body">Fastest path to revenue. Need AI-ready cleared workforce. Will pay per seat for pipeline access.</div>
+        </div>
+      </div>
+
+      <h3>Three revenue scenarios</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Revenue / Student</th>
+            <th>Payment structure</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Employer-pays</strong></td>
+            <td>$5,000 - $8,000</td>
+            <td>Employer pays per seat for pipeline access</td>
+            <td>Fastest. Start now.</td>
+          </tr>
+          <tr>
+            <td><strong>WIOA / ETPL</strong></td>
+            <td>$3,500 - $7,000</td>
+            <td>State workforce board funding per participant</td>
+            <td>2-6 months for ETPL listing</td>
+          </tr>
+          <tr>
+            <td><strong>VET TEC 2.0</strong></td>
+            <td>25/25/50 split</td>
+            <td>25% at enrollment, 25% at completion, 50% tied to employment outcomes</td>
+            <td>Applications expected mid-2026</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Easter Seals HVRP funding pathway</h3>
+
+      <div class="callout">
+        <span class="callout-label">Active funding channel</span>
+        <p><strong>Easter Seals Oregon HVRP</strong> (Homeless Veterans Reintegration Program): $1.4M in DOL funding, active in Central Oregon. This is a real, funded channel -- not hypothetical. Trisha Sargent manages the program as HVRP Program Manager at Easter Seals. She also serves as Director of L&D at Consumer Cellular, with 14+ years across T-Mobile, AT&T, and Gap. Her dual role bridges workforce development and corporate training -- exactly the intersection LearnAIR operates in.</p>
+      </div>
+
+      <h3>Unit economics: 15-person cohort</h3>
+
+      <div class="econ-bars">
+        <div class="econ-bar-row">
+          <span class="econ-bar-label">Revenue</span>
+          <div class="econ-bar-track">
+            <div class="econ-bar-fill" style="width: 100%;">
+              <span class="econ-bar-val">$32,450</span>
+            </div>
+          </div>
+        </div>
+        <div class="econ-bar-row">
+          <span class="econ-bar-label">Cost / student</span>
+          <div class="econ-bar-track">
+            <div class="econ-bar-fill light" style="width: 33%;">
+              <span class="econ-bar-val">$2,163</span>
+            </div>
+          </div>
+        </div>
+        <div class="econ-bar-row">
+          <span class="econ-bar-label">Break-even</span>
+          <div class="econ-bar-track">
+            <div class="econ-bar-fill dark" style="width: 22%;">
+              <span class="econ-bar-val">5 students</span>
+            </div>
+          </div>
+        </div>
+        <div class="econ-bar-row">
+          <span class="econ-bar-label">Gross margin</span>
+          <div class="econ-bar-track">
+            <div class="econ-bar-fill" style="width: 67%;">
+              <span class="econ-bar-val">67%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Year 1 projection</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Metric</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cohorts</td><td>6</td></tr>
+          <tr><td>Revenue</td><td>$457,000</td></tr>
+          <tr><td>Net</td><td>$267,000</td></tr>
+          <tr><td>Break-even per cohort (employer-pays)</td><td>5 students</td></tr>
+          <tr><td>Break-even per cohort (WIOA/VET TEC)</td><td>8 students</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Funding sequence</h3>
+      <ol class="numbered-list">
+        <li><strong>Phase 1: Employer-pays proves model.</strong> Defense contractors and federal operators pay $5K-$8K/seat. Fastest path to revenue. No regulatory approval needed. Start immediately.</li>
+        <li><strong>Phase 2: ETPL/VET TEC expands access.</strong> State workforce board listing (ETPL, 2-6 months). VET TEC 2.0 provider application (expected mid-2026). WIOA funding at $3.5K-$7K/participant. Easter Seals HVRP as parallel DOL-funded channel.</li>
+        <li><strong>Phase 3: GI Bill pipeline.</strong> Requires 2-year operating history. Partner with established institution to accelerate. Workforce Pell expanding July 2026 creates new access path.</li>
+        <li><strong>Phase 4: Grants supplement.</strong> DOL VETS grants, state workforce innovation funds, foundation grants from veteran-serving organizations.</li>
+      </ol>
+
+      <div class="watchout">
+        <h4>Key constraint</h4>
+        <ul>
+          <li>GI Bill requires 2-year operating history. The workaround is partnering with an established educational institution as the approved provider while LearnAIR supplies the curriculum and instruction.</li>
+          <li>VET TEC 2.0 is still frozen as of March 2026. No providers have been approved. Applications may open June 2026. File immediately when the window opens.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 04. PILOT DESIGN ===== -->
+  <section class="doc-section" id="pilot">
+    <div class="doc-label">Pilot Design</div>
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title">First Cohort: 4-Week Pilot</h2>
+    </div>
+    <div class="content">
+
+      <p><strong>Sector:</strong> Federal contracting. <strong>Cohort:</strong> 15 participants. <strong>Format:</strong> 4 weeks part-time (10-12 hrs/week). <strong>First cohort cost:</strong> $19,657 ($1,310/student). <strong>Subsequent cohorts:</strong> $13,370.</p>
+
+      <h3>Tools</h3>
+      <p>Claude Pro, ChatGPT Plus, Microsoft Copilot, n8n (workflow automation), Miro (collaborative design).</p>
+
+      <div class="week-block">
+        <span class="week-label">Week 1</span>
+        <div class="week-title">AI Landscape + Mission Command Mapping</div>
+        <p>Ground truth: where AI is deployed in federal operations today, what it does well, where it fails. Map the military mission command framework to civilian AI supervision: intent = objective, left/right limits = guardrails, delegated execution = agent autonomy, monitoring = human-in-the-loop.</p>
+        <ul>
+          <li>Survey current AI deployments across government and defense contractors</li>
+          <li>Translate mission command vocabulary into civilian operations language</li>
+          <li>Identify the "AI supervisor" role across three federal workflow examples</li>
+          <li>Deliverable: personal mission command translation document</li>
+        </ul>
+      </div>
+
+      <div class="week-block">
+        <span class="week-label">Week 2</span>
+        <div class="week-title">Hands-on Workflow Design</div>
+        <p>Build it. Participants design AI-augmented workflows for real operational scenarios. Introduce the RACI-AI matrix (Responsible, Accountable, Consulted, Informed + AI role). Hands-on with n8n for workflow automation.</p>
+        <ul>
+          <li>RACI-AI matrix for a FOIA processing workflow</li>
+          <li>Build a working n8n automation for document intake and classification</li>
+          <li>Identify where human oversight is required vs. optional vs. unnecessary</li>
+          <li>Deliverable: workflow case study with before/after process maps</li>
+        </ul>
+      </div>
+
+      <div class="week-block">
+        <span class="week-label">Week 3</span>
+        <div class="week-title">Supervision Practicum</div>
+        <p>The core differentiator. Live AI agent supervision exercises. Participants manage running AI systems, catch errors, handle exceptions, and build guardrail engineering skills.</p>
+        <ul>
+          <li>Supervised AI output review: identify hallucinations, bias, and quality drift</li>
+          <li>Guardrail engineering: design constraints that prevent common failure modes</li>
+          <li>Exception handling: when and how to override automated decisions</li>
+          <li>Deliverable: guardrail document + productivity analysis</li>
+        </ul>
+      </div>
+
+      <div class="week-block">
+        <span class="week-label">Week 4</span>
+        <div class="week-title">Portfolio Build + Capstone</div>
+        <p>Synthesize everything into employer-ready artifacts. Capstone presentations to an employer panel.</p>
+        <ul>
+          <li>Compile portfolio: workflow case study, guardrail document, productivity analysis, mission command brief</li>
+          <li>Write AI competency statement (the civilian equivalent of a military evaluation)</li>
+          <li>Present capstone to employer panel for live feedback</li>
+          <li>Deliverable: complete portfolio + AI competency statement</li>
+        </ul>
+      </div>
+
+      <h3>Participant deliverables (total)</h3>
+      <table class="data-table">
+        <thead><tr><th>Artifact</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Workflow case study</td><td>Demonstrates ability to redesign operations with AI</td></tr>
+          <tr><td>Guardrail document</td><td>Shows risk-aware AI governance thinking</td></tr>
+          <tr><td>Productivity analysis</td><td>Quantified before/after with real metrics</td></tr>
+          <tr><td>Mission command brief</td><td>Translates military experience into civilian AI language</td></tr>
+          <tr><td>AI competency statement</td><td>Employer-ready credential summary</td></tr>
+        </tbody>
+      </table>
+
+      <div class="kill-box">
+        <h4>Kill criteria</h4>
+        <ul>
+          <li><strong>Week 2:</strong> If attendance drops below 70%, content engagement is flat, or participants consistently say "I don't see how this is different from a Google cert," diagnose immediately. The problem could be format (too much lecture), difficulty (too abstract), or relevance (wrong sector focus).</li>
+          <li><strong>Day 90:</strong> If completion rate is below 60%, zero employers rate any graduate as "would hire," and no participant lands a relevant role/interview within 30 days, do not proceed to Cohort 2. Publish what you learned. Iterate or shelf.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 05. SECTOR WORKFLOWS ===== -->
+  <section class="doc-section" id="workflows">
+    <div class="doc-label">Applied Curriculum</div>
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Sector Workflows</h2>
+    </div>
+    <div class="content">
+
+      <p>Four sector-specific AI supervision workflows that form the applied curriculum. Each shows exactly what the "AI supervisor" role looks like in practice: not building models, not writing prompts, but running operations where AI handles the first pass and a human maintains command.</p>
+
+      <!-- WORKFLOW 1 -->
+      <h3>1. Federal/Public: FOIA Request Processing</h3>
+      <p>AI-supervised pipeline from citizen request intake through response drafting. The supervisor sets classification criteria, reviews AI redaction recommendations, and approves final responses.</p>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">Step 1</div>
+          <div class="wf-label">Intake Classification</div>
+          <div class="wf-desc">AI triages requests by complexity, agency, and document type</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 2</div>
+          <div class="wf-label">Document Review</div>
+          <div class="wf-desc">AI identifies responsive documents and flags sensitive content</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 3</div>
+          <div class="wf-label">Redaction Recommendation</div>
+          <div class="wf-desc">AI proposes redactions under exemption categories</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 4</div>
+          <div class="wf-label">Human Review</div>
+          <div class="wf-desc">Supervisor validates, overrides, and approves</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 5</div>
+          <div class="wf-label">Response Drafting</div>
+          <div class="wf-desc">AI generates response letter; supervisor signs off</div>
+        </div>
+      </div>
+
+      <div class="outcome-box">
+        <p><strong>Outcome:</strong> 40-60% reduction in processing time per request. The AI supervisor role is the quality gate between automated document review and public release.</p>
+      </div>
+
+      <!-- WORKFLOW 2 -->
+      <h3>2. Healthcare Admin: Prior Authorization + Denial Management</h3>
+      <p>AI handles the administrative burden of insurance authorization and denial appeals. The supervisor monitors payer criteria matching, reviews appeal strategies, and tracks pattern detection for systemic issues.</p>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">Step 1</div>
+          <div class="wf-label">Auth Prep</div>
+          <div class="wf-desc">AI assembles clinical documentation and prior auth requirements</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 2</div>
+          <div class="wf-label">Payer Matching</div>
+          <div class="wf-desc">AI matches criteria to specific payer rules and policies</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 3</div>
+          <div class="wf-label">Denial Triage</div>
+          <div class="wf-desc">AI categorizes denials by type, appealability, and urgency</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 4</div>
+          <div class="wf-label">Appeal Letter</div>
+          <div class="wf-desc">AI drafts appeal; supervisor reviews clinical accuracy</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 5</div>
+          <div class="wf-label">Pattern Detection</div>
+          <div class="wf-desc">AI identifies systemic denial patterns across payers</div>
+        </div>
+      </div>
+
+      <div class="outcome-box">
+        <p><strong>Outcome:</strong> Denial rate reduced from <strong>15% to 10%</strong>. Appeal preparation time from <strong>60 minutes to 20 minutes</strong>. The supervisor catches clinical nuances AI misses and owns the escalation decisions.</p>
+      </div>
+
+      <!-- WORKFLOW 3 -->
+      <h3>3. Logistics: Warehouse Exception Management</h3>
+      <p>AI monitors warehouse operations, detects anomalies, recommends resolutions. The supervisor handles complex exceptions, validates AI root-cause analysis, and manages reporting to stakeholders.</p>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">Step 1</div>
+          <div class="wf-label">Detection</div>
+          <div class="wf-desc">AI flags inventory discrepancies, shipping delays, quality holds</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 2</div>
+          <div class="wf-label">Root Cause</div>
+          <div class="wf-desc">AI analyzes patterns and proposes root cause</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 3</div>
+          <div class="wf-label">Resolution</div>
+          <div class="wf-desc">AI recommends corrective action from playbook</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 4</div>
+          <div class="wf-label">Execution</div>
+          <div class="wf-desc">Supervisor approves and dispatches resolution</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 5</div>
+          <div class="wf-label">Reporting</div>
+          <div class="wf-desc">AI compiles pattern reports for leadership</div>
+        </div>
+      </div>
+
+      <div class="outcome-box">
+        <p><strong>Outcome:</strong> <strong>64% reduction</strong> in exception resolution time. The supervisor validates root-cause accuracy and makes judgment calls AI cannot: vendor relationships, customer impact, safety thresholds.</p>
+      </div>
+
+      <!-- WORKFLOW 4 -->
+      <h3>4. Business Services: Contract Review + Client Reporting</h3>
+      <p>AI handles data aggregation, report generation, and compliance monitoring. The supervisor ensures accuracy, manages client relationships, and directs the AI knowledge base.</p>
+
+      <div class="workflow-steps">
+        <div class="wf-step">
+          <div class="wf-num">Step 1</div>
+          <div class="wf-label">Aggregation</div>
+          <div class="wf-desc">AI pulls data from CRM, billing, project tools</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 2</div>
+          <div class="wf-label">Report Gen</div>
+          <div class="wf-desc">AI drafts client reports and QBR decks</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 3</div>
+          <div class="wf-label">Compliance</div>
+          <div class="wf-desc">AI flags contract terms, SLA status, risk items</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 4</div>
+          <div class="wf-label">QBR Prep</div>
+          <div class="wf-desc">Supervisor reviews, adds context, prepares narrative</div>
+        </div>
+        <div class="wf-step">
+          <div class="wf-num">Step 5</div>
+          <div class="wf-label">Knowledge Base</div>
+          <div class="wf-desc">AI updates institutional knowledge from interactions</div>
+        </div>
+      </div>
+
+      <div class="outcome-box">
+        <p><strong>Outcome:</strong> Ops team freed from <strong>60% to 25%</strong> admin time. The supervisor owns the client relationship, narrative framing, and strategic decisions that AI cannot make.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 06. 90-DAY TIMELINE ===== -->
+  <section class="doc-section" id="timeline">
+    <div class="doc-label">Execution Plan</div>
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <h2 class="section-title">90-Day Execution Timeline</h2>
+    </div>
+    <div class="content">
+
+      <p>Current status as of March 19, 2026: first discovery call completed. Monday meeting with Teresa scheduled. Designed for a 1-2 person core team working 20-30 hours/week on LearnAIR alongside other obligations.</p>
+
+      <div class="timeline-vis">
+        <div class="tl-month">
+          <div class="tl-month-label">Month 1 (Weeks 1-4)</div>
+          <div class="tl-month-title">Validate or Kill</div>
+          <ul>
+            <li><strong style="color:var(--green);">[DONE]</strong> First discovery call (Mar 19)</li>
+            <li><strong style="color:var(--accent);">[NEXT]</strong> Teresa meeting (Monday)</li>
+            <li>Build target list: 8-10 employers, 5-6 VSOs, 8-10 veterans</li>
+            <li>Conduct 15-20 validation conversations</li>
+            <li>Pattern analysis: what is consistent, what is surprising</li>
+            <li>Draft validation report + curriculum outline v0.1</li>
+            <li>Identify 2-3 pilot partners</li>
+            <li>Connect with Easter Seals HVRP (Trisha Sargent)</li>
+          </ul>
+        </div>
+        <div class="tl-month">
+          <div class="tl-month-label">Month 2 (Weeks 5-8)</div>
+          <div class="tl-month-title">Build + Launch Pilot</div>
+          <ul>
+            <li>Finalize 4-week pilot design for 10-15 participants</li>
+            <li>Build curriculum package (sessions, exercises, capstone spec)</li>
+            <li>Open applications through partner channels</li>
+            <li>Screen applicants, select cohort</li>
+            <li>Submit first funding application (ETPL + Easter Seals HVRP)</li>
+            <li>Run Pilot Weeks 1-2, adjust in real time</li>
+          </ul>
+        </div>
+        <div class="tl-month">
+          <div class="tl-month-label">Month 3 (Weeks 9-12)</div>
+          <div class="tl-month-title">Complete + Measure + Decide</div>
+          <ul>
+            <li>Run Pilot Weeks 3-4, capstone presentations</li>
+            <li>Employer panel reviews 2-3 capstones each</li>
+            <li>Post-program survey: skills, confidence, NPS</li>
+            <li>Compile Pilot Results Brief (primary credibility asset)</li>
+            <li>Draft Cohort 2 plan with curriculum changes</li>
+            <li>Go/no-go decision with documented rationale</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Detailed week-by-week</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>Week</th><th>Activities</th><th>Deliverables</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td>Finalize scripts. Build target list. Send outreach. Set up call tracker.</td>
+            <td>Target list with names and outreach status. 3-5 conversations booked.</td>
+          </tr>
+          <tr>
+            <td><strong>2-3</strong></td>
+            <td>Conduct 15-20 validation conversations. Debrief after every call (notes within 1 hour).</td>
+            <td>15-20 conversation summaries. Running signal log: quotes, themes, objections, willingness-to-pay data. 2+ employers agreed to review graduates.</td>
+          </tr>
+          <tr>
+            <td><strong>3-4</strong></td>
+            <td>Synthesize findings. Draft curriculum v0.1. Identify pilot partners. Research funding.</td>
+            <td>Validation report (2-3 pages). Curriculum outline. Partner shortlist. Funding options memo.</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td>Finalize pilot design. Build curriculum package. Open applications.</td>
+            <td>4-week curriculum package. Application form live. Recruitment sent through 2+ channels.</td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td>
+            <td>Screen applicants. Select cohort. Onboard. Submit first funding application.</td>
+            <td>Cohort selected. Onboarding packet sent. 1+ funding application submitted. Pre-survey completed.</td>
+          </tr>
+          <tr>
+            <td><strong>7-8</strong></td>
+            <td>Run Pilot Weeks 1-2. Collect session feedback. Adjust pacing. Schedule employer reviews.</td>
+            <td>2 weeks delivered. Feedback log. 2+ curriculum adjustments documented. Employer reviews confirmed.</td>
+          </tr>
+          <tr>
+            <td><strong>9-10</strong></td>
+            <td>Run Pilot Weeks 3-4. Capstone presentations to employer panel. Post-program survey.</td>
+            <td>All capstones submitted. Post-survey data. Employer feedback on 5+ graduates (structured rubric).</td>
+          </tr>
+          <tr>
+            <td><strong>11</strong></td>
+            <td>Compile results. Write Pilot Results Brief. Draft Cohort 2 plan.</td>
+            <td>Pilot Results Brief (3-5 pages). Cohort 2 draft plan with curriculum changes.</td>
+          </tr>
+          <tr>
+            <td><strong>12</strong></td>
+            <td>Share Results Brief with all stakeholders. Open new conversations. Go/no-go decision.</td>
+            <td>Results distributed. Decision documented. If go: Cohort 2 dates announced, recruitment active.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="kill-box">
+        <h4>Day 30 kill criteria</h4>
+        <ul>
+          <li>Fewer than 3 of 8+ employer conversations produced a concrete next step</li>
+          <li>No VSO or workforce partner expressed willingness to help recruit a pilot cohort</li>
+          <li>Veterans consistently said "I don't see how this is different from [existing program]"</li>
+          <li>Zero employers could name a specific AI-supervision-adjacent role they expect to hire for within 12 months</li>
+        </ul>
+      </div>
+
+      <div class="kill-box">
+        <h4>Day 90 kill criteria</h4>
+        <ul>
+          <li>Pilot completion rate below 60%</li>
+          <li>Zero employers rated any graduate as "would hire" or "would interview"</li>
+          <li>No participant landed a relevant role, interview, or career next step within 30 days</li>
+          <li>No funding path exists for the next cohort</li>
+          <li>The team cannot identify what to change to improve outcomes</li>
+        </ul>
+      </div>
+
+      <h3>Day 90 scale decision</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Signal</th><th>Strong (Scale)</th><th>Mixed (Iterate)</th><th>Weak (Pause)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Completion rate</td><td>80%+</td><td>60-79%</td><td>&lt;60%</td></tr>
+          <tr><td>Employers "would hire"</td><td>3+</td><td>1-2</td><td>0</td></tr>
+          <tr><td>Participant NPS</td><td>50+</td><td>20-49</td><td>&lt;20</td></tr>
+          <tr><td>90-day placement</td><td>50%+</td><td>25-49%</td><td>&lt;25%</td></tr>
+          <tr><td>Next cohort funding</td><td>Secured</td><td>Applied, pending</td><td>No leads</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>3+ Strong signals:</strong> Launch Cohort 2 with confidence. <strong>Mixed:</strong> Smaller Cohort 2 (5-8 people) to test specific changes. <strong>Mostly Weak:</strong> Publish what you learned, maintain relationships, revisit in 6 months.</p>
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 07. VALIDATION PLAYBOOK ===== -->
+  <section class="doc-section" id="validation">
+    <div class="doc-label">Validation Playbook</div>
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <h2 class="section-title">Interview Scripts</h2>
+    </div>
+    <div class="content">
+
+      <p>Three scripts for 25-35 minute conversations. The goal is signal extraction, not selling. Record every call (with permission) and debrief with notes within one hour.</p>
+
+      <!-- SCRIPT A -->
+      <h3>Script A: Employer / Hiring Manager</h3>
+      <p><em>Target: VP of Operations, Program Manager, or HR Director at a federal contractor or healthcare system with 500+ employees. Prioritize orgs with existing veteran hiring commitments.</em></p>
+
+      <div class="script-block">
+        <div class="script-context">
+          "Thanks for making time. We're exploring a workforce training concept focused on veterans transitioning into AI-adjacent roles -- not building AI models, but supervising AI systems in operational settings: reviewing outputs, catching errors, managing workflows where AI does the first pass and a human makes the final call. We're early -- we haven't built anything yet -- and we're talking to people like you to understand whether this solves a real hiring problem. Nothing to buy, no pitch. I just want to learn from your experience."
+        </div>
+
+        <div class="script-q">
+          <strong>Q1. Where is AI showing up in your operations today, and where do you expect it in 12-18 months?</strong>
+          <em>Listen for: specific use cases vs. vague "we're exploring." Concrete = real need.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q2. When you think about the people who sit between the AI system and the final decision, what does that role look like?</strong>
+          <em>Listen for: whether they have thought about this at all. If they jump to "data scientist," the supervision framing has not landed.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q3. How hard has it been to hire for roles requiring judgment under ambiguity -- people who follow a process but also flag when something is off?</strong>
+          <em>Listen for: specific pain. "Three reqs open for six months" beats "yeah, hiring is tough."</em>
+        </div>
+        <div class="script-q">
+          <strong>Q4. Have you hired a veteran specifically for their operational background? How did that work out?</strong>
+          <em>Listen for: whether the military-to-ops pipeline is a proven pattern or a new idea.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q5. If a program produced candidates who could supervise AI-assisted workflows -- and those candidates were veterans with security clearances -- what would that pipeline be worth per hire?</strong>
+          <em>Listen for: a number, a range, or "we'd pay a recruiter fee." If they deflect entirely, willingness to pay is low.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q6. What would you need to see before considering hiring from a program like this?</strong>
+          <em>Listen for: what drives hiring decisions. This shapes curriculum outputs.</em>
+        </div>
+
+        <div class="commitment-ask">
+          <strong>Commitment test (Q7):</strong> "If we ran a pilot cohort of 10-15 veterans this summer, trained specifically on AI workflow supervision with a capstone project, would you be willing to interview the top graduates -- no obligation to hire, just review their work and give us feedback on readiness?" <em>A "yes" here is real signal.</em>
+        </div>
+
+        <div class="signal-grid">
+          <div class="signal-col green">
+            <h5>Green flags</h5>
+            <ul>
+              <li>Names a specific AI use case in production</li>
+              <li>Describes "human in the loop" problem unprompted</li>
+              <li>Puts a dollar figure on hiring cost</li>
+              <li>Volunteers to introduce you to a colleague</li>
+              <li>Asks when the first cohort graduates</li>
+            </ul>
+          </div>
+          <div class="signal-col red">
+            <h5>Red flags</h5>
+            <ul>
+              <li>"AI is still a few years out for us"</li>
+              <li>Only talks about needing engineers or PhDs</li>
+              <li>Enthusiastic but will not commit to reviewing candidates</li>
+              <li>"We don't think about veteran hiring specifically"</li>
+              <li>Defers to hiring freeze or budget cycle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCRIPT B -->
+      <h3>Script B: VSO / Workforce Leader</h3>
+      <p><em>Target: Program Director at Hiring Our Heroes, BreakLine, a state workforce board, or a VSO with career transition programs. They control access to veteran cohorts and institutional credibility.</em></p>
+
+      <div class="script-block">
+        <div class="script-context">
+          "Appreciate you taking this. We're designing a training program called LearnAIR that prepares transitioning service members for AI workflow supervision roles -- jobs where a person reviews, validates, and manages AI system outputs in fields like healthcare operations, government services, and logistics. We're not trying to turn veterans into software engineers. We're focused on the oversight and judgment layer. Before we build anything, we want to learn from organizations like yours."
+        </div>
+
+        <div class="script-q">
+          <strong>Q1. What are the top three job categories your transitioning veterans land in? Where do they struggle most?</strong>
+          <em>Listen for: whether "operations" or "process management" shows up naturally.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q2. When employers ask for veteran candidates, what skills do they request most? Has that changed recently?</strong>
+          <em>Listen for: whether AI, automation, or "tech-adjacent" is on employers' radar.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q3. How do you evaluate new training programs before recommending them? What makes you trust a program enough to put your name behind it?</strong>
+          <em>Listen for: the actual bar. This tells you exactly what you need to earn credibility.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q4. Have you seen AI-specific training programs targeting veterans? What worked, what fell short?</strong>
+          <em>Listen for: awareness of the landscape. If they name programs, ask what those programs got wrong.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q5. If 70%+ of graduates landed relevant roles within 90 days, what would a partnership look like from your side?</strong>
+          <em>Listen for: what "partnership" means to them. Co-marketing? TAP class access? A slot in their calendar?</em>
+        </div>
+
+        <div class="commitment-ask">
+          <strong>Commitment test (Q6):</strong> "If we designed a 4-week pilot this summer and needed 10-15 veteran participants, would your organization help recruit them -- even informally? And would you be open to a follow-up once we have a curriculum outline?"
+        </div>
+
+        <div class="signal-grid">
+          <div class="signal-col green">
+            <h5>Green flags</h5>
+            <ul>
+              <li>Describes gaps in existing tech-transition programs</li>
+              <li>"We could include this in our next cohort cycle"</li>
+              <li>Offers to introduce you to employer partners</li>
+              <li>Mentions GI Bill, VR&E, or WIOA unprompted</li>
+            </ul>
+          </div>
+          <div class="signal-col red">
+            <h5>Red flags</h5>
+            <ul>
+              <li>"We already have an AI program" (not interested)</li>
+              <li>Only willing to "stay in touch"</li>
+              <li>Can not describe how they would recruit participants</li>
+              <li>Decision timeline is 6+ months for any new partnership</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCRIPT C -->
+      <h3>Script C: Transitioning Veteran</h3>
+      <p><em>Target: E-5 to O-4, 6-15 years of service, within 12 months of transition (or recently separated within 24 months). Any branch, especially operations, intelligence, logistics, medical, or maintenance backgrounds.</em></p>
+
+      <div class="script-block">
+        <div class="script-context">
+          "Thanks for your time -- I know transition is a busy period. We're building a training program for veterans that focuses on AI workflow supervision. That means: jobs where AI does a first draft or a first pass, and a human reviews it, catches mistakes, and makes the final call. Think quality assurance for AI systems, not programming them. It maps pretty directly to the kind of process discipline and judgment you've been using in the military. We haven't launched yet -- I want to hear whether this sounds useful, or whether I'm off base."
+        </div>
+
+        <div class="script-q">
+          <strong>Q1. What is your plan for your next career step? What roles are you targeting?</strong>
+          <em>Listen for: "project management, operations, maybe tech" = core audience. Locked into specific track (nursing, cyber cert) = may not need this.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q2. When you hear "AI," what comes to mind? Is it relevant to the work you want to do?</strong>
+          <em>Listen for: fear ("I'll be replaced"), curiosity ("I want to understand it"), or dismissal ("that's for engineers").</em>
+        </div>
+        <div class="script-q">
+          <strong>Q3. In your military role, how often did you review someone else's work, validate information, or catch errors in a process?</strong>
+          <em>Listen for: whether they describe AI-supervision-adjacent skills without realizing it.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q4. If a program could help you land a $65K-$85K role in 90 days, where you supervise AI tools rather than build them, what would it need to look like for you to invest 4-6 weeks?</strong>
+          <em>Listen for: format preferences, salary expectations, what "invest" means to them.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q5. What have you tried for career transition -- TAP, SkillBridge, bootcamps, certifications? What worked and what did not?</strong>
+          <em>Listen for: specific complaints. Past experience shapes how they evaluate your program.</em>
+        </div>
+        <div class="script-q">
+          <strong>Q6. If this cost $2,000 out of pocket -- or was free via GI Bill or workforce grant -- which path would you pursue?</strong>
+          <em>Listen for: willingness to pay (strongest signal) or hard resistance ("only if free" = different payer model).</em>
+        </div>
+
+        <div class="commitment-ask">
+          <strong>Commitment test (Q7):</strong> "We're planning a pilot cohort this summer. If you qualified, would you apply? And -- separate question -- can you think of 2-3 people in your network who would also be interested? Would you share it with them?"
+        </div>
+
+        <div class="signal-grid">
+          <div class="signal-col green">
+            <h5>Green flags</h5>
+            <ul>
+              <li>Immediately connects military role to AI-supervision framing</li>
+              <li>Asks specific questions about the program</li>
+              <li>Names people they would refer</li>
+              <li>"I'd pay for this" or "I'd use my GI Bill"</li>
+            </ul>
+          </div>
+          <div class="signal-col red">
+            <h5>Red flags</h5>
+            <ul>
+              <li>"Sounds cool" but no questions or follow-up</li>
+              <li>Only interested if completely free and zero time commitment</li>
+              <li>Sees AI as irrelevant to their future work</li>
+              <li>Cannot describe any process-oversight experience from service</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 08. TEAM ===== -->
+  <section class="doc-section" id="team">
+    <div class="doc-label">Team</div>
+    <div class="section-header">
+      <span class="section-number">08</span>
+      <h2 class="section-title">Who We Are</h2>
+    </div>
+    <div class="content">
+
+      <p>Partners and funders evaluate this section for three things: (1) Do these people understand the veteran population? (2) Do they understand AI well enough to teach it? (3) Can they run a training program? You do not need all three in one person. You need all three covered by the team.</p>
+
+      <h3>Bio template</h3>
+
+      <div class="template-field">[Full Name], [Role at LearnAIR]</div>
+
+      <p><strong>Paragraph 1 -- Military or veteran-community credibility:</strong></p>
+      <div class="template-field">[Branch, years of service, rank at separation, primary role/MOS]. [One sentence on what you managed: team size, operational scope, stakes]. [One sentence connecting that experience to why you are building this.]</div>
+
+      <p><strong>Paragraph 2 -- AI or technology credibility:</strong></p>
+      <div class="template-field">[Current or recent role involving AI, automation, or technology implementation]. [One specific example: "Led the deployment of..." or "Built a system that..."]. [If no direct AI experience: describe adjacent credibility and state your advisory relationship.]</div>
+
+      <p><strong>Paragraph 3 -- Workforce or education credibility:</strong></p>
+      <div class="template-field">[Teaching, training, mentoring, or program design experience]. [Formal: "Designed and delivered a 12-week technical training program for..." Informal: "Mentored 30+ transitioning service members through..."]. [If none: omit and address in Team Gaps.]</div>
+
+      <h3>Example bios</h3>
+
+      <div class="example-bio">
+        <strong>Example A -- Military operator turned tech leader</strong><br><br>
+        "Mike served 10 years as an Army officer, leading teams of up to 50 personnel in complex operational environments where mission success depended on rapid information synthesis, disciplined processes, and sound judgment under uncertainty. He deployed twice and managed cross-functional operations that required coordinating intelligence, logistics, and execution in real time.<br><br>
+        After the military, Mike transitioned into technology leadership, where he [specific AI/tech role or project]. He has firsthand experience implementing AI-assisted workflows and understands both the technical requirements and the human factors that determine whether these systems succeed or fail in practice.<br><br>
+        He founded LearnAIR because he saw the same skills that made his teams effective in the military -- process discipline, exception handling, quality assurance under pressure -- being exactly what is missing in the civilian AI workforce."
+      </div>
+
+      <div class="example-bio">
+        <strong>Example B -- Veteran who pivoted into AI/ML</strong><br><br>
+        "Sarah spent 8 years as a Marine Corps intelligence analyst, where she reviewed classified reporting, validated source reliability, and briefed senior leaders on assessments that influenced operational decisions. She managed a team of 12 analysts and developed quality-control processes for intelligence products under tight deadlines.<br><br>
+        After separating, she completed a machine learning certificate at [Institution] and now works as an AI operations specialist at [Company], where she supervises a team that validates AI-generated outputs for accuracy and compliance.<br><br>
+        Sarah brings the rare combination of having done the military-to-AI-career transition herself, and now working daily in the exact kind of role LearnAIR prepares veterans for."
+      </div>
+
+      <h3>Handling gaps</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Gap</th><th>How to frame it</th><th>Action to cite</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>No instructional designer</strong></td>
+            <td>"Our pilot curriculum is being developed in partnership with [advisor] who has designed workforce programs for [organization]."</td>
+            <td>Name a specific advisor. A 30-minute conversation with an ID professional at a community college is enough to cite.</td>
+          </tr>
+          <tr>
+            <td><strong>No AI/ML technical depth</strong></td>
+            <td>"Our technical curriculum is informed by [advisor] who leads AI implementation at [company]. We focus on applied judgment, not engineering."</td>
+            <td>Reframe as intentional scoping. Still need one credible technical voice on the advisory board.</td>
+          </tr>
+          <tr>
+            <td><strong>No workforce track record</strong></td>
+            <td>"Our team brings [X years] of combined military training and professional development experience."</td>
+            <td>Military training IS workforce development. An NCO who ran training for 30 soldiers is closer to instructional design than most realize.</td>
+          </tr>
+          <tr>
+            <td><strong>No veteran on team</strong></td>
+            <td>Be honest. Recruit a veteran advisor immediately. <strong>Do not launch without at least one veteran in a named, visible role.</strong></td>
+            <td>Non-negotiable. A program training veterans without veteran leadership will face justified skepticism from every stakeholder.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Advisory board template</h3>
+      <div class="template-field"><strong>[Name]</strong> -- [Title, Organization]. [One sentence on relevance to the mission.]</div>
+      <div class="template-field"><strong>[Name]</strong> -- [Title, Organization]. [One sentence.]</div>
+      <div class="template-field"><strong>[Name]</strong> -- [Title, Organization]. [One sentence.]</div>
+
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:1rem;">Aim for 3-5 advisors covering: military/veteran community, AI/technology, workforce development, and employer perspective. Even informal advisors count. Ask permission to list them and describe their contribution accurately.</p>
+
+      <h3>What funders actually evaluate</h3>
+      <ul>
+        <li><strong>Specificity over superlatives.</strong> "10-year Army officer who managed 50-person teams" beats "decorated military leader with extensive experience."</li>
+        <li><strong>Connection to the mission.</strong> "I watched 6 people in my platoon struggle to translate their skills" is more compelling than "I identified a market opportunity."</li>
+        <li><strong>Awareness of what you don't know.</strong> Teams that acknowledge gaps and show plans to fill them are more credible than teams that pretend everything is figured out.</li>
+        <li><strong>Evidence of traction.</strong> "We've conducted 20 validation interviews with employers" beats any credential.</li>
+        <li><strong>Diversity of perspective.</strong> Three Army officers is less credible for a cross-service program than Army, Navy, and a civilian with workforce development experience.</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 09. RISK MATRIX ===== -->
+  <section class="doc-section" id="risk">
+    <div class="doc-label">Risk Assessment</div>
+    <div class="section-header">
+      <span class="section-number">09</span>
+      <h2 class="section-title">Risk Matrix</h2>
+    </div>
+    <div class="content">
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Risk</th>
+            <th>Severity</th>
+            <th>Likelihood</th>
+            <th>Mitigation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>"AI supervisor" role does not emerge as distinct job category</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Frame as skill overlay, not standalone job title. "AI operations leadership" is additive to project management, operations management, etc.</td>
+          </tr>
+          <tr>
+            <td><strong>Employer willingness to pay is zero</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Validate early via commitment tests in interviews. If employers won't pay, pivot to government funding only (WIOA, HVRP, VET TEC).</td>
+          </tr>
+          <tr>
+            <td><strong>Veterans see this as "just another bootcamp"</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Mission command framing must be authentic, not marketing. Curriculum must feel different on day one. Portfolio artifacts must be distinct from bootcamp projects.</td>
+          </tr>
+          <tr>
+            <td><strong>Accenture or HOH launches competing program</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td>Speed advantage: 12-18 month window. Build curriculum IP and employer relationships that create switching costs. Pursue co-branding to turn competitors into partners.</td>
+          </tr>
+          <tr>
+            <td><strong>Pilot cohort cannot be recruited in time</strong></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td>Multiple recruitment channels: Easter Seals HVRP, VSO partners, SkillBridge pipeline, direct outreach to transitioning service members.</td>
+          </tr>
+          <tr>
+            <td><strong>Funding delays (ETPL, VET TEC, GI Bill)</strong></td>
+            <td><span class="risk-severity sev-med">Medium</span></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td>Employer-pays model runs independently of government funding. Easter Seals HVRP as near-term DOL channel. Stack multiple applications to avoid single-point-of-failure.</td>
+          </tr>
+          <tr>
+            <td><strong>Curriculum does not translate to employer readiness</strong></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td><span class="risk-severity sev-low">Low</span></td>
+            <td>Employer panel reviews capstones during pilot. Iterate curriculum based on real feedback. Portfolio artifacts designed to prove competence, not check boxes.</td>
+          </tr>
+          <tr>
+            <td><strong>AI tools change faster than curriculum</strong></td>
+            <td><span class="risk-severity sev-low">Low</span></td>
+            <td><span class="risk-severity sev-high">High</span></td>
+            <td>Curriculum teaches judgment and process, not specific tools. Tools are interchangeable; the supervision framework is durable.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <hr class="thick-divider">
+
+  <!-- ===== 10. SOURCES ===== -->
+  <section class="doc-section" id="sources">
+    <div class="section-header">
+      <span class="section-number">10</span>
+      <h2 class="section-title">Sources</h2>
+    </div>
+    <div class="content">
+
+      <h3>Research and data</h3>
+      <ul>
+        <li>Stanford HAI, AI Index Report 2025</li>
+        <li>Stanford Digital Economy Lab, "Canaries in the Coal Mine" -- labor-market paper on AI-exposed occupations</li>
+        <li>Microsoft AI Economy Institute, Global AI Adoption in 2025</li>
+        <li>Northeastern University fireside chat summary of Gina Raimondo remarks, March 9, 2026</li>
+        <li>IMDA Singapore, AI-fluent workforce press release, August 29, 2025</li>
+        <li>BLS Employment Situation of Veterans and related tables</li>
+        <li>Autor, Dorn, and Hanson, China shock labor-market adjustment research</li>
+        <li>War on the Rocks, "The U.S. Army, Artificial Intelligence, and Mission Command," March 2025</li>
+        <li>Military.com, "Why Veterans Are Built for AI," November 2025</li>
+        <li>Military.com, "AI-Proof Careers for Veterans 2026," March 2026</li>
+      </ul>
+
+      <h3>Competitor programs</h3>
+      <ul>
+        <li><a href="https://www.hiringourheroes.org/" style="color:var(--accent);">Hiring Our Heroes</a> -- U.S. Chamber of Commerce Foundation</li>
+        <li><a href="https://newsroom.accenture.com/news/2025/accenture-launches-national-career-training-initiative-to-support-officers-and-senior-enlisted-personnel-transitioning-to-civilian-careers" style="color:var(--accent);">Accenture National Veterans Initiative (2025)</a></li>
+        <li><a href="https://vetsintech.co/vetsinai/" style="color:var(--accent);">VetsinTech -- Vets in AI Program</a></li>
+        <li><a href="https://www.codeplatoon.org/blog/artificial-intelligence-training-for-veterans" style="color:var(--accent);">Code Platoon AI Curriculum</a></li>
+        <li><a href="https://www.edtechinnovationhub.com/news/openai-academy-backs-hands-on-ai-sprint-for-veterans-in-virginia-pilot" style="color:var(--accent);">OpenAI Academy + Veterans Forge</a></li>
+        <li><a href="https://cloud.google.com/blog/topics/training-certifications/register-for-the-gen-ai-training-and-certification-program-for-veterans" style="color:var(--accent);">Google Launchpad for Veterans</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/" style="color:var(--accent);">Microsoft Azure AI Fundamentals (AI-900)</a></li>
+        <li><a href="https://aws.amazon.com/certification/veterans-reimbursement/" style="color:var(--accent);">AWS Certification Veterans Reimbursement</a></li>
+        <li><a href="https://www.va.gov/education/other-va-education-benefits/vet-tec-2/" style="color:var(--accent);">VET TEC 2.0 -- VA.gov</a></li>
+        <li><a href="https://www.salesforce.com/news/stories/military-veteran-program-announcement-2025/" style="color:var(--accent);">Salesforce Military Program 2025</a></li>
+        <li><a href="https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/about/deloitte-ai-academy.html" style="color:var(--accent);">Deloitte AI Academy</a></li>
+        <li><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/building-a-talent-pipeline-for-the-ai-era" style="color:var(--accent);">McKinsey -- Building AI Talent Pipeline</a></li>
+        <li><a href="https://fourblock.org/usaa-propels-fourblocks-expansion-of-ai-career-tools-to-empower-veterans-and-military-spouses-in-transition" style="color:var(--accent);">FourBlock AI Career Tools</a></li>
+        <li><a href="https://vetswhocode.io" style="color:var(--accent);">Vets Who Code</a></li>
+        <li><a href="https://vets2industry.org/" style="color:var(--accent);">Vets2Industry</a></li>
+        <li><a href="https://www.acp-usa.org/" style="color:var(--accent);">American Corporate Partners</a></li>
+      </ul>
+
+      <h3>Funding and workforce development</h3>
+      <ul>
+        <li><a href="https://www.easterseals.com/oregon/" style="color:var(--accent);">Easter Seals Oregon</a> -- HVRP program, $1.4M DOL funding</li>
+        <li>DOL VETS -- Homeless Veterans Reintegration Program (HVRP) grant guidelines</li>
+        <li>WIOA (Workforce Innovation and Opportunity Act) -- state workforce board funding for eligible training programs</li>
+        <li>Workforce Pell expansion -- July 2026 implementation (bipartisan infrastructure bill)</li>
+      </ul>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR / v1 -- March 19, 2026</div>
+  <div class="footer-right">
+    <a href="index.html">Previous version: v0</a>
+  </div>
+</footer>
+
+</body>
+</html>
