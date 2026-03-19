@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Call Prep — Justin Meeting (Mar 19)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #a63d2f;
+    --red-bg: rgba(166, 61, 47, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--green);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ATTENDEES BAR --- */
+  .attendees {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+  }
+
+  .attendees-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .attendee-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    background: var(--warm);
+    color: var(--muted);
+    padding: 4px 10px;
+    border: 1px solid var(--faint);
+  }
+
+  .attendee-chip.primary {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-color: var(--accent-light);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul, .article li ol {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- CALLOUT BOXES --- */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* --- GREEN / RED SIGNAL BOXES --- */
+  .signal-box {
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .signal-box.green {
+    border-left: 3px solid var(--green);
+    background: var(--green-bg);
+  }
+
+  .signal-box.green .signal-label {
+    color: var(--green);
+  }
+
+  .signal-box.red {
+    border-left: 3px solid var(--red);
+    background: var(--red-bg);
+  }
+
+  .signal-box.red .signal-label {
+    color: var(--red);
+  }
+
+  .signal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .signal-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .signal-box li {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  /* --- NUMBERED QUESTIONS --- */
+  .questions ol {
+    counter-reset: question;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .questions ol > li {
+    counter-increment: question;
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .questions ol > li::before {
+    content: counter(question);
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-bg);
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  /* --- DO / DON'T LIST --- */
+  .do-dont ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .do-dont li {
+    padding-left: 1.6rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .do-dont li.dont::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 10px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .do-dont li.do::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    width: 8px;
+    height: 12px;
+    border-right: 2px solid var(--green);
+    border-bottom: 2px solid var(--green);
+    transform: rotate(45deg);
+  }
+
+  /* --- POST-CALL STEPS --- */
+  .steps ol {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .steps ol > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 2.2rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .steps ol > li:last-child {
+    border-bottom: none;
+  }
+
+  .steps ol > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--ink);
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .attendees { padding: 0 1.5rem 2rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Prep</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Call Prep</div>
+  <h1>Justin Coats Meeting &mdash; Mar 19, 2pm PT</h1>
+  <div class="doc-date">March 19, 2026</div>
+</section>
+
+<div class="attendees">
+  <div class="attendees-inner">
+    <span class="attendee-chip primary">Justin Coats &mdash; CVO, LearnAIR</span>
+    <span class="attendee-chip">Mike Deal</span>
+    <span class="attendee-chip">Trisha Sargent &mdash; Easter Seals</span>
+    <span class="attendee-chip">Joe &mdash; East Coast, TBD</span>
+  </div>
+</div>
+
+<div class="article">
+
+  <div class="callout">
+    <span class="callout-label">Context</span>
+    Justin is assembling a team for the veteran program. This is an initial meeting &mdash; he&rsquo;ll share his vision and feel out engagement models. Mike has been through the March cohort training. Andrew is not on this call but is prepping Mike and will process the transcript afterward.
+  </div>
+
+  <!-- WHAT LEARNAIR IS -->
+  <hr>
+  <h2>What LearnAIR Actually Is</h2>
+  <p style="font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 1rem;">PAUL'S CLARITY TEST</p>
+
+  <p><strong>One sentence</strong>: LearnAIR is a Bend, Oregon AI training company that teaches businesses how to use ChatGPT &mdash; and they want to build a veteran-specific program but haven&rsquo;t started yet.</p>
+
+  <h3>The veteran program opportunity in plain English</h3>
+  <ol>
+    <li>Veterans need AI skills to be competitive in the job market</li>
+    <li>Employers need people who can manage AI systems (not just use them)</li>
+    <li>Government has workforce development money (DOL, VA, SkillBridge) looking for programs to fund</li>
+    <li>LearnAIR has the training content + OpenAI partnership + SDVOSB status to access that funding</li>
+    <li>Nobody has connected these dots into an actual program yet &mdash; it&rsquo;s a waitlist page</li>
+  </ol>
+
+  <h3>Who pays</h3>
+  <p>Not the veteran. Three funding sources:</p>
+  <ul>
+    <li>Government grants (DOL workforce programs via orgs like Easter Seals)</li>
+    <li>Employer-sponsored (companies that want AI-ready veteran hires)</li>
+    <li>GI Bill / SkillBridge pipeline (if accredited)</li>
+  </ul>
+
+  <h3>What Mike + Andrew bring that LearnAIR doesn&rsquo;t have</h3>
+  <ul>
+    <li>A specific thesis: mission command &rarr; AI operations supervision (not just &ldquo;AI literacy&rdquo;)</li>
+    <li>A concrete curriculum design (4-week pilot with validate-or-kill criteria)</li>
+    <li>Outcomes-based framing (placement, not attendance)</li>
+    <li>Andrew&rsquo;s technical depth (building with AI, not just prompting)</li>
+    <li>Mike&rsquo;s veteran credibility + in-person partnership skills</li>
+    <li>Connection to policy conversation (Stanford/Hoover, Raimondo, Singapore model)</li>
+  </ul>
+
+  <!-- QUESTIONS -->
+  <hr>
+  <h2>Questions for Justin</h2>
+
+  <div class="questions">
+    <h3>Understanding Intent</h3>
+    <ol>
+      <li>When you say &ldquo;building a team&rdquo; &mdash; what does that mean? Contractors? Partners? Employees?</li>
+      <li>What&rsquo;s the veteran program&rsquo;s current state beyond the waitlist page? Any pilots run? Any vets trained through it?</li>
+      <li>Is there funding committed, or is this &ldquo;build it first, find money second&rdquo;?</li>
+      <li>What&rsquo;s the Trisha/Easter Seals connection specifically &mdash; active contract or exploratory?</li>
+    </ol>
+
+    <h3>Testing Alignment</h3>
+    <ol start="5">
+      <li>&ldquo;Train 1 million veterans&rdquo; &mdash; what&rsquo;s the actual Year 1 target?</li>
+      <li>Is the veteran program a separate business unit or a marketing arm of the corporate training?</li>
+      <li>How do you measure success &mdash; training completions or job placements?</li>
+      <li>What&rsquo;s the engagement model for vets &mdash; free, subsidized, employer-sponsored?</li>
+    </ol>
+
+    <h3>Strategic</h3>
+    <ol start="9">
+      <li>OpenAI-only or open to model-agnostic? (Claude, Gemini, open-source)</li>
+      <li>Bobby&rsquo;s involvement &mdash; day-to-day or advisory?</li>
+      <li>What&rsquo;s the decision timeline? When does this team need to be moving?</li>
+      <li>How do you think about the SkillBridge pipeline?</li>
+    </ol>
+  </div>
+
+  <!-- DO / DON'T -->
+  <hr>
+  <h2>Things Mike Should NOT Do on This Call</h2>
+
+  <div class="do-dont">
+    <ul>
+      <li class="dont">Don&rsquo;t pitch the full briefing yet &mdash; listen first, understand Justin&rsquo;s vision</li>
+      <li class="dont">Don&rsquo;t commit to any structure (contractor, partner, etc.) &mdash; say &ldquo;I want to think on that&rdquo;</li>
+      <li class="dont">Don&rsquo;t mention Andrew&rsquo;s involvement yet unless it comes up naturally &mdash; keep that card for later</li>
+      <li class="dont">Don&rsquo;t oversell the thesis &mdash; ask questions, let Justin feel heard</li>
+      <li class="do"><strong>DO</strong> take notes on: what Justin says the obstacles are, what he&rsquo;s tried, what he wishes he had</li>
+    </ul>
+  </div>
+
+  <!-- SIGNALS -->
+  <hr>
+  <h2>What to Listen For</h2>
+
+  <div class="signal-box green">
+    <span class="signal-label">Green Lights</span>
+    <ul>
+      <li>Justin talks about outcomes, not just training hours</li>
+      <li>There&rsquo;s actual funding or a clear path to it</li>
+      <li>He&rsquo;s open to co-ownership / equity, not just contractor work</li>
+      <li>He acknowledges the program needs building, not just marketing</li>
+      <li>Bobby is actually involved and accessible</li>
+    </ul>
+  </div>
+
+  <div class="signal-box red">
+    <span class="signal-label">Red Flags</span>
+    <ul>
+      <li>&ldquo;We just need someone to deliver the existing curriculum to veterans&rdquo; (you&rsquo;re labor, not a partner)</li>
+      <li>No funding, no timeline, no specifics (it&rsquo;s a dream, not a plan)</li>
+      <li>&ldquo;We&rsquo;ve already designed the program&rdquo; (no room for the thesis)</li>
+      <li>Heavy focus on &ldquo;1 million&rdquo; number (vanity metric, no path to get there)</li>
+      <li>Trisha&rsquo;s Easter Seals contract is vague or nonexistent</li>
+    </ul>
+  </div>
+
+  <!-- POST-CALL -->
+  <hr>
+  <h2>Post-Call Actions</h2>
+
+  <div class="steps">
+    <ol>
+      <li>Mike sends Andrew the full transcript (Notion, Gemini, or manual recording)</li>
+      <li>Andrew processes transcript, extracts key signals</li>
+      <li>Evening session: assess fit, decide whether to go deeper or pivot to independent play</li>
+      <li>If green: iterate on the briefing with Justin&rsquo;s actual language and constraints</li>
+      <li>If red: focus energy on building independently using the thesis + curriculum as standalone assets</li>
+    </ol>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>

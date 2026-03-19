@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnAIR &mdash; Practical Assets for Demand Validation &amp; Launch</title>
+  <style>
+    :root {
+      --navy: #1a2332;
+      --slate: #2d3748;
+      --accent: #3182ce;
+      --green: #2f855a;
+      --red: #c53030;
+      --warm-gray: #f7f5f3;
+      --border: #e2e0dc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--slate);
+      line-height: 1.65;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      background: #fff;
+    }
+    h1 {
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 1.05rem;
+      color: #718096;
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-top: 3rem;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--accent);
+    }
+    h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-top: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    h4 {
+      font-size: 1rem;
+      color: var(--slate);
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    p, li { font-size: 0.97rem; }
+    p { margin-bottom: 0.75rem; }
+    ul, ol { margin-left: 1.4rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.35rem; }
+    .script-box {
+      background: var(--warm-gray);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin: 1rem 0 1.5rem;
+    }
+    .context-setter {
+      background: #ebf4ff;
+      border-left: 4px solid var(--accent);
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.2rem;
+      border-radius: 0 4px 4px 0;
+      font-style: italic;
+    }
+    .question {
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+    }
+    .question strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 0.15rem;
+    }
+    .question em {
+      font-size: 0.88rem;
+      color: #718096;
+    }
+    .flags {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .flag-col {
+      padding: 0.9rem;
+      border-radius: 5px;
+      font-size: 0.92rem;
+    }
+    .green-flags {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+    }
+    .red-flags {
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+    }
+    .flag-col h5 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .green-flags h5 { color: var(--green); }
+    .red-flags h5 { color: var(--red); }
+    .flag-col ul { margin-left: 1.1rem; margin-bottom: 0; }
+    .flag-col li { font-size: 0.88rem; margin-bottom: 0.25rem; }
+    .commitment-test {
+      background: #fffff0;
+      border: 1px solid #fefcbf;
+      border-radius: 5px;
+      padding: 0.9rem 1.1rem;
+      margin-top: 1rem;
+    }
+    .commitment-test strong { color: #975a16; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border);
+    }
+    th {
+      background: var(--warm-gray);
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .kill-criteria {
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      margin: 1rem 0;
+    }
+    .kill-criteria h4 { color: var(--red); margin-top: 0; }
+    .decision-point {
+      background: #fffff0;
+      border: 1px solid #fefcbf;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      margin: 1rem 0;
+    }
+    .decision-point h4 { color: #975a16; margin-top: 0; }
+    .template-field {
+      background: #f7fafc;
+      border: 1px dashed #a0aec0;
+      border-radius: 4px;
+      padding: 0.6rem 0.9rem;
+      margin: 0.5rem 0;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #4a5568;
+    }
+    .example-block {
+      background: var(--warm-gray);
+      border-left: 3px solid var(--accent);
+      padding: 0.8rem 1.1rem;
+      margin: 0.6rem 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.93rem;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+    .section-number {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: 3px;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+    .toc {
+      background: var(--warm-gray);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc h3 { margin-top: 0; }
+    .toc ol { margin-bottom: 0; }
+    .toc li { margin-bottom: 0.3rem; }
+    .toc a { color: var(--accent); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>LearnAIR</h1>
+<p class="subtitle">Practical Assets for Demand Validation &amp; Launch Execution</p>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#scripts">Demand Validation Conversation Scripts</a> (3 scripts, 5&ndash;7 questions each)</li>
+    <li><a href="#timeline">90-Day Timeline &amp; Milestones</a> (month-by-month with kill criteria)</li>
+    <li><a href="#team">Team Credibility Section Template</a> ("Who We Are" for briefings and proposals)</li>
+  </ol>
+</div>
+
+<!-- ============================================================ -->
+<!-- ASSET 1: CONVERSATION SCRIPTS                                 -->
+<!-- ============================================================ -->
+
+<h2 id="scripts"><span class="section-number">1</span> Demand Validation Conversation Scripts</h2>
+
+<p>These scripts are structured for 25&ndash;35 minute conversations. The goal is signal extraction, not selling. You are testing whether the problem is real, whether the proposed solution fits, and whether the person across the table would take a concrete action. Record every call (with permission) and debrief with notes within one hour.</p>
+
+<!-- SCRIPT A -->
+<h3>Script A: Employer / Hiring Manager</h3>
+<p><em>Target: VP of Operations, Program Manager, or HR Director at a federal contractor (defense, health IT, systems integration) or a healthcare system with 500+ employees. Prioritize orgs with existing veteran hiring commitments or DoD contract requirements.</em></p>
+
+<div class="script-box">
+
+  <div class="context-setter">
+    <strong>Context setter (read aloud, ~30 seconds):</strong><br>
+    "Thanks for making time. We're exploring a workforce training concept focused on veterans transitioning into AI-adjacent roles &mdash; not building AI models, but supervising AI systems in operational settings: reviewing outputs, catching errors, managing workflows where AI is doing the first pass and a human makes the final call. We're early &mdash; we haven't built anything yet &mdash; and we're talking to people like you to understand whether this solves a real hiring problem. Nothing to buy, no pitch. I just want to learn from your experience."
+  </div>
+
+  <div class="question">
+    <strong>Q1. Where is AI showing up in your operations today, and where do you expect it in the next 12&ndash;18 months?</strong>
+    <em>Listen for: specific use cases vs. vague "we're exploring." The more concrete, the more real the need.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q2. When you think about the people who'll sit between the AI system and the final decision, what does that role look like? What does that person need to be good at?</strong>
+    <em>Listen for: whether they've thought about this at all. If they jump to "data scientist" or "engineer," the human-supervision framing hasn't landed in their org yet.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q3. How hard has it been to hire for roles that require judgment under ambiguity &mdash; people who can follow a process but also flag when something's off?</strong>
+    <em>Listen for: specific pain. "We've had three reqs open for six months" beats "yeah, hiring is tough."</em>
+  </div>
+
+  <div class="question">
+    <strong>Q4. Have you ever hired a veteran specifically because of their operational background &mdash; ability to follow SOPs, escalate appropriately, maintain composure in high-stakes environments? How did that work out?</strong>
+    <em>Listen for: whether the military-to-ops pipeline is already a proven pattern in their org, or a new idea.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q5. If a training program produced candidates who could supervise AI-assisted workflows &mdash; review AI-generated reports, validate automated decisions, manage exception queues &mdash; and those candidates were veterans with security clearances, what would that pipeline be worth to you per hire?</strong>
+    <em>Listen for: a number, a range, or "we'd pay a recruiter fee." If they deflect entirely, willingness to pay is low.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q6. What would you need to see from a program like this before you'd consider hiring from it? A credential? A portfolio? A probationary project?</strong>
+    <em>Listen for: what actually drives hiring decisions. This shapes your curriculum outputs.</em>
+  </div>
+
+  <div class="commitment-test">
+    <strong>Commitment test (Q7):</strong> "If we ran a pilot cohort of 10&ndash;15 veterans this summer, trained specifically on AI workflow supervision with a capstone project, would you be willing to interview the top graduates &mdash; no obligation to hire, just review their work and give us feedback on readiness?"
+    <br><br><em>A "yes" here is real signal. Ask for an intro to whoever would be the hiring decision-maker if it's not them.</em>
+  </div>
+
+  <div class="flags">
+    <div class="flag-col green-flags">
+      <h5>Green Flags</h5>
+      <ul>
+        <li>Names a specific AI use case already in production</li>
+        <li>Describes the "human in the loop" problem without you prompting it</li>
+        <li>Puts a dollar figure on hiring cost or pipeline value</li>
+        <li>Volunteers to introduce you to a colleague</li>
+        <li>Asks when the first cohort graduates</li>
+      </ul>
+    </div>
+    <div class="flag-col red-flags">
+      <h5>Red Flags</h5>
+      <ul>
+        <li>"AI is still a few years out for us"</li>
+        <li>Only talks about needing engineers or PhDs</li>
+        <li>Enthusiastic but won't commit to reviewing candidates</li>
+        <li>"We don't really think about veteran hiring specifically"</li>
+        <li>Defers everything to a hiring freeze or budget cycle</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT B -->
+<h3>Script B: Veteran-Serving Organization Leader</h3>
+<p><em>Target: Program Director or Executive at Hiring Our Heroes, BreakLine, a state workforce development board, a Vet Center, or a VSO with a career transition program. These people control access to veteran cohorts and institutional credibility.</em></p>
+
+<div class="script-box">
+
+  <div class="context-setter">
+    <strong>Context setter (~30 seconds):</strong><br>
+    "Appreciate you taking this. We're designing a training program called LearnAIR that would prepare transitioning service members for AI workflow supervision roles &mdash; the jobs where a person reviews, validates, and manages AI system outputs in fields like healthcare operations, government services, and logistics. We're not trying to turn veterans into software engineers. We're focused on the oversight and judgment layer. Before we build anything, we want to learn from organizations like yours about what works, what doesn't, and whether there's a real fit."
+  </div>
+
+  <div class="question">
+    <strong>Q1. What are the top three job categories your transitioning veterans are landing in today? Where do they struggle most in placement?</strong>
+    <em>Listen for: whether "operations" or "process management" shows up naturally. If placements are concentrated in sales, trades, or cybersecurity, the AI-supervision lane may need more explanation.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q2. When employers come to you looking for veteran candidates, what skills or qualities do they ask for most often? Has that changed in the past two years?</strong>
+    <em>Listen for: whether AI, automation, or "tech-adjacent" skills are on employers' radar yet.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q3. How do you evaluate new training programs before recommending them to your veterans? What makes you trust a program enough to put your name behind it?</strong>
+    <em>Listen for: the actual bar. Accreditation? Employment outcomes? Employer endorsements? A track record? This tells you exactly what you need to earn credibility.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q4. Have you seen AI-specific training programs targeting veterans? If so, what's worked and what's fallen short?</strong>
+    <em>Listen for: awareness of the competitive landscape. If they name specific programs, ask what those programs got wrong.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q5. If a program could demonstrate that 70%+ of graduates landed relevant roles within 90 days, and employers validated the curriculum, what would a partnership look like from your side? Could you help us reach a pilot cohort?</strong>
+    <em>Listen for: what "partnership" actually means to them. Co-marketing? Access to a TAP class? A slot in their program calendar? Some will offer a lot; others will want to wait for proof.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q6. What's the typical timeline and decision process for your organization to endorse or partner with a new workforce program?</strong>
+    <em>Listen for: whether this is a 2-week conversation or a 6-month committee process. Calibrates your timeline.</em>
+  </div>
+
+  <div class="commitment-test">
+    <strong>Commitment test (Q7):</strong> "If we designed a 4&ndash;6 week pilot this summer and needed 10&ndash;15 veteran participants, would your organization be willing to help us recruit them &mdash; even informally, like sharing a flyer or posting in your community channels? And would you be open to a follow-up conversation once we have a curriculum outline to review?"
+    <br><br><em>Two asks here: recruitment help (low cost to them, high value to you) and a second meeting (tests whether they'll invest more time).</em>
+  </div>
+
+  <div class="flags">
+    <div class="flag-col green-flags">
+      <h5>Green Flags</h5>
+      <ul>
+        <li>Describes gaps in existing tech-transition programs</li>
+        <li>Says "we could include this in our next cohort cycle"</li>
+        <li>Offers to introduce you to employer partners</li>
+        <li>Asks about outcomes tracking and data sharing</li>
+        <li>Mentions GI Bill, VR&amp;E, or WIOA funding paths unprompted</li>
+      </ul>
+    </div>
+    <div class="flag-col red-flags">
+      <h5>Red Flags</h5>
+      <ul>
+        <li>"We already have an AI program" (and aren't interested in another)</li>
+        <li>Only willing to "stay in touch" with no concrete next step</li>
+        <li>Can't describe how they'd recruit participants</li>
+        <li>Concerned about competing with their own programs</li>
+        <li>Decision timeline is 6+ months for any new partnership</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT C -->
+<h3>Script C: Transitioning Veteran</h3>
+<p><em>Target: E-5 to O-4, 6&ndash;15 years of service, within 12 months of transition (or recently separated within 24 months). Any branch, any MOS &mdash; but especially operations, intelligence, logistics, medical, or maintenance backgrounds where process discipline is central to the job.</em></p>
+
+<div class="script-box">
+
+  <div class="context-setter">
+    <strong>Context setter (~30 seconds):</strong><br>
+    "Thanks for your time &mdash; I know transition is a busy period. We're building a training program for veterans that focuses on AI workflow supervision. That means: jobs where AI does a first draft or a first pass, and a human reviews it, catches mistakes, and makes the final call. Think quality assurance for AI systems, not programming them. It maps pretty directly to the kind of process discipline and judgment you've been using in the military. We haven't launched yet &mdash; I want to hear whether this sounds useful, or whether I'm off base."
+  </div>
+
+  <div class="question">
+    <strong>Q1. What's your plan right now for your next career step? What kinds of roles are you targeting, and how's the search going?</strong>
+    <em>Listen for: clarity vs. overwhelm. Veterans who say "I'm looking at project management, operations, maybe tech" are your core audience. Those locked into a specific technical track (nursing, cybersecurity cert) may not need this.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q2. When you hear "AI," what comes to mind? Do you see it as relevant to the kind of work you want to do?</strong>
+    <em>Listen for: fear ("I'll be replaced"), curiosity ("I want to understand it"), or dismissal ("that's for engineers"). Each tells you how to position the program.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q3. In your military role, how often did you review someone else's work, validate information before passing it up, or catch errors in a process? Can you give me an example?</strong>
+    <em>Listen for: whether they naturally describe AI-supervision-adjacent skills without realizing it. The best signal is a detailed, specific example.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q4. If a training program could help you land a role paying $65K&ndash;$85K in 90 days, where you'd be supervising AI tools rather than building them, what would that need to look like for you to invest 4&ndash;6 weeks in it?</strong>
+    <em>Listen for: format preferences (remote vs. in-person, full-time vs. part-time), salary expectations, and what "invest" means to them (time, money, opportunity cost of not doing something else).</em>
+  </div>
+
+  <div class="question">
+    <strong>Q5. What have you already tried for career transition &mdash; TAP, SkillBridge, bootcamps, certifications? What worked and what didn't?</strong>
+    <em>Listen for: specific complaints. "TAP was useless" and "the bootcamp was too technical" are different problems. Their past experience shapes how they'll evaluate your program.</em>
+  </div>
+
+  <div class="question">
+    <strong>Q6. If this program cost $2,000 out of pocket &mdash; or was free if covered by GI Bill or a workforce grant &mdash; which path would you pursue? Would cost be a dealbreaker?</strong>
+    <em>Listen for: willingness to pay (strongest signal), awareness of funding options, or hard resistance. If everyone says "only if it's free," the business model needs a different payer (employer, grant).</em>
+  </div>
+
+  <div class="commitment-test">
+    <strong>Commitment test (Q7):</strong> "We're planning a pilot cohort this summer. If you qualified, would you apply? And &mdash; separate question &mdash; can you think of two or three people in your unit or veteran network who'd also be interested? Would you share it with them?"
+    <br><br><em>"Would you apply" tests personal intent. "Would you share it" tests whether the value prop is strong enough to refer. Both matter.</em>
+  </div>
+
+  <div class="flags">
+    <div class="flag-col green-flags">
+      <h5>Green Flags</h5>
+      <ul>
+        <li>Immediately connects their military role to the AI-supervision framing</li>
+        <li>Asks specific questions about the program (schedule, outcomes, who's teaching)</li>
+        <li>Names people they'd refer</li>
+        <li>Says "I'd pay for this" or "I'd use my GI Bill"</li>
+        <li>Describes frustration with existing transition programs</li>
+      </ul>
+    </div>
+    <div class="flag-col red-flags">
+      <h5>Red Flags</h5>
+      <ul>
+        <li>"Sounds cool" but no questions and no follow-up offer</li>
+        <li>Only interested if it's completely free and requires no time</li>
+        <li>Already committed to a specific career path (nursing, law school)</li>
+        <li>Sees AI as irrelevant to their future work</li>
+        <li>Can't describe any process-oversight experience from their service</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- ASSET 2: 90-DAY TIMELINE                                      -->
+<!-- ============================================================ -->
+
+<h2 id="timeline"><span class="section-number">2</span> 90-Day Timeline &amp; Milestones</h2>
+
+<p>This plan assumes a start date of <strong>Week 1 = the Monday after the team commits to go</strong>. Adjust dates accordingly. The plan is designed for a 1&ndash;2 person core team working 20&ndash;30 hours/week on LearnAIR alongside other obligations.</p>
+
+<!-- MONTH 1 -->
+<h3>Month 1: Validate or Kill (Weeks 1&ndash;4)</h3>
+<p><em>Objective: Talk to enough people to know if the problem is real and the market will pay.</em></p>
+
+<table>
+  <tr>
+    <th>Week</th>
+    <th>Activities</th>
+    <th>Deliverables</th>
+  </tr>
+  <tr>
+    <td><strong>1</strong></td>
+    <td>
+      Finalize interview scripts (done &mdash; see above). Build a target list: 8&ndash;10 employers, 5&ndash;6 VSOs, 8&ndash;10 veterans. Send outreach emails/LinkedIn messages to book conversations. Set up a shared note-taking template and call tracker.
+    </td>
+    <td>
+      Target list with names, orgs, contact info, and outreach status. Shared call tracker (spreadsheet or Notion). First 3&ndash;5 conversations booked for Week 2.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>2&ndash;3</strong></td>
+    <td>
+      Conduct 15&ndash;20 validation conversations across all three segments. Debrief after every call (written notes within 1 hour). Begin pattern analysis: what's consistent, what's surprising.
+    </td>
+    <td>
+      15&ndash;20 completed conversation summaries. Running signal log: top quotes, recurring themes, specific objections, willingness-to-pay data points. At least 2 employers who've agreed to review pilot graduates.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>3&ndash;4</strong></td>
+    <td>
+      Synthesize findings into a validation report. Draft v0.1 curriculum outline (4&ndash;6 week pilot structure). Identify 2&ndash;3 potential pilot partners (VSOs or bases with SkillBridge). Begin informal conversations with potential instructors/advisors. Research funding: WIOA grants, SkillBridge authorization, state workforce board programs.
+    </td>
+    <td>
+      <strong>Validation Report</strong> (2&ndash;3 pages): problem confirmed/not confirmed, willingness to pay, employer pull, veteran resonance, key risks. <strong>Curriculum Outline v0.1</strong>: week-by-week topics, capstone project concept, tools used. <strong>Partner shortlist</strong> with status of each conversation. <strong>Funding options memo</strong>: 3&ndash;5 specific programs with eligibility, amounts, and deadlines.
+    </td>
+  </tr>
+</table>
+
+<div class="kill-criteria">
+  <h4>Day 30 Kill Criteria</h4>
+  <p>Stop and reassess the entire concept if any of these are true:</p>
+  <ul>
+    <li>Fewer than 3 of 8+ employer conversations produced a concrete next step (review graduates, introduce to hiring manager, discuss pipeline).</li>
+    <li>No VSO or workforce partner expressed willingness to help recruit a pilot cohort.</li>
+    <li>Veterans consistently said "I don't see how this is different from [existing program]" without being able to articulate what's better.</li>
+    <li>Zero employers could name a specific AI-supervision-adjacent role they're hiring for or expect to hire for within 12 months.</li>
+  </ul>
+  <p><strong>What to do if you hit kill criteria:</strong> Don't abandon the thesis. Reframe. The specific failure tells you where. If employers don't see the role, the market isn't ready (shelf it 6 months). If veterans don't resonate, the positioning needs work (test new language). If partners won't engage, your credibility package is insufficient (build it before asking).</p>
+</div>
+
+<!-- MONTH 2 -->
+<h3>Month 2: Build and Launch Pilot (Weeks 5&ndash;8)</h3>
+<p><em>Objective: Run a small, fast, ugly pilot that produces real graduates an employer can evaluate.</em></p>
+
+<table>
+  <tr>
+    <th>Week</th>
+    <th>Activities</th>
+    <th>Deliverables</th>
+  </tr>
+  <tr>
+    <td><strong>5</strong></td>
+    <td>
+      Finalize pilot design: 10&ndash;15 participants, 4 weeks, remote-first (or hybrid if partner provides space). Build curriculum into a deliverable format (slide decks, exercises, capstone brief). Open applications through partner channels. Begin SkillBridge paperwork if applicable.
+    </td>
+    <td>
+      <strong>Pilot curriculum package</strong>: 4 weeks of sessions, exercises, tools list, capstone project spec. Application form live. Recruitment outreach sent through at least 2 channels.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>6</strong></td>
+    <td>
+      Screen applicants. Select cohort (bias toward diversity of MOS, branch, and experience level &mdash; you want to learn what backgrounds succeed). Onboard participants: set expectations, distribute materials, confirm schedules. Submit first funding application (WIOA, state workforce grant, or similar).
+    </td>
+    <td>
+      Cohort selected and notified. Onboarding packet sent. At least 1 funding application submitted. Pre-program survey completed by all participants (baseline skills, expectations, career goals).
+    </td>
+  </tr>
+  <tr>
+    <td><strong>7&ndash;8</strong></td>
+    <td>
+      <strong>Run Pilot Weeks 1&ndash;2.</strong> Teach. Observe. Collect feedback after every session (5-minute survey or verbal check). Adjust pacing in real time &mdash; this is a learning exercise, not a performance. Begin scheduling employer review sessions for Week 10&ndash;11.
+    </td>
+    <td>
+      First 2 weeks of instruction delivered. Session-by-session feedback log. At least 2 curriculum adjustments documented ("we changed X because participants struggled with / breezed through Y"). Employer review sessions confirmed for post-pilot.
+    </td>
+  </tr>
+</table>
+
+<div class="decision-point">
+  <h4>Day 60 Decision Point</h4>
+  <p>By now you have partial pilot data. The team needs to answer:</p>
+  <ul>
+    <li><strong>Are participants engaged?</strong> If attendance drops below 70% by week 2, the format or content isn't working. Diagnose fast: is it schedule, difficulty, relevance, or life circumstances?</li>
+    <li><strong>Is employer interest holding?</strong> The employers who said "yes" at day 30 &mdash; are they still returning emails? If they've gone quiet, the pull is weaker than interviews suggested.</li>
+    <li><strong>Can we fund the next cohort?</strong> If no funding path has materialized and the team can't self-fund, the program needs a different economic model (employer-paid, for example).</li>
+  </ul>
+  <p><strong>Commit or pivot:</strong> If 2 of 3 signals are positive, commit to completing the pilot and planning Cohort 2. If only 1 is positive, finish the pilot but pause expansion until you understand why.</p>
+</div>
+
+<!-- MONTH 3 -->
+<h3>Month 3: Complete, Measure, Decide (Weeks 9&ndash;12)</h3>
+<p><em>Objective: Finish the pilot, produce measurable outcomes, and decide whether to scale.</em></p>
+
+<table>
+  <tr>
+    <th>Week</th>
+    <th>Activities</th>
+    <th>Deliverables</th>
+  </tr>
+  <tr>
+    <td><strong>9&ndash;10</strong></td>
+    <td>
+      <strong>Run Pilot Weeks 3&ndash;4.</strong> Capstone projects in progress. Participants present capstones in Week 4 (ideally to an employer panel). Collect post-program survey: skills gained, confidence level, career clarity, NPS. Facilitate employer review sessions &mdash; each employer reviews 2&ndash;3 capstone projects and gives structured feedback.
+    </td>
+    <td>
+      Pilot instruction complete. All capstone projects submitted. Post-program survey data collected. Employer feedback on at least 5 graduates (structured rubric: readiness, hire/no-hire/maybe, specific gaps).
+    </td>
+  </tr>
+  <tr>
+    <td><strong>11</strong></td>
+    <td>
+      Compile results: completion rate, skill gains, employer assessments, participant satisfaction, any job placements or interviews. Write the Pilot Results Brief (this becomes your primary credibility asset). Begin drafting Cohort 2 plan: what to change, how to scale, funding model.
+    </td>
+    <td>
+      <strong>Pilot Results Brief</strong> (3&ndash;5 pages): cohort demographics, completion rate, skill assessments, employer feedback, participant testimonials, lessons learned, recommended changes. <strong>Cohort 2 Draft Plan</strong>: timeline, target size, curriculum changes, funding strategy.
+    </td>
+  </tr>
+  <tr>
+    <td><strong>12</strong></td>
+    <td>
+      Share Pilot Results Brief with all stakeholders: employers, VSO partners, potential funders. Use results to open new conversations (the brief is your outbound sales tool now). Make the go/no-go decision on Cohort 2. If go: lock dates, open recruitment, submit additional funding applications.
+    </td>
+    <td>
+      Results Brief distributed. Stakeholder feedback collected. <strong>Go/no-go decision documented</strong> with rationale. If go: Cohort 2 dates announced, recruitment pipeline active, at least 1 confirmed funding source or clear path to one.
+    </td>
+  </tr>
+</table>
+
+<div class="kill-criteria">
+  <h4>Day 90 Kill Criteria</h4>
+  <p>Do not proceed to Cohort 2 if:</p>
+  <ul>
+    <li>Pilot completion rate was below 60% (fewer than 6 of 10 finished).</li>
+    <li>Zero employers rated any graduate as "would hire" or "would interview."</li>
+    <li>No participant landed a relevant role, interview, or concrete career next step within 30 days of completion.</li>
+    <li>No funding path exists for the next cohort (can't be volunteer-run indefinitely).</li>
+    <li>The team can't identify what to change to improve outcomes. (If the pilot failed but the lessons are clear, that's a reason to iterate, not quit.)</li>
+  </ul>
+</div>
+
+<div class="decision-point">
+  <h4>Day 90 Scale Decision Framework</h4>
+  <table>
+    <tr>
+      <th>Signal</th>
+      <th>Strong (Scale)</th>
+      <th>Mixed (Iterate)</th>
+      <th>Weak (Pause/Kill)</th>
+    </tr>
+    <tr>
+      <td>Completion rate</td>
+      <td>80%+</td>
+      <td>60&ndash;79%</td>
+      <td>&lt;60%</td>
+    </tr>
+    <tr>
+      <td>Employer "would hire/interview"</td>
+      <td>3+ employers</td>
+      <td>1&ndash;2 employers</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Participant NPS</td>
+      <td>50+</td>
+      <td>20&ndash;49</td>
+      <td>&lt;20</td>
+    </tr>
+    <tr>
+      <td>90-day placement rate</td>
+      <td>50%+</td>
+      <td>25&ndash;49%</td>
+      <td>&lt;25%</td>
+    </tr>
+    <tr>
+      <td>Funding for next cohort</td>
+      <td>Secured</td>
+      <td>Applied, pending</td>
+      <td>No leads</td>
+    </tr>
+  </table>
+  <p><strong>3+ Strong signals:</strong> Launch Cohort 2 with confidence. <strong>Mixed:</strong> Run a smaller Cohort 2 (5&ndash;8 people) to test specific changes. <strong>Mostly Weak:</strong> Publish what you learned, maintain relationships, revisit in 6 months or pivot the model.</p>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- ASSET 3: TEAM CREDIBILITY SECTION                             -->
+<!-- ============================================================ -->
+
+<h2 id="team"><span class="section-number">3</span> Team Credibility Section Template</h2>
+
+<p>This is the "Who We Are" section for briefing documents, pitch decks, funding applications, and the LearnAIR website. Partners and funders evaluate this section for three things: <strong>(1) Do these people understand the veteran population?</strong> (military service or deep VSO experience), <strong>(2) Do they understand AI well enough to teach it?</strong> (applied AI work, not just enthusiasm), and <strong>(3) Can they actually run a training program?</strong> (instructional design, program management, or workforce development track record).</p>
+
+<p>You do not need all three in one person. You need all three covered by the team.</p>
+
+<h3>Recommended Structure (Per Team Member)</h3>
+
+<div class="script-box">
+  <h4>Template: Team Member Bio</h4>
+
+  <div class="template-field">[Full Name], [Role at LearnAIR]</div>
+
+  <p><strong>Paragraph 1 &mdash; Military or veteran-community credibility:</strong></p>
+  <div class="template-field">[Branch, years of service, rank at separation, primary role/MOS]. [One sentence on what you managed: team size, operational scope, stakes]. [One sentence connecting that experience to why you're building this &mdash; the personal "why."]</div>
+
+  <p><strong>Paragraph 2 &mdash; AI or technology credibility:</strong></p>
+  <div class="template-field">[Current or recent role involving AI, automation, or technology implementation]. [One specific example: "Led the deployment of..." or "Built a system that..." or "Trained a team of X to use..."]. [If no direct AI experience: describe adjacent technical credibility and state that you're partnered with / advised by someone who has it.]</div>
+
+  <p><strong>Paragraph 3 &mdash; Workforce or education credibility:</strong></p>
+  <div class="template-field">[Any teaching, training, mentoring, or program design experience]. [If formal: "Designed and delivered a 12-week technical training program for..." If informal: "Mentored 30+ transitioning service members through..."]. [If none: omit this paragraph and address it in the "Team Gaps" section below.]</div>
+</div>
+
+<h3>Example Bios (Adapt to Actual Team)</h3>
+
+<div class="example-block">
+  <strong>Example A &mdash; Military operator turned tech leader:</strong><br><br>
+  "Mike served 10 years as an Army officer, leading teams of up to 50 personnel in complex operational environments where mission success depended on rapid information synthesis, disciplined processes, and sound judgment under uncertainty. He deployed twice and managed cross-functional operations that required coordinating intelligence, logistics, and execution in real time.<br><br>
+  After the military, Mike transitioned into technology leadership, where he [specific AI/tech role or project]. He has firsthand experience implementing AI-assisted workflows and understands both the technical requirements and the human factors that determine whether these systems succeed or fail in practice.<br><br>
+  He founded LearnAIR because he saw the same skills that made his teams effective in the military &mdash; process discipline, exception handling, quality assurance under pressure &mdash; being exactly what's missing in the civilian AI workforce."
+</div>
+
+<p><em>Note how the bio does three things: establishes military credibility with specifics (not just "I served"), connects the military experience directly to the AI-supervision thesis, and explains the personal motivation. Funders and partners read dozens of bios &mdash; the ones that land are specific and connected to the mission, not generic.</em></p>
+
+<div class="example-block">
+  <strong>Example B &mdash; Veteran who pivoted into AI/ML:</strong><br><br>
+  "Sarah spent 8 years as a Marine Corps intelligence analyst, where she reviewed classified reporting, validated source reliability, and briefed senior leaders on assessments that influenced operational decisions. She managed a team of 12 analysts and developed quality-control processes for intelligence products under tight deadlines.<br><br>
+  After separating, she completed a machine learning certificate at [Institution] and now works as an AI operations specialist at [Company], where she supervises a team that validates AI-generated outputs for accuracy and compliance. She oversees exception-handling workflows where human judgment is the last line of defense before automated decisions go live.<br><br>
+  Sarah brings the rare combination of having done the military-to-AI-career transition herself, and now working daily in the exact kind of role LearnAIR prepares veterans for."
+</div>
+
+<div class="example-block">
+  <strong>Example C &mdash; Civilian co-founder with AI expertise:</strong><br><br>
+  "Jordan has spent 7 years building AI systems for healthcare and government clients at [Company]. He has designed human-in-the-loop workflows for clinical decision support, automated document review, and claims processing, and has trained non-technical teams to supervise these systems in production environments.<br><br>
+  While not a veteran himself, Jordan partnered with Mike after seeing the same pattern across every AI deployment: the hardest role to fill isn't the engineer who builds the model &mdash; it's the operator who knows when to trust it and when to override it. He recognized that military-trained professionals are uniquely suited for this role and brings the technical curriculum depth to complement the team's operational expertise."
+</div>
+
+<h3>Handling Team Gaps</h3>
+
+<p>Every early-stage team has gaps. Funders know this. What they're evaluating is whether you know what's missing and have a credible plan to fill it. Here's how to address the most common gaps:</p>
+
+<table>
+  <tr>
+    <th>Gap</th>
+    <th>How to Frame It</th>
+    <th>Specific Action to Cite</th>
+  </tr>
+  <tr>
+    <td><strong>No instructional designer</strong></td>
+    <td>"Our pilot curriculum is being developed in partnership with [advisor name] who has designed workforce programs for [organization]. We are actively recruiting an instructional design lead for Cohort 2 and have allocated [budget/equity/role] for the position."</td>
+    <td>Name a specific advisor, even if informal. If you don't have one, get one before publishing this section. A 30-minute conversation with an ID professional at a community college or workforce board is enough to cite as "in consultation with."</td>
+  </tr>
+  <tr>
+    <td><strong>No AI/ML technical depth</strong></td>
+    <td>"Our technical curriculum is informed by [advisor/partner] who leads AI implementation at [company/org]. The LearnAIR program focuses on AI workflow supervision, not model development, and our curriculum emphasizes applied judgment and process management rather than engineering skills."</td>
+    <td>Reframe the gap as intentional scoping. You're not teaching people to build AI &mdash; you're teaching people to work alongside it. But you still need one credible technical voice on the advisory board.</td>
+  </tr>
+  <tr>
+    <td><strong>No workforce development track record</strong></td>
+    <td>"While this is LearnAIR's first formal cohort, our team brings [X years] of combined experience in military training and professional development. We are partnering with [VSO or workforce board] to ensure our program design meets industry standards for workforce training outcomes measurement."</td>
+    <td>Military training IS workforce development. Frame it that way. An Army NCO who ran a training program for 30 soldiers is closer to an instructional designer than most people realize.</td>
+  </tr>
+  <tr>
+    <td><strong>No veteran on the team</strong></td>
+    <td>This is the hardest gap to overcome. Be honest: "Our founding team does not include a veteran, and we recognize that limits our credibility with the community we serve. We have recruited [name], a [rank/branch] veteran, as an advisory board member and are actively seeking a veteran co-founder or program director." <strong>Do not launch without at least one veteran in a named, visible role.</strong></td>
+    <td>Recruit a veteran advisor immediately. This is non-negotiable for the market. A program that trains veterans without veteran leadership will face justified skepticism from every stakeholder.</td>
+  </tr>
+</table>
+
+<h3>Advisory Board Section</h3>
+
+<p>Even with 0&ndash;1 formal advisors, create an advisory board section. It signals that you're building institutional support. Structure:</p>
+
+<div class="script-box">
+  <h4>Advisory Board (Template)</h4>
+
+  <div class="template-field"><strong>[Name]</strong> &mdash; [Title, Organization]. [One sentence on relevance: "Brings 15 years of experience in workforce program design for veteran populations" or "Leads AI deployment for a Fortune 500 healthcare system."]</div>
+
+  <div class="template-field"><strong>[Name]</strong> &mdash; [Title, Organization]. [One sentence.]</div>
+
+  <div class="template-field"><strong>[Name]</strong> &mdash; [Title, Organization]. [One sentence.]</div>
+
+  <p style="margin-top: 1rem; font-size: 0.92rem; color: #718096;"><em>Aim for 3&ndash;5 advisors covering: (1) military/veteran community, (2) AI/technology, (3) workforce development/education, (4) employer perspective. Even informal advisors count &mdash; ask permission to list them, and describe their contribution accurately.</em></p>
+</div>
+
+<h3>What Funders and Partners Actually Look For</h3>
+
+<p>Based on how DOL VETS grants, workforce board partnerships, and impact investors evaluate teams:</p>
+
+<ul>
+  <li><strong>Specificity over superlatives.</strong> "10-year Army officer who managed 50-person teams" beats "decorated military leader with extensive experience." Numbers, roles, and outcomes are credible. Adjectives are not.</li>
+  <li><strong>Connection to the mission.</strong> Why this team, for this problem, at this time? The personal narrative matters more than the resume. "I watched 6 people in my platoon struggle to translate their skills" is more compelling than "I identified a market opportunity."</li>
+  <li><strong>Awareness of what you don't know.</strong> Teams that acknowledge gaps and show a plan to fill them are more credible than teams that pretend to have everything figured out.</li>
+  <li><strong>Evidence of traction.</strong> Even small things count: "We've conducted 20 validation interviews with employers," "We have a letter of intent from [VSO]," "Three employers have agreed to review pilot graduates." Traction beats credentials.</li>
+  <li><strong>Diversity of perspective.</strong> A team of three Army officers is less credible for a cross-service program than a team with Army, Navy, and a civilian with workforce development experience. If the team is homogeneous, the advisory board needs to fill that gap.</li>
+</ul>
+
+<hr>
+
+<p style="text-align: center; color: #a0aec0; font-size: 0.85rem; margin-top: 3rem;">
+  LearnAIR &mdash; Practical Assets v1.0 &mdash; Prepared for demand validation and pilot planning.
+</p>
+
+</body>
+</html>

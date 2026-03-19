@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Deep Dive — People, Product, Position</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hub-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  .article td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    width: 1%;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* --- KEY QUESTION CALLOUT --- */
+  .key-question {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .key-question strong {
+    color: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    .article td:first-child { white-space: normal; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Research</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Deep Dive</div>
+  <h1>LearnAIR Deep Dive &mdash; People, Product, Position</h1>
+  <div class="doc-date">March 19, 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- COMPANY -->
+  <hr>
+  <h2>Company</h2>
+
+  <table>
+    <tr><td><strong>Legal name</strong></td><td>Neesh.ai (DBA: LearnAIR)</td></tr>
+    <tr><td><strong>Founded</strong></td><td>2023 (rebranded Oct 2025)</td></tr>
+    <tr><td><strong>HQ</strong></td><td>Redmond/Bend, Oregon</td></tr>
+    <tr><td><strong>Team</strong></td><td>~15 people</td></tr>
+    <tr><td><strong>Funding</strong></td><td>Bootstrapped, no VC</td></tr>
+    <tr><td><strong>Status</strong></td><td>SDVOSB (Service-Disabled Veteran-Owned Small Business)</td></tr>
+    <tr><td><strong>Clients</strong></td><td>~100 businesses, 2 unnamed Fortune 50, Les Schwab, OMEP</td></tr>
+    <tr><td><strong>Certs</strong></td><td>OpenAI Service Partner, ChatGPT Team Reseller, SHRM Provider</td></tr>
+    <tr><td><strong>Recognition</strong></td><td>Redmond Chamber &ldquo;New Business/Product of the Year&rdquo; 2024, STRIVE Pitch winner</td></tr>
+  </table>
+
+  <p><strong>Origin</strong>: Justin noticed businesses using ChatGPT for jokes, not work. Previously ran an Amazon consulting agency (Volitant) which he sold in 2022. Pivoted to AI training.</p>
+
+  <!-- PEOPLE -->
+  <hr>
+  <h2>People</h2>
+
+  <h3>Justin Coats &mdash; CVO &amp; Co-Founder</h3>
+  <ul>
+    <li>Marine veteran &mdash; helicopter mechanic, then commercial pilot, then FAA drone pilot</li>
+    <li><strong>Disabled veteran</strong> (service-connected, hence SDVOSB)</li>
+    <li>Serial entrepreneur &mdash; Amazon agency (Volitant) &rarr; sold 2022 &rarr; AI training</li>
+    <li>Won STRIVE Pitch Competition ($4K, COCC Small Business Dev Center)</li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/ai-integrator" target="_blank">linkedin.com/in/ai-integrator</a></li>
+    <li>Philosophy: &ldquo;Don&rsquo;t Forget the Human Part&rdquo; &mdash; AI augments, never replaces</li>
+    <li><strong>Key quotes</strong>:
+      <ul>
+        <li>&ldquo;AI should work for people, not the other way around&rdquo; (STRIVE pitch)</li>
+        <li>&ldquo;Veterans have a unique ability to lead with resilience, adaptability, and purpose&rdquo;</li>
+        <li>&ldquo;From day one, our mission has been to place humans at the center of AI adoption&rdquo;</li>
+      </ul>
+    </li>
+    <li><strong>Core concept</strong>: &ldquo;Digital Employees&rdquo; / &ldquo;Digital Teammates&rdquo; &mdash; not &ldquo;AI tools.&rdquo; The 80/20 offload: AI does 80% of busywork, humans do the 20% that requires judgment.</li>
+    <li><strong>His vocabulary</strong>: &ldquo;AI integration&rdquo; (not adoption), &ldquo;Everboarding&rdquo; (continuous, not one-time), &ldquo;Learn, Build, Deploy&rdquo; methodology, &ldquo;live, human-led&rdquo; training</li>
+    <li><strong>Podcast circuit</strong>: Wantrepreneur Show (#1149), Language of Leadership (#020), DARE (2:42), AI Chopping Block (&ldquo;Work of 30 People Using AI&rdquo;), Adventurous Entrepreneurs (#63)</li>
+    <li><strong>Authentic POV</strong>: AI is a workforce transformation that should be led by people who understand mission, discipline, and human factors &mdash; not just technologists. Veterans are uniquely positioned because they understand systems, adaptability under pressure, and purpose beyond self.</li>
+  </ul>
+
+  <h3>Teresa Coats, M.S. &mdash; CEO &amp; Co-Founder</h3>
+  <ul>
+    <li>Justin&rsquo;s wife. M.S. degree (likely Exercise Science, Cal U of PA)</li>
+    <li>Academic background &mdash; taught Intro to Sport Science at Boise State (as recently as summer 2025, GPS athlete monitoring / loading metrics)</li>
+    <li>Became CEO at Oct 2025 rebrand (was COO &mdash; earned the title through operational execution)</li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/teresacoats" target="_blank">linkedin.com/in/teresacoats</a></li>
+    <li><strong>Key quotes</strong>:
+      <ul>
+        <li>&ldquo;AI is only as transformative as the people empowered to use it&rdquo;</li>
+        <li>&ldquo;Employees tell us that AI is helping them rediscover what is fun and exciting in their work. It&rsquo;s a real awakening &mdash; suddenly the mundane tasks are lifted.&rdquo;</li>
+        <li>&ldquo;With our expansion into India and new partnerships with international conglomerates, we are doubling down on our mission to democratize AI literacy.&rdquo;</li>
+      </ul>
+    </li>
+    <li><strong>Speaking</strong>: AI + EQ = Business Intelligence Summit (Feb 2026, Central Oregon SHRM &mdash; 5 PDCs)</li>
+    <li><strong>Leadership style</strong>: Operator. &ldquo;Translate complexity into clear, actionable strategy.&rdquo; Justin is the vision, Teresa is execution.</li>
+    <li><strong>Sport science angle</strong>: Thinks in load management, periodization, data-driven coaching &mdash; will intuitively understand health/performance optimization. Natural bridge to Baseline/health work if relevant.</li>
+    <li><strong>What she cares about for Monday</strong>: Practical, measurable outcomes. Human-centered framing. Institutional validation (SHRM, OpenAI, Fortune 50). She&rsquo;s not a theorist &mdash; everything is &ldquo;build it in the session, deploy it Monday.&rdquo;</li>
+  </ul>
+
+  <h3>Bobby Napiltonia &mdash; Chairman &amp; Chief Strategist</h3>
+  <ul>
+    <li><strong>36+ years in tech. This is the credibility hire. ACTIVELY ENGAGED &mdash; not ceremonial.</strong></li>
+    <li>Creative Labs (Sound Blaster era) &rarr; BEA Systems (Worldwide Channels) &rarr; <strong>Salesforce (SVP, created AppExchange with Benioff, grew Channels from &lt;5% to 1/3 of revenue)</strong> &rarr; State Software (JSON era) &rarr; <strong>Twilio (first CRO, $5M &rarr; $178M in 18 months)</strong> &rarr; Okera (President, acquired by Databricks) &rarr; The GTM Firm &rarr; LearnAIR</li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/bobby-napiltonia-8b82624" target="_blank">linkedin.com/in/bobby-napiltonia-8b82624</a> (487 posts, 4 articles &mdash; very active)</li>
+    <li>X: @bobbynap (dormant &mdash; LinkedIn is his platform)</li>
+    <li>Also: Venture Partner at Founder First Fund, UPWARD Men Silicon Valley chapter leader</li>
+    <li><strong>Engagement proof</strong>: Spoke on Dreamforce &rsquo;25 floor representing LearnAIR, posts LinkedIn content tagging LearnAIR regularly, announced rebrand personally with video (114 likes), leading India expansion</li>
+    <li><strong>Key quotes</strong>:
+      <ul>
+        <li>&ldquo;AI is like air. It&rsquo;s all around us, it powers everything, but most people still don&rsquo;t know how to breathe it.&rdquo;</li>
+        <li>&ldquo;Two decades ago we launched the AppExchange; today it&rsquo;s on its way to becoming a $2 trillion economy. [LearnAIR is] serving the largest market we&rsquo;ve ever seen &mdash; AI Literacy.&rdquo;</li>
+        <li>&ldquo;Training precedes productivity.&rdquo;</li>
+        <li>&ldquo;Why generic AI without a human in the loop is BROKEN today in GTM&rdquo;</li>
+      </ul>
+    </li>
+    <li><strong>Core thesis</strong>: AI literacy training is the next trillion-dollar ecosystem play, analogous to AppExchange. Human-in-the-loop is non-negotiable. He criticizes fully automated AI outreach.</li>
+    <li><strong>His superpower</strong>: GTM/distribution/ecosystem building, not technology. Scaling go-to-market, partner ecosystems, pricing models.</li>
+    <li><strong>Self-describes as</strong>: &ldquo;Chief Helper,&rdquo; &ldquo;the Forrest Gump life of technology.&rdquo; No college degree, started at UPS.</li>
+    <li><strong>Hosts</strong>: &ldquo;Get the Money&rdquo; podcast (reframes GTM as &ldquo;Get The Money&rdquo;)</li>
+  </ul>
+
+  <h3>Trisha (Patricia Ann) Sargent &mdash; Program Manager / L&amp;D Specialist</h3>
+  <ul>
+    <li>Email: trisha.sargent@gmail.com</li>
+    <li>LinkedIn: <a href="https://linkedin.com/in/patricia-sargent-721a904a" target="_blank">linkedin.com/in/patricia-sargent-721a904a</a> &mdash; &ldquo;I help guide nonprofits &amp; human services...&rdquo;</li>
+    <li><strong>Location</strong>: Bend, Oregon</li>
+    <li><strong>Current dual roles</strong>:
+      <ol>
+        <li><strong>Director of Learning &amp; Development, Consumer Cellular</strong> &mdash; since ~July 2012. Previously Senior Manager of Training. Corporate call center workforce training at scale.</li>
+        <li><strong>Program Manager, HVRP, Easterseals Oregon</strong> &mdash; launched the Homeless Veterans Reintegration Program in Central Oregon. Federally funded (DOL), placing homeless vets into employment.</li>
+      </ol>
+    </li>
+    <li><strong>Prior corporate L&amp;D</strong>: T-Mobile, AT&amp;T, Gap Inc. &mdash; consistent workforce development track.</li>
+    <li><strong>Certifications</strong>: Certified Instructor, Tending the Roots Trauma-Informed Care curriculum. Passionate about trauma-informed organizational change.</li>
+    <li><strong>Created &ldquo;The CHIA Method of Connection&rdquo; (TM)</strong> &mdash; leadership framework: Courage, Honesty, Intuition, Accountability.</li>
+    <li><strong>Community</strong>: TEDxBend organizer/team member. Deep Central Oregon civic roots.</li>
+    <li><strong>Business registrations</strong>: Santa Cruz LLC (filed Jun 2025, Active) + Rosemary LLC &mdash; both registered in Bend under her name. Likely consulting vehicles.</li>
+    <li><strong>Possible Medal of Honor family connection</strong> (UNCONFIRMED): A Patricia Sargent is listed as daughter of Sgt. Maj. John L. Canley, Vietnam-era Medal of Honor recipient (Battle of Hue, 1968). Christened a Navy ship in his honor. If same person, her commitment to veteran services is deeply personal.</li>
+    <li><strong>What she brings</strong>: She&rsquo;s the operational backbone &mdash; knows how to build training programs (corporate L&amp;D), run federally-funded veteran workforce programs (HVRP), and navigate trauma-informed practice. She&rsquo;s the person who makes a program actually work on the ground.</li>
+  </ul>
+
+  <h3>Joe &mdash; East Coast</h3>
+  <ul>
+    <li>No info beyond first name. Justin is &ldquo;bringing him onto the team.&rdquo;</li>
+  </ul>
+
+  <h3>Rest of Team</h3>
+  <ul>
+    <li>Curtis Milander &mdash; Lead Trainer</li>
+    <li>Keith Newman &mdash; PR &amp; Outreach</li>
+    <li>Rhonda Coats &mdash; Sales Ops (likely family)</li>
+    <li>Carl Bohme &mdash; Applied AI Engineer</li>
+    <li>Devan Fischer &mdash; Applied AI Engineer (Army veteran)</li>
+    <li>Makenna Warner &mdash; AI Literacy Engineer &amp; Trainer</li>
+    <li>John Konye &mdash; Creative Director</li>
+    <li>Andrea Zuniga &mdash; Training Operations</li>
+    <li>Ben Kluger &mdash; GTM Strategist</li>
+    <li>Mark Daugherty &mdash; Facilities/Strategic Advisor</li>
+  </ul>
+
+  <!-- PRODUCTS & SERVICES -->
+  <hr>
+  <h2>Products &amp; Services</h2>
+
+  <h3>Training Series</h3>
+  <ul>
+    <li><strong>Foundation</strong> (3 live sessions &times; 1.5hrs): AI literacy, prompting, build a &ldquo;digital employee&rdquo; (custom GPT). Groups 5&ndash;20.</li>
+    <li><strong>Connect</strong> (Foundation + 3 practice sessions): Implementation support, Q&amp;A, troubleshooting.</li>
+    <li><strong>Build</strong> (launched Oct 2025): Agentic workflows, advanced. Details limited.</li>
+    <li><strong>Executive Series</strong>: Referenced in sales materials but not publicly listed. May be planned or lightly marketed.</li>
+  </ul>
+
+  <h3>Consulting Framework (5 pillars)</h3>
+  <p>Assess &rarr; Align &rarr; Educate &rarr; Enable &rarr; Sustain (Everboarding&copy;)</p>
+
+  <h3>Other Revenue</h3>
+  <ul>
+    <li><strong>ChatGPT Team Reselling</strong>: Verified reseller, can provision + manage licenses</li>
+    <li><strong>Strategic AI Implementation</strong>: Long-term partnerships &mdash; deployment, process redesign, compliance, change management</li>
+    <li><strong>AI Profile</strong>: Structured company profile optimized for LLM search (novel offering)</li>
+    <li><strong>Everboarding&copy;</strong>: Trademarked concept for ongoing AI adoption support (not one-time onboarding)</li>
+  </ul>
+
+  <h3>Pricing</h3>
+  <p>Not public. Contact-based. Given SHRM credits, group sizes, enterprise positioning: likely $5K&ndash;$25K+ per engagement.</p>
+
+  <h3>Performance Claims</h3>
+  <ul>
+    <li>80% busywork offloaded</li>
+    <li>10x faster output</li>
+    <li>92% post-training adoption rate</li>
+    <li>4.5hrs to first AI assistant</li>
+    <li>One nonprofit: &ldquo;four months of work&rdquo; &rarr; 1.5 hours</li>
+  </ul>
+
+  <!-- VETERAN PROGRAM -->
+  <hr>
+  <h2>Veteran Program</h2>
+
+  <p><strong>URL</strong>: <a href="https://learnair.com/veterans" target="_blank">learnair.com/veterans</a></p>
+
+  <ul>
+    <li>Goal: <strong>&ldquo;Train 1 million veterans in AI literacy&rdquo;</strong></li>
+    <li>Currently a <strong>waitlist page</strong> &mdash; not launched</li>
+    <li>Targets veterans at any transition stage</li>
+    <li>Flexible, online, practical AI literacy</li>
+    <li>No evidence of pilots run yet</li>
+    <li>No public funding or partnerships announced</li>
+  </ul>
+
+  <!-- OPENAI PARTNERSHIP -->
+  <hr>
+  <h2>OpenAI Partnership</h2>
+
+  <ol>
+    <li><strong>Official Service Partner</strong> &mdash; invite-only program for firms with &ldquo;deep technical expertise.&rdquo; LearnAIR is in a training-focused tier (vs. ML engineering firms like Tribe AI).</li>
+    <li><strong>Verified ChatGPT Team Reseller</strong> &mdash; can sell, provision, manage subscriptions directly.</li>
+  </ol>
+
+  <p>Announced September 30, 2025 (as Neesh.ai). Real partnership, not just a badge &mdash; but &ldquo;certified by OpenAI&rdquo; language may overstate depth.</p>
+
+  <div class="key-question">
+    <strong>Platform risk</strong>: Entire product line is ChatGPT-centric. No evidence of model-agnostic positioning.
+  </div>
+
+  <!-- PARTNERSHIPS & EXPANSION -->
+  <hr>
+  <h2>Partnerships &amp; Expansion</h2>
+
+  <ul>
+    <li><strong>Verix</strong> (India expansion): Co-founded by Kirthiga Reddy (ex-Meta India MD) and Saurabh Doshi (ex-Meta APAC MD). Clients include Netflix, UNICEF, Room to Read. Leading localized AI training into India.</li>
+    <li><strong>Easter Seals Oregon</strong> (via Trisha Sargent): Easter Seals runs HVRP ($1.4M DOL funding) and SSVF veteran programs across Oregon. Potential funding pipeline for veteran training.</li>
+  </ul>
+
+  <!-- COMPETITIVE POSITION -->
+  <hr>
+  <h2>Competitive Position</h2>
+
+  <h3>Strengths</h3>
+  <ul>
+    <li>SDVOSB opens government contract doors (5% federal set-aside)</li>
+    <li>Bobby Napiltonia brings enterprise credibility + Rolodex</li>
+    <li>OpenAI partnership is real</li>
+    <li>SHRM credits enable HR/L&amp;D department sales</li>
+    <li>Bend, Oregon base &mdash; perception advantage for non-coastal tech</li>
+    <li>Justin&rsquo;s exit history (Amazon agency) = knows how to build and sell</li>
+  </ul>
+
+  <h3>Weaknesses</h3>
+  <ul>
+    <li>Bootstrapped, small, family-heavy team</li>
+    <li>No public pricing, no third-party reviews</li>
+    <li>Limited content output (2 blog posts)</li>
+    <li>ChatGPT-only = platform risk</li>
+    <li>&ldquo;1 million veterans&rdquo; is aspirational with zero evidence of traction</li>
+    <li>Veteran program is a waitlist, not a product</li>
+  </ul>
+
+  <div class="key-question">
+    <strong>Key question</strong>: Is LearnAIR a training company that wants to add a veteran program, or a veteran-focused company? Right now it&rsquo;s clearly the former &mdash; the veteran initiative is marketing, not a business unit.
+  </div>
+
+  <!-- EASTER SEALS -->
+  <hr>
+  <h2>Easter Seals Oregon &mdash; Funding Context</h2>
+
+  <ul>
+    <li><strong>HVRP</strong>: $1.4M federal (DOL), ~$71K other. Career exploration, skills assessment, job readiness, vocational counseling, computer training, financial literacy, 90/180/270-day retention follow-up.</li>
+    <li><strong>SSVF</strong>: Housing assistance, employment support, benefits navigation.</li>
+    <li><strong>Service locations</strong>: Portland, McMinnville, Salem, Roseburg, Eugene, Grants Pass, Klamath Falls, Medford.</li>
+    <li><strong>Model</strong>: Federal funding &rarr; Easter Seals &rarr; contracts with specialized training providers. This is the standard pathway for LearnAIR to deliver AI training to veterans via DOL funding.</li>
+  </ul>
+
+  <!-- SOURCES -->
+  <hr>
+  <h2>Press &amp; Sources</h2>
+
+  <ul>
+    <li><a href="https://cascadebusnews.com/ai-training-firm-neesh-now-learnair/" target="_blank">Cascade Business News: AI Training Firm Neesh Now LearnAir</a></li>
+    <li><a href="https://cascadebusnews.com/neesh-ai-aims-to-spark-an-ai-awakening-in-the-workplace/" target="_blank">Cascade Business News: Neesh.AI Aims to Spark an AI Awakening</a></li>
+    <li><a href="https://cascadebusnews.com/neesh-ai-ceo-justin-coats-wins-prestigious-strive-program-pitch-competition/" target="_blank">Cascade Business News: STRIVE Pitch Win</a></li>
+    <li><a href="https://www.einnews.com/pr_news/857947531/ai-training-firm-neesh-is-now-learnair-taps-ex-salesforce-exec-bobby-napiltonia-chairman-and-teresa-coats-ceo" target="_blank">EIN Presswire: Rebrand + Bobby + Teresa</a></li>
+    <li><a href="https://bendbulletin.com/2025/10/17/redmond-ai-firm-changes-name-and-expands/" target="_blank">Bend Bulletin: Name Change &amp; Expansion</a></li>
+    <li><a href="https://bendbulletin.com/2025/02/18/redmond-tech-company-helps-nonprofits-businesses-use-ai/" target="_blank">Bend Bulletin: Helps Nonprofits Use AI</a></li>
+    <li><a href="https://oregon.easterseals.com/get-support/areas-of-support/veterans-families/veterans-employment-services-0" target="_blank">Easterseals Oregon Veteran Employment</a></li>
+  </ul>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
