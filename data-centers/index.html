@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Austin Warehouse-to-Data Center | Strategic Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --section-gap: 5rem;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  nav .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  nav .nav-links a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- HERO --- */
+  .hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .hero .meta {
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    gap: 2rem;
+  }
+
+  /* --- STAT BAR --- */
+  .stat-bar {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .stat-item {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--faint);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* --- CONTENT --- */
+  .doc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    margin-top: var(--section-gap);
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--ink);
+  }
+
+  .content p {
+    margin-bottom: 1.2rem;
+    max-width: 680px;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content ul li {
+    position: relative;
+    margin-bottom: 0.6rem;
+    max-width: 680px;
+  }
+
+  .content ul li::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.85rem;
+    width: 0.6rem;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  /* --- TABLES --- */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+
+  .data-table thead {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .data-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.6rem 1rem 0.6rem 0;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 0.7rem 1rem 0.7rem 0;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .data-table .highlight {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* --- CALLOUT --- */
+  .callout {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout p { margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- DARK CALLOUT --- */
+  .callout-dark {
+    background: var(--ink);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--accent);
+  }
+
+  .callout-dark * { color: var(--paper) !important; }
+
+  .callout-dark .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent) !important;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- CARD GRID --- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* --- DECISION GRID --- */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .decision-card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .decision-card.recommended {
+    background: var(--accent-bg);
+    border-top: 3px solid var(--accent);
+  }
+
+  .decision-card h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .decision-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* --- WORKFLOW --- */
+  .workflow-steps {
+    display: flex;
+    gap: 0;
+    margin: 2rem 0;
+  }
+
+  .wf-step {
+    flex: 1;
+    background: var(--warm);
+    padding: 1.2rem;
+    position: relative;
+    margin-right: 1.5rem;
+  }
+
+  .wf-step::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left: 6px solid var(--accent);
+  }
+
+  .wf-step:last-child { margin-right: 0; }
+  .wf-step:last-child::after { display: none; }
+
+  .wf-step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .wf-step .step-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1rem;
+  }
+
+  .wf-step p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* --- ECON BARS --- */
+  .econ-bars { margin: 2rem 0; }
+
+  .econ-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .econ-bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .econ-bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--warm);
+    position: relative;
+  }
+
+  .econ-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+  }
+
+  .econ-bar-fill.dark { background: var(--ink); }
+
+  .econ-bar-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* --- TOC --- */
+  .toc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    background: var(--warm);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .toc {
+    columns: 2;
+    column-gap: 3rem;
+    list-style: none;
+  }
+
+  .toc li {
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+  }
+
+  .toc a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  .toc .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* --- DIVIDERS --- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--faint);
+    margin: var(--section-gap) 0;
+  }
+
+  .thick-divider {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: var(--section-gap) 0;
+  }
+
+  /* --- SQUIGGLE (NIC-inspired) --- */
+  .squiggle {
+    width: 100%;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 Q15 12 20 6 Q25 0 30 6 Q35 12 40 6' fill='none' stroke='%23c9c3b8' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    margin: 0;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--faint);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- MOBILE --- */
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .decision-grid { grid-template-columns: 1fr; }
+    .workflow-steps { flex-direction: column; }
+    .wf-step { margin-right: 0; margin-bottom: 0.5rem; }
+    .wf-step::after { display: none; }
+    .toc { columns: 1; }
+    .econ-bar-label { width: 90px; font-size: 0.55rem; }
+    footer { flex-direction: column; gap: 1rem; }
+    nav .nav-links { display: none; }
+  }
+
+  @media print {
+    nav { display: none; }
+    body { font-size: 10pt; background-image: none; }
+    .content { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">andrew deal <span>/</span> research</div>
+    <ul class="nav-links">
+      <li><a href="#market">Market</a></li>
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#power">Power</a></li>
+      <li><a href="#incentives">Incentives</a></li>
+      <li><a href="#players">Players</a></li>
+      <li><a href="#deals">Deals</a></li>
+      <li><a href="#economics">Economics</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#decision">Decision</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Strategic Framework // March 2026</div>
+  <h1>Austin <em>Warehouse-to-<br>Data Center</em><br>Conversion</h1>
+  <p class="subtitle">A complete operating picture for warehouse owners, investors, and developers evaluating conversion, JV, or disposition strategy in Central Texas.</p>
+  <div class="meta">
+    <span>Scope: Austin Metro + Central TX</span>
+    <span>Updated: March 2026</span>
+    <span>35 Sources Cited</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">1.54 GW</div>
+    <div class="stat-label">Installed Capacity (2025)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">#2</div>
+    <div class="stat-label">U.S. Market by New Construction</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">225+ GW</div>
+    <div class="stat-label">ERCOT Queue (Data Centers ~70%)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">10-14x</div>
+    <div class="stat-label">Value Uplift (Warehouse to DC)</div>
+  </div>
+</div>
+
+<div class="squiggle"></div>
+
+<div class="toc-container">
+  <div class="toc-label">Contents</div>
+  <ol class="toc">
+    <li><a href="#market"><span class="toc-num">01</span> Market Overview</a></li>
+    <li><a href="#supply"><span class="toc-num">02</span> Supply/Demand Dynamics</a></li>
+    <li><a href="#thesis"><span class="toc-num">03</span> The Conversion Thesis</a></li>
+    <li><a href="#power"><span class="toc-num">04</span> Power Infrastructure</a></li>
+    <li><a href="#incentives"><span class="toc-num">05</span> Regulatory + Incentives</a></li>
+    <li><a href="#players"><span class="toc-num">06</span> Key Players</a></li>
+    <li><a href="#deals"><span class="toc-num">07</span> Recent Deals</a></li>
+    <li><a href="#economics"><span class="toc-num">08</span> Financial Model</a></li>
+    <li><a href="#risks"><span class="toc-num">09</span> Risks</a></li>
+    <li><a href="#decision"><span class="toc-num">10</span> Decision Framework</a></li>
+  </ol>
+</div>
+
+<div class="doc-container">
+
+  <!-- SECTION 1: MARKET OVERVIEW -->
+  <div class="section-header" id="market">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Market Overview</h2>
+  </div>
+
+  <div class="content">
+    <p>Austin's data center market reached approximately 1.54 GW of installed capacity in 2025, growing to an estimated 1.63 GW in 2026 and projected to reach 2.19 GW by 2031 (6.05% CAGR). The Austin-San Antonio corridor now accounts for roughly 1,700 MW of total capacity and has positioned itself as the second-largest U.S. data center market by new construction activity, behind only Northern Virginia.</p>
+
+    <p>Between 2023 and 2024, Central Texas construction activity quadrupled, adding 463.5 MW of potential demand under development. That four-fold expansion reflected a structural shift in developer and hyperscaler attention, not a cyclical spike.</p>
+
+    <h3>Demand Drivers</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Primary</div>
+        <div class="card-title">AI Compute</div>
+        <p>Hyperscalers collectively targeting $315-400B in annual CapEx. U.S. data center capacity leasing in Q3 2025 alone exceeded the entirety of 2024. Average AI data center requests run 300 MW at a single site.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Structural</div>
+        <div class="card-title">Energy Economics</div>
+        <p>Austin electricity averages $0.12/kWh, roughly 47% below the national average. At 100 MW scale, that differential represents tens of millions annually versus California or the Northeast.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Overflow</div>
+        <div class="card-title">DFW Migration</div>
+        <p>Dallas-Fort Worth remains dominant by installed capacity, but power constraints, land scarcity, and congestion have pushed project overflow south. Austin offers land at lower cost with comparable power access.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Baseline</div>
+        <div class="card-title">Cloud + Enterprise</div>
+        <p>Austin's 170,000+ technology sector workers generate native enterprise demand independent of the national AI build-out. Regional cloud, financial services, healthcare IT all continue to grow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SUPPLY/DEMAND -->
+  <div class="section-header" id="supply">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Supply / Demand Dynamics</h2>
+  </div>
+
+  <div class="content">
+    <p>The Austin industrial market provides the context against which conversion decisions are made. Two markets, moving in opposite directions.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Industrial / Warehouse</div>
+        <div class="card-title">Softening</div>
+        <p>Vacancy hit 21.9% (up 860 bps YoY). Net absorption of 4.1M sq ft was positive but outpaced by 6.8M sq ft of deliveries. Average asking rent: $13.17/sq ft NNN. Supply has outrun demand.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Data Center</div>
+        <div class="card-title">Constrained</div>
+        <p>Near all-time low vacancy nationally. Colocation asking rates hit $195.94/kW/month (up 6.5% YoY), expected to breach $200/kW in 2026. Lead times for new capacity: 18-36 months.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">The Arbitrage</div>
+      <p>Warehouse values are softer than peak. Data center premiums are near all-time highs. This divergence is the core conversion thesis. The supply of functional data center space is severely constrained relative to demand, and the timeline to bring new supply online is long. This creates a structural window for converting shovel-ready sites.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THESIS -->
+  <div class="section-header" id="thesis">
+    <span class="section-number">03</span>
+    <h2 class="section-title">The Conversion Thesis</h2>
+  </div>
+
+  <div class="content">
+    <h3>Why Warehouses</h3>
+    <ul>
+      <li><strong>Column spacing.</strong> Large-bay industrial buildings (40-60 ft spacing) accommodate row-and-aisle server deployments without obstruction.</li>
+      <li><strong>Floor loading.</strong> Class A distribution centers routinely specify 125-250 lbs/sq ft. Data centers require 150 lbs/sq ft minimum, 250 preferred. Many modern warehouses already qualify.</li>
+      <li><strong>Power access.</strong> Industrial parks are frequently served by 12-35 kV distribution feeders designed for manufacturing loads. Existing utility easements reduce permitting timelines.</li>
+      <li><strong>Site area.</strong> Warehouses with significant yard/trailer parking accommodate outdoor cooling towers, generators, switchgear, and battery storage without adding structure.</li>
+      <li><strong>Speed to market.</strong> Adaptive reuse can cut 6-12 months off delivery timelines compared to greenfield, with 10-15% cost advantages over new construction.</li>
+    </ul>
+
+    <h3>Conversion Candidate Scorecard</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>Minimum</th>
+          <th>Preferred</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Clear ceiling height</td><td class="num">24 ft</td><td class="num">30-36 ft</td></tr>
+        <tr><td>Floor slab load</td><td class="num">150 lbs/sq ft</td><td class="num">250 lbs/sq ft</td></tr>
+        <tr><td>Column spacing</td><td class="num">40 x 40 ft</td><td class="num">50 x 50 ft+</td></tr>
+        <tr><td>Building footprint</td><td class="num">50,000 sq ft</td><td class="num">150-500K sq ft</td></tr>
+        <tr><td>Site area for MEP</td><td class="num">20% of footprint</td><td class="num">40-60%</td></tr>
+        <tr><td>Existing power (3-phase)</td><td class="num">1-5 MW</td><td class="num">5-20+ MW</td></tr>
+        <tr><td>Distance to 138-345 kV transmission</td><td class="num">&lt; 5 miles</td><td class="num">&lt; 2 miles</td></tr>
+        <tr><td>Fiber access</td><td class="num">Within 1 mile</td><td class="num">On-site / lit</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-dark">
+      <div class="callout-label">Key Disqualifier</div>
+      <p>Ceiling height is the single most commonly cited disqualifier. Pre-2000 warehouse stock with 18-22 ft clear heights limits cooling system design flexibility. 24 ft is the practical minimum; 30 ft provides comfortable overhead mechanical routing.</p>
+    </div>
+
+    <h3>Three Conversion Approaches</h3>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Option A</div>
+        <div class="step-title">Powered Shell</div>
+        <p>$4-8M/MW. Upgrade envelope, install substation. Tenant provides MEP. Prologis model.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Option B</div>
+        <div class="step-title">Turnkey</div>
+        <p>$10-14M/MW. Full Tier II/III build: UPS, cooling, fire suppression, security, cabling.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Option C</div>
+        <div class="step-title">Wholesale Campus</div>
+        <p>Master-planned multi-tenant site. Secure transmission-level power, lease pads to operators. Tract model.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: POWER -->
+  <div class="section-header" id="power">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Power Infrastructure</h2>
+  </div>
+
+  <div class="content">
+    <p>Texas operates an isolated synchronous grid managed by ERCOT. Unlike other U.S. grids, ERCOT is not interconnected with neighboring grids at scale. Power supply and demand must balance in real time with limited external backstop. This isolation is both a feature (Texas-specific pricing and policy) and a risk (no external backup during emergencies).</p>
+
+    <h3>The Queue Problem</h3>
+
+    <p>ERCOT's Large Load Interconnection queue has exploded. This is the critical constraint.</p>
+
+    <div class="econ-bars">
+      <div class="econ-bar">
+        <div class="econ-bar-label">Sep 2024</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 25%;">
+            <span class="econ-bar-value">56 GW</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Sep 2025</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 91%;">
+            <span class="econ-bar-value">205 GW</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Current</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill dark" style="width: 100%;">
+            <span class="econ-bar-value">225+ GW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>225 GW of queued requests represents more than 2.5x the entire current ERCOT system peak demand. Approximately 70-73% are data centers. More than half have not submitted required studies. Realistic timeline from application to energized substation for large new loads (75+ MW): 3-5 years.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Sub-75 MW Window</div>
+      <p>For projects below 75 MW, Austin Energy handles interconnection through its own distribution planning process rather than the ERCOT LLI queue. This creates a potential pathway for mid-size conversions (5-75 MW) that bypasses the worst of the queue delays. This window is significant for mid-market conversion candidates.</p>
+    </div>
+
+    <h3>Senate Bill 6</h3>
+    <ul>
+      <li>Facilities drawing 75 MW or more must comply with ERCOT curtailment protocols during grid emergencies</li>
+      <li>On-site backup generation serving at least 50% of demand may be directed to deploy during grid events</li>
+      <li>Battery storage is becoming a practical necessity for compliance</li>
+      <li>The 75 MW threshold is adjustable by the Public Utility Commission of Texas</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 5: INCENTIVES -->
+  <div class="section-header" id="incentives">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Regulatory + Incentives</h2>
+  </div>
+
+  <div class="content">
+    <h3>Texas Sales Tax Exemption</h3>
+    <p>One of the most generous data center incentive structures in the United States. The program provides a 10-15 year exemption from the 6.25% state sales and use tax on qualifying purchases.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Capital Commitment</th>
+          <th>Jobs</th>
+          <th>Benefit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Standard</td><td class="num">$200M+ over 5 years</td><td class="num">20</td><td>10-15 year sales tax exemption</td></tr>
+        <tr><td>Large Project</td><td class="num">$500M+ over 5 years</td><td class="num">40</td><td>Extended eligibility</td></tr>
+      </tbody>
+    </table>
+
+    <p>Texas is forgoing approximately $1 billion/year through this program. For a $300M build, the exemption represents approximately $18-22M in avoided sales tax.</p>
+
+    <h3>Zoning</h3>
+    <p>Austin's LI and GI zoning permits data centers by right or administrative change of use. No full rezoning needed for most warehouse conversions. Outside city limits in Williamson, Hays, Caldwell, or Bastrop County, permitting is generally faster and less costly.</p>
+  </div>
+
+  <!-- SECTION 6: PLAYERS -->
+  <div class="section-header" id="players">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Key Players</h2>
+  </div>
+
+  <div class="content">
+    <h3>Developers / Operators</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Austin Angle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Skybox Datacenters</strong></td><td>Developer</td><td>600 MW campus in Hutto with Prologis. Largest active project in market.</td></tr>
+        <tr><td><strong>Prologis</strong></td><td>Industrial REIT</td><td>$25B data center arm. 160-acre Power Campus Austin. The warehouse-to-DC conversion model at scale.</td></tr>
+        <tr><td><strong>Tract</strong></td><td>Land developer</td><td>3,000 acres in Caldwell County. 4 GW at full build. 360 MW Phase 1 energized 2028.</td></tr>
+        <tr><td><strong>Digital Realty</strong></td><td>Colo REIT</td><td>Established multi-tenant footprint. Enterprise and cloud interconnection.</td></tr>
+        <tr><td><strong>CyrusOne / KKR</strong></td><td>Hyperscale</td><td>North Austin campus. Wholesale for cloud customers.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Capital</h3>
+    <ul>
+      <li><strong>Blackstone:</strong> Largest data center investor globally. Multiple Austin positions through QTS, Compass.</li>
+      <li><strong>Brookfield:</strong> Active in Texas data center infrastructure.</li>
+      <li><strong>Blue Owl Capital:</strong> Structured Meta Hyperion JV. Active in DC net lease financing.</li>
+      <li><strong>KKR:</strong> Owner of CyrusOne. Active acquirer globally.</li>
+    </ul>
+
+    <h3>Brokers + Advisors</h3>
+    <ul>
+      <li><strong>CBRE Data Center Solutions:</strong> Primary market intelligence and transaction broker for wholesale DC in Austin.</li>
+      <li><strong>JLL Technology + Infrastructure:</strong> Large campus and build-to-suit transactions.</li>
+      <li><strong>AQUILA Commercial:</strong> Austin-specific industrial and data center brokerage.</li>
+      <li><strong>Partners Real Estate:</strong> Local market specialist, Austin industrial.</li>
+      <li><strong>Texas Data Center Realty:</strong> Specialist broker for warehouse-to-DC specifically.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 7: DEALS -->
+  <div class="section-header" id="deals">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Recent Deals</h2>
+  </div>
+
+  <div class="content">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Location</th>
+          <th>Scale</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Skybox PowerCampus</strong><br><span style="color: var(--muted); font-size: 0.8rem;">Skybox + Prologis</span></td>
+          <td>Hutto, Williamson Co.</td>
+          <td class="num">600 MW<br><span style="color: var(--muted); font-size: 0.8rem;">Phase 1: 30 MW / $548M</span></td>
+          <td>Phase 1 delivering Jul 2025</td>
+        </tr>
+        <tr>
+          <td><strong>Tract Megasite</strong></td>
+          <td>Caldwell County</td>
+          <td class="num">4 GW at full build<br><span style="color: var(--muted); font-size: 0.8rem;">Initial: 360 MW</span></td>
+          <td>360 MW energized 2028</td>
+        </tr>
+        <tr>
+          <td><strong>Blueprint Data Centers</strong></td>
+          <td>Taylor + Georgetown</td>
+          <td class="num">85 MW</td>
+          <td>Under construction</td>
+        </tr>
+        <tr>
+          <td><strong>Iron Mountain</strong></td>
+          <td>Austin area</td>
+          <td class="num">Multi-building campus</td>
+          <td>Planning</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Growth Corridors</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">North</div>
+        <div class="card-title">Round Rock / Pflugerville / Hutto</div>
+        <p>Primary suburban growth corridor. Land available, utility relationships established. Williamson County.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">South</div>
+        <div class="card-title">Kyle / Buda / Lockhart</div>
+        <p>Emerging corridor. Bluebonnet Electric service. Hays and Caldwell Counties. Tract's bet.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: ECONOMICS -->
+  <div class="section-header" id="economics">
+    <span class="section-number">08</span>
+    <h2 class="section-title">Financial Model</h2>
+  </div>
+
+  <div class="content">
+    <p>The comparison frame: what does the building earn as a warehouse versus what it earns as a data center asset? Illustrative model for a 200,000 sq ft building at 20 MW.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Warehouse Hold</th>
+          <th>Powered Shell</th>
+          <th>Turnkey</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Build cost</td><td class="num">&mdash;</td><td class="num">$120M</td><td class="num">$240M</td></tr>
+        <tr><td>Annual revenue</td><td class="num">$2.6M</td><td class="num highlight">$29M</td><td class="num highlight">$47M</td></tr>
+        <tr><td>NOI</td><td class="num">$2.3M</td><td class="num">$20M</td><td class="num">$32M</td></tr>
+        <tr><td>Cap rate</td><td class="num">6%</td><td class="num">5.5%</td><td class="num">5%</td></tr>
+        <tr><td>Stabilized value</td><td class="num">$38M</td><td class="num highlight">$364M</td><td class="num highlight">$640M</td></tr>
+        <tr><td>Value creation</td><td class="num">&mdash;</td><td class="num highlight">+$326M</td><td class="num highlight">+$602M</td></tr>
+        <tr><td>Development yield</td><td class="num">&mdash;</td><td class="num">~17%</td><td class="num">~13%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-dark">
+      <div class="callout-label">The Value Gap</div>
+      <p>A fully energized powered shell in Austin leased on a 10-15 year triple-net basis trades at 5-5.5% cap rate. At $29M NOI, that implies approximately $527-580M stabilized value. Roughly 10-14x the warehouse value of the same building footprint. This value gap is real but requires navigating three gatekeepers: power interconnection, construction capital, and tenant execution.</p>
+    </div>
+
+    <h3>Conversion Costs by Type</h3>
+
+    <div class="econ-bars">
+      <div class="econ-bar">
+        <div class="econ-bar-label">Powered Shell</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 36%;">
+            <span class="econ-bar-value">$4-8M / MW</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Turnkey Tier II</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 64%;">
+            <span class="econ-bar-value">$10-14M / MW</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">AI-Optimized</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill dark" style="width: 100%;">
+            <span class="econ-bar-value">$18-22M / MW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: RISKS -->
+  <div class="section-header" id="risks">
+    <span class="section-number">09</span>
+    <h2 class="section-title">Risks</h2>
+  </div>
+
+  <div class="content">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Critical</div>
+        <div class="card-title">Power + Interconnection</div>
+        <p>225+ GW queued at ERCOT. New LLI applications enter a multi-year process. Austin Energy warning of "tremendous strain." The assumption that power will be available on any reasonable timeline requires rigorous due diligence.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Structural</div>
+        <div class="card-title">Grid Reliability</div>
+        <p>Winter Storm Uri killed 200+ Texans when ERCOT ordered 20,000 MW of blackouts. Five years later, structural vulnerabilities remain partially unresolved. Available power could fall 15+ GW short during extreme events.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Market</div>
+        <div class="card-title">Overbuilding</div>
+        <p>225 GW queued is implausible at face value. Many applications are speculative. The risk is timing mismatch: too many projects online simultaneously in 2027-2030 creating a short-term glut.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Cost</div>
+        <div class="card-title">Construction Inflation</div>
+        <p>Data center construction costs rose 47% per sq ft recently. Transformer lead times: 52-100+ weeks. Conversion projects are partially insulated by reusing the shell, but MEP faces the same equipment markets.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Mitigation</div>
+      <p>Priority-queue sites with existing high-voltage service, legacy manufacturing power agreements, or proximity to substations with demonstrated available capacity. Pre-lease or LOI before breaking ground. Do not start a speculative turnkey buildout without a committed tenant. Powered shell is more defensible as a spec product because capital commitment is lower.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 10: DECISION -->
+  <div class="section-header" id="decision">
+    <span class="section-number">10</span>
+    <h2 class="section-title">Decision Framework</h2>
+  </div>
+
+  <div class="content">
+    <h3>Four Strategic Options</h3>
+
+    <div class="decision-grid">
+      <div class="decision-card">
+        <h4>Convert</h4>
+        <p>Owner develops the data center and retains ownership. Requires capital access, long hold horizon, and operational sophistication.</p>
+      </div>
+      <div class="decision-card recommended">
+        <h4>JV / Partner</h4>
+        <p>Owner contributes land/building. Developer contributes capital and expertise. 20-40% promote on stabilized value. Best path for most warehouse holders.</p>
+      </div>
+      <div class="decision-card">
+        <h4>Sell</h4>
+        <p>Sell at data center site premium to a developer. Liquidity now. Expect 3-6x replacement cost for sites with committed power capacity.</p>
+      </div>
+      <div class="decision-card">
+        <h4>Hold</h4>
+        <p>Continue as warehouse. Preserve option value. Best if power or zoning constraints are disqualifying today. Wait for conditions to improve.</p>
+      </div>
+    </div>
+
+    <h3>Site Qualification</h3>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Step 1</div>
+        <div class="step-title">Site Qualification</div>
+        <p>Does the building meet 4+ of 6 conversion criteria? If not: hold or sell as-is.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Step 2</div>
+        <div class="step-title">Power Path</div>
+        <p>Can the site secure sufficient power within 36 months? If not: option value is speculative.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Step 3</div>
+        <div class="step-title">Capital + Expertise</div>
+        <p>Access to $50M+ and a development platform? If yes: convert. If no: JV or sell.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Step 4</div>
+        <div class="step-title">Timing</div>
+        <p>2025-2027 is the strongest near-term seller's market. After 2027, site premiums may moderate.</p>
+      </div>
+    </div>
+
+    <div class="callout-dark">
+      <div class="callout-label">Timing Window</div>
+      <p>The current window (2025-2027) is likely the strongest near-term seller's market for data center sites. Power-constrained markets are repricing land with committed utility capacity dramatically upward. Holding through 2027-2028 without a clear power path carries both opportunity cost and risk of missing the peak.</p>
+    </div>
+
+    <h3>JV Structure Options</h3>
+    <ul>
+      <li><strong>Promote structure:</strong> Contribute land/building at appraised value. Partner contributes cash and expertise. Owner receives 20-40% promote on stabilized value or sale proceeds.</li>
+      <li><strong>Ground lease:</strong> Retain fee interest and lease land under a 50-99 year ground lease. Current income, principal protection, and participation in development upside.</li>
+      <li><strong>Sale-leaseback:</strong> Sell at data center premium to institutional buyer who undertakes conversion. Take cash proceeds and exit clean.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="squiggle"></div>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://andrewdeal.info">Andrew Deal</a> / Research
+  </div>
+  <div class="footer-right">
+    March 2026 / 35 sources cited / <a href="https://andrewdeal.info">andrewdeal.info</a>
+  </div>
+</footer>
+
+</body>
+</html>
