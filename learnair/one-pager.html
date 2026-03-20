@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Command → AI Supervision | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 3.5rem 2rem 1.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-header .subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* --- CONTENT --- */
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+  }
+
+  .content hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 2rem 0 1.5rem;
+  }
+
+  .content h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .content p {
+    margin-bottom: 0.8rem;
+    line-height: 1.65;
+    font-size: 0.9rem;
+  }
+
+  .content .lead {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* --- CARDS --- */
+  .card-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.2rem;
+  }
+
+  .card .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .card p {
+    font-size: 0.82rem;
+    margin-bottom: 0;
+    line-height: 1.55;
+  }
+
+  /* --- BULLETS --- */
+  .content ul {
+    margin-bottom: 0.8rem;
+    padding-left: 1.2rem;
+  }
+
+  .content li {
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .content li .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  /* --- QUOTE --- */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: #2a2724;
+    background: var(--accent-bg);
+    line-height: 1.6;
+  }
+
+  /* --- BUILT LIST --- */
+  .built-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1.5rem;
+    margin: 0.5rem 0;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .built-list li {
+    font-size: 0.82rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .built-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 640px) {
+    .card-row { grid-template-columns: 1fr; }
+    .built-list { grid-template-columns: 1fr; }
+    .doc-header { padding: 2.5rem 1.5rem 1rem; }
+    .content { padding: 0 1.5rem 2rem; }
+    footer { flex-direction: column; gap: 0.75rem; }
+  }
+
+  /* --- PRINT --- */
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.6in;
+    }
+
+    html { font-size: 13px; }
+
+    nav { display: none; }
+
+    body {
+      background: white;
+      color: black;
+      min-height: auto;
+    }
+
+    .doc-header { padding: 0 0 0.6rem; }
+    .content { padding: 0 0 0.5rem; }
+    .content hr { margin: 0.8rem 0 0.6rem; }
+
+    .card {
+      border: 1px solid #ccc;
+      break-inside: avoid;
+    }
+
+    .pullquote { break-inside: avoid; }
+
+    footer {
+      padding: 0.6rem 0 0;
+      border-top: 1px solid #ccc;
+    }
+
+    a { color: black; }
+
+    .content, .doc-header, footer {
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">One-Pager</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Concept Brief</div>
+  <h1>Mission Command &rarr; AI Supervision</h1>
+  <p class="subtitle">A concept for the LearnAIR veteran program</p>
+</section>
+
+<div class="content">
+
+  <!-- THE GAP -->
+  <hr>
+  <h2>The Gap</h2>
+  <p class="lead">Deloitte teaches prompts. Code Platoon teaches coding. SkillBridge teaches existing job skills. Nobody trains the person who sits between the AI system and the business outcome&mdash;the one who makes sure it actually works.</p>
+  <p>That&rsquo;s what mission command trained veterans for: managing complex systems under uncertainty, making judgment calls with incomplete information, and owning outcomes.</p>
+  <div class="pullquote">The AI operations supervisor is the most important role nobody is hiring for yet.</div>
+
+  <!-- THE CONCEPT -->
+  <hr>
+  <h2>The Concept</h2>
+  <div class="card-row">
+    <div class="card">
+      <div class="card-label">The Student</div>
+      <p>Veterans at any transition stage. Military judgment&mdash;leading teams, running ops under pressure, managing systems&mdash;translates directly to AI supervision.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Employer</div>
+      <p>Defense contractors, federal agencies, and SMBs modernizing with AI. They need people who can manage AI operations, not just use AI tools.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Funder</div>
+      <p>DOL grants (via Easter Seals HVRP), GI Bill, SkillBridge, employer training budgets. Veterans train at no cost to them.</p>
+    </div>
+  </div>
+
+  <!-- WHY NOW -->
+  <hr>
+  <h2>Why Now</h2>
+  <ul>
+    <li>AI task capability doubles every 4&ndash;7 months&mdash;the window to train supervisors is closing fast. <span class="source">METR / Stanford AI Index 2025</span></li>
+    <li>13% employment decline for ages 22&ndash;25 in AI-exposed jobs since ChatGPT launch. Junior roles are disappearing first. <span class="source">Brynjolfsson et al., &ldquo;Canaries in the Coal Mine,&rdquo; Stanford 2025</span></li>
+    <li>&ldquo;America cannot withstand the economic shock that&rsquo;s coming&rdquo;&mdash;former Commerce Secretary Raimondo calls for outcomes-based, employer-driven training. <span class="source">NYT Op-Ed, Mar 2026</span></li>
+    <li>The gap between &ldquo;AI literacy&rdquo; and &ldquo;AI operations supervision&rdquo; is where veterans have a natural, immediate advantage.</li>
+  </ul>
+
+  <!-- WHAT WE'VE BUILT -->
+  <hr>
+  <h2>What We&rsquo;ve Built</h2>
+  <ul class="built-list">
+    <li>Competitive landscape analysis (10+ programs mapped)</li>
+    <li>4-week pilot curriculum with validate-or-kill criteria</li>
+    <li>Policy alignment research (Raimondo, Brynjolfsson, Stanford HAI)</li>
+    <li>Demand validation framework with employer outreach scripts</li>
+  </ul>
+
+</div>
+
+<footer>
+  <div class="footer-left">Mike Deal &amp; Andrew Deal &mdash; March 2026</div>
+  <div class="footer-right"><a href="hub.html">Back to Hub</a></div>
+</footer>
+
+</body>
+</html>
