@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Strategy — Proximity Strategy: Gina Raimondo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--green);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 60ch;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article hr.light {
+    border-top: 1px solid var(--faint);
+    margin: 2rem 0 2rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  /* --- CALLOUT / HIGHLIGHT BOX --- */
+  .callout {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .callout strong {
+    color: var(--green);
+  }
+
+  .callout-accent {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout-accent .callout-label {
+    color: var(--accent);
+  }
+
+  .callout-accent strong {
+    color: var(--accent);
+  }
+
+  /* --- PHASE CARDS --- */
+  .phase-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--green);
+  }
+
+  .phase-card.current::before {
+    background: var(--accent);
+  }
+
+  .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .phase-card.current .phase-label {
+    color: var(--accent);
+  }
+
+  .phase-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .phase-card ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0;
+  }
+
+  .phase-card li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- PEOPLE GRID --- */
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .person-card {
+    background: var(--paper);
+    padding: 1.2rem 1.4rem;
+  }
+
+  .person-card:hover {
+    background: var(--white);
+  }
+
+  .pc-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .pc-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .pc-detail {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* --- TIME SENSITIVE --- */
+  .urgent-items {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-light);
+    padding: 1.6rem 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .urgent-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .urgent-items ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0;
+  }
+
+  .urgent-items li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.4rem;
+  }
+
+  .urgent-items strong {
+    color: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    .people-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Strategy</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Strategy</div>
+  <h1>Proximity Strategy &mdash; Gina Raimondo</h1>
+  <p class="doc-subtitle">Become visible to Raimondo&rsquo;s orbit over 3&ndash;6 months through events, content engagement, institutional channels, and mutual connections &mdash; positioning the veterans-as-AI-operations-supervisors thesis as a concrete implementation of her &ldquo;grand bargain&rdquo; framework.</p>
+  <div class="doc-date">March 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- PHASED PLAN -->
+  <hr>
+  <h2>Phased Plan</h2>
+
+  <div class="phase-card current">
+    <span class="phase-label">Phase 1 &mdash; Now through April</span>
+    <div class="phase-title">Content Visibility</div>
+    <ul>
+      <li>Publish LinkedIn article: <strong>&ldquo;Veterans as AI Operations Supervisors: A Proof of Concept for the Grand Bargain&rdquo;</strong> &mdash; use her language, cite her NYT op-ed, reference BPC report</li>
+      <li>Comment substantively on every Raimondo LinkedIn post within 2 hours</li>
+      <li>Write public response to BPC &ldquo;Nation at Risk&rdquo; report framing veterans as overlooked cohort. Send to BPC Human Capital team directly.</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 2 &mdash; April through May</span>
+    <div class="phase-title">Institutional Access</div>
+    <ul>
+      <li>Submit Vanderbilt Asness Summit interest form (Apr 23&ndash;24, Nashville &mdash; she&rsquo;s keynoting)</li>
+      <li>Identify CFR members for term membership nomination (deadline Jan 10, 2027 &mdash; Andrew is eligible at 35)</li>
+      <li>Reach out to <strong>Garrett Moran</strong> (BPC commissioner, Year Up) &mdash; most aligned commissioner</li>
+      <li>Reach out to <strong>Erik Brynjolfsson</strong> (Stanford, AESG member) &mdash; academic validator, local</li>
+      <li>Contact BPC Human Capital team about workforce workgroup participation</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 3 &mdash; May through June</span>
+    <div class="phase-title">Network Bridging</div>
+    <ul>
+      <li>Attend Aspen Ideas Festival if possible (late June)</li>
+      <li>Build relationship with VetsInTech leadership in SF (outcomes data + veteran credibility)</li>
+      <li>Connect with <strong>Rob Reich</strong> at Stanford (AI Safety Institute &mdash; Raimondo appointed him)</li>
+      <li>Attend any Bay Area Raimondo events</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 4 &mdash; June+</span>
+    <div class="phase-title">Direct Contact</div>
+    <ul>
+      <li>By now: 2&ndash;3 LinkedIn interactions she&rsquo;s seen, a published piece using her framework, at least one BPC commissioner or AESG member connection</li>
+      <li>Request introduction through mutual connection &mdash; not cold</li>
+      <li>The ask: <strong>15 minutes to share a concrete implementation of her grand bargain, focused on veterans</strong></li>
+    </ul>
+  </div>
+
+  <!-- KEY CONNECTIONS -->
+  <hr>
+  <h2>Key Connections</h2>
+
+  <h3>Her Inner Circle</h3>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="pc-name">Chris Slevin</div>
+      <span class="pc-role">Last Commerce CoS (2023&ndash;2025)</span>
+      <div class="pc-detail">Most recent Chief of Staff at Commerce. Knows the policy agenda intimately.</div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">Mike Harney</div>
+      <span class="pc-role">First Commerce CoS</span>
+      <div class="pc-detail">Original Chief of Staff. Helped shape the early Commerce AI agenda.</div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">David Ortiz</div>
+      <span class="pc-role">RI Governor CoS</span>
+      <div class="pc-detail">Long-time loyalist from the Rhode Island days. Deep trust relationship.</div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">Rob Reich</div>
+      <span class="pc-role">Stanford &mdash; AI Safety Institute</span>
+      <div class="pc-detail">Raimondo appointed him. Local at Stanford. Natural connection point.</div>
+    </div>
+  </div>
+
+  <h3>BPC Commissioners to Target</h3>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="pc-name">Garrett Moran</div>
+      <span class="pc-role">Year Up &mdash; Most Aligned</span>
+      <div class="pc-detail">Year Up background, outcomes-based, most aligned with veteran workforce positioning. <strong>Priority target.</strong></div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">Allan Golston</div>
+      <span class="pc-role">Gates Foundation</span>
+      <div class="pc-detail">Focus on underserved populations. Gates Foundation resources and credibility.</div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">Russlynn Ali</div>
+      <span class="pc-role">XQ Institute</span>
+      <div class="pc-detail">Education innovation lens. XQ Institute rethinks high school &mdash; same modular, outcomes-based philosophy.</div>
+    </div>
+    <div class="person-card">
+      <div class="pc-name">John B. King, Jr.</div>
+      <span class="pc-role">Former U.S. Secretary of Education</span>
+      <div class="pc-detail">Federal education policy expertise. Institutional credibility at the highest level.</div>
+    </div>
+  </div>
+
+  <h3>AESG Members (Overlap with Our Network)</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Affiliation</th>
+        <th>Relevance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Erik Brynjolfsson</strong></td>
+        <td>Stanford DEL</td>
+        <td>Local. AI + labor research. Attending his seminar Apr 6. <strong>Primary bridge.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Jonathan Levin</strong></td>
+        <td>Stanford President</td>
+        <td>Institutional Stanford access</td>
+      </tr>
+      <tr>
+        <td><strong>Keith Hennessey</strong></td>
+        <td>Hoover / Stanford</td>
+        <td>Local, policy-oriented</td>
+      </tr>
+      <tr>
+        <td><strong>John Cochrane</strong></td>
+        <td>Hoover</td>
+        <td>Local, economics</td>
+      </tr>
+      <tr>
+        <td><strong>Brad Smith</strong></td>
+        <td>Microsoft VP</td>
+        <td>Has AI workforce + veteran programs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Organizations She&rsquo;s Partnered With</h3>
+  <ul>
+    <li>Year Up, Markle Foundation, Skillful, Skills for RI&rsquo;s Future, XQ Institute, Operation HOPE</li>
+    <li>Good Jobs Challenge grantees (32 industry-led workforce partnerships)</li>
+  </ul>
+
+  <!-- CONFIRMED APPEARANCES -->
+  <hr>
+  <h2>Confirmed Appearances</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Event</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Apr 23&ndash;24</strong></td>
+        <td>Vanderbilt Asness Summit</td>
+        <td>Nashville. Keynote. National security framing. Invitation-only. <strong>Submit interest form ASAP.</strong></td>
+      </tr>
+      <tr>
+        <td>Late June</td>
+        <td>Aspen Ideas Festival</td>
+        <td>Watch for announcement. High-probability appearance given AESG membership.</td>
+      </tr>
+      <tr>
+        <td>TBD</td>
+        <td>CFR events</td>
+        <td>Distinguished Fellow, co-chairing new economic security task force. Will likely speak at CFR events in NYC/DC.</td>
+      </tr>
+      <tr>
+        <td>TBD</td>
+        <td>Congressional testimony</td>
+        <td>BPC Commission recs may trigger Hill testimony. High-visibility moment.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WHY SHE SHOULD CARE -->
+  <hr>
+  <h2>Why She Should Care</h2>
+
+  <div class="callout">
+    <span class="callout-label">The Core Insight</span>
+    <p style="margin-bottom: 0.8rem;">She has a <strong>framework problem</strong> &mdash; she needs concrete implementations to point to. Every politician building toward 2028 needs proposals that are both visionary and demonstrably workable.</p>
+    <p style="margin-bottom: 0;"><strong>You&rsquo;re not asking her for something. You&rsquo;re offering her a case study.</strong></p>
+  </div>
+
+  <p>Veterans as AI operations supervisors gives her:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>What She Gets</th>
+        <th>Why It Works</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sympathetic population</strong></td>
+        <td>Bipartisan support &mdash; nobody argues against veteran programs</td>
+      </tr>
+      <tr>
+        <td><strong>Existing funding</strong></td>
+        <td>GI Bill, DOL HVRP, Easter Seals &mdash; doesn&rsquo;t require new appropriations</td>
+      </tr>
+      <tr>
+        <td><strong>Measurable outcomes</strong></td>
+        <td>Her framework demands this &mdash; placement rates, earnings data, retention</td>
+      </tr>
+      <tr>
+        <td><strong>National security angle</strong></td>
+        <td>Aligns with Vanderbilt keynote and Commerce tenure AI framing</td>
+      </tr>
+      <tr>
+        <td><strong>&ldquo;This already works&rdquo; story</strong></td>
+        <td>A proof point she can reference on the campaign trail for 2028</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- BRYNJOLFSSON AS THE BRIDGE -->
+  <hr>
+  <h2>Brynjolfsson as the Bridge</h2>
+
+  <div class="callout-accent">
+    <span class="callout-label">The Most Natural Path</span>
+    <p style="margin-bottom: 0.8rem;">Brynjolfsson is an AESG member (same group as Raimondo). He&rsquo;s local at Stanford. You&rsquo;re attending his DEL seminar April 6.</p>
+    <p style="margin-bottom: 0;">If you build a relationship with him first, he becomes the <strong>warm introduction to Raimondo through AESG</strong>. Don&rsquo;t go cold &mdash; go through the bridge.</p>
+  </div>
+
+  <p>See the full Brynjolfsson connection plan: <a href="brynjolfsson-plan.html">Connecting with Erik Brynjolfsson &rarr;</a></p>
+
+  <!-- TIME-SENSITIVE ITEMS -->
+  <hr>
+  <h2>Time-Sensitive Items</h2>
+
+  <div class="urgent-items">
+    <span class="urgent-label">Action Required</span>
+    <ul>
+      <li><strong>Vanderbilt Asness Summit</strong> &mdash; Submit interest form ASAP (Apr 23&ndash;24). She&rsquo;s keynoting. Invitation-only.</li>
+      <li><strong>April 6 DEL Seminar</strong> &mdash; First Brynjolfsson touchpoint. Confirm registration.</li>
+      <li><strong>CFR Term Membership</strong> &mdash; Deadline Jan 10, 2027. Start finding a nominator now. Andrew is eligible at 35.</li>
+      <li><strong>LinkedIn content</strong> &mdash; Begin substantive commenting on Raimondo posts immediately. Build visibility before attempting any direct contact.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub &mdash; March 2026</div>
+  <div class="footer-right"><a href="hub.html">Back to Hub</a></div>
+</footer>
+
+</body>
+</html>
