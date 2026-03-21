@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIKE DEAL // AI Operations Onboarding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --border: #30363d;
+      --border-light: #484f58;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --text-muted: #484f58;
+      --accent: #00d4aa;
+      --accent-dim: rgba(0, 212, 170, 0.15);
+      --accent-blue: #58a6ff;
+      --accent-blue-dim: rgba(88, 166, 255, 0.1);
+      --status-green: #3fb950;
+      --status-yellow: #d29922;
+      --status-gray: #484f58;
+      --status-red: #f85149;
+      --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --grid-color: rgba(48, 54, 61, 0.5);
+    }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 60px 60px;
+      background-position: -1px -1px;
+    }
+
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+      );
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      padding: 2.5rem 2rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-blue), var(--accent));
+    }
+
+    .header-top-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .header .subtitle {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-top: 0.25rem;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-item .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .status-item .value {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .status-item .value.highlight {
+      color: var(--accent);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-yellow);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(210, 153, 34, 0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(210, 153, 34, 0); }
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--bg-primary);
+      background: var(--accent);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    /* ── SESSION CARDS ── */
+    .session-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .session-card:hover {
+      border-color: var(--border-light);
+    }
+
+    .session-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+    }
+
+    .session-card.completed::before { background: var(--status-green); }
+    .session-card.in-progress::before { background: var(--status-yellow); }
+    .session-card.upcoming::before { background: var(--status-gray); }
+
+    .session-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .session-id {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .session-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .session-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .status-dot.green { background: var(--status-green); }
+    .status-dot.yellow { background: var(--status-yellow); }
+    .status-dot.gray { background: var(--status-gray); }
+
+    .session-items {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .session-items li {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      padding: 0.25rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .session-items li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .session-callout {
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.85rem;
+      background: var(--accent-dim);
+      border-left: 2px solid var(--accent);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    /* ── TOOL GRID ── */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+
+    .tool-row:hover {
+      border-color: var(--border-light);
+    }
+
+    .tool-name {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .tool-purpose {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .tool-status {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .tool-status.installed {
+      color: var(--status-green);
+      border-color: rgba(63, 185, 80, 0.3);
+      background: rgba(63, 185, 80, 0.08);
+    }
+
+    .tool-status.active {
+      color: var(--accent-blue);
+      border-color: rgba(88, 166, 255, 0.3);
+      background: var(--accent-blue-dim);
+    }
+
+    .tool-status.pending {
+      color: var(--status-yellow);
+      border-color: rgba(210, 153, 34, 0.3);
+      background: rgba(210, 153, 34, 0.08);
+    }
+
+    .tool-status.critical {
+      color: var(--status-red);
+      border-color: rgba(248, 81, 73, 0.3);
+      background: rgba(248, 81, 73, 0.08);
+    }
+
+    /* ── CURRICULUM ── */
+    .curriculum-list {
+      list-style: none;
+    }
+
+    .curriculum-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .curriculum-item:hover {
+      border-color: var(--border-light);
+    }
+
+    .curriculum-item.next {
+      border-color: var(--accent);
+      background: linear-gradient(90deg, var(--accent-dim), var(--bg-secondary) 40%);
+    }
+
+    .module-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .curriculum-item.next .module-num {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .module-content {
+      flex: 1;
+    }
+
+    .module-title {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .module-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+
+    .module-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.15rem 0.45rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .module-tag.next {
+      color: var(--accent);
+      border: 1px solid rgba(0, 212, 170, 0.4);
+      background: var(--accent-dim);
+      animation: pulse-tag 2.5s ease-in-out infinite;
+    }
+
+    .module-tag.upcoming {
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    @keyframes pulse-tag {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* ── QUICK REFERENCE / TERMINAL ── */
+    .terminal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      font-family: var(--mono);
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.r { background: #f85149; }
+    .terminal-dot.y { background: #d29922; }
+    .terminal-dot.g { background: #3fb950; }
+
+    .terminal-title {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+    }
+
+    .terminal-body {
+      padding: 1.25rem;
+    }
+
+    .cmd-line {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .cmd-prompt {
+      color: var(--accent);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .cmd-text {
+      font-size: 0.82rem;
+      color: var(--text-primary);
+    }
+
+    .cmd-comment {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-left: 0.75rem;
+    }
+
+    .terminal-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+
+    .terminal-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.6rem;
+    }
+
+    .route-line {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+      padding-left: 0.75rem;
+      position: relative;
+    }
+
+    .route-line::before {
+      content: '|';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .route-highlight {
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .route-arrow {
+      color: var(--text-muted);
+    }
+
+    /* ── LINKS ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .link-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .link-icon {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .link-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .link-card:hover .link-label {
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+
+    .footer-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 20px 20px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+    }
+
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .footer-text span {
+      color: var(--accent);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .container { padding: 1rem; }
+      .header { padding: 1.5rem 1.25rem 1.25rem; }
+      .status-bar { gap: 1rem; }
+      .tool-grid { grid-template-columns: 1fr; }
+      .tool-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+      .tool-purpose { grid-column: 1 / -1; order: 3; }
+      .links-grid { grid-template-columns: 1fr; }
+      .session-meta { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="container">
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+      <div class="header-top-label">// system operator</div>
+      <h1>MIKE DEAL</h1>
+      <div class="subtitle">AI Operations Onboarding</div>
+      <div class="status-bar">
+        <div class="status-item">
+          <div class="label">Sessions</div>
+          <div class="value">1 / &mdash;</div>
+        </div>
+        <div class="status-item">
+          <div class="label">Tools Installed</div>
+          <div class="value">6 / 8</div>
+        </div>
+        <div class="status-item">
+          <div class="label">Next Session</div>
+          <div class="value highlight">TBD</div>
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══ SECTION 1: SESSIONS LOG ═══ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div class="section-title">Sessions Log</div>
+      </div>
+
+      <div class="session-card completed">
+        <div class="session-meta">
+          <div>
+            <span class="session-id">SESSION 01</span>
+            <span class="session-date">&nbsp;&mdash;&nbsp;2026.03.20</span>
+          </div>
+          <div class="session-status">
+            <div class="status-dot green"></div>
+            COMPLETED
+          </div>
+        </div>
+        <ul class="session-items">
+          <li>Setup kit: Homebrew, Git, Node, pnpm, Python 3.12, Claude Code</li>
+          <li>Fixed PATH issues (PNPM_HOME, Homebrew)</li>
+          <li>iTerm appearance basics</li>
+          <li>Google Sheets MCP: partial (service account created, auth issues)</li>
+          <li>Manus test: successfully automated retreat spreadsheet</li>
+        </ul>
+        <div class="session-callout">
+          KEY INSIGHT: Claude Code = operations center &middot; Manus = browser hands
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 2: TOOL STACK ═══ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div class="section-title">Tool Stack</div>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-row">
+          <div class="tool-name">Claude Code</div>
+          <div class="tool-purpose">Operations center: files, analysis, research, writing</div>
+          <div class="tool-status installed">Installed</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">Manus</div>
+          <div class="tool-purpose">Browser automation: web forms, Sheets, checkouts</div>
+          <div class="tool-status active">Active &middot; 300 cr</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">ChatGPT</div>
+          <div class="tool-purpose">LearnAIR class (concepts transfer across models)</div>
+          <div class="tool-status active">Active</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">Monologue</div>
+          <div class="tool-purpose">Speech-to-text for laptop</div>
+          <div class="tool-status installed">Installed</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">Granola</div>
+          <div class="tool-purpose">Meeting transcription</div>
+          <div class="tool-status installed">Installed</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">CleanShot X</div>
+          <div class="tool-purpose">Screenshots for visual references</div>
+          <div class="tool-status installed">Purchased</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">1Password</div>
+          <div class="tool-purpose">Password management (replacing LastPass)</div>
+          <div class="tool-status pending">Pending</div>
+        </div>
+        <div class="tool-row">
+          <div class="tool-name">Starlink</div>
+          <div class="tool-purpose">Internet upgrade (current: 766 KB/s up)</div>
+          <div class="tool-status critical">Critical</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 3: CURRICULUM ═══ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div class="section-title">Curriculum</div>
+      </div>
+
+      <ul class="curriculum-list">
+        <li class="curriculum-item next">
+          <div class="module-num">1</div>
+          <div class="module-content">
+            <div class="module-title">Claude Code Fundamentals</div>
+            <div class="module-desc">Prompting, file operations, projects</div>
+          </div>
+          <div class="module-tag next">Next</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">2</div>
+          <div class="module-content">
+            <div class="module-title">Context Management</div>
+            <div class="module-desc">CLAUDE.md, memory, compaction</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">3</div>
+          <div class="module-content">
+            <div class="module-title">Hub Structure</div>
+            <div class="module-desc">Organizing research and decisions</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">4</div>
+          <div class="module-content">
+            <div class="module-title">Google Sheets MCP</div>
+            <div class="module-desc">Finish setup, service account sharing</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">5</div>
+          <div class="module-content">
+            <div class="module-title">Content Strategy</div>
+            <div class="module-desc">LinkedIn, audience building</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">6</div>
+          <div class="module-content">
+            <div class="module-title">Security Hygiene</div>
+            <div class="module-desc">1Password, iCloud storage, privacy</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+        <li class="curriculum-item">
+          <div class="module-num">7</div>
+          <div class="module-content">
+            <div class="module-title">Advanced: Agents & Automation</div>
+            <div class="module-desc">Agents, parallel research, automation</div>
+          </div>
+          <div class="module-tag upcoming">Upcoming</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ═══ SECTION 4: QUICK REFERENCE ═══ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div class="section-title">Quick Reference</div>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot r"></div>
+          <div class="terminal-dot y"></div>
+          <div class="terminal-dot g"></div>
+          <div class="terminal-title">mike@abilene ~ claude-reference</div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-label">Commands</div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <span class="cmd-text">claude</span>
+            <span class="cmd-comment"># start new session</span>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <span class="cmd-text">claude -r</span>
+            <span class="cmd-comment"># resume last session</span>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">$</span>
+            <span class="cmd-text">claude -p "question"</span>
+            <span class="cmd-comment"># one-shot question</span>
+          </div>
+
+          <hr class="terminal-divider">
+
+          <div class="terminal-label">Tool Routing</div>
+          <div class="route-line">Does this need a browser?</div>
+          <div class="route-line">&nbsp;&nbsp;<span class="route-arrow">&rarr;</span> Yes <span class="route-arrow">&rarr;</span> <span class="route-highlight">Manus</span></div>
+          <div class="route-line">&nbsp;&nbsp;<span class="route-arrow">&rarr;</span> No &nbsp;<span class="route-arrow">&rarr;</span> <span class="route-highlight">Claude Code</span></div>
+
+          <hr class="terminal-divider">
+
+          <div class="terminal-label">Key URLs</div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">&gt;</span>
+            <span class="cmd-text">andrewdeal.info/learnair/hub.html</span>
+            <span class="cmd-comment"># LearnAIR Hub</span>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">&gt;</span>
+            <span class="cmd-text">andrewdeal.info/learnair/one-pager.html</span>
+            <span class="cmd-comment"># One-pager</span>
+          </div>
+          <div class="cmd-line">
+            <span class="cmd-prompt">&gt;</span>
+            <span class="cmd-text">github.com/a-deal/setup-kit</span>
+            <span class="cmd-comment"># Setup kit</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SECTION 5: LINKS ═══ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <div class="section-title">Links</div>
+      </div>
+
+      <div class="links-grid">
+        <a href="https://andrewdeal.info/learnair/hub.html" class="link-card" target="_blank" rel="noopener">
+          <span class="link-icon">[~]</span>
+          <span class="link-label">LearnAIR Hub</span>
+        </a>
+        <a href="https://github.com/a-deal/setup-kit" class="link-card" target="_blank" rel="noopener">
+          <span class="link-icon">[&gt;]</span>
+          <span class="link-label">Setup Kit Repo</span>
+        </a>
+        <a href="https://andrewdeal.info/learnair/one-pager.html" class="link-card" target="_blank" rel="noopener">
+          <span class="link-icon">[#]</span>
+          <span class="link-label">Teresa One-Pager</span>
+        </a>
+        <a href="https://andrewdeal.info/learnair/brynjolfsson.html" class="link-card" target="_blank" rel="noopener">
+          <span class="link-icon">[%]</span>
+          <span class="link-label">Brynjolfsson Plan</span>
+        </a>
+        <a href="https://andrewdeal.info/learnair/raimondo.html" class="link-card" target="_blank" rel="noopener">
+          <span class="link-icon">[&amp;]</span>
+          <span class="link-label">Raimondo Plan</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+      <div class="footer-grid"></div>
+      <div class="footer-text">
+        Built by <span>Andrew</span> & <span>Mike</span> Deal &middot; 2026
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
