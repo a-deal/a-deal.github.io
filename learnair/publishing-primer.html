@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Publishing Primer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #a63d2f;
+    --red-bg: rgba(166, 61, 47, 0.06);
+    --code-bg: #1e1e1e;
+    --code-fg: #d4d4d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--green);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul, .article li ol {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  /* --- CODE BLOCKS --- */
+  .code-block {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    padding: 1.2rem 1.6rem;
+    margin: 1rem 0 1.5rem;
+    overflow-x: auto;
+    border-radius: 2px;
+  }
+
+  .code-block .comment {
+    color: #6a9955;
+  }
+
+  .code-block .keyword {
+    color: #c586c0;
+  }
+
+  .code-block .string {
+    color: #ce9178;
+  }
+
+  /* --- TEMPLATE BOX --- */
+  .template-box {
+    border: 2px solid var(--accent);
+    background: var(--accent-bg);
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .template-box .template-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .template-box .code-block {
+    margin: 0;
+    font-size: 0.78rem;
+  }
+
+  /* --- SIGNAL BOXES (green/red split) --- */
+  .split-signals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .signal-box {
+    padding: 1.4rem 1.6rem;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .signal-box.green {
+    border-left: 3px solid var(--green);
+    background: var(--green-bg);
+  }
+
+  .signal-box.green .signal-label {
+    color: var(--green);
+  }
+
+  .signal-box.red {
+    border-left: 3px solid var(--red);
+    background: var(--red-bg);
+  }
+
+  .signal-box.red .signal-label {
+    color: var(--red);
+  }
+
+  .signal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .signal-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .signal-box li {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  /* --- NUMBERED STEPS --- */
+  .steps ol {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .steps ol > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 3.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .steps ol > li:last-child {
+    border-bottom: none;
+  }
+
+  .steps ol > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--accent);
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  .steps ol > li strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .steps ol > li p {
+    font-size: 0.92rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .steps ol > li .code-block {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- PRIORITY LIST --- */
+  .priority-list ol {
+    counter-reset: priority;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .priority-list ol > li {
+    counter-increment: priority;
+    position: relative;
+    padding-left: 2.6rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .priority-list ol > li::before {
+    content: counter(priority);
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--accent);
+    width: 1.6rem;
+    height: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+  }
+
+  /* --- CONTENT LOOP FLOW --- */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 1.5rem 0 2rem;
+    flex-wrap: wrap;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 140px;
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.2rem 1rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .flow-step:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+
+  .flow-step:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+
+  .flow-step .flow-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .flow-step .flow-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .flow-step .flow-detail {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--faint);
+    padding: 0 0.3rem;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  .article td code {
+    font-size: 0.78rem;
+  }
+
+  /* --- FAQ CARDS --- */
+  .faq-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .faq-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.4rem 1.6rem;
+    transition: border-color 0.2s;
+  }
+
+  .faq-card:hover {
+    border-color: var(--accent-light);
+  }
+
+  .faq-card .faq-q {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .faq-card .faq-a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .faq-card .faq-a code {
+    font-size: 0.78rem;
+  }
+
+  /* --- CALLOUT --- */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* --- PART LABEL --- */
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .split-signals { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); justify-content: center; padding: 0.3rem 0; }
+    .flow-step:first-child, .flow-step:last-child { border-radius: 4px; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    .steps ol > li { padding-left: 2.8rem; }
+    .steps ol > li::before { font-size: 1.1rem; width: 1.8rem; height: 1.8rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Guide</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Guide</div>
+  <h1>Publishing Primer</h1>
+  <p class="subtitle">How to contribute to the hub and build your own site</p>
+  <div class="doc-date">March 22, 2026</div>
+</section>
+
+<div class="article">
+
+  <div class="callout">
+    <span class="callout-label">Two Skills</span>
+    Contributing to the shared hub, and standing up your own site. Both use the same tools &mdash; Git, GitHub, and Claude Code.
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 1: HUB CONTRIBUTIONS -->
+  <!-- ============================================ -->
+  <hr>
+  <span class="part-label">Part 1</span>
+  <h2>Contributing to the Hub</h2>
+
+  <h3>What the hub is</h3>
+  <p>A shared knowledge base at <code>~/src/hub/</code> with five directories:</p>
+
+  <table>
+    <tr><th>Directory</th><th>Purpose</th></tr>
+    <tr><td><code>research/</code></td><td>Deep dives, competitive analysis, evidence</td></tr>
+    <tr><td><code>decisions/</code></td><td>Design decisions with rationale</td></tr>
+    <tr><td><code>plans/</code></td><td>Roadmaps, strategies, phased plans</td></tr>
+    <tr><td><code>execution/</code></td><td>Session notes, retros, what worked</td></tr>
+    <tr><td><code>meetings/</code></td><td>Session logs and meeting notes</td></tr>
+  </table>
+
+  <h3>How to add something</h3>
+
+  <p><strong>Step 1: Navigate to the hub</strong></p>
+  <div class="code-block">cd ~/src/hub</div>
+
+  <p><strong>Step 2: Start Claude Code</strong></p>
+  <div class="code-block">claude</div>
+
+  <p><strong>Step 3: Tell Claude what you want to create</strong></p>
+  <p>Examples:</p>
+  <ul>
+    <li>&ldquo;Create a research note about [topic]. Put it in research/ dated today.&rdquo;</li>
+    <li>&ldquo;I just had a meeting with [person]. Create a meeting log in meetings/ using the template.&rdquo;</li>
+    <li>&ldquo;I found something interesting about [topic]. Add it to the hub.&rdquo;</li>
+  </ul>
+  <p>Claude will create the file with the right naming convention (<code>YYYY-MM-DD-topic.md</code>) and frontmatter.</p>
+
+  <p><strong>Step 4: Or create it manually</strong></p>
+  <div class="code-block">touch research/2026-03-22-my-topic.md</div>
+  <p>Then open in any text editor, or tell Claude to edit it.</p>
+
+  <!-- FILE TEMPLATE -->
+  <h3>File template</h3>
+  <p>Every file starts with frontmatter:</p>
+
+  <div class="template-box">
+    <span class="template-label">Template &mdash; Copy This</span>
+    <div class="code-block"><span class="comment">---</span>
+<span class="keyword">title:</span> <span class="string">Your Title Here</span>
+<span class="keyword">date:</span> <span class="string">2026-03-22</span>
+<span class="keyword">projects:</span> <span class="string">learnair</span>
+<span class="keyword">tags:</span> <span class="string">research, topic1, topic2</span>
+<span class="comment">---</span>
+
+<span class="comment"># Your Title Here</span>
+
+Content goes here. Markdown format.</div>
+  </div>
+
+  <!-- WHAT BELONGS / WHAT DOESN'T -->
+  <h3>What goes in the hub</h3>
+
+  <div class="split-signals">
+    <div class="signal-box green">
+      <span class="signal-label">What Belongs</span>
+      <ul>
+        <li>Research findings from reading, listening, conversations</li>
+        <li>Meeting notes and takeaways</li>
+        <li>Ideas that cross multiple projects</li>
+        <li>Competitive intelligence</li>
+        <li>Policy or market insights</li>
+      </ul>
+    </div>
+
+    <div class="signal-box red">
+      <span class="signal-label">What Doesn&rsquo;t Belong</span>
+      <ul>
+        <li>Personal journal entries</li>
+        <li>Temporary task lists</li>
+        <li>Anything with passwords or sensitive data</li>
+        <li>Drafts that aren&rsquo;t ready to share</li>
+        <li>Files belonging to other projects</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PART 2: PERSONAL WEBSITE -->
+  <!-- ============================================ -->
+  <hr>
+  <span class="part-label">Part 2</span>
+  <h2>Your Own Website (GitHub Pages)</h2>
+
+  <p>A free website at <code>yourusername.github.io</code> where you can publish anything: articles, a portfolio, project pages, the LearnAIR one-pager. Andrew&rsquo;s is at <code>andrewdeal.info</code> (custom domain on top of GitHub Pages).</p>
+
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>GitHub account (we&rsquo;ll create one)</li>
+    <li>Git installed (done via setup kit)</li>
+    <li>Claude Code (done)</li>
+  </ul>
+
+  <h3>Step-by-step</h3>
+
+  <div class="steps">
+    <ol>
+      <li>
+        <strong>Create a GitHub account</strong>
+        <p>Go to <a href="https://github.com/signup" target="_blank">github.com/signup</a>. Use your real name. Pick a username you&rsquo;d put on a business card (e.g., <code>mkdeal</code> or <code>mikedeal</code>).</p>
+      </li>
+      <li>
+        <strong>Create the repository</strong>
+        <p>In Claude Code:</p>
+        <div class="code-block">claude -p "Help me create a GitHub Pages site. My GitHub username is [username]. Walk me through it."</div>
+        <p>Or manually on GitHub: New Repository &rarr; name it <code>[username].github.io</code> (this exact format matters) &rarr; make it Public &rarr; check &ldquo;Add a README file&rdquo; &rarr; Create.</p>
+      </li>
+      <li>
+        <strong>Clone it locally</strong>
+        <div class="code-block">cd ~/src
+git clone https://github.com/[username]/[username].github.io.git
+cd [username].github.io</div>
+      </li>
+      <li>
+        <strong>Create your first page</strong>
+        <p>Start Claude Code, then tell it what you want:</p>
+        <div class="code-block">claude</div>
+        <p>&ldquo;Create a simple index.html for my personal site. My name is Mike Deal. Keep it clean and professional. I&rsquo;m a Marine veteran exploring AI workforce development.&rdquo;</p>
+        <p>Claude writes the file. You review it.</p>
+      </li>
+      <li>
+        <strong>Push it live</strong>
+        <div class="code-block">git add .
+git commit -m "Initial site"
+git push</div>
+        <p>Wait 2 minutes. Visit <code>[username].github.io</code>. Your site is live.</p>
+      </li>
+      <li>
+        <strong>Iterate</strong>
+        <p>Want to add a page? Tell Claude:</p>
+        <ul>
+          <li>&ldquo;Add a page about the LearnAIR veteran program at /learnair/&rdquo;</li>
+          <li>&ldquo;Create a blog post about what I learned this week&rdquo;</li>
+          <li>&ldquo;Add my resume as a page&rdquo;</li>
+        </ul>
+        <p>Each time: edit locally, <code>git add</code>, <code>git commit</code>, <code>git push</code>. That&rsquo;s the whole workflow.</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- CUSTOM DOMAIN -->
+  <h3>Custom domain (optional, later)</h3>
+  <ol>
+    <li>Buy a domain ($10&ndash;15/year) through Squarespace Domains, Namecheap, or Cloudflare</li>
+    <li>In your GitHub repo settings, add the custom domain</li>
+    <li>Update DNS records at your registrar</li>
+    <li>Claude can walk you through the DNS setup when you&rsquo;re ready</li>
+  </ol>
+
+  <!-- WHAT TO PUBLISH FIRST -->
+  <h3>What to publish first</h3>
+  <p>In order of impact:</p>
+
+  <div class="priority-list">
+    <ol>
+      <li><strong>A simple landing page</strong> &mdash; who you are, what you&rsquo;re about, contact info</li>
+      <li><strong>The LearnAIR one-pager</strong> &mdash; shows you&rsquo;re building something real</li>
+      <li><strong>A first article</strong> &mdash; your take on AI and veterans, written from experience</li>
+      <li><strong>LinkedIn cross-post</strong> &mdash; publish on your site, share the link on LinkedIn</li>
+    </ol>
+  </div>
+
+  <!-- THE CONTENT LOOP -->
+  <h3>The content loop</h3>
+  <p>This is the same loop Andrew runs. The site is the home base. Social is the distribution.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="flow-num">01</span>
+      <div class="flow-title">Learn</div>
+      <div class="flow-detail">Session, research, conversation</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <span class="flow-num">02</span>
+      <div class="flow-title">Write</div>
+      <div class="flow-detail">Claude helps, you edit for voice</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <span class="flow-num">03</span>
+      <div class="flow-title">Publish</div>
+      <div class="flow-detail">git push &mdash; site updates</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <span class="flow-num">04</span>
+      <div class="flow-title">Share</div>
+      <div class="flow-detail">Post link on LinkedIn</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <span class="flow-num">05</span>
+      <div class="flow-title">Listen</div>
+      <div class="flow-detail">Reactions = demand signal</div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- QUICK REFERENCE -->
+  <!-- ============================================ -->
+  <hr>
+  <h2>Quick Reference</h2>
+
+  <table>
+    <tr><th>Task</th><th>Command</th></tr>
+    <tr><td>Start Claude</td><td><code>claude</code></td></tr>
+    <tr><td>Navigate to hub</td><td><code>cd ~/src/hub</code></td></tr>
+    <tr><td>Create a file</td><td>Tell Claude or <code>touch research/YYYY-MM-DD-topic.md</code></td></tr>
+    <tr><td>Save changes</td><td><code>git add . && git commit -m "message" && git push</code></td></tr>
+    <tr><td>See what changed</td><td><code>git status</code></td></tr>
+    <tr><td>See recent history</td><td><code>git log --oneline -5</code></td></tr>
+  </table>
+
+  <!-- ============================================ -->
+  <!-- COMMON QUESTIONS -->
+  <!-- ============================================ -->
+  <hr>
+  <h2>Common Questions</h2>
+
+  <div class="faq-grid">
+    <div class="faq-card">
+      <div class="faq-q">&ldquo;What if I mess something up?&rdquo;</div>
+      <div class="faq-a">Git tracks every change. You can always undo. Tell Claude &ldquo;undo my last change&rdquo; or run <code>git checkout -- filename</code>.</div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-q">&ldquo;Do I need to know HTML?&rdquo;</div>
+      <div class="faq-a">No. Claude writes it. You review it and say &ldquo;change this&rdquo; or &ldquo;make that bigger.&rdquo; Markdown files (<code>.md</code>) are even simpler: just plain text with some formatting.</div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-q">&ldquo;How do I know if it worked?&rdquo;</div>
+      <div class="faq-a">After <code>git push</code>, wait 2 minutes, then refresh the URL. If you see your changes, it worked.</div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-q">&ldquo;What if Git asks for a password?&rdquo;</div>
+      <div class="faq-a">Set up SSH keys. Tell Claude: &ldquo;Help me set up SSH keys for GitHub.&rdquo; One-time setup, never type a password again.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
