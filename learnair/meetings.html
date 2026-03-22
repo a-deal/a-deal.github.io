@@ -519,10 +519,19 @@
 <!-- ==================== UPCOMING ==================== -->
 <div class="section">
   <div class="section-label">
-    Upcoming <span class="count">1 scheduled</span>
+    Upcoming <span class="count">0 scheduled</span>
   </div>
 
-  <!-- Session 2 — Mar 22 (scheduled) -->
+  <p style="font-size: 0.9rem; color: var(--muted); font-style: italic;">No upcoming meetings scheduled.</p>
+</div>
+
+<!-- ==================== COMPLETED ==================== -->
+<div class="section">
+  <div class="section-label">
+    Completed <span class="count">3 sessions</span>
+  </div>
+
+  <!-- Session 2 — Mar 22 -->
   <div class="meeting-card">
     <div class="meeting-header">
       <div class="meeting-header-left">
@@ -530,11 +539,11 @@
           <span class="meeting-date">2026-03-22</span>
           <span class="meeting-type working-session">Working Session</span>
         </div>
-        <div class="meeting-title">Session 2: Quick Wins + Teresa Prep</div>
+        <div class="meeting-title">Session 2: Thesis Iteration + Curriculum Discovery</div>
       </div>
-      <div class="meeting-status scheduled">
-        <span class="status-dot scheduled"></span>
-        Scheduled
+      <div class="meeting-status completed">
+        <span class="status-dot completed"></span>
+        Completed
       </div>
     </div>
 
@@ -544,38 +553,96 @@
     </div>
 
     <div class="meeting-body">
-      <h3>Agenda</h3>
-      <ul class="agenda-note">
-        <li>Quick win: Mike does real work in Claude Code (retreat doc or transcript analysis)</li>
-        <li>Teresa prep: walk through one-pager, practice the 30-second pitch, handle objections</li>
-        <li>Field manual review: walk through andrewdeal.info/mike/, get Mike's feedback</li>
-        <li>Hub contribution: Mike adds his first research note or meeting log</li>
-        <li>Ancillary items (light touch): Starlink status, 1Password, internet speed reality</li>
+      <h3>Key Takeaways</h3>
+      <ul class="takeaways">
+        <li>Thesis opener iterated through 4 versions live &mdash; Mike gave line-by-line feedback while Andrew drove Claude Code on screen share</li>
+        <li>One-pager redesigned: problem statement first (Teresa Coates language), process engineering bottleneck, veteran mission command as solution, applied experiential learning as delivery</li>
+        <li>Field manual concepts tightened &mdash; content should be "simple without being reductive" with expandable sections for deeper context</li>
+        <li>Live transcription tool (Monologue) used to capture Mike's verbal feedback in real time and feed it directly into Claude Code</li>
+        <li>Veteran tiering insight: "transition" over "translation," "across all market sectors" instead of listing industries, "infrastructure" needs qualifier (human capital)</li>
+        <li>9 curriculum module stubs surfaced organically from Mike's real-time questions about the tooling</li>
+        <li>Teresa prep completed &mdash; identified her three LinkedIn articles as alignment signals and mapped her "workforce redesign" framing to LearnAIR thesis</li>
       </ul>
 
+      <h3>Decisions</h3>
+      <ul class="takeaways">
+        <li>Thesis opener structure locked: problem statement, process bottleneck, veteran mission command, applied experiential learning</li>
+        <li>Tone: "rigor of McKinsey without the veneer" &mdash; authoritative but grounded, not consultant speak</li>
+        <li>Need a terminal vs GUI primer as companion piece to the voice-first field manual section</li>
+        <li>Feedback iteration cycle: push changes, review together, capture feedback live, feed back into agent &mdash; one iteration at a time</li>
+      </ul>
+
+      <div class="curriculum-insights">
+        <span class="ci-label">Curriculum Insights</span>
+        <ul>
+          <li><strong>Cartography as a frame.</strong> "Mapping the terrain" mirrors military training &mdash; you don't get the whole map up front. Build it as you need it.</li>
+          <li><strong>Language-first habit.</strong> The core behavioral shift: start in natural language / terminal, offshoot to GUI widgets only when needed, then return.</li>
+          <li><strong>Just-in-time vs foundational knowledge.</strong> Some knowledge (how the internet works) must be built up slowly. Other knowledge (market research, specific tools) is just-in-time. Curriculum needs to distinguish between these.</li>
+          <li><strong>1:1 tutorial ratios.</strong> Alpha School article in Colossus Magazine &mdash; high-touch, focused education produces outsized returns. Age-agnostic. Core differentiator for LearnAIR.</li>
+          <li><strong>Context switching is a real lesson.</strong> Mike asking "did that mess it up?" when they went on a tangent is a natural teaching moment. Build this into the curriculum.</li>
+          <li><strong>Persona module needs nuance.</strong> When does imposing a persona help (communication, style matching) vs when does it hurt (narrowing serendipity)?</li>
+          <li><strong>Module ordering emerging.</strong> Terminal orientation, voice-first input, basic agent tasking, context discipline, personas, just-in-time patterns, building your own hub.</li>
+        </ul>
+      </div>
+
       <div class="action-items">
-        <h3>Action Items</h3>
+        <h3>Action Items &mdash; Mike (before Teresa Monday)</h3>
         <div class="action-item">
           <div class="action-checkbox"></div>
-          <span class="action-text">Mike: send thank you email to Justin before Monday</span>
+          <span class="action-text">Review thesis V3 one more time &mdash; note any remaining wording concerns</span>
         </div>
         <div class="action-item">
           <div class="action-checkbox"></div>
-          <span class="action-text">Mike: review one-pager before Teresa call</span>
+          <span class="action-text">Internalize the three Teresa Coates article themes &mdash; be ready to reference "workforce and leadership redesign challenge" framing</span>
         </div>
         <div class="action-item">
           <div class="action-checkbox"></div>
-          <span class="action-text">Mike: add first contribution to hub</span>
+          <span class="action-text">Practice the 30-second pitch using new opener structure</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Be ready to speak from personal experience at the Teresa meeting</span>
+        </div>
+        <h3>Action Items &mdash; Andrew (async)</h3>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Finalize thesis V3 with all session feedback &mdash; push updated one-pager to andrewdeal.info</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Write the terminal vs GUI primer for the field manual</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Improve hub navigation &mdash; add a clear index or table of contents</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Capture curriculum module stubs into a structured list</span>
+        </div>
+        <h3>Action Items &mdash; Next Session</h3>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Run the strategic stress test on the thesis</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Review Oregon competitive landscape</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Build comms plan beyond Teresa meeting</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike's first real task in Claude Code</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike adds first contribution to the hub</span>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- ==================== COMPLETED ==================== -->
-<div class="section">
-  <div class="section-label">
-    Completed <span class="count">2 sessions</span>
   </div>
 
   <!-- Session 1 — Mar 20 -->
