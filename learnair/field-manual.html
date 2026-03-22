@@ -411,6 +411,43 @@
     line-height: 1.65;
   }
 
+  /* --- EXPANDABLE DETAILS --- */
+  .concept-detail {
+    margin-top: 0.8rem;
+  }
+
+  .concept-detail summary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .concept-detail summary::-webkit-details-marker { display: none; }
+
+  .concept-detail summary::before {
+    content: '+ more';
+  }
+
+  .concept-detail[open] summary::before {
+    content: '- less';
+  }
+
+  .concept-detail .detail-content {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--faint);
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
   /* --- RESOURCES --- */
   .resource-group {
     margin-bottom: 2rem;
@@ -710,60 +747,50 @@
     <div class="concept-card">
       <div class="concept-name">Context Window</div>
       <span class="concept-tag">How much AI can hold in its head</span>
-      <div class="concept-desc">Claude: 200K tokens (~500 pages). ChatGPT: 128K but degrades earlier. More context = better answers. This is why CLI beats chat &mdash; you can feed it your entire project.</div>
+      <div class="concept-desc">Claude holds ~500 pages at once. ChatGPT holds less and degrades earlier. More context = better answers.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">This is why CLI beats chat. In a browser, you copy-paste snippets. In Claude Code, you point it at your entire project and it reads everything. The context window is the biggest differentiator between "helpful chatbot" and "capable partner." When Claude can see your full codebase, meeting notes, and research at the same time, it connects dots you wouldn't think to ask about.</div></details>
     </div>
     <div class="concept-card">
       <div class="concept-name">CLAUDE.md</div>
       <span class="concept-tag">Standing briefing for every session</span>
-      <div class="concept-desc">A file you put in any project folder. Claude reads it automatically every session. "Here's who I am, here's what this project is, here's what not to do." Saves you from repeating yourself.</div>
+      <div class="concept-desc">A file Claude reads automatically every session. "Here's who I am, here's what this project is, here's what not to do." Write it once, never repeat yourself.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">Put a CLAUDE.md in any project folder. Claude reads it before you say anything. Andrew's says things like "never use npm, use pnpm" and "write like texting a smart busy friend." You can put your persona, your preferences, your project context. This is how Claude goes from generic to personal. It's also where your AI style guide lives (see Personalizing Your AI below).</div></details>
     </div>
     <div class="concept-card">
       <div class="concept-name">MCP</div>
       <span class="concept-tag">Model Context Protocol</span>
-      <div class="concept-desc">A way to connect Claude to external services (Google Calendar, Sheets, etc.). Powerful when it works. Currently unreliable for complex setups. CSV export is often the better path for now.</div>
+      <div class="concept-desc">Connects Claude to external services (Calendar, Sheets, etc.). Powerful when it works. Currently unreliable. CSV export is often better.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">MCP is the protocol for plugging Claude into other tools. Google Calendar works well. Google Sheets was a 2-hour nightmare (service accounts, OAuth confusion, config file roulette). The ecosystem is young. Rule of thumb: if an MCP server doesn't work in 10 minutes, use a simpler path (download CSV, use Manus for browser tasks). Don't spend 2 hours on plumbing for a 5-minute task.</div></details>
     </div>
     <div class="concept-card">
       <div class="concept-name">Agents vs. Assistants</div>
       <span class="concept-tag">The key distinction</span>
-      <div class="concept-desc">An assistant waits for you to ask. An agent acts on its own based on rules you set. ChatGPT is an assistant. Andrew's WhatsApp health coach is an agent. The future is agents.</div>
+      <div class="concept-desc">An assistant waits for you to ask. An agent acts on its own. ChatGPT is an assistant. Andrew's WhatsApp health coach is an agent.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">Assistants are reactive: you type, it responds. Agents are proactive: you define the mission, they execute patrols. An agent can pull your Garmin data every 4 hours, send you a morning briefing, nudge you when your sleep score drops. You set the rules once, it runs 24/7. The future of AI work isn't asking questions. It's commanding operations.</div></details>
     </div>
     <div class="concept-card" style="grid-column: span 2;">
-      <div class="concept-name">Input Speed: Why Voice-First Matters</div>
-      <span class="concept-tag">The single biggest productivity unlock</span>
-      <div class="concept-desc">Speaking is 130-170 words per minute. Typing is 35-43. Mouse clicking is 5-15. That's a 4x gap between talking and typing, and a 10x gap between talking and clicking through menus. The implication: the fastest way to interact with AI is to talk to it. Dictate your thoughts, let the AI process them, then type to refine. Stanford research found speech is 3x faster than typing with 20% fewer errors. Tools like Monologue turn your voice into text anywhere on your laptop. The workflow shift: talk to generate, type to edit, never click when you can type. This isn't a nice-to-have. If you're spending 4 hours a day interacting with AI tools, voice-first reclaims 2 of those hours. Optimize your toolchain for speaking first, typing second, mouse last.</div>
+      <div class="concept-name">Input Speed</div>
+      <span class="concept-tag">Speaking: 150 WPM. Typing: 40. Mouse: 10. Optimize accordingly.</span>
+      <div class="concept-desc">Talk to generate (4x faster). Type to edit. Never click when you can type (10x faster). Voice-first reclaims 2 hours out of every 4 spent with AI tools.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">Stanford research: speech is 3x faster than typing with 20% fewer errors. KLM research: terminal commands are 42% faster than GUI clicks. University of Waterloo: developers in terminal 65%+ of the time complete sprints 22% faster with 31% fewer focus breaks. Tools like Monologue turn your voice into text anywhere on your laptop. The workflow: speak your thoughts, let AI process them, type only to refine. Human output bandwidth is ~50 bits/second regardless of method (Paradromics neuroscience). Speaking encodes ~40 of those bits. Typing encodes ~15. The mouse encodes ~5.</div></details>
     </div>
     <div class="concept-card" style="grid-column: span 2;">
-      <div class="concept-name">Why Terminal Over GUI (And When Not To)</div>
-      <span class="concept-tag">Voice-first breaks the GUI paradigm</span>
-      <div class="concept-desc">Once you're talking to your computer, clicking through menus stops making sense. Voice + CLI means you speak an intent and a system acts on it. No hunting for buttons, no navigating dropdown menus, no context switching between mouse targets. Your computer becomes a conversation partner, not a control panel.
-
-CLI research backs this up: replacing GUI file operations with terminal commands cuts task completion time by 42% (KLM research). Developers who do 65%+ of tasks in terminal complete sprints 22% faster with 31% fewer focus breaks (University of Waterloo, 2023).
-
-But GUIs win in specific places. Visual design (Figma, photo editing) where you need to see and arrange spatially. Spreadsheets where scanning 500 color-coded rows beats asking for data you don't know exists. Precision editing where "3 pixels left" is two clicks vs a paragraph of description. The rule: GUI for consuming and arranging. CLI for producing and commanding.
-
-The practical shift: your primary work mode becomes voice + terminal. You talk, the AI acts, you review. GUIs become your secondary mode for visual tasks. Not "never use a mouse." Just know that every time you reach for the mouse, you're choosing the slowest input channel.
-
-What about discoverability? In a GUI you see menus and know what's possible. In a CLI, you need structure. That's what the hub framework solves: a standardized folder layout (research/, decisions/, plans/, meetings/, execution/) that gives you the same "I know what's available" feeling, just through file organization instead of menu bars.</div>
+      <div class="concept-name">Terminal Over GUI</div>
+      <span class="concept-tag">Voice breaks the GUI paradigm. Your computer becomes a conversation, not a control panel.</span>
+      <div class="concept-desc">Voice + CLI: speak an intent, the system acts. No menus, no buttons, no mouse targets. GUI stays for visual tasks (design, spreadsheets, spatial work).</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">Once you're talking to your computer, clicking through menus is the slow lane. But GUIs win in specific places: visual design (Figma), scanning a color-coded spreadsheet, precision pixel editing. The rule: CLI for producing and commanding. GUI for consuming and arranging. The discoverability problem ("in a GUI I see menus, in a CLI I see nothing") is solved by structure. That's what the hub framework does: five folders that map to five types of work, so you always know what's available without needing a menu bar.</div></details>
     </div>
     <div class="concept-card" style="grid-column: span 2;">
-      <div class="concept-name">The Hub: Your Local Command Center</div>
-      <span class="concept-tag">Replacing GUI discoverability with structure</span>
-      <div class="concept-desc">The hub is a folder at ~/src/hub/ with five directories. Each one maps to a type of work:
-
-research/ for deep dives, competitive analysis, anything you learn.
-decisions/ for design decisions with rationale and status.
-plans/ for roadmaps, strategies, phased approaches.
-meetings/ for session logs, call notes, action items.
-execution/ for retros, what worked, what didn't.
-
-Files are dated (2026-03-22-topic.md) and written in markdown (plain text with simple formatting). When you open Claude Code inside the hub, it can see everything. Ask "what research do we have on Oregon?" and it searches across all files. Ask "create a meeting log for today's session" and it knows the template.
-
-This replaces the GUI instinct of "where do I click?" with "where does this belong?" Five folders, five types of work. That's the whole system. You can list everything with 'ls research/' the way you'd scan a folder in Finder, but faster.</div>
+      <div class="concept-name">The Hub</div>
+      <span class="concept-tag">Five folders. Five types of work. Your local command center.</span>
+      <div class="concept-desc">research/ &middot; decisions/ &middot; plans/ &middot; meetings/ &middot; execution/. Files are dated markdown. Claude sees everything. Ask "what do we have on Oregon?" and it searches all files.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">The hub is at ~/src/hub/. Each folder maps to a type of work. research/ for anything you learn. decisions/ for choices with rationale. plans/ for roadmaps and strategies. meetings/ for session logs and call notes. execution/ for retros and what worked. Files are named YYYY-MM-DD-topic.md. When you open Claude Code inside the hub, it reads the whole structure. "Create a meeting log for today" and it knows the template. "What research do we have on funding?" and it searches across everything. This replaces "where do I click?" with "where does this belong?"</div></details>
     </div>
     <div class="concept-card" style="grid-column: span 2;">
       <div class="concept-name">Personalizing Your AI</div>
       <span class="concept-tag">Make it talk like you, think like you</span>
-      <div class="concept-desc">Out of the box, AI writes like a polite intern. You can change that. Feed it examples of your writing and ask "what do you notice?" It builds a theory of your voice: how you start, how you structure, what words you reach for. Save that as a style guide in your CLAUDE.md or ChatGPT custom instructions. Over time, the AI stops sounding generic and starts sounding like your co-author. This isn't cosmetic. When the AI matches your voice, you spend less time editing and more time thinking. Three approaches: (1) upload your writing and let it analyze your patterns, (2) describe your voice in plain language ("direct, short sentences, no fluff, military-adjacent"), (3) correct it when it misses ("I wouldn't say it that way, I'd say it like this"). The guide sharpens over time. Think of it like training a new team member on how you communicate.</div>
+      <div class="concept-desc">Feed it your writing. Ask "what do you notice?" Save the analysis as a style guide in CLAUDE.md. Three approaches: (1) let it analyze your patterns, (2) describe your voice in plain language, (3) correct it when it misses.</div>
+      <details class="concept-detail"><summary></summary><div class="detail-content">Out of the box, AI writes like a polite intern. Upload your writing samples and ask "what patterns do you see?" It surfaces things you'd never consciously noticed: how you open, how you structure, what words you reach for. Save that as a style guide. Over time, the AI stops sounding generic and starts sounding like your co-author. This isn't cosmetic. When the AI matches your voice, you spend less time editing and more time thinking. The guide sharpens with every correction.</div></details>
     </div>
   </div>
 </div>
