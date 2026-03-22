@@ -213,6 +213,198 @@
     letter-spacing: 0.08em;
   }
 
+  /* --- COLLAPSIBLE SECTIONS --- */
+  .section-label.collapsible {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .section-label.collapsible:hover {
+    opacity: 0.85;
+  }
+
+  .section-toggle {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.25s ease;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .section-label.collapsed .section-toggle {
+    transform: rotate(-90deg);
+  }
+
+  .section-content {
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    opacity: 1;
+  }
+
+  .section-content.collapsed {
+    max-height: 0 !important;
+    opacity: 0;
+  }
+
+  /* --- SEARCH + FILTER --- */
+  .search-filter {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 1.5rem;
+  }
+
+  .search-input-wrap {
+    position: relative;
+    margin-bottom: 0.8rem;
+  }
+
+  .search-input {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    padding: 0.75rem 1rem 0.75rem 2.6rem;
+    background: var(--warm);
+    border: 1px solid var(--faint);
+    border-radius: 0;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .search-input::placeholder {
+    color: var(--faint);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+    background: var(--white);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    color: var(--faint);
+    pointer-events: none;
+  }
+
+  .tag-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+  }
+
+  .tag-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--warm);
+    border: 1px solid var(--faint);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .tag-pill:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+  }
+
+  .tag-pill.active {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+  }
+
+  .filter-clear {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: none;
+    border: 1px solid var(--accent);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    display: none;
+  }
+
+  .filter-clear.visible {
+    display: inline-block;
+  }
+
+  .filter-clear:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  .no-results {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+    padding: 3rem 1rem;
+    display: none;
+  }
+
+  .no-results.visible {
+    display: block;
+  }
+
+  /* --- QUICK LINKS --- */
+  .quick-links {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+  }
+
+  .quick-link {
+    background: var(--warm);
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .quick-link:hover {
+    background: var(--white);
+  }
+
+  .ql-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .ql-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
   /* --- RESOURCE CARDS --- */
   .resource-grid {
     display: grid;
@@ -252,6 +444,10 @@
   .resource-card:hover::after {
     color: var(--accent);
     transform: translateX(3px);
+  }
+
+  .resource-card.filtered-out {
+    display: none;
   }
 
   .rc-meta {
@@ -530,6 +726,9 @@
     .status-bar { grid-template-columns: 1fr; }
     nav .nav-links { gap: 0.6rem; }
     footer { flex-direction: column; gap: 1rem; }
+    .quick-links-grid { grid-template-columns: repeat(2, 1fr); }
+    .search-filter { padding: 0 1.5rem 1.5rem; }
+    .quick-links { padding: 0 1.5rem 2rem; }
   }
 </style>
 </head>
@@ -582,301 +781,359 @@
   </div>
 </div>
 
+</div><!-- container (status bar) -->
+
+<!-- ==================== SEARCH + FILTER ==================== -->
+<div class="search-filter" id="search-filter">
+  <div class="search-input-wrap">
+    <span class="search-icon">&#x2315;</span>
+    <input type="text" class="search-input" id="hub-search" placeholder="Search briefings, research, curriculum..." autocomplete="off">
+  </div>
+  <div class="tag-pills" id="tag-pills">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- ==================== AUDIENCE QUICK LINKS ==================== -->
+<div class="quick-links">
+  <div class="quick-links-grid">
+    <a class="quick-link" href="one-pager.html">
+      <span class="ql-icon">&#x1F4CB;</span>
+      <span class="ql-text">Prep for Teresa</span>
+    </a>
+    <a class="quick-link" href="#research">
+      <span class="ql-icon">&#x1F50D;</span>
+      <span class="ql-text">Understand the landscape</span>
+    </a>
+    <a class="quick-link" href="#curriculum">
+      <span class="ql-icon">&#x1F4DA;</span>
+      <span class="ql-text">Build the curriculum</span>
+    </a>
+    <a class="quick-link" href="stress-test.html">
+      <span class="ql-icon">&#x1F3AF;</span>
+      <span class="ql-text">Plan strategy</span>
+    </a>
+  </div>
+</div>
+
+<!-- ==================== NO RESULTS MESSAGE ==================== -->
+<div class="container" style="padding-bottom: 0;">
+  <div class="no-results" id="no-results">No resources match your search.</div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<div class="container">
+
 <!-- ==================== BRIEFINGS ==================== -->
-<div class="section" id="briefings">
-  <div class="section-label">
+<div class="section" id="briefings" data-section="briefings">
+  <div class="section-label collapsible" data-toggle="briefings">
     Briefings &amp; Deliverables <span class="count">3 documents</span>
+    <span class="section-toggle">&#x25BE;</span>
   </div>
 
-  <div class="resource-grid" style="margin-bottom: 2rem;">
-    <a class="resource-card" href="one-pager.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type briefing">One-Pager</span>
-          <span class="rc-date">Mar 20, 2026</span>
+  <div class="section-content" data-section-content="briefings">
+    <div class="resource-grid" style="margin-bottom: 2rem;">
+      <a class="resource-card" href="one-pager.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type briefing">One-Pager</span>
+            <span class="rc-date">Mar 20, 2026</span>
+          </div>
+          <div class="rc-title">Mission Command &rarr; AI Supervision</div>
+          <div class="rc-desc">Leave-behind for Teresa meeting (Mon Mar 24). The gap, the concept (Student / Employer / Funder), why now (Brynjolfsson + Raimondo), what we&rsquo;ve built. Prints to one page.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">teresa</span>
+            <span class="rc-tag">one-pager</span>
+            <span class="rc-tag">monday</span>
+          </div>
         </div>
-        <div class="rc-title">Mission Command &rarr; AI Supervision</div>
-        <div class="rc-desc">Leave-behind for Teresa meeting (Mon Mar 24). The gap, the concept (Student / Employer / Funder), why now (Brynjolfsson + Raimondo), what we&rsquo;ve built. Prints to one page.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">teresa</span>
-          <span class="rc-tag">one-pager</span>
-          <span class="rc-tag">monday</span>
+      </a>
+    </div>
+
+    <div style="margin-bottom: 2rem;">
+      <a class="version-row" href="v1.html">
+        <span class="vr-version current">v1</span>
+        <div class="vr-content">
+          <div class="vr-title">Complete Briefing &mdash; Clarity Revision</div>
+          <div class="vr-changes">Added &ldquo;What This Is&rdquo; cards (Student / Employer / Funder). New &ldquo;Why This Gap Exists&rdquo; section. Sharpened hero for immediate clarity. Easter Seals HVRP funding pathway. Condensed competitive landscape. Risk matrix. Addresses Paul&rsquo;s feedback: &ldquo;I still don&rsquo;t really know what you&rsquo;re doing.&rdquo;</div>
         </div>
-      </div>
-    </a>
-  </div>
+        <span class="vr-date">Mar 19, 2026</span>
+      </a>
+      <a class="version-row" href="index.html">
+        <span class="vr-version">v0</span>
+        <div class="vr-content">
+          <div class="vr-title">Complete Briefing &mdash; Initial Thesis</div>
+          <div class="vr-changes">Full thesis document. Competitive landscape with positioning matrix. Business model &amp; economics. Four-week pilot curriculum. Workflow designs. Execution timeline. Validation scripts. Team template. 9 sections, 2,371 lines.</div>
+        </div>
+        <span class="vr-date">Mar 18, 2026</span>
+      </a>
+    </div>
 
-  <div style="margin-bottom: 2rem;">
-    <a class="version-row" href="v1.html">
-      <span class="vr-version current">v1</span>
-      <div class="vr-content">
-        <div class="vr-title">Complete Briefing &mdash; Clarity Revision</div>
-        <div class="vr-changes">Added &ldquo;What This Is&rdquo; cards (Student / Employer / Funder). New &ldquo;Why This Gap Exists&rdquo; section. Sharpened hero for immediate clarity. Easter Seals HVRP funding pathway. Condensed competitive landscape. Risk matrix. Addresses Paul&rsquo;s feedback: &ldquo;I still don&rsquo;t really know what you&rsquo;re doing.&rdquo;</div>
-      </div>
-      <span class="vr-date">Mar 19, 2026</span>
-    </a>
-    <a class="version-row" href="index.html">
-      <span class="vr-version">v0</span>
-      <div class="vr-content">
-        <div class="vr-title">Complete Briefing &mdash; Initial Thesis</div>
-        <div class="vr-changes">Full thesis document. Competitive landscape with positioning matrix. Business model &amp; economics. Four-week pilot curriculum. Workflow designs. Execution timeline. Validation scripts. Team template. 9 sections, 2,371 lines.</div>
-      </div>
-      <span class="vr-date">Mar 18, 2026</span>
-    </a>
-  </div>
-
-  <div class="callout">
-    <span class="callout-label">Version Policy</span>
-    Each version is preserved at its own URL. v0 stays at <code>/learnair/</code>, v1 at <code>/learnair/v1.html</code>. We don&rsquo;t overwrite &mdash; we iterate. The changelog tracks what changed and why.
+    <div class="callout">
+      <span class="callout-label">Version Policy</span>
+      Each version is preserved at its own URL. v0 stays at <code>/learnair/</code>, v1 at <code>/learnair/v1.html</code>. We don&rsquo;t overwrite &mdash; we iterate. The changelog tracks what changed and why.
+    </div>
   </div>
 </div>
 
 <!-- ==================== RESEARCH ==================== -->
-<div class="section" id="research">
-  <div class="section-label">
+<div class="section" id="research" data-section="research">
+  <div class="section-label collapsible" data-toggle="research">
     Research &amp; Analysis <span class="count">7 documents</span>
+    <span class="section-toggle">&#x25BE;</span>
   </div>
 
-  <div class="resource-grid">
-    <a class="resource-card" href="deep-dive.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type research">Deep Dive</span>
-          <span class="rc-date">Mar 19, 2026</span>
+  <div class="section-content" data-section-content="research">
+    <div class="resource-grid">
+      <a class="resource-card" href="deep-dive.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type research">Deep Dive</span>
+            <span class="rc-date">Mar 19, 2026</span>
+          </div>
+          <div class="rc-title">LearnAIR Deep Dive &mdash; People, Product, Position</div>
+          <div class="rc-desc">Full dossier on the company, all key people (Justin, Teresa, Bobby, Trisha) with LinkedIn activity analysis, products &amp; pricing, veteran program status, competitive position, Easter Seals funding context, and press sources.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">company</span>
+            <span class="rc-tag">people</span>
+            <span class="rc-tag">linkedin</span>
+            <span class="rc-tag">funding</span>
+          </div>
         </div>
-        <div class="rc-title">LearnAIR Deep Dive &mdash; People, Product, Position</div>
-        <div class="rc-desc">Full dossier on the company, all key people (Justin, Teresa, Bobby, Trisha) with LinkedIn activity analysis, products &amp; pricing, veteran program status, competitive position, Easter Seals funding context, and press sources.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">company</span>
-          <span class="rc-tag">people</span>
-          <span class="rc-tag">linkedin</span>
-          <span class="rc-tag">funding</span>
+      </a>
+      <a class="resource-card" href="call-prep.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Call Prep</span>
+            <span class="rc-date">Mar 19, 2026</span>
+          </div>
+          <div class="rc-title">Call Prep &mdash; Justin Meeting (Mar 19, 2pm)</div>
+          <div class="rc-desc">Question bank for today&rsquo;s call. What LearnAIR actually is (Paul&rsquo;s clarity test). 12 strategic questions organized by intent, alignment, and strategy. Red flags vs. green lights framework. Post-call action plan.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">meeting</span>
+            <span class="rc-tag">questions</span>
+            <span class="rc-tag">tactical</span>
+          </div>
         </div>
-      </div>
-    </a>
-    <a class="resource-card" href="call-prep.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Call Prep</span>
-          <span class="rc-date">Mar 19, 2026</span>
+      </a>
+      <a class="resource-card" href="stress-test.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Strategy</span>
+            <span class="rc-date">Mar 22, 2026</span>
+          </div>
+          <div class="rc-title">Strategic Stress Test &mdash; Opposition, Path to Success, Zero to One</div>
+          <div class="rc-desc">Steelman opposition (5 arguments with counters), phased path from dogfooding to pilot to case study, kill criteria, honest assessment of risks and advantages, open questions for Session 2.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">strategy</span>
+            <span class="rc-tag">opposition</span>
+            <span class="rc-tag">pilot</span>
+            <span class="rc-tag">zero-to-one</span>
+          </div>
         </div>
-        <div class="rc-title">Call Prep &mdash; Justin Meeting (Mar 19, 2pm)</div>
-        <div class="rc-desc">Question bank for today&rsquo;s call. What LearnAIR actually is (Paul&rsquo;s clarity test). 12 strategic questions organized by intent, alignment, and strategy. Red flags vs. green lights framework. Post-call action plan.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">meeting</span>
-          <span class="rc-tag">questions</span>
-          <span class="rc-tag">tactical</span>
+      </a>
+      <a class="resource-card" href="hoover-speakers.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Policy</span>
+            <span class="rc-date">Mar 19, 2026</span>
+          </div>
+          <div class="rc-title">Hoover Talk Speakers &mdash; Raimondo &amp; Brynjolfsson</div>
+          <div class="rc-desc">Deep dive on Gina Raimondo (former Secretary of Commerce) and Erik Brynjolfsson (Stanford Digital Economy Lab). Their policy frameworks, research findings, and direct alignment to the LearnAIR veteran program. The whitespace: neither has a veteran-specific AI workforce program.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">policy</span>
+            <span class="rc-tag">stanford</span>
+            <span class="rc-tag">raimondo</span>
+            <span class="rc-tag">brynjolfsson</span>
+            <span class="rc-tag">labor</span>
+          </div>
         </div>
-      </div>
-    </a>
-    <a class="resource-card" href="stress-test.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Strategy</span>
-          <span class="rc-date">Mar 22, 2026</span>
+      </a>
+      <a class="resource-card" href="oregon-landscape.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type research">Research</span>
+            <span class="rc-date">Mar 22, 2026</span>
+          </div>
+          <div class="rc-title">Oregon Landscape &mdash; Veterans, AI, Employers, Funding</div>
+          <div class="rc-desc">Concrete: veteran orgs (COVO, East Cascades Works, WorkSource Bend), employers (Health Elements AI, Intel, Northrop Grumman, Prineville data centers), training institutions (COCC, OSU-Cascades), funding ($10M Oregon-NVIDIA, ODVA grants, WIOA).</div>
+          <div class="rc-tags">
+            <span class="rc-tag">oregon</span>
+            <span class="rc-tag">employers</span>
+            <span class="rc-tag">funding</span>
+            <span class="rc-tag">bend</span>
+          </div>
         </div>
-        <div class="rc-title">Strategic Stress Test &mdash; Opposition, Path to Success, Zero to One</div>
-        <div class="rc-desc">Steelman opposition (5 arguments with counters), phased path from dogfooding to pilot to case study, kill criteria, honest assessment of risks and advantages, open questions for Session 2.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">strategy</span>
-          <span class="rc-tag">opposition</span>
-          <span class="rc-tag">pilot</span>
-          <span class="rc-tag">zero-to-one</span>
+      </a>
+      <a class="resource-card" href="competitive-landscape.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type research">Research</span>
+            <span class="rc-date">Mar 18, 2026</span>
+          </div>
+          <div class="rc-title">Competitive Positioning Analysis</div>
+          <div class="rc-desc">Detailed breakdown of 10+ competitors: Deloitte AI Academy, Vets in Tech, Code Platoon, SkillBridge, Hiring Our Heroes, Google/Microsoft/AWS certs. Positioning matrix and gap analysis.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">competitive</span>
+            <span class="rc-tag">landscape</span>
+            <span class="rc-tag">positioning</span>
+          </div>
         </div>
-      </div>
-    </a>
-    <a class="resource-card" href="hoover-speakers.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Policy</span>
-          <span class="rc-date">Mar 19, 2026</span>
+      </a>
+      <a class="resource-card" href="practical-assets.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type assets">Assets</span>
+            <span class="rc-date">Mar 18, 2026</span>
+          </div>
+          <div class="rc-title">Practical Assets for Demand Validation &amp; Launch</div>
+          <div class="rc-desc">Validation interview scripts, employer outreach templates, signal/noise frameworks, commitment asks, and discovery conversation guides for testing the thesis with real prospects.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">validation</span>
+            <span class="rc-tag">scripts</span>
+            <span class="rc-tag">outreach</span>
+          </div>
         </div>
-        <div class="rc-title">Hoover Talk Speakers &mdash; Raimondo &amp; Brynjolfsson</div>
-        <div class="rc-desc">Deep dive on Gina Raimondo (former Secretary of Commerce) and Erik Brynjolfsson (Stanford Digital Economy Lab). Their policy frameworks, research findings, and direct alignment to the LearnAIR veteran program. The whitespace: neither has a veteran-specific AI workforce program.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">policy</span>
-          <span class="rc-tag">stanford</span>
-          <span class="rc-tag">raimondo</span>
-          <span class="rc-tag">brynjolfsson</span>
-          <span class="rc-tag">labor</span>
-        </div>
-      </div>
-    </a>
-    <a class="resource-card" href="oregon-landscape.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type research">Research</span>
-          <span class="rc-date">Mar 22, 2026</span>
-        </div>
-        <div class="rc-title">Oregon Landscape &mdash; Veterans, AI, Employers, Funding</div>
-        <div class="rc-desc">Concrete: veteran orgs (COVO, East Cascades Works, WorkSource Bend), employers (Health Elements AI, Intel, Northrop Grumman, Prineville data centers), training institutions (COCC, OSU-Cascades), funding ($10M Oregon-NVIDIA, ODVA grants, WIOA).</div>
-        <div class="rc-tags">
-          <span class="rc-tag">oregon</span>
-          <span class="rc-tag">employers</span>
-          <span class="rc-tag">funding</span>
-          <span class="rc-tag">bend</span>
-        </div>
-      </div>
-    </a>
-    <a class="resource-card" href="competitive-landscape.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type research">Research</span>
-          <span class="rc-date">Mar 18, 2026</span>
-        </div>
-        <div class="rc-title">Competitive Positioning Analysis</div>
-        <div class="rc-desc">Detailed breakdown of 10+ competitors: Deloitte AI Academy, Vets in Tech, Code Platoon, SkillBridge, Hiring Our Heroes, Google/Microsoft/AWS certs. Positioning matrix and gap analysis.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">competitive</span>
-          <span class="rc-tag">landscape</span>
-          <span class="rc-tag">positioning</span>
-        </div>
-      </div>
-    </a>
-    <a class="resource-card" href="practical-assets.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type assets">Assets</span>
-          <span class="rc-date">Mar 18, 2026</span>
-        </div>
-        <div class="rc-title">Practical Assets for Demand Validation &amp; Launch</div>
-        <div class="rc-desc">Validation interview scripts, employer outreach templates, signal/noise frameworks, commitment asks, and discovery conversation guides for testing the thesis with real prospects.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">validation</span>
-          <span class="rc-tag">scripts</span>
-          <span class="rc-tag">outreach</span>
-        </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>
 
 <!-- ==================== PEOPLE ==================== -->
-<div class="section" id="people">
-  <div class="section-label">
+<div class="section" id="people" data-section="people">
+  <div class="section-label collapsible" data-toggle="people">
     Key People <span class="count">5 profiles</span>
+    <span class="section-toggle">&#x25BE;</span>
   </div>
 
-  <div class="people-grid">
-    <div class="person-card">
-      <div class="pc-name">Justin Coats</div>
-      <span class="pc-role">CVO &amp; Co-Founder, LearnAIR</span>
-      <div class="pc-detail">Marine veteran (helicopter mechanic). Disabled vet, SDVOSB. Serial entrepreneur &mdash; sold Amazon agency in 2022. Philosophy: &ldquo;Don&rsquo;t Forget the Human Part.&rdquo; Vocabulary: &ldquo;Digital Employees,&rdquo; 80/20 offload, &ldquo;Learn, Build, Deploy.&rdquo;</div>
-      <a class="pc-link" href="https://linkedin.com/in/ai-integrator" target="_blank">LinkedIn &rarr;</a>
-    </div>
-    <div class="person-card">
-      <div class="pc-name">Teresa Coats, M.S.</div>
-      <span class="pc-role">CEO &amp; Co-Founder, LearnAIR</span>
-      <div class="pc-detail">The operator. Was COO, earned CEO title. Sport science background (Boise State). Thinks in load management &amp; periodization. Cares about practical, measurable outcomes. &ldquo;AI is only as transformative as the people empowered to use it.&rdquo;</div>
-      <a class="pc-link" href="https://linkedin.com/in/teresacoats" target="_blank">LinkedIn &rarr;</a>
-    </div>
-    <div class="person-card">
-      <div class="pc-name">Bobby Napiltonia</div>
-      <span class="pc-role">Chairman &amp; Chief Strategist</span>
-      <div class="pc-detail">36+ years. Created Salesforce AppExchange with Benioff. First CRO at Twilio ($5M &rarr; $178M in 18 months). 487 LinkedIn posts &mdash; actively engaged, not ceremonial. &ldquo;AI is like air. Most people still don&rsquo;t know how to breathe it.&rdquo;</div>
-      <a class="pc-link" href="https://linkedin.com/in/bobby-napiltonia-8b82624" target="_blank">LinkedIn &rarr;</a>
-    </div>
-    <div class="person-card">
-      <div class="pc-name">Trisha Sargent</div>
-      <span class="pc-role">Program Manager / L&amp;D Director</span>
-      <div class="pc-detail">14+ years corporate L&amp;D (Consumer Cellular, T-Mobile, AT&amp;T, Gap). Launched Easter Seals HVRP in Central Oregon ($1.4M DOL). Trauma-informed care certified. TEDxBend. Possibly daughter of Medal of Honor recipient Sgt. Maj. Canley.</div>
-      <a class="pc-link" href="https://linkedin.com/in/patricia-sargent-721a904a" target="_blank">LinkedIn &rarr;</a>
-    </div>
-    <div class="person-card" style="grid-column: span 2;">
-      <div class="pc-name">Joe</div>
-      <span class="pc-role">East Coast &mdash; Role TBD</span>
-      <div class="pc-detail">No information beyond first name. Justin is &ldquo;bringing him onto the team.&rdquo; Profile to be updated after Mar 19 call.</div>
+  <div class="section-content" data-section-content="people">
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="pc-name">Justin Coats</div>
+        <span class="pc-role">CVO &amp; Co-Founder, LearnAIR</span>
+        <div class="pc-detail">Marine veteran (helicopter mechanic). Disabled vet, SDVOSB. Serial entrepreneur &mdash; sold Amazon agency in 2022. Philosophy: &ldquo;Don&rsquo;t Forget the Human Part.&rdquo; Vocabulary: &ldquo;Digital Employees,&rdquo; 80/20 offload, &ldquo;Learn, Build, Deploy.&rdquo;</div>
+        <a class="pc-link" href="https://linkedin.com/in/ai-integrator" target="_blank">LinkedIn &rarr;</a>
+      </div>
+      <div class="person-card">
+        <div class="pc-name">Teresa Coats, M.S.</div>
+        <span class="pc-role">CEO &amp; Co-Founder, LearnAIR</span>
+        <div class="pc-detail">The operator. Was COO, earned CEO title. Sport science background (Boise State). Thinks in load management &amp; periodization. Cares about practical, measurable outcomes. &ldquo;AI is only as transformative as the people empowered to use it.&rdquo;</div>
+        <a class="pc-link" href="https://linkedin.com/in/teresacoats" target="_blank">LinkedIn &rarr;</a>
+      </div>
+      <div class="person-card">
+        <div class="pc-name">Bobby Napiltonia</div>
+        <span class="pc-role">Chairman &amp; Chief Strategist</span>
+        <div class="pc-detail">36+ years. Created Salesforce AppExchange with Benioff. First CRO at Twilio ($5M &rarr; $178M in 18 months). 487 LinkedIn posts &mdash; actively engaged, not ceremonial. &ldquo;AI is like air. Most people still don&rsquo;t know how to breathe it.&rdquo;</div>
+        <a class="pc-link" href="https://linkedin.com/in/bobby-napiltonia-8b82624" target="_blank">LinkedIn &rarr;</a>
+      </div>
+      <div class="person-card">
+        <div class="pc-name">Trisha Sargent</div>
+        <span class="pc-role">Program Manager / L&amp;D Director</span>
+        <div class="pc-detail">14+ years corporate L&amp;D (Consumer Cellular, T-Mobile, AT&amp;T, Gap). Launched Easter Seals HVRP in Central Oregon ($1.4M DOL). Trauma-informed care certified. TEDxBend. Possibly daughter of Medal of Honor recipient Sgt. Maj. Canley.</div>
+        <a class="pc-link" href="https://linkedin.com/in/patricia-sargent-721a904a" target="_blank">LinkedIn &rarr;</a>
+      </div>
+      <div class="person-card" style="grid-column: span 2;">
+        <div class="pc-name">Joe</div>
+        <span class="pc-role">East Coast &mdash; Role TBD</span>
+        <div class="pc-detail">No information beyond first name. Justin is &ldquo;bringing him onto the team.&rdquo; Profile to be updated after Mar 19 call.</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ==================== CURRICULUM ==================== -->
-<div class="section" id="curriculum">
-  <div class="section-label">
+<div class="section" id="curriculum" data-section="curriculum">
+  <div class="section-label collapsible" data-toggle="curriculum">
     Curriculum <span class="count">Work in progress — 2 resources</span>
+    <span class="section-toggle">&#x25BE;</span>
   </div>
 
-  <div class="callout">
-    <span class="callout-label">The Insight</span>
-    We&rsquo;re the first cohort. Every problem we hit, every solution we find, every lesson we learn becomes a module in the veteran program. The field manual below is the prototype curriculum, built by going through it ourselves.
-  </div>
+  <div class="section-content" data-section-content="curriculum">
+    <div class="callout">
+      <span class="callout-label">The Insight</span>
+      We&rsquo;re the first cohort. Every problem we hit, every solution we find, every lesson we learn becomes a module in the veteran program. The field manual below is the prototype curriculum, built by going through it ourselves.
+    </div>
 
-  <div class="resource-grid">
-    <a class="resource-card" href="field-manual.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Field Manual</span>
-          <span class="rc-date">Active</span>
+    <div class="resource-grid">
+      <a class="resource-card" href="field-manual.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Field Manual</span>
+            <span class="rc-date">Active</span>
+          </div>
+          <div class="rc-title">Getting Started with AI &mdash; Field Manual</div>
+          <div class="rc-desc">The prototype curriculum. Three-tier landscape (chat &rarr; CLI &rarr; agents), crawl/walk/run learning path, key concepts (context window, CLAUDE.md, MCP, input speed, personalization), curated resources, session log.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">curriculum</span>
+            <span class="rc-tag">field-manual</span>
+            <span class="rc-tag">dogfooding</span>
+            <span class="rc-tag">active</span>
+          </div>
         </div>
-        <div class="rc-title">Getting Started with AI &mdash; Field Manual</div>
-        <div class="rc-desc">The prototype curriculum. Three-tier landscape (chat &rarr; CLI &rarr; agents), crawl/walk/run learning path, key concepts (context window, CLAUDE.md, MCP, input speed, personalization), curated resources, session log.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">curriculum</span>
-          <span class="rc-tag">field-manual</span>
-          <span class="rc-tag">dogfooding</span>
-          <span class="rc-tag">active</span>
+      </a>
+      <a class="resource-card" href="publishing-primer.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Guide</span>
+            <span class="rc-date">Mar 22, 2026</span>
+          </div>
+          <div class="rc-title">Publishing Primer &mdash; Hub Contributions + Personal Website</div>
+          <div class="rc-desc">How to add research to the hub, create meeting logs, and stand up your own GitHub Pages site. The content loop: learn &rarr; write &rarr; publish &rarr; share on LinkedIn &rarr; read reactions.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">guide</span>
+            <span class="rc-tag">publishing</span>
+            <span class="rc-tag">github-pages</span>
+            <span class="rc-tag">hub</span>
+          </div>
         </div>
-      </div>
-    </a>
-    <a class="resource-card" href="publishing-primer.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Guide</span>
-          <span class="rc-date">Mar 22, 2026</span>
-        </div>
-        <div class="rc-title">Publishing Primer &mdash; Hub Contributions + Personal Website</div>
-        <div class="rc-desc">How to add research to the hub, create meeting logs, and stand up your own GitHub Pages site. The content loop: learn &rarr; write &rarr; publish &rarr; share on LinkedIn &rarr; read reactions.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">guide</span>
-          <span class="rc-tag">publishing</span>
-          <span class="rc-tag">github-pages</span>
-          <span class="rc-tag">hub</span>
-        </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>
 
 <!-- ==================== STRATEGIC CONNECTIONS ==================== -->
-<div class="section" id="connections">
-  <div class="section-label">
+<div class="section" id="connections" data-section="connections">
+  <div class="section-label collapsible" data-toggle="connections">
     Strategic Connections <span class="count">2 targets</span>
+    <span class="section-toggle">&#x25BE;</span>
   </div>
 
-  <div class="resource-grid">
-    <a class="resource-card" href="brynjolfsson-plan.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Strategy</span>
-          <span class="rc-date">Mar 20, 2026</span>
+  <div class="section-content" data-section-content="connections">
+    <div class="resource-grid">
+      <a class="resource-card" href="brynjolfsson-plan.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Strategy</span>
+            <span class="rc-date">Mar 20, 2026</span>
+          </div>
+          <div class="rc-title">Erik Brynjolfsson &mdash; Stanford Digital Economy Lab</div>
+          <div class="rc-desc">Connection plan via DEL Monday Seminars (free, weekly, room-sized). His augmentation/automation research is the academic backbone of our thesis. AESG member &mdash; the warm bridge to Raimondo. Attending Apr 6 seminar.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">stanford</span>
+            <span class="rc-tag">ai-labor</span>
+            <span class="rc-tag">seminars</span>
+            <span class="rc-tag">AESG</span>
+          </div>
         </div>
-        <div class="rc-title">Erik Brynjolfsson &mdash; Stanford Digital Economy Lab</div>
-        <div class="rc-desc">Connection plan via DEL Monday Seminars (free, weekly, room-sized). His augmentation/automation research is the academic backbone of our thesis. AESG member &mdash; the warm bridge to Raimondo. Attending Apr 6 seminar.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">stanford</span>
-          <span class="rc-tag">ai-labor</span>
-          <span class="rc-tag">seminars</span>
-          <span class="rc-tag">AESG</span>
+      </a>
+      <a class="resource-card" href="raimondo-plan.html">
+        <div>
+          <div class="rc-meta">
+            <span class="rc-type prep">Strategy</span>
+            <span class="rc-date">Mar 20, 2026</span>
+          </div>
+          <div class="rc-title">Gina Raimondo &mdash; Former Secretary of Commerce</div>
+          <div class="rc-desc">3&ndash;6 month proximity strategy. Her &ldquo;grand bargain&rdquo; framework needs concrete implementations &mdash; our veteran program is a case study she can point to. Phased plan: content visibility &rarr; institutional access &rarr; network bridging &rarr; direct contact.</div>
+          <div class="rc-tags">
+            <span class="rc-tag">policy</span>
+            <span class="rc-tag">CFR</span>
+            <span class="rc-tag">BPC</span>
+            <span class="rc-tag">AESG</span>
+            <span class="rc-tag">2028</span>
+          </div>
         </div>
-      </div>
-    </a>
-    <a class="resource-card" href="raimondo-plan.html">
-      <div>
-        <div class="rc-meta">
-          <span class="rc-type prep">Strategy</span>
-          <span class="rc-date">Mar 20, 2026</span>
-        </div>
-        <div class="rc-title">Gina Raimondo &mdash; Former Secretary of Commerce</div>
-        <div class="rc-desc">3&ndash;6 month proximity strategy. Her &ldquo;grand bargain&rdquo; framework needs concrete implementations &mdash; our veteran program is a case study she can point to. Phased plan: content visibility &rarr; institutional access &rarr; network bridging &rarr; direct contact.</div>
-        <div class="rc-tags">
-          <span class="rc-tag">policy</span>
-          <span class="rc-tag">CFR</span>
-          <span class="rc-tag">BPC</span>
-          <span class="rc-tag">AESG</span>
-          <span class="rc-tag">2028</span>
-        </div>
-      </div>
-    </a>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -902,6 +1159,214 @@
   <div class="footer-left">LearnAIR Discovery Hub</div>
   <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
 </footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // =============================================
+  // Feature 1: Search + Tag Filter
+  // =============================================
+  var searchInput = document.getElementById('hub-search');
+  var tagPillsContainer = document.getElementById('tag-pills');
+  var noResults = document.getElementById('no-results');
+  var allCards = document.querySelectorAll('.resource-card');
+  var allSections = document.querySelectorAll('.section[data-section]');
+  var activeTag = null;
+  var clearBtn;
+
+  // Collect all unique tags from cards
+  var tagSet = {};
+  allCards.forEach(function(card) {
+    var tags = card.querySelectorAll('.rc-tag');
+    tags.forEach(function(t) {
+      var text = t.textContent.trim().toLowerCase();
+      if (text) tagSet[text] = true;
+    });
+  });
+
+  var allTags = Object.keys(tagSet).sort();
+
+  // Build tag pills
+  allTags.forEach(function(tag) {
+    var pill = document.createElement('span');
+    pill.className = 'tag-pill';
+    pill.textContent = tag;
+    pill.setAttribute('data-tag', tag);
+    pill.addEventListener('click', function() {
+      if (activeTag === tag) {
+        activeTag = null;
+        pill.classList.remove('active');
+      } else {
+        // deactivate previous
+        var prev = tagPillsContainer.querySelector('.tag-pill.active');
+        if (prev) prev.classList.remove('active');
+        activeTag = tag;
+        pill.classList.add('active');
+      }
+      applyFilter();
+    });
+    tagPillsContainer.appendChild(pill);
+  });
+
+  // Clear button
+  clearBtn = document.createElement('button');
+  clearBtn.className = 'filter-clear';
+  clearBtn.textContent = 'Clear';
+  clearBtn.addEventListener('click', function() {
+    activeTag = null;
+    searchInput.value = '';
+    var prev = tagPillsContainer.querySelector('.tag-pill.active');
+    if (prev) prev.classList.remove('active');
+    applyFilter();
+  });
+  tagPillsContainer.appendChild(clearBtn);
+
+  function applyFilter() {
+    var query = searchInput.value.trim().toLowerCase();
+    var hasFilter = query.length > 0 || activeTag !== null;
+    var visibleCount = 0;
+
+    // Show/hide clear button
+    if (hasFilter) {
+      clearBtn.classList.add('visible');
+    } else {
+      clearBtn.classList.remove('visible');
+    }
+
+    allCards.forEach(function(card) {
+      var matchesTag = true;
+      var matchesSearch = true;
+
+      if (activeTag) {
+        var cardTags = card.querySelectorAll('.rc-tag');
+        var hasTag = false;
+        cardTags.forEach(function(t) {
+          if (t.textContent.trim().toLowerCase() === activeTag) hasTag = true;
+        });
+        matchesTag = hasTag;
+      }
+
+      if (query.length > 0) {
+        var title = (card.querySelector('.rc-title') || {}).textContent || '';
+        var desc = (card.querySelector('.rc-desc') || {}).textContent || '';
+        var tags = '';
+        card.querySelectorAll('.rc-tag').forEach(function(t) { tags += ' ' + t.textContent; });
+        var haystack = (title + ' ' + desc + ' ' + tags).toLowerCase();
+        matchesSearch = haystack.indexOf(query) !== -1;
+      }
+
+      if (matchesTag && matchesSearch) {
+        card.classList.remove('filtered-out');
+        visibleCount++;
+      } else {
+        card.classList.add('filtered-out');
+      }
+    });
+
+    // Hide section headers when all their cards are filtered out
+    allSections.forEach(function(section) {
+      var cards = section.querySelectorAll('.resource-card');
+      if (cards.length === 0) return; // sections without cards (like People) stay visible
+      var anyVisible = false;
+      cards.forEach(function(c) {
+        if (!c.classList.contains('filtered-out')) anyVisible = true;
+      });
+      if (hasFilter) {
+        section.style.display = anyVisible ? '' : 'none';
+      } else {
+        section.style.display = '';
+      }
+    });
+
+    // No results message
+    if (hasFilter && visibleCount === 0) {
+      noResults.classList.add('visible');
+    } else {
+      noResults.classList.remove('visible');
+    }
+  }
+
+  searchInput.addEventListener('input', applyFilter);
+
+  // =============================================
+  // Feature 2: Collapsible Sections
+  // =============================================
+  var STORAGE_KEY = 'learnair-hub-collapsed';
+
+  function getCollapsedState() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch(e) {
+      return {};
+    }
+  }
+
+  function saveCollapsedState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch(e) {}
+  }
+
+  var collapsedState = getCollapsedState();
+  var toggleHeaders = document.querySelectorAll('.section-label.collapsible');
+
+  toggleHeaders.forEach(function(header) {
+    var sectionKey = header.getAttribute('data-toggle');
+    var content = document.querySelector('[data-section-content="' + sectionKey + '"]');
+    if (!content) return;
+
+    // Set initial max-height for animation
+    // Use a large value to allow natural height
+    content.style.maxHeight = content.scrollHeight + 'px';
+
+    // Restore collapsed state
+    if (collapsedState[sectionKey]) {
+      header.classList.add('collapsed');
+      content.classList.add('collapsed');
+      content.style.maxHeight = '0px';
+    }
+
+    header.addEventListener('click', function() {
+      var isCollapsed = header.classList.contains('collapsed');
+
+      if (isCollapsed) {
+        // Expand
+        header.classList.remove('collapsed');
+        content.classList.remove('collapsed');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        delete collapsedState[sectionKey];
+      } else {
+        // Collapse
+        // First set explicit max-height to current height for transition
+        content.style.maxHeight = content.scrollHeight + 'px';
+        // Force reflow
+        content.offsetHeight;
+        header.classList.add('collapsed');
+        content.classList.add('collapsed');
+        content.style.maxHeight = '0px';
+        collapsedState[sectionKey] = true;
+      }
+
+      saveCollapsedState(collapsedState);
+    });
+  });
+
+  // Update max-height on resize for expanded sections
+  window.addEventListener('resize', function() {
+    toggleHeaders.forEach(function(header) {
+      var sectionKey = header.getAttribute('data-toggle');
+      var content = document.querySelector('[data-section-content="' + sectionKey + '"]');
+      if (!content) return;
+      if (!header.classList.contains('collapsed')) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  });
+
+})();
+</script>
 
 </body>
 </html>
