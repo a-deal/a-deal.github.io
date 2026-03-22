@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Oregon Landscape: Veterans, AI, Employers, Funding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --amber: #92600f;
+    --amber-bg: #fdf8ec;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  /* --- FINDING CARDS --- */
+  .finding-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+  }
+
+  .finding-header {
+    padding: 1.6rem 2rem 1.2rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .finding-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .finding-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  .finding-detail {
+    padding: 0 2rem 1.4rem 4.6rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* --- CALLOUT BOX --- */
+  .callout {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout strong {
+    color: var(--accent);
+  }
+
+  /* --- FUNDING TABLES --- */
+  .funding-active td {
+    background: var(--green-bg);
+  }
+
+  .funding-active tr:hover td {
+    background: #e4f0e8;
+  }
+
+  .funding-limited td {
+    background: var(--amber-bg);
+  }
+
+  .funding-limited tr:hover td {
+    background: #f5eedb;
+  }
+
+  .funding-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 2px 8px;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  .funding-label.active {
+    background: var(--green);
+    color: var(--paper);
+  }
+
+  .funding-label.limited {
+    background: var(--amber);
+    color: var(--paper);
+  }
+
+  /* --- ECOSYSTEM GRID --- */
+  .ecosystem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ecosystem-item {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1rem 1.2rem;
+  }
+
+  .ecosystem-item strong {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .ecosystem-item span {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    display: block;
+  }
+
+  .ecosystem-stat {
+    background: var(--warm);
+    border: 1px solid var(--faint);
+    padding: 1.2rem 1.6rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    .finding-header { padding: 1.2rem 1.4rem 1rem; }
+    .finding-detail { padding: 0 1.4rem 1.2rem 3.6rem; }
+    .finding-number { font-size: 2rem; }
+    .ecosystem-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Research</span></a>
+    <a href="hub.html" class="back-link">&larr; Back to Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Landscape Research</div>
+  <h1>Oregon Landscape: Veterans, AI, Employers, Funding</h1>
+  <div class="doc-date">March 22, 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- TOP FINDINGS -->
+  <hr>
+  <h2>Top Findings</h2>
+
+  <div class="finding-card">
+    <div class="finding-header">
+      <span class="finding-number">1</span>
+      <span class="finding-title">Oregon-NVIDIA $10M AI Partnership</span>
+    </div>
+    <p class="finding-detail">Signed April 2025 by Gov. Kotek + Jensen Huang. AI Ambassador Program on campuses. K-12 AI integration. An AI operations supervisor program aligns directly with the state&rsquo;s stated AI workforce priority.</p>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-header">
+      <span class="finding-number">2</span>
+      <span class="finding-title">East Cascades Works is the local workforce board</span>
+    </div>
+    <p class="finding-detail">WIOA-designated entity for Bend/Deschutes County (10 counties east of Cascades). The right partner for federal workforce funding in Central Oregon. Headquartered in Bend.</p>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-header">
+      <span class="finding-number">3</span>
+      <span class="finding-title">Health Elements AI is in Bend</span>
+    </div>
+    <p class="finding-detail">AI-powered clinical data abstraction. Real AI company, not just tech. BVC finalist. A concrete local employer for the &ldquo;would you hire an AI-skilled veteran?&rdquo; conversation.</p>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-header">
+      <span class="finding-number">4</span>
+      <span class="finding-title">Prineville data centers are 35 min from Bend</span>
+    </div>
+    <p class="finding-detail">Meta (3.2M sq ft, $2B+ invested) + Apple (3.2M sq ft). ~300 permanent jobs combined. Infrastructure jobs that need supervision.</p>
+  </div>
+
+  <div class="finding-card">
+    <div class="finding-header">
+      <span class="finding-number">5</span>
+      <span class="finding-title">COCC already has veteran infrastructure</span>
+    </div>
+    <p class="finding-detail">STRIVE Program (free 8-week veteran entrepreneurship, Syracuse IVMF partnership). Justin won STRIVE there. OSU-Cascades has CS with AI option. Neither offers AI operations training. Gap.</p>
+  </div>
+
+  <!-- VETERAN-SERVING ORGANIZATIONS -->
+  <hr>
+  <h2>Veteran-Serving Organizations</h2>
+
+  <h3>Central Oregon (Bend area)</h3>
+  <ul>
+    <li><strong>Central Oregon Veterans Outreach (COVO)</strong>: 61510 S Hwy 97, Bend. Founded 2005. Homeless outreach, SSVF, Central Oregon Veterans Village (22-bed transitional). 200+ people/month.</li>
+    <li><strong>WorkSource Bend</strong>: Nationally recognized for veteran services (NASWA award). Priority of Service for veterans.</li>
+    <li><strong>541VETS</strong>: Digital resource library for rural Oregon veterans (named for 541 area code)</li>
+    <li><strong>East Cascades Works</strong>: Local workforce board for Central Oregon. Bend HQ. Partners with COIC, COCC, Oregon Employment Dept.</li>
+    <li><strong>COIC (Central Oregon Intergovernmental Council)</strong>: Operates WorkSource Oregon locally.</li>
+  </ul>
+
+  <h3>Statewide</h3>
+  <ul>
+    <li><strong>Oregon Dept of Veterans&rsquo; Affairs (ODVA)</strong>: JVSG ($2.4M federal), Military Skills Credentialing, Veteran Services Grant ($972K for 2025&ndash;27)</li>
+    <li><strong>Easterseals Oregon</strong>: HVRP across 8 cities. Contact: <a href="mailto:hvrpreferrals@or.easterseals.com">hvrpreferrals@or.easterseals.com</a></li>
+    <li><strong>Hire Heroes USA</strong>: Expanding into PNW. Partners with General Assembly (Project Forge, free tech training)</li>
+    <li><strong>Oregon Employment Dept</strong>: LVERs and DVOPs at WorkSource centers statewide</li>
+  </ul>
+
+  <h3>Not in Oregon yet</h3>
+  <ul>
+    <li><strong>VetsinTech</strong>: No confirmed Oregon chapter. Opportunity to start one.</li>
+    <li><strong>Code Platoon</strong>: Chicago-based but fully remote option. GI Bill eligible. 15-week AI + Fullstack.</li>
+  </ul>
+
+  <!-- EMPLOYERS -->
+  <hr>
+  <h2>Employers Who Would Hire AI-Skilled Veterans</h2>
+
+  <h3>Central Oregon / Bend</h3>
+  <table>
+    <thead>
+      <tr><th>Company</th><th>What</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Health Elements AI</td><td>AI clinical data abstraction</td><td>Actual AI company in Bend</td></tr>
+      <tr><td>Kollective Technology</td><td>Enterprise video, cloud</td><td>Tech employer in Bend</td></tr>
+      <tr><td>Dutchie</td><td>Cannabis tech platform</td><td>Fast-growing Bend tech</td></tr>
+      <tr><td>Tech Soft 3D</td><td>3D software dev tools</td><td>Engineering employer</td></tr>
+      <tr><td>Amplion</td><td>ML for precision medicine</td><td>ML/AI in Bend</td></tr>
+      <tr><td>Meta (Prineville)</td><td>Data center</td><td>35 min from Bend, ~300 jobs</td></tr>
+      <tr><td>Apple (Prineville)</td><td>Data center</td><td>3.2M sq ft campus</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Portland Metro / Silicon Forest</h3>
+  <table>
+    <thead>
+      <tr><th>Company</th><th>What</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Intel (Hillsboro)</td><td>Semiconductor + AI</td><td>22,300 employees, largest private employer in OR</td></tr>
+      <tr><td>Northrop Grumman</td><td>Defense R&amp;D</td><td>Defense contractor, hires vets</td></tr>
+      <tr><td>Lockheed Martin</td><td>Aerospace/defense</td><td>Defense contractor</td></tr>
+      <tr><td>Boeing (Gresham)</td><td>Aerospace</td><td>Opened 2012</td></tr>
+      <tr><td>Nike (Beaverton)</td><td>Tech/data teams</td><td>~12,000 at HQ</td></tr>
+      <tr><td>Bonneville Power Admin</td><td>Federal, cybersecurity</td><td>Hires veterans with preference</td></tr>
+      <tr><td>Salesforce (Portland)</td><td>CRM, AI (Einstein)</td><td>Enterprise AI</td></tr>
+    </tbody>
+  </table>
+
+  <!-- MILITARY INSTALLATIONS -->
+  <hr>
+  <h2>Military Installations</h2>
+
+  <div class="callout">
+    <strong>No active-duty bases.</strong> Oregon has less than 1% of state GDP from DoD contracts. Veteran population comes from Guard/Reserve and post-service relocators.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Installation</th><th>Location</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Kingsley Field ANGB</td><td>Klamath Falls</td><td>173rd Fighter Wing, F-15 to F-35 transition</td></tr>
+      <tr><td>Portland ANGB</td><td>Portland</td><td>142nd Fighter Wing</td></tr>
+      <tr><td>Camp Rilea</td><td>Warrenton</td><td>Joint training center, 2,000 acres</td></tr>
+      <tr><td>Bend Armory</td><td>Bend</td><td>1-82 Cavalry HHT. TEMPORARILY CLOSED.</td></tr>
+      <tr><td>Anderson Readiness Center</td><td>Salem</td><td>HQ Oregon Army National Guard</td></tr>
+    </tbody>
+  </table>
+
+  <!-- TRAINING INSTITUTIONS -->
+  <hr>
+  <h2>Training Institutions</h2>
+
+  <table>
+    <thead>
+      <tr><th>Institution</th><th>Location</th><th>AI / Veteran Programs</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>COCC</td><td>Bend</td><td>STRIVE (free 8-week vet entrepreneurship), SBDC</td></tr>
+      <tr><td>OSU-Cascades</td><td>Bend</td><td>CS with AI option, Cascades Edge career program</td></tr>
+      <tr><td>Oregon State (Corvallis)</td><td>Corvallis / Online</td><td>Nation&rsquo;s first multidisciplinary AI grad program. VETS-UP semiconductor training. AI Certificate + Microcredentials online.</td></tr>
+      <tr><td>PCC</td><td>Portland / Hillsboro</td><td>AI Lab opened Jan 2026, Teaching Cleanroom ($1.7M grant)</td></tr>
+      <tr><td>U of Oregon</td><td>Eugene</td><td>General CS, veteran resources</td></tr>
+    </tbody>
+  </table>
+
+  <!-- FUNDING SOURCES -->
+  <hr>
+  <h2>Funding Sources</h2>
+
+  <h3><span class="funding-label active">Active / Accessible</span></h3>
+  <table class="funding-active">
+    <thead>
+      <tr><th>Source</th><th>Amount</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>ODVA Veteran Services Grant</td><td>$972K (2025&ndash;27)</td><td>Competitive grants to nonprofits. Contact: Brenna Bandstra, <a href="mailto:brenna.bandstra@odva.oregon.gov">brenna.bandstra@odva.oregon.gov</a></td></tr>
+      <tr><td>JVSG</td><td>$2.4M</td><td>100% federal (DOL-VETS). Funds LVERs/DVOPs.</td></tr>
+      <tr><td>Oregon WIOA Title I</td><td>Part of ~$2.9B national</td><td>Priority of service for veterans. Administered by OR Employment Dept (transitioning from HECC, July 2026)</td></tr>
+      <tr><td>Oregon-NVIDIA AI Partnership</td><td>$10M state</td><td>AI Ambassador Program, campus AI integration</td></tr>
+      <tr><td>Oregon Community Foundation</td><td>Varies</td><td>Community Grants, Eastern OR Workforce Training Grant (Feb&ndash;Mar window), Veteran Scholarship</td></tr>
+    </tbody>
+  </table>
+
+  <h3><span class="funding-label limited">Closing / Limited</span></h3>
+  <table class="funding-limited">
+    <thead>
+      <tr><th>Source</th><th>Amount</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Future Ready Oregon</td><td>$200M total (nearly spent)</td><td>Must spend by end of 2026. Veterans explicitly listed as target. Final round awarded Nov 2024.</td></tr>
+      <tr><td>ODVA Campus Veteran Resource Centers</td><td>$800K</td><td>Awarded Dec 2025</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ECOSYSTEM / COMMUNITY -->
+  <hr>
+  <h2>Ecosystem / Community</h2>
+
+  <div class="ecosystem-grid">
+    <div class="ecosystem-item">
+      <strong>EDCO</strong>
+      <span>Economic Development for Central Oregon. Offices in Bend, Redmond, Prineville. Free services. Annual largest employers list.</span>
+    </div>
+    <div class="ecosystem-item">
+      <strong>BendTECH Coworking</strong>
+      <span>501(c)(3), 200+ members, $100/mo, hosts tech meetups.</span>
+    </div>
+    <div class="ecosystem-item">
+      <strong>Deschutes Tech Guild</strong>
+      <span>Monthly meetup (2nd Tuesday at BendTECH). Merged BendJS + AWS User Group + CloudBeers.</span>
+    </div>
+    <div class="ecosystem-item">
+      <strong>Bend Venture Conference</strong>
+      <span>22nd year, largest PNW angel conference, $14M+ invested.</span>
+    </div>
+    <div class="ecosystem-item">
+      <strong>Bend Entrepreneur Lab (BEL)</strong>
+      <span>Early-stage tech startup support.</span>
+    </div>
+  </div>
+
+  <div class="ecosystem-stat">
+    Central Oregon tech employment grew <strong>50% since 2018</strong> (142% over past decade). Milken Institute ranked Bend-Redmond <strong>top 6 Best Performing Small Cities</strong> (2024). ~85 tech companies in the region.
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
