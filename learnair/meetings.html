@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Meeting Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --yellow: #b8860b;
+    --yellow-bg: #faf6ed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hub-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+  }
+
+  nav .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav .nav-links a:hover { color: var(--ink); }
+
+  /* --- HERO --- */
+  .hero {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+    max-width: 22ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 56ch;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- FILTER LABELS --- */
+  .filters {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--faint);
+    color: var(--muted);
+    background: var(--paper);
+    cursor: default;
+    transition: all 0.2s;
+  }
+
+  .filter-label.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .filter-label:not(.active):hover {
+    border-color: var(--muted);
+  }
+
+  /* --- SECTIONS --- */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label .count {
+    font-size: 0.58rem;
+    background: var(--warm);
+    color: var(--muted);
+    padding: 2px 6px;
+    letter-spacing: 0.08em;
+  }
+
+  /* --- MEETING CARDS --- */
+  .meeting-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .meeting-card:hover {
+    border-color: var(--muted);
+  }
+
+  .meeting-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .meeting-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meeting-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .meeting-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .meeting-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    font-weight: 500;
+  }
+
+  .meeting-type.working-session { background: var(--accent); color: var(--white); }
+  .meeting-type.learnair { background: var(--ink); color: var(--paper); }
+  .meeting-type.external { background: var(--green); color: var(--white); }
+
+  .meeting-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .status-dot.completed { background: var(--green); }
+  .status-dot.scheduled {
+    background: var(--yellow);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .meeting-status.completed { color: var(--green); }
+  .meeting-status.scheduled { color: var(--yellow); }
+
+  .meeting-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .attendees {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+
+  .attendee {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    background: var(--warm);
+    padding: 2px 8px;
+  }
+
+  .meeting-body h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .meeting-body h3:first-child {
+    margin-top: 0;
+  }
+
+  .takeaways {
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .takeaways li {
+    margin-bottom: 0.3rem;
+    margin-left: 1.2rem;
+  }
+
+  .agenda-note {
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .agenda-note li {
+    margin-bottom: 0.3rem;
+    margin-left: 1.2rem;
+  }
+
+  /* --- CURRICULUM INSIGHTS --- */
+  .curriculum-insights {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .curriculum-insights .ci-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .curriculum-insights ul {
+    font-size: 0.88rem;
+    color: #2a2724;
+    line-height: 1.7;
+  }
+
+  .curriculum-insights li {
+    margin-bottom: 0.35rem;
+    margin-left: 1.2rem;
+  }
+
+  .curriculum-insights li strong {
+    color: var(--ink);
+  }
+
+  /* --- ACTION ITEMS --- */
+  .action-items {
+    margin-top: 1.2rem;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+  }
+
+  .action-checkbox {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--faint);
+    border-radius: 2px;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .action-checkbox.checked {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .action-checkbox.checked::after {
+    content: '';
+    width: 5px;
+    height: 8px;
+    border: solid var(--white);
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+  }
+
+  .action-text.done {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .hero { padding: 3.5rem 1.5rem 1.5rem; }
+    .container { padding: 0 1.5rem 3rem; }
+    .filters { padding: 0 1.5rem 2rem; }
+    .meeting-card { padding: 1.5rem; }
+    .meeting-header { flex-direction: column; }
+    .meeting-title { font-size: 1.2rem; }
+    nav .nav-links { gap: 0.6rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="hub-badge">Meetings</span></a>
+    <ul class="nav-links">
+      <li><a href="hub.html">Back to Hub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="kicker">Meeting Log</div>
+  <h1>Meeting <em>Log</em></h1>
+  <p class="subtitle">Session notes, decisions, and curriculum insights from every conversation.</p>
+</section>
+
+<!-- ==================== FILTERS ==================== -->
+<div class="filters">
+  <span class="filter-label active">All Meetings</span>
+  <span class="filter-label">Working Sessions (Andrew + Mike)</span>
+  <span class="filter-label">LearnAIR (Justin, Teresa, team)</span>
+  <span class="filter-label">External (Brynjolfsson, Raimondo, etc.)</span>
+</div>
+
+<div class="container">
+
+<!-- ==================== UPCOMING ==================== -->
+<div class="section">
+  <div class="section-label">
+    Upcoming <span class="count">1 scheduled</span>
+  </div>
+
+  <!-- Session 2 — Mar 22 (scheduled) -->
+  <div class="meeting-card">
+    <div class="meeting-header">
+      <div class="meeting-header-left">
+        <div class="meeting-meta">
+          <span class="meeting-date">2026-03-22</span>
+          <span class="meeting-type working-session">Working Session</span>
+        </div>
+        <div class="meeting-title">Session 2: Quick Wins + Teresa Prep</div>
+      </div>
+      <div class="meeting-status scheduled">
+        <span class="status-dot scheduled"></span>
+        Scheduled
+      </div>
+    </div>
+
+    <div class="attendees">
+      <span class="attendee">Andrew</span>
+      <span class="attendee">Mike</span>
+    </div>
+
+    <div class="meeting-body">
+      <h3>Agenda</h3>
+      <ul class="agenda-note">
+        <li>Quick win: Mike does real work in Claude Code (retreat doc or transcript analysis)</li>
+        <li>Teresa prep: walk through one-pager, practice the 30-second pitch, handle objections</li>
+        <li>Field manual review: walk through andrewdeal.info/mike/, get Mike's feedback</li>
+        <li>Hub contribution: Mike adds his first research note or meeting log</li>
+        <li>Ancillary items (light touch): Starlink status, 1Password, internet speed reality</li>
+      </ul>
+
+      <div class="action-items">
+        <h3>Action Items</h3>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike: send thank you email to Justin before Monday</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike: review one-pager before Teresa call</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike: add first contribution to hub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== COMPLETED ==================== -->
+<div class="section">
+  <div class="section-label">
+    Completed <span class="count">2 sessions</span>
+  </div>
+
+  <!-- Session 1 — Mar 20 -->
+  <div class="meeting-card">
+    <div class="meeting-header">
+      <div class="meeting-header-left">
+        <div class="meeting-meta">
+          <span class="meeting-date">2026-03-20</span>
+          <span class="meeting-type working-session">Working Session</span>
+        </div>
+        <div class="meeting-title">Session 1: Setup + First Contact with Tools</div>
+      </div>
+      <div class="meeting-status completed">
+        <span class="status-dot completed"></span>
+        Completed
+      </div>
+    </div>
+
+    <div class="attendees">
+      <span class="attendee">Andrew</span>
+      <span class="attendee">Mike</span>
+    </div>
+
+    <div class="meeting-body">
+      <h3>Key Takeaways</h3>
+      <ul class="takeaways">
+        <li>Setup kit ran: Homebrew, Git, Node, pnpm, Python 3.12, Claude Code, CLI tools</li>
+        <li>Google Sheets MCP: 2+ hours, did not work (service account vs OAuth mismatch) &mdash; deprioritized</li>
+        <li>Manus test: successfully automated retreat spreadsheet (co-facilitator timeline)</li>
+        <li>Tool routing decided: Claude Code for files/analysis, Manus for browser tasks, ChatGPT for LearnAIR class only</li>
+      </ul>
+
+      <h3>Decisions</h3>
+      <ul class="takeaways">
+        <li>MCP for Google Sheets deprioritized &mdash; CSV or Manus instead</li>
+        <li>Starlink is highest-ROI infrastructure investment</li>
+      </ul>
+
+      <div class="curriculum-insights">
+        <span class="ci-label">Curriculum Insights</span>
+        <ul>
+          <li><strong>Module ordering matters.</strong> Jumped to MCP (advanced) before doing anything useful in Claude Code (basic). Should have started with a quick win.</li>
+          <li><strong>Right tool, right job.</strong> The MCP detour taught the most important lesson: don't fight the tool. Core curriculum principle.</li>
+          <li><strong>Internet is infrastructure.</strong> 766 KB/s upload breaks everything. Curriculum should include a "prerequisites" section: minimum speed, hardware, accounts.</li>
+          <li><strong>PATH/environment issues are universal.</strong> Every non-technical user will hit "command not found." Setup script needs to handle this more gracefully.</li>
+          <li><strong>Quick wins build confidence.</strong> Energy spiked when Manus worked. Energy crashed during MCP troubleshooting. Sequence matters.</li>
+        </ul>
+      </div>
+
+      <div class="action-items">
+        <h3>Action Items</h3>
+        <div class="action-item">
+          <div class="action-checkbox checked"></div>
+          <span class="action-text done">Install Claude Code</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox checked"></div>
+          <span class="action-text done">Fix PATH issues</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox checked"></div>
+          <span class="action-text done">Test Manus on real task</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Starlink: Mike to research/order</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">1Password: migrate from LastPass (next session)</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Finish MCP setup (deferred, low priority)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LearnAIR Justin Team — Mar 19 -->
+  <div class="meeting-card">
+    <div class="meeting-header">
+      <div class="meeting-header-left">
+        <div class="meeting-meta">
+          <span class="meeting-date">2026-03-19</span>
+          <span class="meeting-type learnair">LearnAIR</span>
+        </div>
+        <div class="meeting-title">LearnAIR: Justin's Team Kickoff</div>
+      </div>
+      <div class="meeting-status completed">
+        <span class="status-dot completed"></span>
+        Completed
+      </div>
+    </div>
+
+    <div class="attendees">
+      <span class="attendee">Justin Coats</span>
+      <span class="attendee">Trisha Sargent</span>
+      <span class="attendee">Joe Napiltonia</span>
+      <span class="attendee">Mike Deal</span>
+    </div>
+
+    <div class="meeting-body">
+      <h3>Key Takeaways</h3>
+      <ul class="takeaways">
+        <li>Justin was transparent: doesn't have a full vision, Teresa is more passionate about it, he's "coming back" to the veteran community after 10 years away</li>
+        <li>Proposed roles: Trisha = program leader, Joe = legal/networking, Mike = education/curriculum, Justin = visionary/bridge to LearnAIR</li>
+        <li>LearnAIR is cash-strapped: 4x YoY growth but slower than projected, exploring SBA loans + friends/family round</li>
+        <li>Easter Seals is NOT ready to move forward. Other vet org outreach also stalled.</li>
+        <li>5 months of discussion, minimal execution (landing page + org lists, no outreach done)</li>
+        <li>Structure TBD: for-profit vs nonprofit vs hybrid. Start under LearnAIR umbrella, eventual spin-out.</li>
+      </ul>
+
+      <h3>Decisions</h3>
+      <ul class="takeaways">
+        <li>No decisions made. Justin asked everyone to "think about it" and will propose bi-weekly meetings.</li>
+      </ul>
+
+      <div class="curriculum-insights">
+        <span class="ci-label">Curriculum Insights</span>
+        <ul>
+          <li>The gap between "we want to train veterans" and "here's how" is exactly what our thesis fills.</li>
+          <li>Joe's USERRA background (veteran employment rights law) could inform curriculum on legal frameworks for AI workforce transition.</li>
+          <li>Trisha's call for "market research first" validates the approach we've already taken.</li>
+        </ul>
+      </div>
+
+      <div class="action-items">
+        <h3>Action Items</h3>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Mike: send thank you email to Justin</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox checked"></div>
+          <span class="action-text done">Mike: meeting with Teresa scheduled for Monday Mar 24</span>
+        </div>
+        <div class="action-item">
+          <div class="action-checkbox"></div>
+          <span class="action-text">Justin: send follow-up email to group</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- container -->
+
+<footer>
+  <div class="footer-left">LearnAIR Meeting Log</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
