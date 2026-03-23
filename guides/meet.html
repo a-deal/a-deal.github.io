@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet: Local Meeting Transcription | Andrew Deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+  .nav-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace; font-weight: 500;
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink); text-decoration: none;
+  }
+  nav .logo span { color: var(--accent); }
+  .hero {
+    max-width: 960px; margin: 0 auto;
+    padding: 5rem 2rem 4rem; border-bottom: 3px solid var(--ink);
+  }
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.5rem); text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif; font-size: 1.3rem;
+    font-style: italic; color: var(--muted); max-width: 600px; line-height: 1.5;
+  }
+  .hero .meta {
+    margin-top: 2rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; gap: 2rem;
+  }
+  .stat-bar {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--ink);
+  }
+  .stat-item { padding: 1.5rem 2rem; border-right: 1px solid var(--faint); }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 2.2rem; color: var(--accent); line-height: 1; margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+  }
+  .doc-container { max-width: 960px; margin: 0 auto; padding: 0 2rem 4rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-top: 3.5rem; margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem; border-bottom: 2px solid var(--ink);
+  }
+  .section-number {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 1.8rem; color: var(--accent); line-height: 1;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  p { margin: 1rem 0; font-size: 0.95rem; }
+  ol, ul { margin: 1rem 0; padding-left: 1.5rem; }
+  li { margin: 0.5rem 0; font-size: 0.95rem; }
+  code {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    background: var(--warm); padding: 0.15rem 0.4rem; border-radius: 3px;
+  }
+  pre {
+    background: var(--ink); color: var(--paper);
+    padding: 1.2rem 1.5rem; border-radius: 6px;
+    overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(0,0,0,0.1);
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: 0.8rem; line-height: 1.6; }
+  .callout {
+    background: var(--accent-bg); border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; font-size: 0.9rem;
+  }
+  .callout h3 {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .callout-green { background: var(--green-bg); border-left-color: var(--green); }
+  .callout-green h3 { color: var(--green); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--accent-light); }
+  strong { font-weight: 600; }
+  .footer {
+    max-width: 960px; margin: 0 auto; padding: 2rem;
+    border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint);
+  }
+  @media (max-width: 640px) {
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Andrew<span>.</span>Deal</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Guides</div>
+  <h1>Meet: Local<br><em>Transcription</em></h1>
+  <p class="subtitle">Record meetings and transcribe them locally. No subscriptions, no cloud, no Granola. 100% private, runs on your Mac.</p>
+  <div class="meta">
+    <span>Author: Andrew Deal</span>
+    <span>Updated: March 2026</span>
+    <span>Setup: 5 minutes</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">$0</div>
+    <div class="stat-label">Cost</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Local / Private</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">4</div>
+    <div class="stat-label">Commands</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">MLX</div>
+    <div class="stat-label">Apple Silicon Optimized</div>
+  </div>
+</div>
+
+<div class="doc-container">
+
+  <div class="section-header">
+    <span class="section-number">00</span>
+    <span class="section-title">What It Does</span>
+  </div>
+  <ul>
+    <li>Records audio from your microphone during meetings</li>
+    <li>Transcribes using Whisper, running locally on Apple Silicon</li>
+    <li>Saves recordings and transcripts as plain files you own</li>
+    <li>Works offline. No accounts, no cloud, no subscriptions.</li>
+  </ul>
+
+  <div class="callout callout-green">
+    <h3>How It Compares</h3>
+    <p><strong>meet</strong>: Free, local, exportable transcripts, works offline, total privacy.</p>
+    <p><strong>Granola</strong>: Free tier but no transcript export. Cloud-dependent.</p>
+    <p><strong>Notion AI</strong>: $240/yr. Cloud-dependent.</p>
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <span class="section-title">Requirements</span>
+  </div>
+  <ul>
+    <li>macOS (Apple Silicon recommended for fast transcription)</li>
+    <li>Homebrew installed. If not: <a href="https://brew.sh">brew.sh</a></li>
+    <li>Python 3</li>
+  </ul>
+
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <span class="section-title">Install</span>
+  </div>
+  <p>Open Terminal and run:</p>
+  <pre><code>git clone https://github.com/a-deal/meet.git
+cd meet
+./install.sh</code></pre>
+  <p>The install script will:</p>
+  <ul>
+    <li>Install <code>sox</code> (audio recording) via Homebrew if needed</li>
+    <li>Install <code>mlx-whisper</code> (transcription) via pip if needed</li>
+    <li>Add <code>meet</code> to your PATH</li>
+  </ul>
+  <div class="callout">
+    After install, restart your terminal or run <code>source ~/.zshrc</code> so the <code>meet</code> command is available.
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <span class="section-title">Usage</span>
+  </div>
+
+  <p><strong>Start recording:</strong></p>
+  <pre><code>meet start call-with-mike</code></pre>
+  <p>Give it a name so you can find it later. Recording starts immediately.</p>
+
+  <p><strong>Stop recording and transcribe:</strong></p>
+  <pre><code>meet stop</code></pre>
+  <p>This stops the recording and automatically runs Whisper to generate a transcript. Transcription takes a minute or two depending on the length.</p>
+
+  <p><strong>Transcribe an existing file:</strong></p>
+  <pre><code>meet transcribe ~/Downloads/some-recording.m4a</code></pre>
+  <p>Works with any audio format (wav, m4a, mp3, etc.). ffmpeg handles the conversion.</p>
+
+  <p><strong>List recordings:</strong></p>
+  <pre><code>meet list</code></pre>
+
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <span class="section-title">Where Files Go</span>
+  </div>
+  <ul>
+    <li>Recordings: <code>~/src/hub/meetings/recordings/</code></li>
+    <li>Transcripts: <code>~/src/hub/meetings/recordings/transcripts/</code></li>
+  </ul>
+  <p>You can change the directory by setting the <code>MEET_DIR</code> environment variable:</p>
+  <pre><code>export MEET_DIR="$HOME/meetings"</code></pre>
+
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <span class="section-title">Tips</span>
+  </div>
+  <ul>
+    <li>Use a good microphone. Built-in MacBook mic works, but an external mic gives cleaner transcriptions.</li>
+    <li>For Google Meet or Zoom calls, BlackHole (virtual audio driver) lets you capture both sides of the conversation. Install with <code>brew install blackhole-2ch</code> and set up an aggregate audio device in Audio MIDI Setup.</li>
+    <li>First transcription downloads the Whisper model (~1.5GB). After that it is cached.</li>
+    <li>Apple Silicon Macs transcribe roughly 10x faster than real-time. A 60-min meeting takes about 6 minutes.</li>
+  </ul>
+
+  <div class="section-header">
+    <span class="section-number">&gt;_</span>
+    <span class="section-title">Using with Claude Code</span>
+  </div>
+  <p>After a meeting, you can feed the transcript to Claude Code for instant summaries, action items, or follow-up drafts:</p>
+  <pre><code>cat ~/src/hub/meetings/recordings/transcripts/2026-03-22-call-with-mike.txt | claude "Summarize this meeting. List action items."</code></pre>
+  <p>Or just tell Claude Code: <strong>"Read my latest meeting transcript and give me the key takeaways."</strong></p>
+
+</div>
+
+<div class="footer">
+  Put together by Andrew Deal. Questions? Text me.
+</div>
+
+</body>
+</html>
