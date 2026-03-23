@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Drive Backup Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fafaf8;
+      padding: 0 20px;
+    }
+    .container {
+      max-width: 680px;
+      margin: 60px auto;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 40px 0 16px 0;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 24px 0 8px 0;
+      color: #333;
+    }
+    p { margin: 12px 0; }
+    ol, ul {
+      margin: 12px 0;
+      padding-left: 24px;
+    }
+    li { margin: 6px 0; }
+    code {
+      background: #f0eeeb;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: 'SF Mono', 'Menlo', monospace;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      padding: 16px 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .callout {
+      background: #fff8e6;
+      border-left: 3px solid #e6a800;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout-green {
+      background: #edf7ed;
+      border-left: 3px solid #4caf50;
+    }
+    .callout-red {
+      background: #fdecea;
+      border-left: 3px solid #d32f2f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 15px;
+    }
+    th {
+      font-weight: 600;
+      color: #666;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .footer {
+      margin-top: 60px;
+      padding: 24px 0;
+      border-top: 1px solid #eee;
+      color: #999;
+      font-size: 14px;
+    }
+    a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Google Drive Backup Guide</h1>
+    <p class="subtitle">Back up your entire Google Drive to an external SSD, then clean up storage.</p>
+
+    <h2>What You Need</h2>
+    <ul>
+      <li>A Mac (Intel or Apple Silicon)</li>
+      <li>An external SSD (any size that fits your Drive)</li>
+      <li>Python 3 installed. Check by opening Terminal and typing <code>python3 --version</code></li>
+      <li>A Google account with Drive files to back up</li>
+    </ul>
+
+    <h2>Step 1: Format Your External Drive</h2>
+    <ol>
+      <li>Plug in the drive</li>
+      <li>Open Terminal (Cmd + Space, type "Terminal")</li>
+      <li>Check the drive is visible:
+        <pre><code>ls /Volumes/</code></pre>
+        You should see your drive name in the list.
+      </li>
+      <li>Find your drive's disk number:
+        <pre><code>diskutil list external</code></pre>
+        Look for your drive (it will show the size). Note the <code>/dev/diskN</code> number.
+      </li>
+      <li>Format it for Mac:
+        <pre><code>diskutil eraseDisk APFS "My Backup" /dev/diskN</code></pre>
+        Replace <code>/dev/diskN</code> with your actual disk number. This erases everything on the drive.
+      </li>
+    </ol>
+
+    <h2>Step 2: Enable Google Drive API</h2>
+    <ol>
+      <li>Go to <a href="https://console.cloud.google.com">console.cloud.google.com</a></li>
+      <li>Create a new project (or use an existing one)</li>
+      <li>Go to <strong>APIs &amp; Services</strong> &gt; <strong>Library</strong></li>
+      <li>Search for "Google Drive API" and click <strong>Enable</strong></li>
+      <li>Go to <strong>APIs &amp; Services</strong> &gt; <strong>Credentials</strong></li>
+      <li>Click <strong>Create Credentials</strong> &gt; <strong>OAuth client ID</strong></li>
+      <li>Application type: <strong>Desktop app</strong></li>
+      <li>Name it whatever you want</li>
+      <li>Download the JSON file, rename it to <code>credentials.json</code></li>
+    </ol>
+
+    <div class="callout">
+      If this is your first time setting up a GCP project, you will also need to configure an OAuth consent screen. Choose "External" and fill in the basics. You only need to add yourself as a test user.
+    </div>
+
+    <h2>Step 3: Set Up the Backup Tool</h2>
+    <p>Open Terminal and run these commands one at a time:</p>
+    <pre><code>mkdir ~/drive-backup
+cd ~/drive-backup
+python3 -m venv .venv
+.venv/bin/pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib</code></pre>
+    <p>Copy <code>credentials.json</code> into the <code>~/drive-backup/</code> folder.</p>
+    <p>Download the backup script and save it as <code>drive_backup.py</code> in the same folder. (Andrew will send you this file.)</p>
+
+    <h2>Step 4: Authenticate</h2>
+    <p>The first time you run the backup, a browser window will open asking you to sign in to Google and grant access. Sign in with the account you want to back up.</p>
+    <p>This only happens once. After that, the tool remembers your login.</p>
+
+    <h2>Step 5: Run the Backup</h2>
+    <pre><code>cd ~/drive-backup
+.venv/bin/python3 drive_backup.py "/Volumes/My Backup/Google Drive Backup"</code></pre>
+    <p>Replace "My Backup" with whatever you named your drive in Step 1.</p>
+
+    <p>The script will:</p>
+    <ul>
+      <li>Map all your folders</li>
+      <li>Download every file, keeping the folder structure</li>
+      <li>Export Google Docs as PDF, Google Sheets as Excel</li>
+      <li>Skip files already downloaded (safe to re-run if interrupted)</li>
+      <li>Log everything to <code>_backup_log.jsonl</code></li>
+    </ul>
+
+    <div class="callout">
+      This can take a while depending on how much you have. It is safe to stop (Ctrl+C) and restart. It picks up where it left off.
+    </div>
+
+    <h2>Step 6: Verify</h2>
+    <p>When it finishes, you will see a summary:</p>
+    <pre><code>BACKUP COMPLETE
+  Downloaded: 13967
+  Skipped: 500
+  Errors: 13
+  Total size: 19.60 GB</code></pre>
+    <p>A few errors are normal. These are usually files shared with you that the owner restricted, or Google Forms that cannot be exported.</p>
+    <p>Check the total size on the drive:</p>
+    <pre><code>du -sh "/Volumes/My Backup/Google Drive Backup/"</code></pre>
+
+    <h2>What to Keep vs. Delete from Drive</h2>
+
+    <div class="callout-green callout">
+      <h3>Keep in Drive</h3>
+      <ul>
+        <li>Documents you collaborate on with other people</li>
+        <li>Anything shared with a team or group</li>
+        <li>Files you access from your phone</li>
+        <li>Your resume or docs you send links to</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <h3>Safe to Delete (now backed up)</h3>
+      <ul>
+        <li>Old course materials, ebooks, PDFs</li>
+        <li>Archives and one-time downloads</li>
+        <li>Photos and videos also in Google Photos</li>
+        <li>Browser cache archives, old app backups</li>
+        <li>Anything you have not opened in 6+ months</li>
+      </ul>
+    </div>
+
+    <div class="callout-red callout">
+      <h3>Check Before Deleting</h3>
+      <ul>
+        <li><strong>Shared folders where you are the owner.</strong> If you delete them, other people lose access.</li>
+        <li><strong>Google Forms.</strong> Responses are tied to the form and do not export the same way.</li>
+      </ul>
+    </div>
+
+    <h2>Clean Up (Optional)</h2>
+    <p>Only do this after you have verified the backup on your external drive.</p>
+    <p>Easiest way: go to <a href="https://drive.google.com">drive.google.com</a>, click <strong>Storage</strong> in the left sidebar (sorts by file size), and delete the biggest files first. Empty trash after.</p>
+
+    <h2>Need Help?</h2>
+    <p>This guide covers the basics. For setting up automated backups or more advanced integrations, let's walk through it together. Some of the tooling works better with a hands-on setup.</p>
+
+    <div class="footer">
+      Put together by Andrew Deal. Questions? Text me.
+    </div>
+  </div>
+</body>
+</html>
