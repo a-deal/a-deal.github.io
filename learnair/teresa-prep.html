@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teresa Prep | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --paper-cool: #f0eee9;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: rgba(45, 106, 79, 0.08);
+    --red: #9b2c2c;
+    --red-bg: rgba(155, 44, 44, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* --- TOP NAV --- */
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid #333;
+    padding: 0.6rem 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .top-nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .top-nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    text-decoration: none;
+  }
+
+  .top-nav .prep-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--white);
+    padding: 2px 8px;
+    font-weight: 500;
+  }
+
+  .top-nav .back-link {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: #999;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .top-nav .back-link:hover { color: #fff; }
+
+  /* --- MOBILE TABS --- */
+  .mobile-tabs {
+    display: none;
+    position: fixed;
+    top: 38px;
+    left: 0;
+    right: 0;
+    z-index: 190;
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid #333;
+    padding: 0;
+  }
+
+  .mobile-tabs button {
+    flex: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: #888;
+    padding: 0.6rem 0;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .mobile-tabs button.active {
+    color: var(--accent-light);
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- SPLIT LAYOUT --- */
+  .split-container {
+    display: flex;
+    margin-top: 38px;
+    height: calc(100vh - 38px);
+  }
+
+  .panel {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .panel-left {
+    background: var(--paper-cool);
+    border-right: 1px solid var(--faint);
+  }
+
+  .panel-right {
+    background: var(--paper);
+  }
+
+  /* --- PANEL HEADERS (sticky within each panel) --- */
+  .panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 0.6rem 1.5rem;
+    border-bottom: 1px solid var(--faint);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .panel-left .panel-header {
+    background: rgba(240, 238, 233, 0.92);
+  }
+
+  .panel-right .panel-header {
+    background: rgba(244, 241, 235, 0.92);
+  }
+
+  .panel-header .panel-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .panel-header .panel-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* --- LEFT PANEL: CALL NOTES --- */
+  .notes-content {
+    padding: 1.5rem;
+  }
+
+  .notes-content h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .notes-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .notes-content hr {
+    border: none;
+    border-top: 1px solid var(--faint);
+    margin: 1.2rem 0;
+  }
+
+  .notes-content ul {
+    padding-left: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .notes-content li {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin-bottom: 0.25rem;
+  }
+
+  .notes-content p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+
+  .notes-content strong {
+    font-weight: 600;
+  }
+
+  .notes-content .vocab-term {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .notes-content .article-title {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .notes-content .article-summary {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-left: 0.2rem;
+  }
+
+  .notes-content .pitch-box {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: #2a2724;
+  }
+
+  .notes-content .intro-box {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .signal-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: 0.5rem 0;
+  }
+
+  .signal-box {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .signal-box.green {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+  }
+
+  .signal-box.red {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+  }
+
+  .signal-box .signal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .signal-box.green .signal-label { color: var(--green); }
+  .signal-box.red .signal-label { color: var(--red); }
+
+  .signal-box ul {
+    padding-left: 0.9rem;
+    margin: 0;
+  }
+
+  .signal-box li {
+    font-size: 0.75rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .dont-discuss {
+    background: var(--warm);
+    padding: 0.6rem 0.9rem;
+    margin: 0.5rem 0;
+    font-size: 0.78rem;
+  }
+
+  .dont-discuss ul {
+    padding-left: 0.9rem;
+    margin: 0;
+  }
+
+  .dont-discuss li {
+    font-size: 0.75rem;
+    margin-bottom: 0.1rem;
+    color: var(--muted);
+  }
+
+  .her-quote {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1rem;
+    margin: 0.8rem 0 0;
+    font-family: 'Instrument Serif', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: #2a2724;
+  }
+
+  .her-quote .attribution {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    font-style: normal;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- RIGHT PANEL: ONE-PAGER --- */
+  .onepager-content {
+    padding: 0;
+  }
+
+  .onepager-content .doc-header {
+    padding: 2.5rem 1.5rem 1rem;
+  }
+
+  .onepager-content .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .onepager-content .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .onepager-content .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .onepager-content .doc-header .subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .op-content {
+    padding: 0 1.5rem 2rem;
+  }
+
+  .op-content hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 1.5rem 0 1.2rem;
+  }
+
+  .op-content h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+
+  .op-content p {
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+    font-size: 0.85rem;
+  }
+
+  .op-content .lead {
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .op-content ul {
+    margin-bottom: 0.7rem;
+    padding-left: 1.2rem;
+  }
+
+  .op-content li {
+    margin-bottom: 0.3rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .op-content li .source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .op-content .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.7rem 1rem;
+    margin: 0.8rem 0;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: #2a2724;
+    background: var(--accent-bg);
+    line-height: 1.55;
+  }
+
+  .op-content .built-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 1.2rem;
+    margin: 0.4rem 0;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .op-content .built-list li {
+    font-size: 0.78rem;
+    padding-left: 0.9rem;
+    position: relative;
+  }
+
+  .op-content .built-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .op-footer {
+    padding: 1rem 1.5rem 2rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .op-footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .op-footer .footer-right {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .op-footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE: MOBILE --- */
+  @media (max-width: 900px) {
+    .mobile-tabs {
+      display: flex;
+    }
+
+    .split-container {
+      display: block;
+      margin-top: 72px;
+      height: auto;
+    }
+
+    .panel {
+      height: auto;
+      overflow-y: visible;
+    }
+
+    .panel-left {
+      border-right: none;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .panel-header {
+      position: sticky;
+      top: 72px;
+    }
+
+    .panel.hidden-mobile {
+      display: none;
+    }
+
+    .signal-section {
+      grid-template-columns: 1fr;
+    }
+
+    .op-content .built-list {
+      grid-template-columns: 1fr;
+    }
+
+    .op-footer {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  /* --- PRINT --- */
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.6in;
+    }
+
+    html { font-size: 12px; }
+
+    .top-nav,
+    .mobile-tabs { display: none !important; }
+
+    body {
+      background: white;
+      color: black;
+    }
+
+    .split-container {
+      display: block;
+      margin-top: 0;
+      height: auto;
+    }
+
+    .panel {
+      height: auto;
+      overflow: visible;
+    }
+
+    .panel-left {
+      border-right: none;
+      background: white;
+      page-break-after: always;
+    }
+
+    .panel-right {
+      background: white;
+    }
+
+    .panel-header {
+      position: static;
+      background: white !important;
+      backdrop-filter: none;
+    }
+
+    .panel-left .panel-header {
+      background: white !important;
+    }
+
+    .panel-right .panel-header {
+      background: white !important;
+    }
+
+    .notes-content {
+      padding: 0.5rem 0;
+    }
+
+    .notes-content .pitch-box,
+    .notes-content .intro-box {
+      break-inside: avoid;
+    }
+
+    .signal-section {
+      break-inside: avoid;
+    }
+
+    .her-quote {
+      break-inside: avoid;
+    }
+
+    .onepager-content .doc-header {
+      padding: 0.5rem 0;
+    }
+
+    .op-content {
+      padding: 0;
+    }
+
+    .op-content hr {
+      margin: 0.8rem 0 0.6rem;
+    }
+
+    .op-footer {
+      padding: 0.5rem 0;
+      border-top: 1px solid #ccc;
+    }
+
+    a { color: black; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <a href="hub.html" class="logo">LearnAIR</a>
+    <span class="prep-badge">Teresa Prep</span>
+    <a href="hub.html" class="back-link">&larr; Hub</a>
+  </div>
+</div>
+
+<!-- MOBILE TABS -->
+<div class="mobile-tabs">
+  <button class="active" onclick="showPanel('left')">Call Notes</button>
+  <button onclick="showPanel('right')">One-Pager</button>
+</div>
+
+<!-- SPLIT LAYOUT -->
+<div class="split-container">
+
+  <!-- LEFT PANEL: CALL NOTES -->
+  <div class="panel panel-left" id="panel-left">
+    <div class="panel-header">
+      <span class="panel-badge">Call Notes</span>
+      <span class="panel-title">Teresa 1:1 &mdash; Mon Mar 24</span>
+    </div>
+    <div class="notes-content">
+
+      <h2>Her Language</h2>
+      <ul>
+        <li><span class="vocab-term">"Digital employees"</span> &mdash; not "AI tools." Core branding.</li>
+        <li><span class="vocab-term">"Human-centered"</span> &mdash; AI augments, never replaces.</li>
+        <li><span class="vocab-term">"Everboarding"</span> &mdash; continuous enablement, not one-time. Trademarked.</li>
+        <li><span class="vocab-term">"The human part"</span> &mdash; AI handles repetitive, humans do the thinking.</li>
+        <li><span class="vocab-term">"Practical, ethical, transformative"</span> &mdash; her three-word framework.</li>
+      </ul>
+
+      <hr>
+
+      <h2>Her Articles</h2>
+      <p>
+        <span class="article-title">1. "Moving Beyond Fear: Designing an AI-Enabled Workforce"</span><br>
+        <span class="article-summary">Fear is the barrier. Design workflows where AI elevates humans.</span>
+      </p>
+      <p>
+        <span class="article-title">2. "AI Leverage and the Shift in Workplace Influence"</span><br>
+        <span class="article-summary">People who learn AI gain disproportionate power at work.</span>
+      </p>
+      <p>
+        <span class="article-title">3. "Your AI Strategy Is Incomplete If It Ignores the Workforce"</span><br>
+        <span class="article-summary">Investing in AI tools without workforce readiness = waste.</span>
+      </p>
+      <p style="font-size: 0.75rem; color: var(--accent); margin-top: 0.3rem;"><strong>Through-line:</strong> Technology strategy without workforce strategy fails.</p>
+
+      <hr>
+
+      <h2>Meeting Flow</h2>
+
+      <p><strong>Open: Connection</strong> <span style="color: var(--muted); font-size: 0.75rem;">(5-10 min)</span></p>
+      <ul>
+        <li>Fallujah, the Marine Corps, what it taught you</li>
+        <li>Deloitte, Forest Service, the career arc</li>
+        <li>Breathwork, the move to Bend, family</li>
+        <li>Why this veteran program speaks to you personally</li>
+      </ul>
+
+      <p><strong>Middle: The Program</strong> <span style="color: var(--muted); font-size: 0.75rem;">(10-15 min)</span></p>
+      <p style="font-size: 0.78rem; color: var(--muted);">Workforce redesign, not tech. Mission command = AI supervision.</p>
+
+      <div class="pitch-box">
+        "I see this as a workforce redesign challenge, not a technology problem. Every industry is deploying AI faster than they can find people to manage it. Veterans already have the operating system for this. In the military, it's called mission command. My brother Andrew and I have been building out a thesis on how that translates to AI ecosystem supervision."
+      </div>
+
+      <p style="font-size: 0.78rem;"><strong>If she leans in:</strong> "Actually, we put something together. Want to see it?" &rarr; Share the one-pager.</p>
+      <p style="font-size: 0.78rem;"><strong>If she stays surface:</strong> Don't force it. Say you're excited to keep the conversation going.</p>
+
+      <p><strong>Close: Next Steps</strong> <span style="color: var(--muted); font-size: 0.75rem;">(5 min)</span></p>
+      <div class="pitch-box">
+        "I'd love to continue this. Would it make sense to do a follow-up with you, Justin, and potentially my brother Andrew? I think you'd find the combination interesting."
+      </div>
+
+      <hr>
+
+      <h2>Introduce Andrew</h2>
+      <div class="intro-box">
+        "After my first conversation with Justin a couple weeks ago, I was genuinely excited. I reached out to my brother Andrew, who's been in the tech space for years. Two startup exits, Twitch, autonomous operations. He's not military, but he brings the technical depth. Here's the cool part: I originally reached out to him to learn AI myself. In the process of me learning, we realized we were building the exact thing this program needs. A training approach, a curriculum, a way to think about how veterans fit into this moment."
+      </div>
+
+      <hr>
+
+      <h2>Listen For</h2>
+      <div class="signal-section">
+        <div class="signal-box green">
+          <div class="signal-label">Green Lights</div>
+          <ul>
+            <li>Program as real business unit, not side project</li>
+            <li>Mentions funding or revenue plans</li>
+            <li>Asks about your availability / timeline</li>
+            <li>"Tell me more" or "I'd love to meet Andrew"</li>
+          </ul>
+        </div>
+        <div class="signal-box red">
+          <div class="signal-label">Red Flags</div>
+          <ul>
+            <li>"Justin's passion project"</li>
+            <li>No mention of funding or resources</li>
+            <li>Steers toward generic veteran support</li>
+            <li>Evaluating you as a hire, not a partner</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>Don't Discuss</h2>
+      <div class="dont-discuss">
+        <ul>
+          <li>Equity, titles, partnership structures &mdash; too early</li>
+          <li>Existing team dynamics (Trisha, Joe)</li>
+          <li>Anything critical of LearnAIR's pace</li>
+          <li>The full hub or thesis &mdash; glimpses only</li>
+        </ul>
+      </div>
+
+      <div class="her-quote">
+        "AI is only as transformative as the people empowered to use it."
+        <div class="attribution">&mdash; Teresa Coats. That IS your thesis.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: ONE-PAGER -->
+  <div class="panel panel-right" id="panel-right">
+    <div class="panel-header">
+      <span class="panel-badge">One-Pager</span>
+      <span class="panel-title">Shareable Document</span>
+    </div>
+    <div class="onepager-content">
+
+      <section class="doc-header">
+        <div class="kicker">Concept Brief</div>
+        <h1>Mission Command &rarr; AI Supervision</h1>
+        <p class="subtitle">A concept for the LearnAIR veteran program</p>
+      </section>
+
+      <div class="op-content">
+
+        <!-- THE GAP -->
+        <hr>
+        <h2>The Gap</h2>
+        <p class="lead">The hardest problem in AI isn't building it. It's managing what happens when an entire workforce becomes 10x more productive and the processes, coordination, and accountability structures haven't caught up. That's a redesign challenge playing out across every sector.</p>
+        <p>This role is emerging in real time. It sits between the AI system and the business outcome. Defining where AI operates, validating what it produces, keeping humans accountable for results. Every industry is working to define it.</p>
+
+        <!-- THE CONCEPT -->
+        <hr>
+        <h2>The Concept</h2>
+        <div style="background: var(--accent); color: var(--white); padding: 1.2rem 1.5rem; margin: 0.4rem 0 1.2rem;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">The Opportunity</div>
+          <p style="font-family: 'Instrument Serif', serif; font-size: 1.05rem; line-height: 1.45; margin: 0; color: var(--white);">An applied experiential training program that transitions veterans with mission command skill sets into AI ecosystem supervision roles. Built at the pace this moment demands.</p>
+        </div>
+
+        <!-- Flywheel -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 1rem 0 1.2rem;">
+          <div style="padding: 0.9rem 1.1rem; background: var(--accent); color: var(--white); border: 1px solid var(--accent);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 0.25rem;">01 &mdash; The Veteran</div>
+            <p style="font-size: 0.78rem; margin: 0; color: var(--white); line-height: 1.5;">Veterans possess the foundational skill set to command AI. In the military, it&rsquo;s called mission command: defining boundaries, setting the zone of autonomy, validating outcomes, driving results through ambiguity.</p>
+          </div>
+          <div style="padding: 0.9rem 1.1rem; background: var(--ink); color: var(--paper); border: 1px solid var(--ink);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.25rem;">02 &mdash; The Training Program</div>
+            <p style="font-size: 0.78rem; margin: 0; color: var(--paper); line-height: 1.5;">Applied experiential curriculum that bridges mission command to AI ecosystem supervision. Designed to inform and adapt LearnAIR&rsquo;s proven training methodology for the veteran population.</p>
+          </div>
+          <div style="padding: 0.9rem 1.1rem; background: var(--paper); border: 1px solid var(--faint);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem;">03 &mdash; The Employer</div>
+            <p style="font-size: 0.78rem; margin: 0; line-height: 1.5;">Every industry deploying AI at scale needs people who can manage what AI produces and own the outcome.</p>
+          </div>
+          <div style="padding: 0.9rem 1.1rem; background: var(--warm); border: 1px solid var(--faint);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem;">04 &mdash; The Funder</div>
+            <p style="font-size: 0.78rem; margin: 0; line-height: 1.5;">DOL grants, GI Bill, SkillBridge, employer training budgets. Veterans train at no cost.</p>
+          </div>
+        </div>
+
+        <!-- WHY NOW -->
+        <hr>
+        <h2>Why Now</h2>
+        <ul>
+          <li>AI task capability doubles every 4&ndash;7 months. The window to train supervisors is closing fast. <span class="source">METR / Stanford AI Index 2025</span></li>
+          <li>13% employment decline for ages 22&ndash;25 in AI-exposed jobs since ChatGPT launch. Junior roles are disappearing first. <span class="source">Brynjolfsson et al., &ldquo;Canaries in the Coal Mine,&rdquo; Stanford 2025</span></li>
+          <li>&ldquo;America cannot withstand the economic shock that&rsquo;s coming.&rdquo; Former Commerce Secretary Raimondo calls for outcomes-based, employer-driven training. <span class="source">NYT Op-Ed, Mar 2026</span></li>
+        </ul>
+        <div style="background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 0.8rem 1.2rem; margin-top: 0.8rem;">
+          <p style="font-family: 'Instrument Serif', serif; font-size: 0.95rem; line-height: 1.45; margin: 0;">The gap between &ldquo;AI literacy&rdquo; and &ldquo;AI ecosystem supervision&rdquo; is where veterans have a natural, immediate advantage.</p>
+        </div>
+
+        <!-- WHO WE ARE -->
+        <hr>
+        <h2>Who We Are</h2>
+        <p><strong>Mike Deal, the veteran perspective.</strong> Marine Corps infantry officer (2004&ndash;2012). Two deployments to Fallujah, Iraq. Post-military: Deloitte management consulting (DOD, global joint ventures), EFT practitioner, Holotropic Breathwork&reg; facilitator, Forest Service ranger. Based in Bend, Oregon.</p>
+        <p><strong>Andrew Deal, the technical perspective.</strong> Startup operator. Two exits (Bear Flag Robotics &rarr; John Deere, Over &rarr; GoDaddy). Identity systems at Twitch (10M+ DAU). $39M in autonomous operations funding. Oxford, Reforge (SV&rsquo;s premier product leadership program). Upskilled into engineering through a boot camp, not academia. Firsthand experience in rapid skill transitions. Based in San Francisco.</p>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem;">Mike reached out to Andrew to learn AI. In the process, they started building the exact thing this program needs: a training approach, a curriculum, and a way to think about how veterans fit into this AI workforce moment. The collaboration is anchored in the merger of their backgrounds and experience.</p>
+
+        <!-- WHAT WE'VE BUILT -->
+        <hr>
+        <h2>What We&rsquo;ve Built</h2>
+        <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem;">Research and frameworks to inform how LearnAIR&rsquo;s established AI training methodology could be adapted for the veteran population.</p>
+        <ul class="built-list">
+          <li>Competitive landscape analysis (10+ programs mapped).</li>
+          <li>4-week pilot curriculum design with validate-or-kill criteria.</li>
+          <li>Policy alignment research (Raimondo, Brynjolfsson, Stanford HAI).</li>
+          <li>Oregon employer and funding landscape (concrete organizations, institutions, grant pathways).</li>
+          <li>Field manual: actively training ourselves through the curriculum we&rsquo;re designing. We&rsquo;re the first cohort.</li>
+          <li>Curriculum stubs in development: persona frameworks, glossary of AI ecosystem supervision terms, applied experiential learning methodology.</li>
+        </ul>
+
+      </div>
+
+      <div class="op-footer">
+        <div class="footer-left">Mike Deal &amp; Andrew Deal &mdash; March 2026</div>
+        <div class="footer-right"><a href="hub.html">Back to Hub</a></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showPanel(which) {
+    const left = document.getElementById('panel-left');
+    const right = document.getElementById('panel-right');
+    const buttons = document.querySelectorAll('.mobile-tabs button');
+
+    if (which === 'left') {
+      left.classList.remove('hidden-mobile');
+      right.classList.add('hidden-mobile');
+      buttons[0].classList.add('active');
+      buttons[1].classList.remove('active');
+    } else {
+      right.classList.remove('hidden-mobile');
+      left.classList.add('hidden-mobile');
+      buttons[1].classList.add('active');
+      buttons[0].classList.remove('active');
+    }
+
+    window.scrollTo(0, 0);
+  }
+</script>
+
+</body>
+</html>
