@@ -182,28 +182,41 @@
     padding: 0 2rem;
   }
 
-  /* --- CHAPTER (sidebar numbers on desktop) --- */
-  .chapter {
-    padding: 4rem 0 1rem;
+  /* --- SECTION (full-width wrapper with sticky sidebar number) --- */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
     display: grid;
     grid-template-columns: 80px 1fr;
-    gap: 0 1.5rem;
+    gap: 0 0;
     align-items: start;
   }
 
-  .chapter-number {
+  .section-num {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--faint);
     line-height: 1;
-    opacity: 0.5;
+    opacity: 0.45;
     position: sticky;
     top: 5rem;
-    grid-row: 1 / 4;
     text-align: right;
-    padding-right: 1rem;
+    padding-right: 1.5rem;
     border-right: 2px solid var(--faint);
+    align-self: start;
+    height: fit-content;
+  }
+
+  .section-content {
+    max-width: 800px;
+    padding-left: 1.5rem;
+  }
+
+  .section-content .wide-inner {
+    margin-left: -1.5rem;
+    margin-right: -80px;
   }
 
   .chapter-title {
@@ -229,12 +242,12 @@
     width: 60px;
     height: 2px;
     background: var(--accent);
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem 0;
   }
 
-  .chapter-body {
-    grid-column: 2;
-  }
+  /* legacy wrappers inside sections */
+  .chapter { padding: 0; }
+  .chapter-body { /* no-op */ }
 
   p {
     margin: 1.25rem 0;
@@ -437,11 +450,11 @@
     .hero h1 { font-size: 2.5rem; }
     .stats { grid-template-columns: repeat(2, 1fr); gap: 0 2rem; }
     .content, .wide { padding: 0 1.5rem; }
-    .chapter {
+    .section {
       display: block;
-      padding: 3rem 0 1rem;
+      padding: 3rem 1.5rem 1rem;
     }
-    .chapter-number {
+    .section-num {
       position: static;
       font-size: 3rem;
       text-align: left;
@@ -449,6 +462,13 @@
       border-right: none;
       margin-bottom: -0.25rem;
       opacity: 0.3;
+    }
+    .section-content {
+      padding-left: 0;
+    }
+    .section-content .wide-inner {
+      margin-left: 0;
+      margin-right: 0;
     }
     .chapter-title { font-size: 1.8rem; }
     .card-pair { grid-template-columns: 1fr; }
@@ -505,35 +525,26 @@
 </div>
 
 
-<!-- CHAPTER 1 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">01</div>
-    <div class="chapter-body">
-      <div class="chapter-title">The Problem</div>
-      <div class="divider"></div>
-      <p>An AI coach is inherently probabilistic. Even with perfect instructions, it will drift: giving unsolicited advice, forgetting rules mid-conversation, hallucinating data, or coaching at the wrong tier.</p>
-      <p>You cannot eliminate this. But you can measure it, catch it, and improve it over time.</p>
-      <p>This framework defines how we audit coaching quality, align two independently-built systems, and create a feedback loop that makes the coaching measurably better with every iteration.</p>
-    </div>
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-num">01</div>
+  <div class="section-content">
+    <div class="chapter-title">The Problem</div>
+    <div class="divider"></div>
+    <p>An AI coach is inherently probabilistic. Even with perfect instructions, it will drift: giving unsolicited advice, forgetting rules mid-conversation, hallucinating data, or coaching at the wrong tier.</p>
+    <p>You cannot eliminate this. But you can measure it, catch it, and improve it over time.</p>
+    <p>This framework defines how we audit coaching quality, align two independently-built systems, and create a feedback loop that makes the coaching measurably better with every iteration.</p>
   </div>
 </div>
 
-
-<!-- CHAPTER 2 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">02</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Shared Foundations</div>
-      <div class="chapter-intro">Two systems built independently arrived at the same conclusions. This is the strongest signal that the methodology is right.</div>
-      <div class="divider"></div>
-    </div>
-  </div>
-</div>
-
-<div class="wide">
-  <table>
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-num">02</div>
+  <div class="section-content">
+    <div class="chapter-title">Shared Foundations</div>
+    <div class="chapter-intro">Two systems built independently arrived at the same conclusions. This is the strongest signal that the methodology is right.</div>
+    <div class="divider"></div>
+    <table>
     <tr><th style="width: 25%;">Foundation</th><th>Evidence</th></tr>
     <tr><td><strong>The Knowing-Doing Gap</strong></td><td>Both exist for the same reason: people already know what to do. The gap is execution, not information. Both cite Sofian's Quit For Life insight.</td></tr>
     <tr><td><strong>Intervention Hierarchy</strong></td><td>Both implement tiered interventions with gates. Never recommend Tier N until Tier N-1 is addressed. Tier structure is nearly identical: Connection, Foundations, Optimization, Health Context, Targeted.</td></tr>
@@ -546,23 +557,17 @@
     <tr><td><strong>Proactive Outreach</strong></td><td>Cochrane review: 3+ proactive contacts significantly increase behavior change. Both reach out rather than wait.</td></tr>
     <tr><td><strong>Data-Grounded Coaching</strong></td><td>"Prioritize sleep" is banned. "Get to bed by 10:30, your stdev is 98 minutes" is coaching. Both reject generic advice.</td></tr>
   </table>
-</div>
-
-
-<!-- CHAPTER 3 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">03</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Key Divergences</div>
-      <div class="chapter-intro">Where the two systems take meaningfully different approaches, and how we resolve each one.</div>
-      <div class="divider"></div>
-    </div>
   </div>
 </div>
 
-<div class="wide">
-  <table>
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-num">03</div>
+  <div class="section-content">
+    <div class="chapter-title">Key Divergences</div>
+    <div class="chapter-intro">Where the two systems take meaningfully different approaches, and how we resolve each one.</div>
+    <div class="divider"></div>
+    <table>
     <tr><th>Dimension</th><th>Agentic Coach</th><th>iOS App</th><th>Resolution</th></tr>
     <tr><td><strong>Program Structure</strong></td><td>14-day blocks. Time-bound. Finish lines create urgency.</td><td>21-day graduation. Accumulation-based. Patience through cumulative progress.</td><td>Blend: keep blocks for structure, add graduation tracking that persists beyond blocks.</td></tr>
     <tr><td><strong>Habit Cap</strong></td><td>1 anchor habit per block. More conservative, closer to PN data.</td><td>3 forming habits. More user agency, richer daily touchpoint.</td><td>Start with 1 for new users, expand to 3 as capacity is proven.</td></tr>
@@ -573,23 +578,17 @@
     <tr><td><strong>Seasonal Rotation</strong></td><td>Linear. Blocks complete, pick next one.</td><td>Cyclical. Forming, Practicing, Resting. Habits breathe.</td><td>Add lifecycle states. After a block, habits persist.</td></tr>
     <tr><td><strong>Success Metrics</strong></td><td>Program completion, habit streaks, health data changes.</td><td>Graduation rate, layering depth, return after gap. Separates product health from behavior change.</td><td>Adopt the distinction. Track both.</td></tr>
   </table>
-</div>
-
-
-<!-- CHAPTER 4 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">04</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Unique Strengths Worth Preserving</div>
-      <div class="chapter-intro">Each system has capabilities the other lacks. The convergence keeps the best of both.</div>
-      <div class="divider"></div>
-    </div>
   </div>
 </div>
 
-<div class="wide">
-  <div class="card-pair">
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-num">04</div>
+  <div class="section-content">
+    <div class="chapter-title">Unique Strengths Worth Preserving</div>
+    <div class="chapter-intro">Each system has capabilities the other lacks. The convergence keeps the best of both.</div>
+    <div class="divider"></div>
+    <div class="card-pair">
     <div class="card card-blue">
       <h3>Agentic Coach (Keep These)</h3>
       <ul>
@@ -616,21 +615,14 @@
   </div>
 </div>
 
-
-<!-- CHAPTER 5 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">05</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Simulation Test Suite</div>
-      <div class="chapter-intro">Scripted conversations that test specific coaching behaviors. Run after every workspace change, before deploying to production.</div>
-      <div class="divider"></div>
-    </div>
-  </div>
-</div>
-
-<div class="wide">
-  <table>
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-num">05</div>
+  <div class="section-content">
+    <div class="chapter-title">Simulation Test Suite</div>
+    <div class="chapter-intro">Scripted conversations that test specific coaching behaviors. Run after every workspace change, before deploying to production.</div>
+    <div class="divider"></div>
+    <table>
     <tr><th>Scenario</th><th>Tests</th><th>Expected Behavior</th></tr>
     <tr><td>New user onboarding</td><td>Does the coach follow the structured flow?</td><td>Cluster menu, wearable, labs, what tried, synthesis, drip</td></tr>
     <tr><td>Unsolicited advice</td><td>User mentions bad sleep. Permission asked?</td><td>"I noticed something. Want to hear it?"</td></tr>
@@ -643,47 +635,35 @@
     <tr><td>Progressive disclosure</td><td>Week 1. Full picture or focused?</td><td>One focus, one action.</td></tr>
     <tr><td>Data isolation</td><td>Two users. Data cross?</td><td>Never. user_id checked on every tool call.</td></tr>
   </table>
-</div>
-
-
-<!-- CHAPTER 6 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">06</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Guardrail Tools</div>
-      <div class="chapter-intro">Shift quality from "hope it remembers" to "the system enforces it."</div>
-      <div class="divider"></div>
-      <p>Instead of relying on the LLM to remember rules, build tools that enforce them programmatically.</p>
-    </div>
   </div>
 </div>
 
-<div class="wide">
-  <table>
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-num">06</div>
+  <div class="section-content">
+    <div class="chapter-title">Guardrail Tools</div>
+    <div class="chapter-intro">Shift quality from "hope it remembers" to "the system enforces it."</div>
+    <div class="divider"></div>
+    <p>Instead of relying on the LLM to remember rules, build tools that enforce them programmatically.</p>
+    <table>
     <tr><th>Tool</th><th>Purpose</th><th>When Called</th></tr>
     <tr><td><code>get_coaching_context</code></td><td>Returns structured context: current tier, active habits, recent check-ins, stall signals, capacity level</td><td>Start of every conversation turn</td></tr>
     <tr><td><code>validate_recommendation</code></td><td>Checks if a habit recommendation respects the intervention hierarchy</td><td>Before suggesting any habit</td></tr>
     <tr><td><code>check_user_capacity</code></td><td>Returns capacity level from check-in patterns</td><td>Before adding new forming habits</td></tr>
     <tr><td><code>log_coaching_event</code></td><td>Logs what the coach said and recommended for quality auditing</td><td>After every substantive response</td></tr>
   </table>
-</div>
-
-
-<!-- CHAPTER 7 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">07</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Quality Scoring</div>
-      <div class="chapter-intro">Score every conversation. Track trends. Prove improvement over time.</div>
-      <div class="divider"></div>
-    </div>
   </div>
 </div>
 
-<div class="wide">
-  <table>
+<!-- SECTION 7 -->
+<div class="section">
+  <div class="section-num">07</div>
+  <div class="section-content">
+    <div class="chapter-title">Quality Scoring</div>
+    <div class="chapter-intro">Score every conversation. Track trends. Prove improvement over time.</div>
+    <div class="divider"></div>
+    <table>
     <tr><th>Dimension</th><th>Metric</th><th style="width: 100px;">Target</th></tr>
     <tr><td>Unsolicited advice rate</td><td>% of responses with unrequested recommendations</td><td><strong>&lt;10%</strong></td></tr>
     <tr><td>Respond-first compliance</td><td>% of turns with immediate acknowledgment before tool calls</td><td><strong>&gt;95%</strong></td></tr>
@@ -692,22 +672,16 @@
     <tr><td>Data grounding</td><td>% of insights citing specific user data vs generic advice</td><td><strong>&gt;80%</strong></td></tr>
     <tr><td>Capacity awareness</td><td>Adjusted load based on user signals</td><td><strong>Qualitative</strong></td></tr>
   </table>
-</div>
-
-
-<!-- CHAPTER 8 -->
-<div class="content">
-  <div class="chapter">
-    <div class="chapter-number">08</div>
-    <div class="chapter-body">
-      <div class="chapter-title">Convergence Checklist</div>
-      <div class="chapter-intro">Before the agentic coach serves an app user, every item must be verified.</div>
-      <div class="divider"></div>
-    </div>
   </div>
 </div>
 
-<div class="wide">
+<!-- SECTION 8 -->
+<div class="section">
+  <div class="section-num">08</div>
+  <div class="section-content">
+    <div class="chapter-title">Convergence Checklist</div>
+    <div class="chapter-intro">Before the agentic coach serves an app user, every item must be verified.</div>
+    <div class="divider"></div>
   <div class="checklist">
     <h3>Must Pass Before Launch</h3>
     <ul>
@@ -723,8 +697,8 @@
       <li>Quality scores meet targets for 2 consecutive weeks</li>
     </ul>
   </div>
+  </div>
 </div>
-
 
 <!-- THESIS -->
 <div class="content">
