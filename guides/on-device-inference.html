@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On-Device Inference: What 400B Parameters on iPhone Means | Andrew Deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.08); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 18px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.75; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo:hover { color: var(--ink); }
+  nav .logo span { color: var(--accent); }
+  nav .nav-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); }
+
+  .hero { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 3.8rem);
+    line-height: 1.1; margin-bottom: 2rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 1.1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+  .hero .meta { margin-top: 3rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); display: flex; gap: 2.5rem; }
+
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+  .chapter { padding: 5rem 0; }
+  .chapter-number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 5rem;
+    color: var(--faint); line-height: 1; opacity: 0.4; margin-bottom: -0.5rem; }
+  .chapter-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem;
+    line-height: 1.2; margin-bottom: 1rem; }
+  .divider { width: 60px; height: 2px; background: var(--accent); margin: 0 0 2.5rem 0; }
+  p { margin: 1.25rem 0; font-size: 0.95rem; line-height: 1.8; }
+  strong { font-weight: 600; }
+
+  .signal-box { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 2rem 2.5rem; margin: 3rem 0; border-radius: 0 12px 12px 0; }
+  .signal-box p { margin: 0.5rem 0; }
+  .signal-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2.5rem 0; }
+  .grid-item { padding: 2rem; background: var(--warm); border-radius: 12px; }
+  .grid-item h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .grid-item p { font-size: 0.9rem; margin: 0.5rem 0; line-height: 1.6; }
+
+  .unchanged { background: var(--green-bg); border-radius: 12px; padding: 2rem 2.5rem; margin: 2.5rem 0; }
+  .unchanged h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  .unchanged ul { padding-left: 0; list-style: none; }
+  .unchanged li { margin: 0.6rem 0; padding-left: 1rem; position: relative; font-size: 0.9rem; line-height: 1.6; }
+  .unchanged li::before { content: ''; position: absolute; left: 0; top: 0.55rem; width: 4px; height: 4px;
+    border-radius: 50%; background: var(--green); }
+
+  .timeline { display: flex; gap: 0; margin: 3rem 0; border-top: 2px solid var(--ink); }
+  .timeline-item { flex: 1; padding: 1.5rem 1.5rem 1.5rem 0; border-right: 1px solid var(--faint); }
+  .timeline-item:last-child { border-right: none; }
+  .timeline-date { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem;
+    color: var(--ink); line-height: 1; margin-bottom: 0.4rem; }
+  .timeline-date .accent { color: var(--accent); }
+  .timeline-label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); }
+
+  .questions { margin: 3rem 0; }
+  .question { padding: 1.5rem 0; border-bottom: 1px solid var(--warm); }
+  .question:first-child { border-top: 2px solid var(--ink); }
+  .question h3 { font-family: 'Instrument Serif', serif; font-size: 1.2rem; margin-bottom: 0.75rem; }
+  .question p { font-size: 0.9rem; color: var(--muted); margin: 0.5rem 0; }
+
+  .thesis { padding: 5rem 0; border-top: 2px solid var(--ink); margin-top: 3rem; }
+  .thesis-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; line-height: 1.5; max-width: 600px; }
+  .thesis-text em { font-style: italic; color: var(--accent); }
+
+  .footer { max-width: 720px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 5rem 1.5rem 4rem; }
+    .content { padding: 0 1.5rem; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .timeline { flex-direction: column; }
+    .timeline-item { border-right: none; border-bottom: 1px solid var(--faint); }
+    .hero .meta { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner"><a href="/" class="logo">Andrew<span>.</span>Deal</a><span class="nav-label">Analysis</span></div></nav>
+
+<div class="hero">
+  <div class="kicker">March 24, 2026</div>
+  <h1>400B Parameters on iPhone. What It Means for <em>Health Coaching.</em></h1>
+  <p class="subtitle">iPhone 17 Pro reportedly running a frontier-scale LLM entirely on-device. If real, this changes the calculus on local AI inference, making cloud dependency optional for even the most demanding applications.</p>
+  <div class="meta">
+    <span>Andrew Deal</span>
+    <span>Quick Analysis</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="signal-box">
+    <div class="signal-label">The Signal</div>
+    <p><strong>iPhone 17 Pro running 400B parameter LLM on-device.</strong> This is the most significant hardware demo for local AI inference in years. If validated, it means frontier-scale reasoning, the kind that powers personalized health coaching, runs without a server, without an API call, and without any health data leaving the phone.</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-number">01</div>
+    <div class="chapter-title">What Changes</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="grid-item">
+      <h3>Focus Plan Goes Local</h3>
+      <p>Currently, every Focus Plan calls Claude via a Cloudflare proxy. Costs money, adds latency, sends health context to a third party. On-device inference: zero API cost, zero latency, zero PHI exposure.</p>
+    </div>
+    <div class="grid-item">
+      <h3>The v2.0 Thesis Was Right</h3>
+      <p>An earlier version of the product bet on Apple's Foundation Model for on-device AI. Failed because the model wasn't capable enough. A 400B model on iPhone vindicates that thesis. The pivot to cloud was a timing decision, not a strategic one.</p>
+    </div>
+    <div class="grid-item">
+      <h3>Always-On Coaching</h3>
+      <p>No internet required. Morning check-in works on a plane, in the redwoods, anywhere. For a product betting on earning 30 seconds in your morning, removing connectivity as a failure mode is significant.</p>
+    </div>
+    <div class="grid-item">
+      <h3>The Moat Shifts to Data</h3>
+      <p>If on-device inference commoditizes the AI layer, the differentiator becomes: which habits work for which people in which contexts. The evidence layer. The methodology. The taste. Not the model.</p>
+    </div>
+  </div>
+
+  <div class="unchanged">
+    <h3>What Doesn't Change</h3>
+    <ul>
+      <li>The agentic coach still needs a server for WhatsApp and iMessage delivery</li>
+      <li>Multi-user coaching still needs centralized infrastructure</li>
+      <li>The shared data layer is still needed for "two surfaces, one brain"</li>
+      <li>Wearable data aggregation still happens server-side</li>
+      <li>The behavior change methodology is platform-agnostic</li>
+    </ul>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-number">02</div>
+    <div class="chapter-title">Timeline</div>
+    <div class="divider"></div>
+    <p>The on-device capability arrives after the critical validation phase. Build for cloud now, design for local later.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Now</div>
+      <div class="timeline-label">Build shared<br>data layer</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">May</div>
+      <div class="timeline-label">Concierge<br>beta (cloud)</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Jul</div>
+      <div class="timeline-label">Soft launch<br>decision</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date"><span class="accent">Fall</span></div>
+      <div class="timeline-label">iPhone 17 Pro<br>ships</div>
+    </div>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-number">03</div>
+    <div class="chapter-title">Open Questions</div>
+    <div class="divider"></div>
+  </div>
+
+  <div class="questions">
+    <div class="question">
+      <h3>What does this look like for us, specifically?</h3>
+      <p>Focus Plan generation, coaching messages, habit suggestions, barrier detection. All running locally. The Cloudflare proxy becomes optional. The Claude API becomes a fallback, not a dependency. The iOS app becomes self-contained for the first time.</p>
+    </div>
+    <div class="question">
+      <h3>Is it iPhone 17 only?</h3>
+      <p>Unclear. If the 400B demo relies on iPhone 17 Pro's new Neural Engine, it may not trickle to iPad or older devices immediately. But Apple's pattern is to cascade capabilities downward within 1-2 generations. The M-series Macs (Mac Mini, MacBook Pro) likely already have the compute. The question is whether Apple exposes the APIs.</p>
+    </div>
+    <div class="question">
+      <h3>When do we deploy our own edge models?</h3>
+      <p>This is the bigger question. A fine-tuned model trained on our coaching methodology, our evidence layer, our intervention hierarchy would outperform a general-purpose 400B model for our specific use case. The timeline: after we have enough coaching data from the concierge beta (50-100 conversations, 1,000+ coaching turns). The mechanism: distill our methodology into a smaller, faster model that runs on-device. The moat: nobody else has the coaching data to train this model.</p>
+    </div>
+    <div class="question">
+      <h3>Does this change what we build today?</h3>
+      <p>No. The shared data layer is the moat regardless of where inference happens. If Apple ships local inference, we swap the Claude API call for an on-device model call. The API contract stays the same. The data layer still feeds the model. The coaching methodology still drives the recommendations. Build the data layer. When local inference arrives, flip a switch.</p>
+    </div>
+  </div>
+
+  <div class="thesis">
+    <div class="thesis-text">The data layer is the moat. Build that. When Apple ships local inference, <em>flip a switch.</em></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Andrew Deal. March 2026.
+</div>
+
+</body>
+</html>
