@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coaching Quality Framework | Andrew Deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714; --paper: #f0ebe1; --warm: #e4ddd0; --accent: #b8860b;
+    --accent-light: #d4a832; --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560; --faint: #c9c3b8; --white: #fefdfb;
+    --green: #2d6a4f; --green-bg: #f0f7f4; --red: #8b2500; --red-bg: #fdf2f0;
+    --blue: #1a4b8c; --blue-bg: #f0f4fa;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink);
+    line-height: 1.7; min-height: 100vh;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink); padding: 0.75rem 2rem; backdrop-filter: blur(14px); }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.75rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  .hero { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 4rem; border-bottom: 3px solid var(--ink); }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.5rem); text-transform: uppercase;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .subtitle { font-family: 'Instrument Serif', serif; font-size: 1.3rem;
+    font-style: italic; color: var(--muted); max-width: 600px; line-height: 1.5; }
+  .hero .meta { margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); display: flex; gap: 2rem; }
+  .stat-bar { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--ink); }
+  .stat-item { padding: 1.5rem 2rem; border-right: 1px solid var(--faint); }
+  .stat-item:last-child { border-right: none; }
+  .stat-number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.2rem;
+    color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted); }
+  .doc-container { max-width: 960px; margin: 0 auto; padding: 0 2rem 4rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-top: 3.5rem;
+    margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--ink); }
+  .section-number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.8rem;
+    color: var(--accent); line-height: 1; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.5rem;
+    text-transform: uppercase; letter-spacing: 0.02em; }
+  p { margin: 1rem 0; font-size: 0.95rem; }
+  ol, ul { margin: 1rem 0; padding-left: 1.5rem; }
+  li { margin: 0.5rem 0; font-size: 0.95rem; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: var(--warm);
+    padding: 0.15rem 0.4rem; border-radius: 3px; }
+  strong { font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem; }
+  th { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.6rem 0.8rem;
+    border-bottom: 2px solid var(--ink); }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--warm); vertical-align: top; }
+  .callout { background: var(--accent-bg); border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; font-size: 0.9rem; }
+  .callout h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .callout-green { background: var(--green-bg); border-left-color: var(--green); }
+  .callout-green h3 { color: var(--green); }
+  .callout-red { background: var(--red-bg); border-left-color: var(--red); }
+  .callout-red h3 { color: var(--red); }
+  .callout-blue { background: var(--blue-bg); border-left-color: var(--blue); }
+  .callout-blue h3 { color: var(--blue); }
+  .callout ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+  .callout li { font-size: 0.9rem; margin: 0.3rem 0; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .footer { max-width: 960px; margin: 0 auto; padding: 2rem; border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 640px) {
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2) { border-right: none; }
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+    table { font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner"><a href="/" class="logo">Andrew<span>.</span>Deal</a></div></nav>
+
+<div class="hero">
+  <div class="kicker">Frameworks</div>
+  <h1>Coaching<br><em>Quality</em> Framework</h1>
+  <p class="subtitle">How we make an AI health coach measurably better over time. Alignment audit, simulation testing, and guardrail engineering for behavior change at scale.</p>
+  <div class="meta">
+    <span>Author: Andrew Deal</span>
+    <span>March 2026</span>
+    <span>Living Document</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">10</div>
+    <div class="stat-label">Shared Foundations</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Key Divergences</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">12</div>
+    <div class="stat-label">Unique Strengths per System</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">&lt;10%</div>
+    <div class="stat-label">Unsolicited Advice Target</div>
+  </div>
+</div>
+
+<div class="doc-container">
+
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <span class="section-title">The Problem</span>
+  </div>
+  <p>An AI coach is inherently probabilistic. Even with perfect instructions, it will drift: giving unsolicited advice, forgetting rules mid-conversation, hallucinating data, or coaching at the wrong tier. You cannot eliminate this. But you can measure it, catch it, and improve it over time.</p>
+  <p>This framework defines how we audit coaching quality, align two independently-built systems (Milo and Kasane), and create a feedback loop that makes the coaching measurably better with every iteration.</p>
+
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <span class="section-title">Shared Foundations (Where We Already Agree)</span>
+  </div>
+  <p>Two systems built independently arrived at the same conclusions. This is the strongest signal that the methodology is right.</p>
+
+  <table>
+    <tr><th>Foundation</th><th>Evidence</th></tr>
+    <tr><td><strong>The Knowing-Doing Gap</strong></td><td>Both exist for the same reason: people already know what to do. The gap is execution, not information. Both cite Sofian's Quit For Life insight.</td></tr>
+    <tr><td><strong>Intervention Hierarchy</strong></td><td>Both implement tiered interventions with gates. Never recommend Tier N until Tier N-1 is addressed. Tier structure is nearly identical (Connection, Foundations, Optimization, Health Context, Targeted).</td></tr>
+    <tr><td><strong>Capacity Assessment</strong></td><td>Both use the same Precision Nutrition stat: 1 habit = 80% retention, 3 habits = 5%. Same three-tier model (low/medium/high). Same principle: never assume high capacity.</td></tr>
+    <tr><td><strong>Advise With Permission</strong></td><td>Both cite Stanford GPTCoach (vanilla AI gives unsolicited advice 87% of the time). Both target less than 10%. Near-identical phrasing: "I noticed something. Would it be useful if I shared?"</td></tr>
+    <tr><td><strong>Progressive Disclosure</strong></td><td>Week 1-2: one focus, one action. Week 3-4: connect dots. Month 2+: full picture when pulled for. Both frame this as respecting readiness, not withholding.</td></tr>
+    <tr><td><strong>The 1-1-1 Rule</strong></td><td>Every coaching touchpoint: one acknowledgment, one encouragement, one nudge. Not five things. Not a data dump. Three notes, delivered like a coach in the doorway.</td></tr>
+    <tr><td><strong>Compassion / No Guilt</strong></td><td>Never "you missed yesterday." Always "welcome back." Neither uses streak pressure. Both normalize the dip as seasonal, not failure.</td></tr>
+    <tr><td><strong>Connection as Tier 0</strong></td><td>Both cite Holt-Lunstad (148 studies, 308K participants). The coaching relationship itself is the intervention. Social isolation is a health risk equivalent to smoking 15 cigarettes a day.</td></tr>
+    <tr><td><strong>Proactive Outreach</strong></td><td>Cochrane review: 3+ proactive contacts significantly increase behavior change. Both reach out rather than wait.</td></tr>
+    <tr><td><strong>Data-Grounded Coaching</strong></td><td>"Prioritize sleep" is banned. "Get to bed by 10:30, your stdev is 98 minutes" is coaching. Both reject generic advice.</td></tr>
+  </table>
+
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <span class="section-title">Key Divergences</span>
+  </div>
+
+  <table>
+    <tr><th>Dimension</th><th>System A (Agentic Coach)</th><th>System B (iOS App)</th><th>Resolution</th></tr>
+    <tr><td><strong>Program Structure</strong></td><td>14-day blocks. Time-bound. Finish lines create urgency.</td><td>21-day graduation. Accumulation-based. Patience through cumulative progress.</td><td>Blend: keep blocks for structure, add graduation tracking that persists beyond blocks.</td></tr>
+    <tr><td><strong>Habit Cap</strong></td><td>1 anchor habit per block. More conservative, closer to PN data.</td><td>3 forming habits. More user agency, richer daily touchpoint.</td><td>Start with 1 for new users, expand to 3 as capacity is proven.</td></tr>
+    <tr><td><strong>Goal Selection</strong></td><td>Guided menu + skill ladders. User discovers their own habit (Arrival Principle).</td><td>AI-generated Focus Plan from health data. System identifies highest-leverage move.</td><td>Both. Skill ladders for users without data. Focus Plan for data-rich users.</td></tr>
+    <tr><td><strong>Delivery Channel</strong></td><td>WhatsApp/iMessage. Conversational, concise. Meets you in your texting app.</td><td>iOS app. Visual, tactile. Dedicated home for your health practice.</td><td>Complementary surfaces, not competing. Chat for coaching, app for structure.</td></tr>
+    <tr><td><strong>Identity Language</strong></td><td>Minimal. Execution-focused. "The data shows you built a real habit."</td><td>Heavy. "This is who you are now." Deck as identity portfolio.</td><td>Add identity language to agentic coaching. Easy win, high psychological impact.</td></tr>
+    <tr><td><strong>Vulnerability Model</strong></td><td>Basic pushback detection. "Noticed you went quiet."</td><td>Phased plan: habit context, check-in patterns, barrier awareness, tone calibration.</td><td>Adopt the phased plan. Add barrier awareness ("what's getting in the way?").</td></tr>
+    <tr><td><strong>Seasonal Rotation</strong></td><td>Linear. Blocks complete, pick next one. No rest state.</td><td>Cyclical. Forming, Practicing, Resting. Habits breathe with your life.</td><td>Add lifecycle states. After a block, habit moves to Practicing, not void.</td></tr>
+    <tr><td><strong>Success Metrics</strong></td><td>Program completion, habit streaks, health data changes.</td><td>Graduation rate, layering depth, return after gap, habit reactivation. Separates product health from behavior change.</td><td>Adopt the distinction. Track both.</td></tr>
+  </table>
+
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <span class="section-title">Unique Strengths Worth Preserving</span>
+  </div>
+
+  <div class="callout callout-blue">
+    <h3>Agentic Coach Strengths (Keep These)</h3>
+    <ul>
+      <li><strong>Skill Ladders + Arrival Principle.</strong> Users discover their own habit through guided conversation. Creates ownership and compliance that AI-prescribed habits don't.</li>
+      <li><strong>Health Data Drip Capture.</strong> 12 questions over 14 days, priority-ordered. Easy questions first, action-requiring later. Structured onboarding via conversation.</li>
+      <li><strong>Signal Priority Framework.</strong> Critical, Warning, Positive, Neutral. HRV below 50 = critical. Sleep debt above 7 hours = critical. Defined thresholds, not vibes.</li>
+      <li><strong>Compound Effects.</strong> Never report metrics in isolation. "Sleep at 6.2hrs is dragging HRV down, which means recovery from Monday's session isn't complete."</li>
+      <li><strong>Wearable Integration.</strong> Real-time Garmin, Oura, WHOOP, Apple Health data feeding into coaching decisions every 4 hours.</li>
+      <li><strong>Self-Improvement Loop.</strong> Failure journaling, self-authored knowledge, capability gap tracking. The AI tracks its own mistakes.</li>
+      <li><strong>Re-engagement Protocol.</strong> Day 1 nudge, Day 3 escalate to human, Day 7 final nudge, then dormant. Structured, not ad hoc.</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-green">
+    <h3>iOS App Strengths (Adopt These)</h3>
+    <ul>
+      <li><strong>Habit Lifecycle.</strong> Forming, Practicing, Resting. A growing deck that breathes with your life. Habits persist, not just blocks.</li>
+      <li><strong>Practice, Not Performance.</strong> Missing a day is practice, not failure. Check-ins are reps, not grades. Graduation is cumulative, not consecutive.</li>
+      <li><strong>Identity-Based Framing.</strong> "This is who you are now." Connects habits to self-concept (James Clear, Self-Determination Theory).</li>
+      <li><strong>Seasonal Intelligence.</strong> Habits rest and reactivate. Spring walks, winter cooking, injury rehab. The system remembers tools you've used before.</li>
+      <li><strong>Behavior Change Metrics.</strong> Graduation rate above 60%, layering depth, return after gap, habit reactivation. Separates "people show up" from "something is changing."</li>
+      <li><strong>The Dog Food Test.</strong> Every feature must pass: does the user want to engage, or are we hoping they should? If engagement drops, make the experience more valuable, not louder.</li>
+    </ul>
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <span class="section-title">Simulation Test Suite</span>
+  </div>
+  <p>A set of scripted conversations that test specific coaching behaviors. Run after every workspace change, before deploying to production.</p>
+
+  <table>
+    <tr><th>Scenario</th><th>Tests</th><th>Expected Behavior</th></tr>
+    <tr><td>New user onboarding</td><td>Does the coach follow the structured flow?</td><td>Cluster menu, wearable, labs, what tried, synthesis, drip</td></tr>
+    <tr><td>Unsolicited advice</td><td>User mentions bad sleep. Does coach ask permission?</td><td>"I noticed something. Want to hear it?" not "You should try..."</td></tr>
+    <tr><td>Intervention hierarchy</td><td>User asks about supplements. Foundations first?</td><td>"Before supplements, let's check sleep and movement."</td></tr>
+    <tr><td>Capacity overload</td><td>User seems overwhelmed. Reduce recommendations?</td><td>1 habit, not 3. Gentle cadence.</td></tr>
+    <tr><td>Respond before working</td><td>User sends message. Immediate acknowledgment?</td><td>Text response first, then tool calls, then detailed response.</td></tr>
+    <tr><td>Meal logging accuracy</td><td>After logging a meal, verify from disk?</td><td>Always call get_meals. Never trust session memory for totals.</td></tr>
+    <tr><td>Returning user</td><td>User silent for a week. Guilt-free re-entry?</td><td>"Welcome back." Not "You've been quiet."</td></tr>
+    <tr><td>Habit graduation</td><td>User hits threshold. Identity language?</td><td>"This is part of who you are now."</td></tr>
+    <tr><td>Progressive disclosure</td><td>Week 1 user. Full picture or focused?</td><td>One focus, one action. Full picture only when pulled for.</td></tr>
+    <tr><td>Data isolation</td><td>Two users in same window. Data cross?</td><td>Never. user_id checked on every tool call.</td></tr>
+  </table>
+
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <span class="section-title">Guardrail Tools</span>
+  </div>
+  <p>Instead of relying on the LLM to remember rules, build tools that enforce them. Shift quality from "hope it remembers" to "the system enforces it."</p>
+
+  <table>
+    <tr><th>Tool</th><th>Purpose</th><th>When Called</th></tr>
+    <tr><td><code>get_coaching_context</code></td><td>Returns structured context: current tier, active habits, recent check-ins, stall signals, capacity level</td><td>Start of every conversation turn</td></tr>
+    <tr><td><code>validate_recommendation</code></td><td>Checks if a habit recommendation respects the intervention hierarchy</td><td>Before suggesting any habit</td></tr>
+    <tr><td><code>check_user_capacity</code></td><td>Returns capacity level (low/medium/high) from check-in patterns</td><td>Before adding new forming habits</td></tr>
+    <tr><td><code>log_coaching_event</code></td><td>Logs what the coach said and recommended for quality auditing</td><td>After every substantive response</td></tr>
+  </table>
+
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <span class="section-title">Quality Scoring</span>
+  </div>
+  <p>Score every conversation. Track trends. Prove improvement over time.</p>
+
+  <table>
+    <tr><th>Dimension</th><th>Metric</th><th>Target</th></tr>
+    <tr><td>Unsolicited advice rate</td><td>% of responses with unrequested recommendations</td><td>&lt;10%</td></tr>
+    <tr><td>Respond-first compliance</td><td>% of turns with immediate acknowledgment before tool calls</td><td>&gt;95%</td></tr>
+    <tr><td>Intervention hierarchy</td><td>% of recommendations following tier order</td><td>&gt;90%</td></tr>
+    <tr><td>Identity language</td><td>% of graduation moments with identity framing</td><td>&gt;80%</td></tr>
+    <tr><td>Data grounding</td><td>% of insights citing specific user data vs generic advice</td><td>&gt;80%</td></tr>
+    <tr><td>Capacity awareness</td><td>Adjusted load based on user signals</td><td>Qualitative review</td></tr>
+  </table>
+
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <span class="section-title">Convergence Checklist</span>
+  </div>
+  <p>Before the agentic coach serves an app user, every item must be verified.</p>
+
+  <div class="callout callout-red">
+    <h3>Must Pass Before Launch</h3>
+    <ul>
+      <li>Habit lifecycle matches (forming/practicing/resting states)</li>
+      <li>Focus Plan output format matches app schema</li>
+      <li>Check-in data writes to shared data layer</li>
+      <li>Graduation threshold aligns (21 cumulative, not consecutive)</li>
+      <li>Coaching messages appear in the app</li>
+      <li>Identity language is consistent between app and chat</li>
+      <li>Seasonal rotation is supported (shelving, reactivating)</li>
+      <li>Behavior change metrics are tracked (graduation rate, return-after-gap)</li>
+      <li>Simulation test suite passes all 10 scenarios</li>
+      <li>Quality scores meet targets for 2 consecutive weeks</li>
+    </ul>
+  </div>
+
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <span class="section-title">The Thesis</span>
+  </div>
+  <p>Two surfaces, one brain. The app is the visual home where your health practice lives. The coach is the relationship where growth happens. They share a single person profile, a single evidence layer, and a single methodology.</p>
+  <p>When the coach learns you struggle with evening walks on rainy days, the app adjusts your forming habit to include an indoor backup. When you check in on the app, the coach knows and doesn't double-ask. When a habit graduates in the app, the coach celebrates with identity language.</p>
+  <p>The coaching methodology is not a feature. It is the product. These tools exist to make it measurably better, provably effective, and continuously improving. If the first 10 users say "I feel like I have a health coach," the thesis holds. If they say "nice habit tracker," we go back to the drawing board.</p>
+
+</div>
+
+<div class="footer">
+  Andrew Deal. March 2026. Living document.
+</div>
+
+</body>
+</html>
