@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coaching Simulation: Baseline Report | Andrew Deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.08); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5; --red: #8b2500; --red-bg: #fdf3f0;
+    --blue: #1e4d8c; --blue-bg: #f1f5fb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 18px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.75; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo:hover { color: var(--ink); }
+  nav .logo span { color: var(--accent); }
+  nav .nav-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); }
+
+  .hero { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 3.8rem);
+    line-height: 1.1; margin-bottom: 2rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 1.05rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+  .hero .meta { margin-top: 3rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); display: flex; gap: 2.5rem; }
+
+  .big-number { max-width: 720px; margin: 0 auto; padding: 0 2rem 4rem;
+    display: flex; align-items: baseline; gap: 1.5rem; border-bottom: 2px solid var(--ink); padding-bottom: 3rem; }
+  .big-number .number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+    font-size: 7rem; line-height: 1; color: var(--ink); }
+  .big-number .label { font-family: 'Instrument Serif', serif; font-size: 1.5rem;
+    color: var(--muted); font-style: italic; line-height: 1.3; }
+
+  .section { max-width: 960px; margin: 0 auto; padding: 4rem 2rem 2rem;
+    display: grid; grid-template-columns: 80px 1fr; gap: 0;
+    align-items: start; position: relative; z-index: 1; background: var(--paper); }
+  .section-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.2rem;
+    color: var(--faint); line-height: 1; opacity: 0.45; position: sticky; top: 5rem;
+    text-align: right; padding-right: 1.5rem; border-right: 2px solid var(--faint); }
+  .section-content { max-width: 800px; padding-left: 1.5rem; }
+  .chapter-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem;
+    line-height: 1.2; margin-bottom: 0.5rem; }
+  .divider { width: 60px; height: 2px; background: var(--accent); margin: 0 0 1.5rem 0; }
+  p { margin: 1.25rem 0; font-size: 0.95rem; line-height: 1.8; }
+  strong { font-weight: 600; }
+
+  .scorecard { margin: 2rem 0; }
+  .score-row { display: grid; grid-template-columns: 1fr 100px 70px; gap: 1rem; align-items: center;
+    padding: 1rem 0; border-bottom: 1px solid var(--warm); }
+  .score-row:first-child { border-top: 2px solid var(--ink); }
+  .score-name { font-size: 0.9rem; font-weight: 500; }
+  .score-bar-wrap { height: 8px; background: var(--warm); border-radius: 4px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 4px; transition: width 0.5s; }
+  .score-bar.green { background: var(--green); }
+  .score-bar.amber { background: var(--accent); }
+  .score-bar.red { background: var(--red); }
+  .score-pct { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-align: right; }
+  .score-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-align: center; padding: 0.2rem 0.5rem; border-radius: 3px; }
+  .badge-pass { background: var(--green-bg); color: var(--green); }
+  .badge-near { background: var(--accent-soft); color: var(--accent); }
+  .badge-fail { background: var(--red-bg); color: var(--red); }
+
+  .finding { padding: 1.5rem 0; border-bottom: 1px solid var(--warm); }
+  .finding:first-child { border-top: 2px solid var(--ink); }
+  .finding-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+  .finding-title { font-weight: 600; font-size: 0.95rem; }
+  .finding-score { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .finding-detail { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+
+  .callout { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem; margin: 2rem 0; border-radius: 0 12px 12px 0; }
+  .callout h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .callout p { font-size: 0.9rem; margin: 0.5rem 0; }
+
+  .thesis { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; border-top: 2px solid var(--ink); margin-top: 2rem; }
+  .thesis-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; line-height: 1.5; max-width: 600px; }
+  .thesis-text em { font-style: italic; color: var(--accent); }
+
+  .footer { max-width: 880px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .big-number { padding: 0 1.5rem 2rem; }
+    .big-number .number { font-size: 4.5rem; }
+    .big-number .label { font-size: 1.2rem; }
+    .section { display: block; padding: 3rem 1.5rem 1rem; }
+    .section-num { position: static; font-size: 3rem; text-align: left; padding-right: 0;
+      border-right: none; margin-bottom: -0.25rem; opacity: 0.3; }
+    .section-content { padding-left: 0; }
+    .score-row { grid-template-columns: 1fr 80px 60px; }
+    .hero .meta { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner"><a href="/" class="logo">Andrew<span>.</span>Deal</a><span class="nav-label">Simulation Report</span></div></nav>
+
+<div class="hero">
+  <div class="kicker">March 24, 2026</div>
+  <h1>Coaching Simulation: <em>Baseline</em> Report</h1>
+  <p class="subtitle">10 scripted scenarios testing an AI health coach against a behavioral science rubric. This is the baseline measurement before convergence optimizations.</p>
+  <div class="meta">
+    <span>Model: Claude Sonnet 4.6</span>
+    <span>10 Scenarios, 23 Turns</span>
+    <span>103 Rubric Items</span>
+  </div>
+</div>
+
+<div class="big-number">
+  <div class="number">67%</div>
+  <div class="label">Overall coaching quality score.<br>69 of 103 rubric items passed.</div>
+</div>
+
+<!-- SECTION 1: SCORECARD -->
+<div class="section">
+  <div class="section-num">01</div>
+  <div class="section-content">
+    <div class="chapter-title">Scorecard</div>
+    <div class="divider"></div>
+    <div class="scorecard">
+      <div class="score-row">
+        <div class="score-name">New user onboarding</div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 100%"></div></div>
+        <div class="score-pct">14/14</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Data grounding (cite specific numbers)</div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 100%"></div></div>
+        <div class="score-pct">9/9</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Barrier awareness (habit stalling)</div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 90%"></div></div>
+        <div class="score-pct">9/10</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Capacity overload (reduce to 1 habit)</div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 89%"></div></div>
+        <div class="score-pct">8/9</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Unsolicited advice (ask permission)</div>
+        <div class="score-bar-wrap"><div class="score-bar amber" style="width: 75%"></div></div>
+        <div class="score-pct">6/8</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Compound effects (connect metrics)</div>
+        <div class="score-bar-wrap"><div class="score-bar amber" style="width: 75%"></div></div>
+        <div class="score-pct">6/8</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Intervention hierarchy (foundations first)</div>
+        <div class="score-bar-wrap"><div class="score-bar amber" style="width: 63%"></div></div>
+        <div class="score-pct">5/8</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Progressive disclosure (Week 1 focus)</div>
+        <div class="score-bar-wrap"><div class="score-bar red" style="width: 56%"></div></div>
+        <div class="score-pct">5/9</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Returning user (guilt-free re-entry)</div>
+        <div class="score-bar-wrap"><div class="score-bar red" style="width: 44%"></div></div>
+        <div class="score-pct">4/9</div>
+      </div>
+      <div class="score-row">
+        <div class="score-name">Habit graduation (identity language)</div>
+        <div class="score-bar-wrap"><div class="score-bar red" style="width: 33%"></div></div>
+        <div class="score-pct">3/9</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: WHAT'S WORKING -->
+<div class="section">
+  <div class="section-num">02</div>
+  <div class="section-content">
+    <div class="chapter-title">What's Working</div>
+    <div class="divider"></div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Onboarding flow</span>
+        <span class="finding-score">14/14 (100%)</span>
+      </div>
+      <div class="finding-detail">Perfect score. Introduced itself, led with outcomes not features, presented goal clusters as a menu, kept tone warm and direct, didn't ask for health data upfront. The scripted 5-message flow works exactly as designed.</div>
+    </div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Data grounding</span>
+        <span class="finding-score">9/9 (100%)</span>
+      </div>
+      <div class="finding-detail">When asked "how am I doing?", the coach cited specific HRV values, sleep averages, check-in counts, and trend directions. No generic "you're doing great." Every insight grounded in actual user data.</div>
+    </div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Barrier awareness</span>
+        <span class="finding-score">9/10 (90%)</span>
+      </div>
+      <div class="finding-detail">When a habit stalled, the coach asked "what's getting in the way?" before pushing harder. Used the Arrival Principle: asked questions, didn't prescribe. One miss: didn't adapt the specific habit suggestion based on the barrier revealed.</div>
+    </div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Capacity awareness</span>
+        <span class="finding-score">8/9 (89%)</span>
+      </div>
+      <div class="finding-detail">When user showed signs of overwhelm, coach reduced to one concrete action. Validated feelings before suggesting. One miss: offered a second suggestion in the same turn (should have kept it to one).</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: WHERE IT BREAKS -->
+<div class="section">
+  <div class="section-num">03</div>
+  <div class="section-content">
+    <div class="chapter-title">Where It Breaks</div>
+    <div class="divider"></div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Habit graduation: no identity language</span>
+        <span class="finding-score">3/9 (33%)</span>
+      </div>
+      <div class="finding-detail">Lowest score. When a user hit the graduation threshold, the coach said "great job" and "you built a real habit." Never said "this is part of who you are now" or framed the habit as an identity shift. The psychology of graduation (James Clear, Self-Determination Theory) is missing entirely.</div>
+    </div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Returning user: not guilt-free enough</span>
+        <span class="finding-score">4/9 (44%)</span>
+      </div>
+      <div class="finding-detail">After a 7-day silence, the coach acknowledged the gap explicitly ("noticed you've been quiet") instead of simply welcoming back. Referenced the gap duration. Didn't affirm that the deck is still there and the practice continues. Made the absence the topic instead of the return.</div>
+    </div>
+    <div class="finding">
+      <div class="finding-header">
+        <span class="finding-title">Progressive disclosure: information overload</span>
+        <span class="finding-score">5/9 (56%)</span>
+      </div>
+      <div class="finding-detail">Week 1 user asked a broad question. Coach gave the full health picture instead of one focus area. Mentioned multiple metrics, multiple habits, and multiple time horizons. Should have kept it to one insight and one action for a new user.</div>
+    </div>
+
+    <div class="callout">
+      <h3>The Pattern</h3>
+      <p>The bottom three failures all stem from the same root cause: the coaching framework treats every user the same regardless of relationship stage. A Week 1 user gets the same information density as a Month 3 user. A returning user gets the same tone as an active one. A graduating user gets execution language when they need identity language.</p>
+      <p>The fix is in the coaching workspace files, not the model. The model follows instructions well (100% on onboarding proves that). It just doesn't have the right instructions for these specific moments.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: METHODOLOGY -->
+<div class="section">
+  <div class="section-num">04</div>
+  <div class="section-content">
+    <div class="chapter-title">How This Works</div>
+    <div class="divider"></div>
+    <p>Each scenario is a scripted multi-turn conversation. A simulated user sends messages. The coach responds using the full production system prompt (SOUL.md + AGENTS.md + TOOLS.md, 57,879 characters). A separate grading model scores each response against a behavioral rubric.</p>
+    <p>Coaching model: Claude Sonnet 4.6 (matches production). Grading model: Claude Haiku 4.5 (fast, cheap, independent judgment). Each rubric item scores 0 or 1 with an explanation.</p>
+    <p>The test suite runs in under 5 minutes. It can run before every workspace deployment. Changes to the coaching instructions get measured, not guessed.</p>
+    <p>The rubric is derived from the coaching methodology: advise with permission (Stanford GPTCoach, target less than 10%), intervention hierarchy with gates (Sofian/Baseline), capacity assessment (Precision Nutrition), progressive disclosure, identity-based habits (James Clear), and the 1-1-1 rule.</p>
+  </div>
+</div>
+
+<!-- SECTION 5: WHAT'S NEXT -->
+<div class="section">
+  <div class="section-num">05</div>
+  <div class="section-content">
+    <div class="chapter-title">What's Next</div>
+    <div class="divider"></div>
+    <p>Three workspace changes to address the bottom three failures:</p>
+    <p><strong>1. Identity language at graduation.</strong> Add explicit copy to the coaching instructions: when a habit reaches the graduation threshold, frame it as "this is part of who you are now," not "great job completing the program." Connect the habit to the user's self-concept.</p>
+    <p><strong>2. Warm re-entry for returning users.</strong> When a user comes back after silence, the first message should be "welcome back, your deck is still here" not "noticed you've been quiet." Never reference the gap duration. Make the return feel like coming home.</p>
+    <p><strong>3. Progressive disclosure enforcement.</strong> Add a stage-awareness rule: for users in their first two weeks, limit every response to one insight and one action. The full picture is available when they ask for it, not before.</p>
+    <p>Target after these changes: 80%+ overall, with no scenario below 60%.</p>
+  </div>
+</div>
+
+<div class="thesis">
+  <div class="thesis-text">The model follows instructions well. 100% on onboarding proves that. The gaps are in the instructions, not the model. <em>Fix the instructions, re-run, prove it.</em></div>
+</div>
+
+<div class="footer">
+  Andrew Deal. March 24, 2026. Baseline simulation run.
+</div>
+
+</body>
+</html>
