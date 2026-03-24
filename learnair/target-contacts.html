@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Target Contacts — First 5 Employers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .action-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--accent);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 50ch;
+    line-height: 1.6;
+  }
+
+  /* --- CONTACT CARDS --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+  }
+
+  .contact-card {
+    border: 1px solid var(--faint);
+    background: var(--white);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.2s;
+  }
+
+  .contact-card:hover {
+    border-color: var(--accent-light);
+  }
+
+  .contact-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .contact-company {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .status-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    background: var(--warm);
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .contact-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+
+  .contact-title {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-linkedin {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    margin-bottom: 1rem;
+  }
+
+  .contact-linkedin:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .contact-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 0.3rem;
+    margin-top: 1rem;
+  }
+
+  .contact-section-label:first-of-type {
+    margin-top: 0;
+  }
+
+  .contact-why,
+  .contact-context {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .contact-context {
+    color: var(--muted);
+  }
+
+  /* --- OUTREACH TEMPLATE --- */
+  .section-header {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-top: 3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .script-block {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.8rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* --- NEXT STEPS CALLOUT --- */
+  .next-steps {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .next-steps h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .next-steps ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .next-steps li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .next-steps li::before {
+    content: '\2014';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .contact-card { padding: 1.5rem; }
+    .contact-company { font-size: 1.3rem; }
+    .contact-card-header { flex-direction: column; gap: 0.4rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="action-badge">Action</span></a>
+    <a href="hub.html" class="back-link">&larr; Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Employer Outreach</div>
+  <h1>Target Contacts &mdash; First 5 Employers</h1>
+  <p class="subtitle">Real people at real companies. The contact phase starts here.</p>
+</section>
+
+<div class="article">
+
+  <!-- 1. Les Schwab -->
+  <div class="contact-card">
+    <div class="contact-card-header">
+      <div class="contact-company">Les Schwab Tire Centers</div>
+      <span class="status-tag">Not contacted</span>
+    </div>
+    <div class="contact-name">Brian Buch</div>
+    <div class="contact-title">Vice President, Information and Digital Services</div>
+    <a class="contact-linkedin" href="https://www.linkedin.com/in/brian-buch-a310521/" target="_blank">linkedin.com/in/brian-buch-a310521</a>
+    <div class="contact-section-label">Why this person</div>
+    <p class="contact-why">35-year Les Schwab veteran who owns IT and digital strategy. Recently earned all 12 AWS certifications including the AWS Certified AI Practitioner exam, and holds a Chief Data Officer certification. He is actively thinking about AI/data strategy at enterprise scale &mdash; exactly the person feeling the coordination pain across 500+ locations.</p>
+    <div class="contact-section-label">Company context</div>
+    <p class="contact-context">HQ Bend, OR. ~8,000 employees, 500+ stores across the West. A large, operationally distributed workforce where individual AI adoption without coordination creates real friction.</p>
+  </div>
+
+  <!-- 2. St. Charles Health System -->
+  <div class="contact-card">
+    <div class="contact-card-header">
+      <div class="contact-company">St. Charles Health System</div>
+      <span class="status-tag">Not contacted</span>
+    </div>
+    <div class="contact-name">Rebecca Berry, MBA</div>
+    <div class="contact-title">Vice President &amp; Chief Human Resources Officer</div>
+    <a class="contact-linkedin" href="https://www.linkedin.com/in/rebecca-berry-401311b4/" target="_blank">linkedin.com/in/rebecca-berry-401311b4</a>
+    <div class="contact-section-label">Why this person</div>
+    <p class="contact-why">Confirmed senior leader on the official leadership team who owns workforce development, training, and organizational change. At St. Charles since 2007, she led their workforce turnaround (reducing reliance on traveling nurses). AI workforce readiness lands squarely in her domain. Note: St. Charles also has a CIDO (initials L.F.) &mdash; worth confirming via LinkedIn or asking Rebecca&rsquo;s office for an introduction.</p>
+    <div class="contact-section-label">Company context</div>
+    <p class="contact-context">HQ Bend, OR. Largest healthcare provider in Central Oregon, ~3,800 employees. Healthcare is under intense pressure to adopt AI while navigating compliance, staffing shortages, and institutional change resistance.</p>
+  </div>
+
+  <!-- 3. BASX Solutions -->
+  <div class="contact-card">
+    <div class="contact-card-header">
+      <div class="contact-company">BASX Solutions / AAON</div>
+      <span class="status-tag">Not contacted</span>
+    </div>
+    <div class="contact-name">Mark Nordstrom</div>
+    <div class="contact-title">Executive Vice President, Operations</div>
+    <a class="contact-linkedin" href="https://www.linkedin.com/in/mark-nordstrom-6a113117a" target="_blank">linkedin.com/in/mark-nordstrom-6a113117a</a>
+    <div class="contact-section-label">Why this person</div>
+    <p class="contact-why">EVP of Operations since 2017 with 15+ years driving operational excellence at a company that literally builds cooling infrastructure for hyperscale data centers. He understands the AI wave from the infrastructure side and owns the manufacturing/operations workforce that needs to coordinate AI tooling. Based in Bend, OR.</p>
+    <div class="contact-section-label">Company context</div>
+    <p class="contact-context">HQ Redmond, OR (acquired by AAON in 2021). Data center cooling and manufacturing &mdash; directly in the AI infrastructure supply chain, but their own workforce AI adoption is a separate challenge.</p>
+  </div>
+
+  <!-- 4. Perkins & Co -->
+  <div class="contact-card">
+    <div class="contact-card-header">
+      <div class="contact-company">Perkins &amp; Co</div>
+      <span class="status-tag">Not contacted</span>
+    </div>
+    <div class="contact-name">Jared Holum, CPA</div>
+    <div class="contact-title">President</div>
+    <a class="contact-linkedin" href="https://www.linkedin.com/in/jholum/" target="_blank">linkedin.com/in/jholum</a>
+    <div class="contact-section-label">Why this person</div>
+    <p class="contact-why">As President since 2017, Jared owns firm strategy and operations. Accounting/advisory firms are ground zero for AI disruption (audit automation, tax AI, advisory analytics). At 165 employees, he is close enough to operations to feel the coordination gap personally. A firm this size likely has no dedicated CTO &mdash; the president is the decision-maker.</p>
+    <div class="contact-section-label">Company context</div>
+    <p class="contact-context">HQ Portland, OR. Largest locally-owned accounting firm in Oregon, 165+ employees, 26 shareholders. Professional services firms face the sharpest gap between individual AI usage and firm-wide coordination.</p>
+  </div>
+
+  <!-- 5. Dutch Bros -->
+  <div class="contact-card">
+    <div class="contact-card-header">
+      <div class="contact-company">Dutch Bros</div>
+      <span class="status-tag">Not contacted</span>
+    </div>
+    <div class="contact-name">Venki Krishnababu</div>
+    <div class="contact-title">Chief Technology and Information Officer</div>
+    <a class="contact-linkedin" href="https://www.linkedin.com/in/vkrishnababu/" target="_blank">linkedin.com/in/vkrishnababu</a>
+    <div class="contact-section-label">Why this person</div>
+    <p class="contact-why">Joined December 2024 from lululemon (7 years as CTO), previously CTO at Premera Blue Cross and tech leadership at Nordstrom. Nearly 30 years of enterprise technology leadership. Hired specifically to lead Dutch Bros&rsquo; technology transformation as they scale rapidly. A new CTIO building out tech strategy at a fast-growing company is actively making build-vs-buy decisions about AI tooling and workforce enablement right now.</p>
+    <div class="contact-section-label">Company context</div>
+    <p class="contact-context">HQ Grants Pass, OR (NYSE: BROS). 900+ locations. A rapidly scaling Oregon-born company in the middle of a technology transformation, with a brand-new CTIO charter.</p>
+  </div>
+
+  <!-- OUTREACH TEMPLATE -->
+  <h2 class="section-header">Outreach Template</h2>
+
+  <div class="script-block">I&rsquo;m building a program that trains veterans to manage AI operations. I&rsquo;m looking for employers feeling the gap between individual AI productivity and organizational coordination. Would you be open to a 15-minute call?</div>
+
+  <!-- NEXT STEPS -->
+  <div class="next-steps">
+    <h3>Next Steps</h3>
+    <ul>
+      <li>Pick one. Send the email. Track the response.</li>
+      <li>Don&rsquo;t send all 5 at once. Start with the warmest (Brian Buch at Les Schwab) and iterate based on response.</li>
+      <li>Update status on this page as contacts are made.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
