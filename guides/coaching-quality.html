@@ -182,45 +182,58 @@
     padding: 0 2rem;
   }
 
-  /* --- CHAPTER --- */
+  /* --- CHAPTER (sidebar numbers on desktop) --- */
   .chapter {
-    padding: 6rem 0;
+    padding: 4rem 0 1rem;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 1.5rem;
+    align-items: start;
   }
 
   .chapter-number {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
-    font-size: 5rem;
+    font-size: 2.5rem;
     color: var(--faint);
     line-height: 1;
-    opacity: 0.4;
-    margin-bottom: -0.5rem;
+    opacity: 0.5;
+    position: sticky;
+    top: 5rem;
+    grid-row: 1 / 4;
+    text-align: right;
+    padding-right: 1rem;
+    border-right: 2px solid var(--faint);
   }
 
   .chapter-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
-    font-size: 2.2rem;
+    font-size: 2rem;
     line-height: 1.2;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: var(--ink);
   }
 
   .chapter-intro {
     font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--muted);
     max-width: 560px;
     line-height: 1.6;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
   }
 
   .divider {
     width: 60px;
     height: 2px;
     background: var(--accent);
-    margin: 0 0 3rem 0;
+    margin: 0 0 1rem 0;
+  }
+
+  .chapter-body {
+    grid-column: 2;
   }
 
   p {
@@ -424,8 +437,19 @@
     .hero h1 { font-size: 2.5rem; }
     .stats { grid-template-columns: repeat(2, 1fr); gap: 0 2rem; }
     .content, .wide { padding: 0 1.5rem; }
-    .chapter { padding: 4rem 0; }
-    .chapter-number { font-size: 3.5rem; }
+    .chapter {
+      display: block;
+      padding: 3rem 0 1rem;
+    }
+    .chapter-number {
+      position: static;
+      font-size: 3rem;
+      text-align: left;
+      padding-right: 0;
+      border-right: none;
+      margin-bottom: -0.25rem;
+      opacity: 0.3;
+    }
     .chapter-title { font-size: 1.8rem; }
     .card-pair { grid-template-columns: 1fr; }
     .hero .meta { flex-direction: column; gap: 0.75rem; }
@@ -485,11 +509,13 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">01</div>
-    <div class="chapter-title">The Problem</div>
-    <div class="divider"></div>
-    <p>An AI coach is inherently probabilistic. Even with perfect instructions, it will drift: giving unsolicited advice, forgetting rules mid-conversation, hallucinating data, or coaching at the wrong tier.</p>
-    <p>You cannot eliminate this. But you can measure it, catch it, and improve it over time.</p>
-    <p>This framework defines how we audit coaching quality, align two independently-built systems, and create a feedback loop that makes the coaching measurably better with every iteration.</p>
+    <div class="chapter-body">
+      <div class="chapter-title">The Problem</div>
+      <div class="divider"></div>
+      <p>An AI coach is inherently probabilistic. Even with perfect instructions, it will drift: giving unsolicited advice, forgetting rules mid-conversation, hallucinating data, or coaching at the wrong tier.</p>
+      <p>You cannot eliminate this. But you can measure it, catch it, and improve it over time.</p>
+      <p>This framework defines how we audit coaching quality, align two independently-built systems, and create a feedback loop that makes the coaching measurably better with every iteration.</p>
+    </div>
   </div>
 </div>
 
@@ -498,9 +524,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">02</div>
-    <div class="chapter-title">Shared Foundations</div>
-    <div class="chapter-intro">Two systems built independently arrived at the same conclusions. This is the strongest signal that the methodology is right.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Shared Foundations</div>
+      <div class="chapter-intro">Two systems built independently arrived at the same conclusions. This is the strongest signal that the methodology is right.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
@@ -525,9 +553,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">03</div>
-    <div class="chapter-title">Key Divergences</div>
-    <div class="chapter-intro">Where the two systems take meaningfully different approaches, and how we resolve each one.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Key Divergences</div>
+      <div class="chapter-intro">Where the two systems take meaningfully different approaches, and how we resolve each one.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
@@ -550,9 +580,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">04</div>
-    <div class="chapter-title">Unique Strengths Worth Preserving</div>
-    <div class="chapter-intro">Each system has capabilities the other lacks. The convergence keeps the best of both.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Unique Strengths Worth Preserving</div>
+      <div class="chapter-intro">Each system has capabilities the other lacks. The convergence keeps the best of both.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
@@ -589,9 +621,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">05</div>
-    <div class="chapter-title">Simulation Test Suite</div>
-    <div class="chapter-intro">Scripted conversations that test specific coaching behaviors. Run after every workspace change, before deploying to production.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Simulation Test Suite</div>
+      <div class="chapter-intro">Scripted conversations that test specific coaching behaviors. Run after every workspace change, before deploying to production.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
@@ -616,10 +650,12 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">06</div>
-    <div class="chapter-title">Guardrail Tools</div>
-    <div class="chapter-intro">Shift quality from "hope it remembers" to "the system enforces it."</div>
-    <div class="divider"></div>
-    <p>Instead of relying on the LLM to remember rules, build tools that enforce them programmatically.</p>
+    <div class="chapter-body">
+      <div class="chapter-title">Guardrail Tools</div>
+      <div class="chapter-intro">Shift quality from "hope it remembers" to "the system enforces it."</div>
+      <div class="divider"></div>
+      <p>Instead of relying on the LLM to remember rules, build tools that enforce them programmatically.</p>
+    </div>
   </div>
 </div>
 
@@ -638,9 +674,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">07</div>
-    <div class="chapter-title">Quality Scoring</div>
-    <div class="chapter-intro">Score every conversation. Track trends. Prove improvement over time.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Quality Scoring</div>
+      <div class="chapter-intro">Score every conversation. Track trends. Prove improvement over time.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
@@ -661,9 +699,11 @@
 <div class="content">
   <div class="chapter">
     <div class="chapter-number">08</div>
-    <div class="chapter-title">Convergence Checklist</div>
-    <div class="chapter-intro">Before the agentic coach serves an app user, every item must be verified.</div>
-    <div class="divider"></div>
+    <div class="chapter-body">
+      <div class="chapter-title">Convergence Checklist</div>
+      <div class="chapter-intro">Before the agentic coach serves an app user, every item must be verified.</div>
+      <div class="divider"></div>
+    </div>
   </div>
 </div>
 
