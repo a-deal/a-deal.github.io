@@ -116,7 +116,7 @@
 <div class="hero">
   <div class="kicker">March 24, 2026</div>
   <h1>Coaching Simulation: <em>Baseline</em> Report</h1>
-  <p class="subtitle">10 scripted scenarios testing an AI health coach against a behavioral science rubric. This is the baseline measurement before convergence optimizations.</p>
+  <p class="subtitle">10 scripted scenarios testing an AI health coach against a behavioral science rubric. Baseline measurement, then three targeted fixes, then re-run. Measurable improvement in one iteration.</p>
   <div class="meta">
     <span>Model: Claude Sonnet 4.6</span>
     <span>10 Scenarios, 23 Turns</span>
@@ -125,8 +125,9 @@
 </div>
 
 <div class="big-number">
-  <div class="number">67%</div>
-  <div class="label">Overall coaching quality score.<br>69 of 103 rubric items passed.</div>
+  <div class="number" style="text-decoration: line-through; opacity: 0.3;">67%</div>
+  <div class="number" style="color: var(--accent);">78%</div>
+  <div class="label">After three workspace edits.<br>80 of 103 rubric items passed.<br><span style="font-size: 0.8em;">Baseline was 67% (69/103).</span></div>
 </div>
 
 <!-- SECTION 1: SCORECARD -->
@@ -157,9 +158,9 @@
         <div class="score-pct">8/9</div>
       </div>
       <div class="score-row">
-        <div class="score-name">Unsolicited advice (ask permission)</div>
-        <div class="score-bar-wrap"><div class="score-bar amber" style="width: 75%"></div></div>
-        <div class="score-pct">6/8</div>
+        <div class="score-name">Unsolicited advice (ask permission) <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--green);">+13%</span></div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 88%"></div></div>
+        <div class="score-pct">7/8</div>
       </div>
       <div class="score-row">
         <div class="score-name">Compound effects (connect metrics)</div>
@@ -177,14 +178,14 @@
         <div class="score-pct">5/9</div>
       </div>
       <div class="score-row">
-        <div class="score-name">Returning user (guilt-free re-entry)</div>
-        <div class="score-bar-wrap"><div class="score-bar red" style="width: 44%"></div></div>
-        <div class="score-pct">4/9</div>
+        <div class="score-name">Returning user (guilt-free re-entry) <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--green);">+23%</span></div>
+        <div class="score-bar-wrap"><div class="score-bar amber" style="width: 67%"></div></div>
+        <div class="score-pct">6/9</div>
       </div>
       <div class="score-row">
-        <div class="score-name">Habit graduation (identity language)</div>
-        <div class="score-bar-wrap"><div class="score-bar red" style="width: 33%"></div></div>
-        <div class="score-pct">3/9</div>
+        <div class="score-name">Habit graduation (identity language) <span style="font-family: 'JetBrains Mono'; font-size: 0.65rem; color: var(--green);">+56%</span></div>
+        <div class="score-bar-wrap"><div class="score-bar green" style="width: 89%"></div></div>
+        <div class="score-pct">8/9</div>
       </div>
     </div>
   </div>
@@ -291,7 +292,7 @@
 </div>
 
 <div class="thesis">
-  <div class="thesis-text">The model follows instructions well. 100% on onboarding proves that. The gaps are in the instructions, not the model. <em>Fix the instructions, re-run, prove it.</em></div>
+  <div class="thesis-text">Three workspace edits. 67% to 78%. Habit graduation went from 33% to 89%. The model follows instructions. <em>Fix the instructions, re-run, prove it.</em></div>
 </div>
 
 <div class="footer">
