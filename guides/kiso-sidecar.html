@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiso Sidecar Architecture | Andrew Deal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.08); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 18px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.75; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo:hover { color: var(--ink); }
+  nav .logo span { color: var(--accent); }
+  nav .nav-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); }
+  .hero { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.5rem, 7vw, 3.8rem);
+    line-height: 1.1; margin-bottom: 2rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 1.05rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+  .section { max-width: 960px; margin: 0 auto; padding: 4rem 2rem 2rem;
+    display: grid; grid-template-columns: 80px 1fr; gap: 0;
+    align-items: start; position: relative; z-index: 1; background: var(--paper); }
+  .section-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.2rem;
+    color: var(--faint); line-height: 1; opacity: 0.45; position: sticky; top: 5rem;
+    text-align: right; padding-right: 1.5rem; border-right: 2px solid var(--faint); }
+  .section-content { max-width: 800px; padding-left: 1.5rem; }
+  .chapter-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem;
+    line-height: 1.2; margin-bottom: 0.5rem; }
+  .divider { width: 60px; height: 2px; background: var(--accent); margin: 0 0 1.5rem 0; }
+  p { margin: 1.25rem 0; font-size: 0.95rem; line-height: 1.8; }
+  strong { font-weight: 600; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; background: var(--warm);
+    padding: 0.15rem 0.45rem; border-radius: 4px; }
+  pre { background: var(--ink); color: var(--paper); padding: 1.2rem 1.5rem; border-radius: 8px;
+    overflow-x: auto; margin: 1.5rem 0; font-size: 0.8rem; line-height: 1.6; }
+  pre code { background: none; padding: 0; color: inherit; }
+  .callout { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem; margin: 2rem 0; border-radius: 0 12px 12px 0; font-size: 0.9rem; }
+  .callout p { margin: 0.5rem 0; font-size: 0.9rem; }
+  .callout-green { background: var(--green-bg); border-left-color: var(--green); }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  th { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.75rem 1rem 0.75rem 0;
+    border-bottom: 2px solid var(--ink); }
+  td { padding: 0.75rem 1rem 0.75rem 0; border-bottom: 1px solid var(--warm); vertical-align: top; }
+  .thesis { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; border-top: 2px solid var(--ink); margin-top: 2rem; }
+  .thesis-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; line-height: 1.5; max-width: 600px; }
+  .thesis-text em { font-style: italic; color: var(--accent); }
+  .footer { max-width: 880px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); }
+  @media (max-width: 640px) {
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .section { display: block; padding: 3rem 1.5rem 1rem; }
+    .section-num { position: static; font-size: 3rem; text-align: left; padding-right: 0;
+      border-right: none; margin-bottom: -0.25rem; opacity: 0.3; }
+    .section-content { padding-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner"><a href="/" class="logo">Andrew<span>.</span>Deal</a><span class="nav-label">Architecture</span></div></nav>
+
+<div class="hero">
+  <div class="kicker">March 24, 2026</div>
+  <h1>Sidecar Architecture: <em>Zero-Downtime</em> Deploys</h1>
+  <p class="subtitle">How we split the Kasane v1 API from the coaching gateway so we can iterate on the shared data layer without taking Milo offline.</p>
+</div>
+
+<div class="section">
+  <div class="section-num">01</div>
+  <div class="section-content">
+    <div class="chapter-title">The Problem</div>
+    <div class="divider"></div>
+    <p>The health-engine gateway runs as a single Docker container on Mac Mini. It serves Milo's MCP tools, wearable auth, and the new Kasane v1 API. Any code change requires a Docker rebuild, which takes Milo offline. Real users (Paul, Dad, Mike, Patrick) depend on Milo being available.</p>
+    <p>The v1 API is the most actively developed surface right now. We need to iterate fast without risking Milo's uptime.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">02</div>
+  <div class="section-content">
+    <div class="chapter-title">The Architecture</div>
+    <div class="divider"></div>
+    <pre><code>Docker container (port 18800)         Python process (port 18801)
+├── MCP tools (/api/{tool})           ├── v1 API (/api/v1/*)
+├── Auth routes (/auth/*)             └── Kasane sync endpoint
+├── Garmin/Oura/WHOOP integrations
+└── OpenClaw gateway connection
+         │                                      │
+         └───── shared data directory ──────────┘
+                /Users/andrew/src/health-engine/data/
+                    ├── kasane.db (SQLite)
+                    ├── users/ (CSVs)
+                    └── admin/ (audit logs)</code></pre>
+    <p>Two independent processes, one shared data directory. Either can restart without affecting the other. The Docker container handles the coaching agent. The sidecar handles the iOS sync API.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">03</div>
+  <div class="section-content">
+    <div class="chapter-title">What Lives Where</div>
+    <div class="divider"></div>
+    <table>
+      <tr><th>Service</th><th>Port</th><th>Process</th><th>Clients</th></tr>
+      <tr><td><strong>Coaching gateway</strong></td><td>18800</td><td>Docker (auto-restart)</td><td>Milo (OpenClaw), iOS Shortcuts, wearable auth</td></tr>
+      <tr><td><strong>Kasane v1 API</strong></td><td>18801</td><td>LaunchAgent (auto-restart)</td><td>Kasane iOS app (SyncService)</td></tr>
+    </table>
+    <div class="callout-green callout">
+      <p><strong>Both read/write the same SQLite database and CSV files.</strong> No replication, no sync between them. SQLite handles concurrent access via WAL mode. The coaching gateway writes health data (meals, weight, labs, wearables). The v1 API writes habits, check-ins, and focus plans. Both can read everything.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">04</div>
+  <div class="section-content">
+    <div class="chapter-title">Operations</div>
+    <div class="divider"></div>
+    <p><strong>Restart the v1 API (no Milo impact):</strong></p>
+    <pre><code>ssh mac-mini 'launchctl unload ~/Library/LaunchAgents/com.kiso.v1api.plist'
+ssh mac-mini 'launchctl load ~/Library/LaunchAgents/com.kiso.v1api.plist'</code></pre>
+    <p><strong>Deploy code changes to v1 API:</strong></p>
+    <pre><code>ssh mac-mini 'cd ~/src/health-engine && git pull origin master'
+ssh mac-mini 'launchctl unload ~/Library/LaunchAgents/com.kiso.v1api.plist'
+ssh mac-mini 'launchctl load ~/Library/LaunchAgents/com.kiso.v1api.plist'</code></pre>
+    <p><strong>Check status:</strong></p>
+    <pre><code>curl http://mac-mini:18801/health        # v1 API
+curl http://mac-mini:18800/health        # coaching gateway</code></pre>
+    <p><strong>View logs:</strong></p>
+    <pre><code>ssh mac-mini 'tail -f /tmp/kiso-v1.log'</code></pre>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">05</div>
+  <div class="section-content">
+    <div class="chapter-title">Data</div>
+    <div class="divider"></div>
+    <p>Paul's family data migrated and serving:</p>
+    <table>
+      <tr><th>Person</th><th>Relationship</th><th>Habits</th><th>Check-ins</th></tr>
+      <tr><td>Andrew Deal</td><td>self</td><td>-</td><td>-</td></tr>
+      <tr><td>Paul</td><td>self</td><td>23</td><td>274</td></tr>
+      <tr><td>Brittany</td><td>self</td><td>10</td><td>18</td></tr>
+      <tr><td>Lulu</td><td>child</td><td>2</td><td>2</td></tr>
+      <tr><td>Leo</td><td>child</td><td>2</td><td>1</td></tr>
+      <tr><td>Pops</td><td>other</td><td>4</td><td>2</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-num">06</div>
+  <div class="section-content">
+    <div class="chapter-title">Cloud Migration Path</div>
+    <div class="divider"></div>
+    <p>When we outgrow the Mac Mini (more than 10 active users, need uptime guarantees, or Paul needs to deploy without Andrew):</p>
+    <p><strong>Phase 1 (now):</strong> Mac Mini sidecar. Free, fast, good enough for concierge beta.</p>
+    <p><strong>Phase 2:</strong> Deploy the v1 API to Fly.io or Railway. The sidecar script becomes the deployment artifact. The Docker gateway stays on Mac Mini for Milo. Kasane iOS points to the cloud URL.</p>
+    <p><strong>Phase 3:</strong> Move everything to cloud. Docker gateway migrates to managed hosting. Mac Mini becomes a development/testing machine only.</p>
+    <p>Each phase is a configuration change, not a rewrite. The API contract stays the same.</p>
+  </div>
+</div>
+
+<div class="thesis">
+  <div class="thesis-text">Two processes, one data directory. Deploy the API without touching the coach. <em>Iterate fast, break nothing.</em></div>
+</div>
+
+<div class="footer">Andrew Deal. March 24, 2026.</div>
+</body>
+</html>
