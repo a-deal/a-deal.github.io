@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Strategy — Partnership Structure Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #9b2226;
+    --red-bg: rgba(155, 34, 38, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--green);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--green);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .doc-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 60ch;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article hr.light {
+    border-top: 1px solid var(--faint);
+    margin: 2rem 0 2rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.4rem;
+    color: var(--muted);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  /* --- ENTITY CARDS --- */
+  .entity-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.6rem 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .entity-card.recommended {
+    border-color: var(--green);
+    border-width: 2px;
+  }
+
+  .entity-card.avoid {
+    border-color: var(--red);
+    border-width: 2px;
+  }
+
+  .entity-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .entity-card.recommended .entity-label { color: var(--green); }
+  .entity-card.avoid .entity-label { color: var(--red); }
+
+  .entity-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .entity-card p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+  }
+
+  .entity-card ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .entity-card li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  .entity-card h4 {
+    font-size: 0.88rem;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .verdict {
+    margin-top: 1rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .verdict.good {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    color: var(--green);
+  }
+
+  .verdict.bad {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+    color: var(--red);
+  }
+
+  .verdict.neutral {
+    background: var(--warm);
+    border-left: 3px solid var(--faint);
+    color: var(--muted);
+  }
+
+  /* --- CALLOUTS --- */
+  .callout {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .callout strong {
+    color: var(--green);
+  }
+
+  .callout-accent {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout-accent .callout-label {
+    color: var(--accent);
+  }
+
+  .callout-accent strong {
+    color: var(--accent);
+  }
+
+  /* --- WATCHOUT BOX --- */
+  .watchout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.6rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .watchout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .watchout strong {
+    color: var(--accent-light);
+  }
+
+  .watchout ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .watchout li {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- HIGHLIGHT BOX --- */
+  .highlight-box {
+    background: var(--green-bg);
+    border: 2px solid var(--green);
+    padding: 1.6rem 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .highlight-box .highlight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .highlight-box .highlight-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: var(--green);
+  }
+
+  /* --- PHASE CARDS --- */
+  .phase-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    padding: 1.6rem 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--green);
+  }
+
+  .phase-card.current::before {
+    background: var(--accent);
+  }
+
+  .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .phase-card.current .phase-label {
+    color: var(--accent);
+  }
+
+  .phase-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .phase-card p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.5rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .phase-card h4 {
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+
+  .phase-card ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .phase-card li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- LEGAL CALLOUT --- */
+  .legal-callout {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.6rem 2rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .legal-callout .callout-label {
+    color: var(--accent);
+  }
+
+  .legal-callout ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-callout li {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  .legal-callout strong {
+    color: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Strategy</span></a>
+    <a href="hub.html" class="back-link">&larr; Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Strategy</div>
+  <h1>Partnership Structure Options</h1>
+  <p class="doc-subtitle">The playbook for how Andrew and Mike structure their role in the veteran AI workforce program. The goal: co-executive roles with real equity, not trainer gigs with LearnAIR t-shirts.</p>
+  <div class="doc-date">March 23, 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- ENTITY STRUCTURES -->
+  <hr>
+  <h2>1. Entity Structure Options</h2>
+
+  <!-- Option A -->
+  <div class="entity-card avoid">
+    <span class="entity-label">Option A &mdash; Avoid</span>
+    <div class="entity-title">Subsidiary / Division Under LearnAIR</div>
+    <p>The veteran program lives inside LearnAIR as a business unit. Andrew and Mike get titles (VP, Director) and compensation tied to program performance. No separate legal entity.</p>
+
+    <h4>How equity works</h4>
+    <p>There is no real equity. LearnAIR might offer phantom equity or profit-sharing. But Andrew and Mike wouldn&rsquo;t own anything. If LearnAIR sells, they get whatever the phantom equity agreement says &mdash; only as good as the contract and the goodwill of the people enforcing it.</p>
+
+    <h4>Who controls what</h4>
+    <p>LearnAIR controls everything. Budget, hiring, strategy, IP. Andrew and Mike operate with whatever autonomy they negotiate, but it&rsquo;s granted, not owned.</p>
+
+    <h4>Pros for Andrew + Mike</h4>
+    <ul>
+      <li>Fastest path to launch. No entity formation, no legal costs.</li>
+      <li>LearnAIR&rsquo;s infrastructure (accounting, insurance, SDVOSB) already in place.</li>
+      <li>Less financial risk. LearnAIR covers operating costs.</li>
+    </ul>
+
+    <h4>Cons for Andrew + Mike</h4>
+    <ul>
+      <li><strong>No ownership. Period.</strong> If the relationship sours, they walk away with nothing.</li>
+      <li>Subject to LearnAIR&rsquo;s priorities. If they pivot or run low on cash, the veteran program gets cut first.</li>
+      <li>Career risk: they become &ldquo;LearnAIR employees&rdquo; in the market&rsquo;s eyes, not founders.</li>
+      <li>Justin&rsquo;s &ldquo;education implementation&rdquo; framing lives here. This is the structure where Mike becomes a trainer.</li>
+    </ul>
+
+    <div class="verdict bad">This is the structure LearnAIR will push for by default. It&rsquo;s the one to avoid.</div>
+  </div>
+
+  <!-- Option B -->
+  <div class="entity-card recommended">
+    <span class="entity-label">Option B &mdash; Recommended</span>
+    <div class="entity-title">Joint Venture LLC</div>
+    <p>A new LLC co-owned by LearnAIR (or Justin/Teresa personally) and the Deal Brothers. Separate EIN, separate bank account, separate P&amp;L. The JV runs the veteran program. Both parties contribute assets: LearnAIR contributes brand, content, distribution; Deal Brothers contribute IP, curriculum, labor, technical capability.</p>
+
+    <h4>How equity works</h4>
+    <p>Negotiated ownership split. Could be 50/50, 60/40, or anything else. Vesting schedules can apply. Distributions flow to members based on ownership percentage.</p>
+
+    <h4>Proposed split</h4>
+    <p><strong>55% Deal Brothers / 45% LearnAIR</strong>, or 50/50 with Deal Brothers holding the managing member role. Rationale: Deal Brothers are doing the work, built the IP, and will run the program. LearnAIR is contributing brand and distribution but not labor.</p>
+
+    <h4>Pros for Andrew + Mike</h4>
+    <ul>
+      <li>Real ownership with legal protection.</li>
+      <li>Separate P&amp;L means the program&rsquo;s success is measurable and attributable.</li>
+      <li>Managing member role gives operational control.</li>
+      <li>Can attract outside investment or grants into the JV without diluting at the parent level.</li>
+    </ul>
+
+    <h4>Cons for Andrew + Mike</h4>
+    <ul>
+      <li>JV operating agreements are complex. Legal costs to set up properly ($5&ndash;15K).</li>
+      <li>LearnAIR has a veto on major decisions (if structured that way).</li>
+      <li>Unwinding a JV is messy. Need clear buyout provisions.</li>
+    </ul>
+
+    <p style="font-size: 0.85rem; color: var(--muted);"><strong>Real-world example</strong>: Hulu was originally a JV between NBC Universal, Fox, and Disney. Each contributed content and distribution; the JV operated independently. (It worked until the parents&rsquo; interests diverged &mdash; the buyout provisions matter.)</p>
+
+    <div class="verdict good">This is the strongest option for both sides. Gives Andrew and Mike real ownership while giving LearnAIR upside without labor. The negotiation is about the split and the operating agreement terms.</div>
+  </div>
+
+  <!-- Option C -->
+  <div class="entity-card">
+    <span class="entity-label">Option C</span>
+    <div class="entity-title">Spin-Out with Licensing Agreement</div>
+    <p>Andrew and Mike form their own company. They license LearnAIR&rsquo;s training content, brand (co-branded or &ldquo;powered by LearnAIR&rdquo;), and potentially the SDVOSB certification pathway. LearnAIR gets a licensing fee and possibly a small equity stake (5&ndash;15%).</p>
+
+    <h4>Proposed terms</h4>
+    <p>5&ndash;10% equity to LearnAIR + 8&ndash;12% revenue share on programs using LearnAIR content, declining to 5% after Year 3. Or a flat annual licensing fee ($20&ndash;50K) once revenue supports it.</p>
+
+    <h4>Pros for Andrew + Mike</h4>
+    <ul>
+      <li>Maximum control and ownership. Clean cap table for future fundraising.</li>
+      <li>Can pivot without LearnAIR&rsquo;s permission.</li>
+      <li>Clear founder story: &ldquo;We built this.&rdquo;</li>
+    </ul>
+
+    <h4>Cons for Andrew + Mike</h4>
+    <ul>
+      <li>No SDVOSB status (unless Mike qualifies independently).</li>
+      <li>Lose LearnAIR brand halo and Bobby&rsquo;s network unless the license covers it.</li>
+      <li>More financial risk. Self-funded until revenue or grants come in.</li>
+    </ul>
+
+    <div class="verdict neutral">Best for Andrew and Mike if they want something fully theirs. Harder to pitch to LearnAIR because they get less upside.</div>
+  </div>
+
+  <!-- Option D -->
+  <div class="entity-card">
+    <span class="entity-label">Option D</span>
+    <div class="entity-title">Independent Entity with Partnership Agreement</div>
+    <p>Completely separate company. No equity connection to LearnAIR. A commercial partnership agreement covers referrals, co-marketing, and content sharing.</p>
+
+    <h4>Proposed terms</h4>
+    <p>20% referral fee on clients sent in either direction for 18 months. Co-marketing agreement for joint events and content. Non-exclusive &mdash; both sides can partner with others.</p>
+
+    <h4>Pros for Andrew + Mike</h4>
+    <ul>
+      <li>Total independence. No one can fire them, override them, or dilute them.</li>
+      <li>Cleanest cap table possible. Can partner with others simultaneously.</li>
+    </ul>
+
+    <h4>Cons for Andrew + Mike</h4>
+    <ul>
+      <li>No brand leverage, no SDVOSB access, no Bobby Napiltonia network.</li>
+      <li>LearnAIR could partner with a competitor or build their own veteran program.</li>
+      <li>Starting from zero on brand recognition.</li>
+    </ul>
+
+    <div class="verdict neutral">This is the walk-away structure. If LearnAIR won&rsquo;t give equity, this is the default. Preserves the relationship without giving anything away.</div>
+  </div>
+
+  <!-- Option E -->
+  <div class="entity-card">
+    <span class="entity-label">Option E</span>
+    <div class="entity-title">Public Benefit Corporation (PBC)</div>
+    <p>A for-profit corporation with a stated public benefit mission written into the charter. The mission (veteran workforce development) is legally embedded &mdash; directors must balance profit with mission.</p>
+
+    <h4>Pros</h4>
+    <ul>
+      <li>&ldquo;Mission-driven&rdquo; framing attracts impact investors, ESG funds.</li>
+      <li>Still a for-profit: equity has real value. The public benefit mission protects against a future acquirer gutting the program.</li>
+    </ul>
+
+    <h4>Cons</h4>
+    <ul>
+      <li>More complex than LLC (board requirements, annual benefit reports).</li>
+      <li>Some investors avoid PBCs because the mission constraint limits profit-maximizing decisions.</li>
+    </ul>
+
+    <p style="font-size: 0.85rem; color: var(--muted);"><strong>Real-world example</strong>: Patagonia (B Corp certified), Kickstarter (PBC).</p>
+
+    <div class="verdict neutral">Worth considering if the program pursues impact investment. Could be a Phase 2 conversion &mdash; start as LLC, convert to PBC when scale justifies it.</div>
+  </div>
+
+  <!-- Option F -->
+  <div class="entity-card">
+    <span class="entity-label">Option F</span>
+    <div class="entity-title">Nonprofit 501(c)(3)</div>
+    <p>Tax-exempt organization. Can receive DOL grants, foundation grants, and tax-deductible donations directly. No equity &mdash; founders get salaries and bonuses, not ownership.</p>
+
+    <h4>Pros</h4>
+    <ul>
+      <li>Direct access to DOL grants (WIOA, apprenticeship programs), foundation grants, veteran-specific funding.</li>
+      <li>Strong credibility in the veteran community. GI Bill approval pathway is cleaner.</li>
+    </ul>
+
+    <h4>Cons</h4>
+    <ul>
+      <li><strong>No equity. Ever.</strong> This is the biggest tradeoff.</li>
+      <li>Board controls the organization. Salary caps (implicit). Cannot easily convert to for-profit later.</li>
+    </ul>
+
+    <div class="verdict neutral">Right structure if primary revenue is grants and mission matters more than personal wealth building. Wrong structure if equity value is the goal.</div>
+  </div>
+
+  <!-- Option G -->
+  <div class="entity-card">
+    <span class="entity-label">Option G</span>
+    <div class="entity-title">Hybrid (For-Profit OpCo + Associated Nonprofit)</div>
+    <p>Two entities. A for-profit LLC runs training operations, builds IP, generates revenue. An associated 501(c)(3) receives grants, manages scholarships, funds veterans&rsquo; tuition. The nonprofit pays the for-profit for training delivery.</p>
+
+    <h4>Proposed structure</h4>
+    <ul>
+      <li><strong>&ldquo;Deal Brothers Workforce&rdquo; LLC</strong> (for-profit): owns IP, employs staff, delivers training. Andrew and Mike are co-owners.</li>
+      <li><strong>&ldquo;Veterans AI Foundation&rdquo; 501(c)(3)</strong>: receives grants, provides scholarships, funds training. Contracts with the LLC for delivery.</li>
+      <li><strong>LearnAIR&rsquo;s role</strong>: equity stake in the LLC (10&ndash;20%), board seat on the nonprofit, licensing/content partner.</li>
+    </ul>
+
+    <h4>Pros</h4>
+    <ul>
+      <li>Equity in the for-profit. Grant access through the nonprofit. Clean separation of mission and business.</li>
+      <li>Can attract both impact investors (for-profit) and grant funders (nonprofit).</li>
+    </ul>
+
+    <h4>Cons</h4>
+    <ul>
+      <li>Two entities = twice the legal costs, accounting, governance.</li>
+      <li>IRS scrutiny on related-party transactions. Must be arm&rsquo;s length and well-documented.</li>
+      <li>501(c)(3) approval alone is 3&ndash;6 months.</li>
+    </ul>
+
+    <div class="verdict neutral">The most sophisticated option and arguably the best long-term structure. But don&rsquo;t start here. Start as a for-profit LLC (Option B or C), prove the model, then layer in the nonprofit when grant funding justifies the overhead.</div>
+  </div>
+
+  <!-- EQUITY NEGOTIATION -->
+  <hr>
+  <h2>2. Equity Negotiation Framework</h2>
+
+  <h3>What Andrew + Mike Bring</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Asset</th>
+        <th>Value</th>
+        <th>Portability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>The thesis</strong> (positioning, market map, competitive landscape)</td>
+        <td>High &mdash; this IS the strategic foundation</td>
+        <td>Fully portable</td>
+      </tr>
+      <tr>
+        <td><strong>Curriculum prototype and field manual</strong></td>
+        <td>High &mdash; no one else has built this</td>
+        <td>Fully portable</td>
+      </tr>
+      <tr>
+        <td><strong>Technical capability</strong> (Andrew&rsquo;s AI/dev skills)</td>
+        <td>Very high &mdash; 10x iteration speed</td>
+        <td>Fully portable</td>
+      </tr>
+      <tr>
+        <td><strong>Veteran credibility</strong> (Mike&rsquo;s service record)</td>
+        <td>High &mdash; authentic, not manufactured</td>
+        <td>Fully portable</td>
+      </tr>
+      <tr>
+        <td><strong>Policy alignment research</strong> (Raimondo, Brynjolfsson)</td>
+        <td>Medium-high &mdash; differentiator</td>
+        <td>Fully portable</td>
+      </tr>
+      <tr>
+        <td><strong>Willingness to do the work</strong></td>
+        <td>Critical &mdash; LearnAIR isn&rsquo;t doing it</td>
+        <td>This is the key point</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>What LearnAIR Brings</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Asset</th>
+        <th>Value</th>
+        <th>Portability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Brand and 3-year track record</strong></td>
+        <td>Medium &mdash; recognized in AI training, not in veteran space</td>
+        <td>Not portable</td>
+      </tr>
+      <tr>
+        <td><strong>OpenAI partnership</strong></td>
+        <td>Medium-high &mdash; credibility signal</td>
+        <td>Not portable</td>
+      </tr>
+      <tr>
+        <td><strong>SDVOSB certification</strong></td>
+        <td>High for government contracts</td>
+        <td>Not portable (tied to Justin)</td>
+      </tr>
+      <tr>
+        <td><strong>Bobby Napiltonia&rsquo;s network</strong></td>
+        <td>Medium-high &mdash; enterprise connections</td>
+        <td>Partially portable</td>
+      </tr>
+      <tr>
+        <td><strong>Existing client base (~100)</strong></td>
+        <td>Medium &mdash; potential employer partners</td>
+        <td>Not portable</td>
+      </tr>
+      <tr>
+        <td><strong>Training content library (3 years)</strong></td>
+        <td>Low-medium &mdash; generic, not veteran-specific</td>
+        <td>Not portable</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout-accent">
+    <span class="callout-label">The Core Argument</span>
+    <p style="margin-bottom: 0;">Andrew and Mike are providing the <strong>labor, IP, and subject matter expertise</strong> for a program that doesn&rsquo;t exist yet. LearnAIR is providing <strong>brand and infrastructure</strong> for a program they haven&rsquo;t been able to build. The party doing the building should own the majority.</p>
+  </div>
+
+  <h3>Proposed Equity Ranges by Structure</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Structure</th>
+        <th>Deal Brothers</th>
+        <th>LearnAIR</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>JV LLC (B)</strong></td>
+        <td>55&ndash;60%</td>
+        <td>40&ndash;45%</td>
+        <td>Deal Brothers do the work + bring the IP. LearnAIR brings brand + infrastructure.</td>
+      </tr>
+      <tr>
+        <td><strong>Spin-out (C)</strong></td>
+        <td>85&ndash;95%</td>
+        <td>5&ndash;15%</td>
+        <td>Deal Brothers own the entity. LearnAIR gets equity for the license.</td>
+      </tr>
+      <tr>
+        <td><strong>PBC (E)</strong></td>
+        <td>60&ndash;70%</td>
+        <td>15&ndash;25%</td>
+        <td>Founders control. Remainder to impact investors/advisors.</td>
+      </tr>
+      <tr>
+        <td><strong>Hybrid for-profit (G)</strong></td>
+        <td>70&ndash;80%</td>
+        <td>10&ndash;20%</td>
+        <td>For-profit is Deal Brothers&rsquo; vehicle. LearnAIR contributes primarily to the nonprofit side.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Vesting and Milestones</h3>
+  <ul>
+    <li><strong>Deal Brothers vesting</strong>: 25% at signing, remainder over 24 months. Accelerated vesting if they hit milestones (first pilot, first grant, first revenue).</li>
+    <li><strong>LearnAIR vesting</strong>: Consider making some of LearnAIR&rsquo;s equity contingent on actual contribution. If they promise Bobby&rsquo;s network and don&rsquo;t deliver, that equity shouldn&rsquo;t vest.</li>
+    <li><strong>Cliff</strong>: 6-month cliff for both sides. If either party isn&rsquo;t contributing by month 6, unvested equity returns to the pool.</li>
+  </ul>
+
+  <!-- CONVERSATION PLAYBOOK -->
+  <hr>
+  <h2>3. How to Navigate the Conversation</h2>
+
+  <div class="phase-card current">
+    <span class="phase-label">Phase 1 &mdash; Now through Teresa Meeting (Mar 24&ndash;31)</span>
+    <div class="phase-title">Build Rapport</div>
+    <p>Show capability without showing your hand. Let them come to you.</p>
+    <h4>What to say</h4>
+    <ul>
+      <li>&ldquo;Mike and I have been deep in this since Justin introduced us. We&rsquo;re really excited about the problem space.&rdquo;</li>
+      <li>&ldquo;We&rsquo;ve done some preliminary research and thinking. Happy to share when the time is right.&rdquo;</li>
+      <li>&ldquo;We see this as something potentially bigger than a training program.&rdquo;</li>
+    </ul>
+    <h4>What NOT to say</h4>
+    <ul>
+      <li>Anything about equity, titles, or structure.</li>
+      <li>&ldquo;We want to be partners, not employees.&rdquo; (True but premature.)</li>
+      <li>Don&rsquo;t hand over the thesis, competitive landscape, or field manual.</li>
+    </ul>
+    <h4>What to do</h4>
+    <ul>
+      <li>Let Mike build the Teresa relationship. Andrew stays in the background.</li>
+      <li>Continue building independently. Every day the thesis gets stronger, the leverage increases.</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 2 &mdash; After 4-Way Call (Early April)</span>
+    <div class="phase-title">Plant the Seed</div>
+    <p>The program needs its own structure. Use Justin&rsquo;s own language.</p>
+    <h4>What to say</h4>
+    <ul>
+      <li>&ldquo;Justin, you mentioned on the March 19th call that you could see this becoming its own organization. We&rsquo;ve been thinking about what that could look like.&rdquo;</li>
+      <li>&ldquo;We want to make sure we structure this in a way that everyone is motivated for the long haul.&rdquo;</li>
+    </ul>
+    <h4>What to do</h4>
+    <ul>
+      <li>Share the thesis (or a curated version). Let the quality of the work make the argument.</li>
+      <li>Introduce Andrew into the conversation.</li>
+      <li>Attend the Brynjolfsson seminar (April 6). Drop it casually.</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 3 &mdash; Present Options (Mid-April)</span>
+    <div class="phase-title">Menu, Not Demand</div>
+    <p>Come to the table with options. Let them pick from choices that all work for you.</p>
+    <h4>Present 3 options</h4>
+    <ol>
+      <li><strong>Joint Venture LLC</strong> (your preferred)</li>
+      <li><strong>Spin-out with licensing</strong> (your ideal)</li>
+      <li><strong>Division under LearnAIR</strong> with strong equity-equivalent compensation (their likely preference &mdash; include so they feel heard, but make terms rich enough that they&rsquo;d rather do the JV)</li>
+    </ol>
+    <h4>How to handle pushback</h4>
+    <ul>
+      <li>&ldquo;We were thinking more of a division.&rdquo; &rarr; &ldquo;We&rsquo;re open to that. What would ownership and decision-making look like?&rdquo;</li>
+      <li>&ldquo;We can&rsquo;t give up equity.&rdquo; &rarr; &ldquo;What does compensation look like for running a program this complex?&rdquo;</li>
+      <li>&ldquo;Justin wants to maintain control.&rdquo; &rarr; &ldquo;Absolutely. We see LearnAIR having board-level oversight. The question is about day-to-day operations.&rdquo;</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-label">Phase 4 &mdash; Decision (May)</span>
+    <div class="phase-title">Decide. No Limbo.</div>
+    <h4>Decision criteria</h4>
+    <ul>
+      <li>Do Andrew and Mike have real ownership (equity, not phantom)?</li>
+      <li>Do they have operational control of the program?</li>
+      <li>Are their titles commensurate with their contribution?</li>
+      <li>Is the structure one they&rsquo;d be proud to describe to Brynjolfsson, to a grant funder, to a veteran?</li>
+    </ul>
+    <p style="font-style: normal;"><strong>Timeline</strong>: Have a signed operating agreement or a clear separation by May 15.</p>
+  </div>
+
+  <!-- WALK-AWAY -->
+  <hr>
+  <h2>4. The Walk-Away Scenario</h2>
+
+  <div class="watchout">
+    <span class="watchout-label">If Partnership Fails</span>
+    <p style="margin-bottom: 0.8rem;">Andrew and Mike form their own LLC. They own 100%. They run the veteran AI workforce program under their own brand.</p>
+    <h4 style="color: var(--accent-light); margin-top: 1rem;">What they keep</h4>
+    <ul>
+      <li>Everything they&rsquo;ve built: thesis, competitive landscape, curriculum, field manual, policy research</li>
+      <li>The Brynjolfsson connection and Raimondo pathway</li>
+      <li>The speed advantage &mdash; 10x LearnAIR&rsquo;s pace</li>
+      <li>Veteran credibility (Mike) + Technical capability (Andrew)</li>
+      <li>Full control of the narrative, the brand, and the direction</li>
+    </ul>
+    <h4 style="color: var(--accent-light); margin-top: 1rem;">What they lose</h4>
+    <ul>
+      <li>SDVOSB certification (matters for government contracts)</li>
+      <li>LearnAIR brand recognition (limited &mdash; known in AI training, not veteran space)</li>
+      <li>Bobby Napiltonia&rsquo;s network (unless Bobby advises independently)</li>
+      <li>OpenAI partnership access (can build own provider relationships)</li>
+      <li>LearnAIR&rsquo;s ~100 client relationships</li>
+    </ul>
+    <h4 style="color: var(--accent-light); margin-top: 1rem;">Can they use their work?</h4>
+    <p style="margin-bottom: 0.8rem;"><strong>Yes. Unambiguously.</strong> The thesis, curriculum, competitive landscape, and research were created by Andrew and Mike on their own time, with their own tools, before any agreement with LearnAIR. There is no work-for-hire relationship. There is no IP assignment.</p>
+    <h4 style="color: var(--accent-light); margin-top: 1rem;">The highest-leverage walk-away</h4>
+    <p style="margin-bottom: 0;">&ldquo;We&rsquo;ll build it ourselves, and if it works, you can buy it from us later at a multiple of what it would have cost to partner today.&rdquo; <em>Don&rsquo;t say this to LearnAIR. Just know it&rsquo;s true.</em></p>
+  </div>
+
+  <!-- LEGAL -->
+  <hr>
+  <h2>5. Legal Considerations</h2>
+
+  <div class="highlight-box">
+    <span class="highlight-label">Do This Now</span>
+    <div class="highlight-text">Form an LLC before partnership talks.</div>
+    <p style="font-size: 0.88rem; color: var(--green); margin-top: 0.5rem; margin-bottom: 0;">Oregon LLC: ~$100, takes a day. It creates a legal entity that owns the IP, signals seriousness, and sets the frame: this is a partnership between entities, not LearnAIR hiring two people.</p>
+  </div>
+
+  <h3>Protecting the IP</h3>
+
+  <div class="legal-callout">
+    <span class="callout-label">Immediate Priority</span>
+    <p style="margin-bottom: 0.8rem;">Do not share the thesis, competitive landscape, field manual, or curriculum under any framework that could be interpreted as contributing to LearnAIR&rsquo;s business. Until there is a signed agreement that explicitly addresses IP ownership, treat every document as Deal Brothers&rsquo; proprietary work.</p>
+    <ul>
+      <li><strong>Watermark everything shared.</strong> Label: &ldquo;Draft &mdash; Confidential &mdash; Property of Andrew and Michael Deal.&rdquo;</li>
+      <li><strong>Keep records of creation dates.</strong> Git history, file timestamps, email threads.</li>
+      <li><strong>Don&rsquo;t use LearnAIR tools or platforms</strong> to create work product.</li>
+      <li><strong>Don&rsquo;t accept any compensation from LearnAIR</strong> before the structure is agreed. Accepting payment can create an implied employment relationship.</li>
+    </ul>
+  </div>
+
+  <h3>LLC Formation Details</h3>
+  <ul>
+    <li><strong>State</strong>: Oregon (where the program will operate). Or Wyoming/Delaware for asset protection.</li>
+    <li><strong>Members</strong>: Andrew Deal and Michael Deal, 50/50.</li>
+    <li><strong>Operating agreement</strong>: Simple initial agreement defining ownership, decision-making, and IP assignment (all work related to the veteran program is owned by the LLC).</li>
+    <li><strong>Name</strong>: Pick something neutral. Don&rsquo;t name it after the veteran program specifically &mdash; keep that flexible.</li>
+  </ul>
+
+  <h3>Non-Compete and Non-Solicit Concerns</h3>
+
+  <div class="legal-callout">
+    <span class="callout-label">Before Signing Anything</span>
+    <ul>
+      <li><strong>Non-compete clauses</strong>: &ldquo;You can&rsquo;t operate a competing training business for X years.&rdquo; This is the kill shot. Never agree in any form. Oregon law (ORS 653.295) restricts non-competes to employees earning above a threshold and limits them to 12 months.</li>
+      <li><strong>Non-solicit clauses</strong>: More reasonable but needs limits. Ensure it doesn&rsquo;t prevent working with veterans or employers found independently.</li>
+      <li><strong>Exclusivity</strong>: &ldquo;The veteran program can only operate through LearnAIR.&rdquo; Reject this. Non-exclusive or walk.</li>
+    </ul>
+  </div>
+
+  <h3>When Do You Need a Lawyer?</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Use AI Templates For</th>
+        <th>Hire a Lawyer For</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Initial LLC operating agreement (simple 50/50)</td>
+        <td>JV operating agreement or any equity split with LearnAIR ($5&ndash;10K)</td>
+      </tr>
+      <tr>
+        <td>NDA for sharing work with LearnAIR</td>
+        <td>Reviewing anything LearnAIR asks you to sign</td>
+      </tr>
+      <tr>
+        <td>Meeting notes and verbal agreement docs</td>
+        <td>501(c)(3) application ($3&ndash;5K) if going nonprofit/hybrid</td>
+      </tr>
+      <tr>
+        <td>&mdash;</td>
+        <td>Any government contract or grant application</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>When</strong>: Hire the lawyer after you&rsquo;ve agreed on the structure in principle but before you sign anything. Don&rsquo;t bring a lawyer to the negotiation &mdash; that changes the energy. Bring the lawyer to the paperwork. Portland business/startup attorney: $300&ndash;500/hour, ~10&ndash;15 hours total.</p>
+
+  <!-- DECISION MATRIX -->
+  <hr>
+  <h2>Decision Matrix</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>If LearnAIR Offers...</th>
+        <th>Andrew + Mike Should...</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Trainer/contractor roles</strong></td>
+        <td>Decline. Go independent (Option D).</td>
+      </tr>
+      <tr>
+        <td><strong>Division roles with profit-sharing, no equity</strong></td>
+        <td>Counter with JV (Option B). If they refuse, go independent.</td>
+      </tr>
+      <tr>
+        <td><strong>JV with &lt;40% for Deal Brothers</strong></td>
+        <td>Counter at 55%. If they won&rsquo;t go above 45%, evaluate non-equity terms.</td>
+      </tr>
+      <tr>
+        <td><strong>JV at 50/50 or better</strong></td>
+        <td>Accept. Get the operating agreement right.</td>
+      </tr>
+      <tr>
+        <td><strong>&ldquo;We need to think about it&rdquo; past May</strong></td>
+        <td>Set a deadline. &ldquo;We need structure in place by May 15.&rdquo; If they miss it, go independent.</td>
+      </tr>
+      <tr>
+        <td><strong>Nothing (ghost)</strong></td>
+        <td>Go independent. They were never serious.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NEXT STEPS -->
+  <hr>
+  <h2>Immediate Next Steps</h2>
+  <ol>
+    <li><strong>Form an LLC.</strong> This week. Oregon or Wyoming. Andrew and Mike 50/50. Assign all existing IP to the LLC.</li>
+    <li><strong>Do not share unprotected IP.</strong> Anything shared with LearnAIR should be watermarked and sent from the LLC.</li>
+    <li><strong>Teresa meeting (March 24).</strong> Build rapport. Don&rsquo;t discuss structure. Follow the Phase 1 playbook.</li>
+    <li><strong>4-way call (late March / early April).</strong> Follow Phase 2. Plant the &ldquo;its own organization&rdquo; seed using Justin&rsquo;s own words.</li>
+    <li><strong>Brynjolfsson seminar (April 6).</strong> Attend. Build the independent credibility play. Mention it casually to LearnAIR.</li>
+    <li><strong>Present options (mid-April).</strong> Follow Phase 3. Menu, not demand.</li>
+    <li><strong>Decision by May 15.</strong> Partner or go independent. No limbo.</li>
+  </ol>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub &mdash; March 2026</div>
+  <div class="footer-right"><a href="hub.html">Back to Hub</a></div>
+</footer>
+
+</body>
+</html>
