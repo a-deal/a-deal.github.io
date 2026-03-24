@@ -37,11 +37,22 @@
     letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); display: flex; gap: 2.5rem; }
 
   .content { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
-  .chapter { padding: 4rem 0 1rem; }
-  .chapter-number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 4rem;
-    color: var(--faint); line-height: 1; opacity: 0.35; margin-bottom: -0.25rem; }
+
+  .section {
+    max-width: 960px; margin: 0 auto; padding: 4rem 2rem 2rem;
+    display: grid; grid-template-columns: 80px 1fr; gap: 0;
+    align-items: start; position: relative; z-index: 1; background: var(--paper);
+  }
+  .section-num {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.2rem;
+    color: var(--faint); line-height: 1; opacity: 0.45; position: sticky; top: 5rem;
+    text-align: right; padding-right: 1.5rem; border-right: 2px solid var(--faint);
+    align-self: start;
+  }
+  .section-content { max-width: 800px; padding-left: 1.5rem; }
+
   .chapter-title { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem;
-    line-height: 1.2; margin-bottom: 1rem; }
+    line-height: 1.2; margin-bottom: 0.5rem; }
   .divider { width: 60px; height: 2px; background: var(--accent); margin: 0 0 1.5rem 0; }
   p { margin: 1.25rem 0; font-size: 0.95rem; line-height: 1.8; }
   strong { font-weight: 600; }
@@ -92,6 +103,10 @@
   @media (max-width: 640px) {
     .hero { padding: 5rem 1.5rem 4rem; }
     .content { padding: 0 1.5rem; }
+    .section { display: block; padding: 3rem 1.5rem 1rem; }
+    .section-num { position: static; font-size: 3rem; text-align: left; padding-right: 0;
+      border-right: none; margin-bottom: -0.25rem; opacity: 0.3; }
+    .section-content { padding-left: 0; }
     .grid-2 { grid-template-columns: 1fr; }
     .timeline { flex-direction: column; }
     .timeline-item { border-right: none; border-bottom: 1px solid var(--faint); }
@@ -114,103 +129,108 @@
 </div>
 
 <div class="content">
-
   <div class="signal-box">
     <div class="signal-label">The Signal</div>
     <p><strong>iPhone 17 Pro running 400B parameter LLM on-device.</strong> This is the most significant hardware demo for local AI inference in years. If validated, it means frontier-scale reasoning, the kind that powers personalized health coaching, runs without a server, without an API call, and without any health data leaving the phone.</p>
   </div>
+</div>
 
-  <div class="chapter">
-    <div class="chapter-number">01</div>
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-num">01</div>
+  <div class="section-content">
     <div class="chapter-title">What Changes</div>
     <div class="divider"></div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <h3>Focus Plan Goes Local</h3>
+        <p>Currently, every Focus Plan calls Claude via a Cloudflare proxy. Costs money, adds latency, sends health context to a third party. On-device inference: zero API cost, zero latency, zero PHI exposure.</p>
+      </div>
+      <div class="grid-item">
+        <h3>The v2.0 Thesis Was Right</h3>
+        <p>An earlier version of the product bet on Apple's Foundation Model for on-device AI. Failed because the model wasn't capable enough. A 400B model on iPhone vindicates that thesis. The pivot to cloud was a timing decision, not a strategic one.</p>
+      </div>
+      <div class="grid-item">
+        <h3>Always-On Coaching</h3>
+        <p>No internet required. Morning check-in works on a plane, in the redwoods, anywhere. For a product betting on earning 30 seconds in your morning, removing connectivity as a failure mode is significant.</p>
+      </div>
+      <div class="grid-item">
+        <h3>The Moat Shifts to Data</h3>
+        <p>If on-device inference commoditizes the AI layer, the differentiator becomes: which habits work for which people in which contexts. The evidence layer. The methodology. The taste. Not the model.</p>
+      </div>
+    </div>
+    <div class="unchanged">
+      <h3>What Doesn't Change</h3>
+      <ul>
+        <li>The agentic coach still needs a server for WhatsApp and iMessage delivery</li>
+        <li>Multi-user coaching still needs centralized infrastructure</li>
+        <li>The shared data layer is still needed for "two surfaces, one brain"</li>
+        <li>Wearable data aggregation still happens server-side</li>
+        <li>The behavior change methodology is platform-agnostic</li>
+      </ul>
+    </div>
   </div>
+</div>
 
-  <div class="grid-2">
-    <div class="grid-item">
-      <h3>Focus Plan Goes Local</h3>
-      <p>Currently, every Focus Plan calls Claude via a Cloudflare proxy. Costs money, adds latency, sends health context to a third party. On-device inference: zero API cost, zero latency, zero PHI exposure.</p>
-    </div>
-    <div class="grid-item">
-      <h3>The v2.0 Thesis Was Right</h3>
-      <p>An earlier version of the product bet on Apple's Foundation Model for on-device AI. Failed because the model wasn't capable enough. A 400B model on iPhone vindicates that thesis. The pivot to cloud was a timing decision, not a strategic one.</p>
-    </div>
-    <div class="grid-item">
-      <h3>Always-On Coaching</h3>
-      <p>No internet required. Morning check-in works on a plane, in the redwoods, anywhere. For a product betting on earning 30 seconds in your morning, removing connectivity as a failure mode is significant.</p>
-    </div>
-    <div class="grid-item">
-      <h3>The Moat Shifts to Data</h3>
-      <p>If on-device inference commoditizes the AI layer, the differentiator becomes: which habits work for which people in which contexts. The evidence layer. The methodology. The taste. Not the model.</p>
-    </div>
-  </div>
-
-  <div class="unchanged">
-    <h3>What Doesn't Change</h3>
-    <ul>
-      <li>The agentic coach still needs a server for WhatsApp and iMessage delivery</li>
-      <li>Multi-user coaching still needs centralized infrastructure</li>
-      <li>The shared data layer is still needed for "two surfaces, one brain"</li>
-      <li>Wearable data aggregation still happens server-side</li>
-      <li>The behavior change methodology is platform-agnostic</li>
-    </ul>
-  </div>
-
-  <div class="chapter">
-    <div class="chapter-number">02</div>
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-num">02</div>
+  <div class="section-content">
     <div class="chapter-title">Timeline</div>
     <div class="divider"></div>
     <p>The on-device capability arrives after the critical validation phase. Build for cloud now, design for local later.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Now</div>
+        <div class="timeline-label">Build shared<br>data layer</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">May</div>
+        <div class="timeline-label">Concierge<br>beta (cloud)</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jul</div>
+        <div class="timeline-label">Soft launch<br>decision</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date"><span class="accent">Fall</span></div>
+        <div class="timeline-label">iPhone 17 Pro<br>ships</div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-date">Now</div>
-      <div class="timeline-label">Build shared<br>data layer</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">May</div>
-      <div class="timeline-label">Concierge<br>beta (cloud)</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date">Jul</div>
-      <div class="timeline-label">Soft launch<br>decision</div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-date"><span class="accent">Fall</span></div>
-      <div class="timeline-label">iPhone 17 Pro<br>ships</div>
-    </div>
-  </div>
-
-  <div class="chapter">
-    <div class="chapter-number">03</div>
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-num">03</div>
+  <div class="section-content">
     <div class="chapter-title">Open Questions</div>
     <div class="divider"></div>
+    <div class="questions">
+      <div class="question">
+        <h3>What does this look like for us, specifically?</h3>
+        <p>Focus Plan generation, coaching messages, habit suggestions, barrier detection. All running locally. The Cloudflare proxy becomes optional. The Claude API becomes a fallback, not a dependency. The iOS app becomes self-contained for the first time.</p>
+      </div>
+      <div class="question">
+        <h3>Is it iPhone 17 only?</h3>
+        <p>Unclear. If the 400B demo relies on iPhone 17 Pro's new Neural Engine, it may not trickle to iPad or older devices immediately. But Apple's pattern is to cascade capabilities downward within 1-2 generations. The M-series Macs (Mac Mini, MacBook Pro) likely already have the compute. The question is whether Apple exposes the APIs.</p>
+      </div>
+      <div class="question">
+        <h3>When do we deploy our own edge models?</h3>
+        <p>This is the bigger question. A fine-tuned model trained on our coaching methodology, our evidence layer, our intervention hierarchy would outperform a general-purpose 400B model for our specific use case. The timeline: after we have enough coaching data from the concierge beta (50-100 conversations, 1,000+ coaching turns). The mechanism: distill our methodology into a smaller, faster model that runs on-device. The moat: nobody else has the coaching data to train this model.</p>
+      </div>
+      <div class="question">
+        <h3>Does this change what we build today?</h3>
+        <p>No. The shared data layer is the moat regardless of where inference happens. If Apple ships local inference, we swap the Claude API call for an on-device model call. The API contract stays the same. The data layer still feeds the model. The coaching methodology still drives the recommendations. Build the data layer. When local inference arrives, flip a switch.</p>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div class="questions">
-    <div class="question">
-      <h3>What does this look like for us, specifically?</h3>
-      <p>Focus Plan generation, coaching messages, habit suggestions, barrier detection. All running locally. The Cloudflare proxy becomes optional. The Claude API becomes a fallback, not a dependency. The iOS app becomes self-contained for the first time.</p>
-    </div>
-    <div class="question">
-      <h3>Is it iPhone 17 only?</h3>
-      <p>Unclear. If the 400B demo relies on iPhone 17 Pro's new Neural Engine, it may not trickle to iPad or older devices immediately. But Apple's pattern is to cascade capabilities downward within 1-2 generations. The M-series Macs (Mac Mini, MacBook Pro) likely already have the compute. The question is whether Apple exposes the APIs.</p>
-    </div>
-    <div class="question">
-      <h3>When do we deploy our own edge models?</h3>
-      <p>This is the bigger question. A fine-tuned model trained on our coaching methodology, our evidence layer, our intervention hierarchy would outperform a general-purpose 400B model for our specific use case. The timeline: after we have enough coaching data from the concierge beta (50-100 conversations, 1,000+ coaching turns). The mechanism: distill our methodology into a smaller, faster model that runs on-device. The moat: nobody else has the coaching data to train this model.</p>
-    </div>
-    <div class="question">
-      <h3>Does this change what we build today?</h3>
-      <p>No. The shared data layer is the moat regardless of where inference happens. If Apple ships local inference, we swap the Claude API call for an on-device model call. The API contract stays the same. The data layer still feeds the model. The coaching methodology still drives the recommendations. Build the data layer. When local inference arrives, flip a switch.</p>
-    </div>
-  </div>
-
+<div class="content">
   <div class="thesis">
     <div class="thesis-text">The data layer is the moat. Build that. When Apple ships local inference, <em>flip a switch.</em></div>
   </div>
-
 </div>
 
 <div class="footer">
