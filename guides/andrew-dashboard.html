@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew's Health Dashboard | Baseline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.06); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5;
+    --red: #8b2500; --red-bg: #fdf3f0;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  nav .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green); background: var(--green-bg); padding: 0.25rem 0.6rem;
+    border-radius: 100px; }
+
+  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hero .kicker::after { content: ''; flex: 1; height: 1px; background: var(--faint); max-width: 60px; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem;
+    margin: 2.25rem 0 0.75rem; color: var(--ink); }
+  h2:first-child { margin-top: 0; }
+  p { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.7; }
+  strong { font-weight: 600; }
+
+  .priority-card { background: var(--green-bg); border: 2px solid var(--green); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 1rem 0; box-shadow: var(--card-shadow); }
+  .priority-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.7rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem; }
+  .priority-label .num { background: var(--green); color: #fff; width: 20px; height: 20px;
+    border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; }
+  .priority-card h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.3rem; margin-bottom: 1rem; }
+
+  .metric-row { display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(45, 106, 79, 0.12); font-size: 0.85rem; }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-label { font-weight: 500; color: var(--ink); }
+  .metric-value { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+  .metric-detail { font-size: 0.72rem; color: var(--muted); margin-left: 0.35rem; }
+
+  .gauge-container { margin: 1rem 0 0.75rem; }
+  .gauge-bar { height: 10px; background: rgba(45, 106, 79, 0.15); border-radius: 5px; position: relative; }
+  .gauge-fill { height: 100%; background: var(--green); border-radius: 5px; }
+  .gauge-target { position: absolute; top: -4px; right: 0; height: 18px; width: 2px; background: var(--ink); border-radius: 1px; }
+  .gauge-labels { display: flex; justify-content: space-between; margin-top: 0.35rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+
+  .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
+  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
+  .tip-card.green { background: var(--green-bg); border-left-color: var(--green); }
+  .tip-card.green h4 { color: var(--green); }
+
+  .bodycomp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1rem 0; }
+  .bc-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
+    padding: 1rem; box-shadow: var(--card-shadow); text-align: center; }
+  .bc-card .bc-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.4rem; color: var(--ink); line-height: 1.2; }
+  .bc-card .bc-unit { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+    color: var(--muted); letter-spacing: 0.05em; }
+  .bc-card .bc-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .recovery-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin: 1rem 0; }
+  .rv-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
+    padding: 0.85rem 0.75rem; box-shadow: var(--card-shadow); text-align: center; }
+  .rv-card .rv-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 1.2rem; color: var(--ink); line-height: 1.2; }
+  .rv-card .rv-unit { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+    color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .rv-card .rv-label { font-size: 0.65rem; color: var(--muted); margin-top: 0.15rem; }
+  .rv-standing { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+    margin-top: 0.2rem; padding: 0.1rem 0.4rem; border-radius: 100px; display: inline-block; }
+  .standing-optimal { background: var(--green-bg); color: var(--green); }
+  .standing-moderate { background: var(--accent-soft); color: var(--accent); }
+  .standing-concerning { background: var(--red-bg); color: var(--red); }
+  .standing-inprogress { background: var(--accent-soft); color: var(--accent); }
+
+  .scorecard { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+  .scorecard th { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: left;
+    padding: 0.6rem 0.5rem; border-bottom: 2px solid var(--warm); }
+  .scorecard th:nth-child(3), .scorecard td:nth-child(3) { text-align: center; }
+  .scorecard th:last-child, .scorecard td:last-child { text-align: center; }
+  .scorecard td { padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--warm); }
+  .scorecard tr:last-child td { border-bottom: none; }
+  .sc-name { font-weight: 500; }
+  .sc-value { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+  .sc-unit { font-size: 0.7rem; color: var(--muted); }
+  .sc-standing { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+    padding: 0.15rem 0.5rem; border-radius: 100px; white-space: nowrap; }
+  .sc-pct { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+  .sc-bar { width: 60px; height: 4px; background: var(--warm); border-radius: 2px;
+    display: inline-block; vertical-align: middle; margin-left: 0.25rem; overflow: hidden; }
+  .sc-bar-fill { height: 100%; border-radius: 2px; display: block; }
+
+  .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 2.5rem 1.25rem 1.25rem; }
+    .content { padding: 0 1.25rem 2rem; }
+    .bodycomp-grid { grid-template-columns: 1fr 1fr; }
+    .recovery-grid { grid-template-columns: repeat(3, 1fr); }
+    .priority-card { padding: 1.25rem 1.5rem; }
+    .scorecard { font-size: 0.75rem; }
+    .footer { flex-direction: column; gap: 0.25rem; }
+  }
+  @media (max-width: 420px) {
+    .recovery-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Baseline<span>.</span></a>
+    <span class="badge">Health Dashboard</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Built for Andrew</div>
+  <h1>Your <em>Health</em> Picture</h1>
+  <p class="subtitle">Priorities: Sleep, Body Composition. Updated March 25, 2026.</p>
+</div>
+
+<div class="content">
+
+  <!-- PRIORITY 1: SLEEP -->
+  <div class="priority-card">
+    <div class="priority-label"><span class="num">1</span> Priority: Sleep</div>
+    <h3>Sleep is the foundation. Everything else builds on it.</h3>
+
+    <div class="gauge-container">
+      <div class="gauge-bar">
+        <div class="gauge-fill" style="width: 91.4%;"></div>
+        <div class="gauge-target"></div>
+      </div>
+      <div class="gauge-labels">
+        <span>6.4 hrs avg</span>
+        <span>7.0 hr target</span>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      <span class="metric-label">Sleep Duration</span>
+      <span><span class="metric-value">6.4 hrs</span><span class="metric-detail">target 7.0, gap -0.6 hrs</span></span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-label">Sleep Regularity</span>
+      <span><span class="metric-value">93.6 min</span><span class="metric-detail">std dev, 10th percentile</span></span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-label">Sleep Debt</span>
+      <span><span class="metric-value">~4.2 hrs</span><span class="metric-detail">this week</span></span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-label">HRV</span>
+      <span><span class="metric-value">75.9 ms</span><span class="metric-detail">RMSSD, trending up</span></span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-label">Resting HR</span>
+      <span><span class="metric-value">48.4 bpm</span><span class="metric-detail">excellent</span></span>
+    </div>
+  </div>
+
+  <div class="tip-card green">
+    <h4>Coaching Signal</h4>
+    <p>Averaging 6.4hrs vs 7.0hr target. Not critical yet, but the deficit erodes HRV and willpower over time.</p>
+  </div>
+
+  <div class="tip-card">
+    <h4>Note</h4>
+    <p>Lofta sleep test tonight. If sleep apnea confirms, this changes everything.</p>
+  </div>
+
+  <!-- PRIORITY 2: BODY COMPOSITION -->
+  <h2>Body Composition</h2>
+  <p>Cutting since January. <a href="https://andrewdeal.info/guides/cut-tracker" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(184, 134, 11, 0.3);">Full cut tracker here.</a></p>
+
+  <div class="bodycomp-grid">
+    <div class="bc-card">
+      <div class="bc-value">193.1</div>
+      <div class="bc-unit">lbs</div>
+      <div class="bc-label">Current</div>
+    </div>
+    <div class="bc-card">
+      <div class="bc-value">188.0</div>
+      <div class="bc-unit">lbs</div>
+      <div class="bc-label">Target</div>
+    </div>
+    <div class="bc-card">
+      <div class="bc-value">9.9</div>
+      <div class="bc-unit">lbs lost</div>
+      <div class="bc-label">Total</div>
+    </div>
+    <div class="bc-card">
+      <div class="bc-value" style="color: var(--red);">May 16</div>
+      <div class="bc-unit">&nbsp;</div>
+      <div class="bc-label">Hard Stop</div>
+    </div>
+  </div>
+
+  <!-- RECOVERY SNAPSHOT -->
+  <h2>Recovery Snapshot</h2>
+
+  <div class="recovery-grid">
+    <div class="rv-card">
+      <div class="rv-value">75.9</div>
+      <div class="rv-unit">ms RMSSD</div>
+      <div class="rv-label">HRV</div>
+      <div class="rv-standing standing-optimal">Strong</div>
+    </div>
+    <div class="rv-card">
+      <div class="rv-value">48.4</div>
+      <div class="rv-unit">bpm</div>
+      <div class="rv-label">RHR</div>
+      <div class="rv-standing standing-optimal">Excellent</div>
+    </div>
+    <div class="rv-card">
+      <div class="rv-value">47.0</div>
+      <div class="rv-unit">ml/kg/min</div>
+      <div class="rv-label">VO2 Max</div>
+      <div class="rv-standing standing-optimal">Good</div>
+    </div>
+    <div class="rv-card">
+      <div class="rv-value">10,974</div>
+      <div class="rv-unit">steps/day</div>
+      <div class="rv-label">Steps</div>
+      <div class="rv-standing standing-optimal">90th pctl</div>
+    </div>
+    <div class="rv-card">
+      <div class="rv-value">137</div>
+      <div class="rv-unit">min/week</div>
+      <div class="rv-label">Zone 2</div>
+      <div class="rv-standing standing-moderate">Moderate</div>
+    </div>
+  </div>
+
+  <!-- FULL SCORECARD -->
+  <h2>Full Score Card</h2>
+  <p>All tracked metrics from the scoring engine, ordered by tier and percentile.</p>
+
+  <table class="scorecard" id="scorecardTable">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Value</th>
+        <th>Percentile</th>
+        <th>Standing</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+</div>
+
+<div class="footer">
+  <span>Built by Andrew Deal. Data from Garmin + Kiso.</span>
+  <span>March 2026</span>
+</div>
+
+<script>
+var scores = [
+  {"name": "Sleep Regularity", "value": 93.6, "unit": "min std dev", "standing": "Concerning", "percentile": 10, "tier": 1},
+  {"name": "Daily Steps", "value": 10974, "unit": "steps/day", "standing": "Optimal", "percentile": 90, "tier": 1},
+  {"name": "Sleep Duration", "value": 6.4, "unit": "hrs/night", "standing": "Moderate", "percentile": 35, "tier": 1},
+  {"name": "HRV (RMSSD)", "value": 75.9, "unit": "ms", "standing": "Optimal", "percentile": 80, "tier": 1},
+  {"name": "Resting Heart Rate", "value": 48.4, "unit": "bpm", "standing": "Optimal", "percentile": 92, "tier": 1},
+  {"name": "VO2 Max", "value": 47.0, "unit": "ml/kg/min", "standing": "Optimal", "percentile": 85, "tier": 1},
+  {"name": "Zone 2 Cardio", "value": 137, "unit": "min/week", "standing": "Moderate", "percentile": 65, "tier": 2},
+  {"name": "Body Composition", "value": 193.1, "unit": "lbs (cutting)", "standing": "In Progress", "percentile": 50, "tier": 2}
+];
+
+scores.sort(function(a, b) { return a.tier - b.tier || b.percentile - a.percentile; });
+
+function standingClass(s) {
+  if (s === 'Optimal') return 'standing-optimal';
+  if (s === 'Moderate' || s === 'In Progress') return 'standing-moderate';
+  return 'standing-concerning';
+}
+
+function barColor(s) {
+  if (s === 'Optimal') return 'var(--green)';
+  if (s === 'Moderate' || s === 'In Progress') return 'var(--accent)';
+  return 'var(--red)';
+}
+
+var tbody = document.querySelector('#scorecardTable tbody');
+scores.forEach(function(m) {
+  var tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td class="sc-name">' + m.name + '</td>' +
+    '<td><span class="sc-value">' + m.value.toLocaleString() + '</span> <span class="sc-unit">' + m.unit + '</span></td>' +
+    '<td><span class="sc-pct">' + m.percentile + 'th</span> ' +
+      '<span class="sc-bar"><span class="sc-bar-fill" style="width:' + m.percentile + '%; background:' + barColor(m.standing) + '"></span></span></td>' +
+    '<td><span class="sc-standing ' + standingClass(m.standing) + '">' + m.standing + '</span></td>';
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
