@@ -10,93 +10,151 @@
 <style>
   :root {
     --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
-    --accent-soft: rgba(184, 134, 11, 0.08); --muted: #78716c; --faint: #d6d3cd;
+    --accent-soft: rgba(184, 134, 11, 0.06); --muted: #78716c; --faint: #d6d3cd;
     --green: #2d6a4f; --green-bg: #f2f8f5;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { font-size: 18px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.75; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+
+  /* --- NAV --- */
   nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
-    backdrop-filter: blur(20px); padding: 1rem 2rem; border-bottom: 1px solid var(--faint); }
-  .nav-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.7rem;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
     letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
   nav .logo span { color: var(--accent); }
+  nav .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green); background: var(--green-bg); padding: 0.25rem 0.6rem;
+    border-radius: 100px; }
 
-  .hero { max-width: 720px; margin: 0 auto; padding: 6rem 2rem 3rem; }
-  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2.2rem, 6vw, 3.2rem);
-    line-height: 1.1; margin-bottom: 1.5rem; }
+  /* --- HERO --- */
+  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hero .kicker::after { content: ''; flex: 1; height: 1px; background: var(--faint); max-width: 60px; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.75rem; }
   .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero .subtitle { font-size: 1rem; color: var(--muted); max-width: 520px; line-height: 1.7; }
+  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
 
-  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 4rem; }
+  /* --- CONTENT --- */
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
 
-  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.8rem;
-    margin: 3rem 0 0.5rem; color: var(--ink); }
-  .divider { width: 50px; height: 2px; background: var(--accent); margin: 0 0 1.5rem; }
-  p { margin: 1rem 0; font-size: 0.95rem; line-height: 1.8; }
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem;
+    margin: 2.25rem 0 0.75rem; color: var(--ink); }
+  h2:first-child { margin-top: 0; }
+  p { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.7; }
   strong { font-weight: 600; }
 
+  /* --- WORKOUT CARDS --- */
+  .workout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
   .workout-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
-    padding: 2rem; margin: 1.5rem 0; }
-  .workout-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem;
-    letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .workout-card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04); }
+  .workout-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem; }
+  .workout-card h3 .day-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
   .exercise { display: flex; justify-content: space-between; align-items: baseline;
-    padding: 0.6rem 0; border-bottom: 1px solid var(--warm); font-size: 0.9rem; }
+    padding: 0.45rem 0; border-bottom: 1px solid var(--warm); font-size: 0.85rem; }
   .exercise:last-child { border-bottom: none; }
   .exercise-name { font-weight: 500; }
-  .exercise-sets { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--muted); }
+  .exercise-name a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--faint); transition: border-color 0.15s; }
+  .exercise-name a:hover { border-color: var(--accent); color: var(--accent); }
+  .exercise-name .video-icon { font-size: 0.7rem; color: var(--muted); margin-left: 0.3rem; opacity: 0.5; transition: opacity 0.15s; }
+  .exercise-name a:hover .video-icon { opacity: 1; color: var(--accent); }
+  .exercise-sets { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
 
-  .week-toggle { display: flex; gap: 0; margin: 1.5rem 0; border-radius: 8px; overflow: hidden;
-    border: 1px solid var(--warm); width: fit-content; }
-  .week-toggle span { padding: 0.5rem 1.5rem; font-size: 0.8rem; font-weight: 500;
-    background: #fff; color: var(--muted); }
+  .week-toggle { display: flex; gap: 0; margin: 1rem 0; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--warm); width: fit-content; font-size: 0.75rem; }
+  .week-toggle span { padding: 0.4rem 1.2rem; font-weight: 500; background: #fff; color: var(--muted); cursor: pointer;
+    transition: background 0.15s, color 0.15s; }
   .week-toggle span.active { background: var(--ink); color: #fff; }
 
+  /* --- PULL QUOTE --- */
+  .pull-quote { font-family: 'Instrument Serif', serif; font-size: 1.15rem; font-style: italic;
+    color: var(--muted); margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--warm);
+    border-bottom: 1px solid var(--warm); text-align: center; }
+
+  /* --- TIP CARDS --- */
   .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
-    padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-radius: 0 10px 10px 0; }
-  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-  .tip-card p { font-size: 0.88rem; margin: 0.4rem 0; }
+    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
+  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
+  .tip-card p + p { margin-top: 0.5rem; }
 
-  .routine-card { background: var(--green-bg); border-radius: 12px; padding: 1.5rem 2rem; margin: 1.5rem 0; }
-  .routine-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
-  .routine-item { font-size: 0.88rem; padding: 0.4rem 0; display: flex; gap: 0.75rem; }
-  .routine-time { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--green);
-    min-width: 50px; }
+  /* --- ROUTINE CARDS --- */
+  .routine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .routine-card { background: var(--green-bg); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: var(--card-shadow); }
+  .routine-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
+  .routine-item { font-size: 0.82rem; padding: 0.3rem 0; display: flex; gap: 0.5rem; line-height: 1.5; }
+  .routine-item a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--faint); transition: border-color 0.15s; }
+  .routine-item a:hover { border-color: var(--green); color: var(--green); }
+  .routine-time { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green);
+    min-width: 42px; flex-shrink: 0; padding-top: 1px; }
 
-  .rule { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-style: italic;
-    color: var(--muted); margin: 2rem 0; padding: 1.5rem 0; border-top: 1px solid var(--warm);
-    border-bottom: 1px solid var(--warm); }
+  /* --- RULES (CLOSER) --- */
+  .rules-card { background: var(--ink); color: var(--paper); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 1.5rem 0; }
+  .rules-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .rule-item { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; line-height: 1.6; }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-item strong { color: #fff; font-weight: 600; }
+  .rule-item span { color: rgba(250,249,246,0.7); }
 
-  .footer { max-width: 720px; margin: 0 auto; padding: 2rem; border-top: 1px solid var(--faint);
-    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--faint); }
+  /* --- CHECK-IN --- */
+  .checkin { background: #fff; border: 2px solid var(--accent); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0; text-align: center; }
+  .checkin p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .checkin .cta { font-family: 'Instrument Serif', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.25rem; }
 
+  /* --- WIFE SECTION --- */
+  .wife-note { display: flex; gap: 1rem; align-items: flex-start; background: #fff;
+    border: 1px solid var(--warm); border-radius: 12px; padding: 1.25rem 1.5rem;
+    margin: 1rem 0; box-shadow: var(--card-shadow); }
+  .wife-note .icon { font-size: 1.5rem; flex-shrink: 0; padding-top: 2px; }
+  .wife-note p { font-size: 0.85rem; margin: 0; line-height: 1.65; }
+
+  /* --- FOOTER --- */
+  .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
+
+  /* --- RESPONSIVE --- */
   @media (max-width: 640px) {
-    .hero { padding: 4rem 1.5rem 2rem; }
-    .content { padding: 0 1.5rem 3rem; }
-    .workout-card { padding: 1.5rem; }
+    .hero { padding: 2.5rem 1.25rem 1.25rem; }
+    .content { padding: 0 1.25rem 2rem; }
+    .workout-grid { grid-template-columns: 1fr; }
+    .routine-grid { grid-template-columns: 1fr; }
+    .workout-card { padding: 1rem 1.25rem; }
+    .rules-card { padding: 1.25rem 1.5rem; }
+    .footer { flex-direction: column; gap: 0.25rem; }
   }
 </style>
 </head>
 <body>
 
-<nav><div class="nav-inner"><a href="/" class="logo">Baseline<span>.</span></a></div></nav>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Baseline<span>.</span></a>
+    <span class="badge">Personalized Program</span>
+  </div>
+</nav>
 
 <div class="hero">
-  <div class="kicker">Your Program</div>
-  <h1>Manny's <em>3-Day</em> Strength Program</h1>
+  <div class="kicker">Built for Manny</div>
+  <h1>Your <em>3-Day</em> Strength Program</h1>
   <p class="subtitle">Full body, 3x a week. Simple progression. Built for your home gym. Your wife runs the same program at her own weight.</p>
 </div>
 
 <div class="content">
 
   <h2>The Program</h2>
-  <div class="divider"></div>
   <p>Two workouts, alternating. Train Monday, Wednesday, Friday. Add 5 lbs to each lift every session. When you stall, take 10% off and work back up. That's the whole system.</p>
 
   <div class="week-toggle">
@@ -104,102 +162,98 @@
     <span>Week 2: B / A / B</span>
   </div>
 
-  <div class="workout-card">
-    <h3>Day A</h3>
-    <div class="exercise">
-      <span class="exercise-name">Barbell Squat</span>
-      <span class="exercise-sets">3 x 5</span>
+  <div class="workout-grid">
+    <div class="workout-card">
+      <h3><span class="day-dot"></span> Day A</h3>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">3 x 5</span>
+      </div>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=vcBig73ojpE" target="_blank">Bench Press<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">3 x 5</span>
+      </div>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=axoeDmW0oAY" target="_blank">Barbell Row<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">3 x 5</span>
+      </div>
     </div>
-    <div class="exercise">
-      <span class="exercise-name">Bench Press</span>
-      <span class="exercise-sets">3 x 5</span>
-    </div>
-    <div class="exercise">
-      <span class="exercise-name">Barbell Row</span>
-      <span class="exercise-sets">3 x 5</span>
+
+    <div class="workout-card">
+      <h3><span class="day-dot"></span> Day B</h3>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">3 x 5</span>
+      </div>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wol7Hko8RhY" target="_blank">Overhead Press<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">3 x 5</span>
+      </div>
+      <div class="exercise">
+        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wYREQkVtvEc" target="_blank">Deadlift<span class="video-icon">&#9654;</span></a></span>
+        <span class="exercise-sets">1 x 5</span>
+      </div>
     </div>
   </div>
 
-  <div class="workout-card">
-    <h3>Day B</h3>
-    <div class="exercise">
-      <span class="exercise-name">Barbell Squat</span>
-      <span class="exercise-sets">3 x 5</span>
-    </div>
-    <div class="exercise">
-      <span class="exercise-name">Overhead Press</span>
-      <span class="exercise-sets">3 x 5</span>
-    </div>
-    <div class="exercise">
-      <span class="exercise-name">Deadlift</span>
-      <span class="exercise-sets">1 x 5</span>
-    </div>
-  </div>
+  <div class="pull-quote">The squat stays every session. It's the king of all lifts.</div>
 
-  <p class="rule">The squat stays every session. It's the king of all lifts.</p>
-
-  <h2>How to Get Lean and Muscular</h2>
-  <div class="divider"></div>
-  <p>You don't need to bulk and cut. Eat enough protein (aim for 150g+ a day) and keep lifting heavier. Your body recomps naturally when the training signal is strong and protein is high. Especially if you're not super lean yet, you can build muscle and lose fat at the same time.</p>
+  <h2>Getting Lean and Muscular</h2>
+  <p>You don't need to bulk and cut. Eat enough protein (150g+ a day) and keep lifting heavier. Your body recomps naturally when the training signal is strong and protein is high. Especially if you're not super lean yet, you can build muscle and lose fat at the same time.</p>
 
   <div class="tip-card">
-    <h4>Tips That Help</h4>
-    <p><strong>Keep 1-2 reps in reserve.</strong> Finish each set thinking "I could have done 1-2 more." Going to absolute failure every set burns you out and kills recovery. Save failure for the last set if you want to push it.</p>
-    <p><strong>Control the lowering phase.</strong> On every rep, take 2-3 seconds on the way down. Muscle responds more to the stretch under load. Don't bounce out of the bottom.</p>
-    <p><strong>Want more size?</strong> Try adding one set of 8-12 reps at lighter weight after your 3x5 on bench and squat. That extra volume is where hypertrophy tends to live.</p>
+    <h4>Technique Tips</h4>
+    <p><strong>Keep 1-2 reps in reserve.</strong> Finish each set thinking "I could have done 1-2 more." Going to failure every set burns you out. Save it for the last set if you want to push.</p>
+    <p><strong>Control the lowering phase.</strong> Take 2-3 seconds on the way down. Muscle responds more to the stretch under load. Don't bounce out of the bottom.</p>
+    <p><strong>Want more size?</strong> Add one set of 8-12 reps at lighter weight after your 3x5 on bench and squat. That extra volume is where hypertrophy lives.</p>
   </div>
 
-  <h2>Warm-Up</h2>
-  <div class="divider"></div>
-  <p>5 minutes before every session. Non-negotiable.</p>
+  <h2>Warm-Up & Cooldown</h2>
+  <p>5 minutes each, every session. Non-negotiable.</p>
 
-  <div class="routine-card">
-    <h3>Before You Lift</h3>
-    <div class="routine-item"><span class="routine-time">2 min</span> Jump rope or jog in place</div>
-    <div class="routine-item"><span class="routine-time">30 sec</span> Arm circles each direction</div>
-    <div class="routine-item"><span class="routine-time">1 min</span> 10 bodyweight squats</div>
-    <div class="routine-item"><span class="routine-time">1 min</span> 10 hip hinges (touch toes, stand up)</div>
-    <div class="routine-item"><span class="routine-time">1 min</span> 1 warm-up set at 50% weight for your first lift</div>
+  <div class="routine-grid">
+    <div class="routine-card">
+      <h3>Before You Lift</h3>
+      <div class="routine-item"><span class="routine-time">2 min</span> Jump rope or jog in place</div>
+      <div class="routine-item"><span class="routine-time">30s</span> Arm circles each direction</div>
+      <div class="routine-item"><span class="routine-time">1 min</span> 10 bodyweight squats</div>
+      <div class="routine-item"><span class="routine-time">1 min</span> 10 hip hinges</div>
+      <div class="routine-item"><span class="routine-time">1 min</span> Warm-up set at 50% weight</div>
+    </div>
+
+    <div class="routine-card">
+      <h3>After You Lift</h3>
+      <div class="routine-item"><span class="routine-time">90s</span> <a href="https://www.youtube.com/watch?v=d9pOjXCKGN8" target="_blank">Couch stretch</a> (each leg)</div>
+      <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=xSdsjliJ5Ns" target="_blank">Doorway chest stretch</a></div>
+      <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=YSsUKckE5V0" target="_blank">Hang from bar or doorframe</a></div>
+      <div class="routine-item"><span class="routine-time">30s</span> 5 deep, slow breaths</div>
+    </div>
   </div>
 
-  <h2>Cooldown</h2>
-  <div class="divider"></div>
-  <p>5 minutes after every session. This is where you stay injury-free.</p>
-
-  <div class="routine-card">
-    <h3>After You Lift</h3>
-    <div class="routine-item"><span class="routine-time">90 sec</span> Couch stretch (each leg)</div>
-    <div class="routine-item"><span class="routine-time">60 sec</span> Doorway chest stretch (each side)</div>
-    <div class="routine-item"><span class="routine-time">60 sec</span> Hang from pull-up bar or doorframe</div>
-    <div class="routine-item"><span class="routine-time">30 sec</span> 5 deep, slow breaths</div>
+  <div class="wife-note">
+    <span class="icon">👫</span>
+    <p><strong>For your wife:</strong> Same exact program. Same lifts, same progression, same warm-up and cooldown. Start lighter, add 5 lbs per session. Compound lifts work the same for everyone. She'll build functional strength and lean out. There is no such thing as a separate "women's program."</p>
   </div>
 
-  <h2>For Your Wife</h2>
-  <div class="divider"></div>
-  <p>Same exact program. Same lifts, same progression, same warm-up and cooldown. Start with lighter weight and add 5 lbs per session at the same pace. The compound lifts work the same for everyone. She'll build functional strength and lean out without needing a separate "women's program." There is no such thing.</p>
-
-  <h2>The Rules</h2>
-  <div class="divider"></div>
-
-  <div class="tip-card">
-    <h4>Keep It Simple</h4>
-    <p><strong>Never miss two in a row.</strong> Miss a session, that's life. Miss two, you're building a habit of not showing up.</p>
-    <p><strong>150g protein a day.</strong> This is the one nutrition thing that matters. Chicken, beef, eggs, protein shakes, whatever gets you there.</p>
-    <p><strong>Add 5 lbs every session.</strong> This is the magic. Small, consistent progression is how you go from lifting light to lifting heavy without ever feeling overwhelmed.</p>
-    <p><strong>Sleep matters more than supplements.</strong> 7+ hours. No supplement will outwork bad sleep.</p>
-    <p><strong>Train together.</strong> You and your wife lifting together is the accountability system that actually works. Your kid sees parents who take care of themselves. That's the real program.</p>
+  <div class="rules-card">
+    <h3>The Rules</h3>
+    <div class="rule-item"><strong>Never miss two in a row.</strong> <span>Miss one, that's life. Miss two, you're building a habit of not showing up.</span></div>
+    <div class="rule-item"><strong>150g protein a day.</strong> <span>Chicken, beef, eggs, shakes. This is the one nutrition thing that matters.</span></div>
+    <div class="rule-item"><strong>Add 5 lbs every session.</strong> <span>Small, consistent progression. Light to heavy without ever feeling overwhelmed.</span></div>
+    <div class="rule-item"><strong>Sleep > supplements.</strong> <span>7+ hours. Nothing you can buy will outwork bad sleep.</span></div>
+    <div class="rule-item"><strong>Train together.</strong> <span>You and your wife lifting is the accountability that works. Your kid sees parents who take care of themselves.</span></div>
   </div>
 
-</div>
-
-  <h2>Check In</h2>
-  <div class="divider"></div>
-  <p>Give this a couple weeks and let me know how it feels. What's heavy, what's easy, what's sore. We can adjust from there. The first week might feel light. That's by design. The weight catches up fast.</p>
+  <div class="checkin">
+    <p class="cta">Give this a couple weeks, then check in.</p>
+    <p>What's heavy, what's easy, what's sore. We adjust from there. The first week might feel light. That's by design.</p>
+  </div>
 
 </div>
 
 <div class="footer">
-  Built for Manny by Andrew Deal. March 2026.
+  <span>Built for Manny by Andrew Deal</span>
+  <span>March 2026</span>
 </div>
 
 </body>
