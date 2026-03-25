@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | LinkedIn Content Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --linkedin: #0a66c2;
+    --linkedin-bg: rgba(10, 102, 194, 0.05);
+    --linkedin-light: #e8f0fe;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--green);
+    color: var(--white);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 50ch;
+    line-height: 1.6;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- STRENGTH CARDS --- */
+  .strength-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .strength-card {
+    background: var(--white);
+    padding: 1.4rem 1.5rem;
+  }
+
+  .strength-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .strength-card .label {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .strength-card .detail {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* --- CALLOUT BOX --- */
+  .callout {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .callout strong {
+    color: var(--accent);
+  }
+
+  .callout ul {
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+    padding-left: 1.2rem;
+  }
+
+  .callout li {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+  }
+
+  /* --- LINKEDIN POST PREVIEW CARDS --- */
+  .post-card {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .post-card-header {
+    padding: 1.2rem 1.6rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .post-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--linkedin);
+    color: #fff;
+    padding: 2px 8px;
+    flex-shrink: 0;
+  }
+
+  .post-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .post-body {
+    background: var(--linkedin-light);
+    border-top: 1px solid var(--faint);
+    padding: 1.4rem 1.6rem;
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: #1a1a1a;
+    white-space: pre-line;
+  }
+
+  .post-body .hashtags {
+    color: var(--linkedin);
+    margin-top: 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 1.5rem 0;
+  }
+
+  .timeline-step {
+    background: var(--white);
+    padding: 1.4rem 1.5rem;
+  }
+
+  .timeline-step .period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-step .action {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-step .note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* --- COMMENTING LIST --- */
+  .comment-targets li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .rule-highlight {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .rule-highlight strong {
+    color: var(--green);
+  }
+
+  /* --- METRICS GRID --- */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 1.5rem 0;
+  }
+
+  .metric-cell {
+    background: var(--white);
+    padding: 1rem 1.2rem;
+  }
+
+  .metric-cell .metric-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .metric-cell .metric-meaning {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* --- ACCENT CALLOUT --- */
+  .accent-callout {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .accent-callout strong {
+    color: var(--green);
+  }
+
+  /* --- REFERENCE BOX --- */
+  .reference-box {
+    background: var(--warm);
+    border: 1px solid var(--faint);
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .reference-box .ref-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .reference-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .reference-box li {
+    font-size: 0.88rem;
+    margin-bottom: 0.35rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .reference-box li strong {
+    color: var(--ink);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .strength-cards { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Guide</span></a>
+    <a href="hub.html" class="back-link">&larr; Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Content Strategy</div>
+  <h1>LinkedIn Content Strategy</h1>
+  <p class="subtitle">Why LinkedIn, what to post, how to think about cadence. Start with one post.</p>
+  <div class="doc-date">March 25, 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- WHY LINKEDIN -->
+  <hr>
+  <h2>Why LinkedIn, Why Now</h2>
+
+  <p>LinkedIn is the only platform where Mike&rsquo;s target audience already lives: veteran hiring managers, workforce development professionals, defense contractors, HR leaders, L&amp;D directors, and the LearnAIR team. Justin, Teresa, Bobby, Trisha, Joe. They&rsquo;re all there. Every post Mike writes, they see.</p>
+
+  <p>LinkedIn rewards three things that play to Mike&rsquo;s strengths:</p>
+
+  <div class="strength-cards">
+    <div class="strength-card">
+      <div class="num">01</div>
+      <div class="label">Authenticity over polish</div>
+      <div class="detail">Real experience beats produced content. Mike&rsquo;s journey from &ldquo;what is a terminal?&rdquo; to building with AI in 3 weeks is the content.</div>
+    </div>
+    <div class="strength-card">
+      <div class="num">02</div>
+      <div class="label">Professional context</div>
+      <div class="detail">Unlike X where you&rsquo;re shouting into the void, LinkedIn posts land in the feeds of people who hire, fund, and partner. The audience is already filtered.</div>
+    </div>
+    <div class="strength-card">
+      <div class="num">03</div>
+      <div class="label">Saves are the king metric</div>
+      <div class="detail">When someone saves your post, LinkedIn&rsquo;s algorithm treats it as the highest signal of value. Posts that teach something specific get saved. Mike&rsquo;s mission command insights are inherently saveable.</div>
+    </div>
+  </div>
+
+  <!-- WHY IT MATTERS FOR LEARNAIR -->
+  <div class="callout">
+    <strong>Why it matters for LearnAIR</strong>
+    <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">If Mike is posting about mission command and AI supervision before the 4-way call, Justin and Teresa see someone who isn&rsquo;t just talking in meetings but building in public. That&rsquo;s a different level of commitment.</p>
+    <ul>
+      <li>Creates demand signal &mdash; if veterans and employers react, that&rsquo;s proof the thesis resonates</li>
+      <li>Builds Mike&rsquo;s personal brand independent of LearnAIR &mdash; that&rsquo;s leverage in any negotiation</li>
+      <li>Generates testimonial content in real time &mdash; his &ldquo;oh shit&rdquo; moments become proof points</li>
+      <li>Attracts the exact people we need: employers feeling the AI gap, veterans looking for direction, workforce professionals who get it</li>
+    </ul>
+  </div>
+
+  <!-- STARTER POSTS -->
+  <hr>
+  <h2>Starter Posts</h2>
+
+  <p>Pick one. Don&rsquo;t overthink it. The first post is the hardest. After that, it gets easier.</p>
+
+  <div class="post-card">
+    <div class="post-card-header">
+      <span class="post-number">Post 1</span>
+      <span class="post-title">The Journey</span>
+    </div>
+    <div class="post-body">Three weeks ago I didn&rsquo;t know what a terminal was. Not a flight terminal. A computer terminal. I&rsquo;d been using ChatGPT like everyone else, typing questions and getting answers. Then my brother showed me something different.
+
+He opened a black screen, typed a sentence, and an AI agent read our entire project, wrote a research brief, and published it to a website. In one prompt. No clicking, no menus, no copy-paste.
+
+I&rsquo;m a Marine infantry officer turned management consultant turned breathwork facilitator. Tech was never my lane. But watching what&rsquo;s possible now, I realized the gap isn&rsquo;t technical skill. It&rsquo;s knowing how to manage these systems. And that&rsquo;s something I&rsquo;ve been trained to do my entire career.
+
+In the military we call it mission command. Define the boundaries, set the zone of autonomy, validate the outcomes. That&rsquo;s exactly what AI needs right now. Not more engineers. More supervisors.
+
+I&rsquo;m early in this journey. But the through-line is already clear.
+
+<span class="hashtags">#AI #veterans #missioncommand #workforcedevelopment #AIliteracy</span></div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-card-header">
+      <span class="post-number">Post 2</span>
+      <span class="post-title">The Thesis</span>
+    </div>
+    <div class="post-body">AI has given every individual 10x leverage. The question nobody&rsquo;s answered: how do you capture that at the organizational level?
+
+The bottleneck isn&rsquo;t the technology. It&rsquo;s the processes, coordination, and accountability that haven&rsquo;t caught up.
+
+Veterans spend their careers managing exactly this kind of problem. In the military it&rsquo;s called mission command. Defining boundaries, validating outcomes, driving results through ambiguity.
+
+That skill set transfers directly to AI ecosystem supervision. And almost nobody is talking about it yet.
+
+Working on something here. More to come.
+
+<span class="hashtags">#AI #veterans #workforcetransformation</span></div>
+  </div>
+
+  <div class="post-card">
+    <div class="post-card-header">
+      <span class="post-number">Post 3</span>
+      <span class="post-title">The Learning Moment</span>
+    </div>
+    <div class="post-body">Just finished a session on Custom GPTs and AI agents. One person in the room built a fully functional HR compliance portal in under an hour. From scratch.
+
+That&rsquo;s the individual productivity story. And it&rsquo;s real.
+
+But here&rsquo;s what I keep coming back to: what happens when 50 people in your company each build their own tool? Who validates the outputs? Who coordinates the overlap? Who&rsquo;s accountable when the AI-generated policy template gets the FLSA requirements wrong?
+
+That&rsquo;s the gap. Individual building is solved. Organizational management of all that building is wide open.
+
+Curious: anyone else seeing this in their org?
+
+<span class="hashtags">#AI #workforcedesign #leadership</span></div>
+  </div>
+
+  <!-- CADENCE -->
+  <hr>
+  <h2>Cadence</h2>
+
+  <p>Don&rsquo;t batch-write. Write from what happened that day or that week. Freshness over perfection.</p>
+
+  <div class="timeline">
+    <div class="timeline-step">
+      <div class="period">Week 1</div>
+      <div class="action">One post</div>
+      <div class="note">Just one. See what happens. Don&rsquo;t overthink it.</div>
+    </div>
+    <div class="timeline-step">
+      <div class="period">Weeks 2&ndash;4</div>
+      <div class="action">2 posts / week</div>
+      <div class="note">One about learning, one about the thesis.</div>
+    </div>
+    <div class="timeline-step">
+      <div class="period">Month 2+</div>
+      <div class="action">3 posts / week</div>
+      <div class="note">If the energy is there. Quality over quantity, always.</div>
+    </div>
+  </div>
+
+  <!-- COMMENTING STRATEGY -->
+  <hr>
+  <h2>Commenting Strategy</h2>
+
+  <p>More important than posting at first. Comments on other people&rsquo;s posts build visibility faster than your own posts.</p>
+
+  <h3>Targets</h3>
+  <ul class="comment-targets">
+    <li><strong>Teresa Coats</strong> &mdash; posts on LinkedIn about AI workforce</li>
+    <li><strong>LearnAIR</strong> company posts</li>
+    <li><strong>Erik Brynjolfsson</strong> &mdash; 487 posts, very active</li>
+    <li><strong>Gina Raimondo</strong> &mdash; posts about workforce policy</li>
+    <li><strong>VetsinTech, Code Platoon, SkillBridge</strong>-related content</li>
+  </ul>
+
+  <div class="rule-highlight">
+    <strong>Rule:</strong> Add substance, not &ldquo;great post!&rdquo; One sentence of real insight or a question. That&rsquo;s it.
+  </div>
+
+  <!-- WHAT TO TRACK -->
+  <hr>
+  <h2>What to Track</h2>
+
+  <p>Don&rsquo;t chase likes. Chase saves and comments. One thoughtful comment from an employer or veteran is worth more than 100 likes.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-cell">
+      <div class="metric-name">Impressions</div>
+      <div class="metric-meaning">Are people seeing it?</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-name">Saves</div>
+      <div class="metric-meaning">Are people bookmarking it? Highest signal of value.</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-name">Comments</div>
+      <div class="metric-meaning">Are people engaging? What are they saying?</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-name">Profile Views</div>
+      <div class="metric-meaning">Are new people finding Mike?</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-name">Connection Requests</div>
+      <div class="metric-meaning">Are the right people reaching out?</div>
+    </div>
+  </div>
+
+  <!-- FORMAT TIPS -->
+  <hr>
+  <h2>Format Tips</h2>
+
+  <div class="reference-box">
+    <div class="ref-title">Quick Reference</div>
+    <ul>
+      <li><strong>Short paragraphs.</strong> One thought per paragraph. Mobile-first.</li>
+      <li><strong>Hook in the first line.</strong> LinkedIn truncates after ~2 lines. The first sentence has to earn the click.</li>
+      <li><strong>No hashtag spam.</strong> 3&ndash;5 relevant hashtags max, at the bottom.</li>
+      <li><strong>End with a question.</strong> Drives comments, which drive reach.</li>
+      <li><strong>Voice:</strong> Grounded. First-person. &ldquo;Here&rsquo;s what I&rsquo;m learning&rdquo; not &ldquo;here&rsquo;s what you should do.&rdquo;</li>
+      <li><strong>Links:</strong> Add the one-pager when the time is right (not in the first post). Never link to internal hub or strategy docs.</li>
+    </ul>
+  </div>
+
+  <!-- THE META POINT -->
+  <div class="accent-callout">
+    <strong>The meta point:</strong> Mike posting on LinkedIn is curriculum in action. He&rsquo;s learning to communicate the thesis publicly. That&rsquo;s a skill he&rsquo;ll need when talking to employers, funders, and veterans. The posts are practice reps for the real conversations. And if they resonate, they become the demand signal that validates everything.
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
