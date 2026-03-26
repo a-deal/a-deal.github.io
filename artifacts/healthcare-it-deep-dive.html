@@ -6,88 +6,288 @@
 <title>Healthcare IT: Why $5T Runs on 60-Year-Old Software | Distilled</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #7c3aed;
-    --accent-soft: rgba(124, 58, 237, 0.06); --muted: #78716c; --faint: #d6d3cd;
-    --green: #2d6a4f; --green-bg: #f2f8f5; --red: #8b2500; --red-bg: #fdf3f0;
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --ink: #1a202c;
+    --ink-soft: #3f3f46;
+    --paper: #ffffff;
+    --warm-bg: #faf8f5;
+    --section-bg: #f7f5f2;
+    --dark: #1c1c1e;
+    --dark-mid: #2a2a2e;
+    --coral: #d4654a;
+    --coral-soft: rgba(212, 101, 74, 0.08);
+    --coral-hover: #c05540;
+    --muted: #888888;
+    --faint: #e8e5e0;
+    --divider: #d6d3cd;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+    --card-shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.05);
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
-    backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
-  .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
-  nav .logo span { color: var(--accent); }
-  nav .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 0.25rem 0.6rem;
-    border-radius: 100px; }
-  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
-  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
-    line-height: 1.1; margin-bottom: 0.75rem; }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 520px; line-height: 1.6; }
-  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
-  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem; margin: 2.25rem 0 0.75rem; }
-  p { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.7; }
-  strong { font-weight: 600; }
-  .data-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
-    padding: 1.25rem 1.5rem; margin: 1rem 0; box-shadow: var(--card-shadow); }
-  .data-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-  .data-row { display: flex; justify-content: space-between; align-items: center;
-    padding: 0.45rem 0; border-bottom: 1px solid var(--warm); font-size: 0.85rem; }
+  html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font-family: 'Raleway', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.8; }
+
+  /* === NAV === */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(24px);
+    padding: 1.1rem 2.5rem;
+    border-bottom: 1px solid var(--faint);
+    transition: box-shadow 0.3s ease;
+  }
+  nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .nav-inner {
+    max-width: 820px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo {
+    font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.05rem;
+    color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+  }
+  nav .logo span { color: var(--coral); }
+  nav .badge {
+    font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--coral); background: var(--coral-soft);
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+  }
+
+  /* === HERO === */
+  .hero-wrap {
+    background: var(--dark);
+    padding: clamp(3rem, 8vw, 6rem) 2.5rem clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .hero {
+    max-width: 820px; margin: 0 auto;
+  }
+  .hero .kicker {
+    font-family: 'Raleway', sans-serif; font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 1.25rem;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-weight: 400;
+    font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+    line-height: 1.12; margin-bottom: 1.25rem;
+    color: #fff;
+  }
+  .hero h1 em { font-style: italic; color: var(--coral); }
+  .hero .subtitle {
+    font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.6);
+    max-width: 560px; line-height: 1.75; letter-spacing: 0.01em;
+  }
+  .hero .subtitle a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* === CONTENT === */
+  .content { max-width: 820px; margin: 0 auto; padding: 0 2.5rem 4rem; }
+
+  h2 {
+    font-family: 'Playfair Display', serif; font-weight: 500;
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+    margin: 2.5rem 0 0.75rem; line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .section-divider {
+    margin: clamp(2.5rem, 5vw, 4rem) 0 clamp(1.5rem, 3vw, 2rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--faint);
+  }
+  .section-divider .chapter-label {
+    font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--coral);
+  }
+
+  p {
+    margin: 0.65rem 0; font-size: 0.92rem; line-height: 1.85;
+    font-weight: 400; color: var(--ink-soft);
+  }
+  strong { font-weight: 600; color: var(--ink); }
+
+  /* === DATA CARDS === */
+  .data-card {
+    background: var(--paper); border: 1px solid var(--faint);
+    border-radius: 14px; padding: 1.5rem 1.75rem; margin: 1.25rem 0;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .data-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-1px);
+  }
+  .data-card h3 {
+    font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 1rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--faint);
+  }
+  .data-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.55rem 0; border-bottom: 1px solid rgba(0,0,0,0.04);
+    font-size: 0.85rem;
+  }
   .data-row:last-child { border-bottom: none; }
-  .data-name { font-weight: 500; }
-  .data-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); }
-  .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
-    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
-  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
-  .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
-  .pull-quote { font-family: 'Instrument Serif', serif; font-size: 1.15rem; font-style: italic;
-    color: var(--accent); margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--warm);
-    border-bottom: 1px solid var(--warm); text-align: center; }
-  .timeline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-  .timeline-item { background: #fff; border: 1px solid var(--warm); border-radius: 8px; padding: 0.6rem 0.8rem;
-    font-size: 0.75rem; flex: 1; min-width: 100px; }
-  .timeline-item .year { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent); }
-  .timeline-item .label { color: var(--muted); margin-top: 0.2rem; }
-  .dark-card { background: var(--ink); color: var(--paper); border-radius: 16px;
-    padding: 1.75rem 2rem; margin: 1.5rem 0; }
-  .dark-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-  .dark-card p { font-size: 0.85rem; line-height: 1.6; color: rgba(250,249,246,0.8); margin: 0.5rem 0; }
-  .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
-    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
-  a { color: var(--accent); }
+  .data-name { font-weight: 400; color: var(--ink-soft); flex: 1; padding-right: 1rem; }
+  .data-value {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+    font-weight: 500; color: var(--coral); white-space: nowrap;
+  }
+
+  /* === CALLOUT CARDS === */
+  .callout {
+    border-radius: 14px; padding: 1.5rem 1.75rem; margin: 1.5rem 0;
+    position: relative; overflow: hidden;
+  }
+  .callout::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 4px; border-radius: 14px 0 0 14px;
+  }
+  .callout h4 {
+    font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .callout p { font-size: 0.88rem; margin: 0.35rem 0; line-height: 1.75; }
+
+  .callout.coral { background: var(--coral-soft); }
+  .callout.coral::before { background: var(--coral); }
+  .callout.coral h4 { color: var(--coral); }
+
+  .callout.red { background: #fdf3f0; }
+  .callout.red::before { background: #b93e25; }
+  .callout.red h4 { color: #b93e25; }
+
+  .callout.green { background: #f0f7f4; }
+  .callout.green::before { background: #2d6a4f; }
+  .callout.green h4 { color: #2d6a4f; }
+
+  /* === PULL QUOTE === */
+  .pull-quote {
+    font-family: 'Playfair Display', serif; font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    font-style: italic; color: var(--ink); font-weight: 400;
+    margin: 2rem 0; padding: 1.75rem 0;
+    border-top: 2px solid var(--coral); border-bottom: 1px solid var(--faint);
+    text-align: left; line-height: 1.65;
+    position: relative;
+  }
+
+  /* === TIMELINE === */
+  .timeline { display: flex; flex-wrap: wrap; gap: 0.65rem; margin: 1.25rem 0; }
+  .timeline-item {
+    background: var(--warm-bg); border: 1px solid var(--faint);
+    border-radius: 10px; padding: 0.85rem 1rem;
+    font-size: 0.78rem; flex: 1; min-width: 110px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .timeline-item:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); }
+  .timeline-item .year {
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+    color: var(--coral); font-size: 0.8rem;
+  }
+  .timeline-item .label { color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+
+  /* === DARK CARD === */
+  .dark-card {
+    background: var(--dark); color: #fff; border-radius: 16px;
+    padding: clamp(1.75rem, 4vw, 2.5rem); margin: 2rem 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+  .dark-card h3 {
+    font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--coral); margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .dark-card p {
+    font-size: 0.88rem; line-height: 1.75;
+    color: rgba(255,255,255,0.72); margin: 0.65rem 0;
+  }
+  .dark-card strong { color: #fff; }
+
+  /* === CODE BLOCK === */
+  .code-block {
+    background: var(--dark); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    line-height: 1.8; overflow-x: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .code-block .comment { color: #6b7280; }
+  .code-block .key { color: #d4654a; }
+  .code-block .val { color: #e8c87a; }
+
+  /* === FULL-WIDTH DARK SECTION === */
+  .dark-section {
+    background: var(--dark); color: #fff;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 2.5rem;
+    margin: clamp(2.5rem, 5vw, 4rem) calc(-50vw + 50%) 0;
+    width: 100vw; position: relative; left: 50%; right: 50%;
+    margin-left: -50vw; margin-right: -50vw;
+  }
+  .dark-section .inner { max-width: 820px; margin: 0 auto; }
+  .dark-section h2 { color: #fff; }
+  .dark-section p { color: rgba(255,255,255,0.68); }
+  .dark-section strong { color: #fff; }
+  .dark-section .data-card {
+    background: var(--dark-mid); border-color: rgba(255,255,255,0.08);
+  }
+  .dark-section .data-card h3 { border-bottom-color: rgba(255,255,255,0.08); }
+  .dark-section .data-name { color: rgba(255,255,255,0.6); }
+  .dark-section .data-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+
+  /* === FOOTER === */
+  .footer-wrap { background: var(--dark); padding: 2rem 2.5rem; margin-top: 0; }
+  .footer {
+    max-width: 820px; margin: 0 auto;
+    font-family: 'Raleway', sans-serif; font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    display: flex; justify-content: space-between;
+  }
+  .footer a { color: var(--coral); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  a { color: var(--coral); transition: color 0.2s ease; }
+  a:hover { color: var(--coral-hover); }
+
+  /* === RESPONSIVE === */
   @media (max-width: 640px) {
-    .hero { padding: 2.5rem 1.25rem 1.25rem; }
-    .content { padding: 0 1.25rem 2rem; }
+    .hero-wrap { padding: 2.5rem 1.5rem 2rem; }
+    .content { padding: 0 1.5rem 3rem; }
+    nav { padding: 0.9rem 1.5rem; }
     .timeline { flex-direction: column; }
-    .footer { flex-direction: column; gap: 0.25rem; }
+    .footer { flex-direction: column; gap: 0.4rem; }
+    .data-row { flex-direction: column; gap: 0.15rem; }
+    .data-value { text-align: left; }
+  }
+
+  /* === SCROLL NAV SHADOW === */
+  @media (prefers-reduced-motion: no-preference) {
+    .data-card, .timeline-item, .callout { transition: all 0.25s ease; }
   }
 </style>
 </head>
 <body>
-<nav>
+
+<nav id="topnav">
   <div class="nav-inner">
     <a href="/" class="logo">Baseline<span>.</span></a>
     <span class="badge">Research Distillation</span>
   </div>
 </nav>
-<div class="hero">
-  <div class="kicker">Social Capital Deep Dive</div>
-  <h1>Healthcare IT: Why <em>$5T</em> Runs on 60-Year-Old Software</h1>
-  <p class="subtitle">Distilled from Social Capital's 80-page deep dive. The structural locks, why they persist, and how LLMs bypass them. <a href="Healthcare_It_Social_Capital.pdf">Full PDF</a></p>
+
+<div class="hero-wrap">
+  <div class="hero">
+    <div class="kicker">Social Capital Deep Dive</div>
+    <h1>Healthcare IT: Why <em>$5T</em> Runs on<br>60-Year-Old Software</h1>
+    <p class="subtitle">Distilled from Social Capital's 80-page deep dive. Eight chapters covering architecture, costs, failed interoperability, market consolidation, the $1T administrative layer, and why LLMs might finally break the cycle. <a href="Healthcare_It_Social_Capital.pdf">Full PDF</a></p>
+  </div>
 </div>
+
 <div class="content">
 
   <h2>The Numbers</h2>
@@ -95,55 +295,281 @@
     <h3>The Cost of Fragmentation</h3>
     <div class="data-row"><span class="data-name">U.S. healthcare spending</span><span class="data-value">18% of GDP ($5.3T)</span></div>
     <div class="data-row"><span class="data-name">Per capita (vs UK $6,747)</span><span class="data-value">$14,775</span></div>
-    <div class="data-row"><span class="data-name">Admin costs (% of revenue)</span><span class="data-value">20-30%</span></div>
-    <div class="data-row"><span class="data-name">Personal bankruptcies (medically related)</span><span class="data-value">~66%</span></div>
+    <div class="data-row"><span class="data-name">Admin costs (% of total spending)</span><span class="data-value">25-30% (~$950B)</span></div>
+    <div class="data-row"><span class="data-name">Admin spend vs Canada (per capita)</span><span class="data-value">3.5x more</span></div>
+    <div class="data-row"><span class="data-name">Personal bankruptcies (medically related)</span><span class="data-value">~66% (78% had insurance)</span></div>
     <div class="data-row"><span class="data-name">Medication errors undetected by EHR</span><span class="data-value">33%</span></div>
     <div class="data-row"><span class="data-name">Patient records that fail to match across systems</span><span class="data-value">Up to 50%</span></div>
     <div class="data-row"><span class="data-name">Insurance denials overturned on appeal</span><span class="data-value">81.7%</span></div>
+    <div class="data-row"><span class="data-name">Patients who give up on denied care</span><span class="data-value">78%</span></div>
   </div>
 
-  <h2>The Origin: 1966</h2>
-  <p>Massachusetts General Hospital needed a computer system for 20 departments on a PDP-7 with 4KB of RAM. Three developers built MUMPS: an operating system, programming language, and database fused into one inseparable layer. It stored data as trees (globals), not tables. Branches only existed when data existed. Fast writes, concurrent access, zero wasted memory.</p>
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 1 / The Patient Reality</div>
+  </div>
+  <!-- ============================================ -->
+
+  <h2>What the Patient Sees vs. What Actually Happens</h2>
+  <p>A patient checks in, sees a doctor, gets a prescription, receives a bill. Four steps. Behind each one runs a hidden pipeline: insurance verification, benefits calculation, payment authorization, prior approval scan, clinical documentation, drug formulary checks, allergy cross-references, pharmacy routing, coverage verification, medical coding review, claims submission, adjudication, and patient billing.</p>
+  <p>Healthcare IT is only ~3.5% of total healthcare spending. But it is the connective tissue everything depends on. Hospitals can't bill without it. Physicians can't prescribe without it. Claims can't move without it.</p>
+  <p>The problem starts when care crosses vendors. Within a single provider system, applications communicate because they share infrastructure. When a patient moves between an Epic hospital and a Cerner hospital, records must be translated, verified, or rebuilt manually. The U.S. has no universal patient identifier. HIPAA mandated one in 1996, but Congress blocked funding two years later citing privacy concerns, and that ban has been renewed in every appropriations bill since.</p>
+
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 2 / The 1966 Decision</div>
+  </div>
+  <!-- ============================================ -->
+
+  <h2>The Origin: MUMPS</h2>
+  <p>Massachusetts General Hospital needed a computer system for 20 departments on a PDP-7 with 4KB of RAM. Three developers (Neil Pappalardo, Robert Greenes, Curt Marble) in Dr. G. Octo Barnett's lab built MUMPS: Massachusetts General Hospital Utility Multi-Programming System. An operating system, programming language, and database fused into one inseparable layer.</p>
+  <p>It stored data as trees (globals), not tables. Branches only existed when data existed. If a patient had no allergies, there was no allergy branch. No wasted memory. Each department got its own branch of the tree, so dozens of departments could write to the same patient record simultaneously without conflicts. A nurse entering vitals never touched the branch where lab results lived.</p>
   <p>The tradeoff: reading across patients (population analytics) requires walking every tree, one by one. MUMPS was built to answer "what is happening with this patient right now?" Not "what is happening across all patients."</p>
 
   <div class="pull-quote">The solution they built still forms the foundation of Epic, Meditech, and every major EHR vendor in 2025.</div>
 
+  <h2>The Dictionary Problem</h2>
+  <p>Field names like "Patient Name" and "Date of Birth" take up memory. On 4KB, even labels were too expensive. So they replaced readable names with numeric codes. Field .01 means "Patient Name." Field .02 means "Gender." But nothing in the data itself tells you that.</p>
+
+  <div class="code-block">
+    <span class="comment">// What you export</span><br>
+    <span class="key">^PATIENT(123,.01)</span> = <span class="val">"SMITH,JOHN"</span><br>
+    <span class="key">^PATIENT(123,.02)</span> = <span class="val">"M"</span><br>
+    <span class="key">^PATIENT(123,.03)</span> = <span class="val">"19850315"</span><br>
+    <span class="key">^PATIENT(123,.09)</span> = <span class="val">"401.9"</span><br><br>
+    <span class="comment">// What it means (locked in vendor dictionary)</span><br>
+    <span class="comment">// Patient Name: SMITH, JOHN</span><br>
+    <span class="comment">// Gender: Male</span><br>
+    <span class="comment">// Date of Birth: March 15, 1985</span><br>
+    <span class="comment">// Diagnosis: Hypertension (ICD-9 401.9)</span>
+  </div>
+
+  <p>The meaning of each field is stored in a proprietary data dictionary controlled by the vendor. You can export raw data, but without the dictionary, that export is a list of numbers with no meaning attached. Vendors treated the dictionary as intellectual property. This created a structural lock that persists to this day.</p>
+
+  <h2>Epic's Workaround: Chronicles and Clarity</h2>
+  <p>Population-level queries require scanning large portions of the database, competing with the same resources used by clinicians. Analytical queries can interfere with the live system. Epic solved this with a dual-database architecture:</p>
+
+  <div class="callout coral">
+    <h4>The Nightly ETL</h4>
+    <p><strong>Chronicles</strong> (the live MUMPS database): real-time clinical data, tree format, cannot be queried safely for analytics.</p>
+    <p><strong>Clarity</strong> (the SQL database): analytics-ready, table format, safe to query. Updated by a nightly batch process that copies data from Chronicles.</p>
+    <p>The workaround became the industry standard. But it introduced a permanent constraint: <strong>analytics always runs on yesterday's data.</strong></p>
+  </div>
+
+  <h2>The 24-Hour Gap</h2>
+  <p>For compliance reporting, day-old data is acceptable. The Joint Commission and CMS do not require infection rates by the minute. But clinical care is different. A sepsis patient's vitals can deteriorate within minutes. The pattern is visible in the data. An algorithm watching in real-time could flag it, giving clinicians a critical head start.</p>
+  <p>But analytics runs on Clarity, which receives its data during the nightly batch process. When the data becomes available for analysis, the opportunity for intervention may already be gone. Vitals spike at 2 AM in Chronicles. The alert fires at 11:30 PM in Clarity: "Patient showed sepsis indicators 21 hours ago."</p>
+
+  <h2>Why No One Has Escaped</h2>
+  <p>Migrating a hospital EHR system costs $50M to $500M and takes 18 to 36 months, with both systems running simultaneously during transition. A new system must prove it will never crash during patient care before hospitals will adopt it. Demonstrating that reliability requires operating at scale. But reaching scale requires hospitals willing to take the initial risk. The cost of leaving exceeds the pain of staying.</p>
+  <p>Network effects compound the lock. Epic hospitals can access other Epic hospitals through Care Everywhere. The more hospitals join, the more valuable Epic becomes. Epic added 176 hospitals in 2024. Roughly 90% of medical residents now train on Epic, reinforcing the cycle through muscle memory. Epic has lost extremely few customers in its 47-year history, with one documented instance of a customer leaving for 6 months before returning.</p>
+
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 3 / Rising Costs &amp; Population-Level Pressure</div>
+  </div>
+  <!-- ============================================ -->
+
+  <h2>The Spending Crisis</h2>
+  <p>In 1970, healthcare accounted for 6.9% of U.S. GDP. By 2000, 13.3%. By 2024, 18%. The U.S. spends $14,775 per person on healthcare each year. Germany spends $9,365. The UK spends $6,747. Japan spends $5,790. The U.S. spends roughly 50% more than peer nations while achieving worse outcomes on many population health metrics. The gap persists even among higher-income Americans.</p>
+
+  <h2>The Payment Model Shifted</h2>
+  <p>Under the traditional fee-for-service model, providers are paid for each service delivered. More tests, more procedures, more visits generate more revenue. The only data required is what was done and who should be billed.</p>
+  <p>Payers began experimenting with value-based care, where providers are paid for outcomes rather than volume. Keeping patients healthy increases revenue. Poor outcomes reduce it. Medicare now ties a significant share of hospital payments to quality metrics and readmission rates.</p>
+
+  <div class="pull-quote">Fee-for-service needs documentation. Value-based care needs measurement. The EHR was built to do the first, and the economy now runs on the second.</div>
+
+  <p>This model requires a different data capability: tracking outcomes over time, comparing performance across providers, and identifying patients at risk before they deteriorate. All of these require reading across patients, the one thing the architecture can't do without risking the live clinical system.</p>
+
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 4 / The Illusion of Interoperability</div>
+  </div>
+  <!-- ============================================ -->
+
   <h2>40 Years of Failed Interoperability</h2>
+  <p>Interoperability requires solving problems at four layers: foundational (connect), structural (format), semantic (meaning), and organizational (governance). Over four decades, the industry tried six major approaches. Each solved a layer. None solved all four.</p>
   <div class="timeline">
-    <div class="timeline-item"><div class="year">1987</div><div class="label">HL7 v2: shared format, but 20% proprietary per vendor</div></div>
-    <div class="timeline-item"><div class="year">2005</div><div class="label">HL7 v3: removed ambiguity, too complex to adopt</div></div>
-    <div class="timeline-item"><div class="year">2009</div><div class="label">HITECH Act: $27B for EHR adoption. 9% to 97% in 6 years. But paper silos became digital silos.</div></div>
-    <div class="timeline-item"><div class="year">2014</div><div class="label">FHIR: modern APIs, cost per interface $500K to $50K. Vendors in no rush.</div></div>
-    <div class="timeline-item"><div class="year">2016</div><div class="label">Cures Act: data blocking illegal. $1M fines. 1,500+ complaints filed.</div></div>
-    <div class="timeline-item"><div class="year">2023</div><div class="label">TEFCA: hub-and-spoke network. But exchanges deliver PDFs, not structured data.</div></div>
-  </div>
-  <p>Each attempt solved one layer. None solved all four: foundational (connect), structural (format), semantic (meaning), organizational (governance). 70% of hospitals can exchange data. Only 42% of clinicians actually use it at point of care.</p>
-
-  <h2>The Reinforcing Loop</h2>
-  <p>Architecture constrains what regulation can change. Weak enforcement preserves intermediary margins. Those margins fund resistance to architectural reform. Three locks: safety over intelligence, the individual over the crowd, margin from friction. They compound into an equilibrium that absorbs reform from any single direction.</p>
-
-  <h2>The $1T Administrative Layer</h2>
-  <p>185,000 medical coders translate every clinical note into billing codes. Physicians spend 1-2 hours per day on documentation after patient care. Prior authorizations require 14 hours of physician time per week per practice. The administrative layer exists because machines couldn't read clinical language. The system runs on human translation.</p>
-
-  <h2>What Changed: LLMs</h2>
-  <p>For sixty years, software could not interpret what clinical data actually means. "MI" and "heart attack" and "acute myocardial infarction" are the same condition. A physician knows that instantly. Software could not.</p>
-  <p>LLMs developed contextual comprehension. This capability is now in production: ambient documentation (100+ health systems), clinical trial matching (minutes vs weeks), prior auth automation. Olive AI raised $850M for RPA automation and shut down by 2023 because it targeted the UI layer, not the semantic layer.</p>
-
-  <div class="tip-card">
-    <h4>The Pincer Strategy</h4>
-    <p><strong>Consumer Aggregation (OpenAI):</strong> Patients download and aggregate their own records, bypassing institutional barriers. When patients share their own data, HIPAA's institutional rules largely don't apply.</p>
-    <p><strong>Enterprise Compression (Anthropic):</strong> Automate the $1T administrative layer from inside. Documentation, coding, prior auth.</p>
-    <p>Both target the same locked system from opposite sides simultaneously.</p>
+    <div class="timeline-item"><div class="year">1987</div><div class="label">HL7 v2: shared format, but "Z-segments" let vendors keep 20% proprietary. Each interface cost $500K+.</div></div>
+    <div class="timeline-item"><div class="year">2005</div><div class="label">HL7 v3: removed ambiguity, spec ran thousands of pages. Too complex. HL7 v2 still dominates (80%+ of exchanges).</div></div>
+    <div class="timeline-item"><div class="year">2009</div><div class="label">HITECH Act: $27B for EHR adoption. Medicare: $44K/physician. Medicaid: $63,750. 9% to 97% in 6 years. Paper silos became digital silos.</div></div>
+    <div class="timeline-item"><div class="year">2014</div><div class="label">FHIR: REST APIs + JSON. Cost per interface $500K to $50K. Vendors in no rush to adopt.</div></div>
+    <div class="timeline-item"><div class="year">2016</div><div class="label">Cures Act: data blocking illegal. FHIR R4 APIs required. $1M fines. 1,500+ complaints filed since 2021.</div></div>
+    <div class="timeline-item"><div class="year">2023</div><div class="label">TEFCA: hub-and-spoke via QHINs. But exchanges deliver PDFs, not structured data. Providers hesitate on data quality.</div></div>
   </div>
 
-  <div class="pull-quote">The patient consent pathway may move more usable data than four decades of institutional standards.</div>
+  <h2>Compliance Does Not Equal Utility</h2>
+  <p>The metrics look promising on paper. 70% of U.S. hospitals engage in core interoperability actions. But only 42% of clinicians actually use external data at the point of care. 15-30% of key clinical variables are missing in exchanges. Only ~35% of interoperability projects meet their ROI targets.</p>
+  <p>Data that is technically interoperable is not necessarily integrated. It arrives in separate portals, un-normalized, or too late to influence decisions. Liability compounds the problem: when data lives outside a clinician's own EHR, acting on it creates legal exposure.</p>
+
+  <h2>Why Estonia Doesn't Translate</h2>
+  <p>Estonia has 1.3 million people and a single national health IT infrastructure maintained by government. Every citizen can access their complete medical history through a national system. The U.S. has 330 million people, over 6,000 hospitals, 50 state regulatory regimes, and a multi-payer system with competing commercial interests. Even the UK's NHS, with a national patient identifier and single-payer structure, still operates with significant fragmentation across hospital trusts and GP systems.</p>
+
+  <div class="pull-quote">The foundational, structural, and organizational layers are largely addressed. The semantic layer remains the gap. Machines still can't tell that "MI" and "heart attack" and "acute myocardial infarction" all mean the same thing.</div>
+
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 5 / Infrastructure Consolidation Dynamics</div>
+  </div>
+  <!-- ============================================ -->
+
+  <h2>If Data Won't Flow, Control the Pipes</h2>
+  <p>When interoperability couldn't be forced through standards or regulation, market participants pursued a simpler strategy: buy enough of the system that interoperability becomes internal. Two approaches emerged.</p>
+
+  <div class="data-card">
+    <h3>Horizontal: Epic</h3>
+    <div class="data-row"><span class="data-name">Overall hospital market share</span><span class="data-value">42%</span></div>
+    <div class="data-row"><span class="data-name">500+ bed hospitals</span><span class="data-value">~70%</span></div>
+    <div class="data-row"><span class="data-name">Medical residents trained on Epic</span><span class="data-value">~90%</span></div>
+    <div class="data-row"><span class="data-name">Hospitals added in 2024</span><span class="data-value">176</span></div>
+    <div class="data-row"><span class="data-name">Switching cost per hospital system</span><span class="data-value">$50M-$500M</span></div>
+    <div class="data-row"><span class="data-name">Historical customer churn</span><span class="data-value">Near zero</span></div>
+  </div>
+
+  <p>Epic built everything in-house on a single MUMPS foundation. Every module shares one patient record. Clinical documentation, scheduling (Cadence), billing (Resolute), radiology (Radiant), pharmacy (Willow), lab (Beaker), surgery (OpTime), patient portal (MyChart), analytics (Cogito/Caboodle/SlicerDicer). One system, one record.</p>
+
+  <div class="data-card">
+    <h3>Vertical: UnitedHealth Group (~$400B)</h3>
+    <div class="data-row"><span class="data-name">UnitedHealthcare (Insurance)</span><span class="data-value">52M lives covered</span></div>
+    <div class="data-row"><span class="data-name">Optum Health (Providers)</span><span class="data-value">90,000+ physicians</span></div>
+    <div class="data-row"><span class="data-name">OptumRx (Pharmacy/PBM)</span><span class="data-value">3rd largest PBM</span></div>
+    <div class="data-row"><span class="data-name">Change Healthcare (Claims)</span><span class="data-value">40% of all U.S. claims</span></div>
+    <div class="data-row"><span class="data-name">Revenue from internal transactions</span><span class="data-value">~40%</span></div>
+  </div>
+
+  <p>UnitedHealth assembled multiple layers into one company. They own insurance, physicians, pharmacy, and claims processing. Data flows freely between subsidiaries. A competitor insurer sees only their own claims. United sees 40% of all U.S. claims, giving them an information asymmetry advantage: they can observe competitor pricing patterns, identify profitable physician practices, and spot market opportunities before competitors.</p>
+
+  <div class="callout red">
+    <h4>Change Healthcare Breach (Feb 2024)</h4>
+    <p>An attacker entered Change Healthcare's network through a remote access portal that lacked multi-factor authentication. Nine days later, BlackCat ransomware encrypted systems responsible for 40% of U.S. medical claims. UnitedHealth paid $22M in Bitcoin. The ransomware group kept the payment without deleting the stolen data. A second group later attempted extortion using the same records.</p>
+    <p><strong>192.7 million Americans exposed</strong> (roughly 2 out of 3 people in the U.S.). Total financial impact exceeded <strong>$2.45 billion</strong>. 94% of hospitals reported financial damage. Concentration creates efficiency. It also creates catastrophic single points of failure.</p>
+  </div>
+
+  <p>Both consolidation strategies work around interoperability by making it internal. Data flows freely inside Epic's ecosystem and inside United's subsidiaries. For everyone outside those walls, the constraints remain. Neither strategy reduced the administrative layer that sits between providers and payers.</p>
+
+  <!-- ============================================ -->
+  <div class="section-divider">
+    <div class="chapter-label">Chapter 6 / The $1 Trillion Administrative Layer</div>
+  </div>
+  <!-- ============================================ -->
+
+  <h2>Where the Money Goes</h2>
+  <p>The U.S. spends about $950 billion each year on healthcare administration, representing 25-30% of total healthcare spending. On a per capita basis, 3.5x more than Canada.</p>
+
+  <div class="data-card">
+    <h3>Admin Spend by Stakeholder (2019)</h3>
+    <div class="data-row"><span class="data-name">Hospitals</span><span class="data-value">$250B (26%)</span></div>
+    <div class="data-row"><span class="data-name">Other sites of care</span><span class="data-value">$235B (24%)</span></div>
+    <div class="data-row"><span class="data-name">Physician groups</span><span class="data-value">$205B (22%)</span></div>
+    <div class="data-row"><span class="data-name">Private payers</span><span class="data-value">$180B (19%)</span></div>
+    <div class="data-row"><span class="data-name">Public payers</span><span class="data-value">$80B (9%)</span></div>
+  </div>
+
+  <h2>The Translation Workforce</h2>
+  <p>Healthcare billing runs on two coding systems: ICD-10, which classifies why the patient was treated (over 70,000 diagnosis codes), and CPT, which classifies what was done (over 10,000 procedure codes). Every clinical encounter has to be translated into both before payment can happen.</p>
+  <p>A physician documents: "65 year old male with exertional chest pain relieved by rest. Family history of coronary artery disease. Stress test ordered." A billing system requires structured codes: ICD-10 diagnosis code I25.10 and CPT procedure code 93015.</p>
+  <p>The system employs roughly <strong>185,000 medical coders</strong> to perform that translation. The code set includes W56.22XA: "struck by orca, initial encounter." One of over 70,000 codes a coder must be prepared to classify.</p>
+
+  <h2>How a Claim Becomes Payment</h2>
+  <p>The U.S. has thousands of insurers, each with its own billing rules and reimbursement logic. Every stage of the claims process requires translating clinical information into a new format: Encounter, Documentation, Coding, Claim Assembly, Clearinghouse, Payer Adjudication. Payment arrives 14-30 days later. Many providers report over 10% denial rate.</p>
+
+  <h2>Permission Before Treatment</h2>
+  <p>Before many treatments move forward, providers must obtain permission from insurers through prior authorization. The system intentionally introduces friction to slow expensive interventions.</p>
+
+  <div class="data-card">
+    <h3>Prior Authorization Burden (AMA Survey)</h3>
+    <div class="data-row"><span class="data-name">Requests per physician per week</span><span class="data-value">39</span></div>
+    <div class="data-row"><span class="data-name">Hours/week spent (physician + staff)</span><span class="data-value">13</span></div>
+    <div class="data-row"><span class="data-name">Physicians reporting care delays</span><span class="data-value">93%</span></div>
+    <div class="data-row"><span class="data-name">Physicians reporting serious adverse events</span><span class="data-value">29%</span></div>
+    <div class="data-row"><span class="data-name">Patients who give up on denied treatment</span><span class="data-value">78%</span></div>
+    <div class="data-row"><span class="data-name">Denials overturned on appeal</span><span class="data-value">81.7%</span></div>
+  </div>
+
+  <p>81.7% of denials are overturned on appeal. The friction itself is the mechanism. Most patients don't appeal. 78% give up entirely.</p>
+
+  <h2>Revenue Cycle Management</h2>
+  <p>The billing pipeline became complex enough to support an entire outsourcing industry. RCM companies handle the whole process for providers, from initial claim submission through denial management to final payment collection. They charge 5-10% of collections but often recover 3-5% more revenue than in-house teams because they specialize in navigating payer-specific rules and denial patterns.</p>
+
+  <div class="data-card">
+    <h3>RCM Market</h3>
+    <div class="data-row"><span class="data-name">Market size (2024)</span><span class="data-value">$142B</span></div>
+    <div class="data-row"><span class="data-name">Projected (2030)</span><span class="data-value">$273B</span></div>
+    <div class="data-row"><span class="data-name">Growth driver</span><span class="data-value">Rising billing complexity</span></div>
+  </div>
+
+  <h2>Why the Layer Persists</h2>
+  <p>The administrative layer persists because nobody with significant power has a strong financial reason to simplify it. Vendors earn revenue from integration services and hold the proprietary data dictionaries. RCM companies grow when billing gets more complicated. The 185,000 coding workforce has professional associations, certifications, and training programs with deep institutional interest in continuity. Payers use tools like prior authorization to control utilization and costs, even when those tools add friction for providers and patients.</p>
+
+</div><!-- end .content -->
+
+<!-- ============================================ -->
+<!-- FULL-BLEED DARK SECTION: LLMs -->
+<!-- ============================================ -->
+<div class="dark-section">
+  <div class="inner">
+
+    <div style="font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--coral); margin-bottom: 0.25rem;">Chapter 7</div>
+    <h2 style="margin-top: 0.25rem;">LLMs Bypass Old Constraints</h2>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">The Reinforcing Loop</h2>
+    <p>Architecture constrains what regulation can change. Weak enforcement preserves intermediary margins. Those margins fund resistance to architectural reform. Three locks: safety over intelligence, the individual over the crowd, margin from friction. They compound into an equilibrium that absorbs reform from any single direction.</p>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">The $850M Lesson: Olive AI</h2>
+    <p>In 2017, Olive AI raised $850M to automate EHR workflows through RPA (rule-based bots clicking through interfaces). Peak valuation: $4B. Shut down by 2023. Healthcare software interfaces change frequently. Each update moved the buttons and fields the bots depended on. A human finds the right field by reading the label. Olive's robot clicked where the button used to be. <strong>It failed because it targeted the UI layer, not the semantic layer.</strong></p>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">Why Previous AI Didn't Help</h2>
+    <p>AI has been in healthcare for years. Over 70% of FDA-approved AI devices focus on imaging: reading scans, detecting tumors, flagging anomalies. Those applications work on structured pixels. Every constraint in this analysis requires something imaging AI was never built to do: <strong>understand unstructured clinical language.</strong></p>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">What Changed</h2>
+    <p>For sixty years, software could not interpret what clinical data actually means. "MI" and "heart attack" and "acute myocardial infarction" are the same condition. A physician knows that instantly. Software could not. LLMs developed contextual comprehension. This capability is now in production:</p>
+
+    <div class="data-card" style="margin-top: 1.25rem;">
+      <h3>LLMs in Production Healthcare</h3>
+      <div class="data-row"><span class="data-name">Ambient documentation (Abridge, Nuance DAX, Ambience)</span><span class="data-value">100+ health systems</span></div>
+      <div class="data-row"><span class="data-name">Clinical trial matching</span><span class="data-value">15+ academic centers, minutes vs weeks</span></div>
+      <div class="data-row"><span class="data-name">Prior auth + coding automation</span><span class="data-value">First systems entering production</span></div>
+      <div class="data-row"><span class="data-name">Physician documentation time saved</span><span class="data-value">1-2 hrs/day</span></div>
+    </div>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">The Patient Pathway</h2>
+    <p>Everything covered so far has been the institutional vector: trying to get organizations to share data through standards, regulation, and infrastructure. Slow progress, full of loopholes. A second vector is forming entirely outside those walls.</p>
+    <p>HIPAA governs how institutions share data with each other. When patients share their own records, different rules apply and institutional barriers largely disappear. Healthcare is one of the last industries where consumers don't have meaningful control over their own data. Less than 5% of health system maturity benchmarks even measure how well they engage patients digitally.</p>
+
+    <div style="background: rgba(212,101,74,0.12); border-left: 4px solid var(--coral); border-radius: 0 14px 14px 0; padding: 1.5rem 1.75rem; margin: 1.5rem 0;">
+      <div style="font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--coral); margin-bottom: 0.6rem;">The Pincer Strategy</div>
+      <p><strong style="color: #fff;">Consumer Aggregation (OpenAI / ChatGPT Health, Jan 7 2026):</strong> Patients download and aggregate their own records, bypassing institutional barriers. When patients share their own data, HIPAA's institutional rules largely don't apply.</p>
+      <p><strong style="color: #fff;">Enterprise Compression (Anthropic / Claude Healthcare, Jan 11 2026):</strong> Automate the $1T administrative layer from inside. Documentation, coding, prior auth, clinical trial management, regulatory operations.</p>
+      <p>Both launched within days of each other at the J.P. Morgan Healthcare Conference. Both target the same locked system from opposite sides simultaneously.</p>
+    </div>
+
+    <div style="background: rgba(45,106,79,0.15); border-left: 4px solid #2d6a4f; border-radius: 0 14px 14px 0; padding: 1.5rem 1.75rem; margin: 1.5rem 0;">
+      <div style="font-family: 'Raleway', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #5eac8b; margin-bottom: 0.6rem;">CMS Interoperability Framework</div>
+      <p>In July 2025, CMS launched a voluntary Interoperability Framework with over 60 companies including Amazon, Apple, Google, OpenAI, and Anthropic pledging to meet data sharing criteria. Early networks are beginning implementation as of Q1 2026. The framework is voluntary. <strong style="color:#fff;">The harder binding deadline for FHIR-based data exchange is July 2026.</strong></p>
+    </div>
+
+    <div style="font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--coral); margin: 2rem 0; padding: 1.25rem 0; border-top: 2px solid rgba(212,101,74,0.3); text-align: left; line-height: 1.6;">The patient consent pathway may move more usable data than four decades of institutional standards.</div>
+
+    <h2 style="font-size: 1.3rem; margin-top: 2rem;">Part Two (Coming)</h2>
+    <p>Part Two will explore the race between platform companies and incumbents, regulatory frameworks taking shape around clinical AI, capital flowing into AI-native healthcare infrastructure, and whether the system absorbs this capability the way it absorbed every previous reform. Epic is building its own AI layer. UnitedHealth is integrating language models across its vertical. The FDA is deciding how to regulate tools that read clinical text rather than scan images. And 185K medical coders are watching the first automated prior authorization systems enter production.</p>
+
+  </div>
+</div>
+
+<div class="content" style="padding-top: clamp(2rem, 4vw, 3.5rem);">
+
+  <!-- ============================================ -->
+  <div class="section-divider" style="border-top: none; padding-top: 0; margin-top: 0;">
+    <div class="chapter-label">Kasane Implications</div>
+  </div>
+  <!-- ============================================ -->
 
   <div class="dark-card">
     <h3>Why This Matters for Kasane</h3>
-    <p>We're on the consumer aggregation side, but going deeper. ChatGPT Health lets you upload and read your records. We connect records to behavior change. The gap Social Capital identifies ("patients downloading their own records") is literally what our Apple Health shortcut, Garmin integration, and lab upload pipeline do.</p>
+    <p>We're on the consumer aggregation side of the pincer, but going deeper. ChatGPT Health lets you upload and read your records. We connect records to behavior change. The gap Social Capital identifies ("patients downloading their own records") is literally what our Apple Health shortcut, Garmin integration, and lab upload pipeline do.</p>
     <p>But we add the coaching layer. Data without action is a dashboard. Data with coaching is a program. That's the gap nobody else is filling.</p>
     <p>The value-based care shift (providers paid for outcomes, not volume) is our tailwind. If keeping patients healthy increases revenue, then tools that actually change patient behavior become infrastructure, not nice-to-haves.</p>
-    <p>CMS Interoperability Framework deadline: July 2026. FHIR-based data exchange becomes binding. That's 4 months away. The data is about to flow. The question is who turns it into action.</p>
+    <p>CMS binding FHIR deadline: <strong>July 2026 (4 months away)</strong>. The data is about to flow. The question is who turns it into action.</p>
   </div>
 
   <h2>Key Stats for Pitch Decks</h2>
@@ -151,18 +577,40 @@
     <h3>Quotable Numbers</h3>
     <div class="data-row"><span class="data-name">Healthcare IT as % of healthcare spend</span><span class="data-value">~3.5%</span></div>
     <div class="data-row"><span class="data-name">EHR market: Epic + Oracle + Meditech</span><span class="data-value">79% of hospitals</span></div>
+    <div class="data-row"><span class="data-name">Epic among 500+ bed hospitals</span><span class="data-value">~70%</span></div>
     <div class="data-row"><span class="data-name">HITECH investment</span><span class="data-value">$27B for digitization</span></div>
     <div class="data-row"><span class="data-name">Hospital EHR adoption (2008 to 2017)</span><span class="data-value">9% to 96%</span></div>
-    <div class="data-row"><span class="data-name">Average patient: different physicians seen</span><span class="data-value">7</span></div>
+    <div class="data-row"><span class="data-name">Average patient: physicians seen</span><span class="data-value">7 different</span></div>
     <div class="data-row"><span class="data-name">Deaths from preventable medical errors (1999)</span><span class="data-value">98,000/year</span></div>
-    <div class="data-row"><span class="data-name">Olive AI: raised / peak valuation / outcome</span><span class="data-value">$850M / $4B / shut down</span></div>
+    <div class="data-row"><span class="data-name">Deaths from medication errors (illegible Rx + missing allergy)</span><span class="data-value">7,000/year</span></div>
+    <div class="data-row"><span class="data-name">Total admin spending</span><span class="data-value">~$950B/year</span></div>
+    <div class="data-row"><span class="data-name">Medical coders in the U.S.</span><span class="data-value">185,000</span></div>
+    <div class="data-row"><span class="data-name">ICD-10 diagnosis codes</span><span class="data-value">70,000+</span></div>
+    <div class="data-row"><span class="data-name">RCM market (2024 / 2030 projected)</span><span class="data-value">$142B / $273B</span></div>
+    <div class="data-row"><span class="data-name">Prior auth: denials overturned on appeal</span><span class="data-value">81.7%</span></div>
+    <div class="data-row"><span class="data-name">Olive AI: raised / peak / outcome</span><span class="data-value">$850M / $4B / shut down</span></div>
+    <div class="data-row"><span class="data-name">Change HC breach: Americans exposed</span><span class="data-value">192.7M</span></div>
+    <div class="data-row"><span class="data-name">Change HC breach: total financial impact</span><span class="data-value">$2.45B+</span></div>
+    <div class="data-row"><span class="data-name">UnitedHealth Group market cap</span><span class="data-value">~$400B</span></div>
     <div class="data-row"><span class="data-name">CMS Interoperability Framework companies</span><span class="data-value">60+ (Amazon, Apple, Google, OpenAI, Anthropic)</span></div>
+    <div class="data-row"><span class="data-name">FHIR binding deadline</span><span class="data-value">July 2026</span></div>
   </div>
 
 </div>
-<div class="footer">
-  <span>Source: Social Capital Healthcare IT Deep Dive / <a href="Healthcare_It_Social_Capital.pdf" style="color:var(--accent);">Full PDF</a></span>
-  <span>Distilled March 2026</span>
+
+<div class="footer-wrap">
+  <div class="footer">
+    <span>Source: Social Capital Healthcare IT Deep Dive / <a href="Healthcare_It_Social_Capital.pdf">Full PDF</a></span>
+    <span>Distilled March 2026</span>
+  </div>
 </div>
+
+<script>
+  // Sticky nav shadow on scroll
+  const nav = document.getElementById('topnav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+</script>
 </body>
 </html>
