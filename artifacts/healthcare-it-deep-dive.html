@@ -46,7 +46,7 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem clamp(2rem, 5vw, 4rem);
+    padding: 1.5rem clamp(2rem, 6vw, 6rem);
     mix-blend-mode: difference;
   }
   nav .logo {
@@ -65,7 +65,7 @@
     position: relative; min-height: 100vh;
     background: var(--dark); color: #fff;
     display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 clamp(2rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+    padding: 0 clamp(2rem, 6vw, 6rem) clamp(3rem, 6vw, 5rem);
     overflow: hidden;
   }
   .hero-bg-text {
@@ -159,7 +159,7 @@
 
   /* FULL-BLEED STATEMENT */
   .statement {
-    padding: clamp(4rem, 10vw, 10rem) clamp(2rem, 5vw, 4rem);
+    padding: clamp(4rem, 10vw, 10rem) clamp(2rem, 6vw, 6rem);
     text-align: center;
   }
   .statement-text {
@@ -173,7 +173,7 @@
   .two-col {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 4vw, 4rem);
-    padding: 0 clamp(2rem, 5vw, 4rem);
+    padding: 0 clamp(2rem, 6vw, 6rem);
   }
   .two-col p {
     font-size: 0.9rem; color: var(--ink-soft); line-height: 1.85;
@@ -182,7 +182,7 @@
   /* DARK BAND */
   .dark-band {
     background: var(--dark); color: #fff;
-    padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 5vw, 4rem);
+    padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 6vw, 6rem);
   }
   .dark-band .section-label { color: var(--coral); }
   .dark-band p { color: rgba(255,255,255,0.55); }
@@ -191,7 +191,7 @@
   /* BROWN BAND */
   .brown-band {
     background: var(--brown); color: #fff;
-    padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 5vw, 4rem);
+    padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 6vw, 6rem);
   }
   .brown-band .section-label { color: var(--coral); }
   .brown-band p { color: rgba(255,255,255,0.55); }
@@ -199,7 +199,7 @@
   /* CREAM BAND */
   .cream-band {
     background: var(--cream);
-    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 5vw, 4rem);
+    padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);
   }
 
   /* PULL QUOTE */
@@ -220,7 +220,7 @@
     margin: clamp(2rem, 4vw, 3rem) 0;
   }
   .tl-cell {
-    padding: 1.25rem 0.75rem 1.25rem 0;
+    padding: 1.25rem 1.25rem 1.25rem 0.5rem;
     border-right: 1px solid rgba(0,0,0,0.06);
     position: relative;
   }
@@ -282,15 +282,17 @@
   /* CONTENT COLUMN */
   .col { max-width: 680px; }
   .col-wide { max-width: 900px; }
-  .pad-x { padding-left: clamp(2rem, 5vw, 4rem); padding-right: clamp(2rem, 5vw, 4rem); }
+  .pad-x { padding-left: clamp(2rem, 6vw, 6rem); padding-right: clamp(2rem, 6vw, 6rem); }
+  .inner-contain { max-width: 1280px; margin: 0 auto; }
 
   /* SECTION SPACING */
   .section { padding: clamp(4rem, 8vw, 8rem) 0; }
+  .section.pad-x { padding: clamp(4rem, 8vw, 8rem) clamp(2rem, 6vw, 6rem); }
 
   /* FOOTER */
   .footer-band {
     background: var(--dark); color: #fff;
-    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+    padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem) clamp(2rem, 4vw, 3rem);
   }
   .footer-logo {
     font-family: 'Anybody', sans-serif; font-weight: 900;
