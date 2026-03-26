@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Curriculum Analysis + Augmentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #a63d2f;
+    --red-bg: rgba(166, 61, 47, 0.05);
+    --amber: #c4762b;
+    --amber-bg: rgba(196, 118, 43, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .doc-badge {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2px 7px;
+    font-weight: 500;
+  }
+
+  .back-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--ink); }
+
+  /* --- HEADER --- */
+  .doc-header {
+    padding: 5rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .doc-header .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .doc-header .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .doc-header h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .doc-header .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 55ch;
+  }
+
+  .doc-header .doc-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 1rem;
+  }
+
+  /* --- ARTICLE CONTENT --- */
+  .article {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  .article hr {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .article h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .article h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+    color: var(--ink);
+  }
+
+  .article p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+    font-size: 0.95rem;
+  }
+
+  .article strong {
+    font-weight: 600;
+  }
+
+  .article ul, .article ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .article li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article li ul {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .article a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .article a:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .article code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--warm);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+
+  .article blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--warm);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #2a2724;
+  }
+
+  /* --- TABLE --- */
+  .article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--faint);
+  }
+
+  .article th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .article td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .article tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tr:hover td {
+    background: var(--white);
+  }
+
+  /* --- COMPARISON TABLE (prominent) --- */
+  .comparison-table {
+    border: 2px solid var(--ink);
+    margin: 2rem 0;
+  }
+
+  .comparison-table th {
+    font-size: 0.72rem;
+    padding: 1rem 1.2rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-bottom: none;
+  }
+
+  .comparison-table td {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.92rem;
+  }
+
+  .comparison-table td:first-child {
+    font-weight: 500;
+    color: var(--muted);
+    width: 40%;
+  }
+
+  .comparison-table td:last-child {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* --- SESSION CARDS --- */
+  .session-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin-bottom: 2rem;
+  }
+
+  .session-card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .session-card .session-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .session-card .session-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    margin-bottom: 0.8rem;
+  }
+
+  .session-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .session-card li {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--muted);
+    padding: 0.2rem 0;
+    border-bottom: 1px solid rgba(201, 195, 184, 0.4);
+  }
+
+  .session-card li:last-child {
+    border-bottom: none;
+  }
+
+  /* --- STRENGTHS LIST --- */
+  .strengths-list {
+    counter-reset: strength;
+    list-style: none;
+    padding: 0;
+  }
+
+  .strengths-list li {
+    counter-increment: strength;
+    padding: 0.8rem 0 0.8rem 3rem;
+    position: relative;
+    border-bottom: 1px solid var(--faint);
+    font-size: 0.93rem;
+    line-height: 1.65;
+  }
+
+  .strengths-list li:last-child {
+    border-bottom: none;
+  }
+
+  .strengths-list li::before {
+    content: counter(strength);
+    position: absolute;
+    left: 0;
+    top: 0.8rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem;
+    color: var(--faint);
+    width: 2rem;
+    text-align: center;
+  }
+
+  /* --- GAP CARDS --- */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin-bottom: 2rem;
+  }
+
+  .gap-card {
+    background: var(--paper);
+    padding: 1.4rem 1.4rem 1.4rem 1.8rem;
+    border-left: 3px solid var(--red);
+    position: relative;
+  }
+
+  .gap-card .gap-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    color: var(--red);
+    opacity: 0.3;
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+  }
+
+  .gap-card .gap-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+    padding-right: 2rem;
+  }
+
+  .gap-card .gap-desc {
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* --- CALLOUT BOXES --- */
+  .callout {
+    padding: 1.4rem 1.8rem;
+    margin: 2rem 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .callout-quote {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-bg);
+    color: var(--ink);
+  }
+
+  .callout-quote .quote-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 0.6rem;
+  }
+
+  .callout-quote .quote-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .callout-green {
+    border-left: 3px solid var(--green);
+    background: var(--green-bg);
+    color: var(--ink);
+  }
+
+  .callout-green strong {
+    color: var(--green);
+  }
+
+  /* --- AUGMENTATION PLAN --- */
+  .plan-block {
+    border: 1px solid var(--faint);
+    margin-bottom: 1px;
+    background: var(--paper);
+  }
+
+  .plan-block:last-of-type {
+    margin-bottom: 2rem;
+  }
+
+  .plan-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--faint);
+    background: var(--warm);
+  }
+
+  .plan-week {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .plan-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .plan-body {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .plan-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .plan-body li {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    padding: 0.35rem 0 0.35rem 1.2rem;
+    position: relative;
+    color: var(--ink);
+  }
+
+  .plan-body li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 6px;
+    height: 6px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  .plan-body li.done::before {
+    background: var(--accent);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .session-grid { grid-template-columns: 1fr; }
+    .gap-grid { grid-template-columns: 1fr; }
+    .comparison-table td:first-child { width: auto; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Research</span></a>
+    <a href="hub.html" class="back-link">&larr; Hub</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Curriculum Analysis</div>
+  <h1>LearnAIR Curriculum Analysis + Our Augmentation</h1>
+  <p class="subtitle">What the Foundation Series teaches, what&rsquo;s missing, and how we extend it.</p>
+  <div class="doc-date">March 26, 2026</div>
+</section>
+
+<div class="article">
+
+  <!-- SECTION 1: WHAT THEY TEACH -->
+  <hr>
+  <h2>What They Teach</h2>
+  <p>The Foundation Series is 3 live sessions &times; 1.5 hours each. Groups of 5&ndash;20. Here&rsquo;s what each session covers.</p>
+
+  <div class="session-grid">
+    <div class="session-card">
+      <div class="session-label">Session 1</div>
+      <div class="session-title">Orientation + Personalization</div>
+      <ul>
+        <li>What ChatGPT is (library metaphor)</li>
+        <li>Interface tour</li>
+        <li>Memory architecture (3 tiers)</li>
+        <li>DIRECT prompting framework</li>
+        <li>Digital twin + counterbalance persona</li>
+        <li>Data privacy settings</li>
+        <li>Scheduled tasks</li>
+      </ul>
+    </div>
+    <div class="session-card">
+      <div class="session-label">Session 2</div>
+      <div class="session-title">Organization + Personas</div>
+      <ul>
+        <li>Progress check-ins</li>
+        <li>Thread management challenges</li>
+        <li>Projects feature (files, sharing)</li>
+        <li>App integrations (Drive, Gmail, Slack)</li>
+        <li>Persona creation framework</li>
+        <li>Live exercise: build a persona (18 min)</li>
+      </ul>
+    </div>
+    <div class="session-card">
+      <div class="session-label">Session 3</div>
+      <div class="session-title">Custom GPTs + Agent Mode</div>
+      <ul>
+        <li>AI-powered app development</li>
+        <li>Agent mode demo</li>
+        <li>Custom GPT architecture</li>
+        <li>Building &ldquo;digital employees&rdquo;</li>
+        <li>8,000 char limit, knowledge base</li>
+        <li>Macro vs Micro GPT strategy</li>
+        <li>Troubleshooting</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 2: WHAT THEY DO WELL -->
+  <hr>
+  <h2>What They Do Well</h2>
+
+  <ol class="strengths-list">
+    <li><strong>Accessible metaphors.</strong> &ldquo;World&rsquo;s library with an intelligent librarian&rdquo; lands for non-technical people. The &ldquo;digital employee&rdquo; framing gives people a mental model they can work with.</li>
+    <li><strong>Structured prompting.</strong> The DIRECT framework is solid. Giving people a recipe for prompts removes the blank-page anxiety.</li>
+    <li><strong>Persona + counterbalance.</strong> Creating a digital twin and then a counterbalance that fills gaps is a genuinely useful pedagogical move.</li>
+    <li><strong>Hands-on time in session.</strong> 18 minutes of live building in Session 2. People leave having done something, not just heard about it.</li>
+    <li><strong>Macro vs Micro GPT strategy.</strong> The org chart metaphor (Sales GPT, Marketing GPT at macro; email writer, LinkedIn post creator at micro) is a good way to think about organizing AI tools.</li>
+    <li><strong>Real participant wins.</strong> John completed 4&ndash;6 months of work in one week. Cindy built an HR compliance hub. Shannon streamlined a 6&ndash;9 month framework creation to days. These are real outcomes.</li>
+  </ol>
+
+  <!-- SECTION 3: THE GAP -->
+  <hr>
+  <h2>The Gap</h2>
+  <p>Eight things the Foundation Series doesn&rsquo;t cover. These aren&rsquo;t criticisms &mdash; they&rsquo;re the natural next layer that a 4.5-hour introductory course can&rsquo;t reach.</p>
+
+  <div class="gap-grid">
+    <div class="gap-card">
+      <div class="gap-number">1</div>
+      <div class="gap-title">No organizational coordination layer</div>
+      <div class="gap-desc">Everything is individual. &ldquo;Build YOUR persona.&rdquo; Zero discussion of what happens when 50 people each do this. Who coordinates? Who validates? Who governs?</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">2</div>
+      <div class="gap-title">ChatGPT-only, platform-locked</div>
+      <div class="gap-desc">Entire curriculum is OpenAI-specific. No model-agnostic thinking. No Claude, Gemini, or open-source. Students are locked into one vendor.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">3</div>
+      <div class="gap-title">No file system / version control</div>
+      <div class="gap-desc">They teach ChatGPT Projects (folders) but not actual file management. No git, no version history. JB&rsquo;s Session 2 frustration (copy-paste admin) is a direct symptom.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">4</div>
+      <div class="gap-title">No CLI / terminal exposure</div>
+      <div class="gap-desc">Everything is GUI. No command line, no voice-first workflow, no understanding of why the terminal matters for managing systems vs. building individual things.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">5</div>
+      <div class="gap-title">No security / governance depth</div>
+      <div class="gap-desc">They mention privacy toggles but not: who reviews AI output? What happens when a Custom GPT gives wrong advice? What&rsquo;s the approval workflow?</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">6</div>
+      <div class="gap-title">No workforce transition framework</div>
+      <div class="gap-desc">A skills course, not a transition program. Nothing about how this changes jobs, teams, or managing the anxiety when AI does 80% of the work.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">7</div>
+      <div class="gap-title">No measurement / outcomes</div>
+      <div class="gap-desc">They cite 92% adoption but teach no framework for measuring ROI. &ldquo;4&ndash;6 months of work in one week&rdquo; is anecdotal, not systematic.</div>
+    </div>
+    <div class="gap-card">
+      <div class="gap-number">8</div>
+      <div class="gap-title">Troubleshooting is reactive, not systemic</div>
+      <div class="gap-desc">Context limits, memory loss, hallucinations are treated as bugs to work around, not architectural realities to design for.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: HOW WE EXTEND IT -->
+  <hr>
+  <h2>How We Extend It</h2>
+  <p>Side by side: what the Foundation Series covers vs. what our augmentation adds.</p>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>LearnAIR Teaches</th>
+        <th>We Add</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Build a digital employee</td><td>Manage a team of digital employees</td></tr>
+      <tr><td>Personal productivity</td><td>Organizational productivity</td></tr>
+      <tr><td>ChatGPT-specific skills</td><td>Model-agnostic principles</td></tr>
+      <tr><td>GUI workflows</td><td>CLI + voice-first workflows</td></tr>
+      <tr><td>Individual personas</td><td>System-level governance</td></tr>
+      <tr><td>&ldquo;Here&rsquo;s what AI can do&rdquo;</td><td>&ldquo;Here&rsquo;s how to be responsible for what AI does&rdquo;</td></tr>
+      <tr><td>DIRECT prompting</td><td>CLAUDE.md persistent context</td></tr>
+      <tr><td>Projects (ChatGPT folders)</td><td>Hub framework (research, decisions, plans, meetings, execution)</td></tr>
+      <tr><td>18 minutes of hands-on</td><td>Weeks of applied experiential learning</td></tr>
+      <tr><td>Certificate of completion</td><td>Job placement tied to outcomes</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 5: PRACTICAL AUGMENTATION PLAN -->
+  <hr>
+  <h2>Practical Augmentation Plan</h2>
+  <p>An 8-week applied program. Mike and Andrew bridge the gaps through building, not lectures.</p>
+
+  <div class="plan-block">
+    <div class="plan-header">
+      <span class="plan-week">Week 1&ndash;2</span>
+      <span class="plan-title">CLI Foundations</span>
+    </div>
+    <div class="plan-body">
+      <ul>
+        <li class="done">Install and configure Claude Code</li>
+        <li>CLAUDE.md as persistent persona (replaces per-session persona loading)</li>
+        <li>Hub framework: research/, decisions/, plans/, meetings/, execution/</li>
+        <li>First real task: take LearnAIR session notes and publish them as a hub page</li>
+        <li>Voice-first workflow: Monologue + terminal</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plan-block">
+    <div class="plan-header">
+      <span class="plan-week">Week 3&ndash;4</span>
+      <span class="plan-title">System Thinking</span>
+    </div>
+    <div class="plan-body">
+      <ul>
+        <li>Managing multiple agents (sub-agents, parallel tasks)</li>
+        <li>Version control with Git (own your work, never lose progress)</li>
+        <li>Model-agnostic principles: do the same task in ChatGPT, Claude, and Gemini. Compare.</li>
+        <li>Build a Custom GPT AND a CLAUDE.md for the same purpose. See the difference.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plan-block">
+    <div class="plan-header">
+      <span class="plan-week">Week 5&ndash;6</span>
+      <span class="plan-title">Organizational Layer</span>
+    </div>
+    <div class="plan-body">
+      <ul>
+        <li>What happens when 5 people each build their own tool? Simulate it.</li>
+        <li>Governance: who reviews AI output before it ships?</li>
+        <li>The coordination problem: individual productivity vs. organizational ROI</li>
+        <li>Interview one employer: &ldquo;If a veteran showed up who could manage your AI operations, would that be valuable?&rdquo;</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="plan-block">
+    <div class="plan-header">
+      <span class="plan-week">Week 7&ndash;8</span>
+      <span class="plan-title">Integration + Pilot Prep</span>
+    </div>
+    <div class="plan-body">
+      <ul>
+        <li>Build a LinkedIn content system using the hub as source material</li>
+        <li>Run a mock &ldquo;AI ecosystem supervision&rdquo; exercise</li>
+        <li>Document everything: what worked, what broke, what surprised you</li>
+        <li>Produce a case study of the learning journey (Mike&rsquo;s &ldquo;oh shit&rdquo; moments as testimonials)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 6: MIKE'S TAKE -->
+  <hr>
+  <h2>Mike&rsquo;s Take</h2>
+
+  <div class="callout callout-quote">
+    <div class="quote-text">&ldquo;I&rsquo;m left after the three-course curriculum with this sense of needing more practical application and exploration time.&rdquo;</div>
+    <div class="quote-attr">Mike Deal &mdash; after completing the Foundation Series, March 2026</div>
+  </div>
+
+  <p>This is the signal. LearnAIR gives you the concepts in 3 sessions. Our program gives you the reps, the depth, and the organizational layer that makes those concepts useful at scale.</p>
+
+  <!-- SECTION 7: FOR THE 4-WAY CALL -->
+  <hr>
+  <h2>For the 4-Way Call</h2>
+
+  <div class="callout callout-green">
+    <p><strong>Key talking points:</strong></p>
+    <ul>
+      <li><strong>Don&rsquo;t criticize their curriculum.</strong> It&rsquo;s good for what it is.</li>
+      <li><strong>Position as extension, not replacement.</strong> &ldquo;LearnAIR teaches individual AI literacy. We&rsquo;re building the organizational supervision layer on top of it.&rdquo;</li>
+      <li><strong>Use Mike&rsquo;s firsthand experience as the proof.</strong> &ldquo;Mike went through the Foundation Series and identified the exact gap: practical application and organizational coordination.&rdquo;</li>
+      <li><strong>The veteran tiering maps to their framework.</strong> NCOs = micro GPT operators, officers = macro GPT strategists, senior officers = the person who designs the org chart of GPTs.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
