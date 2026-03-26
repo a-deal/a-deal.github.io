@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare IT: Why $5T Runs on 60-Year-Old Software | Distilled</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #7c3aed;
+    --accent-soft: rgba(124, 58, 237, 0.06); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5; --red: #8b2500; --red-bg: #fdf3f0;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  nav .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 0.25rem 0.6rem;
+    border-radius: 100px; }
+  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 520px; line-height: 1.6; }
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem; margin: 2.25rem 0 0.75rem; }
+  p { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.7; }
+  strong { font-weight: 600; }
+  .data-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin: 1rem 0; box-shadow: var(--card-shadow); }
+  .data-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .data-row { display: flex; justify-content: space-between; align-items: center;
+    padding: 0.45rem 0; border-bottom: 1px solid var(--warm); font-size: 0.85rem; }
+  .data-row:last-child { border-bottom: none; }
+  .data-name { font-weight: 500; }
+  .data-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+  .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
+  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
+  .pull-quote { font-family: 'Instrument Serif', serif; font-size: 1.15rem; font-style: italic;
+    color: var(--accent); margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--warm);
+    border-bottom: 1px solid var(--warm); text-align: center; }
+  .timeline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+  .timeline-item { background: #fff; border: 1px solid var(--warm); border-radius: 8px; padding: 0.6rem 0.8rem;
+    font-size: 0.75rem; flex: 1; min-width: 100px; }
+  .timeline-item .year { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent); }
+  .timeline-item .label { color: var(--muted); margin-top: 0.2rem; }
+  .dark-card { background: var(--ink); color: var(--paper); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 1.5rem 0; }
+  .dark-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .dark-card p { font-size: 0.85rem; line-height: 1.6; color: rgba(250,249,246,0.8); margin: 0.5rem 0; }
+  .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
+  a { color: var(--accent); }
+  @media (max-width: 640px) {
+    .hero { padding: 2.5rem 1.25rem 1.25rem; }
+    .content { padding: 0 1.25rem 2rem; }
+    .timeline { flex-direction: column; }
+    .footer { flex-direction: column; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Baseline<span>.</span></a>
+    <span class="badge">Research Distillation</span>
+  </div>
+</nav>
+<div class="hero">
+  <div class="kicker">Social Capital Deep Dive</div>
+  <h1>Healthcare IT: Why <em>$5T</em> Runs on 60-Year-Old Software</h1>
+  <p class="subtitle">Distilled from Social Capital's 80-page deep dive. The structural locks, why they persist, and how LLMs bypass them. <a href="Healthcare_It_Social_Capital.pdf">Full PDF</a></p>
+</div>
+<div class="content">
+
+  <h2>The Numbers</h2>
+  <div class="data-card">
+    <h3>The Cost of Fragmentation</h3>
+    <div class="data-row"><span class="data-name">U.S. healthcare spending</span><span class="data-value">18% of GDP ($5.3T)</span></div>
+    <div class="data-row"><span class="data-name">Per capita (vs UK $6,747)</span><span class="data-value">$14,775</span></div>
+    <div class="data-row"><span class="data-name">Admin costs (% of revenue)</span><span class="data-value">20-30%</span></div>
+    <div class="data-row"><span class="data-name">Personal bankruptcies (medically related)</span><span class="data-value">~66%</span></div>
+    <div class="data-row"><span class="data-name">Medication errors undetected by EHR</span><span class="data-value">33%</span></div>
+    <div class="data-row"><span class="data-name">Patient records that fail to match across systems</span><span class="data-value">Up to 50%</span></div>
+    <div class="data-row"><span class="data-name">Insurance denials overturned on appeal</span><span class="data-value">81.7%</span></div>
+  </div>
+
+  <h2>The Origin: 1966</h2>
+  <p>Massachusetts General Hospital needed a computer system for 20 departments on a PDP-7 with 4KB of RAM. Three developers built MUMPS: an operating system, programming language, and database fused into one inseparable layer. It stored data as trees (globals), not tables. Branches only existed when data existed. Fast writes, concurrent access, zero wasted memory.</p>
+  <p>The tradeoff: reading across patients (population analytics) requires walking every tree, one by one. MUMPS was built to answer "what is happening with this patient right now?" Not "what is happening across all patients."</p>
+
+  <div class="pull-quote">The solution they built still forms the foundation of Epic, Meditech, and every major EHR vendor in 2025.</div>
+
+  <h2>40 Years of Failed Interoperability</h2>
+  <div class="timeline">
+    <div class="timeline-item"><div class="year">1987</div><div class="label">HL7 v2: shared format, but 20% proprietary per vendor</div></div>
+    <div class="timeline-item"><div class="year">2005</div><div class="label">HL7 v3: removed ambiguity, too complex to adopt</div></div>
+    <div class="timeline-item"><div class="year">2009</div><div class="label">HITECH Act: $27B for EHR adoption. 9% to 97% in 6 years. But paper silos became digital silos.</div></div>
+    <div class="timeline-item"><div class="year">2014</div><div class="label">FHIR: modern APIs, cost per interface $500K to $50K. Vendors in no rush.</div></div>
+    <div class="timeline-item"><div class="year">2016</div><div class="label">Cures Act: data blocking illegal. $1M fines. 1,500+ complaints filed.</div></div>
+    <div class="timeline-item"><div class="year">2023</div><div class="label">TEFCA: hub-and-spoke network. But exchanges deliver PDFs, not structured data.</div></div>
+  </div>
+  <p>Each attempt solved one layer. None solved all four: foundational (connect), structural (format), semantic (meaning), organizational (governance). 70% of hospitals can exchange data. Only 42% of clinicians actually use it at point of care.</p>
+
+  <h2>The Reinforcing Loop</h2>
+  <p>Architecture constrains what regulation can change. Weak enforcement preserves intermediary margins. Those margins fund resistance to architectural reform. Three locks: safety over intelligence, the individual over the crowd, margin from friction. They compound into an equilibrium that absorbs reform from any single direction.</p>
+
+  <h2>The $1T Administrative Layer</h2>
+  <p>185,000 medical coders translate every clinical note into billing codes. Physicians spend 1-2 hours per day on documentation after patient care. Prior authorizations require 14 hours of physician time per week per practice. The administrative layer exists because machines couldn't read clinical language. The system runs on human translation.</p>
+
+  <h2>What Changed: LLMs</h2>
+  <p>For sixty years, software could not interpret what clinical data actually means. "MI" and "heart attack" and "acute myocardial infarction" are the same condition. A physician knows that instantly. Software could not.</p>
+  <p>LLMs developed contextual comprehension. This capability is now in production: ambient documentation (100+ health systems), clinical trial matching (minutes vs weeks), prior auth automation. Olive AI raised $850M for RPA automation and shut down by 2023 because it targeted the UI layer, not the semantic layer.</p>
+
+  <div class="tip-card">
+    <h4>The Pincer Strategy</h4>
+    <p><strong>Consumer Aggregation (OpenAI):</strong> Patients download and aggregate their own records, bypassing institutional barriers. When patients share their own data, HIPAA's institutional rules largely don't apply.</p>
+    <p><strong>Enterprise Compression (Anthropic):</strong> Automate the $1T administrative layer from inside. Documentation, coding, prior auth.</p>
+    <p>Both target the same locked system from opposite sides simultaneously.</p>
+  </div>
+
+  <div class="pull-quote">The patient consent pathway may move more usable data than four decades of institutional standards.</div>
+
+  <div class="dark-card">
+    <h3>Why This Matters for Kasane</h3>
+    <p>We're on the consumer aggregation side, but going deeper. ChatGPT Health lets you upload and read your records. We connect records to behavior change. The gap Social Capital identifies ("patients downloading their own records") is literally what our Apple Health shortcut, Garmin integration, and lab upload pipeline do.</p>
+    <p>But we add the coaching layer. Data without action is a dashboard. Data with coaching is a program. That's the gap nobody else is filling.</p>
+    <p>The value-based care shift (providers paid for outcomes, not volume) is our tailwind. If keeping patients healthy increases revenue, then tools that actually change patient behavior become infrastructure, not nice-to-haves.</p>
+    <p>CMS Interoperability Framework deadline: July 2026. FHIR-based data exchange becomes binding. That's 4 months away. The data is about to flow. The question is who turns it into action.</p>
+  </div>
+
+  <h2>Key Stats for Pitch Decks</h2>
+  <div class="data-card">
+    <h3>Quotable Numbers</h3>
+    <div class="data-row"><span class="data-name">Healthcare IT as % of healthcare spend</span><span class="data-value">~3.5%</span></div>
+    <div class="data-row"><span class="data-name">EHR market: Epic + Oracle + Meditech</span><span class="data-value">79% of hospitals</span></div>
+    <div class="data-row"><span class="data-name">HITECH investment</span><span class="data-value">$27B for digitization</span></div>
+    <div class="data-row"><span class="data-name">Hospital EHR adoption (2008 to 2017)</span><span class="data-value">9% to 96%</span></div>
+    <div class="data-row"><span class="data-name">Average patient: different physicians seen</span><span class="data-value">7</span></div>
+    <div class="data-row"><span class="data-name">Deaths from preventable medical errors (1999)</span><span class="data-value">98,000/year</span></div>
+    <div class="data-row"><span class="data-name">Olive AI: raised / peak valuation / outcome</span><span class="data-value">$850M / $4B / shut down</span></div>
+    <div class="data-row"><span class="data-name">CMS Interoperability Framework companies</span><span class="data-value">60+ (Amazon, Apple, Google, OpenAI, Anthropic)</span></div>
+  </div>
+
+</div>
+<div class="footer">
+  <span>Source: Social Capital Healthcare IT Deep Dive / <a href="Healthcare_It_Social_Capital.pdf" style="color:var(--accent);">Full PDF</a></span>
+  <span>Distilled March 2026</span>
+</div>
+</body>
+</html>
