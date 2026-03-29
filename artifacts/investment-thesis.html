@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High-Conviction Allocation: A Research-Backed Investment Thesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Anybody:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: { DEFAULT: '#1a1a1a', soft: '#4a4a4a', faint: '#8a8a8a' },
+        paper: '#ffffff',
+        cream: '#f5f2e9',
+        brown: '#2b1d15',
+        coral: { DEFAULT: '#d4654a', bright: '#e85d3a', light: '#e8a090' },
+        warn: '#b93e25',
+        good: '#2d6a4f',
+      },
+      fontFamily: {
+        display: ['Anybody', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+  @layer utilities {
+    .font-massive { font-family: 'Anybody', sans-serif; font-weight: 900; line-height: 0.88; letter-spacing: -0.04em; text-transform: uppercase; }
+    .font-stat { font-family: 'Anybody', sans-serif; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+    .font-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+    .font-inline-stat { font-family: 'Anybody', sans-serif; font-weight: 700; }
+    .px-band { padding-left: clamp(2rem, 6vw, 6rem); padding-right: clamp(2rem, 6vw, 6rem); }
+    .py-section { padding-top: clamp(4rem, 8vw, 8rem); padding-bottom: clamp(4rem, 8vw, 8rem); }
+    .py-band { padding-top: clamp(5rem, 10vw, 10rem); padding-bottom: clamp(5rem, 10vw, 10rem); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+  .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal-scale.visible { opacity: 1; transform: scale(1); }
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.22s; }
+  .stagger-3 { transition-delay: 0.34s; }
+  .stagger-4 { transition-delay: 0.46s; }
+</style>
+</head>
+<body class="font-body bg-paper text-ink leading-relaxed overflow-x-hidden">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-band py-6 mix-blend-difference">
+  <a href="/" class="font-display font-extrabold text-lg text-white no-underline tracking-tight">ANDREW DEAL</a>
+  <div class="text-xs font-medium text-white tracking-wide"><span class="opacity-50">Research.</span> <strong class="font-semibold">Investment Thesis.</strong></div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-screen bg-ink text-white flex flex-col justify-end px-band pb-12 md:pb-20 overflow-hidden">
+  <div class="absolute top-[8vh] -left-[2vw] font-massive text-[clamp(8rem,18vw,20rem)] text-white/[0.04] whitespace-nowrap pointer-events-none" aria-hidden="true">HIGH<br>CONVICTION</div>
+  <h1 class="font-massive text-[clamp(4rem,11vw,12rem)] mb-8 max-w-[14em] reveal">HIGH<br><em class="not-italic text-coral-bright">CONVICTION</em><br>RESEARCH</h1>
+  <div class="flex flex-col md:flex-row gap-6 md:gap-16 pb-4 reveal stagger-2">
+    <div>
+      <div class="font-label text-white/35 mb-1">Companies screened</div>
+      <div class="text-sm text-white/70 max-w-[22em] leading-relaxed">37 companies on revenue growth, margins, PEG, ROE, distance from highs</div>
+    </div>
+    <div>
+      <div class="font-label text-white/35 mb-1">Deep dives</div>
+      <div class="text-sm text-white/70 max-w-[22em] leading-relaxed">500+ pages of institutional analysis across healthcare, AI infrastructure, autonomous investing</div>
+    </div>
+    <div>
+      <div class="font-label text-white/35 mb-1">Date</div>
+      <div class="text-sm text-white/70">March 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS, WHY NOW -->
+<section class="px-band py-section">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">The Case</div>
+    <div class="font-massive text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] mb-8 reveal">WHY ADD A<br>CONCENTRATED<br>SLEEVE</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mt-4">
+      <div class="reveal stagger-1">
+        <p class="text-[0.92rem] text-ink-soft leading-[1.85] mb-4">My portfolio is 100% passive ETFs. That's the right foundation, but it means zero exposure to companies where I have genuine informational edge through my daily work.</p>
+        <p class="text-[0.92rem] text-ink-soft leading-[1.85]">I'm proposing a 10-20% carve-out ($30-65K) for 4-5 individual positions. Not replacing the strategy. Adding a concentrated sleeve alongside it, focused on sectors I work in every day.</p>
+      </div>
+      <div class="reveal stagger-2">
+        <p class="text-[0.92rem] text-ink-soft leading-[1.85] mb-4">Several of these companies are 22-72% off their highs right now. I've screened 37 companies on fundamentals and read 500+ pages of institutional research to narrow it down.</p>
+        <p class="text-[0.92rem] text-ink-soft leading-[1.85]">The base case over 5 years: outperform VTI by $20-34K. The bear case: underperform by $5-9K, which is 1-2% of total portfolio. I can stomach that tradeoff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE I HAVE EDGE -->
+<section class="bg-cream px-band py-section">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">Where I Have Edge</div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mt-8">
+      <div class="reveal stagger-1">
+        <div class="font-display font-extrabold text-lg mb-3">AI Infrastructure</div>
+        <p class="text-[0.85rem] text-ink-soft leading-[1.85]">I build with Claude, GPT, and Gemini daily. I write agent frameworks and cloud APIs. I see what's real vs hype in AI infrastructure from the inside.</p>
+      </div>
+      <div class="reveal stagger-2">
+        <div class="font-display font-extrabold text-lg mb-3">Health Tech</div>
+        <p class="text-[0.85rem] text-ink-soft leading-[1.85]">I'm building an AI health coaching platform with Garmin, Apple Health, and CGM integrations. I understand the gap between clinical tools and consumer products.</p>
+      </div>
+      <div class="reveal stagger-3">
+        <div class="font-display font-extrabold text-lg mb-3">Consumer Products</div>
+        <p class="text-[0.85rem] text-ink-soft leading-[1.85]">I'm on tirzepatide (GLP-1). I wear a Garmin daily. I pay for Google Workspace, YouTube Premium, and Claude. I evaluate these as both a builder and a customer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION 1: GOOG -->
+<section class="grid grid-cols-1 md:grid-cols-2 min-h-0 md:min-h-[80vh]">
+  <div class="flex flex-col justify-center px-band py-section">
+    <div class="font-label text-ink-faint mb-2 reveal">Position 1 / 30% Allocation</div>
+    <div class="font-massive text-[clamp(3rem,8vw,6rem)] mb-6 reveal">ALPHABET</div>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] mb-4 reveal stagger-1">Google is the front door of the internet with 90% search market share. They're defending it with Gemini, which leads AI reasoning benchmarks. Google Cloud is $43B growing 31% YoY and just became profitable. YouTube ad revenue ($36B) nearly matches Netflix's total revenue.</p>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] reveal stagger-2">The distribution is something no startup can replicate: <span class="font-inline-stat text-coral">3B+</span> Android devices, Chrome at 69% browser share, 14B searches per day vs ChatGPT's 1B prompts. AI Overviews already serves 1.5B users per month.</p>
+    <div class="mt-6 pt-6 border-t border-black/[0.08] reveal stagger-3">
+      <div class="font-label text-warn mb-1">Exit condition</div>
+      <p class="text-xs text-ink-faint">DOJ forces Chrome AND Android divestiture, or search share drops below 80%.</p>
+    </div>
+  </div>
+  <div class="bg-cream flex items-center justify-center p-12 md:p-16">
+    <div class="text-right reveal-right space-y-10">
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-coral-bright">22%</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Off 52-week high</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">$198B</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Search revenue (80% of operating profit)</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">$43B</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Google Cloud revenue, 31% YoY growth</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">90%</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Global search market share</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION 2: NVDA -->
+<section class="grid grid-cols-1 md:grid-cols-2 min-h-0 md:min-h-[80vh]">
+  <div class="order-2 md:order-1 bg-ink text-white flex flex-col justify-center p-12 md:p-16">
+    <div class="w-full reveal-left space-y-8">
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-coral-bright">75%</div><div class="text-sm text-white/40 mt-1">Gross margin on $115B in GPU sales</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-white">4.5M</div><div class="text-sm text-white/40 mt-1">CUDA developers locked into the ecosystem</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-white">$43B</div><div class="text-sm text-white/40 mt-1">Cash on hand, almost zero long-term debt</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-white">1,500+</div><div class="text-sm text-white/40 mt-1">Partners (AWS, Azure, GCP, Meta, OpenAI, Anthropic)</div></div>
+    </div>
+  </div>
+  <div class="order-1 md:order-2 flex flex-col justify-center px-band py-section">
+    <div class="font-label text-ink-faint mb-2 reveal">Position 2 / 20% Allocation</div>
+    <div class="font-massive text-[clamp(3rem,8vw,6rem)] mb-6 reveal">NVIDIA</div>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] mb-4 reveal stagger-1">The picks and shovels of AI. Every major AI company is their customer. CUDA has backward compatibility across 8 GPU generations, creating enormous switching costs. New chip architecture every 2 years keeps them ahead of competition.</p>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] reveal stagger-2">I see compute demand firsthand. Every AI agent I build consumes GPU inference. The shift from training to inference scaling means <span class="font-inline-stat text-coral">more</span> chips needed per query, not fewer.</p>
+    <div class="mt-6 pt-6 border-t border-black/[0.08] reveal stagger-3">
+      <div class="font-label text-warn mb-1">Exit condition</div>
+      <p class="text-xs text-ink-faint">Gross margins fall below 60% for 2 consecutive quarters, or custom silicon captures >30% of training market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION 3: HIMS -->
+<section class="grid grid-cols-1 md:grid-cols-2 min-h-0 md:min-h-[80vh]">
+  <div class="flex flex-col justify-center px-band py-section">
+    <div class="font-label text-ink-faint mb-2 reveal">Position 3 / 20% Allocation</div>
+    <div class="font-massive text-[clamp(3rem,8vw,6rem)] mb-6 reveal">HIMS</div>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] mb-4 reveal stagger-1">The consumer access layer for GLP-1s: tirzepatide and semaglutide. The biggest health trend in a generation. Telehealth plus pharmacy plus subscriptions bypass the traditional PBM system. 74% gross margin.</p>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] reveal stagger-2">I'm personally on tirzepatide. I understand the patient experience, the pricing, the compliance challenges. Telehealth visits cost <span class="font-inline-stat text-coral">$50</span> vs $176 in-person. 3.6M Americans can't access care due to transportation barriers alone. HIMS is solving distribution, not inventing a drug.</p>
+    <div class="mt-6 pt-6 border-t border-black/[0.08] reveal stagger-3">
+      <div class="font-label text-warn mb-1">Exit condition</div>
+      <p class="text-xs text-ink-faint">FDA bans compounded GLP-1s, or operating margin still negative after 2 years.</p>
+    </div>
+  </div>
+  <div class="bg-cream flex items-center justify-center p-12 md:p-16">
+    <div class="text-right reveal-right space-y-10">
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-coral-bright">72%</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Off 52-week high (biggest discount)</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">$50</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Telehealth visit vs $176 in-person</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">74%</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Gross margin</div></div>
+      <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">3.6M</div><div class="text-sm text-ink-faint mt-1 ml-auto max-w-[16em]">Americans who can't access care (transportation)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION 4: VISA -->
+<section class="bg-ink text-white px-band py-band">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">Position 4 / 15% Allocation</div>
+    <div class="font-massive text-[clamp(3rem,8vw,8rem)] text-white mb-12 reveal">THE<br>TOLL<br>BOOTH</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+      <div class="reveal-left">
+        <p class="text-[0.92rem] text-white/70 leading-[1.85] mb-4">Visa has a 98% gross margin toll booth on every digital transaction. When AI agents start making purchases autonomously, they'll use existing payment rails. The moat is the network itself.</p>
+        <p class="text-[0.92rem] text-white/70 leading-[1.85]">This is the steady compounder. The lowest-risk position in the portfolio. The anchor.</p>
+        <div class="mt-6 pt-6 border-t border-white/[0.08]">
+          <div class="font-label text-warn mb-1">Exit condition</div>
+          <p class="text-xs text-white/40">Payment volume growth goes negative, or crypto/stablecoin rails capture >10% of global transaction volume.</p>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="grid grid-cols-2 gap-8">
+          <div><div class="font-stat text-[2.5rem] text-coral-bright">98%</div><div class="text-sm text-white/40 mt-1">Gross margin</div></div>
+          <div><div class="font-stat text-[2.5rem] text-white">68%</div><div class="text-sm text-white/40 mt-1">Operating margin</div></div>
+          <div><div class="font-stat text-[2.5rem] text-white">15%</div><div class="text-sm text-white/40 mt-1">Revenue growth</div></div>
+          <div><div class="font-stat text-[2.5rem] text-white">15%</div><div class="text-sm text-white/40 mt-1">Portfolio allocation</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITION 5: OPEN SLOT -->
+<section class="px-band py-band">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">Position 5 / 15% Allocation</div>
+    <div class="font-massive text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.95] mb-12 reveal">THE OPEN<br>QUESTION</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+      <div class="reveal-left">
+        <div class="font-display font-extrabold text-xl mb-4">Option A: Microsoft <span class="text-ink-faint font-normal text-sm">(safer)</span></div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div><div class="font-stat text-[2rem] text-coral-bright">36%</div><div class="text-xs text-ink-faint mt-1">Off 52-week high</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">$75B</div><div class="text-xs text-ink-faint mt-1">Azure revenue, 39% growth</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">$368B</div><div class="text-xs text-ink-faint mt-1">Locked-in future revenue</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">AAA</div><div class="text-xs text-ink-faint mt-1">Credit rating (1 of 2 companies)</div></div>
+        </div>
+        <p class="text-[0.85rem] text-ink-soft leading-[1.85]">Azure, 27% of OpenAI, identity lock-in via 600M Entra users. Microsoft has shifted from software vendor to indispensable infrastructure. The concern: existing exposure through VTI and VLUE. Is the 36% discount worth the concentration?</p>
+      </div>
+      <div class="reveal-right">
+        <div class="font-display font-extrabold text-xl mb-4">Option B: Inspire Medical <span class="text-ink-faint font-normal text-sm">(asymmetric)</span></div>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div><div class="font-stat text-[2rem] text-coral-bright">69%</div><div class="text-xs text-ink-faint mt-1">Off 52-week high</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">85%</div><div class="text-xs text-ink-faint mt-1">Gross margin</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">$1B</div><div class="text-xs text-ink-faint mt-1">Market cap (small)</div></div>
+          <div><div class="font-stat text-[2rem] text-ink">Only</div><div class="text-xs text-ink-faint mt-1">FDA-approved sleep apnea implant</div></div>
+        </div>
+        <p class="text-[0.85rem] text-ink-soft leading-[1.85]">I'm being tested for sleep apnea. CPAP compliance is terrible. Inspire is the alternative. Single product, binary risk. This could go to near zero or 5x.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPOUND TABLE -->
+<section class="bg-cream px-band py-band">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">5-Year Compound Model</div>
+    <div class="font-massive text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.95] mb-4 reveal">WHAT $30K<br>BECOMES</div>
+    <p class="text-[0.92rem] text-ink-soft leading-[1.85] max-w-[38em] mb-12 reveal stagger-1">Modeled against the same $30K in VTI at a historical 10% annual return ($48,315 after 5 years).</p>
+
+    <div class="overflow-x-auto reveal stagger-2">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b-2 border-ink">
+            <th class="text-left font-display font-extrabold py-3 pr-4">Scenario</th>
+            <th class="text-right font-display font-extrabold py-3 px-4">With MSFT</th>
+            <th class="text-right font-display font-extrabold py-3 px-4">With INSP</th>
+            <th class="text-right font-display font-extrabold py-3 px-4">VTI Benchmark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-black/[0.08]">
+            <td class="py-4 pr-4"><div class="font-display font-bold">Bear</div><div class="text-xs text-ink-faint">Worst reasonable case</div></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-warn">$36.8K</span><br><span class="text-xs text-ink-faint">-$5.3K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-warn">$31.2K</span><br><span class="text-xs text-ink-faint">-$10.9K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-ink-faint">$42.1K</span></td>
+          </tr>
+          <tr class="border-b border-black/[0.08]">
+            <td class="py-4 pr-4"><div class="font-display font-bold">Base</div><div class="text-xs text-ink-faint">Most likely outcome</div></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-ink">$68.7K</span><br><span class="text-xs text-good">+$20.4K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-ink">$71.2K</span><br><span class="text-xs text-good">+$22.9K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-ink-faint">$48.3K</span></td>
+          </tr>
+          <tr>
+            <td class="py-4 pr-4"><div class="font-display font-bold">Bull</div><div class="text-xs text-ink-faint">If theses play out fully</div></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-good">$110.9K</span><br><span class="text-xs text-good">+$55.6K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-good">$133.9K</span><br><span class="text-xs text-good">+$78.6K vs VTI</span></td>
+            <td class="text-right py-4 px-4"><span class="font-stat text-lg text-ink-faint">$55.3K</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-16 reveal">
+      <div class="font-label text-coral mb-2">At $50K Allocation</div>
+      <div class="grid grid-cols-3 gap-8 mt-6">
+        <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-warn">$61.3K</div><div class="text-sm text-ink-faint mt-1">Bear (-$8.8K vs VTI)</div></div>
+        <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-ink">$114.5K</div><div class="text-sm text-ink-faint mt-1">Base (+$34K vs VTI)</div></div>
+        <div><div class="font-stat text-[clamp(2rem,4vw,3rem)] text-good">$184.9K</div><div class="text-sm text-ink-faint mt-1">Bull (+$92.7K vs VTI)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXIT CONDITIONS -->
+<section class="bg-ink text-white px-band py-band">
+  <div class="max-w-7xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">Discipline</div>
+    <div class="font-massive text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.95] text-white mb-12 reveal">WRITE THE<br>EXIT BEFORE<br>THE ENTRY</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal stagger-1">
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">GOOG</div>
+        <p class="text-sm text-white/50 leading-relaxed">DOJ forces Chrome AND Android divestiture (not just one). Search share drops below 80%.</p>
+      </div>
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">NVDA</div>
+        <p class="text-sm text-white/50 leading-relaxed">Gross margins below 60% for 2 consecutive quarters. Custom silicon captures >30% of training market.</p>
+      </div>
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">HIMS</div>
+        <p class="text-sm text-white/50 leading-relaxed">FDA bans compounded GLP-1s. Operating margin still negative after 2 years.</p>
+      </div>
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">V</div>
+        <p class="text-sm text-white/50 leading-relaxed">Digital payment volume growth goes negative. Crypto rails capture >10% of global transactions.</p>
+      </div>
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">MSFT</div>
+        <p class="text-sm text-white/50 leading-relaxed">Azure growth falls below 20%. OpenAI partnership dissolves or builds competing cloud.</p>
+      </div>
+      <div class="border border-white/[0.1] p-6">
+        <div class="font-display font-extrabold text-coral-bright mb-3">INSP</div>
+        <p class="text-sm text-white/50 leading-relaxed">Competing non-surgical sleep apnea solution gets FDA approval with better outcomes. Insurance coverage materially contracts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS -->
+<section class="px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-2 reveal">For Discussion</div>
+    <div class="font-massive text-[clamp(2.5rem,6vw,5rem)] leading-[0.95] mb-12 reveal">OPEN<br>QUESTIONS</div>
+    <div class="space-y-8 reveal stagger-1">
+      <div class="border-b border-black/[0.08] pb-6">
+        <div class="font-display font-extrabold mb-2">1. Account selection</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">Should these positions go in the Roth (tax-free gains on winners) or taxable (tax loss harvesting if HIMS or INSP declines)?</p>
+      </div>
+      <div class="border-b border-black/[0.08] pb-6">
+        <div class="font-display font-extrabold mb-2">2. MSFT overlap</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">How much MSFT do I already own through VTI, VLUE, and the other factor ETFs? Is the 36% discount worth the concentration?</p>
+      </div>
+      <div class="border-b border-black/[0.08] pb-6">
+        <div class="font-display font-extrabold mb-2">3. Position sizing</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">Given my age (35), high risk tolerance, and thesis quality: is $30K (10%) the right starting size or should I go to $50K (15-20%)?</p>
+      </div>
+      <div class="border-b border-black/[0.08] pb-6">
+        <div class="font-display font-extrabold mb-2">4. Execution</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">Dollar-cost average in over a few weeks, or lump sum given the current discounts?</p>
+      </div>
+      <div class="border-b border-black/[0.08] pb-6">
+        <div class="font-display font-extrabold mb-2">5. HIMS regulatory risk</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">Is there a way to hedge the FDA risk on compounded GLP-1s, or is position sizing sufficient risk management?</p>
+      </div>
+      <div class="pb-6">
+        <div class="font-display font-extrabold mb-2">6. Review cadence</div>
+        <p class="text-[0.9rem] text-ink-soft leading-[1.85]">Quarterly reviews against exit conditions, no trading between reviews unless an exit condition triggers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="bg-ink text-white px-band py-section">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+    <div>
+      <div class="font-massive text-[clamp(2rem,4vw,3rem)] text-white/20 mb-4">RESEARCH<br>SOURCES</div>
+      <div class="space-y-2 text-sm text-white/40">
+        <p>Social Capital deep dive reports: 36 reports, 500+ pages</p>
+        <p>Quantitative screen: 37 companies on revenue growth, margins, PEG, ROE</p>
+        <p>Colossus podcast interviews: Palantir, 3G Capital, Apollo, Thrive Capital</p>
+        <p>Personal experience: AI health coaching platform, daily product usage</p>
+      </div>
+    </div>
+    <div class="text-right">
+      <div class="font-display font-extrabold text-lg text-white/20">ANDREW DEAL</div>
+      <div class="text-xs text-white/30 mt-1">March 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLL REVEAL JS -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
