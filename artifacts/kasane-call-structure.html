@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Kickoff: Call Structure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #F8F9FB;
+    --text: #2C3E50;
+    --text-light: #7B8A99;
+    --text-lighter: #A8B5C2;
+    --accent: #5B7FED;
+    --accent-light: #E8EDFB;
+    --border: #E2E6EC;
+    --white: #FFFFFF;
+    --section-gap: clamp(80px, 10vw, 120px);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: clamp(60px, 8vw, 100px) clamp(24px, 5vw, 48px) 120px;
+  }
+
+  .header { margin-bottom: var(--section-gap); }
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(36px, 5vw, 48px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .header-date {
+    font-size: 13px;
+    color: var(--text-lighter);
+  }
+
+  .opener {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: var(--section-gap);
+    max-width: 600px;
+  }
+
+  .section { margin-bottom: var(--section-gap); }
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-lighter);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 28px 0 8px;
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: #4A5568;
+    max-width: 600px;
+  }
+  .key { color: var(--text); font-weight: 600; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: var(--section-gap) 0;
+  }
+
+  /* ── Act blocks ── */
+  .act {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+  .act-header {
+    padding: 20px 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .act-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+  .act-time {
+    font-size: 12px;
+    color: var(--text-lighter);
+    font-weight: 500;
+  }
+  .act-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    padding: 8px 24px 0;
+  }
+  .act-body {
+    padding: 16px 24px 24px;
+  }
+  .act-body p {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .act-selected {
+    border-color: var(--accent);
+    border-width: 2px;
+  }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .checklist li {
+    font-size: 14px;
+    color: #4A5568;
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "[ ]";
+    position: absolute;
+    left: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: monospace;
+  }
+
+  /* ── Decisions ── */
+  .decision {
+    border-left: 3px solid var(--accent);
+    padding: 0 0 0 20px;
+    margin: 20px 0;
+  }
+  .decision p { font-size: 14px; }
+  .decision-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  /* ── Do / Don't ── */
+  .rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+  .rule-col {
+    background: var(--white);
+    padding: 20px;
+  }
+  .rule-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .rule-do .rule-label { color: #2D8A4E; }
+  .rule-dont .rule-label { color: #C0392B; }
+  .rule-item {
+    font-size: 13px;
+    color: #4A5568;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  /* ── Link card ── */
+  .link-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--white);
+    transition: border-color 0.15s;
+  }
+  .link-card:hover { border-color: var(--accent); }
+  .link-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-lighter);
+    margin-bottom: 4px;
+  }
+  .link-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .link-card-desc {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .footer {
+    font-size: 11px;
+    color: var(--text-lighter);
+    margin-top: var(--section-gap);
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 640px) {
+    .rules { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Kasane</div>
+    <h1>Sprint Kickoff</h1>
+    <div class="header-date">March 31, 2026. Call structure. 60 minutes.</div>
+  </div>
+
+  <p class="opener">One hour. Three acts. The sprint starts today. This call succeeds if we leave with one framing agreed, one build scoped for week 1, and names on a list.</p>
+
+  <a class="link-card" href="https://andrewdeal.info/artifacts/kasane-sprint-alignment">
+    <div class="link-card-label">Pre-read</div>
+    <div class="link-card-title">Sprint Alignment Artifact</div>
+    <div class="link-card-desc">Full strategic context, shared vocabulary, the three islands diagnosis, and proposed roadmap. Shared March 30.</div>
+  </a>
+
+  <hr class="divider">
+
+  <!-- ACT 1 -->
+  <div class="section">
+    <div class="section-num">Act 1</div>
+    <h2>Your world</h2>
+
+    <div class="act">
+      <div class="act-header">
+        <span class="act-label">Minutes 0-20</span>
+        <span class="act-time">Lead with Paul's priorities</span>
+      </div>
+      <div class="act-title">App Store, SyncService, coordination</div>
+      <div class="act-body">
+        <p>Start where Paul is. He's been grinding on App Store rejections and wants to ship. Honor that energy before introducing new framing.</p>
+
+        <h3>Artifact reactions</h3>
+        <p>"You've had the doc overnight. What landed? What's off? What's missing?" Listen. Don't re-explain.</p>
+
+        <h3>App Store status</h3>
+        <ul class="checklist">
+          <li>What's left after Sign in with Apple fix?</li>
+          <li>Timeline to approval: days or weeks?</li>
+          <li>TestFlight backup plan for founding members if delayed?</li>
+        </ul>
+
+        <h3>Quick coordination</h3>
+        <ul class="checklist">
+          <li>PR #94 (shared data layer): merge before or after resubmission?</li>
+          <li>api.kasanelife.com CNAME: do it live on the call if possible</li>
+          <li>SyncConfig values: base URL + token ready when he is</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ACT 2 -->
+  <div class="section">
+    <div class="section-num">Act 2</div>
+    <h2>The one question</h2>
+
+    <div class="act act-selected">
+      <div class="act-header">
+        <span class="act-label">Minutes 20-40</span>
+        <span class="act-time">The strategic heart of the call</span>
+      </div>
+      <div class="act-title">What happens after someone checks off their habits?</div>
+      <div class="act-body">
+        <p>Right now: nothing. Checkbox turns green. The user supplies all motivation. The system doesn't respond, doesn't learn, doesn't compound. Default-diverging.</p>
+
+        <p>Proposed: after check-in, the app shows 2-3 sentences from Kiso. Personalized. Based on real biometrics. <span class="key">"You hit bedtime 3 nights straight. Sleep is up 22 minutes. Resting HR dropped a beat."</span></p>
+
+        <p>This is the bridge. One endpoint. One UI element. One week. It connects habits to outcomes and makes the system feel alive.</p>
+
+        <div class="decision">
+          <div class="decision-label">Decision needed</div>
+          <p><span class="key">Can we wire one feedback loop into the Today screen in week 1?</span> What does SyncService need to call /api/v1/context? Show Paul the response for his real data on the call.</p>
+        </div>
+
+        <p>If yes: the sprint validates the intelligence thesis. If "let's get App Store first": that's fine, we have our sequencing answer.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ACT 3 -->
+  <div class="section">
+    <div class="section-num">Act 3</div>
+    <h2>The sprint</h2>
+
+    <div class="act">
+      <div class="act-header">
+        <span class="act-label">Minutes 40-60</span>
+        <span class="act-time">Only if Act 2 landed</span>
+      </div>
+      <div class="act-title">Users, rhythm, definition of done</div>
+      <div class="act-body">
+
+        <h3>The 10 users</h3>
+        <p>Names, not theory. Who's onboarding this week? What problem does each person have?</p>
+        <ul class="checklist">
+          <li>Active: Andrew, Grigoriy, Manny</li>
+          <li>Paul's family: Brittany, Pops, kids</li>
+          <li>Warm: Patrick Smith, Dean Wu, Derek's contacts</li>
+          <li>Gap: identify remaining 2-4 names</li>
+        </ul>
+
+        <h3>Operating rhythm</h3>
+        <ul class="checklist">
+          <li>Weekly artifact from each person (template in sprint alignment doc)</li>
+          <li>Weekend silence pattern (Paul's request, keep it)</li>
+          <li>Daily app usage: both founders, every day, 12 weeks</li>
+          <li>First artifact due date: agree on day</li>
+        </ul>
+
+        <h3>Definition of done</h3>
+        <div class="decision">
+          <div class="decision-label">Week 8 success</div>
+          <p><span class="key">At least 3 users who can describe a specific health outcome the product helped achieve.</span> Not engagement metrics. Outcome statements. "My sleep improved." "My ApoB dropped." "I stuck with a habit for 21 days."</p>
+        </div>
+
+        <h3>Close</h3>
+        <p>"What am I missing?" Let Paul close the call.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- RULES -->
+  <div class="section">
+    <div class="section-num">Guardrails</div>
+    <h2>Protect the hour</h2>
+
+    <div class="rules">
+      <div class="rule-col rule-do">
+        <div class="rule-label">Do</div>
+        <div class="rule-item">Listen to his artifact reaction before talking</div>
+        <div class="rule-item">Show /api/v1/context with Paul's real data</div>
+        <div class="rule-item">Name specific users, not categories</div>
+        <div class="rule-item">Leave with one build scoped for week 1</div>
+        <div class="rule-item">Respect his "just build" instinct</div>
+      </div>
+      <div class="rule-col rule-dont">
+        <div class="rule-label">Don't</div>
+        <div class="rule-item">Demo Milo, MCP package, or landing page</div>
+        <div class="rule-item">Discuss competitive landscape (Savva, ChatGPT Health)</div>
+        <div class="rule-item">Renegotiate business model or partnership</div>
+        <div class="rule-item">Open strategic docs (PR #1). Iterate async.</div>
+        <div class="rule-item">Send more articles before the call</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Andrew Deal. For personal use ahead of sprint kickoff call with Paul Mederos.</div>
+
+</div>
+</body>
+</html>
