@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike's Program | Baseline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.06); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5;
+    --blue: #1e40af; --blue-bg: #eff6ff;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+
+  /* --- NAV --- */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  nav .badge { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green); background: var(--green-bg); padding: 0.25rem 0.6rem;
+    border-radius: 100px; }
+
+  /* --- HERO --- */
+  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hero .kicker::after { content: ''; flex: 1; height: 1px; background: var(--faint); max-width: 60px; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 520px; line-height: 1.6; }
+
+  /* --- CONTENT --- */
+  .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
+
+  h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem;
+    margin: 2.25rem 0 0.75rem; color: var(--ink); }
+  h2:first-child { margin-top: 0; }
+  p { margin: 0.5rem 0; font-size: 0.9rem; line-height: 1.7; }
+  strong { font-weight: 600; }
+
+  /* --- WORKOUT CARDS --- */
+  .workout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .workout-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
+    padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .workout-card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04); }
+  .workout-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem; }
+  .workout-card h3 .day-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .workout-card.blue h3 { color: var(--blue); }
+  .workout-card.blue h3 .day-dot { background: var(--blue); }
+  .workout-card.blue { border-color: #dbeafe; }
+  .exercise { display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.45rem 0; border-bottom: 1px solid var(--warm); font-size: 0.85rem; }
+  .exercise:last-child { border-bottom: none; }
+  .exercise-name { font-weight: 500; }
+  .exercise-sets { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+  .exercise-note { font-size: 0.78rem; color: var(--muted); font-style: italic; padding: 0.2rem 0 0.4rem; }
+
+  /* --- PULL QUOTE --- */
+  .pull-quote { font-family: 'Instrument Serif', serif; font-size: 1.15rem; font-style: italic;
+    color: var(--muted); margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--warm);
+    border-bottom: 1px solid var(--warm); text-align: center; }
+
+  /* --- TIP CARDS --- */
+  .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
+  .tip-card.blue { background: var(--blue-bg); border-left-color: var(--blue); }
+  .tip-card.blue h4 { color: var(--blue); }
+  .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
+  .tip-card p + p { margin-top: 0.5rem; }
+
+  /* --- ROUTINE CARDS --- */
+  .routine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .routine-card { background: var(--green-bg); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: var(--card-shadow); }
+  .routine-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
+  .routine-item { font-size: 0.82rem; padding: 0.3rem 0; display: flex; gap: 0.5rem; line-height: 1.5; }
+  .routine-time { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green);
+    min-width: 60px; flex-shrink: 0; padding-top: 1px; }
+
+  /* --- SCENARIO TOGGLE --- */
+  .scenario-tabs { display: flex; gap: 0; margin: 1rem 0; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--warm); width: fit-content; font-size: 0.75rem; }
+  .scenario-tabs span { padding: 0.5rem 1.4rem; font-weight: 500; background: #fff; color: var(--muted); cursor: pointer;
+    transition: background 0.15s, color 0.15s; user-select: none; }
+  .scenario-tabs span.active { background: var(--ink); color: #fff; }
+  .scenario-content { display: none; }
+  .scenario-content.active { display: block; }
+
+  /* --- VOLUME TABLE --- */
+  .volume-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.82rem; }
+  .volume-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--warm); }
+  .volume-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--warm); }
+  .volume-table td:first-child { font-weight: 500; }
+  .volume-table .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+
+  /* --- TIMELINE --- */
+  .timeline { margin: 1.25rem 0; padding-left: 1.5rem; border-left: 2px solid var(--warm); }
+  .timeline-block { padding: 0.75rem 0; position: relative; }
+  .timeline-block::before { content: ''; position: absolute; left: -1.75rem; top: 1rem;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--warm); border: 2px solid var(--paper); }
+  .timeline-block.current::before { background: var(--accent); }
+  .timeline-block h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem; }
+  .timeline-block p { font-size: 0.82rem; margin: 0.2rem 0; line-height: 1.6; }
+
+  /* --- RULES (CLOSER) --- */
+  .rules-card { background: var(--ink); color: var(--paper); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 1.5rem 0; }
+  .rules-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .rule-item { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; line-height: 1.6; }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-item strong { color: #fff; font-weight: 600; }
+  .rule-item span { color: rgba(250,249,246,0.7); }
+
+  /* --- CHECK-IN --- */
+  .checkin { background: #fff; border: 2px solid var(--accent); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0; text-align: center; }
+  .checkin p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+  .checkin .cta { font-family: 'Instrument Serif', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.25rem; }
+
+  /* --- ADDENDUM --- */
+  .addendum { border-top: 2px solid var(--warm); margin-top: 2rem; padding-top: 1rem; }
+  .addendum h2 { color: var(--muted); font-size: 1.3rem; }
+  .addendum-toggle { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); cursor: pointer;
+    padding: 0.5rem 0; border: none; background: none; user-select: none; }
+  .addendum-toggle::before { content: '+'; display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft); border: 1px solid rgba(184,134,11,0.2);
+    font-size: 0.8rem; font-weight: 600; transition: transform 0.2s; }
+  .addendum-toggle.open::before { content: '-'; }
+  .addendum-section { display: none; margin-bottom: 1.5rem; }
+  .addendum-section.open { display: block; }
+
+  /* --- SOURCES --- */
+  .sources { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--warm); }
+  .sources h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .source-item { font-size: 0.8rem; padding: 0.35rem 0; color: var(--muted); line-height: 1.5; }
+  .source-item strong { color: var(--ink); font-weight: 500; }
+
+  /* --- FOOTER --- */
+  .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 640px) {
+    .hero { padding: 2.5rem 1.25rem 1.25rem; }
+    .content { padding: 0 1.25rem 2rem; }
+    .workout-grid { grid-template-columns: 1fr; }
+    .routine-grid { grid-template-columns: 1fr; }
+    .workout-card { padding: 1rem 1.25rem; }
+    .rules-card { padding: 1.25rem 1.5rem; }
+    .footer { flex-direction: column; gap: 0.25rem; }
+    .volume-table { font-size: 0.75rem; }
+    .volume-table th, .volume-table td { padding: 0.4rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Baseline<span>.</span></a>
+    <span class="badge">April Program</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Built for Mike</div>
+  <h1>Return to <em>Strength</em></h1>
+  <p class="subtitle">4 sessions a week. Compound lifts at the gym, conditioning at home. Includes an optional onramp for Nikki.</p>
+</div>
+
+<div class="content">
+
+  <!-- ============================================ -->
+  <!-- THE PLAN (concise, what to actually do)      -->
+  <!-- ============================================ -->
+
+  <h2>The Setup</h2>
+  <p>44, 195 lbs, 6'0". Four months off. Newborn at home. Commitment level: 9/10.</p>
+  <p>We're running <strong>strength and conditioning concurrently</strong>. Not strength first, then cardio. Both, every week, with conditioning getting the early bias because your VO2 max is the fastest thing to recover.</p>
+  <p><strong>Target: 3 gym days + 1 home day.</strong> You said you can do 2 gym days. That's the floor. Push for 3 when you can. The fallback is below if a week only allows 2.</p>
+
+  <div class="pull-quote">You don't need to earn the right to train hard. You just need to start smart.</div>
+
+  <h2>The Program</h2>
+  <p>Big compound lifts, low volume to start, conditioning finisher every session. Weeks 1-2 should feel easy. That's by design.</p>
+
+  <div class="scenario-tabs" id="scenarioTabs">
+    <span class="active" data-scenario="optimal">3 Gym + 1 Home</span>
+    <span data-scenario="fallback">2 Gym + 2 Home</span>
+  </div>
+
+  <!-- OPTIMAL: 3 GYM + 1 HOME -->
+  <div class="scenario-content active" id="scenario-optimal">
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Day 1 — Upper Push</h3>
+        <div class="exercise">
+          <span class="exercise-name">Bench Press</span>
+          <span class="exercise-sets">4 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">OHP or DB Shoulder Press</span>
+          <span class="exercise-sets">3 x 8</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Barbell Row</span>
+          <span class="exercise-sets">3 x 8</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Tricep Pushdown</span>
+          <span class="exercise-sets">2 x 12</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Lateral Raise</span>
+          <span class="exercise-sets">2 x 15</span>
+        </div>
+        <p class="exercise-note">Finish: 8 min Airdyne or rower, easy pace</p>
+      </div>
+
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Day 2 — Lower</h3>
+        <div class="exercise">
+          <span class="exercise-name">Back Squat</span>
+          <span class="exercise-sets">4 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Romanian Deadlift</span>
+          <span class="exercise-sets">3 x 8</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Leg Press or BSS</span>
+          <span class="exercise-sets">3 x 10</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Leg Curl</span>
+          <span class="exercise-sets">2 x 12</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Calf Raise</span>
+          <span class="exercise-sets">2 x 15</span>
+        </div>
+        <p class="exercise-note">Finish: 8 min rowing intervals (30s on / 90s off)</p>
+      </div>
+    </div>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Day 3 — Full Body Pull</h3>
+        <div class="exercise">
+          <span class="exercise-name">Deadlift</span>
+          <span class="exercise-sets">3 x 4</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Weighted Chin-up or Lat Pulldown</span>
+          <span class="exercise-sets">3 x 8</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Incline DB Press</span>
+          <span class="exercise-sets">3 x 10</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Lunges or Step-ups</span>
+          <span class="exercise-sets">2 x 10/leg</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Barbell Curl</span>
+          <span class="exercise-sets">2 x 12</span>
+        </div>
+        <p class="exercise-note">Finish: 8 min Airdyne, moderate effort</p>
+      </div>
+
+      <div class="workout-card blue">
+        <h3><span class="day-dot"></span> Day 4 — Home Conditioning</h3>
+        <div class="exercise">
+          <span class="exercise-name">Airdyne or Rower Intervals</span>
+          <span class="exercise-sets">6-8 x 30s/90s</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">DB Goblet Squat (20 lb)</span>
+          <span class="exercise-sets">3 x 15</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Push-ups</span>
+          <span class="exercise-sets">3 x max</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">DB Row (20 lb)</span>
+          <span class="exercise-sets">3 x 12/arm</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name">Plank</span>
+          <span class="exercise-sets">3 x 30-45s</span>
+        </div>
+        <p class="exercise-note">30-40 min total. Recovery and conditioning, not a grind.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FALLBACK: 2 GYM + 2 HOME -->
+  <div class="scenario-content" id="scenario-fallback">
+
+    <div class="tip-card blue">
+      <h4>2-Day Gym Reality</h4>
+      <p>If you can only hit the gym twice, we compress to <strong>Upper/Lower</strong> and add a second home day. The gym days carry all the heavy loading. Home days handle conditioning and lighter strength work. You'll progress slower. Push for 3 when you can.</p>
+    </div>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Gym Day 1 — Upper</h3>
+        <div class="exercise"><span class="exercise-name">Bench Press</span><span class="exercise-sets">4 x 5</span></div>
+        <div class="exercise"><span class="exercise-name">Barbell Row</span><span class="exercise-sets">4 x 6</span></div>
+        <div class="exercise"><span class="exercise-name">OHP</span><span class="exercise-sets">3 x 8</span></div>
+        <div class="exercise"><span class="exercise-name">Lat Pulldown or Chin-ups</span><span class="exercise-sets">3 x 8</span></div>
+        <div class="exercise"><span class="exercise-name">Tricep / Bicep superset</span><span class="exercise-sets">2 x 12 each</span></div>
+        <div class="exercise"><span class="exercise-name">Lateral Raise</span><span class="exercise-sets">2 x 15</span></div>
+      </div>
+
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Gym Day 2 — Lower</h3>
+        <div class="exercise"><span class="exercise-name">Back Squat</span><span class="exercise-sets">4 x 5</span></div>
+        <div class="exercise"><span class="exercise-name">Deadlift</span><span class="exercise-sets">3 x 4</span></div>
+        <div class="exercise"><span class="exercise-name">Leg Press or BSS</span><span class="exercise-sets">3 x 10</span></div>
+        <div class="exercise"><span class="exercise-name">RDL</span><span class="exercise-sets">3 x 8</span></div>
+        <div class="exercise"><span class="exercise-name">Leg Curl</span><span class="exercise-sets">2 x 12</span></div>
+        <div class="exercise"><span class="exercise-name">Calf Raise</span><span class="exercise-sets">2 x 15</span></div>
+      </div>
+    </div>
+
+    <div class="workout-grid">
+      <div class="workout-card blue">
+        <h3><span class="day-dot"></span> Home Day 1 — Conditioning</h3>
+        <div class="exercise"><span class="exercise-name">Airdyne or Rower Intervals</span><span class="exercise-sets">8 x 30s/90s</span></div>
+        <div class="exercise"><span class="exercise-name">Treadmill Walk (incline)</span><span class="exercise-sets">15 min</span></div>
+        <div class="exercise"><span class="exercise-name">Core circuit (plank, dead bug, pallof)</span><span class="exercise-sets">3 rounds</span></div>
+      </div>
+
+      <div class="workout-card blue">
+        <h3><span class="day-dot"></span> Home Day 2 — Light Strength</h3>
+        <div class="exercise"><span class="exercise-name">DB Goblet Squat</span><span class="exercise-sets">3 x 15</span></div>
+        <div class="exercise"><span class="exercise-name">Push-up Variations</span><span class="exercise-sets">3 x max</span></div>
+        <div class="exercise"><span class="exercise-name">DB Row (20 lb)</span><span class="exercise-sets">3 x 12/arm</span></div>
+        <div class="exercise"><span class="exercise-name">DB RDL (20 lb)</span><span class="exercise-sets">3 x 15</span></div>
+        <div class="exercise"><span class="exercise-name">Airdyne cooldown</span><span class="exercise-sets">10 min easy</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>How to Pick Your Weights</h2>
+  <p><strong>Weeks 1-2:</strong> Pick a weight you could do for 10 reps. Do sets of 5. Finish every set thinking "I had 3-4 more." RPE 6-7.</p>
+  <p><strong>Weeks 3-4:</strong> Add 5-10% to your working weights. RPE 7-8.</p>
+  <p><strong>Week 5:</strong> Cut volume in half, keep weights moderate. Deload, then start Mesocycle 2.</p>
+
+  <h2>Conditioning</h2>
+  <div class="routine-grid">
+    <div class="routine-card">
+      <h3>Weeks 1-2</h3>
+      <div class="routine-item"><span class="routine-time">Intervals</span> 6 rounds: 30s hard / 90s easy</div>
+      <div class="routine-item"><span class="routine-time">Finishers</span> 8 min easy after gym days</div>
+    </div>
+    <div class="routine-card">
+      <h3>Weeks 3-4</h3>
+      <div class="routine-item"><span class="routine-time">Intervals</span> 8 rounds: 30s hard / 60s easy</div>
+      <div class="routine-item"><span class="routine-time">Finishers</span> 10 min moderate after gym days</div>
+    </div>
+  </div>
+
+  <h2>Warm-Up (5 min, every session)</h2>
+  <div class="routine-card" style="margin: 1rem 0;">
+    <h3>Before You Lift</h3>
+    <div class="routine-item"><span class="routine-time">2 min</span> Light cardio (Airdyne, rower, or jog in place)</div>
+    <div class="routine-item"><span class="routine-time">1 min</span> 10 bodyweight squats</div>
+    <div class="routine-item"><span class="routine-time">1 min</span> 10 hip hinges</div>
+    <div class="routine-item"><span class="routine-time">1 min</span> Arm circles + band pull-aparts</div>
+  </div>
+
+  <h2>Nikki's Onramp</h2>
+  <p>If Nikki wants to train, she doesn't need a separate program. Same structure, her own weight. The compound lifts work the same for everyone.</p>
+
+  <div class="tip-card">
+    <h4>Postpartum First</h4>
+    <p><strong>Clear with her doctor.</strong> Once cleared, start with home conditioning and bodyweight movements for 1-2 weeks before adding external load. Core and pelvic floor come first: dead bugs, bird dogs, diaphragmatic breathing before planks and squats. If anything feels off, scale back. A pelvic floor PT is worth the visit.</p>
+  </div>
+
+  <div class="workout-card" style="margin: 1rem 0;">
+    <h3><span class="day-dot"></span> Nikki's Starting Point (Weeks 1-2)</h3>
+    <div class="exercise"><span class="exercise-name">Bodyweight Squat</span><span class="exercise-sets">3 x 10</span></div>
+    <div class="exercise"><span class="exercise-name">Incline Push-ups (hands on bench)</span><span class="exercise-sets">3 x 8</span></div>
+    <div class="exercise"><span class="exercise-name">DB Row (8-10 lb)</span><span class="exercise-sets">3 x 10/arm</span></div>
+    <div class="exercise"><span class="exercise-name">DB RDL (10-15 lb)</span><span class="exercise-sets">3 x 10</span></div>
+    <div class="exercise"><span class="exercise-name">Dead Bugs</span><span class="exercise-sets">3 x 8/side</span></div>
+    <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Your existing 8-15 lb DBs cover this. Week 3+: add goblet squats, floor push-ups, Airdyne. If she's ready, she joins your gym days at lighter weight.</span></div>
+  </div>
+
+  <div class="rules-card">
+    <h3>The Rules</h3>
+    <div class="rule-item"><strong>RPE governs everything.</strong> <span>If the weight feels heavy, it is heavy. Drop 10% and keep moving. Ego lifting is how you get hurt at 44.</span></div>
+    <div class="rule-item"><strong>Never miss two in a row.</strong> <span>Miss one session, that's life with a newborn. Miss two, you're building a habit of not showing up.</span></div>
+    <div class="rule-item"><strong>Sleep beats everything.</strong> <span>If the baby had you up all night, swap to a conditioning day. Don't skip.</span></div>
+    <div class="rule-item"><strong>30 minutes is a full session.</strong> <span>Get in, hit the compounds, get out. Consistency beats duration.</span></div>
+    <div class="rule-item"><strong>Track your weights.</strong> <span>Write down what you lifted. Next session, try to beat it. That's the whole system.</span></div>
+  </div>
+
+  <div class="checkin">
+    <p class="cta">Check in after Week 2.</p>
+    <p>Tell me what weights you're hitting, what feels heavy, what feels easy, and how recovery is going with the newborn schedule. We adjust from there.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- ADDENDUM (methodology, deep dives)           -->
+  <!-- ============================================ -->
+
+  <div class="addendum">
+    <h2>Addendum: The Thinking Behind the Plan</h2>
+    <p style="color: var(--muted); font-size: 0.85rem;">You don't need to read any of this to follow the program. This is for the curious.</p>
+
+    <!-- WHY 3 DAYS -->
+    <button class="addendum-toggle" data-section="why-three">Why 3 Gym Days, Not 2</button>
+    <div class="addendum-section" id="why-three">
+      <p>To drive meaningful strength adaptations, you need roughly 6-10 hard sets per muscle group per week (Minimum Effective Volume through Maximum Adaptive Volume). Cramming that into two sessions means either long, grinding workouts or leaving sets on the table. Three sessions lets you spread the volume, recover between sessions, and actually progress week to week.</p>
+      <p>At two gym days, you're capped at about 60-70% of the weekly stimulus you could get from three. Over a month, that gap compounds. Israetel's volume research and Nippard's practical application both point to the same conclusion: frequency matters more than session duration for returning lifters.</p>
+    </div>
+
+    <!-- PRILEPIN'S TABLE -->
+    <button class="addendum-toggle" data-section="prilepin">Prilepin's Table &amp; Loading Logic</button>
+    <div class="addendum-section" id="prilepin">
+      <p>Prilepin's table was originally built for Olympic lifters, but the principles hold for compound strength work. There's an optimal number of reps at each intensity that drives adaptation without burying you.</p>
+      <table class="volume-table">
+        <thead>
+          <tr><th>Intensity</th><th>Reps / Set</th><th>Total Reps</th><th>Your Weeks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>65-75%</td><td class="mono">4-6</td><td class="mono">18-24</td><td>Weeks 1-2 (reacquisition)</td></tr>
+          <tr><td>70-80%</td><td class="mono">3-5</td><td class="mono">12-20</td><td>Weeks 3-4 (loading)</td></tr>
+          <tr><td>50-60%</td><td class="mono">3-5</td><td class="mono">10-15</td><td>Week 5 (deload)</td></tr>
+        </tbody>
+      </table>
+      <p>You don't have current maxes, and we're not testing them in week one. The "pick a weight you could do for 10, do sets of 5" heuristic lands you at roughly 65-70%. The stimulus for a detrained lifter comes from novelty, not from grinding.</p>
+    </div>
+
+    <!-- VOLUME LANDMARKS -->
+    <button class="addendum-toggle" data-section="volume">Volume Landmarks (Israetel / RP)</button>
+    <div class="addendum-section" id="volume">
+      <p>MEV is Minimum Effective Volume: the least you can do and still grow. MAV is Maximum Adaptive Volume: the sweet spot. You start at MEV and build toward MAV over the mesocycle.</p>
+      <table class="volume-table">
+        <thead>
+          <tr><th>Muscle Group</th><th>MEV (sets/wk)</th><th>Week 1</th><th>Week 4 Target</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Quads</td><td class="mono">6</td><td class="mono">6</td><td class="mono">10-12</td></tr>
+          <tr><td>Hamstrings</td><td class="mono">4</td><td class="mono">4</td><td class="mono">8</td></tr>
+          <tr><td>Back</td><td class="mono">6</td><td class="mono">6</td><td class="mono">10-12</td></tr>
+          <tr><td>Chest</td><td class="mono">4</td><td class="mono">6</td><td class="mono">10</td></tr>
+          <tr><td>Shoulders</td><td class="mono">4</td><td class="mono">4</td><td class="mono">8</td></tr>
+          <tr><td>Arms</td><td class="mono">2</td><td class="mono">2-4</td><td class="mono">6-8</td></tr>
+        </tbody>
+      </table>
+      <p>Volume increases by adding 1-2 sets per muscle group every 1-2 weeks. If recovery drops (sleep wrecked, soreness 3+ days, performance dips), hold volume or pull back.</p>
+    </div>
+
+    <!-- PROGRESSION ROADMAP -->
+    <button class="addendum-toggle" data-section="roadmap">Progression Roadmap</button>
+    <div class="addendum-section" id="roadmap">
+      <div class="timeline">
+        <div class="timeline-block current">
+          <h4>April: Weeks 1-5 (You Are Here)</h4>
+          <p>Reacquisition phase. Moderate weights, build conditioning base. RPE 6-8. Focus on showing up. End with a deload week.</p>
+        </div>
+        <div class="timeline-block">
+          <h4>May: Mesocycle 2</h4>
+          <p>Push toward MAV. Add a 4th exercise to gym days. RPE 8-9 on top sets. Conditioning intervals shift to 45s on / 60s off. Body comp starts shifting.</p>
+        </div>
+        <div class="timeline-block">
+          <h4>June: Specialization</h4>
+          <p>Bias toward weak points. If conditioning is solid, shift more volume to strength. If you're still gassing out, keep the conditioning bias.</p>
+        </div>
+        <div class="timeline-block">
+          <h4>Long Term: The Garage Gym</h4>
+          <p>Once you have heavier home equipment, you can run a true 4-day split from home. Training around the baby's schedule instead of gym hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOME EQUIPMENT -->
+    <button class="addendum-toggle" data-section="equipment">Home Equipment Analysis</button>
+    <div class="addendum-section" id="equipment">
+      <div class="workout-grid">
+        <div class="workout-card">
+          <h3><span class="day-dot"></span> What You Have</h3>
+          <div class="exercise"><span class="exercise-name">Treadmill</span><span class="exercise-sets">cardio</span></div>
+          <div class="exercise"><span class="exercise-name">Airdyne</span><span class="exercise-sets">intervals</span></div>
+          <div class="exercise"><span class="exercise-name">Rower</span><span class="exercise-sets">intervals</span></div>
+          <div class="exercise"><span class="exercise-name">Kettlebells (15 lb and under)</span><span class="exercise-sets">warm-up</span></div>
+          <div class="exercise"><span class="exercise-name">Dumbbells (8, 10, 15, 20 lb)</span><span class="exercise-sets">light work</span></div>
+        </div>
+        <div class="workout-card">
+          <h3><span class="day-dot"></span> The Gap</h3>
+          <div class="exercise"><span class="exercise-name">No barbell or rack</span><span class="exercise-sets">can't squat heavy</span></div>
+          <div class="exercise"><span class="exercise-name">Max DB is 20 lb</span><span class="exercise-sets">can't load lower body</span></div>
+          <div class="exercise"><span class="exercise-name">No pull-up bar</span><span class="exercise-sets">no vertical pull</span></div>
+          <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">At 195 lbs, 20 lb DBs are ~10% of your bodyweight. Not enough for progressive overload.</span></div>
+        </div>
+      </div>
+
+      <p style="margin-top: 1rem;"><strong>Priority upgrades, in order:</strong></p>
+      <div class="tip-card">
+        <h4>1. Adjustable Dumbbells (50-70 lb)</h4>
+        <p>Single highest-impact purchase. Unlocks goblet squats, DB bench, rows, RDLs, lunges at real load. PowerBlocks or Bowflex SelectTechs, $300-400.</p>
+      </div>
+      <div class="tip-card">
+        <h4>2. Pull-up Bar ($25-35)</h4>
+        <p>Doorframe mount. Chin-ups, pull-ups, hanging leg raises. High stimulus, zero footprint.</p>
+      </div>
+      <div class="tip-card">
+        <h4>3. Kettlebell (35-53 lb, $50-80)</h4>
+        <p>Swings, Turkish get-ups, single-arm work your 15 lb bells can't touch.</p>
+      </div>
+      <div class="tip-card">
+        <h4>4. Barbell + Squat Stand ($400-600)</h4>
+        <p>End game. Eliminates the gym entirely. Get the DBs first, see if consistency holds, then invest.</p>
+      </div>
+    </div>
+
+    <!-- DB-ONLY STRENGTH -->
+    <button class="addendum-toggle" data-section="db-only">Dumbbell-Only Strength: What's Possible</button>
+    <div class="addendum-section" id="db-only">
+      <p>With adjustable DBs up to 50-70 lbs, you can run a full strength program from home. Not a watered-down version. An actual program with progressive overload.</p>
+      <div class="workout-grid">
+        <div class="workout-card">
+          <h3><span class="day-dot"></span> Lower Body</h3>
+          <div class="exercise"><span class="exercise-name">DB Goblet Squat</span><span class="exercise-sets">heavy, 3 x 8-10</span></div>
+          <div class="exercise"><span class="exercise-name">DB Bulgarian Split Squat</span><span class="exercise-sets">3 x 8/leg</span></div>
+          <div class="exercise"><span class="exercise-name">DB Romanian Deadlift</span><span class="exercise-sets">3 x 10</span></div>
+          <div class="exercise"><span class="exercise-name">DB Step-ups (high box)</span><span class="exercise-sets">3 x 10/leg</span></div>
+          <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Single-leg work compensates for lighter load. A 60 lb goblet squat is roughly equivalent to 135 lb back squat in muscular demand.</span></div>
+        </div>
+        <div class="workout-card">
+          <h3><span class="day-dot"></span> Upper Body</h3>
+          <div class="exercise"><span class="exercise-name">DB Floor Press or Bench</span><span class="exercise-sets">3 x 8-10</span></div>
+          <div class="exercise"><span class="exercise-name">DB Row (single arm)</span><span class="exercise-sets">3 x 10/arm</span></div>
+          <div class="exercise"><span class="exercise-name">DB OHP (seated or standing)</span><span class="exercise-sets">3 x 8</span></div>
+          <div class="exercise"><span class="exercise-name">Chin-ups (pull-up bar)</span><span class="exercise-sets">3 x max</span></div>
+          <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">DB work forces each side to work independently. No hiding a weak side behind a barbell.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOURCES -->
+    <div class="sources">
+      <h3>Sources</h3>
+      <div class="source-item"><strong>Dr. Mike Israetel (Renaissance Periodization)</strong> — Volume landmarks (MEV, MAV, MRV), mesocycle structure, concurrent training models. Primary framework for this program's volume progression.</div>
+      <div class="source-item"><strong>Jeff Nippard</strong> — Practical application of evidence-based training for natural lifters. His work on training frequency and compound movement selection informed the 3-day split structure.</div>
+      <div class="source-item"><strong>A.S. Prilepin</strong> — Optimal rep/set ranges at given intensities. Originally from Soviet Olympic lifting research, applied here to set loading zones for a returning intermediate lifter.</div>
+      <div class="source-item"><strong>Dr. Shree Bose / Barbell Medicine</strong> — Return-to-training protocols for detrained lifters, RPE-based autoregulation, and age-appropriate programming considerations.</div>
+      <div class="source-item"><strong>Andrew Deal</strong> — Program design, exercise selection, and individualization based on Mike's equipment, schedule, and training history.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>Built for Mike by Andrew Deal</span>
+  <span>April 2026</span>
+</div>
+
+<script>
+  // Scenario toggle
+  document.getElementById('scenarioTabs').addEventListener('click', function(e) {
+    if (e.target.tagName !== 'SPAN') return;
+    const scenario = e.target.dataset.scenario;
+    this.querySelectorAll('span').forEach(s => s.classList.remove('active'));
+    e.target.classList.add('active');
+    document.querySelectorAll('.scenario-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('scenario-' + scenario).classList.add('active');
+  });
+
+  // Addendum toggles
+  document.querySelectorAll('.addendum-toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const section = document.getElementById(this.dataset.section);
+      const isOpen = section.classList.contains('open');
+      section.classList.toggle('open');
+      this.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
