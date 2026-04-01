@@ -19,8 +19,10 @@
     --accent-light: #E8EDFB;
     --border: #E2E6EC;
     --white: #FFFFFF;
-    --red: #C0392B;
     --green: #2D8A4E;
+    --green-light: #E9F5EE;
+    --amber: #B8860B;
+    --amber-light: #FDF6E3;
     --section-gap: clamp(80px, 10vw, 120px);
   }
 
@@ -69,33 +71,6 @@
     max-width: 600px;
   }
 
-  .toc {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 0;
-    margin-bottom: var(--section-gap);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 48px;
-  }
-  .toc a {
-    font-size: 13px;
-    color: var(--text-light);
-    text-decoration: none;
-    padding: 4px 0;
-    display: flex;
-    gap: 8px;
-    align-items: baseline;
-    transition: color 0.15s;
-  }
-  .toc a:hover { color: var(--accent); }
-  .toc-num {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-lighter);
-    min-width: 20px;
-  }
-
   .section { margin-bottom: var(--section-gap); }
   .section-num {
     font-size: 11px;
@@ -133,71 +108,66 @@
     margin: var(--section-gap) 0;
   }
 
-  .glossary { margin: 24px 0; }
-  .glossary-term {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: baseline;
+  .arc-phase {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    margin: 20px 0;
   }
-  .glossary-term:last-child { border-bottom: none; }
-  .glossary-word {
-    font-size: 13px;
+  .arc-phase-label {
+    font-size: 11px;
     font-weight: 600;
-    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
   }
-  .glossary-def {
-    font-size: 14px;
-    color: #4A5568;
-    line-height: 1.6;
-  }
+  .arc-phase-label.momentum { color: var(--accent); }
+  .arc-phase-label.explore { color: var(--amber); }
+  .arc-phase-label.direct { color: var(--green); }
 
-  .response {
-    border-left: 3px solid var(--accent);
-    padding: 0 0 0 20px;
-    margin: 24px 0;
-  }
-  .response h3 { margin-top: 0; }
-  .response p { font-size: 14px; }
+  .arc-phase p { margin-bottom: 12px; }
+  .arc-phase p:last-child { margin-bottom: 0; }
 
-  .response-red { border-left-color: var(--red); }
-  .response-green { border-left-color: var(--green); }
-
-  .questions {
-    list-style: none;
-    padding: 0;
-    counter-reset: q;
-  }
-  .questions li {
-    font-size: 15px;
-    color: #4A5568;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    counter-increment: q;
-    padding-left: 28px;
-    position: relative;
-  }
-  .questions li::before {
-    content: counter(q);
-    position: absolute;
-    left: 0;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    top: 16px;
-  }
-  .questions li:last-child { border-bottom: none; }
-  .questions li strong { color: var(--text); }
-
-  .callout {
+  .talk-box {
     background: var(--accent-light);
-    padding: 24px 28px;
-    margin: 28px 0;
+    padding: 20px 24px;
+    margin: 20px 0;
     border-radius: 4px;
   }
-  .callout p { color: var(--accent); font-weight: 500; margin-bottom: 0; }
+  .talk-box p { color: var(--accent); font-weight: 500; margin-bottom: 0; font-size: 15px; line-height: 1.7; }
+  .talk-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .hold-box {
+    background: var(--amber-light);
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .hold-box p { color: var(--amber); font-weight: 500; margin-bottom: 0; font-size: 14px; line-height: 1.7; }
+
+  .listen-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .listen-item:last-child { border-bottom: none; }
+  .listen-item p { margin-bottom: 4px; }
+  .listen-note { font-size: 13px; color: var(--text-light); }
+
+  .context-box {
+    background: var(--green-light);
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 4px;
+  }
+  .context-box p { color: var(--green); font-size: 14px; margin-bottom: 0; }
 
   .footer {
     font-size: 11px;
@@ -207,8 +177,7 @@
   }
 
   @media (max-width: 640px) {
-    .toc { grid-template-columns: 1fr; }
-    .glossary-term { grid-template-columns: 1fr; gap: 4px; }
+    .arc-phase { padding: 20px; }
   }
 </style>
 </head>
@@ -218,150 +187,100 @@
   <div class="header">
     <div class="header-label">LearnAIR</div>
     <h1>Trisha Meeting Prep</h1>
-    <div class="header-date">March 31, 2026. For Mike's Thursday meeting. Review before our call tomorrow at 11:30am.</div>
+    <div class="header-date">Updated April 1, 2026. For Mike's Thursday 9am Starbucks meeting.</div>
   </div>
 
-  <p class="opener">Trisha emailed today recapping her conversation with Justin. She's framing her role as "strategic leadership and idea-management." The strategy is already built. What's missing is execution. This doc covers how to position yourself Thursday and what to watch for.</p>
-
-  <nav class="toc">
-    <a href="#situation"><span class="toc-num">01</span> The situation</a>
-    <a href="#positioning"><span class="toc-num">02</span> Your positioning</a>
-    <a href="#question"><span class="toc-num">03</span> The one question</a>
-    <a href="#signals"><span class="toc-num">04</span> Green and red flags</a>
-    <a href="#donts"><span class="toc-num">05</span> What not to do</a>
-    <a href="#leverage"><span class="toc-num">06</span> The leverage</a>
-    <a href="#script"><span class="toc-num">07</span> Thursday's script</a>
-  </nav>
+  <p class="opener">This is a conversation, not a pitch. You're getting to know a potential partner. The goal: understand what Trisha actually brings to the table, build shared excitement about the opportunity, and position yourself for the April 7 call with Justin and Teresa. Trust your instincts. You know these people better than anyone.</p>
 
   <!-- 01 -->
-  <div class="section" id="situation">
+  <div class="section">
     <div class="section-num">01</div>
-    <h2>The situation</h2>
+    <h2>The arc of conversation</h2>
 
-    <h3>What Trisha said in her email</h3>
-    <div class="glossary">
-      <div class="glossary-term">
-        <div class="glossary-word">Two-pronged</div>
-        <div class="glossary-def">Near-term: connect veteran outreach to existing LearnAIR training. Long-term: build a veteran-specific program with more clarity around needs, audience, delivery.</div>
-      </div>
-      <div class="glossary-term">
-        <div class="glossary-word">Joe's role</div>
-        <div class="glossary-def">Referral partnership and early connection-building. This is his lane. Sales only, sabbatical mode.</div>
-      </div>
-      <div class="glossary-term">
-        <div class="glossary-word">Your role</div>
-        <div class="glossary-def">"Gather your ideas and insights so I can translate those into stronger recommendations." She's positioning herself as the translator between you and Justin/Teresa.</div>
-      </div>
-      <div class="glossary-term">
-        <div class="glossary-word">Her role</div>
-        <div class="glossary-def">"Strategic leadership and idea-management space." This describes coordination work (recapping, scheduling, keeping people informed) labeled as strategy.</div>
-      </div>
+    <p>Good conversations have a shape. You start light, build energy around shared excitement, then use that momentum to get into the real questions. Think of it as climbing a hill together. The hard-hitting questions come near the top, when people are open and engaged, not at the start when everyone's still warming up.</p>
+
+    <div class="arc-phase">
+      <div class="arc-phase-label momentum">First 10 minutes: Build momentum</div>
+      <p>Start with the excitement. This is a massive opportunity and you both feel it. Share what's been energizing you. The competitive landscape is wide open. Nobody is doing what you're envisioning. There are policy tailwinds (Raimondo's workforce AI initiatives, VET TEC 2.0 coming). Andrew is attending a Stanford seminar with Brynjolfsson, the leading AI labor economist, on Monday. You've been going through the LearnAIR curriculum yourself and seeing both its strengths and where veterans need something more.</p>
+      <p>The point of this phase: get Trisha talking about what excites her. People reveal what they care about when they're excited. Let her show you.</p>
     </div>
 
-    <p><span class="key">The gap:</span> the email describes what everyone's title should be, not what anyone is going to build. The strategy is done. The curriculum framework exists. The employer targets are mapped. What's missing is someone picking up the phone and calling an employer or a veteran.</p>
+    <div class="arc-phase">
+      <div class="arc-phase-label explore">Middle 10 minutes: Explore competencies</div>
+      <p>Shift naturally from excitement to substance. There are real competencies this venture needs: curriculum design, employer outreach, veteran recruiting, sales, program management. You don't have to list them. Instead, talk about the challenges you see and watch where she leans in.</p>
+      <p>For example: "One thing I keep coming back to is, how do we know employers will actually hire for this role? That feels like the thing we need to answer first." See if she has a take. Does she name specific employers? Does she know how hiring managers think about AI roles? Or does she stay general?</p>
+      <p>Another angle: "The LearnAIR curriculum is strong for individual productivity. The gap I see is organizational coordination. When 50 people each have their own AI setup, who governs that?" See if she can speak to this with any depth.</p>
+      <p>You're not testing her. You're having a real conversation about real problems. Her responses will naturally reveal what she brings.</p>
+    </div>
+
+    <div class="arc-phase">
+      <div class="arc-phase-label direct">Last 10 minutes: Direct questions</div>
+      <p>By now you've built rapport and shared energy. This is where the frank questions feel natural, not confrontational.</p>
+      <p><span class="key">How do you see LearnAIR's strategy for the veteran program?</span> This is the big one. If she has a clear, specific answer, she's been thinking deeply. If she defers to Justin or stays high-level ("we're still figuring it out"), that tells you where she is. Both are fine. You just need to know.</p>
+      <p><span class="key">What's your arrangement with LearnAIR right now?</span> Volunteer? Consultant? On payroll? This is a fair question between potential partners. Ask it directly and warmly.</p>
+      <p><span class="key">How do you see the April 7 call going?</span> What does she think the outcome should be? This tells you whether she's thinking in terms of commitments or more conversation.</p>
+    </div>
   </div>
 
   <hr class="divider">
 
   <!-- 02 -->
-  <div class="section" id="positioning">
+  <div class="section">
     <div class="section-num">02</div>
-    <h2>Your positioning</h2>
+    <h2>What to say, what to hold back</h2>
 
-    <div class="response">
-      <h3>You own Track 2</h3>
-      <p>Program development. Joe owns Track 1 (referral sales). These are separate. Don't let them blur. Track 1 can happen without you. Track 2 can't happen without you.</p>
+    <div class="talk-box">
+      <div class="talk-label">Say this</div>
+      <p>"Since our last group call, Andrew and I have been putting real work into this. We've built a comprehensive thesis, a competitive landscape analysis, a curriculum framework, and employer readiness targets. We're excited to bring that to the April 7 conversation."</p>
     </div>
 
-    <div class="response">
-      <h3>Show the iceberg, not the glacier</h3>
-      <p>Don't show the full concept brief. Talk to it at a high level: "I've been developing a curriculum framework with my brother that maps military operational experience to AI coordination roles. We've done employer research. We have a thesis on why veterans are uniquely positioned." They should sense depth and want to explore further.</p>
+    <p>That single statement does three things: it signals depth without showing your hand, it positions April 7 as the real moment, and it invites her to match your energy with her own preparation.</p>
+
+    <div class="hold-box">
+      <p>Hold back: the hub, the concept brief, the full competitive landscape, the curriculum gap analysis. These are for Justin and Teresa. You can talk to the work at wave-top level. Don't hand over documents yet.</p>
     </div>
 
-    <div class="response">
-      <h3>Don't commit before April 7</h3>
-      <p>Thursday is positioning for the 4-way call with Justin and Teresa. That's the real meeting. Everything you say Thursday should strengthen your hand for that conversation.</p>
+    <div class="context-box">
+      <p>Context from today's call: Trisha was likely brought back into the fold only after Justin met you. She's newly activated, not someone who failed to execute for 5 months. Give her room to show what she's got. The priority failure was timing and bandwidth on LearnAIR's side, not incapability.</p>
     </div>
   </div>
 
   <hr class="divider">
 
   <!-- 03 -->
-  <div class="section" id="question">
+  <div class="section">
     <div class="section-num">03</div>
-    <h2>The one question to ask</h2>
+    <h2>What you're listening for</h2>
 
-    <div class="callout">
-      <p>"Between now and our call with Justin and Teresa, what are you going to build?"</p>
+    <div class="listen-item">
+      <p><span class="key">Does she describe real problems or abstract roles?</span></p>
+      <p class="listen-note">If she talks about the difficulty of getting employers to understand AI supervision roles, or the challenge of vetting which veterans are ready for this, she's thinking about the actual work. If she talks about "strategic alignment" and "idea management," she's thinking about process.</p>
     </div>
 
-    <p>If she answers with coordination tasks (scheduling the meeting, recapping today's conversation, keeping people informed), that tells you her role is coordination.</p>
-    <p>If she answers with employer contacts she's reaching out to, veteran organizations she's engaging, or curriculum work she's contributing, she's a real execution partner.</p>
-    <p>Her answer defines the dynamic going into April 7.</p>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 04 -->
-  <div class="section" id="signals">
-    <div class="section-num">04</div>
-    <h2>Green and red flags</h2>
-
-    <div class="response response-green">
-      <h3>Green flags</h3>
-      <p>She names specific employers or veteran orgs she's going to contact. She talks about concrete next steps with dates. She acknowledges the 5-month infrastructure gap. She asks you what you need to execute.</p>
+    <div class="listen-item">
+      <p><span class="key">Can she speak to employer dynamics with any specificity?</span></p>
+      <p class="listen-note">Her L&D background at Consumer Cellular and her Easter Seals HVRP work mean she should have opinions here. If she can name companies, describe hiring patterns, or talk about how training budgets work, that's additive to what you and Andrew bring.</p>
     </div>
 
-    <div class="response response-red">
-      <h3>Red flags</h3>
-      <p>More "strategic framing" without action items. Positions herself as translator between you and Justin/Teresa (gatekeeper dynamic). Wants to see your full work product without offering her own deliverables. Vague language about "continuing to shape" without committing to anything specific this week.</p>
+    <div class="listen-item">
+      <p><span class="key">Is she additive or duplicative?</span></p>
+      <p class="listen-note">Best case: she brings the employer network, the veteran org connections (Easter Seals, L&D community), and the operational program management that you and Andrew don't have. That's a real team. If she's claiming strategy and curriculum design, those overlap with what you already have. Overlap isn't bad, but it changes how the partnership works.</p>
+    </div>
+
+    <div class="listen-item">
+      <p><span class="key">What's her energy around commitment?</span></p>
+      <p class="listen-note">Is she talking about what she's going to do this week? Or is she talking about what the group should discuss next time? Forward motion vs. more meetings. Both tell you something.</p>
     </div>
   </div>
 
   <hr class="divider">
 
-  <!-- 05 -->
-  <div class="section" id="donts">
-    <div class="section-num">05</div>
-    <h2>What not to do</h2>
-
-    <ul class="questions">
-      <li><strong>Don't negotiate structure, equity, or titles.</strong> Way too early. Those conversations happen after the April 7 call at the earliest.</li>
-      <li><strong>Don't hand over documents.</strong> Talk to the work, don't share it. The full thesis, curriculum framework, and employer research stay in our pocket until the partnership structure is clear.</li>
-      <li><strong>Don't criticize Trisha or Joe's output.</strong> Just demonstrate yours. The quality gap speaks for itself.</li>
-      <li><strong>Don't commit to deliverables on behalf of both of us.</strong> You can share what you're working on. Don't promise what Andrew will bring to April 7.</li>
-    </ul>
+  <div class="section">
+    <p><span class="key">Remember:</span> Thursday is positioning for April 7. You're not closing anything. You're building a relationship and gathering intel. Walk in curious, walk out informed. That's a win.</p>
+    <p>You've got this. Trust the arc. Trust your read on people. Call Andrew after if you want to debrief.</p>
   </div>
 
-  <hr class="divider">
-
-  <!-- 06 -->
-  <div class="section" id="leverage">
-    <div class="section-num">06</div>
-    <h2>The leverage</h2>
-
-    <p>LearnAIR has had 5+ months on the veteran program. Zero infrastructure. No dedicated emails for outreach. No landing page. No executed outreach on Joe's 40 target organizations. Five months of meetings that produced meetings.</p>
-
-    <p>You and Andrew built a comprehensive thesis, curriculum framework, competitive landscape analysis, employer readiness targets, and policy alignment in days. The work product gap between what we've produced and what LearnAIR has produced is the strongest card in this negotiation.</p>
-
-    <p><span class="key">You don't need to say this out loud.</span> It's obvious from the quality of what you bring to conversations. Trisha already knows. Justin already knows. That's why they're leaning in.</p>
-  </div>
-
-  <hr class="divider">
-
-  <!-- 07 -->
-  <div class="section" id="script">
-    <div class="section-num">07</div>
-    <h2>Thursday's script</h2>
-
-    <div class="callout">
-      <p>"I've been doing real work on this with my brother. We have a clear thesis, we've done the employer research, and we have a curriculum direction. I want to bring that to the April 7 call. Between now and then, I'd love to know what you're working on so we can come in aligned."</p>
-    </div>
-
-    <p>Collaborative but clear. You're building, you're ready, and you want to see what she's building too. If she's building, you have a partner. If she's coordinating, you have a coordinator. Either is fine. You just need to know which one before April 7.</p>
-  </div>
-
-  <p class="footer">Prep doc for Mike. April 7 4-way with Justin + Teresa is the real meeting. Thursday is positioning.</p>
+  <p class="footer">Prep doc for Mike. Updated after April 1 call with Andrew. The April 7 4-way with Justin + Teresa is the real meeting.</p>
 
 </div>
 </body>
