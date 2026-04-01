@@ -4,125 +4,365 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trisha Meeting Prep — Mike</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #F8F9FB;
+    --text: #2C3E50;
+    --text-light: #7B8A99;
+    --text-lighter: #A8B5C2;
+    --accent: #5B7FED;
+    --accent-light: #E8EDFB;
+    --border: #E2E6EC;
+    --white: #FFFFFF;
+    --red: #C0392B;
+    --green: #2D8A4E;
+    --section-gap: clamp(80px, 10vw, 120px);
+  }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #1a1a2e;
-    color: #e0e0e0;
-    padding: 20px;
-    max-width: 760px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 680px;
     margin: 0 auto;
-    line-height: 1.5;
+    padding: clamp(60px, 8vw, 100px) clamp(24px, 5vw, 48px) 120px;
   }
-  h1 { font-size: 1.4rem; color: #fff; margin-bottom: 4px; }
-  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
-  .section {
-    background: #16213e;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 14px;
+
+  .header { margin-bottom: var(--section-gap); }
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
   }
-  .section-red { border-left: 4px solid #e74c3c; }
-  .section-green { border-left: 4px solid #2ecc71; }
-  .section-blue { border-left: 4px solid #3498db; }
-  .section-yellow { border-left: 4px solid #f39c12; }
-  .section-purple { border-left: 4px solid #9b59b6; }
-  .section-gray { border-left: 4px solid #555; }
-  h2 { font-size: 1rem; color: #fff; margin-bottom: 10px; }
-  h3 { font-size: 0.85rem; color: #ccc; margin: 12px 0 6px; }
-  p, li { font-size: 0.85rem; color: #bbb; margin-bottom: 6px; }
-  ul { padding-left: 18px; }
-  li { margin-bottom: 4px; }
-  strong { color: #fff; }
-  .tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-right: 6px; margin-bottom: 4px; }
-  .tag-red { background: rgba(231,76,60,0.2); color: #e74c3c; }
-  .tag-green { background: rgba(46,204,113,0.2); color: #2ecc71; }
-  .divider { border: none; border-top: 1px solid #2a2a4a; margin: 20px 0; }
+  h1 {
+    font-size: clamp(36px, 5vw, 48px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .header-date {
+    font-size: 13px;
+    color: var(--text-lighter);
+  }
+
+  .opener {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: var(--section-gap);
+    max-width: 600px;
+  }
+
+  .toc {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+    margin-bottom: var(--section-gap);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 48px;
+  }
+  .toc a {
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 4px 0;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-lighter);
+    min-width: 20px;
+  }
+
+  .section { margin-bottom: var(--section-gap); }
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-lighter);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 28px 0 8px;
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 16px;
+    color: #4A5568;
+    max-width: 600px;
+  }
+  .key { color: var(--text); font-weight: 600; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: var(--section-gap) 0;
+  }
+
+  .glossary { margin: 24px 0; }
+  .glossary-term {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .glossary-term:last-child { border-bottom: none; }
+  .glossary-word {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .glossary-def {
+    font-size: 14px;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+
+  .response {
+    border-left: 3px solid var(--accent);
+    padding: 0 0 0 20px;
+    margin: 24px 0;
+  }
+  .response h3 { margin-top: 0; }
+  .response p { font-size: 14px; }
+
+  .response-red { border-left-color: var(--red); }
+  .response-green { border-left-color: var(--green); }
+
+  .questions {
+    list-style: none;
+    padding: 0;
+    counter-reset: q;
+  }
+  .questions li {
+    font-size: 15px;
+    color: #4A5568;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    counter-increment: q;
+    padding-left: 28px;
+    position: relative;
+  }
+  .questions li::before {
+    content: counter(q);
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    top: 16px;
+  }
+  .questions li:last-child { border-bottom: none; }
+  .questions li strong { color: var(--text); }
+
+  .callout {
+    background: var(--accent-light);
+    padding: 24px 28px;
+    margin: 28px 0;
+    border-radius: 4px;
+  }
+  .callout p { color: var(--accent); font-weight: 500; margin-bottom: 0; }
+
+  .footer {
+    font-size: 11px;
+    color: var(--text-lighter);
+    margin-top: var(--section-gap);
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 640px) {
+    .toc { grid-template-columns: 1fr; }
+    .glossary-term { grid-template-columns: 1fr; gap: 4px; }
+  }
 </style>
 </head>
 <body>
+<div class="page">
 
-<h1>Mike's Meeting with Trisha</h1>
-<p class="subtitle">Thursday this week. Prep for your 11:30am call with Andrew tomorrow (Apr 1).</p>
+  <div class="header">
+    <div class="header-label">LearnAIR</div>
+    <h1>Trisha Meeting Prep</h1>
+    <div class="header-date">March 31, 2026. For Mike's Thursday meeting. Review before our call tomorrow at 11:30am.</div>
+  </div>
 
-<div class="section section-red">
-  <h2>The Situation</h2>
-  <p>Trisha emailed today recapping her conversation with Justin. She's positioning herself as "strategic leadership and idea-management." But the strategy is already built. You and Andrew have the thesis, curriculum framework, employer targets, and competitive landscape.</p>
-  <p style="margin-top:8px;"><strong>What's missing isn't strategy. It's execution.</strong> Someone needs to find the employers, find the veterans, and build the pipeline. That's the hard work nobody has done yet.</p>
+  <p class="opener">Trisha emailed today recapping her conversation with Justin. She's framing her role as "strategic leadership and idea-management." The strategy is already built. What's missing is execution. This doc covers how to position yourself Thursday and what to watch for.</p>
+
+  <nav class="toc">
+    <a href="#situation"><span class="toc-num">01</span> The situation</a>
+    <a href="#positioning"><span class="toc-num">02</span> Your positioning</a>
+    <a href="#question"><span class="toc-num">03</span> The one question</a>
+    <a href="#signals"><span class="toc-num">04</span> Green and red flags</a>
+    <a href="#donts"><span class="toc-num">05</span> What not to do</a>
+    <a href="#leverage"><span class="toc-num">06</span> The leverage</a>
+    <a href="#script"><span class="toc-num">07</span> Thursday's script</a>
+  </nav>
+
+  <!-- 01 -->
+  <div class="section" id="situation">
+    <div class="section-num">01</div>
+    <h2>The situation</h2>
+
+    <h3>What Trisha said in her email</h3>
+    <div class="glossary">
+      <div class="glossary-term">
+        <div class="glossary-word">Two-pronged</div>
+        <div class="glossary-def">Near-term: connect veteran outreach to existing LearnAIR training. Long-term: build a veteran-specific program with more clarity around needs, audience, delivery.</div>
+      </div>
+      <div class="glossary-term">
+        <div class="glossary-word">Joe's role</div>
+        <div class="glossary-def">Referral partnership and early connection-building. This is his lane. Sales only, sabbatical mode.</div>
+      </div>
+      <div class="glossary-term">
+        <div class="glossary-word">Your role</div>
+        <div class="glossary-def">"Gather your ideas and insights so I can translate those into stronger recommendations." She's positioning herself as the translator between you and Justin/Teresa.</div>
+      </div>
+      <div class="glossary-term">
+        <div class="glossary-word">Her role</div>
+        <div class="glossary-def">"Strategic leadership and idea-management space." This describes coordination work (recapping, scheduling, keeping people informed) labeled as strategy.</div>
+      </div>
+    </div>
+
+    <p><span class="key">The gap:</span> the email describes what everyone's title should be, not what anyone is going to build. The strategy is done. The curriculum framework exists. The employer targets are mapped. What's missing is someone picking up the phone and calling an employer or a veteran.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 02 -->
+  <div class="section" id="positioning">
+    <div class="section-num">02</div>
+    <h2>Your positioning</h2>
+
+    <div class="response">
+      <h3>You own Track 2</h3>
+      <p>Program development. Joe owns Track 1 (referral sales). These are separate. Don't let them blur. Track 1 can happen without you. Track 2 can't happen without you.</p>
+    </div>
+
+    <div class="response">
+      <h3>Show the iceberg, not the glacier</h3>
+      <p>Don't show the full concept brief. Talk to it at a high level: "I've been developing a curriculum framework with my brother that maps military operational experience to AI coordination roles. We've done employer research. We have a thesis on why veterans are uniquely positioned." They should sense depth and want to explore further.</p>
+    </div>
+
+    <div class="response">
+      <h3>Don't commit before April 7</h3>
+      <p>Thursday is positioning for the 4-way call with Justin and Teresa. That's the real meeting. Everything you say Thursday should strengthen your hand for that conversation.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 03 -->
+  <div class="section" id="question">
+    <div class="section-num">03</div>
+    <h2>The one question to ask</h2>
+
+    <div class="callout">
+      <p>"Between now and our call with Justin and Teresa, what are you going to build?"</p>
+    </div>
+
+    <p>If she answers with coordination tasks (scheduling the meeting, recapping today's conversation, keeping people informed), that tells you her role is coordination.</p>
+    <p>If she answers with employer contacts she's reaching out to, veteran organizations she's engaging, or curriculum work she's contributing, she's a real execution partner.</p>
+    <p>Her answer defines the dynamic going into April 7.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 04 -->
+  <div class="section" id="signals">
+    <div class="section-num">04</div>
+    <h2>Green and red flags</h2>
+
+    <div class="response response-green">
+      <h3>Green flags</h3>
+      <p>She names specific employers or veteran orgs she's going to contact. She talks about concrete next steps with dates. She acknowledges the 5-month infrastructure gap. She asks you what you need to execute.</p>
+    </div>
+
+    <div class="response response-red">
+      <h3>Red flags</h3>
+      <p>More "strategic framing" without action items. Positions herself as translator between you and Justin/Teresa (gatekeeper dynamic). Wants to see your full work product without offering her own deliverables. Vague language about "continuing to shape" without committing to anything specific this week.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 05 -->
+  <div class="section" id="donts">
+    <div class="section-num">05</div>
+    <h2>What not to do</h2>
+
+    <ul class="questions">
+      <li><strong>Don't negotiate structure, equity, or titles.</strong> Way too early. Those conversations happen after the April 7 call at the earliest.</li>
+      <li><strong>Don't hand over documents.</strong> Talk to the work, don't share it. The full thesis, curriculum framework, and employer research stay in our pocket until the partnership structure is clear.</li>
+      <li><strong>Don't criticize Trisha or Joe's output.</strong> Just demonstrate yours. The quality gap speaks for itself.</li>
+      <li><strong>Don't commit to deliverables on behalf of both of us.</strong> You can share what you're working on. Don't promise what Andrew will bring to April 7.</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 06 -->
+  <div class="section" id="leverage">
+    <div class="section-num">06</div>
+    <h2>The leverage</h2>
+
+    <p>LearnAIR has had 5+ months on the veteran program. Zero infrastructure. No dedicated emails for outreach. No landing page. No executed outreach on Joe's 40 target organizations. Five months of meetings that produced meetings.</p>
+
+    <p>You and Andrew built a comprehensive thesis, curriculum framework, competitive landscape analysis, employer readiness targets, and policy alignment in days. The work product gap between what we've produced and what LearnAIR has produced is the strongest card in this negotiation.</p>
+
+    <p><span class="key">You don't need to say this out loud.</span> It's obvious from the quality of what you bring to conversations. Trisha already knows. Justin already knows. That's why they're leaning in.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 07 -->
+  <div class="section" id="script">
+    <div class="section-num">07</div>
+    <h2>Thursday's script</h2>
+
+    <div class="callout">
+      <p>"I've been doing real work on this with my brother. We have a clear thesis, we've done the employer research, and we have a curriculum direction. I want to bring that to the April 7 call. Between now and then, I'd love to know what you're working on so we can come in aligned."</p>
+    </div>
+
+    <p>Collaborative but clear. You're building, you're ready, and you want to see what she's building too. If she's building, you have a partner. If she's coordinating, you have a coordinator. Either is fine. You just need to know which one before April 7.</p>
+  </div>
+
+  <p class="footer">Prep doc for Mike. April 7 4-way with Justin + Teresa is the real meeting. Thursday is positioning.</p>
+
 </div>
-
-<div class="section section-yellow">
-  <h2>What Trisha Said in Her Email</h2>
-  <ul>
-    <li><strong>Two-pronged approach:</strong> near-term (connect vet outreach to existing LearnAIR training) + long-term (build veteran-specific program)</li>
-    <li><strong>Joe's role:</strong> referral partnership and connection-building (his lane, sales only)</li>
-    <li><strong>Your role:</strong> "gather your ideas and insights so I can translate those into recommendations"</li>
-    <li><strong>Her role:</strong> "strategic leadership and idea-management"</li>
-  </ul>
-  <p style="margin-top:8px;">The email describes coordination work (recapping, scheduling, keeping people informed) but labels it strategy.</p>
-</div>
-
-<div class="section section-blue">
-  <h2>Your Positioning</h2>
-  <ul>
-    <li><strong>You own Track 2</strong> (program development). Joe owns Track 1 (referral sales). Keep them separate.</li>
-    <li><strong>Don't show the full concept brief.</strong> Talk to it at a high level. "I've been developing a curriculum framework with my brother that maps military operational experience to AI coordination roles."</li>
-    <li><strong>Show the iceberg, not the glacier.</strong> They should sense there's 90 yards of depth and want to explore further.</li>
-    <li><strong>Don't commit to anything before the April 7 call</strong> with Justin and Teresa.</li>
-  </ul>
-</div>
-
-<div class="section section-purple">
-  <h2>The One Question to Ask</h2>
-  <p><strong>"Between now and our call with Justin and Teresa, what are you going to build?"</strong></p>
-  <p style="margin-top:8px;">If she answers with coordination tasks (scheduling, recapping), that's her role. If she answers with employer contacts, veteran outreach, or curriculum work, she's a real partner.</p>
-</div>
-
-<div class="section section-green">
-  <h2>Green Flags</h2>
-  <ul>
-    <li>She names specific employers or veteran orgs she's going to contact</li>
-    <li>She talks about concrete next steps with dates</li>
-    <li>She acknowledges the 5-month infrastructure gap</li>
-    <li>She asks you what you need to execute</li>
-  </ul>
-</div>
-
-<div class="section section-red">
-  <h2>Red Flags</h2>
-  <ul>
-    <li>More "strategic framing" without action items</li>
-    <li>Positions herself as translator between you and Justin/Teresa (gatekeeper)</li>
-    <li>Wants to see your full work product without offering her own deliverables</li>
-    <li>Vague language about "continuing to shape" without committing to specifics</li>
-  </ul>
-</div>
-
-<div class="section section-gray">
-  <h2>What NOT to Do</h2>
-  <ul>
-    <li>Don't negotiate structure, equity, or titles. Too early.</li>
-    <li>Don't hand over documents. Talk to the work, don't share it.</li>
-    <li>Don't criticize Trisha or Joe's output. Just demonstrate yours.</li>
-    <li>Don't commit to anything before April 7.</li>
-  </ul>
-</div>
-
-<div class="section section-blue">
-  <h2>The Leverage</h2>
-  <p>LearnAIR has had 5+ months and produced zero infrastructure for the veteran program. No emails, no landing page, no outreach on Joe's 40 target organizations. You and Andrew built a comprehensive thesis, curriculum framework, employer targets, and competitive landscape in days.</p>
-  <p style="margin-top:8px;">You don't need to say this out loud. It's obvious from the quality of what you bring to conversations.</p>
-</div>
-
-<div class="section section-yellow">
-  <h2>Thursday's Script</h2>
-  <p>"I've been doing real work on this with my brother. We have a clear thesis, we've done the employer research, and we have a curriculum direction. I want to bring that to the April 7 call. Between now and then, I'd love to know what you're working on so we can come in aligned."</p>
-  <p style="margin-top:8px;">Collaborative but clear. You're building, you're ready, and you want to see what she's building too.</p>
-</div>
-
-<hr class="divider">
-<p style="font-size:0.75rem; color:#555; text-align:center;">Prep doc for Mike. April 7 4-way call with Justin + Teresa is the real meeting. Thursday is positioning.</p>
-
 </body>
 </html>
