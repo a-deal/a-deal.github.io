@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | April 7 Call Arc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --amber: #92400e;
+    --amber-bg: #fef9ee;
+    --section-gap: 4rem;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  nav .back {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav .back:hover { color: var(--ink); }
+
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: var(--section-gap);
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-top: var(--section-gap);
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--faint);
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #4a4540;
+    margin-bottom: 1rem;
+    max-width: 640px;
+  }
+
+  strong { color: var(--ink); }
+
+  .hypothesis-box {
+    background: var(--white);
+    border: 2px solid var(--accent);
+    padding: 2rem 2.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .hypothesis-box p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 0;
+  }
+
+  .proof-box {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+  }
+
+  .proof-box p { color: var(--green); margin-bottom: 0.5rem; }
+  .proof-box p:last-child { margin-bottom: 0; }
+
+  .warning-box {
+    background: var(--amber-bg);
+    border-left: 3px solid var(--amber);
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+  }
+
+  .warning-box p { color: var(--amber); margin-bottom: 0; font-size: 0.9rem; }
+
+  ol, ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    font-size: 0.95rem;
+    color: #4a4540;
+    margin-bottom: 0.4rem;
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 2px solid var(--faint);
+  }
+
+  td {
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid var(--warm);
+    color: #4a4540;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  td:first-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+
+  .arc-step {
+    background: var(--white);
+    padding: 1.2rem 1.5rem;
+    margin: 0.8rem 0;
+    border-left: 3px solid var(--faint);
+  }
+
+  .arc-step.momentum { border-left-color: var(--accent); }
+  .arc-step.explore { border-left-color: var(--amber); }
+  .arc-step.direct { border-left-color: var(--green); }
+
+  .arc-step strong { display: block; margin-bottom: 0.3rem; }
+  .arc-step p { margin-bottom: 0; font-size: 0.9rem; }
+
+  .confidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 1.5rem 0;
+  }
+
+  .confidence-item {
+    background: var(--paper);
+    padding: 1rem 1.2rem;
+  }
+
+  .confidence-label {
+    font-size: 0.85rem;
+    color: #4a4540;
+    margin-bottom: 0.3rem;
+  }
+
+  .confidence-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .confidence-value.high { color: var(--green); }
+  .confidence-value.mid { color: var(--amber); }
+  .confidence-value.low { color: var(--accent); }
+
+  .hold-back {
+    background: var(--paper);
+    border: 1px solid var(--faint);
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .hold-back li { color: var(--muted); font-size: 0.88rem; }
+
+  .footer-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    margin-top: var(--section-gap);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 2rem; }
+    .hypothesis-box { padding: 1.5rem; }
+    .hypothesis-box p { font-size: 1.2rem; }
+    .confidence-grid { grid-template-columns: 1fr; }
+    table { font-size: 0.78rem; }
+    td:first-child { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="hub.html">LearnAIR</a>
+    <a class="back" href="hub.html">Back to Hub</a>
+  </div>
+</nav>
+
+<div class="content">
+
+  <div class="kicker">Call Arc</div>
+  <h1>April 7: Justin + Teresa</h1>
+  <p class="subtitle">Tuesday, April 7, 2026 at 9:30 AM PT. 45 minutes. Mike opens, Andrew supports.</p>
+
+  <div class="hypothesis-box">
+    <p>"You're not training people to use AI. You're training leaders to command AI-enabled systems."</p>
+  </div>
+
+  <p>Mike says this. In his voice, in his credibility. It's the most important 15 seconds of the call.</p>
+
+  <h2>What We Know Going In</h2>
+
+  <p><strong>From Trisha (Apr 2):</strong> She's a general business consultant, not a co-builder. No one at LearnAIR is building the veteran program. LearnAIR will provide content, brand, SDVOSB, and partner companies. Not labor, not strategy, not curriculum design.</p>
+
+  <p><strong>From Mike's independent research:</strong> Two deep research sessions mapping Marine Corps leadership to AI workforce management. MCPP-to-AI planning framework (6 steps). Terminology translation table. Leadership skill mapping. Devil's advocate stress test. This is original work with real citations (USMC doctrine, Command and Staff College curriculum).</p>
+
+  <p><strong>From the strategic clarity doc:</strong> The hypothesis is that employers will pay for veterans trained in AI operations supervision. We have zero employer conversations. All work to date is supply-side.</p>
+
+  <div class="warning-box">
+    <p><strong>Still missing:</strong> Employer signal. LLC formation. Break Line or BetterUp call.</p>
+  </div>
+
+  <h2>The Arc</h2>
+
+  <div class="arc-step momentum">
+    <strong>Act 1: Energy + Alignment (Minutes 0-10)</strong>
+    <p>Mike opens. "Teresa, Justin, we've been putting real work into this since we last spoke. Here's where our heads are at."</p>
+    <p style="margin-top: 0.6rem;">Deliver the one-liner. Reference the Trisha conversation positively ("good conversation, helped clarify how the different pieces fit together"). Andrew adds Stanford/Brynjolfsson context if relevant.</p>
+    <p style="margin-top: 0.6rem;"><strong>Goal:</strong> Establish that Deal Brothers have been building, not waiting. Set the tone as partners, not pitchers.</p>
+  </div>
+
+  <div class="arc-step explore">
+    <strong>Act 2: Show the Depth, Invite Them In (Minutes 10-25)</strong>
+    <p>Show 2-3 rows of the terminology table:</p>
+  </div>
+
+  <table>
+    <tr><th>Marine Corps</th><th>AI Ecosystem Equivalent</th></tr>
+    <tr><td>Commander's Intent</td><td>Outcome Definition + Constraints</td></tr>
+    <tr><td>Mission Tactics</td><td>Delegated AI task execution</td></tr>
+    <tr><td>Feedback Loop</td><td>Output validation + refinement loop</td></tr>
+  </table>
+
+  <p>"This is what we mean by mission command for AI. Veterans already think this way. The training teaches them to apply it to AI systems instead of human teams."</p>
+
+  <p>Then flip it: <strong>"What does this connect to in what you're already teaching? Where do you see the overlap?"</strong></p>
+
+  <div class="proof-box">
+    <p><strong>Goal:</strong> Demonstrate substance without overwhelming. Create space for Justin and Teresa to see themselves in it. Watch where they engage (real interest) and where they go blank (not their lane).</p>
+  </div>
+
+  <div class="hold-back">
+    <strong style="font-size: 0.82rem; color: var(--muted); display: block; margin-bottom: 0.5rem;">Hold back:</strong>
+    <ul>
+      <li>Full execution model translation (too detailed for 45 min)</li>
+      <li>"Own AI Workforce Management, not AI Training" (internal framing, sounds like criticism of their business)</li>
+      <li>The forcing question about training program vs. new operator class (they're not ready)</li>
+    </ul>
+  </div>
+
+  <div class="arc-step direct">
+    <strong>Act 3: Structure + Next Steps (Minutes 25-45)</strong>
+    <p><strong>The two-track framing:</strong> "We see two tracks here. Track one is Joe selling existing LearnAIR curriculum to veteran-adjacent employers. That's revenue now. Track two is a purpose-built program for AI ecosystem supervision, designed for veterans, built on mission command principles. We think track two is the bigger opportunity, and we've been building the framework for it. How are you thinking about the relationship between those two tracks?"</p>
+  </div>
+
+  <h3>Push for specifics:</h3>
+  <ul>
+    <li>"What would it take for us to get access to your content library so we can start adapting it for the veteran population?"</li>
+    <li>"Can we schedule a follow-up in two weeks with a pilot proposal?"</li>
+    <li>"Would you be open to us bringing in feedback from employer conversations we're setting up?"</li>
+  </ul>
+
+  <div class="proof-box">
+    <p><strong>Goal:</strong> Walk away with at least one concrete commitment: content access, follow-up date, or openness to employer discovery input.</p>
+  </div>
+
+  <h2>Pre-Mortem</h2>
+
+  <p>Why this call goes poorly:</p>
+
+  <ol>
+    <li><strong>Justin treats it as a sales meeting</strong> ("what can you deliver for us?") instead of a partnership meeting</li>
+    <li><strong>Teresa is enthusiastic but noncommittal.</strong> "Love this, let's keep talking." No concrete next step.</li>
+    <li><strong>They blur the two tracks.</strong> Joe's existing curriculum sales becomes "the veteran program" and our supervision layer gets absorbed.</li>
+    <li><strong>We show up with strategy docs but no employer signal.</strong> They nod politely and nothing changes.</li>
+  </ol>
+
+  <div class="warning-box">
+    <p><strong>Mitigation:</strong> The two-track framing (Act 3) is specifically designed to prevent blurring. If they try to merge the tracks, Mike can say: "I want to make sure we're distinguishing between selling what already exists and building something new. Both are valuable. They're just different work with different timelines."</p>
+  </div>
+
+  <h2>Confidence Levels</h2>
+
+  <div class="confidence-grid">
+    <div class="confidence-item">
+      <div class="confidence-label">Teresa is genuinely aligned and wants to move</div>
+      <div class="confidence-value high">70%</div>
+    </div>
+    <div class="confidence-item">
+      <div class="confidence-label">Justin sees revenue opportunity more than mission</div>
+      <div class="confidence-value mid">50%</div>
+    </div>
+    <div class="confidence-item">
+      <div class="confidence-label">We get a structural commitment on April 7</div>
+      <div class="confidence-value low">30%</div>
+    </div>
+    <div class="confidence-item">
+      <div class="confidence-label">Employer discovery calls happen before Tuesday</div>
+      <div class="confidence-value low">20%</div>
+    </div>
+  </div>
+
+  <h2>The Underlying Pattern</h2>
+
+  <p>The Marine Corps doesn't use rigid control or no control. It uses elastic constraints: commander's intent pulls units toward alignment while allowing autonomous execution. That's the AI supervision model in one image.</p>
+
+  <p>LearnAIR's current curriculum trains line cooks (follow prompts, use tools). Mike's framework trains chefs (set intent, design systems, evaluate outputs). The April 7 pitch needs to make this distinction without insulting what LearnAIR already does. Frame it as: <strong>"You've built the foundation. We're proposing the next floor."</strong></p>
+
+  <div class="warning-box">
+    <p><strong>Optimization ratchet warning:</strong> If LearnAIR optimizes for "get veterans jobs fast" (Trisha confirmed revenue is the primary driver), they'll build a placement pipeline that measures speed and volume. That caps the program at tactical. The tension between revenue motivation and program quality is the load-bearing risk.</p>
+  </div>
+
+  <h2>Mike's Assets</h2>
+
+  <p>Use selectively. Don't present all of it.</p>
+
+  <h3>Terminology table (show 2-3 rows)</h3>
+
+  <table>
+    <tr><th>Marine Corps</th><th>AI Ecosystem Equivalent</th></tr>
+    <tr><td>Commander</td><td>AI System Owner / Operator Lead</td></tr>
+    <tr><td>Commander's Intent</td><td>Outcome Definition + Constraints</td></tr>
+    <tr><td>Mission Tactics</td><td>Delegated AI task execution</td></tr>
+    <tr><td>Feedback Loop</td><td>Output validation + refinement loop</td></tr>
+  </table>
+
+  <h3>One-sentence synthesis (Mike's own)</h3>
+
+  <p><em>"Marine field grade officers are developed to convert ambiguous reality into clear intent, integrated plans, disciplined execution, adaptive feedback, and leader development at scale."</em></p>
+
+  <h3>Devil's advocate (shows we stress-tested our own thesis)</h3>
+
+  <ul>
+    <li><strong>Over-militarization risk:</strong> translate principles, not language</li>
+    <li><strong>Market timing risk:</strong> many orgs still experimenting, solution may be ahead of demand</li>
+    <li><strong>Mitigation:</strong> tiered progression model (meet people where they are)</li>
+  </ul>
+
+  <h2>What Success Looks Like</h2>
+
+  <p>After the call, we have:</p>
+
+  <ol>
+    <li>A clear structure agreement or at least directional alignment (who owns what)</li>
+    <li>A concrete next step with a date (pilot proposal, content access, follow-up call)</li>
+    <li>Confirmation that the veteran program is a separate track, not a flavor of existing LearnAIR training</li>
+    <li>A read on whether Justin or Teresa is the real champion (bet: Teresa)</li>
+  </ol>
+
+  <div class="footer-note">
+    Andrew &amp; Mike Deal. Updated April 2, 2026.
+  </div>
+
+</div>
+
+</body>
+</html>
