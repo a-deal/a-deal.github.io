@@ -4,7 +4,7 @@
 <script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LearnAIR | April 7 Call Arc</title>
+<title>LearnAIR | April 7 Story Arc (v3)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -220,6 +220,80 @@
   .arc-step strong { display: block; margin-bottom: 0.3rem; }
   .arc-step p { margin-bottom: 0; font-size: 0.9rem; }
 
+  .beat-block {
+    margin: 2rem 0;
+  }
+
+  .beat-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .beat-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    flex-shrink: 0;
+  }
+
+  .beat-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .beat-duration {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .spoken-version {
+    background: var(--warm);
+    border-left: 3px solid var(--accent-light);
+    padding: 1.2rem 1.5rem;
+    margin: 1.2rem 0;
+  }
+
+  .spoken-version .spoken-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .spoken-version p {
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 0;
+    font-size: 0.92rem;
+  }
+
+  .reserve-section {
+    border: 1px solid var(--faint);
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    background: var(--white);
+  }
+
+  .reserve-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
   .confidence-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -290,98 +364,299 @@
 
 <div class="content">
 
-  <div class="kicker">Call Arc</div>
+  <div class="kicker">Story Arc v3 — 5 Beats</div>
   <h1>April 7: Justin + Teresa</h1>
-  <p class="subtitle">Tuesday, April 7, 2026 at 9:30 AM PT. 45 minutes. Mike opens, Andrew supports.</p>
+  <p class="subtitle">Tuesday, April 7, 2026 at 9:30 AM PT. 45 minutes. Mike opens, Andrew supports. Spoken arc is 10 minutes. Leaves 20 minutes for their reactions and our listening.</p>
 
   <div class="hypothesis-box">
     <p>"You're not training people to use AI. You're training leaders to command AI-enabled systems."</p>
   </div>
 
-  <p>Mike says this. In his voice, in his credibility. It's the most important 15 seconds of the call.</p>
+  <p>Mike says this. In his voice, in his credibility. Most important 15 seconds of the call.</p>
 
-  <h2>What We Know Going In</h2>
+  <!-- BEAT 1 -->
+  <h2>Beat 1: The Bet</h2>
+  <div class="beat-duration" style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);">30 SECONDS</div>
 
-  <p><strong>From Trisha (Apr 2):</strong> She's a general business consultant, not a co-builder. No one at LearnAIR is building the veteran program. LearnAIR will provide content, brand, SDVOSB, and partner companies. Not labor, not strategy, not curriculum design.</p>
+  <p>Employers will pay for veterans trained in AI operations supervision.</p>
 
-  <p><strong>From Mike's independent research:</strong> Two deep research sessions mapping Marine Corps leadership to AI workforce management. MCPP-to-AI planning framework (6 steps). Terminology translation table. Leadership skill mapping. Devil's advocate stress test. This is original work with real citations (USMC doctrine, Command and Staff College curriculum).</p>
+  <p>That's the hypothesis. Not "veterans can learn AI." Not "mission command is cool." The question is whether someone writes a check for this specific thing. We believe they will. We haven't proven it yet. Everything we're about to show you is the case for why the bet is worth making, and the plan for how we test it.</p>
 
-  <p><strong>From the strategic clarity doc:</strong> The hypothesis is that employers will pay for veterans trained in AI operations supervision. We have zero employer conversations. All work to date is supply-side.</p>
-
-  <div class="warning-box">
-    <p><strong>Still missing:</strong> Employer signal. LLC formation. Break Line or BetterUp call.</p>
+  <div class="spoken-version">
+    <span class="spoken-label">Spoken version</span>
+    <p>"We have a thesis we're excited about. Employers will pay for veterans trained to supervise AI systems, not just use them. We've done three weeks of structured work on this. We want to walk you through what we've found and where we think the opportunity is."</p>
   </div>
 
-  <h2>The Arc</h2>
+  <!-- BEAT 2 -->
+  <h2>Beat 2: The Job</h2>
+  <div class="beat-duration" style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);">2 MINUTES</div>
+
+  <p>Before the framework, show the job. Make them picture it.</p>
+
+  <p><strong>Lead with one workflow example:</strong> A healthcare company deploys an AI to review insurance claims and pre-approve routine cases. It works. But someone has to define the approval criteria, catch false denials, audit the system's decision patterns, and adapt the rules when regulations change. That someone isn't a developer. They're not a data scientist. They're an operations supervisor who thinks in terms of intent, delegation, exception handling, and feedback loops.</p>
+
+  <p>That role is emerging across every sector right now:</p>
+
+  <ul>
+    <li><strong>Federal:</strong> AI triages FOIA requests. Supervisor sets rules of engagement for what's auto-approved vs. flagged.</li>
+    <li><strong>Logistics:</strong> AI manages inventory forecasting. Supervisor intervenes during novel conditions (supply disruptions, demand spikes).</li>
+    <li><strong>Business services:</strong> AI flags risk clauses in contracts. Supervisor validates critical calls and decides when to override.</li>
+  </ul>
+
+  <p>Companies are deploying these systems and discovering nobody knows how to manage them. Gina Raimondo at Commerce is asking the question at the policy level. Brynjolfsson at Stanford is measuring it: 20-30% productivity gains, but only when humans stay in the loop as supervisors, not operators.</p>
+
+  <div class="spoken-version">
+    <span class="spoken-label">Spoken version</span>
+    <p>Pick ONE workflow (healthcare is the clearest). Walk through it in 60 seconds. Then: "This pattern is showing up in federal, logistics, business services, everywhere AI is being deployed. The question is: who do you train for this role?"</p>
+  </div>
+
+  <!-- BEAT 3 -->
+  <h2>Beat 3: The Bridge</h2>
+  <div class="beat-duration" style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);">2 MINUTES</div>
+
+  <p>Now reveal why veterans.</p>
+
+  <p>That supervisor role requires a specific cognitive framework: set intent clearly, delegate execution, validate outputs, adapt when conditions change. That's not a new skill set. It's mission command.</p>
+
+  <p>Mike mapped it term by term:</p>
+
+  <table>
+    <tr>
+      <th>Marine Corps</th>
+      <th>AI Supervision</th>
+    </tr>
+    <tr>
+      <td>Commander's Intent</td>
+      <td>Outcome definition + constraints</td>
+    </tr>
+    <tr>
+      <td>Mission Tactics</td>
+      <td>Delegated AI task execution</td>
+    </tr>
+    <tr>
+      <td>Feedback Loop</td>
+      <td>Output validation + refinement</td>
+    </tr>
+  </table>
+
+  <p>This isn't a metaphor. A Marine field grade officer trained in MCPP already has the cognitive framework for AI supervision. They've spent years converting ambiguous reality into clear intent, integrated plans, disciplined execution, and adaptive feedback. They just haven't applied it to this domain yet.</p>
+
+  <p>Veterans don't need to learn how to think in systems. They need a bridge that translates what they already know into AI.</p>
+
+  <div class="spoken-version">
+    <span class="spoken-label">Spoken version</span>
+    <p>"That healthcare supervisor we just described? Set the intent, delegate, validate, adapt. Marines call that mission command. It's the same cognitive framework. We're not teaching veterans a new way to think. We're giving them a bridge to apply what they already know."</p>
+    <p style="margin-top: 0.6rem;">Show 2-3 rows of the table. Let it land. Don't over-explain.</p>
+  </div>
+
+  <!-- BEAT 4 -->
+  <h2>Beat 4: The Roadmap</h2>
+  <div class="beat-duration" style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);">3 MINUTES</div>
+
+  <p>Two prongs. Not competing. Sequential.</p>
 
   <div class="arc-step momentum">
-    <strong>Act 1: Energy + Alignment (Minutes 0-10)</strong>
-    <p>Mike opens. "Teresa, Justin, we've been putting real work into this since we last spoke. Here's where our heads are at."</p>
-    <p style="margin-top: 0.6rem;">Deliver the one-liner. Reference the Trisha conversation positively ("good conversation, helped clarify how the different pieces fit together"). Andrew adds Stanford/Brynjolfsson context if relevant.</p>
-    <p style="margin-top: 0.6rem;"><strong>Goal:</strong> Establish that Deal Brothers have been building, not waiting. Set the tone as partners, not pitchers.</p>
+    <strong>Prong 1: AI Literacy (LearnAIR's strength)</strong>
+    <p>Adapt your existing curriculum for a military audience. Delivered through TAPS or a 1-week follow-on. Teaches tool proficiency. This is where enlisted grades and junior officers start. It's also a vetting function: who's engaged, who has aptitude, who wants more. This is revenue now with what you've already built.</p>
+  </div>
+
+  <div class="arc-step direct">
+    <strong>Prong 2: AI Supervision (new IP)</strong>
+    <p>A 4-week intensive for Marine Corps officers, O1-O3. Project-based, not lecture-based.</p>
+  </div>
+
+  <ul>
+    <li><strong>Week 1:</strong> Map military experience to the AI supervision framework</li>
+    <li><strong>Week 2:</strong> Tools in context (judgment, not proficiency)</li>
+    <li><strong>Week 3:</strong> Live employer project, real ambiguity</li>
+    <li><strong>Week 4:</strong> Portfolio, case study, placement prep</li>
+  </ul>
+
+  <p>The phased approach to outcomes:</p>
+  <ul>
+    <li><strong>Phase 1:</strong> Put out the curriculum. Train Marines. Get testimonials. Prove the model works.</li>
+    <li><strong>Phase 2:</strong> Track participants into jobs. Measure outcomes. Build the case studies.</li>
+    <li><strong>Phase 3:</strong> Outcome data makes this a different category from every other program. That's the moat.</li>
+  </ul>
+
+  <p>We don't need to be outcome-based on day one. But the roadmap gets us there. And the curriculum design comes after employer validation, not before. We need to hear from the companies who would hire our graduates before we finalize what we teach.</p>
+
+  <div class="spoken-version">
+    <span class="spoken-label">Spoken version</span>
+    <p>"We see two tracks. Track one is adapting what you've already built for a military audience. That's revenue now. Track two is a purpose-built program for AI supervision, designed for officers, grounded in mission command. We think track two is the bigger opportunity. How are you thinking about the relationship between those two?"</p>
+  </div>
+
+  <div class="warning-box">
+    <p><strong>Two-track defense (rehearse this):</strong> If they try to merge the prongs: "Both are valuable. They're different work with different timelines. Prong 1 is revenue now. Prong 2 needs its own track."</p>
+  </div>
+
+  <!-- BEAT 5 -->
+  <h2>Beat 5: The Asks</h2>
+  <div class="beat-duration" style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);">2 MINUTES</div>
+
+  <p>Three things, in order:</p>
+
+  <div class="arc-step momentum">
+    <strong>1. Employer signal</strong>
+    <p>We have a strong thesis and zero employer conversations. Mike is reaching out through Break Line and his direct network. We want your employer contacts in the mix too. The questions are ready: "Are companies asking for people who can supervise AI workflows? What do they call that role? What would they pay?" One conversation with a hiring manager changes this from theory to signal.</p>
   </div>
 
   <div class="arc-step explore">
-    <strong>Act 2: Show the Depth, Invite Them In (Minutes 10-25)</strong>
-    <p>Show 2-3 rows of the terminology table:</p>
+    <strong>2. Curriculum access</strong>
+    <p>We want to see what you've built. Not to copy it. To understand the baseline so we can design Prong 2 on top of Prong 1. The literacy prong should build on what already exists.</p>
   </div>
+
+  <div class="arc-step direct">
+    <strong>3. A follow-up with a date</strong>
+    <p>30 minutes isn't enough to hash this out. We'd like a deeper working session in two weeks where we can walk through the employer discovery findings and the two-prong plan together. Can we get that on the calendar before we hang up?</p>
+  </div>
+
+  <div class="spoken-version">
+    <span class="spoken-label">Spoken version</span>
+    <p>Don't let the call end without pinning at least one of these three. If all three get deflected, that's data. It means they're not ready, and we plan accordingly.</p>
+  </div>
+
+  <!-- PRE-MORTEM -->
+  <h2>Pre-Mortem: How Each Beat Fails</h2>
 
   <table>
-    <tr><th>Marine Corps</th><th>AI Ecosystem Equivalent</th></tr>
-    <tr><td>Commander's Intent</td><td>Outcome Definition + Constraints</td></tr>
-    <tr><td>Mission Tactics</td><td>Delegated AI task execution</td></tr>
-    <tr><td>Feedback Loop</td><td>Output validation + refinement loop</td></tr>
+    <tr>
+      <th>Beat</th>
+      <th>Failure mode</th>
+      <th>Defense</th>
+    </tr>
+    <tr>
+      <td>Beat 1: The Bet</td>
+      <td>"That's ambitious. Where's the proof?"</td>
+      <td>"That's why employer signal is our #1 ask. The thesis is strong. The proof is what we build together."</td>
+    </tr>
+    <tr>
+      <td>Beat 2: The Job</td>
+      <td>Justin asks "which company told you they need this?"</td>
+      <td>"None yet. These workflows are sourced from industry deployment patterns, not direct conversations. That's the gap we're closing." Be honest.</td>
+    </tr>
+    <tr>
+      <td>Beat 3: The Bridge</td>
+      <td>Teresa says "we already teach this"</td>
+      <td>"Your curriculum teaches people to use the tools. We're proposing a program that teaches people to command the system. Different skill, different audience, different outcome."</td>
+    </tr>
+    <tr>
+      <td>Beat 4: The Roadmap</td>
+      <td>They try to merge the prongs</td>
+      <td>"Both are valuable. Different work, different timelines. Prong 1 is revenue now. Prong 2 needs its own track."</td>
+    </tr>
+    <tr>
+      <td>Beat 5: The Asks</td>
+      <td>"Love it, let's keep talking" (no commitment)</td>
+      <td>Push: "Can we get a 60-minute working session on the calendar before we hang up? Even tentative." If deflected, that's your answer.</td>
+    </tr>
+    <tr>
+      <td>Texas relocation</td>
+      <td>They mention moving to Texas mid-call</td>
+      <td>"What does the timeline look like for the move, and how does the veteran program fit into that transition?" Listen for specificity vs. aspiration. If program travels to Texas, that's bullish for a JV/spin-out. If it stays in Oregon, LearnAIR's local infrastructure matters more. Don't bring it up. Only respond if they raise it.</td>
+    </tr>
+    <tr>
+      <td>"So what's the arrangement?"</td>
+      <td>Justin or Teresa ask about the business relationship</td>
+      <td>"We're a consultancy. We own the IP we're building. The structure comes after we validate demand together." One line. Don't elaborate. Retainer and equity talk is post-April 7.</td>
+    </tr>
   </table>
 
-  <p>"This is what we mean by mission command for AI. Veterans already think this way. The training teaches them to apply it to AI systems instead of human teams."</p>
+  <!-- DIAGNOSTIC LISTENING GUIDE -->
+  <h2>Diagnostic Listening Guide</h2>
 
-  <p>Then flip it: <strong>"What does this connect to in what you're already teaching? Where do you see the overlap?"</strong></p>
+  <p>Watch where Justin and Teresa engage vs. go blank during the call:</p>
 
-  <div class="proof-box">
-    <p><strong>Goal:</strong> Demonstrate substance without overwhelming. Create space for Justin and Teresa to see themselves in it. Watch where they engage (real interest) and where they go blank (not their lane).</p>
+  <ul>
+    <li><strong>If they lean into the workflows (Beat 2):</strong> They're thinking about product. Good signal. They can picture selling this.</li>
+    <li><strong>If they lean into the framework (Beat 3):</strong> They're thinking about theory. Less actionable. Push back toward "what does this look like for your clients?"</li>
+    <li><strong>If Justin immediately asks about money:</strong> He's in sales mode. Go to the economics reserve. This is his lane. Let him run there.</li>
+    <li><strong>If Teresa asks about the phased approach:</strong> She's thinking about operations. She's your champion. Feed her the roadmap details.</li>
+    <li><strong>If both go quiet after the asks:</strong> The call is over in spirit. Wrap gracefully. Don't fill silence with more pitch.</li>
+  </ul>
+
+  <!-- RESERVE SECTIONS -->
+  <h2>[Reserve] The Landscape</h2>
+
+  <div class="reserve-section">
+    <span class="reserve-label">Don't present unless asked "who else is doing this?"</span>
+    <p>We looked at 23 organizations. Nobody produces outcomes for AI supervision roles. Training programs teach tool proficiency but don't track placement. Placement networks (Break Line has Palantir, Scale AI, Anduril, Shield AI, Google) have the employers but no AI supervision track. Coaching platforms (BetterUp ran a 73-person veteran pilot) coach identity, not operational capability. The gap is: nobody bridges military command principles to AI ecosystem supervision. That's what we're building.</p>
   </div>
+
+  <h2>[Reserve] The Economics</h2>
+
+  <div class="reserve-section">
+    <span class="reserve-label">Don't present unless they ask about money or business model</span>
+    <p><strong>15-person pilot cohort:</strong></p>
+    <ul>
+      <li>Tuition: $3,500-5,000 per participant</li>
+      <li>Employer co-sponsorship: $2,000-5,000 per hire</li>
+      <li>Grant funding: Easter Seals HVRP, DOL workforce development, SDVOSB set-asides</li>
+    </ul>
+    <p style="margin-top: 0.8rem;"><strong>Revenue scenarios:</strong></p>
+    <ul>
+      <li>Conservative (tuition only, 4 cohorts/year): $210K-300K</li>
+      <li>Medium (tuition + employer co-pay): $400K-600K</li>
+      <li>Aggressive (tuition + co-pay + grants): $800K+</li>
+    </ul>
+    <p style="margin-top: 0.8rem;">Your SDVOSB status unlocks federal set-asides and government contracts. That's one of the most valuable things you bring to this partnership.</p>
+  </div>
+
+  <h2>[Reserve] What We've Built</h2>
+
+  <div class="reserve-section">
+    <span class="reserve-label">Don't enumerate unless they ask "what have you actually done?"</span>
+    <p>Three weeks of work: strategic thesis with testable hypothesis, competitive landscape (23 orgs, positioning matrix), MCPP-to-AI supervision framework (Mike's original research), sector workflow examples (4 industries), unit economics (3 scenarios), Oregon employer landscape, target intermediaries with interview scripts, published research hub. We did this while Mike was finishing Forest Service workshops and Andrew was running a health tech company.</p>
+  </div>
+
+  <!-- SATURDAY RECONCILIATION -->
+  <h2>Saturday Reconciliation Notes</h2>
+
+  <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em;">Added Apr 3. Review Saturday before pulling visuals.</p>
+
+  <ol>
+    <li style="margin-bottom: 0.8rem;"><strong>Beat 5, Ask #2 may be stale.</strong> Trisha confirmed Apr 2 that LearnAIR will provide content + trainer access for the pilot. "We want to see what you've built" (current Ask #2) undersells what we already know. Consider updating to: "We'd like to start adapting your curriculum for a military audience. Trisha confirmed you're open to that. Can we set up content access this week?" Stronger, more specific, shows we've done homework.</li>
+    <li style="margin-bottom: 0.8rem;"><strong>Employer signal status.</strong> Arc says "zero employer conversations." If Mike made any discovery calls (Break Line, Volterra, Alex Ha) by Saturday, Beat 5 needs to reflect that signal. Even one conversation changes the framing from "we have nothing" to "here's what we're hearing."</li>
+    <li style="margin-bottom: 0.8rem;"><strong>Intermediary strategy is missing from the spoken arc.</strong> The thesis identifies Break Line and BetterUp as higher-leverage than direct employer calls. Beat 5 only mentions "your employer contacts." Consider adding one line: "We're also reaching out through Break Line and BetterUp, organizations that see both sides of the veteran-employer gap daily."</li>
+    <li style="margin-bottom: 0.8rem;"><strong>Heat map is ready.</strong> See <code>hub/plans/2026-04-07-heat-map.md</code>. Needs Mike's calibration on NCOs and warrant officers before it becomes a slide.</li>
+    <li><strong>Slides outline is ready.</strong> See <code>hub/plans/2026-04-07-slides-outline.md</code>. 8 presented slides + 3 reserves. Maps 1:1 to the spoken arc.</li>
+  </ol>
+
+  <!-- NOTES FOR MIKE -->
+  <h2>Notes for Mike</h2>
+
+  <p><strong>What changed from v2:</strong></p>
+  <ul>
+    <li>Flipped the order: workflows before framework (K's recommendation). Show the fish, then explain the fishing rod. The terminology table lands harder after they can picture the job.</li>
+    <li>Cut from 7 presented beats to 5. Landscape, economics, and "what we've built" are now reserves for Q&A, not part of the spoken arc.</li>
+    <li>Added pre-mortem table with specific defenses for each beat.</li>
+    <li>Added diagnostic listening guide so we know what to watch for.</li>
+    <li>Spoken versions added to each beat so you know exactly what to say, not just what to know.</li>
+  </ul>
 
   <div class="hold-back">
     <strong style="font-size: 0.82rem; color: var(--muted); display: block; margin-bottom: 0.5rem;">Hold back:</strong>
     <ul>
-      <li>Full execution model translation (too detailed for 45 min)</li>
-      <li>"Own AI Workforce Management, not AI Training" (internal framing, sounds like criticism of their business)</li>
+      <li>Full MCPP translation (show 2-3 rows, reference the rest)</li>
+      <li>"Own AI Workforce Management" framing (internal, sounds like criticism)</li>
       <li>The forcing question about training program vs. new operator class (they're not ready)</li>
+      <li>Money, retainers, equity, business structure (downstream of trust)</li>
     </ul>
   </div>
 
-  <div class="arc-step direct">
-    <strong>Act 3: Structure + Next Steps (Minutes 25-45)</strong>
-    <p><strong>The two-track framing:</strong> "We see two tracks here. Track one is Joe selling existing LearnAIR curriculum to veteran-adjacent employers. That's revenue now. Track two is a purpose-built program for AI ecosystem supervision, designed for veterans, built on mission command principles. We think track two is the bigger opportunity, and we've been building the framework for it. How are you thinking about the relationship between those two tracks?"</p>
-  </div>
-
-  <h3>Push for specifics:</h3>
-  <ul>
-    <li>"What would it take for us to get access to your content library so we can start adapting it for the veteran population?"</li>
-    <li>"Can we schedule a follow-up in two weeks with a pilot proposal?"</li>
-    <li>"Would you be open to us bringing in feedback from employer conversations we're setting up?"</li>
-  </ul>
-
   <div class="proof-box">
-    <p><strong>Goal:</strong> Walk away with at least one concrete commitment: content access, follow-up date, or openness to employer discovery input.</p>
+    <p><strong>The call structure:</strong></p>
+    <p>0-10 min: Mike delivers 5 beats</p>
+    <p>10-25 min: Their reactions, questions, diagnostic listening</p>
+    <p>25-30 min: Pin at least one ask</p>
   </div>
 
-  <h2>Pre-Mortem</h2>
+  <p>Read tonight. Break it tomorrow. Saturday we pull visuals and rehearse.</p>
 
-  <p>Why this call goes poorly:</p>
+  <!-- APPENDIX -->
+  <h2>Appendix: Thinking Behind This</h2>
 
-  <ol>
-    <li><strong>Justin treats it as a sales meeting</strong> ("what can you deliver for us?") instead of a partnership meeting</li>
-    <li><strong>Teresa is enthusiastic but noncommittal.</strong> "Love this, let's keep talking." No concrete next step.</li>
-    <li><strong>They blur the two tracks.</strong> Joe's existing curriculum sales becomes "the veteran program" and our supervision layer gets absorbed.</li>
-    <li><strong>We show up with strategy docs but no employer signal.</strong> They nod politely and nothing changes.</li>
-  </ol>
-
-  <div class="warning-box">
-    <p><strong>Mitigation:</strong> The two-track framing (Act 3) is specifically designed to prevent blurring. If they try to merge the tracks, Mike can say: "I want to make sure we're distinguishing between selling what already exists and building something new. Both are valuable. They're just different work with different timelines."</p>
-  </div>
-
-  <h2>Confidence Levels</h2>
+  <h3>Confidence Levels (Duke-Calibrated)</h3>
 
   <div class="confidence-grid">
     <div class="confidence-item">
@@ -402,43 +677,17 @@
     </div>
   </div>
 
-  <h2>The Underlying Pattern</h2>
+  <h3>K Framework: The Underlying Pattern</h3>
 
-  <p>The Marine Corps doesn't use rigid control or no control. It uses elastic constraints: commander's intent pulls units toward alignment while allowing autonomous execution. That's the AI supervision model in one image.</p>
+  <p>Mike's work maps to Komoroske's rubber bands model. The Marine Corps doesn't use rigid control or no control. It uses elastic constraints: commander's intent pulls units toward alignment while allowing autonomous execution. That's the AI supervision model in one image.</p>
 
-  <p>LearnAIR's current curriculum trains line cooks (follow prompts, use tools). Mike's framework trains chefs (set intent, design systems, evaluate outputs). The April 7 pitch needs to make this distinction without insulting what LearnAIR already does. Frame it as: <strong>"You've built the foundation. We're proposing the next floor."</strong></p>
+  <p>The line cooks vs. chefs distinction is the tier gap. LearnAIR's current curriculum trains line cooks (follow prompts, use tools). Mike's framework trains chefs (set intent, design systems, evaluate outputs). The April 7 pitch needs to make this distinction without insulting what LearnAIR already does. Frame it as: <strong>"You've built the foundation. We're proposing the next floor."</strong></p>
 
   <div class="warning-box">
     <p><strong>Optimization ratchet warning:</strong> If LearnAIR optimizes for "get veterans jobs fast" (Trisha confirmed revenue is the primary driver), they'll build a placement pipeline that measures speed and volume. That caps the program at tactical. The tension between revenue motivation and program quality is the load-bearing risk.</p>
   </div>
 
-  <h2>Mike's Assets</h2>
-
-  <p>Use selectively. Don't present all of it.</p>
-
-  <h3>Terminology table (show 2-3 rows)</h3>
-
-  <table>
-    <tr><th>Marine Corps</th><th>AI Ecosystem Equivalent</th></tr>
-    <tr><td>Commander</td><td>AI System Owner / Operator Lead</td></tr>
-    <tr><td>Commander's Intent</td><td>Outcome Definition + Constraints</td></tr>
-    <tr><td>Mission Tactics</td><td>Delegated AI task execution</td></tr>
-    <tr><td>Feedback Loop</td><td>Output validation + refinement loop</td></tr>
-  </table>
-
-  <h3>One-sentence synthesis (Mike's own)</h3>
-
-  <p><em>"Marine field grade officers are developed to convert ambiguous reality into clear intent, integrated plans, disciplined execution, adaptive feedback, and leader development at scale."</em></p>
-
-  <h3>Devil's advocate (shows we stress-tested our own thesis)</h3>
-
-  <ul>
-    <li><strong>Over-militarization risk:</strong> translate principles, not language</li>
-    <li><strong>Market timing risk:</strong> many orgs still experimenting, solution may be ahead of demand</li>
-    <li><strong>Mitigation:</strong> tiered progression model (meet people where they are)</li>
-  </ul>
-
-  <h2>What Success Looks Like</h2>
+  <h3>What Success Looks Like (Backcasting)</h3>
 
   <p>After the call, we have:</p>
 
@@ -450,7 +699,7 @@
   </ol>
 
   <div class="footer-note">
-    Andrew &amp; Mike Deal. Updated April 2, 2026.
+    Andrew &amp; Mike Deal. Story Arc v3, updated April 3, 2026.
   </div>
 
 </div>
