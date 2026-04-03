@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kasane Partnership: Andrew's Perspective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Anybody:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: { DEFAULT: '#1a1a1a', soft: '#4a4a4a', faint: '#8a8a8a' },
+        paper: '#ffffff',
+        cream: '#f5f2e9',
+        brown: '#2b1d15',
+        coral: { DEFAULT: '#d4654a', bright: '#e85d3a', light: '#e8a090' },
+        good: '#2d6a4f',
+      },
+      fontFamily: {
+        display: ['Anybody', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #f5f2e9; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Hero -->
+<header class="bg-brown text-cream" style="padding: clamp(4rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <p class="font-body text-sm tracking-widest uppercase text-coral-light mb-6">Kasane Health LLC</p>
+  <h1 style="font-family: 'Anybody', sans-serif; font-weight: 900; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase;">
+    Partnership<br>Proposal
+  </h1>
+  <p class="font-serif text-xl italic mt-6 text-coral-light" style="max-width: 36rem;">Andrew's perspective on structure, ownership, and how we build this together.</p>
+  <p class="font-body text-sm text-coral-light mt-8 opacity-70">April 3, 2026 &middot; Working draft for discussion</p>
+</header>
+
+<!-- Opening -->
+<section class="bg-paper" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-2xl">
+    <p class="font-body text-lg text-ink-soft leading-relaxed reveal">
+      Paul, I loved the thoroughness of your proposal. The profits interest analysis is genuinely smart, and the tax structure thinking is the kind of rigor that makes me want to build with you. I've been sitting with it for a few days, and I want to share where I landed so we can think through it together.
+    </p>
+  </div>
+</section>
+
+<!-- Where We Agree -->
+<section class="bg-cream" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-2xl">
+    <p class="font-body text-xs tracking-widest uppercase text-good font-bold mb-4 reveal">Where we agree</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-8 reveal stagger-1">The big stuff is settled</h2>
+
+    <div class="space-y-6">
+      <div class="reveal stagger-1">
+        <p class="font-body font-semibold text-ink">LLC is the right entity.</p>
+        <p class="font-body text-ink-soft mt-1">No argument. Bootstrapped, zebra economics, pass-through taxation. C-Corp would be over-engineering for what we're building.</p>
+      </div>
+      <div class="reveal stagger-2">
+        <p class="font-body font-semibold text-ink">Vesting protects both of us.</p>
+        <p class="font-body text-ink-soft mt-1">Completely agree. Neither of us should be locked in without an earn-in period. Clean off-ramps are a feature, not a bug.</p>
+      </div>
+      <div class="reveal stagger-3">
+        <p class="font-body font-semibold text-ink">IP assignment to the LLC.</p>
+        <p class="font-body text-ink-soft mt-1">Yes. All existing and future IP (Kiso, Kasane iOS, brand, domain, everything) belongs to the entity. This is foundational.</p>
+      </div>
+      <div class="reveal stagger-4">
+        <p class="font-body font-semibold text-ink">Tax distributions, dispute resolution, non-compete.</p>
+        <p class="font-body text-ink-soft mt-1">All good as proposed. Mediation first, narrow non-compete, required K-1 distributions. These are clean and fair.</p>
+      </div>
+      <div class="reveal stagger-4">
+        <p class="font-body font-semibold text-ink">We're building a zebra.</p>
+        <p class="font-body text-ink-soft mt-1">Not optimizing for exit. Building a sustainable business that pays us well and does meaningful work. Fully aligned.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Where I See It Differently -->
+<section class="bg-paper" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-2xl">
+    <p class="font-body text-xs tracking-widest uppercase text-coral font-bold mb-4 reveal">Where I see it differently</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-6 reveal stagger-1">The frame</h2>
+    <p class="font-body text-ink-soft leading-relaxed mb-10 reveal stagger-2">
+      Your proposal frames the partnership as "founder bringing in a partner." I've been sitting with whether the frame might be closer to "two people building something together that neither could build alone." Curious how you see it. Let me share where I'm coming from.
+    </p>
+
+    <!-- Contributions -->
+    <h3 class="font-display text-xl font-bold uppercase tracking-tight mb-4 reveal">The contribution picture</h3>
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-cream rounded-lg p-6 reveal stagger-1">
+        <p class="font-body text-xs tracking-widest uppercase text-coral font-bold mb-3">Paul's prior work</p>
+        <p class="font-body text-ink-soft text-sm leading-relaxed">
+          2+ years of product thinking, the Kasane brand, the 130-person waitlist, the Stanford clinical network, the behavior change methodology, and the iOS app. That foundation matters, and I'm not dismissing it.
+        </p>
+      </div>
+      <div class="bg-cream rounded-lg p-6 reveal stagger-2">
+        <p class="font-body text-xs tracking-widest uppercase text-good font-bold mb-3">Andrew's contribution</p>
+        <p class="font-body text-ink-soft text-sm leading-relaxed">
+          Kiso: 605 tests, 40+ MCP tools, multi-user data isolation, OAuth, structured logging, deterministic scheduler, clinical-grade scoring. Milo: real coaching agent serving users today. Wearable integrations (Garmin, Oura, Whoop, Apple Health). The shared data layer that makes everything connect.
+        </p>
+      </div>
+    </div>
+    <p class="font-body text-ink-soft leading-relaxed mb-10 reveal">
+      I think the honest assessment is that we've both made significant contributions, in different domains. Neither piece works as well without the other, and that's actually the strongest argument for a structure that reflects true partnership.
+    </p>
+
+    <!-- Capital Interest -->
+    <h3 class="font-display text-xl font-bold uppercase tracking-tight mb-4 reveal">Capital interest, not profits interest</h3>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-1">
+      The profits interest structure is tax-efficient and well-reasoned. I understand why you proposed it. My concern is more about what it signals than what it does mechanically.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-2">
+      Capital interest means you're an owner. Profits interest means you participate in upside. In practice, the day-to-day difference is small. In a dissolution or sale, the capital interest holder gets paid first. I'm wondering whether two classes of member in a two-person partnership might work against the alignment we both want. How are you thinking about that?
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-10 reveal stagger-3">
+      I'd lean toward both of us holding capital interest, with the prior-work premium showing up in the split rather than the type of interest. What's your reaction to that?
+    </p>
+
+    <!-- The Split -->
+    <h3 class="font-display text-xl font-bold uppercase tracking-tight mb-4 reveal">The split</h3>
+    <div class="flex items-center gap-6 mb-6 reveal stagger-1">
+      <div class="text-center">
+        <p class="font-body text-xs tracking-widest uppercase text-ink-faint mb-1">Your proposal</p>
+        <p class="font-display text-4xl font-black text-ink-faint">70/30</p>
+      </div>
+      <div class="text-coral text-2xl">&rarr;</div>
+      <div class="text-center">
+        <p class="font-body text-xs tracking-widest uppercase text-coral mb-1">My proposal</p>
+        <p class="font-display text-4xl font-black text-coral">55/45</p>
+      </div>
+    </div>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-2">
+      55 recognizes that you started earlier, built the brand, developed the methodology, and have relationships that matter. 45 recognizes that I've built the production infrastructure, the intelligence layer, and the coaching system that makes this a defensible product rather than another habit app.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-3">
+      This isn't about counting lines of code against years of prior work. It's about setting up a structure where both of us feel fully invested for the next 3-5 years. I think 55/45 does that. I think 70/30 could create friction if the day-to-day contributions end up being roughly equal going forward, which is how I'm seeing the trajectory.
+    </p>
+    <p class="font-body text-ink leading-relaxed font-medium mb-10 reveal stagger-4">
+      I'm genuinely open to discussing this. Is there a way you're valuing the prior contributions that I'm not seeing? I want to make sure I'm weighing this fully.
+    </p>
+
+    <!-- Mutual Vesting -->
+    <h3 class="font-display text-xl font-bold uppercase tracking-tight mb-4 reveal">Mutual vesting</h3>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-1">
+      Your proposal has only me vesting. I think we should both vest.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-2">
+      If we're both committed for the long haul (and I believe we are), mutual vesting costs neither of us anything. It signals that we're both earning our stake through continued contribution, not just through what came before. And it protects both of us symmetrically: if I leave early, you're protected. If you leave early, I'm protected.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-10 reveal stagger-3">
+      Proposed schedule: 3-year vest, 6-month cliff, monthly vesting after cliff. Applies to both members equally.
+    </p>
+
+    <!-- Co-Managing -->
+    <h3 class="font-display text-xl font-bold uppercase tracking-tight mb-4 reveal">Co-managing members</h3>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-1">
+      Your proposal designates you as sole Managing Member. I understand the reasoning: you have the deepest context on the product vision, clinical network, and business relationships.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-2">
+      I'd propose co-managing members with domain-specific authority:
+    </p>
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-cream rounded-lg p-5 reveal stagger-2">
+        <p class="font-body text-xs tracking-widest uppercase text-coral font-bold mb-2">Paul's domain</p>
+        <p class="font-body text-ink-soft text-sm">Product design, UX, iOS development, behavior change methodology, clinical relationships, App Store strategy</p>
+      </div>
+      <div class="bg-cream rounded-lg p-5 reveal stagger-3">
+        <p class="font-body text-xs tracking-widest uppercase text-good font-bold mb-2">Andrew's domain</p>
+        <p class="font-body text-ink-soft text-sm">Technical architecture, infrastructure, data layer, AI/ML, deployment, backend API design</p>
+      </div>
+    </div>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-3">
+      Business decisions (pricing, strategy, spending above $500/mo, new hires, partnerships, pivots) require mutual consent.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed reveal stagger-4">
+      This isn't about distrust. It's about reflecting how we actually work. You don't need my permission to redesign the Today screen. I don't need yours to restructure the database. We both need each other's input on whether to raise prices or bring on a third person.
+    </p>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<section class="bg-brown text-cream" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-body text-xs tracking-widest uppercase text-coral-light font-bold mb-4 reveal">Side by side</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-2 reveal stagger-1">What I'm proposing</h2>
+    <p class="font-body text-coral-light text-sm mb-8 reveal stagger-1">Happy to talk through any piece of it on a call rather than going back and forth in writing.</p>
+
+    <div class="overflow-x-auto reveal stagger-2">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-cream/20">
+            <th class="text-left font-body font-semibold py-3 pr-4">Element</th>
+            <th class="text-left font-body font-semibold py-3 pr-4 text-cream/60">Paul's proposal</th>
+            <th class="text-left font-body font-semibold py-3 text-coral-light">Andrew's counter</th>
+          </tr>
+        </thead>
+        <tbody class="font-body text-cream/80">
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Entity</td>
+            <td class="py-3 pr-4">LLC</td>
+            <td class="py-3 text-coral-light">LLC (agreed)</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Interest type</td>
+            <td class="py-3 pr-4">Paul: capital / Andrew: profits</td>
+            <td class="py-3 text-coral-light">Both: capital interest</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Split</td>
+            <td class="py-3 pr-4">70 / 30</td>
+            <td class="py-3 text-coral-light font-semibold">55 / 45</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Vesting</td>
+            <td class="py-3 pr-4">Andrew only, 24mo</td>
+            <td class="py-3 text-coral-light">Both, 36mo, 6mo cliff</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Managing member</td>
+            <td class="py-3 pr-4">Paul (sole)</td>
+            <td class="py-3 text-coral-light">Co-managing, domain-specific</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">IP assignment</td>
+            <td class="py-3 pr-4">All IP to LLC</td>
+            <td class="py-3 text-coral-light">All IP to LLC (agreed)</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Expense threshold</td>
+            <td class="py-3 pr-4">TBD</td>
+            <td class="py-3 text-coral-light">$500/mo per member</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Major decisions</td>
+            <td class="py-3 pr-4">Managing member + mutual for major</td>
+            <td class="py-3 text-coral-light">Mutual consent (defined list)</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Buyout / departure</td>
+            <td class="py-3 pr-4">Formula-based</td>
+            <td class="py-3 text-coral-light">Formula-based (agreed)</td>
+          </tr>
+          <tr class="border-b border-cream/10">
+            <td class="py-3 pr-4 font-medium text-cream">Tax distributions</td>
+            <td class="py-3 pr-4">Required for K-1</td>
+            <td class="py-3 text-coral-light">Required for K-1 (agreed)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-cream">Dispute resolution</td>
+            <td class="py-3 pr-4">Mediation, then arbitration</td>
+            <td class="py-3 text-coral-light">Mediation, then arbitration (agreed)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Financial Projections -->
+<section class="bg-cream" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-body text-xs tracking-widest uppercase text-ink-faint font-bold mb-4 reveal">Financial picture</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-2 reveal stagger-1">55/45 projections</h2>
+    <p class="font-body text-ink-soft text-sm mb-8 reveal stagger-1">Using your realistic growth model, adjusted for the proposed split.</p>
+
+    <div class="overflow-x-auto reveal stagger-2">
+      <table class="w-full text-sm font-body">
+        <thead>
+          <tr class="border-b-2 border-brown/20">
+            <th class="text-left py-3 pr-4 font-semibold">Year</th>
+            <th class="text-right py-3 pr-4 font-semibold">Subs</th>
+            <th class="text-right py-3 pr-4 font-semibold">Net Profit</th>
+            <th class="text-right py-3 pr-4 font-semibold text-coral">Paul (55%)</th>
+            <th class="text-right py-3 font-semibold text-good">Andrew (45%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-ink-soft">
+          <tr class="border-b border-brown/10">
+            <td class="py-2.5 pr-4 font-medium text-ink">Year 1</td>
+            <td class="py-2.5 pr-4 text-right">200</td>
+            <td class="py-2.5 pr-4 text-right">$3K</td>
+            <td class="py-2.5 pr-4 text-right text-coral">$2K</td>
+            <td class="py-2.5 text-right text-good">$1K</td>
+          </tr>
+          <tr class="border-b border-brown/10">
+            <td class="py-2.5 pr-4 font-medium text-ink">Year 2</td>
+            <td class="py-2.5 pr-4 text-right">440</td>
+            <td class="py-2.5 pr-4 text-right">$38K</td>
+            <td class="py-2.5 pr-4 text-right text-coral">$21K</td>
+            <td class="py-2.5 text-right text-good">$17K</td>
+          </tr>
+          <tr class="border-b border-brown/10">
+            <td class="py-2.5 pr-4 font-medium text-ink">Year 3</td>
+            <td class="py-2.5 pr-4 text-right">968</td>
+            <td class="py-2.5 pr-4 text-right">$99K</td>
+            <td class="py-2.5 pr-4 text-right text-coral">$54K</td>
+            <td class="py-2.5 text-right text-good">$45K</td>
+          </tr>
+          <tr class="border-b border-brown/10">
+            <td class="py-2.5 pr-4 font-medium text-ink">Year 4</td>
+            <td class="py-2.5 pr-4 text-right">2,130</td>
+            <td class="py-2.5 pr-4 text-right">$232K</td>
+            <td class="py-2.5 pr-4 text-right text-coral">$128K</td>
+            <td class="py-2.5 text-right text-good">$105K</td>
+          </tr>
+          <tr class="border-b border-brown/10">
+            <td class="py-2.5 pr-4 font-medium text-ink">Year 5</td>
+            <td class="py-2.5 pr-4 text-right">4,686</td>
+            <td class="py-2.5 pr-4 text-right">$526K</td>
+            <td class="py-2.5 pr-4 text-right text-coral">$289K</td>
+            <td class="py-2.5 text-right text-good">$237K</td>
+          </tr>
+          <tr class="border-b border-brown/10 bg-brown/5">
+            <td class="py-2.5 pr-4 font-bold text-ink">Year 6</td>
+            <td class="py-2.5 pr-4 text-right font-semibold">10,309</td>
+            <td class="py-2.5 pr-4 text-right font-semibold">$1.1M</td>
+            <td class="py-2.5 pr-4 text-right font-bold text-coral">$597K</td>
+            <td class="py-2.5 text-right font-bold text-good">$489K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mt-8">
+      <div class="bg-paper rounded-lg p-5 reveal stagger-3">
+        <p class="font-body text-xs tracking-widest uppercase text-ink-faint font-bold mb-1">Hypothetical acquisition (5x Year 6 revenue)</p>
+        <p class="font-body text-ink-soft text-sm">Paul receives ~$4.3M. Andrew receives ~$3.6M. Both at long-term capital gains rates.</p>
+      </div>
+      <div class="bg-paper rounded-lg p-5 reveal stagger-4">
+        <p class="font-body text-xs tracking-widest uppercase text-ink-faint font-bold mb-1">Year 6 target check</p>
+        <p class="font-body text-ink-soft text-sm">Paul: $597K (above $500K target). Andrew: $489K (above $300K target). Both reflect economics aligned with the work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing -->
+<section class="bg-paper" style="padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-2xl">
+    <h2 class="font-display text-2xl font-bold uppercase tracking-tight mb-6 reveal">What I want you to hear</h2>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-1">
+      I'm not trying to diminish what you've built. The brand, the methodology, the clinical network, the product vision. Those are real and they're why I wanted to build with you in the first place.
+    </p>
+    <p class="font-body text-ink-soft leading-relaxed mb-4 reveal stagger-2">
+      I also want to be honest that the technical foundation I've built is substantial, and I think the structure should reflect that. Not because I'm keeping score, but because I want us both to feel like the deal is fair enough that neither of us thinks about it again. The best partnership structures are the ones you set up once and then forget about because the work is what matters.
+    </p>
+    <p class="font-body text-ink leading-relaxed font-medium reveal stagger-3">
+      I'm genuinely open to finding the number and structure that works for both of us. This is my starting point, not my final answer. What are you seeing that I'm not?
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-brown text-cream/40" style="padding: 2rem clamp(2rem, 6vw, 6rem);">
+  <p class="font-body text-xs">Kasane Health &middot; Working draft &middot; April 2026</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
