@@ -104,3 +104,81 @@ describe('gate check behavior', () => {
     expect(dom.window.document.body.innerHTML.length).toBeGreaterThan(0);
   });
 });
+
+describe('site reorg: hub.html nav structure', () => {
+  let html;
+
+  beforeEach(() => {
+    html = fs.readFileSync(path.join(LEARNAIR_DIR, 'hub.html'), 'utf-8');
+  });
+
+  it('has Now tile linking to now.html', () => {
+    expect(html).toContain('href="now.html"');
+    expect(html).toMatch(/Now/);
+  });
+
+  it('has Intel tile linking to intel.html', () => {
+    expect(html).toContain('href="intel.html"');
+    expect(html).toMatch(/Intel/);
+  });
+
+  it('has Log tile linking to log.html', () => {
+    expect(html).toContain('href="log.html"');
+    expect(html).toMatch(/Log/);
+  });
+
+  it('has Archive tile linking to archive.html', () => {
+    expect(html).toContain('href="archive.html"');
+    expect(html).toMatch(/Archive/);
+  });
+
+  it('no longer links to old tile pages', () => {
+    expect(html).not.toContain('href="act.html"');
+    expect(html).not.toContain('href="research-index.html"');
+    expect(html).not.toContain('href="plan-index.html"');
+    expect(html).not.toContain('href="track-index.html"');
+  });
+});
+
+describe('site reorg: index pages exist with correct content', () => {
+  it('now.html exists and links to active pages', () => {
+    const html = fs.readFileSync(path.join(LEARNAIR_DIR, 'now.html'), 'utf-8');
+    expect(html).toContain('strategic-clarity.html');
+    expect(html).toContain('april-7-arc.html');
+    expect(html).toContain('heat-map.html');
+    expect(html).toContain('learnair_access'); // gate check
+  });
+
+  it('intel.html exists and links to intel pages', () => {
+    const html = fs.readFileSync(path.join(LEARNAIR_DIR, 'intel.html'), 'utf-8');
+    expect(html).toContain('deep-dive.html');
+    expect(html).toContain('curriculum-analysis.html');
+    expect(html).toContain('competitive-landscape.html');
+    expect(html).toContain('learnair_access');
+  });
+
+  it('log.html exists and links to meeting pages', () => {
+    const html = fs.readFileSync(path.join(LEARNAIR_DIR, 'log.html'), 'utf-8');
+    expect(html).toContain('meetings.html');
+    expect(html).toContain('learnair_access');
+  });
+
+  it('archive.html exists and links to archived pages', () => {
+    const html = fs.readFileSync(path.join(LEARNAIR_DIR, 'archive.html'), 'utf-8');
+    expect(html).toContain('v1.html');
+    expect(html).toContain('partnership-options.html');
+    expect(html).toContain('stress-test.html');
+    expect(html).toContain('call-prep.html');
+    expect(html).toContain('learnair_access');
+  });
+});
+
+describe('site reorg: heat-map.html exists', () => {
+  it('heat-map.html exists and has content', () => {
+    const html = fs.readFileSync(path.join(LEARNAIR_DIR, 'heat-map.html'), 'utf-8');
+    expect(html).toContain('Heat Map');
+    expect(html).toContain('Enlisted');
+    expect(html).toContain('Junior Officer');
+    expect(html).toContain('learnair_access');
+  });
+});
