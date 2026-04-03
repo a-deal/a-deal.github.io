@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onboarding Roadmap: 5 to 10 Users</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Anybody:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: { DEFAULT: '#1a1a1a', soft: '#4a4a4a', faint: '#8a8a8a' },
+        paper: '#ffffff',
+        cream: '#f5f2e9',
+        brown: '#2b1d15',
+        coral: { DEFAULT: '#d4654a', bright: '#e85d3a', light: '#e8a090' },
+        warn: '#b93e25',
+        good: '#2d6a4f',
+      },
+      fontFamily: {
+        display: ['Anybody', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+  @layer utilities {
+    .font-massive { font-family: 'Anybody', sans-serif; font-weight: 900; line-height: 0.88; letter-spacing: -0.04em; text-transform: uppercase; }
+    .font-stat { font-family: 'Anybody', sans-serif; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
+    .font-label { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+    .px-band { padding-left: clamp(2rem, 6vw, 6rem); padding-right: clamp(2rem, 6vw, 6rem); }
+    .py-section { padding-top: clamp(4rem, 8vw, 8rem); padding-bottom: clamp(4rem, 8vw, 8rem); }
+    .py-band { padding-top: clamp(5rem, 10vw, 10rem); padding-bottom: clamp(5rem, 10vw, 10rem); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.22s; }
+  .stagger-3 { transition-delay: 0.34s; }
+  .stagger-4 { transition-delay: 0.46s; }
+
+  .gate-line { position: relative; }
+  .gate-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 2px;
+  }
+  .gate-active::before { background: theme('colors.coral.DEFAULT'); }
+  .gate-next::before { background: theme('colors.ink.faint'); }
+  .gate-future::before { background: theme('colors.ink.faint'); opacity: 0.4; }
+
+  .check-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.5rem 0; }
+  .check-box { width: 18px; height: 18px; border: 2px solid #d4654a; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+</style>
+</head>
+<body class="font-body bg-paper text-ink leading-relaxed overflow-x-hidden">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-band py-6 mix-blend-difference">
+  <a href="/" class="font-display font-extrabold text-lg text-white no-underline tracking-tight">BASELINE</a>
+  <div class="text-xs font-medium text-white tracking-wide"><span class="opacity-50">Work.</span> <span class="opacity-50">Research.</span> <strong class="font-semibold">Roadmap.</strong></div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-[80vh] bg-ink text-white flex flex-col justify-end px-band pb-12 md:pb-20 overflow-hidden">
+  <div class="absolute top-[8vh] -left-[2vw] font-massive text-[clamp(8rem,18vw,20rem)] text-white/[0.04] whitespace-nowrap pointer-events-none" aria-hidden="true">ONBOARDING<br>ROADMAP</div>
+  <h1 class="font-massive text-[clamp(3.5rem,10vw,10rem)] mb-8 max-w-[14em] reveal">FROM <em class="not-italic text-coral-bright">5</em><br>TO <em class="not-italic text-coral-bright">10</em><br>USERS</h1>
+  <div class="flex flex-col md:flex-row gap-6 md:gap-16 pb-4 reveal stagger-2">
+    <div>
+      <div class="font-label text-white/35 mb-1">Status</div>
+      <div class="text-sm text-white/70">Active plan, April 2026</div>
+    </div>
+    <div>
+      <div class="font-label text-white/35 mb-1">Source</div>
+      <div class="text-sm text-white/70">Paul's circle: 5 organic signups</div>
+    </div>
+    <div>
+      <div class="font-label text-white/35 mb-1">Approach</div>
+      <div class="text-sm text-white/70">Sequenced gates, not batch onboarding</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHERE WE ARE -->
+<section class="bg-cream px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-1 reveal">Current state</div>
+    <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] mt-4 mb-8 reveal stagger-1">What's ready today</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal stagger-2">
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-label text-good mb-3">Built and working</div>
+        <ul class="space-y-2 text-sm text-ink-soft">
+          <li>Coaching flow over WhatsApp and Telegram</li>
+          <li>Garmin integration (active, daily pulls)</li>
+          <li>Oura integration (built, ready to activate)</li>
+          <li>Whoop and Apple Health integrations</li>
+          <li>Multi-user data isolation</li>
+          <li>40+ health tools via MCP</li>
+          <li>iOS app (Kasane) in progress</li>
+        </ul>
+      </div>
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-label text-warn mb-3">Untested with real users</div>
+        <ul class="space-y-2 text-sm text-ink-soft">
+          <li>Oura on a real person (first time)</li>
+          <li>Android-only path (no iOS app)</li>
+          <li>Onboarding without Andrew doing manual setup</li>
+          <li>2+ actively coached users at once</li>
+          <li>MCP setup for non-Andrew technical user</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PEOPLE -->
+<section class="px-band py-section">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-1 reveal">The pipeline</div>
+    <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] mt-4 mb-10 reveal stagger-1">Five people, three gates</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 reveal stagger-2">
+      <div class="bg-cream rounded-2xl p-5 border-2 border-coral">
+        <div class="font-display font-bold text-sm text-coral">GATE 1</div>
+        <div class="font-serif text-lg mt-1">Teague</div>
+        <div class="text-xs text-ink-faint mt-2 leading-relaxed">Android, Oura, strength, dad, technical</div>
+      </div>
+      <div class="bg-cream/50 rounded-2xl p-5 border border-ink/10">
+        <div class="font-display font-bold text-sm text-ink-faint">GATE 2</div>
+        <div class="font-serif text-lg mt-1">Ryan</div>
+        <div class="text-xs text-ink-faint mt-2 leading-relaxed">Men's circle</div>
+      </div>
+      <div class="bg-cream/50 rounded-2xl p-5 border border-ink/10">
+        <div class="font-display font-bold text-sm text-ink-faint">GATE 2</div>
+        <div class="font-serif text-lg mt-1">David</div>
+        <div class="text-xs text-ink-faint mt-2 leading-relaxed">Men's circle</div>
+      </div>
+      <div class="bg-cream/50 rounded-2xl p-5 border border-ink/10">
+        <div class="font-display font-bold text-sm text-ink-faint">GATE 2</div>
+        <div class="font-serif text-lg mt-1">Harrison</div>
+        <div class="text-xs text-ink-faint mt-2 leading-relaxed">Men's circle</div>
+      </div>
+      <div class="bg-ink/5 rounded-2xl p-5 border border-dashed border-ink/10">
+        <div class="font-display font-bold text-sm text-ink-faint">GATE 3</div>
+        <div class="font-serif text-lg mt-1 text-ink-faint">Self-serve</div>
+        <div class="text-xs text-ink-faint mt-2 leading-relaxed">Built from real friction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GATE 1 -->
+<section class="bg-ink text-white px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-1 reveal">Gate 1: This week</div>
+    <h2 class="font-massive text-[clamp(2.5rem,6vw,5rem)] mt-4 mb-10 reveal stagger-1">TEAGUE</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="reveal stagger-2">
+        <h3 class="font-display font-bold text-sm text-coral mb-4">WHY HIM FIRST</h3>
+        <p class="text-white/70 text-sm leading-relaxed mb-4">
+          First Oura-only user. First Android user. Both paths are built but untested with a real person. Learning from one onboarding before doing four more protects everyone's experience.
+        </p>
+        <h3 class="font-display font-bold text-sm text-coral mb-4 mt-8">WHAT HE GETS</h3>
+        <ul class="space-y-2 text-sm text-white/70">
+          <li>Telegram or WhatsApp coaching</li>
+          <li>Oura data: sleep, HRV, readiness, activity, temperature</li>
+          <li>Claude MCP setup (he's technical)</li>
+          <li>Text-based strength logging</li>
+        </ul>
+        <h3 class="font-display font-bold text-sm text-white/30 mb-4 mt-8">WHAT HE WON'T HAVE</h3>
+        <ul class="space-y-2 text-sm text-white/40">
+          <li>iOS app (Android)</li>
+          <li>VO2 max or training zones (Oura doesn't track these)</li>
+          <li>Polished onboarding UX (it's text-first)</li>
+        </ul>
+      </div>
+
+      <div class="reveal stagger-3">
+        <h3 class="font-display font-bold text-sm text-coral mb-4">SUCCESS CRITERIA (1 WEEK)</h3>
+        <div class="space-y-1">
+          <div class="check-item"><div class="check-box"></div><span class="text-sm text-white/70">Milo responds with Teague's real Oura data</span></div>
+          <div class="check-item"><div class="check-box"></div><span class="text-sm text-white/70">At least 3 coaching interactions happen</span></div>
+          <div class="check-item"><div class="check-box"></div><span class="text-sm text-white/70">Paul reports what was confusing or broken</span></div>
+          <div class="check-item"><div class="check-box"></div><span class="text-sm text-white/70">No data cross-contamination with other users</span></div>
+          <div class="check-item"><div class="check-box"></div><span class="text-sm text-white/70">Oura pull runs daily without errors</span></div>
+        </div>
+
+        <h3 class="font-display font-bold text-sm text-coral mb-4 mt-8">WHAT WE LEARN</h3>
+        <ul class="space-y-2 text-sm text-white/70">
+          <li>Is Oura integration reliable day-to-day?</li>
+          <li>What does text-only coaching feel like?</li>
+          <li>How much manual setup is still needed?</li>
+          <li>What gaps does Paul notice that we're blind to?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GATE 2 -->
+<section class="px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="gate-line gate-next pl-6">
+      <div class="font-label text-ink-faint mb-1 reveal">Gate 2: After Teague is stable (~2 weeks out)</div>
+      <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] mt-4 mb-6 reveal stagger-1">Men's Circle</h2>
+      <p class="text-ink-soft text-sm leading-relaxed max-w-2xl mb-8 reveal stagger-2">
+        Ryan, David, and Harrison join once Teague's gate passes. All success criteria met, Oura bugs fixed, setup process fast enough to do three in a week.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal stagger-3">
+        <div>
+          <h3 class="font-display font-bold text-sm text-ink-faint mb-4">BEFORE WE OPEN THIS</h3>
+          <div class="space-y-1">
+            <div class="check-item"><div class="check-box" style="border-color: #8a8a8a"></div><span class="text-sm text-ink-soft">Setup runbook written from Teague learnings</span></div>
+            <div class="check-item"><div class="check-box" style="border-color: #8a8a8a"></div><span class="text-sm text-ink-soft">Painful manual steps automated</span></div>
+            <div class="check-item"><div class="check-box" style="border-color: #8a8a8a"></div><span class="text-sm text-ink-soft">System handles N+3 users without issues</span></div>
+            <div class="check-item"><div class="check-box" style="border-color: #8a8a8a"></div><span class="text-sm text-ink-soft">Monitoring plan for when things break</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-sm text-ink-faint mb-4">OPEN QUESTIONS</h3>
+          <ul class="space-y-2 text-sm text-ink-soft">
+            <li>All 3 at once, or stagger over a week?</li>
+            <li>Does Paul onboard them, or do we?</li>
+            <li>What's the wearable mix? (Oura, Garmin, Apple Watch?)</li>
+            <li>Are any of them iOS? Kasane app would be an option.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="bg-cream px-band py-section">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-warn mb-1 reveal">Non-negotiable</div>
+    <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] mt-4 mb-6 reveal stagger-1">Protecting trust</h2>
+    <p class="text-ink-soft text-sm leading-relaxed max-w-2xl mb-8 reveal stagger-2">
+      These are Paul's relationships. Every interaction reflects on him, not just on us. That's why we're sequencing instead of batch onboarding.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal stagger-3">
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-serif text-lg mb-2">First impressions are permanent</div>
+        <p class="text-sm text-ink-soft">A broken Oura connection or a silent bot after "hello" burns trust permanently. We get one shot per person.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-serif text-lg mb-2">Responsiveness over features</div>
+        <p class="text-sm text-ink-soft">If someone messages and Milo doesn't respond for 6 hours, that's worse than no onboarding at all.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-serif text-lg mb-2">Wrong data is worse than no data</div>
+        <p class="text-sm text-ink-soft">"I don't have that yet" is fine. A wrong insight from stale data is not. Graceful gaps, always.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-6 shadow-sm">
+        <div class="font-serif text-lg mb-2">Set expectations honestly</div>
+        <p class="text-sm text-ink-soft">"This is early, text-only, you're helping us build this." That framing turns rough edges into features.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAUL'S ROLE -->
+<section class="px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-1 reveal">Where you come in</div>
+    <h2 class="font-serif text-[clamp(2rem,4vw,3rem)] mt-4 mb-10 reveal stagger-1">How Paul can help</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="reveal stagger-1">
+        <div class="font-stat text-[3rem] text-coral-bright">01</div>
+        <h3 class="font-display font-bold text-sm mt-2 mb-2">TEAGUE INTRO</h3>
+        <p class="text-sm text-ink-soft">Connect Andrew and Teague. Set expectations: early, text-only, he's helping us build this.</p>
+      </div>
+      <div class="reveal stagger-2">
+        <div class="font-stat text-[3rem] text-coral-bright">02</div>
+        <h3 class="font-display font-bold text-sm mt-2 mb-2">ONBOARDING BUDDY</h3>
+        <p class="text-sm text-ink-soft">Walk Teague through the first few days. The friction you notice is more valuable than anything we see from logs.</p>
+      </div>
+      <div class="reveal stagger-3">
+        <div class="font-stat text-[3rem] text-coral-bright">03</div>
+        <h3 class="font-display font-bold text-sm mt-2 mb-2">CIRCLE PREP</h3>
+        <p class="text-sm text-ink-soft">Find out each person's wearable, phone OS, and what they'd most want to track. That lets us prep before they're in.</p>
+      </div>
+      <div class="reveal stagger-4">
+        <div class="font-stat text-[3rem] text-coral-bright">04</div>
+        <h3 class="font-display font-bold text-sm mt-2 mb-2">QUALITY SIGNALS</h3>
+        <p class="text-sm text-ink-soft">Flag moments where Milo says something wrong or weird. Those are the highest-value signals we can get.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="bg-ink text-white px-band py-band">
+  <div class="max-w-4xl mx-auto">
+    <div class="font-label text-coral mb-1 reveal">Timeline</div>
+    <h2 class="font-massive text-[clamp(2rem,5vw,4rem)] mt-4 mb-12 reveal stagger-1">THREE WEEKS</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="reveal stagger-1">
+        <div class="font-stat text-[2rem] text-coral-bright mb-2">WEEK 1</div>
+        <div class="text-sm text-white/70 leading-relaxed">Teague setup. Oura connection, Telegram, MCP. First coaching interactions.</div>
+      </div>
+      <div class="reveal stagger-2">
+        <div class="font-stat text-[2rem] text-white/30 mb-2">WEEK 2</div>
+        <div class="text-sm text-white/50 leading-relaxed">Observe, fix, learn. Paul reports friction. We fix what breaks. Gate 1 criteria evaluated.</div>
+      </div>
+      <div class="reveal stagger-3">
+        <div class="font-stat text-[2rem] text-white/30 mb-2">WEEK 3+</div>
+        <div class="text-sm text-white/50 leading-relaxed">Circle onboarding begins if Gate 1 passes. Staggered or batched based on learnings.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="px-band py-12 text-center">
+  <div class="text-xs text-ink-faint">Baseline Health / April 2026 / Working document</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
