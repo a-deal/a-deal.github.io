@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | Competitor Hiring Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; min-height: 100vh; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(244, 241, 235, 0.92); border-bottom: 1px solid var(--faint); padding: 0.75rem 2rem; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+  .doc-badge { font-size: 0.55rem; letter-spacing: 0.1em; background: var(--ink); color: var(--paper); padding: 2px 7px; font-weight: 500; }
+  .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-decoration: none; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+  .back-link:hover { color: var(--ink); }
+
+  .doc-header { padding: 5rem 2rem 2rem; max-width: 960px; margin: 0 auto; }
+  .doc-header .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .doc-header .kicker::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--accent); }
+  .doc-header h1 { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1.1; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .doc-header .doc-subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem; line-height: 1.5; }
+  .doc-header .doc-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+
+  .article { max-width: 960px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .article hr { border: none; border-top: 2px solid var(--ink); margin: 3rem 0 2.5rem; }
+  .article h2 { font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-weight: 400; line-height: 1.2; margin-bottom: 1.2rem; }
+  .article h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.6rem; color: var(--ink); }
+  .article p { margin-bottom: 1rem; line-height: 1.75; font-size: 0.95rem; }
+  .article strong { font-weight: 600; }
+  .article ul, .article ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+  .article li { margin-bottom: 0.4rem; font-size: 0.95rem; line-height: 1.65; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .article a:hover { border-bottom-color: var(--accent); }
+
+  .article table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; border: 1px solid var(--faint); }
+  .article th { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.8rem 1rem; background: var(--warm); border-bottom: 2px solid var(--ink); }
+  .article td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--faint); vertical-align: top; line-height: 1.6; }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--white); }
+
+  .key-finding { background: var(--ink); color: var(--paper); padding: 2rem; margin: 1.5rem 0; line-height: 1.75; font-size: 0.95rem; }
+  .key-finding strong { color: var(--accent-light); }
+
+  .callout { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 1.2rem 1.6rem; margin: 1.5rem 0; font-size: 0.92rem; line-height: 1.7; color: var(--ink); }
+  .callout strong { color: var(--accent); }
+
+  .fit-section { background: var(--white); border: 1px solid var(--faint); padding: 1.5rem 2rem; margin-bottom: 1rem; }
+  .fit-section h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .fit-section .fit-profile { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+
+  .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; padding: 2px 7px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 0.3rem; }
+  .tag-strong { background: var(--green); color: var(--white); }
+  .tag-moderate { background: var(--faint); color: var(--ink); }
+  .tag-none { background: var(--warm); color: var(--muted); }
+
+  footer { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 4rem; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; align-items: baseline; }
+  footer .footer-left { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  footer .footer-right { font-size: 0.78rem; color: var(--muted); }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Intel</span></a>
+    <a href="intel.html" class="back-link">&larr; Back to Intel</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Hiring Intelligence</div>
+  <h1>Competitor Hiring Analysis</h1>
+  <p class="doc-subtitle">Who's hiring, for what roles, and what the patterns reveal about the market gap</p>
+  <div class="doc-date">April 3, 2026</div>
+</section>
+
+<div class="article">
+
+  <div class="key-finding">
+    <p>The veteran career orgs are hiring for <strong>partnerships and program expansion</strong>, not AI roles. BreakLine needs partner managers. Hiring Our Heroes needs a program director. Code Platoon needs fundraising and instructors. None of them have "AI operations supervisor" or "AI curriculum designer" on their boards. They're scaling distribution, not AI capability. <strong>That's the gap we fill.</strong></p>
+  </div>
+
+  <hr>
+  <h2>Open Roles by Organization</h2>
+
+  <h3>BreakLine Education</h3>
+  <p><a href="https://breakline.org/careers/" target="_blank">breakline.org/careers</a></p>
+  <table>
+    <thead><tr><th>Role</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Backend Software Engineer</td><td>Remote, FT</td><td>Node/TypeScript, MySQL, cloud platforms</td></tr>
+      <tr><td><strong>Senior Partner Success Manager</strong></td><td>Remote, FT</td><td>4-5yr client-facing. Manage partner relationships, drive expansion</td></tr>
+      <tr><td>Participant Customer Success Associate</td><td>Remote, FT</td><td>2+ yr. Manage participant portfolios through interview process</td></tr>
+      <tr><td><strong>Partner Success Associate</strong></td><td>Remote, FT</td><td>Quota-carrying. Onboard new partners, build opportunities</td></tr>
+      <tr><td>Outreach Associate / Sourcer</td><td>Remote, FT</td><td>Entry-level sourcing, 1-2yr experience</td></tr>
+      <tr><td>DefTech Technical Sourcer</td><td>Remote, Contract</td><td>Hardware, robotics, technical niches</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hiring Our Heroes (U.S. Chamber)</h3>
+  <p><a href="https://www.hiringourheroes.org/about/careers/" target="_blank">hiringourheroes.org/careers</a></p>
+  <table>
+    <thead><tr><th>Role</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Executive Director, Strategic Communications & Marketing</strong></td><td>DC, Hybrid</td><td>Brand, narrative, campaigns targeting employers/funders/military community</td></tr>
+      <tr><td><strong>Senior Director, Skilled Trades Academy</strong></td><td>Remote</td><td>Program expansion, partnerships, funding pipelines</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Code Platoon</h3>
+  <p><a href="https://www.codeplatoon.org/careers" target="_blank">codeplatoon.org/careers</a></p>
+  <table>
+    <thead><tr><th>Role</th><th>Type</th><th>Comp</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Development Director</strong></td><td>Remote (Chicago pref)</td><td>$85-95K</td><td>Fundraising, donor cultivation, partnerships, grants</td></tr>
+      <tr><td>Teaching Assistant</td><td>Remote, Intern</td><td>$2.5K stipend</td><td>CS student supporting instruction</td></tr>
+      <tr><td><strong>Fullstack SWE Instructor</strong></td><td>Remote, ~30hr/wk</td><td>$40-45/hr</td><td>React, Django, PostgreSQL, Docker, AWS</td></tr>
+      <tr><td>AI Impact Fellow</td><td>Remote, 10-12wk</td><td>$1K stipend</td><td>Applied AI research, automation prototypes</td></tr>
+    </tbody>
+  </table>
+
+  <h3>BetterUp</h3>
+  <p><a href="https://www.betterup.com/about-us/careers" target="_blank">betterup.com/careers</a></p>
+  <table>
+    <thead><tr><th>Role</th><th>Comp</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Senior UX Researcher, AI</strong></td><td>$136-232K</td><td>Embedded in AI team, defining next-gen products</td></tr>
+      <tr><td>AI Engineering roles</td><td></td><td>Designing generative AI systems</td></tr>
+      <tr><td>Staff Product Designer</td><td></td><td>Design vision, mentoring</td></tr>
+      <tr><td>Senior SRE</td><td></td><td>AWS, Kubernetes, AI tools</td></tr>
+      <tr><td>Solutions Engineer</td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Accenture</h3>
+  <p><a href="https://www.accenture.com/us-en/careers/local/military-veterans" target="_blank">accenture.com veteran careers</a></p>
+  <table>
+    <thead><tr><th>Role</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Junior Military Officer Program (Consulting Sr Analyst)</td><td>Targets transitioning military</td></tr>
+      <tr><td>Junior Military Officer Program (Technology Sr Analyst)</td><td>Targets transitioning military</td></tr>
+      <tr><td>Global AI & Data Development Program</td><td>San Francisco, summer analyst</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <h2>No Public Openings</h2>
+  <table>
+    <thead><tr><th>Organization</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>LearnAIR / Neesh.ai</td><td>No careers page. ~15 person team, family-heavy</td></tr>
+      <tr><td>VetsinTech</td><td>No staff listings. Runs a matching platform</td></tr>
+      <tr><td>FourBlock</td><td>No public listings. "Best Nonprofit to Work For" 5 years running</td></tr>
+      <tr><td>Vets Who Code</td><td>No public listings. Small nonprofit</td></tr>
+      <tr><td>OpenAI Veterans Forge</td><td>Partnership program, not a staffed team</td></tr>
+      <tr><td>50strong (U of Arizona)</td><td>Platform, no training staff listings</td></tr>
+      <tr><td>American Corporate Partners</td><td>Mentorship network, no listings found</td></tr>
+      <tr><td>Vets2Industry</td><td>Community hub, no listings found</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <h2>Fit Analysis</h2>
+
+  <div class="fit-section">
+    <div class="fit-profile">Mike Deal</div>
+    <h4>Marine veteran, Deloitte consulting, partnerships, facilitation</h4>
+    <table>
+      <thead><tr><th>Role</th><th>Org</th><th>Fit</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Senior Partner Success Manager</td><td>BreakLine</td><td><span class="tag tag-strong">Strong</span></td><td>Partnerships + client management maps to Deloitte background</td></tr>
+        <tr><td>Senior Director, Skilled Trades Academy</td><td>HOH</td><td><span class="tag tag-strong">Strong</span></td><td>Program expansion + vet credibility</td></tr>
+        <tr><td>Development Director</td><td>Code Platoon</td><td><span class="tag tag-strong">Strong</span></td><td>Fundraising + partnerships, Deloitte network is differentiated</td></tr>
+        <tr><td>Partner Success Associate</td><td>BreakLine</td><td><span class="tag tag-moderate">Moderate</span></td><td>Lower seniority but still partnerships-focused</td></tr>
+        <tr><td>Exec Director, Strategic Comms</td><td>HOH</td><td><span class="tag tag-moderate">Moderate</span></td><td>Stretch role. Facilitation skills relevant</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fit-section">
+    <div class="fit-profile">Andrew Deal</div>
+    <h4>Product/eng leadership, AI/technical, Reforge, two acquisitions</h4>
+    <table>
+      <thead><tr><th>Role</th><th>Org</th><th>Fit</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Senior UX Researcher, AI</td><td>BetterUp</td><td><span class="tag tag-strong">Strong</span></td><td>Product strategy + customer synthesis (Reforge, Bear Flag)</td></tr>
+        <tr><td>AI Engineering</td><td>BetterUp</td><td><span class="tag tag-strong">Strong</span></td><td>Python/MCP/agent infrastructure</td></tr>
+        <tr><td>Fullstack SWE Instructor</td><td>Code Platoon</td><td><span class="tag tag-strong">Strong</span></td><td>Hack Reactor teaching + full stack. Part-time</td></tr>
+        <tr><td>AI Impact Fellow</td><td>Code Platoon</td><td><span class="tag tag-moderate">Moderate</span></td><td>Low pay, high signal: inside view of vet AI org gaps</td></tr>
+        <tr><td>DefTech Technical Sourcer</td><td>BreakLine</td><td><span class="tag tag-moderate">Moderate</span></td><td>Bear Flag / John Deere autonomy background</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+  <h2>Strategic Implications</h2>
+
+  <div class="callout">
+    <p><strong>The pattern:</strong> Veteran orgs are scaling distribution (partner managers, program directors, fundraisers) but not AI capability. Nobody is hiring AI curriculum designers or AI operations trainers. That role doesn't exist yet in these organizations.</p>
+  </div>
+
+  <h3>Two ways to use this intelligence</h3>
+
+  <p><strong>1. Trojan horse.</strong> Mike takes a role at BreakLine or HOH, builds relationships from inside, and surfaces the AI supervision gap with employers directly. He'd have access to 200+ employer partners (BreakLine) or the U.S. Chamber network (HOH). This gives us demand-side signal without cold outreach.</p>
+
+  <p><strong>2. Partnership pitch.</strong> Use this hiring data on the April 7 call. "BreakLine is hiring partner managers, not AI trainers. Code Platoon is hiring fundraisers, not AI curriculum designers. That's the gap we fill." This is concrete market evidence, not just our thesis.</p>
+
+  <h3>BetterUp as a strategic angle</h3>
+  <p>BetterUp has government clients (Air Force, NASA, FAA), ran a veteran coaching pilot (73 service members, 6 months), and their Senior UX Researcher role is embedded in the AI team. Alex Ha (Mike's former manager) was VP there. A role at BetterUp would give direct access to the employer side of veteran AI adoption, plus government procurement relationships.</p>
+
+  <hr>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);">Compiled April 3, 2026. All roles verified via web search of careers pages.</p>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
