@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnAIR | April 7 Success Criteria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; min-height: 100vh; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(244, 241, 235, 0.92); border-bottom: 1px solid var(--faint); padding: 0.75rem 2rem; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
+  .doc-badge { font-size: 0.55rem; letter-spacing: 0.1em; background: var(--ink); color: var(--paper); padding: 2px 7px; font-weight: 500; }
+  .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-decoration: none; color: var(--muted); font-weight: 500; transition: color 0.2s; }
+  .back-link:hover { color: var(--ink); }
+
+  .doc-header { padding: 5rem 2rem 2rem; max-width: 960px; margin: 0 auto; }
+  .doc-header .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .doc-header .kicker::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--accent); }
+  .doc-header h1 { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1.1; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .doc-header .doc-subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem; line-height: 1.5; }
+  .doc-header .doc-date { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); }
+
+  .article { max-width: 960px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .article hr { border: none; border-top: 2px solid var(--ink); margin: 3rem 0 2.5rem; }
+  .article h2 { font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-weight: 400; line-height: 1.2; margin-bottom: 1.2rem; }
+  .article h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.6rem; color: var(--ink); }
+  .article p { margin-bottom: 1rem; line-height: 1.75; font-size: 0.95rem; }
+  .article strong { font-weight: 600; }
+  .article ul, .article ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+  .article li { margin-bottom: 0.4rem; font-size: 0.95rem; line-height: 1.65; }
+  .article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .article a:hover { border-bottom-color: var(--accent); }
+
+  .article table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; border: 1px solid var(--faint); }
+  .article th { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.8rem 1rem; background: var(--warm); border-bottom: 2px solid var(--ink); }
+  .article td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--faint); vertical-align: top; line-height: 1.6; }
+  .article tr:last-child td { border-bottom: none; }
+  .article tr:hover td { background: var(--white); }
+
+  .key-finding { background: var(--ink); color: var(--paper); padding: 2rem; margin: 1.5rem 0; line-height: 1.75; font-size: 0.95rem; }
+  .key-finding strong { color: var(--accent-light); }
+
+  .callout { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 1.2rem 1.6rem; margin: 1.5rem 0; font-size: 0.92rem; line-height: 1.7; color: var(--ink); }
+  .callout strong { color: var(--accent); }
+
+  .framework-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; display: inline-block; padding: 3px 8px; margin-bottom: 0.8rem; font-weight: 500; }
+  .fw-k { background: #2d6a4f; color: var(--white); }
+  .fw-duke { background: #5b3a8c; color: var(--white); }
+  .fw-taleb { background: #8b2500; color: var(--white); }
+
+  footer { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 4rem; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; align-items: baseline; }
+  footer .footer-left { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  footer .footer-right { font-size: 0.78rem; color: var(--muted); }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .doc-header { padding: 3.5rem 1.5rem 1.5rem; }
+    .article { padding: 0 1.5rem 3rem; }
+    .article table { font-size: 0.82rem; }
+    .article td, .article th { padding: 0.5rem 0.7rem; }
+    footer { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="hub.html" class="logo">LearnAIR <span class="doc-badge">Strategy</span></a>
+    <a href="now.html" class="back-link">&larr; Back to Now</a>
+  </div>
+</nav>
+
+<section class="doc-header">
+  <div class="kicker">Decision Quality</div>
+  <h1>What Does Success Look Like Tuesday?</h1>
+  <p class="doc-subtitle">Three frameworks applied to the April 7 call. K asks if we're converging. Duke asks if we've pre-decided signal. Taleb asks who bears the downside.</p>
+  <div class="doc-date">April 3, 2026</div>
+</section>
+
+<div class="article">
+
+  <div class="key-finding">
+    <p><strong>The purpose of Tuesday: make them bet or fold. Either answer moves us forward.</strong> Success is a shared commitment with skin, or a clean no. The only failure is ambiguity.</p>
+  </div>
+
+  <!-- K -->
+  <hr>
+  <h2><span class="framework-label fw-k">Komoroske</span> Are we default-converging?</h2>
+
+  <p>Right now the LearnAIR relationship is default-diverging. We have a thesis, a framework, a competitive landscape. Justin and Teresa have a brand, SDVOSB status, clients, and a waitlist page. These exist in parallel. They don't cohere yet.</p>
+
+  <p><strong>Success = the call moves the relationship from "interesting parallel work" to "shared OODA loop."</strong></p>
+
+  <ul>
+    <li>We leave with a shared understanding of what we're building together (even if rough)</li>
+    <li>There's a concrete next action that requires both sides to show up</li>
+    <li>The next conversation is about executing, not re-pitching</li>
+  </ul>
+
+  <p><strong>Failure = we leave with enthusiasm but no shared loop.</strong> "Love it, let's keep talking" without a date, a deliverable, or a commitment from their side. That's still diverging. Energy without coherence.</p>
+
+  <div class="callout">
+    <strong>K's test:</strong> Can you describe the next two weeks in one sentence that includes both sides doing something? If yes, the call worked. If it's just "we'll keep building and circle back," it didn't.
+  </div>
+
+  <!-- DUKE -->
+  <hr>
+  <h2><span class="framework-label fw-duke">Annie Duke</span> Pre-decide what "signal" means</h2>
+
+  <p>We're about to enter an emotionally charged 30 minutes where confirmation bias will run hot. Mike wants it to work (3 months runway). Andrew wants it to work (invested 3 weeks). Justin and Teresa want to feel excited. Everyone has incentives to call it a win regardless of what actually happens.</p>
+
+  <p><strong>Pre-decide the signal levels before Tuesday:</strong></p>
+
+  <table>
+    <thead><tr><th>Outcome</th><th>What it means</th><th>Next move</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>They offer a follow-up date + content access</td>
+        <td><strong>Real signal.</strong> They're investing time.</td>
+        <td>Schedule working session, begin curriculum adaptation</td>
+      </tr>
+      <tr>
+        <td>They say "love it" but deflect all three asks</td>
+        <td><strong>Polite pass.</strong> Enthusiasm is not commitment.</td>
+        <td>Wait 5 days. If no follow-up initiated by them, the answer is no. Don't chase.</td>
+      </tr>
+      <tr>
+        <td>They propose merging our work into existing curriculum</td>
+        <td><strong>Absorption risk.</strong> They want our IP without a separate track.</td>
+        <td>Hold the line: "The supervision program needs its own track." If they resist, that's the answer.</td>
+      </tr>
+      <tr>
+        <td>They raise Texas, timeline uncertainty, "figuring things out"</td>
+        <td><strong>Drift signal.</strong> Not ready to commit.</td>
+        <td>"What would need to be true for you to commit to a pilot by June?"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Backcasting test</h3>
+  <p>Imagine it's April 14. What artifact or commitment from Tuesday makes you say "that call was worth it"? Write that down before the call. That's the success criteria.</p>
+
+  <h3>10-10-10</h3>
+  <ul>
+    <li><strong>10 minutes after:</strong> You'll feel good regardless (adrenaline, rapport). Don't judge the call here.</li>
+    <li><strong>10 days after:</strong> Did anything actually change? Did they follow through? This is where real signal lives.</li>
+    <li><strong>10 months from now:</strong> Was this where the partnership formed, or where you learned it wasn't going to?</li>
+  </ul>
+
+  <p>All three outcomes are fine. The worst outcome is ambiguity that drags for weeks.</p>
+
+  <!-- TALEB -->
+  <hr>
+  <h2><span class="framework-label fw-taleb">Taleb</span> Who bears the downside?</h2>
+
+  <p>Skin in the game check. Who loses something if this doesn't work?</p>
+
+  <table>
+    <thead><tr><th>Person</th><th>Skin</th><th>Downside</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Mike</strong></td>
+        <td>Maximum</td>
+        <td>3 months runway, dropped other work, 95% focus</td>
+      </tr>
+      <tr>
+        <td><strong>Andrew</strong></td>
+        <td>Significant</td>
+        <td>3 weeks intensive work, but 5 years runway. Recoverable.</td>
+      </tr>
+      <tr>
+        <td><strong>Justin/Teresa</strong></td>
+        <td>Zero</td>
+        <td>A waitlist page and a 30-minute call. Nothing committed.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Tuesday's purpose is to get them to put something on the table.</strong> Not money. Time. Content access. An employer introduction. A follow-up with a deliverable. Anything that costs them something if they don't follow through.</p>
+
+  <h3>The barbell strategy</h3>
+  <p>Don't bet everything on the LearnAIR path. The BreakLine/BetterUp angle from the <a href="competitor-hiring.html">hiring analysis</a> is the other tail. If Tuesday goes well, LearnAIR is the primary path. If it doesn't, we already have the competitor hiring map and the trojan horse play. Antifragile positioning: we benefit from Tuesday going well AND we benefit from learning it's not the right path.</p>
+
+  <h3>Via negativa</h3>
+  <p>Stop trying to prove the thesis is right on Tuesday. Instead, try to find out if it's wrong. If we can't kill it in 30 minutes with the people who should be our partners, it's probably real. The strongest thing Mike can say: <strong>"We came to test this with you, not to sell it to you. Where does this break?"</strong></p>
+
+  <h3>Turkey problem check</h3>
+  <p>Have we been feeding ourselves a narrative for 3 weeks that feels increasingly inevitable? Every day we work on this, the sunk cost makes it harder to walk away. Tuesday is the circuit breaker. The longer you go without a disconfirming event, the more fragile you are to one.</p>
+
+  <!-- SYNTHESIS -->
+  <hr>
+  <h2>The Answer</h2>
+
+  <p><strong>Success is not "they like us."</strong> Success is one of two things:</p>
+
+  <p><strong>1. A shared commitment with skin.</strong> A follow-up date on the calendar, content access granted, and at least one employer introduction from their network. Three small bets from their side. Costs them maybe 3 hours total. If they won't put in 3 hours, they won't put in 3 months.</p>
+
+  <p><strong>2. A clean no.</strong> They're not ready, not interested, or not aligned. That's also success because it frees us to take the thesis directly to BreakLine, BetterUp, or employers. A clean no in April is worth more than a maybe that drags to June.</p>
+
+  <div class="key-finding">
+    <p><strong>The one thing that is NOT success:</strong> a warm, excited conversation that produces no commitment and no rejection. That's the ambiguity trap. Duke calls it "resulting from politeness." K calls it "default diverging with good vibes." Taleb calls it "the turkey's good day."</p>
+  </div>
+
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);margin-top:3rem;">Frameworks: Komoroske (default convergence, OODA loops), Annie Duke (backcasting, 10-10-10, kill criteria), Nassim Taleb (skin in the game, barbell strategy, via negativa, turkey problem).</p>
+
+</div>
+
+<footer>
+  <div class="footer-left">LearnAIR Discovery Hub</div>
+  <div class="footer-right">Andrew &amp; Mike Deal &mdash; <a href="https://andrewdeal.info">andrewdeal.info</a></div>
+</footer>
+
+</body>
+</html>
