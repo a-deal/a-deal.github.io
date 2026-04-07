@@ -818,9 +818,6 @@
 </section>
 
 <!-- ============================================ -->
-<!-- ARCHIVED SLIDES (back pocket, scroll if asked) -->
-<!-- ============================================ -->
-
 <!-- NAVIGATION -->
 <div class="nav-arrows">
   <button class="nav-btn" onclick="navigateSlide(-1)" aria-label="Previous slide">&uarr;</button>
@@ -828,14 +825,10 @@
 </div>
 
 <script>
-  const mainSlides = document.querySelectorAll('section.slide:not([data-archive])');
+  const slides = Array.from(document.querySelectorAll('section.slide:not(.archive)'));
   let currentSlide = 0;
 
   function navigateSlide(dir) {
-    // Get all non-archived slides
-    const slides = Array.from(document.querySelectorAll('section.slide')).filter(
-      (s, i) => i < document.querySelectorAll('section.slide').length - 2 // skip last 2 (archived)
-    );
     currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
     slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
   }
@@ -846,8 +839,13 @@
   });
 </script>
 
+<!-- ============================================ -->
+<!-- ARCHIVED SLIDES (hidden, manual scroll only) -->
+<!-- ============================================ -->
+<div style="display:none;" id="archive-section">
+
 <!-- ARCHIVE: DORSEY/VISION -->
-<section class="slide navy">
+<section class="slide navy archive">
   <div class="slide-inner">
     <div class="v8-tag">Where this is going</div>
     <h2>The biggest companies are already building this world.</h2>
@@ -868,7 +866,7 @@
 </section>
 
 <!-- ARCHIVE: TRACK 2 CURRICULUM -->
-<section class="slide navy">
+<section class="slide navy archive">
   <div class="slide-inner">
     <div class="kicker">Track 2 curriculum</div>
     <h2>Four weeks. Three skill layers.</h2>
@@ -915,6 +913,8 @@
     <p class="source">Week 3 gold border: incorporates adversarial collaboration training from MIT sycophancy research (v8 sharpening)</p>
   </div>
 </section>
+
+</div><!-- end archive-section -->
 
 </body>
 </html>
