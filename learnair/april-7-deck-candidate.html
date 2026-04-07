@@ -1085,29 +1085,77 @@
   </button>
 </div>
 
+<style>
+  /* Staggered reveal animations */
+  .slide-inner > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .slide.revealed .slide-inner > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Stagger children */
+  .slide.revealed .slide-inner > *:nth-child(1) { transition-delay: 0s; }
+  .slide.revealed .slide-inner > *:nth-child(2) { transition-delay: 0.1s; }
+  .slide.revealed .slide-inner > *:nth-child(3) { transition-delay: 0.2s; }
+  .slide.revealed .slide-inner > *:nth-child(4) { transition-delay: 0.3s; }
+  .slide.revealed .slide-inner > *:nth-child(5) { transition-delay: 0.4s; }
+  .slide.revealed .slide-inner > *:nth-child(6) { transition-delay: 0.5s; }
+  .slide.revealed .slide-inner > *:nth-child(7) { transition-delay: 0.6s; }
+  .slide.revealed .slide-inner > *:nth-child(8) { transition-delay: 0.7s; }
+
+  /* Slide-level crossfade */
+  section.slide {
+    transition: opacity 0.4s ease;
+  }
+
+  /* Gold line grow animation */
+  .slide.revealed .gold-line {
+    animation: growLine 0.6s ease 0.2s both;
+  }
+  @keyframes growLine {
+    from { width: 0; }
+    to { width: 60px; }
+  }
+
+  /* Stat number count-up feel */
+  .slide.revealed .stat-number,
+  .slide.revealed [style*="font-size:4rem"],
+  .slide.revealed [style*="font-size:2rem"] {
+    animation: fadeScale 0.5s ease 0.15s both;
+  }
+  @keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
 <script>
   const slides = Array.from(document.querySelectorAll('section.slide:not(.archive)'));
   let currentSlide = 0;
+  const revealed = new Set();
 
-  // Smooth fade-in for slides on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
         currentSlide = slides.indexOf(entry.target);
+        if (!revealed.has(entry.target)) {
+          entry.target.classList.add('revealed');
+          revealed.add(entry.target);
+        }
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.35 });
 
-  slides.forEach(slide => {
-    slide.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    slide.style.opacity = '0.3';
-    slide.style.transform = 'translateY(12px)';
-    observer.observe(slide);
-  });
-  // First slide visible immediately
-  if (slides[0]) { slides[0].style.opacity = '1'; slides[0].style.transform = 'translateY(0)'; }
+  slides.forEach(slide => observer.observe(slide));
+
+  // First slide revealed immediately
+  if (slides[0]) {
+    slides[0].classList.add('revealed');
+    revealed.add(slides[0]);
+  }
 
   function navigateSlide(dir) {
     currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
