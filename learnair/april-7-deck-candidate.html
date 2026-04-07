@@ -1101,6 +1101,7 @@
 </style>
 
 <script>
+  // Include appendix slides in navigation
   const slides = Array.from(document.querySelectorAll('section.slide:not(.archive)'));
   let currentSlide = 0;
   const revealed = new Set();
@@ -1182,9 +1183,10 @@
 <!-- APPENDIX (scrollable, not in main nav) -->
 <!-- ============================================ -->
 
-<section class="slide dark" style="min-height:50vh; padding-top:6rem;" data-notes="Appendix. Scroll here if asked about the four-week curriculum.">
+<section class="slide dark" data-notes="Appendix. Scroll here if asked about the four-week curriculum.">
   <div class="slide-inner" style="text-align:center;">
-    <div class="kicker" style="opacity:0.3;">Appendix</div>
+    <div class="kicker">Appendix</div>
+    <h2 style="opacity:0.4;">Back pocket slides</h2>
   </div>
 </section>
 
