@@ -482,22 +482,39 @@
   }
 
   .nav-btn {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(201, 151, 63, 0.4);
-    background: rgba(10, 10, 10, 0.8);
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(201, 151, 63, 0.3);
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.85);
     color: var(--gold);
-    font-size: 1.2rem;
+    font-size: 0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(8px);
-    transition: border-color 0.2s;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s, background 0.3s, transform 0.2s;
   }
 
   .nav-btn:hover {
     border-color: var(--gold);
+    background: rgba(201, 151, 63, 0.12);
+    transform: scale(1.08);
+  }
+
+  .nav-btn:active {
+    transform: scale(0.95);
+  }
+
+  .nav-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--gold);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   /* --- RESPONSIVE --- */
@@ -555,36 +572,118 @@
 <!-- ============================================ -->
 <section class="slide light">
   <div class="slide-inner">
-    <div class="kicker">In the loop &rarr; On the loop</div>
-    <h2>Your students are already seeing results at the individual level.</h2>
-    <p class="lead">An HR compliance hub built in a week. Four months of work done in a single week. That's AI literacy. That's <em>in the loop.</em> That's real.</p>
-    <div class="gold-line"></div>
-    <h3 style="margin-top:2rem;">Now shift the lens.</h3>
-    <p class="lead">Imagine managing a system of AI agents across an entire function. Defining intent. Setting approval criteria. Reviewing outputs. Catching errors. Adapting as conditions change.</p>
-    <p class="lead" style="font-weight:500; color:var(--ink);">That's <em>on the loop.</em> A different role entirely. That's what we're training for.</p>
+    <div class="kicker">LearnAIR today</div>
+    <h2>Your students are already producing real results.</h2>
+
+    <!-- Cindy result card -->
+    <div style="background:var(--white); border:1px solid var(--faint); padding:2.5rem; margin:2rem 0; display:grid; grid-template-columns:auto 1fr; gap:2rem; align-items:center;">
+      <div style="text-align:center;">
+        <div style="font-family:'Instrument Serif',serif; font-size:4rem; color:var(--ink); line-height:1;">1 week</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-top:0.4rem;">Previously 4 months</div>
+      </div>
+      <div>
+        <div style="font-size:1rem; color:var(--ink); line-height:1.6; margin-bottom:0.75rem;">Cindy built an HR compliance hub in a single week. That's AI fluency. That's what your curriculum produces.</div>
+        <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Now shift the lens. What happens in week two, three, four? Does it translate to the P&L?</div>
+      </div>
+    </div>
+
+    <!-- Stanford validation signal -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin:1.5rem 0;">
+      <div style="background:rgba(26,35,50,0.04); padding:1.2rem 1.5rem; border-left:3px solid var(--navy);">
+        <div style="font-family:'Instrument Serif',serif; font-size:1.8rem; color:var(--ink); line-height:1;">100K+</div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:0.3rem; line-height:1.4;">Professional users on AI agent platforms across 1,000 firms. Massive inflection from copilot to delegation.</div>
+      </div>
+      <div style="background:rgba(26,35,50,0.04); padding:1.2rem 1.5rem; border-left:3px solid var(--gold);">
+        <div style="font-family:'Instrument Serif',serif; font-size:1.8rem; color:var(--ink); line-height:1;">New &middot; Private &middot; Small</div>
+        <div style="font-size:0.75rem; color:var(--muted); margin-top:0.3rem; line-height:1.4;">Firms benefiting most from AI agents. No institutional cruft. LearnAIR can move faster than anyone.</div>
+      </div>
+    </div>
+    <p class="source">Stanford Digital Experience Lab, April 2026</p>
   </div>
 </section>
 
 <!-- ============================================ -->
-<!-- SLIDE 5: THE GAP -->
+<!-- SLIDE 5a: THE GAP - CATEGORY (MIKE) -->
 <!-- ============================================ -->
 <section class="slide dark">
   <div class="slide-inner">
-    <div class="kicker">The gap</div>
-    <h2>The training that goes beyond AI fluency.</h2>
-    <p class="lead">Organizations are adopting AI, but workforce redesign is lagging. Current employees don't have management training in AI ecosystems. They're not used to context switching, setting up systems and rules, or evaluating work they didn't produce themselves.</p>
-    <div class="pill-row">
-      <span class="pill">Healthcare</span>
-      <span class="pill">Government</span>
-      <span class="pill">Financial Services</span>
-      <span class="pill">Logistics</span>
-      <span class="pill">Technology</span>
-      <span class="pill">Business Services</span>
-      <span class="pill">SMBs</span>
+    <h1 style="font-size:3.2rem;"><span style="opacity:0.4;">In the Loop</span> <span style="color:var(--gold);">&rarr;</span> On the Loop</h1>
+    <div class="gold-line"></div>
+    <!-- The void: in the loop vs. on the loop -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; margin:2.5rem 0; min-height:260px;">
+      <!-- Left: in the loop -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:2rem; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem;">In the loop &middot; What exists</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:1.5rem; font-weight:400; margin-bottom:1rem; opacity:0.9;">AI Fluency Training</div>
+        <div style="font-size:0.8rem; opacity:0.5; line-height:1.5; margin-bottom:1rem;">Doing a task with AI. Individual productivity. Great programs already exist. Your program is proof.</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(255,255,255,0.12); border-radius:100px; opacity:0.4;">Prompt skills</span>
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(255,255,255,0.12); border-radius:100px; opacity:0.4;">Tool proficiency</span>
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(255,255,255,0.12); border-radius:100px; opacity:0.4;">Certifications</span>
+        </div>
+      </div>
+      <!-- Right: on the loop -->
+      <div style="background:rgba(201,151,63,0.06); border:1px dashed rgba(201,151,63,0.3); padding:2rem; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">On the loop &middot; What doesn't</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:1.5rem; font-weight:400; color:var(--gold); margin-bottom:1rem;">Operational AI Judgment</div>
+        <div style="font-size:0.8rem; opacity:0.5; line-height:1.5; margin-bottom:1rem;">Planning, delegating, overseeing AI systems. Closing the feedback loop. No L&D programs. No curricula.</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(201,151,63,0.25); border-radius:100px; color:var(--gold); opacity:0.6;">Delegation</span>
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(201,151,63,0.25); border-radius:100px; color:var(--gold); opacity:0.6;">Operational judgment</span>
+          <span style="font-size:0.6rem; padding:0.2rem 0.5rem; border:1px solid rgba(201,151,63,0.25); border-radius:100px; color:var(--gold); opacity:0.6;">System oversight</span>
+        </div>
+      </div>
     </div>
     <div class="quote-block">
       <p class="quote-text">The requirement isn't technical depth. It's operational judgment.</p>
     </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SLIDE 5b: THE GAP - SECTOR PROOF (ANDREW) -->
+<!-- ============================================ -->
+<section class="slide navy">
+  <div class="slide-inner">
+    <div class="v8-tag">Across every sector</div>
+    <h2>The gap is everywhere. The right L&D is positioned to close it.</h2>
+
+    <!-- Sector columns: each number speaks to the L&D gap -->
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:4px; margin:2.5rem 0;">
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Healthcare</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">0</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">AI clinical ops training programs</div>
+      </div>
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Finance</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">30K</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">Roles restructured. No retraining.</div>
+      </div>
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Gov't</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">200K+</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">Vets transition yearly. No AI readiness.</div>
+      </div>
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Technology</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">40%</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">Orgs restructuring. L&D absent.</div>
+      </div>
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">Logistics</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">80%</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">Trade growth AI-driven. No oversight training.</div>
+      </div>
+      <div style="background:rgba(201,151,63,0.06); border-top:2px solid var(--gold); padding:1.5rem 0.6rem 1.2rem; text-align:center;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold);">SMBs</div>
+        <div style="font-family:'Instrument Serif',serif; font-size:2rem; color:var(--gold); margin-top:0.5rem; line-height:1;">1:$401M</div>
+        <div style="font-size:0.6rem; opacity:0.45; margin-top:0.4rem; line-height:1.4;">One person, $401M. Leverage without training.</div>
+      </div>
+    </div>
+
+    <p class="lead" style="text-align:center; max-width:100%; opacity:0.7;">Every sector is adopting AI. L&D has a window to own the operational layer.</p>
+    <p class="source" style="text-align:center;">Sources: Social Capital Healthcare Deep Dive, CNBC (Oracle), McKinsey Global Institute, Block (Feb 2026)</p>
   </div>
 </section>
 
@@ -595,22 +694,40 @@
   <div class="slide-inner">
     <div class="v8-tag">This week's data</div>
     <h2>The urgency is measurable now.</h2>
-    <div class="stat-row">
-      <div class="stat">
-        <div class="stat-number">30K</div>
-        <div class="stat-label">Oracle employees cut via a single 6 AM email to fund $156B in AI infrastructure</div>
+
+    <!-- Chamath-style stat cards -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin:2.5rem 0;">
+      <div style="background:rgba(201,151,63,0.08); border:1px solid rgba(201,151,63,0.2); padding:2rem 1.5rem; text-align:center;">
+        <div style="font-family:'Instrument Serif',serif; font-size:4rem; font-weight:400; color:var(--gold); line-height:1;">30K</div>
+        <div style="width:30px; height:2px; background:var(--gold); margin:0.75rem auto; opacity:0.4;"></div>
+        <div style="font-size:0.75rem; opacity:0.7; line-height:1.5;">Oracle employees cut via a single 6 AM email</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.35; margin-top:0.5rem;">$156B redirected to AI infrastructure</div>
       </div>
-      <div class="stat">
-        <div class="stat-number">40%</div>
-        <div class="stat-label">Block's workforce eliminated to replace management coordination with AI</div>
+      <div style="background:rgba(201,151,63,0.08); border:1px solid rgba(201,151,63,0.2); padding:2rem 1.5rem; text-align:center;">
+        <div style="font-family:'Instrument Serif',serif; font-size:4rem; font-weight:400; color:var(--gold); line-height:1;">40%</div>
+        <div style="width:30px; height:2px; background:var(--gold); margin:0.75rem auto; opacity:0.4;"></div>
+        <div style="font-size:0.75rem; opacity:0.7; line-height:1.5;">Block's workforce eliminated</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.35; margin-top:0.5rem;">Replacing management coordination with AI</div>
       </div>
-      <div class="stat">
-        <div class="stat-number">40%</div>
-        <div class="stat-label">Growth in AI-related trade in 2025, 6x faster than global average</div>
+      <div style="background:rgba(201,151,63,0.08); border:1px solid rgba(201,151,63,0.2); padding:2rem 1.5rem; text-align:center;">
+        <div style="font-family:'Instrument Serif',serif; font-size:4rem; font-weight:400; color:var(--gold); line-height:1;">40%</div>
+        <div style="width:30px; height:2px; background:var(--gold); margin:0.75rem auto; opacity:0.4;"></div>
+        <div style="font-size:0.75rem; opacity:0.7; line-height:1.5;">Growth in AI-related trade in 2025</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.35; margin-top:0.5rem;">6x faster than global average &middot; McKinsey</div>
       </div>
     </div>
-    <p class="lead" style="opacity:0.7;">The opportunity is massive. The people who understand how to operate in AI-augmented organizations have leverage. The space is moving fast, but diffusion takes time. We have a window.</p>
-    <p class="source">Sources: Polymarket/CNBC (Oracle, Mar 31), Block (Feb 2026), McKinsey Global Institute (Mar 2026)</p>
+
+    <!-- Pace of change signal -->
+    <div style="background:rgba(201,151,63,0.04); border:1px solid rgba(201,151,63,0.12); padding:1.2rem 1.5rem; margin-bottom:2rem; display:flex; align-items:center; gap:1.5rem;">
+      <div style="font-family:'Instrument Serif',serif; font-size:2.2rem; color:var(--gold); line-height:1; flex:0 0 auto;">4-7mo</div>
+      <div>
+        <div style="font-size:0.8rem; opacity:0.7; line-height:1.5;">Task competency doubling rate. The gap widens faster than any curriculum can close without continuous adaptation.</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.35; margin-top:0.3rem;">Stanford Digital Experience Lab &middot; April 2026</div>
+      </div>
+    </div>
+
+    <p class="lead" style="opacity:0.7; text-align:center; max-width:100%;">The space is moving fast, but diffusion takes time. We have a window.</p>
+    <p class="source" style="text-align:center;">Sources: CNBC (Oracle, Mar 31), Block (Feb 2026), McKinsey Global Institute (Mar 2026), Stanford DEL (Apr 2026)</p>
   </div>
 </section>
 
@@ -647,20 +764,48 @@
   <div class="slide-inner">
     <div class="kicker">Why veterans</div>
     <h2>The military has been training this for decades.</h2>
-    <p class="lead">That supervisor role requires a specific cognitive approach: set clear intent, delegate execution, validate outputs, and adapt as conditions change. That's mission command.</p>
-    <div class="gold-line"></div>
-    <table>
-      <thead>
-        <tr><th>What Veterans Bring</th><th>Translation</th></tr>
-      </thead>
-      <tbody>
-        <tr style="font-weight:600;"><td>Structured Execution</td><td>Mission command, MCPP, BAMCIS, OSMEAC. Planning and executing under uncertainty.</td></tr>
-        <tr><td style="opacity:0.6;">Decentralized Philosophy</td><td style="opacity:0.6;">Commander's intent drives action. Define outcome, trust the execution layer.</td></tr>
-        <tr><td style="opacity:0.6;">Tacit Knowledge</td><td style="opacity:0.6;">Pattern recognition with incomplete information. Prioritization under constraint.</td></tr>
-        <tr><td style="opacity:0.6;">Leadership</td><td style="opacity:0.6;">Coaching, rapid alignment, leading without deep domain expertise.</td></tr>
-        <tr style="font-weight:600;"><td>Ecosystem Thinking</td><td>Operating in systems of systems. Inputs, outputs, dependencies, feedback loops.</td></tr>
-      </tbody>
-    </table>
+    <p class="lead" style="max-width:640px;">Set clear intent, delegate execution, validate outputs, adapt as conditions change. That's mission command. That's the on-the-loop skill set.</p>
+
+    <!-- Chamath-style capability cards -->
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:3px; margin:2.5rem 0;">
+      <!-- Structured Execution - emphasized -->
+      <div style="background:var(--navy); color:var(--white); padding:1.5rem 1rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.3rem; color:var(--gold); line-height:1.2; margin-bottom:0.75rem;">Structured Execution</div>
+          <div style="font-size:0.65rem; opacity:0.6; line-height:1.5;">Mission command, MCPP, BAMCIS, OSMEAC. Planning and executing under uncertainty.</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-top:1rem; opacity:0.6;">Core skill</div>
+      </div>
+      <!-- Decentralized Philosophy -->
+      <div style="background:rgba(26,35,50,0.06); padding:1.5rem 1rem; display:flex; flex-direction:column; justify-content:space-between; border:1px solid var(--faint);">
+        <div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.1rem; color:var(--ink); line-height:1.2; margin-bottom:0.75rem;">Decentralized Philosophy</div>
+          <div style="font-size:0.65rem; color:var(--muted); line-height:1.5;">Commander's intent drives action. Define outcome, trust the execution layer.</div>
+        </div>
+      </div>
+      <!-- Tacit Knowledge -->
+      <div style="background:rgba(26,35,50,0.06); padding:1.5rem 1rem; display:flex; flex-direction:column; justify-content:space-between; border:1px solid var(--faint);">
+        <div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.1rem; color:var(--ink); line-height:1.2; margin-bottom:0.75rem;">Tacit Knowledge</div>
+          <div style="font-size:0.65rem; color:var(--muted); line-height:1.5;">Pattern recognition with incomplete information. Prioritization under constraint.</div>
+        </div>
+      </div>
+      <!-- Leadership -->
+      <div style="background:rgba(26,35,50,0.06); padding:1.5rem 1rem; display:flex; flex-direction:column; justify-content:space-between; border:1px solid var(--faint);">
+        <div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.1rem; color:var(--ink); line-height:1.2; margin-bottom:0.75rem;">Leadership</div>
+          <div style="font-size:0.65rem; color:var(--muted); line-height:1.5;">Coaching, rapid alignment, leading without deep domain expertise.</div>
+        </div>
+      </div>
+      <!-- Systems Thinking - emphasized -->
+      <div style="background:var(--navy); color:var(--white); padding:1.5rem 1rem; display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.3rem; color:var(--gold); line-height:1.2; margin-bottom:0.75rem;">Systems Thinking</div>
+          <div style="font-size:0.65rem; opacity:0.6; line-height:1.5;">Operating in systems of systems. Inputs, outputs, dependencies, feedback loops.</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-top:1rem; opacity:0.6;">Core skill</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -671,17 +816,59 @@
   <div class="slide-inner">
     <div class="kicker">Military leadership ladder</div>
     <h2>A hypothesis: every level maps.</h2>
-    <table>
-      <thead>
-        <tr><th>Military Role</th><th>AI Equivalent</th><th>Core Translation</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Field Grade (O4-O6)</td><td>AI Ecosystem Director</td><td>Enterprise orchestration, strategic intent, cross-org alignment</td></tr>
-        <tr><td>Junior Officers (O1-O3)</td><td>AI Ecosystem Orchestrator</td><td>Workflow design, decision authority, cross-functional coordination</td></tr>
-        <tr><td>Staff NCOs (E6-E9)</td><td>AI Ops & Reliability Lead</td><td>System stability, QA frameworks, workforce execution</td></tr>
-        <tr><td>NCOs (E4-E5)</td><td>AI Workflow Operator</td><td>Task orchestration, direct supervision, prompt execution</td></tr>
-      </tbody>
-    </table>
+
+    <!-- Visual tiered ladder -->
+    <div style="display:flex; flex-direction:column; gap:0; margin:2.5rem 0;">
+      <!-- Tier 4: Field Grade -->
+      <div style="display:flex; align-items:stretch; min-height:80px;">
+        <div style="flex:0 0 180px; background:var(--gold); color:var(--dark); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">O4-O6</div>
+          <div style="font-weight:600; font-size:0.95rem; margin-top:0.2rem;">Field Grade</div>
+        </div>
+        <div style="flex:0 0 24px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.2rem; opacity:0.4;">&rarr;</div>
+        <div style="flex:1; border:1px solid rgba(201,151,63,0.3); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-weight:600; font-size:0.9rem; color:var(--gold);">AI Ecosystem Director</div>
+          <div style="font-size:0.75rem; opacity:0.6; margin-top:0.25rem;">Enterprise orchestration, strategic intent, cross-org alignment</div>
+        </div>
+      </div>
+      <!-- Tier 3: Junior Officers -->
+      <div style="display:flex; align-items:stretch; min-height:80px;">
+        <div style="flex:0 0 180px; background:rgba(201,151,63,0.7); color:var(--dark); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">O1-O3</div>
+          <div style="font-weight:600; font-size:0.95rem; margin-top:0.2rem;">Junior Officers</div>
+        </div>
+        <div style="flex:0 0 24px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.2rem; opacity:0.4;">&rarr;</div>
+        <div style="flex:1; border:1px solid rgba(201,151,63,0.2); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-weight:600; font-size:0.9rem; color:rgba(201,151,63,0.85);">AI Ecosystem Orchestrator</div>
+          <div style="font-size:0.75rem; opacity:0.6; margin-top:0.25rem;">Workflow design, decision authority, cross-functional coordination</div>
+        </div>
+      </div>
+      <!-- Tier 2: Staff NCOs -->
+      <div style="display:flex; align-items:stretch; min-height:80px;">
+        <div style="flex:0 0 180px; background:rgba(201,151,63,0.4); color:var(--white); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">E6-E9</div>
+          <div style="font-weight:600; font-size:0.95rem; margin-top:0.2rem;">Staff NCOs</div>
+        </div>
+        <div style="flex:0 0 24px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.2rem; opacity:0.4;">&rarr;</div>
+        <div style="flex:1; border:1px solid rgba(201,151,63,0.12); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-weight:600; font-size:0.9rem; color:rgba(201,151,63,0.7);">AI Ops &amp; Reliability Lead</div>
+          <div style="font-size:0.75rem; opacity:0.6; margin-top:0.25rem;">System stability, QA frameworks, workforce execution</div>
+        </div>
+      </div>
+      <!-- Tier 1: NCOs -->
+      <div style="display:flex; align-items:stretch; min-height:80px;">
+        <div style="flex:0 0 180px; background:rgba(201,151,63,0.2); color:var(--white); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">E4-E5</div>
+          <div style="font-weight:600; font-size:0.95rem; margin-top:0.2rem;">NCOs</div>
+        </div>
+        <div style="flex:0 0 24px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.2rem; opacity:0.4;">&rarr;</div>
+        <div style="flex:1; border:1px solid rgba(201,151,63,0.08); padding:1rem 1.2rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-weight:600; font-size:0.9rem; color:rgba(201,151,63,0.55);">AI Workflow Operator</div>
+          <div style="font-size:0.75rem; opacity:0.6; margin-top:0.25rem;">Task orchestration, direct supervision, prompt execution</div>
+        </div>
+      </div>
+    </div>
+
     <div class="quote-block" style="margin-top:2rem;">
       <p class="quote-text" style="font-size:1.3rem;">Not transitioning veterans into the workforce. Translating their identity, their frameworks, and their capabilities into an environment where they have a natural advantage.</p>
     </div>
@@ -706,49 +893,103 @@
     <div class="kicker">LearnAIR partnership &middot; One pipeline, three tracks</div>
     <h2>How we make this a reality.</h2>
 
-    <!-- Spectrum: AI Literacy → Employability → Job Placement -->
+    <!-- Spectrum bar: full pipeline -->
     <div style="margin:2rem 0 2.5rem; position:relative;">
-      <div style="display:flex; align-items:center; gap:0;">
-        <div style="flex:0 0 auto; background:var(--gold); color:var(--dark); padding:0.5rem 1rem; font-family:'JetBrains Mono',monospace; font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;">LearnAIR today</div>
-        <div style="flex:1; height:3px; background:linear-gradient(to right, var(--gold), rgba(201,151,63,0.2));"></div>
+      <div style="display:flex; align-items:stretch; height:56px; gap:0;">
+        <!-- LearnAIR anchor -->
+        <div style="flex:0 0 auto; background:var(--gold); color:var(--dark); padding:0 1rem; display:flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;">LearnAIR today</div>
+        <!-- Track 1 -->
+        <div style="flex:1; background:rgba(201,151,63,0.15); display:flex; align-items:center; justify-content:center; border-right:2px solid var(--paper);">
+          <div style="text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); opacity:0.5;">Track 1</div>
+          </div>
+        </div>
+        <!-- Track 2 -->
+        <div style="flex:1.3; background:rgba(201,151,63,0.10); display:flex; align-items:center; justify-content:center; border-right:2px solid var(--paper);">
+          <div style="text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); opacity:0.5;">Track 2</div>
+          </div>
+        </div>
+        <!-- Track 3 -->
+        <div style="flex:1.3; background:rgba(201,151,63,0.05); display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); opacity:0.5;">Track 3</div>
+          </div>
+        </div>
       </div>
-      <div style="display:flex; justify-content:space-between; margin-top:0.6rem; font-family:'JetBrains Mono',monospace; font-size:0.5rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.5;">
-        <span>AI Literacy</span>
-        <span>Improving Employability</span>
-        <span>Job Placement</span>
-      </div>
-      <div style="display:flex; justify-content:space-between; margin-top:0.3rem; font-size:0.7rem; opacity:0.7;">
-        <span>&larr; Track 1</span>
-        <span>Track 2 &middot; Track 3 &rarr;</span>
+      <!-- Spectrum labels -->
+      <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.08em; text-transform:uppercase;">
+        <span style="color:var(--gold); font-weight:600;">AI Literacy</span>
+        <span style="color:var(--muted);">Improving Employability</span>
+        <span style="color:var(--muted);">Job Placement</span>
+        <span style="color:var(--muted); opacity:0.6;">Business Outcomes</span>
       </div>
     </div>
 
-    <div class="track-grid">
-      <div class="track-card">
-        <div class="track-number">Track 1</div>
-        <div class="track-title">SEPS/TAPS Feeder</div>
-        <div class="track-funding">Gov't Funded</div>
-        <div class="track-detail"><strong>Format</strong><br>2-hour intro embedded within SEPS/TAPS</div>
-        <div class="track-detail"><strong>Outcome</strong><br>Awareness and activation. Filter for interest and aptitude.</div>
-        <div class="track-detail"><strong>Why first</strong><br>Lowest cost, fastest signal. Network introductions ready.</div>
+    <!-- Chamath-style track rows -->
+    <div style="display:flex; flex-direction:column; gap:3px; margin:1.5rem 0;">
+      <!-- Track 1 -->
+      <div style="display:grid; grid-template-columns:140px 1fr 1fr 1fr; gap:0; background:var(--white); border:1px solid var(--faint);">
+        <div style="background:var(--navy); color:var(--gold); padding:1.2rem 1rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">Track 1</div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.2rem; margin-top:0.3rem;">SEPS/TAPS Feeder</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:0.5rem; opacity:0.5;">Gov't funded</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Format</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">2-hour intro embedded within SEPS/TAPS</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Outcome</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">Awareness and activation. Filter for interest and aptitude.</div>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Why first</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">Lowest cost, fastest signal. Network introductions ready.</div>
+        </div>
       </div>
-      <div class="track-card">
-        <div class="track-number">Track 2</div>
-        <div class="track-title">Transitioning Veterans</div>
-        <div class="track-funding">Employer / Gov't</div>
-        <div class="track-detail"><strong>Format</strong><br>4-week intensive, project-based with employer capstone</div>
-        <div class="track-detail"><strong>Outcome</strong><br>Certification + capstone + configured AI agents. Placement tracking.</div>
-        <div class="track-detail"><strong>Why it matters</strong><br>The proof layer. Placement data becomes the differentiator. L&D synergies are the vehicle.</div>
+      <!-- Track 2 -->
+      <div style="display:grid; grid-template-columns:140px 1fr 1fr 1fr; gap:0; background:var(--white); border:1px solid var(--faint);">
+        <div style="background:var(--navy); color:var(--gold); padding:1.2rem 1rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">Track 2</div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.2rem; margin-top:0.3rem;">Transitioning Veterans</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:0.5rem; opacity:0.5;">Employer / Gov't</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Format</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">4-week intensive, project-based with employer capstone</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Outcome</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">Certification + capstone + configured AI agents. Placement tracking.</div>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Why it matters</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">The proof layer. Placement data becomes the differentiator. L&D synergies are the vehicle.</div>
+        </div>
       </div>
-      <div class="track-card">
-        <div class="track-number">Track 3</div>
-        <div class="track-title">In-Employer Upskilling</div>
-        <div class="track-funding">Employer Funded</div>
-        <div class="track-detail"><strong>Format</strong><br>4-week part-time alongside current role</div>
-        <div class="track-detail"><strong>Outcome</strong><br>Certification + employer capstone + AI agents configured for context</div>
-        <div class="track-detail"><strong>Why it matters</strong><br>No placement needed. They have the person. We deliver capability.</div>
+      <!-- Track 3 -->
+      <div style="display:grid; grid-template-columns:140px 1fr 1fr 1fr; gap:0; background:var(--white); border:1px solid var(--faint);">
+        <div style="background:var(--navy); color:var(--gold); padding:1.2rem 1rem; display:flex; flex-direction:column; justify-content:center;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.45rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.7;">Track 3</div>
+          <div style="font-family:'Instrument Serif',serif; font-size:1.2rem; margin-top:0.3rem;">In-Employer Upskilling</div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.1em; text-transform:uppercase; margin-top:0.5rem; opacity:0.5;">Employer funded</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Format</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">4-week part-time alongside current role</div>
+        </div>
+        <div style="padding:1rem; border-right:1px solid var(--faint);">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Outcome</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">Certification + employer capstone + AI agents configured for their context</div>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:0.4rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.3rem;">Why it matters</div>
+          <div style="font-size:0.7rem; color:var(--ink); line-height:1.5;">No placement needed. They have the person. We deliver capability. Business outcomes.</div>
+        </div>
       </div>
     </div>
+
     <p class="lead" style="font-weight:500; color:var(--ink); text-align:center; max-width:100%;">Track 1 creates pull. Track 2 proves outcomes. Track 3 drives revenue.</p>
   </div>
 </section>
@@ -836,13 +1077,37 @@
 <!-- ============================================ -->
 <!-- NAVIGATION -->
 <div class="nav-arrows">
-  <button class="nav-btn" onclick="navigateSlide(-1)" aria-label="Previous slide">&uarr;</button>
-  <button class="nav-btn" onclick="navigateSlide(1)" aria-label="Next slide">&darr;</button>
+  <button class="nav-btn" onclick="navigateSlide(-1)" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <button class="nav-btn" onclick="navigateSlide(1)" aria-label="Next slide">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
 </div>
 
 <script>
   const slides = Array.from(document.querySelectorAll('section.slide:not(.archive)'));
   let currentSlide = 0;
+
+  // Smooth fade-in for slides on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        currentSlide = slides.indexOf(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(slide => {
+    slide.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    slide.style.opacity = '0.3';
+    slide.style.transform = 'translateY(12px)';
+    observer.observe(slide);
+  });
+  // First slide visible immediately
+  if (slides[0]) { slides[0].style.opacity = '1'; slides[0].style.transform = 'translateY(0)'; }
 
   function navigateSlide(dir) {
     currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
@@ -850,7 +1115,7 @@
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); navigateSlide(1); }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); navigateSlide(1); }
     if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); navigateSlide(-1); }
   });
 </script>
