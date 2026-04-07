@@ -1123,6 +1123,13 @@
 
   slides.forEach(slide => observer.observe(slide));
 
+  // Also observe appendix slides
+  document.querySelectorAll('section.slide').forEach(slide => {
+    if (!slides.includes(slide) && !slide.classList.contains('archive')) {
+      observer.observe(slide);
+    }
+  });
+
   // First slide revealed immediately
   if (slides[0]) {
     slides[0].classList.add('revealed');
