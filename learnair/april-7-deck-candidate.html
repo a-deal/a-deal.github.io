@@ -1109,26 +1109,23 @@
   let currentSlide = 0;
   const revealed = new Set();
 
+  // Observe ALL visible slides (main + appendix)
+  const allVisibleSlides = Array.from(document.querySelectorAll('section.slide:not(.archive)'));
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        currentSlide = slides.indexOf(entry.target);
+        const idx = slides.indexOf(entry.target);
+        if (idx >= 0) currentSlide = idx;
         if (!revealed.has(entry.target)) {
           entry.target.classList.add('revealed');
           revealed.add(entry.target);
         }
       }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: 0.2 });
 
-  slides.forEach(slide => observer.observe(slide));
-
-  // Also observe appendix slides
-  document.querySelectorAll('section.slide').forEach(slide => {
-    if (!slides.includes(slide) && !slide.classList.contains('archive')) {
-      observer.observe(slide);
-    }
-  });
+  allVisibleSlides.forEach(slide => observer.observe(slide));
 
   // First slide revealed immediately
   if (slides[0]) {
