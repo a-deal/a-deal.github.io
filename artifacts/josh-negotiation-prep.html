@@ -3,136 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offer Negotiation Prep — SCRAM Systems</title>
+<title>Offer Negotiation — SCRAM Systems</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #1a1a2e;
-    color: #e0e0e0;
-    padding: 20px;
-    max-width: 760px;
-    margin: 0 auto;
-    line-height: 1.5;
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap');
+
+  :root {
+    --purple: #7B5EA7;
+    --black: #111;
+    --gray-dark: #444;
+    --gray-mid: #777;
+    --gray-light: #bbb;
+    --gray-rule: #e0e0e0;
+    --bg: #fff;
+    --bg-inset: #f7f6f4;
   }
-  h1 { font-size: 1.4rem; color: #fff; margin-bottom: 4px; }
-  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
-  .section {
-    background: #16213e;
-    border-radius: 12px;
-    padding: 16px 20px;
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { font-size: 17px; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--black);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* — COVER — */
+  .cover {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10vw;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .cover .accent {
+    color: var(--purple);
+  }
+  .cover .meta {
+    margin-top: 32px;
+    font-size: 0.82rem;
+    color: var(--gray-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* — CONTENT CONTAINER — */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 28px 120px;
+  }
+
+  /* — SECTION — */
+  section {
+    margin-bottom: 80px;
+  }
+
+  .section-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gray-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    margin-bottom: 16px;
+  }
+
+  strong { color: var(--black); font-weight: 600; }
+
+  .purple { color: var(--purple); font-weight: 600; }
+
+  /* — LISTS — */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  li {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  li strong { color: var(--black); }
+
+  /* — RULE — */
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-rule);
+    margin: 0;
+  }
+
+  /* — EMAIL BLOCKQUOTE — */
+  .email-block {
+    background: var(--bg-inset);
+    padding: 36px 32px;
+    margin: 24px 0 20px;
+    border-radius: 2px;
+  }
+  .email-block .email-subject {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--gray-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .email-block p {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
     margin-bottom: 14px;
   }
-  .section-red { border-left: 4px solid #e74c3c; }
-  .section-orange { border-left: 4px solid #e67e22; }
-  .section-yellow { border-left: 4px solid #f39c12; }
-  .section-green { border-left: 4px solid #2ecc71; }
-  .section-blue { border-left: 4px solid #3498db; }
-  .section-purple { border-left: 4px solid #9b59b6; }
-  .section-gray { border-left: 4px solid #555; }
-  .section-gold { border-left: 4px solid #d4a843; }
-  h2 {
+  .email-block p:last-child { margin-bottom: 0; }
+
+  /* — INSIGHT BOX — */
+  .insight {
+    margin: 28px 0;
+    padding: 24px 0;
+    border-top: 2px solid var(--purple);
+  }
+  .insight p {
+    font-size: 1.05rem;
+    color: var(--black);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .insight .purple { font-weight: 700; }
+
+  /* — TIMELINE — */
+  .timeline {
+    margin: 20px 0;
+  }
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: baseline;
+  }
+  .timeline-year {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--purple);
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .timeline-desc {
     font-size: 0.95rem;
-    color: #fff;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--gray-dark);
   }
-  .tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    padding: 2px 7px;
-    border-radius: 4px;
-    margin-left: 6px;
-    vertical-align: middle;
-    font-weight: 600;
-  }
-  .tag-high { background: #e74c3c; color: #fff; }
-  .tag-action { background: #2ecc71; color: #1a1a2e; }
-  .tag-info { background: #3498db; color: #fff; }
-  .tag-caution { background: #f39c12; color: #1a1a2e; }
-  p, li { font-size: 0.88rem; color: #ccc; }
-  ul, ol { padding-left: 18px; margin-top: 6px; }
-  li { margin-bottom: 6px; }
-  strong { color: #fff; }
-  .email-draft {
-    background: #0f1a30;
-    border: 1px solid #2a3a5c;
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin: 12px 0;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #d0d0d0;
-  }
-  .email-draft .label {
-    font-size: 0.7rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-  }
-  .email-draft strong { color: #e0e0e0; }
+
+  /* — TABLES — */
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 10px 0;
-    font-size: 0.82rem;
+    margin: 20px 0;
   }
-  th {
+  thead th {
     text-align: left;
-    color: #fff;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    padding: 6px 8px;
-    border-bottom: 1px solid #2a3a5c;
-  }
-  td {
-    padding: 6px 8px;
-    border-bottom: 1px solid #1a2a4c;
-    color: #ccc;
-  }
-  .highlight { color: #d4a843; font-weight: 600; }
-  .divider {
-    border: none;
-    border-top: 1px solid #2a3a5c;
-    margin: 24px 0;
-  }
-  .callout {
-    background: #1a2a3e;
-    border-left: 3px solid #d4a843;
-    padding: 10px 14px;
-    margin: 10px 0;
-    font-size: 0.85rem;
-    border-radius: 0 6px 6px 0;
-  }
-  .callout strong { color: #d4a843; }
-  .step-num {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    background: #2a3a5c;
-    color: #fff;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 22px;
     font-size: 0.72rem;
     font-weight: 700;
-    margin-right: 6px;
+    color: var(--gray-mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0 0 10px;
+    border-bottom: 2px solid var(--black);
+  }
+  tbody td {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-rule);
+    vertical-align: top;
+  }
+  tbody td:first-child {
+    font-weight: 500;
+    color: var(--black);
+    padding-right: 16px;
+  }
+  tbody td:last-child {
+    color: var(--gray-mid);
+    font-size: 0.85rem;
+  }
+
+  /* — STEPS — */
+  .steps {
+    counter-reset: step;
+    margin: 20px 0;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: baseline;
+  }
+  .step::before {
+    counter-increment: step;
+    content: "0" counter(step);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--purple);
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+  .step-content {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+  }
+  .step-content strong { color: var(--black); }
+
+  /* — FOOTER — */
+  footer {
+    padding: 40px 28px;
+    font-size: 0.72rem;
+    color: var(--gray-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* — SEND LABEL — */
+  .send-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+
+  /* — RESPONSIVE — */
+  @media (max-width: 600px) {
+    .cover { padding: 60px 28px; min-height: 80vh; }
+    .content { padding: 0 20px 80px; }
+    .email-block { padding: 24px 20px; }
+    section { margin-bottom: 60px; }
+    table { font-size: 0.82rem; }
+    tbody td { padding: 8px 0; }
   }
 </style>
 </head>
 <body>
 
-<h1>Offer Negotiation Prep</h1>
-<p class="subtitle">SCRAM Systems / Riverside Company — Firmware Engineer — April 2026</p>
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <h1>Offer Negotiation<br><span class="accent">SCRAM Systems / Firmware Engineer</span></h1>
+  <p class="meta">Prepared April 2026</p>
+</div>
 
-<!-- DRAFT EMAIL -->
-<div class="section section-green">
-  <h2>Draft Reply to Brad <span class="tag tag-action">SEND TUE 9-10AM EST</span></h2>
-  <div class="email-draft">
-    <div class="label">Subject: Re: Firmware Engineer Offer</div>
+<div class="content">
+
+<!-- ==================== 01 DRAFT EMAIL ==================== -->
+<section>
+  <div class="section-num">01</div>
+  <h2>Draft Reply to Brad</h2>
+  <p class="send-label">Send Tuesday 9-10am EST</p>
+  <div class="email-block">
+    <div class="email-subject">Re: Firmware Engineer Offer</div>
     <p>Hey Brad,</p>
     <p>Thanks again for the offer and for taking the time to walk me through everything while you're on PTO. Really appreciate it.</p>
     <p>I've had a chance to review the full offer and benefits package. Before I get back to you on next steps, I want to make sure I understand the complete picture. A few questions:</p>
@@ -143,42 +303,63 @@
     <p>Happy to jump on a call if that's easier than typing all this out. No rush on your end. I want to be thoughtful about this.</p>
     <p>Thanks,<br>Joshua</p>
   </div>
-  <div class="callout">
-    <strong>Why this email has no salary number:</strong> You need to understand the full compensation picture (especially equity) before countering. The Ownership Works payout could be worth more than the salary delta you're negotiating. Get the facts first.
+  <div class="insight">
+    <p><span class="purple">Why this email has no salary number.</span> You need to understand the full compensation picture before countering. The Ownership Works payout could be worth more than the salary delta you're negotiating. Get the facts first.</p>
   </div>
-</div>
+</section>
 
-<hr class="divider">
+<hr>
 
-<!-- PE EXIT STRATEGY -->
-<div class="section section-gold">
-  <h2>Private Equity Exit: Why This Matters <span class="tag tag-high">KEY INSIGHT</span></h2>
-  <p>SCRAM Systems is owned by <strong>The Riverside Company</strong>, a global PE firm focused on lower middle market. Here's the timeline:</p>
-  <ul>
-    <li><strong>2014:</strong> Riverside makes minority investment in SCRAM's parent company</li>
-    <li><strong>2020:</strong> Riverside acquires LMG Holdings (LifeSafer ignition interlocks)</li>
-    <li><strong>2021:</strong> Riverside acquires SCRAM Systems and merges it with LMG. Classic PE roll-up.</li>
-    <li><strong>2026:</strong> Full acquisition is 5 years old. Minority stake is 12 years old.</li>
-  </ul>
-  <div class="callout">
-    <strong>Typical PE hold periods are 3-7 years.</strong> PE fund lifecycles run ~10 years (5-6 years investing, 4-5 years harvesting/exiting). At 5 years post-acquisition, SCRAM is squarely in the exit window. A sale, recapitalization, or secondary buyout in the next 1-3 years is plausible.
+<!-- ==================== 02 PE EXIT ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">02</div>
+  <h2>Private Equity Exit:<br>Why This Matters</h2>
+  <p>SCRAM Systems is owned by <strong>The Riverside Company</strong>, a global PE firm focused on the lower middle market. This is a classic roll-up: buy adjacent monitoring companies, consolidate operations, sell the combined platform at a premium.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-year">2014</span>
+      <span class="timeline-desc">Riverside makes minority investment in SCRAM's parent company</span>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2020</span>
+      <span class="timeline-desc">Riverside acquires LMG Holdings (LifeSafer ignition interlocks)</span>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2021</span>
+      <span class="timeline-desc">Riverside acquires SCRAM Systems and merges it with LMG</span>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2026</span>
+      <span class="timeline-desc">Full acquisition is 5 years old. Minority stake is 12 years old.</span>
+    </div>
   </div>
-  <p style="margin-top:10px"><strong>What this means for you:</strong> If Riverside exits while you're employed at SCRAM, your Ownership Works equity could pay out. This is potentially the most valuable part of your compensation that you don't yet understand. Don't negotiate salary until you know what this is worth.</p>
-</div>
 
-<!-- OWNERSHIP WORKS -->
-<div class="section section-purple">
-  <h2>Ownership Works: The Equity Program</h2>
-  <p><strong>What it is:</strong> A nonprofit founded in 2021 by Pete Stavros (KKR partner). It helps PE-backed companies create broad-based employee equity programs. 37 PE firms participate. As of late 2024: 113 companies, 163,000+ employees, $570M in equity payouts.</p>
-  <p style="margin-top:8px"><strong>How it typically works:</strong></p>
+  <div class="insight">
+    <p><span class="purple">Typical PE hold periods are 3-7 years.</span> Fund lifecycles run ~10 years. At 5 years post-acquisition, SCRAM is squarely in the exit window. A sale, recapitalization, or secondary buyout in the next 1-3 years is plausible.</p>
+  </div>
+
+  <p><strong>What this means for you:</strong> If Riverside exits while you're employed at SCRAM, your Ownership Works equity could pay out. This is potentially the most valuable part of your compensation that you don't yet understand. Don't negotiate salary until you know what this is worth.</p>
+</section>
+
+<hr>
+
+<!-- ==================== 03 OWNERSHIP WORKS ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">03</div>
+  <h2>Ownership Works:<br>The Equity Program</h2>
+  <p>A nonprofit founded in 2021 by Pete Stavros (KKR partner). It helps PE-backed companies create broad-based employee equity programs. 37 PE firms participate. As of late 2024: 113 companies, 163,000+ employees, <strong>$570M in equity payouts</strong>.</p>
+
+  <h3>How it typically works</h3>
   <ul>
     <li>Employees receive equity grants (not options) on top of existing wages and benefits</li>
-    <li>Typical payout: <span class="highlight">6-12 months of salary</span> when the PE firm sells the company</li>
+    <li>Typical payout: <span class="purple">6-12 months of salary</span> when the PE firm sells the company</li>
     <li>Payout triggered by a "liquidity event": PE sale, secondary buyout, or IPO</li>
     <li>Vesting schedules vary. Common: 3-4 year vest with 1-year cliff</li>
     <li>Some programs pay incrementally at performance milestones, not just at exit</li>
   </ul>
-  <p style="margin-top:10px"><strong>Questions to ask Brad:</strong></p>
+
+  <h3>Questions to ask Brad</h3>
   <ol>
     <li>What form does the equity take? (Phantom equity, profit interest units, RSUs?)</li>
     <li>What's the vesting schedule? Is there a cliff?</li>
@@ -186,74 +367,108 @@
     <li>Have any SCRAM employees received payouts yet?</li>
     <li>Is the grant sized relative to salary, role level, or tenure?</li>
   </ol>
-  <div class="callout">
-    <strong>If the payout is 6-12 months of salary on a PE exit in the next 1-3 years, that's $50K-$100K on top of your base.</strong> That changes the math on whether $100K vs. $120K base even matters.
+
+  <div class="insight">
+    <p><span class="purple">If the payout is 6-12 months of salary on a PE exit in 1-3 years, that's $50K-$100K on top of your base.</span> That changes the math on whether $100K vs. $120K base even matters.</p>
   </div>
-</div>
+</section>
 
-<hr class="divider">
+<hr>
 
-<!-- SALARY BENCHMARKS -->
-<div class="section section-blue">
-  <h2>Salary Benchmarks: Where You Stand <span class="tag tag-info">MARKET DATA</span></h2>
+<!-- ==================== 04 SALARY BENCHMARKS ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">04</div>
+  <h2>Salary Benchmarks:<br>Where You Stand</h2>
+
   <table>
-    <tr><th>Source</th><th>Range</th></tr>
-    <tr><td>Salary.com (Firmware Eng, national)</td><td>$78K-$105K avg</td></tr>
-    <tr><td>Durham job postings (Firmware Eng I)</td><td>$73K-$117K</td></tr>
-    <tr><td>ZipRecruiter NC (firmware, all levels)</td><td>$130K-$201K</td></tr>
-    <tr><td>Levels.fyi Raleigh-Durham (SWE)</td><td>$110K-$186K</td></tr>
-    <tr><td>Glassdoor Durham (SWE median)</td><td>~$105K</td></tr>
+    <thead>
+      <tr><th>Source</th><th>Range</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Salary.com (Firmware Eng, national)</td><td>$78K - $105K avg</td></tr>
+      <tr><td>Durham job postings (Firmware Eng I)</td><td>$73K - $117K</td></tr>
+      <tr><td>ZipRecruiter NC (firmware, all levels)</td><td>$130K - $201K</td></tr>
+      <tr><td>Levels.fyi Raleigh-Durham (SWE)</td><td>$110K - $186K</td></tr>
+      <tr><td>Glassdoor Durham (SWE median)</td><td>~$105K</td></tr>
+    </tbody>
   </table>
-  <p style="margin-top:10px"><strong>Your history:</strong></p>
+
+  <h3>Your history</h3>
   <ul>
-    <li>Triconomy (Bay Area): $110K starting, bumped to $125K</li>
+    <li><strong>Triconomy (Bay Area):</strong> $110K starting, bumped to $125K</li>
     <li>4 years experience across two companies (Triconomy + Omen)</li>
-    <li>Bay Area embedded systems experience is uncommon in Durham market</li>
+    <li>Bay Area embedded systems experience is uncommon in the Durham market</li>
   </ul>
-  <div class="callout">
-    <strong>Assessment:</strong> $100K is at or below the 50th percentile for your experience in Durham. $120K is defensible (60th-75th percentile). $130K is the ceiling without a competing offer. Your Bay Area background is a differentiator Brad is likely pricing in.
-  </div>
-</div>
 
-<!-- ALL LEVERS -->
-<div class="section section-orange">
-  <h2>All Available Levers <span class="tag tag-caution">RANKED BY IMPACT</span></h2>
+  <div class="insight">
+    <p><span class="purple">$100K is at or below the 50th percentile</span> for your experience level in Durham. $120K is defensible as a 60th-75th percentile ask. $130K is the ceiling without a competing offer. Your Bay Area background is a differentiator Brad is likely pricing in.</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ==================== 05 LEVERS ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">05</div>
+  <h2>All Available Levers</h2>
+
   <table>
-    <tr><th>Lever</th><th>Typical Range</th><th>Notes</th></tr>
-    <tr><td><strong>Base salary</strong></td><td>$100K &rarr; $110-120K</td><td>The main event. Back with market data in email #2.</td></tr>
-    <tr><td><strong>Ownership Works</strong></td><td>$50K-$100K at exit</td><td>Understand before negotiating base. May dwarf the salary delta.</td></tr>
-    <tr><td><strong>Signing bonus</strong></td><td>$5K-$15K</td><td>Easier to approve than base increases (one-time cost, no payroll impact). Ask if base is firm.</td></tr>
-    <tr><td><strong>Review timing</strong></td><td>6 months vs. 12</td><td>"Can we do a compensation review at 6 months?" Gets to $120K+ without committing now.</td></tr>
-    <tr><td><strong>PTO</strong></td><td>10 days &rarr; 15 days</td><td>10 accrued is thin. Industry standard for mid-level is 15. Ask about the tenure growth schedule.</td></tr>
-    <tr><td><strong>L&D budget</strong></td><td>$2K-$5K/year</td><td>Conferences, courses, certs. Low cost to them, high value to you.</td></tr>
-    <tr><td><strong>Remote/hybrid</strong></td><td>1-2 days/week</td><td>Small Durham office (1 firmware eng). May already be informal. Get it in writing.</td></tr>
-    <tr><td><strong>Home office stipend</strong></td><td>$1.5K-$3K one-time</td><td>If any remote component exists.</td></tr>
-    <tr><td><strong>Title/level</strong></td><td>Eng II vs. Eng I</td><td>Affects your next job's salary band. Ask what level this role is slotted at.</td></tr>
+    <thead>
+      <tr><th>Lever</th><th>Range</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Base salary</td><td>$100K &rarr; $110-120K</td><td>The main event. Back with market data in email #2.</td></tr>
+      <tr><td>Ownership Works</td><td>$50K-$100K at exit</td><td>Understand before negotiating base. May dwarf the salary delta.</td></tr>
+      <tr><td>Signing bonus</td><td>$5K-$15K</td><td>Easier to approve than base increases. One-time cost, no payroll impact.</td></tr>
+      <tr><td>Review timing</td><td>6 mo. vs. 12</td><td>Accelerated comp review. Gets to $120K+ without committing now.</td></tr>
+      <tr><td>PTO</td><td>10 &rarr; 15 days</td><td>10 accrued is thin. Industry standard for mid-level is 15.</td></tr>
+      <tr><td>L&D budget</td><td>$2K-$5K/yr</td><td>Conferences, courses, certs. Low cost to them, high value to you.</td></tr>
+      <tr><td>Remote/hybrid</td><td>1-2 days/wk</td><td>Small Durham office. May already be informal. Get it in writing.</td></tr>
+      <tr><td>Home office stipend</td><td>$1.5K-$3K</td><td>One-time, if any remote component exists.</td></tr>
+      <tr><td>Title/level</td><td>Eng II vs. I</td><td>Affects your next job's salary band. Ask what level this is slotted at.</td></tr>
+    </tbody>
   </table>
-  <div class="callout">
-    <strong>Strategy:</strong> Don't negotiate all levers at once. Understand the full picture first (email #1). Then lead with salary backed by data. If salary is firm, pivot to signing bonus + accelerated review + PTO as a package.
+
+  <div class="insight">
+    <p><span class="purple">Don't negotiate all levers at once.</span> Understand the full picture first. Then lead with salary backed by data. If salary is firm, pivot to signing bonus + accelerated review + PTO as a package.</p>
   </div>
-</div>
+</section>
 
-<hr class="divider">
+<hr>
 
-<!-- TIMING PLAYBOOK -->
-<div class="section section-gray">
+<!-- ==================== 06 TIMING ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">06</div>
   <h2>Timing Playbook</h2>
-  <p>
-    <span class="step-num">1</span> <strong>Tue AM:</strong> Send info-gathering email to Brad<br>
-    <span class="step-num">2</span> <strong>Tue-Wed:</strong> Brad replies or calls. Take notes. Understand equity, PTO, review cycle.<br>
-    <span class="step-num">3</span> <strong>Wed-Thu:</strong> Draft email #2: salary counter with market data + leverage framing<br>
-    <span class="step-num">4</span> <strong>Thu AM:</strong> Send counter during business hours<br>
-    <span class="step-num">5</span> <strong>Thu-Fri:</strong> Brad responds or counters. Accept, push, or pivot to other levers.
-  </p>
-  <div class="callout">
-    <strong>Key principle:</strong> Every touchpoint should be during business hours, spaced 24 hours apart minimum. Time communicates confidence. Rushing communicates desperation.
-  </div>
-</div>
 
-<!-- CALL NOTES -->
-<div class="section section-red">
+  <div class="steps">
+    <div class="step">
+      <div class="step-content"><strong>Tuesday AM</strong> &mdash; Send info-gathering email to Brad</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Tue - Wed</strong> &mdash; Brad replies or calls. Take notes. Understand equity, PTO, review cycle.</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Wed - Thu</strong> &mdash; Draft email #2: salary counter with market data and leverage framing</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Thursday AM</strong> &mdash; Send counter during business hours</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Thu - Fri</strong> &mdash; Brad responds or counters. Accept, push, or pivot to other levers.</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <p><span class="purple">Every touchpoint during business hours, spaced 24 hours apart minimum.</span> Time communicates confidence. Rushing communicates desperation.</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- ==================== 07 CALL NOTES ==================== -->
+<section style="margin-top: 80px;">
+  <div class="section-num">07</div>
   <h2>Notes from Our Call</h2>
   <ul>
     <li><strong>Walk-away:</strong> You'd take $100K if firm, but want more PTO at minimum</li>
@@ -263,9 +478,11 @@
     <li><strong>Don't counter until you understand the Ownership Works equity.</strong> It could be the biggest piece of your comp.</li>
     <li><strong>SCRAM Glassdoor:</strong> 3.3/5 comp rating, 3.6/5 work-life balance. PTO grows with tenure. Benefits start after 30 days.</li>
   </ul>
+</section>
+
 </div>
 
-<p style="text-align:center; color:#555; font-size:0.72rem; margin-top:24px;">Prepared April 7, 2026</p>
+<footer>Prepared April 2026</footer>
 
 </body>
 </html>
