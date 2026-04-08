@@ -3,209 +3,570 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paul 1:1 Prep — Wed Apr 8</title>
+<title>Paul 1:1 Prep — Apr 8</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --purple: #7B5EA7;
+    --purple-dim: rgba(123,94,167,0.08);
+    --emerald: #2ecc71;
+    --emerald-dim: rgba(46,204,113,0.08);
+    --amber: #e67e22;
+    --amber-dim: rgba(230,126,34,0.08);
+    --rose: #e74c3c;
+    --rose-dim: rgba(231,76,60,0.06);
+    --black: #111;
+    --gray-dark: #444;
+    --gray-mid: #777;
+    --gray-light: #bbb;
+    --gray-rule: #e0e0e0;
+    --bg: #fff;
+    --bg-inset: #f7f6f4;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; }
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #1a1a2e;
-    color: #e0e0e0;
-    padding: 20px;
-    max-width: 760px;
-    margin: 0 auto;
-    line-height: 1.5;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--black);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
-  h1 { font-size: 1.4rem; color: #fff; margin-bottom: 4px; }
-  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
-  .section {
-    background: #16213e;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-bottom: 14px;
+
+  /* Cover */
+  .cover {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10vw;
   }
-  .section-red { border-left: 4px solid #e74c3c; }
-  .section-orange { border-left: 4px solid #e67e22; }
-  .section-yellow { border-left: 4px solid #f39c12; }
-  .section-green { border-left: 4px solid #2ecc71; }
-  .section-blue { border-left: 4px solid #3498db; }
-  .section-purple { border-left: 4px solid #9b59b6; }
-  .section-gray { border-left: 4px solid #555; }
-  h2 {
-    font-size: 0.95rem;
-    color: #fff;
-    margin-bottom: 8px;
+  .cover h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .cover .accent { color: var(--purple); }
+  .cover .meta {
+    margin-top: 32px;
+    font-size: 0.82rem;
+    color: var(--gray-mid);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
-  .tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    padding: 2px 7px;
-    border-radius: 4px;
-    margin-left: 6px;
-    vertical-align: middle;
-    font-weight: 600;
-  }
-  .tag-high { background: #e74c3c; color: #fff; }
-  .tag-mid { background: #f39c12; color: #1a1a2e; }
-  .tag-low { background: #555; color: #ccc; }
-  .tag-decide { background: #9b59b6; color: #fff; }
-  ul { list-style: none; padding: 0; }
-  li {
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.9rem;
-  }
-  li:last-child { border-bottom: none; }
-  li strong { color: #fff; }
-  .opener {
-    background: linear-gradient(135deg, #16213e 0%, #1a1a3e 100%);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 18px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-  .opener em { color: #f39c12; font-style: normal; }
-  .quote {
-    border-left: 3px solid #f39c12;
-    padding-left: 14px;
-    margin: 10px 0;
-    color: #ccc;
-    font-style: italic;
-    font-size: 0.88rem;
-  }
-  .divider {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    margin: 20px 0;
-  }
-  .context-note {
-    font-size: 0.8rem;
-    color: #666;
+  .cover .meta-sub {
     margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--gray-light);
+    letter-spacing: 0.04em;
   }
-  .two-col {
+
+  /* Content */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 28px 120px;
+  }
+
+  /* Section */
+  section { margin-bottom: 80px; }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--gray-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-top: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    margin-bottom: 16px;
+  }
+
+  strong { color: var(--black); font-weight: 600; }
+  .purple { color: var(--purple); font-weight: 600; }
+
+  ul, ol { padding-left: 20px; margin-bottom: 16px; }
+  li {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+    line-height: 1.55;
+  }
+  li strong { color: var(--black); }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-rule);
+    margin: 0;
+  }
+
+  /* Opener card */
+  .opener {
+    background: var(--bg-inset);
+    padding: 36px 32px;
+    margin: 0 0 24px;
+    border-radius: 2px;
+    border-top: 2px solid var(--purple);
+  }
+  .opener .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .opener p {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    margin-bottom: 14px;
+    line-height: 1.65;
+  }
+  .opener p:last-child { margin-bottom: 0; }
+  .opener .note {
+    font-size: 0.8rem;
+    color: var(--gray-mid);
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-rule);
+  }
+
+  /* Insight box */
+  .insight {
+    margin: 28px 0;
+    padding: 24px 0;
+    border-top: 2px solid var(--purple);
+  }
+  .insight p {
+    font-size: 1.05rem;
+    color: var(--black);
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  /* Agenda cards */
+  .agenda-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .agenda-card {
+    padding: 24px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .agenda-card .a-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .agenda-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+  .agenda-card p {
+    font-size: 0.85rem;
+    color: var(--gray-mid);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  .card-decide {
+    background: var(--rose-dim);
+    border-left: 3px solid var(--rose);
+  }
+  .card-decide .a-tag { color: var(--rose); }
+
+  .card-discuss {
+    background: var(--amber-dim);
+    border-left: 3px solid var(--amber);
+  }
+  .card-discuss .a-tag { color: var(--amber); }
+
+  .card-review {
+    background: var(--purple-dim);
+    border-left: 3px solid var(--purple);
+  }
+  .card-review .a-tag { color: var(--purple); }
+
+  .card-ship {
+    background: var(--emerald-dim);
+    border-left: 3px solid var(--emerald);
+  }
+  .card-ship .a-tag { color: var(--emerald); }
+
+  /* Thread list */
+  .thread-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .thread-list li {
+    display: flex;
+    align-items: baseline;
     gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-rule);
+    margin-bottom: 0;
   }
+  .thread-list li:last-child { border-bottom: none; }
+  .thread-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    min-width: 64px;
+    flex-shrink: 0;
+  }
+  .status-open { color: var(--amber); }
+  .status-done { color: var(--emerald); }
+  .status-review { color: var(--purple); }
+  .status-block { color: var(--rose); }
+  .thread-desc {
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+  }
+  .thread-desc strong { color: var(--black); }
+
+  /* Steps */
+  .steps {
+    counter-reset: step;
+    margin: 20px 0;
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+    align-items: baseline;
+  }
+  .step::before {
+    counter-increment: step;
+    content: "0" counter(step);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--purple);
+    min-width: 28px;
+    flex-shrink: 0;
+  }
+  .step-content {
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+  }
+  .step-content strong { color: var(--black); }
+
+  /* Countdown */
+  .countdown {
+    display: flex;
+    gap: 32px;
+    margin: 24px 0;
+    padding: 28px 0;
+    border-top: 1px solid var(--gray-rule);
+    border-bottom: 1px solid var(--gray-rule);
+  }
+  .countdown-item { text-align: center; }
+  .countdown-num {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2.8rem;
+    color: var(--purple);
+    line-height: 1;
+  }
+  .countdown-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gray-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Exit checklist */
+  .exit-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    counter-reset: exit;
+  }
+  .exit-list li {
+    padding: 12px 0 12px 0;
+    border-bottom: 1px solid var(--gray-rule);
+    font-size: 0.95rem;
+    color: var(--gray-dark);
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin-bottom: 0;
+  }
+  .exit-list li::before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--gray-rule);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .exit-list li:last-child { border-bottom: none; }
+
+  footer {
+    padding: 40px 28px;
+    font-size: 0.72rem;
+    color: var(--gray-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
   @media (max-width: 600px) {
-    .two-col { grid-template-columns: 1fr; }
+    .cover { padding: 60px 28px; min-height: 80vh; }
+    .content { padding: 0 20px 80px; }
+    .opener { padding: 24px 20px; }
+    .agenda-grid { grid-template-columns: 1fr; }
+    .countdown { gap: 20px; }
+    section { margin-bottom: 60px; }
   }
-  .metric-card {
-    background: #0f1a30;
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-  }
-  .metric-card .num { font-size: 1.8rem; color: #f39c12; font-weight: 700; }
-  .metric-card .label { font-size: 0.75rem; color: #888; margin-top: 4px; }
 </style>
 </head>
 <body>
 
-<h1>Paul 1:1 Prep</h1>
-<div class="subtitle">Wednesday, April 8 — Last sync before Hawaii (back 4/16)</div>
-
-<!-- CONTEXT SHIFT -->
-<div class="opener">
-  <strong>Open with this:</strong><br><br>
-  "One thing I want to share before we dig in. I've been stretched too thin. This weekend made that clear. I'm moving to an advisory role on the Mike/LearnAIR work. 10 hours a week, structured, and <em>redirecting the rest of my energy here</em>. Wanted you to know because it changes my capacity and my focus."
-  <br><br>
-  <span style="color:#666; font-size:0.8rem;">Frame as choosing focus, not choosing Paul over Mike. Let him respond. Don't oversell.</span>
+<div class="cover">
+  <h1>Paul 1:1<br><span class="accent">Wednesday Sync</span></h1>
+  <p class="meta">April 8, 2026</p>
+  <p class="meta-sub">Last sync before Hawaii. He's back April 16.</p>
 </div>
 
-<!-- PARTNERSHIP -->
-<div class="section section-red">
-  <h2>Partnership <span class="tag tag-high">DECIDE</span></h2>
-  <ul>
-    <li><strong>Paul said "yes with enthusiasm"</strong> to your partnership framework doc. The open question: is today about nailing specifics (LLC, roles, equity) or confirming the framing and setting a timeline?</li>
-    <li><strong>Your doc proposed:</strong> LLC, vesting, IP assignment, zebra model. You differed on interest type, split, and managing member structure.</li>
-    <li><strong>Decision needed before Hawaii:</strong> Are you forming the LLC now, or agreeing on terms and forming when he's back?</li>
-  </ul>
-  <div class="context-note">Paul's out Friday 4/10 through 4/16. Whatever doesn't get decided today sits 10 days.</div>
-</div>
+<div class="content">
 
-<!-- MOCHARY FRAMEWORK -->
-<div class="section section-purple">
-  <h2>How to run this <span class="tag tag-mid">MOCHARY</span></h2>
-  <ul>
-    <li><strong>Paul's agenda first.</strong> He sent his docket: partnership sync, customer dev, medical citations. Start there.</li>
-    <li><strong>"Heard" before responding.</strong> Reflect back what Paul says before offering your take.</li>
-    <li><strong>Separate decision from implementation.</strong> First: do we form the LLC? Then: what are the terms? Don't let term details block the yes/no.</li>
-    <li><strong>Leave with DRIs.</strong> Every next step has one name and one date.</li>
-    <li><strong>Don't speak first on partnership terms.</strong> You have more power right now (you built the tech). Ask Paul what structure he's envisioning before sharing yours.</li>
-  </ul>
-</div>
+<!-- 01 OPENER -->
+<section>
+  <div class="section-num">01</div>
+  <h2>Open With This</h2>
 
-<hr class="divider">
-
-<!-- PAUL'S DOCKET -->
-<div class="section section-blue">
-  <h2>Paul's Agenda (from WhatsApp 4/6)</h2>
-  <ul>
-    <li><strong>Partnership sync.</strong> "Yes with enthusiasm." Ready to talk structure.</li>
-    <li><strong>Customer dev.</strong> Pin down next hypotheses on primary user journey. Circling: parents, better sleep, just got labs back.</li>
-    <li><strong>Medical citations.</strong> Integrating Kiso into Kasane. Blind spot: impact on focus plan?</li>
-  </ul>
-</div>
-
-<!-- YOUR AGENDA -->
-<div class="section section-green">
-  <h2>Your Agenda (from 1:1 doc)</h2>
-  <ul>
-    <li><strong>Habit Catalogue / Habit Deck.</strong> Leaning into the deck metaphor in a playful way.</li>
-    <li><strong>Brand concepts.</strong> ICP: parents who want better sleep, trigger = just got labs. Two protos to review.</li>
-    <li><strong>Program structure.</strong> Onboarding, Program Reveal, Practice, Reflect, Evidence. Five phases.</li>
-    <li><strong>Eval framework.</strong> L4 rubric. Paul's gut take: start small with real coaching moments, extract testable scenarios. Build from there.</li>
-    <li><strong>Roadmap update PR.</strong> Maintenance conventions?</li>
-    <li><strong>Build v Buy.</strong> Wearable integrations v. thesis validation.</li>
-  </ul>
-</div>
-
-<hr class="divider">
-
-<!-- OPEN THREADS -->
-<div class="section section-orange">
-  <h2>Live Threads to Close <span class="tag tag-mid">BEFORE HAWAII</span></h2>
-  <ul>
-    <li><strong>PR#3 on Kiso.</strong> Paul's focus plan timeout fix. You haven't reviewed yet. Do this before the call or acknowledge it on the call.</li>
-    <li><strong>Patrick Smith feedback.</strong> Habit clusters + habit stacking + MCP support. Paul compiled it. Good signal to discuss.</li>
-    <li><strong>L4 eval examples.</strong> You said you'd pull concrete coaching moments before Wednesday. Did you?</li>
-    <li><strong>Brand direction.</strong> Paul shared two video concepts (4/6). He noted design is still "AI-sloppy" but learning what it takes. He may go deep on design during Hawaii.</li>
-    <li><strong>Internal artifacts app.</strong> Paul floated the idea of a web app with auth for sharing HTML artifacts. Worth a quick yes/no/later.</li>
-  </ul>
-</div>
-
-<!-- KEY NUMBERS -->
-<div class="two-col" style="margin-bottom: 14px;">
-  <div class="metric-card">
-    <div class="num">10</div>
-    <div class="label">days Paul is offline<br>(4/10 - 4/16)</div>
+  <div class="opener">
+    <div class="label">Say first</div>
+    <p>"One thing I want to share before we dig in. I've been stretched too thin. This weekend made that clear. I'm moving to an advisory role on the Mike/LearnAIR work. 10 hours a week, structured, and redirecting the rest of my energy here."</p>
+    <p>"Wanted you to know because it changes my capacity and my focus."</p>
+    <div class="note">Frame as choosing focus, not choosing Paul over Mike. Let him respond. Don't oversell it. Then move to his agenda.</div>
   </div>
-  <div class="metric-card">
-    <div class="num">5</div>
-    <div class="label">weeks of weekly 1:1s<br>(Mar 4 - Apr 8)</div>
-  </div>
-</div>
+</section>
 
-<!-- WHAT GOOD LOOKS LIKE -->
-<div class="section section-gray">
-  <h2>What Good Looks Like Leaving This Call</h2>
+<hr>
+
+<!-- 02 PARTNERSHIP -->
+<section style="margin-top: 80px;">
+  <div class="section-num">02</div>
+  <h2>Partnership<br><span class="purple">The Real Conversation</span></h2>
+
+  <p>Paul said <strong>"yes with enthusiasm"</strong> to your partnership framework doc on April 6. He's ready. The open question you asked is still unanswered: <span class="purple">specifics now, or framing confirmed and timeline set?</span></p>
+
+  <h3>What you proposed in the doc</h3>
   <ul>
-    <li>Partnership: clear next step with a date. Either "forming LLC by [date]" or "terms doc by [date], form when Paul's back."</li>
-    <li>Customer dev: one hypothesis to test. One ICP. Not three.</li>
-    <li>Hawaii plan: what Paul ships on his own (design/brand), what waits for you both.</li>
-    <li>DRIs on every open PR and thread.</li>
-    <li>Paul feels like you're all in. Because you are.</li>
+    <li><strong>LLC formation.</strong> Aligned.</li>
+    <li><strong>Vesting schedule.</strong> Aligned.</li>
+    <li><strong>IP assignment.</strong> Aligned.</li>
+    <li><strong>Zebra model.</strong> Aligned.</li>
+    <li><strong>Interest type, split, managing member.</strong> You see it differently. Needs discussion.</li>
   </ul>
+
+  <div class="insight">
+    <p><span class="purple">Before Hawaii or after?</span> If Paul leaves Friday without a decision on structure, it sits 10 days. Either nail the terms today, or agree on a date to finalize when he's back. Don't leave it in limbo.</p>
+  </div>
+
+  <h3>Mochary moves for this conversation</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-content"><strong>Don't speak first on terms.</strong> You built the tech, you have more leverage right now. Ask Paul what structure he's envisioning before sharing yours.</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Separate decision from implementation.</strong> First: are we forming the LLC? Then, separately: what are the terms?</div>
+    </div>
+    <div class="step">
+      <div class="step-content"><strong>Leave with DRIs.</strong> Who drafts the operating agreement? By when? One name, one date.</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 03 PAUL'S AGENDA -->
+<section style="margin-top: 80px;">
+  <div class="section-num">03</div>
+  <h2>Paul's Docket</h2>
+  <p>He sent this April 6. Start here. His concerns first, yours second.</p>
+
+  <div class="agenda-grid">
+    <div class="agenda-card card-decide">
+      <div class="a-tag">Decide</div>
+      <h4>Partnership sync</h4>
+      <p>"Yes with enthusiasm." Ready to talk structure.</p>
+    </div>
+    <div class="agenda-card card-discuss">
+      <div class="a-tag">Discuss</div>
+      <h4>Customer dev</h4>
+      <p>Pin down next hypotheses. Circling: parents, better sleep, just got labs back.</p>
+    </div>
+    <div class="agenda-card card-review">
+      <div class="a-tag">Review</div>
+      <h4>Medical citations</h4>
+      <p>Kiso into Kasane integration. Blind spot: impact on focus plan?</p>
+    </div>
+    <div class="agenda-card card-ship">
+      <div class="a-tag">Ship</div>
+      <h4>Patrick Smith feedback</h4>
+      <p>Habit clusters, habit stacking, MCP support. Gold nuggets compiled.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 04 YOUR AGENDA -->
+<section style="margin-top: 80px;">
+  <div class="section-num">04</div>
+  <h2>Your Agenda</h2>
+  <p>From the 1:1 doc. Secondary to Paul's docket. Weave in, don't overload.</p>
+
+  <div class="agenda-grid">
+    <div class="agenda-card card-discuss">
+      <div class="a-tag">Discuss</div>
+      <h4>Habit Catalogue</h4>
+      <p>Leaning into the Habit Deck metaphor. Playful framing.</p>
+    </div>
+    <div class="agenda-card card-review">
+      <div class="a-tag">Review</div>
+      <h4>Brand concepts</h4>
+      <p>ICP, two protos (hand-rolled + Stitch/Figma), program structure.</p>
+    </div>
+    <div class="agenda-card card-discuss">
+      <div class="a-tag">Discuss</div>
+      <h4>Eval framework</h4>
+      <p>L4 rubric: what does "good coaching" look like as testable criteria?</p>
+    </div>
+    <div class="agenda-card card-review">
+      <div class="a-tag">Review</div>
+      <h4>Build v Buy</h4>
+      <p>Wearable integrations v. thesis validation. Where to invest?</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- 05 OPEN THREADS -->
+<section style="margin-top: 80px;">
+  <div class="section-num">05</div>
+  <h2>Open Threads</h2>
+  <p>Active items that need a word today or they sit for 10 days.</p>
+
+  <ul class="thread-list">
+    <li>
+      <span class="thread-status status-review">Review</span>
+      <span class="thread-desc"><strong>PR #3 on Kiso.</strong> Paul's focus plan timeout fix. You haven't reviewed it yet.</span>
+    </li>
+    <li>
+      <span class="thread-status status-open">Open</span>
+      <span class="thread-desc"><strong>L4 eval examples.</strong> You said you'd pull concrete coaching moments before Wednesday.</span>
+    </li>
+    <li>
+      <span class="thread-status status-open">Open</span>
+      <span class="thread-desc"><strong>Internal artifacts app.</strong> Paul floated a web app with auth for sharing HTMLs. Quick yes/no/later.</span>
+    </li>
+    <li>
+      <span class="thread-status status-open">Open</span>
+      <span class="thread-desc"><strong>Brand direction.</strong> Paul shared two video concepts. Going deep on design during Hawaii.</span>
+    </li>
+    <li>
+      <span class="thread-status status-done">Done</span>
+      <span class="thread-desc"><strong>PR #97.</strong> Fixed and deployed. OAuth tokens consolidated.</span>
+    </li>
+    <li>
+      <span class="thread-status status-done">Done</span>
+      <span class="thread-desc"><strong>PR #92.</strong> Closed. Kiso responsibility, agreed.</span>
+    </li>
+  </ul>
+</section>
+
+<hr>
+
+<!-- 06 COUNTDOWN -->
+<section style="margin-top: 80px;">
+  <div class="section-num">06</div>
+  <h2>The Clock</h2>
+
+  <div class="countdown">
+    <div class="countdown-item">
+      <div class="countdown-num">10</div>
+      <div class="countdown-label">Days offline</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-num">5</div>
+      <div class="countdown-label">Weeks of 1:1s</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-num">1</div>
+      <div class="countdown-label">Partnership</div>
+    </div>
+  </div>
+
+  <p>Whatever doesn't get decided today sits until April 16. Prioritize the partnership conversation. Everything else can go async.</p>
+</section>
+
+<hr>
+
+<!-- 07 EXIT CHECKLIST -->
+<section style="margin-top: 80px;">
+  <div class="section-num">07</div>
+  <h2>Leave With</h2>
+
+  <ul class="exit-list">
+    <li><strong>Partnership:</strong> clear next step with a date. LLC by [when], or terms doc by [when].</li>
+    <li><strong>Customer dev:</strong> one hypothesis to test. One ICP. Not three.</li>
+    <li><strong>Hawaii plan:</strong> what Paul ships solo (design/brand), what waits.</li>
+    <li><strong>DRIs:</strong> every open PR and thread has a name and a date.</li>
+    <li><strong>Paul feels it:</strong> you're all in. Because you are.</li>
+  </ul>
+</section>
+
 </div>
 
-<div style="text-align:center; color:#444; font-size:0.75rem; margin-top:30px;">
-  Prep by Mochary / Apr 8, 2026
-</div>
+<footer>Mochary prep / April 8, 2026</footer>
 
 </body>
 </html>
