@@ -489,20 +489,52 @@
 
 <hr>
 
-<!-- 05 OPEN THREADS -->
+<!-- 05 STRATEGIC MOMENT -->
 <section style="margin-top: 80px;">
   <div class="section-num">05</div>
+  <h2>The Strategic Moment<br><span class="purple">PR #94: Sync Layer Walkthrough</span></h2>
+
+  <p>This is the convergence infrastructure. The sync layer connects the iOS app to Kiso so Milo and the app see the same data. It's what makes everything else compound. <span class="purple">This is today's most important technical conversation.</span></p>
+
+  <div class="insight">
+    <p><span class="purple">Don't say "can you review PR 94."</span> Say: "The sync layer connects the app to Kiso so Milo and the app see the same data. I want to walk you through what it does and what changed since your review. Can we do 15 minutes on that?" Give him context to engage, not a request to approve.</p>
+  </div>
+
+  <h3>What's changed since Paul's last review (Apr 2)</h3>
+  <ul>
+    <li><strong>SIWA identity reconciliation.</strong> After Sign in with Apple, the app exchanges the identity token for OAuth access/refresh tokens. 3-step waterfall: match by Apple ID, then name, then create new.</li>
+    <li><strong>Dynamic tokens.</strong> No more static apiToken. Tokens managed automatically after SIWA.</li>
+    <li><strong>Orphan sync fix proposed.</strong> SyncScheduler was syncing all CoreData persons (including family members). Server-side fix deployed, iOS filter proposed. Need Paul's input on approach.</li>
+    <li><strong>Cleanup done.</strong> 22 unrelated files removed, SyncConfig.example added per his feedback.</li>
+  </ul>
+
+  <p><strong>After the call:</strong> write decisions back to the PR as a comment. "Per our call 4/8: agreed on X, Paul will Y by Z." The PR is the record.</p>
+</section>
+
+<hr>
+
+<!-- 06 OPEN THREADS -->
+<section style="margin-top: 80px;">
+  <div class="section-num">06</div>
   <h2>Open Threads</h2>
-  <p>Active items that need a word today or they sit for 10 days.</p>
+  <p>Board cleaned this morning. Here's what's left.</p>
 
   <ul class="thread-list">
     <li>
-      <span class="thread-status status-review">Review</span>
-      <span class="thread-desc"><strong>PR #3 on Kiso.</strong> Paul's focus plan timeout fix. You haven't reviewed it yet.</span>
+      <span class="thread-status status-done">Merged</span>
+      <span class="thread-desc"><strong>kiso PR #3.</strong> Paul's timeout fix. Merged this morning with review comment. His first Kiso PR.</span>
+    </li>
+    <li>
+      <span class="thread-status status-review">Active</span>
+      <span class="thread-desc"><strong>iOS PR #97 (citations).</strong> Commented: Paul owns the citation quality bar. <code>verified: true</code> flag gates the UI. He curates, you provide the mechanism. Waiting on his response.</span>
+    </li>
+    <li>
+      <span class="thread-status status-review">Walkthrough</span>
+      <span class="thread-desc"><strong>iOS PR #94 (sync layer).</strong> 15-min walkthrough on the call. SIWA reconciliation + orphan fix need alignment.</span>
     </li>
     <li>
       <span class="thread-status status-open">Open</span>
-      <span class="thread-desc"><strong>L4 eval examples.</strong> You said you'd pull concrete coaching moments before Wednesday.</span>
+      <span class="thread-desc"><strong>L4 eval examples.</strong> You said you'd pull concrete coaching moments. Have you?</span>
     </li>
     <li>
       <span class="thread-status status-open">Open</span>
@@ -510,15 +542,11 @@
     </li>
     <li>
       <span class="thread-status status-open">Open</span>
-      <span class="thread-desc"><strong>Brand direction.</strong> Paul shared two video concepts. Going deep on design during Hawaii.</span>
+      <span class="thread-desc"><strong>Brand direction.</strong> Two video concepts shared. Paul going deep on design during Hawaii.</span>
     </li>
     <li>
-      <span class="thread-status status-done">Done</span>
-      <span class="thread-desc"><strong>PR #97.</strong> Fixed and deployed. OAuth tokens consolidated.</span>
-    </li>
-    <li>
-      <span class="thread-status status-done">Done</span>
-      <span class="thread-desc"><strong>PR #92.</strong> Closed. Kiso responsibility, agreed.</span>
+      <span class="thread-status status-done">Closed</span>
+      <span class="thread-desc"><strong>iOS PR #91, context #5, #6, kiso issue #1.</strong> Stale/superseded. Board is clean.</span>
     </li>
   </ul>
 </section>
@@ -557,9 +585,11 @@
 
   <ul class="exit-list">
     <li><strong>Partnership:</strong> clear next step with a date. LLC by [when], or terms doc by [when].</li>
+    <li><strong>Sync layer:</strong> Paul understands SIWA reconciliation + orphan fix. Alignment on merge timeline.</li>
+    <li><strong>Citations:</strong> Paul confirmed as DRI on citation curation. Verified flag mechanism clear.</li>
     <li><strong>Customer dev:</strong> one hypothesis to test. One ICP. Not three.</li>
-    <li><strong>Hawaii plan:</strong> what Paul ships solo (design/brand), what waits.</li>
-    <li><strong>DRIs:</strong> every open PR and thread has a name and a date.</li>
+    <li><strong>Hawaii plan:</strong> what Paul ships solo (design/brand/citation curation), what waits.</li>
+    <li><strong>DRIs:</strong> every open thread has a name and a date. Written back to PRs after the call.</li>
     <li><strong>Paul feels it:</strong> you're all in. Because you are.</li>
   </ul>
 </section>
