@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Friedman Got Right and Wrong About Claude Mythos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Anybody:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: { DEFAULT: '#1a1a1a', soft: '#4a4a4a', faint: '#8a8a8a' },
+        paper: '#ffffff',
+        cream: '#f5f2e9',
+        navy: { DEFAULT: '#0a1628', mid: '#152238', light: '#1e3354' },
+        gold: { DEFAULT: '#D4AF37', soft: 'rgba(212,175,55,0.12)', muted: '#b8962e' },
+      },
+      fontFamily: {
+        display: ['Anybody', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #0a1628; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .s1 { transition-delay: 0.12s; } .s2 { transition-delay: 0.24s; }
+  .s3 { transition-delay: 0.36s; } .s4 { transition-delay: 0.48s; }
+  .s5 { transition-delay: 0.60s; }
+  .stat { font-family: 'Anybody', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+  .gold-rule { height: 2px; background: linear-gradient(90deg, #D4AF37 0%, transparent 100%); max-width: 80px; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Hero -->
+<header class="bg-navy text-white" style="padding: clamp(6rem, 14vw, 12rem) clamp(2rem, 6vw, 6rem) clamp(5rem, 12vw, 10rem);">
+  <div class="max-w-3xl">
+    <div class="gold-rule mb-10 reveal"></div>
+    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-10 reveal s1">Deep Dive Analysis</p>
+    <h1 class="stat text-white reveal s2" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.92; text-transform: uppercase;">
+      What Friedman<br>Got Right &amp;<br>Wrong About<br>Claude Mythos
+    </h1>
+    <p class="font-serif text-xl italic mt-10 text-gold reveal s3" style="max-width: 30rem; line-height: 1.6;">A counterbalancing read on Anthropic's "restraint," what it actually signals, and what the NYT article left out.</p>
+    <p class="font-mono text-xs text-gray-500 mt-12 reveal s4">April 8, 2026 &middot; In response to Thomas Friedman, NYT, April 7</p>
+  </div>
+</header>
+
+
+<!-- What He Said -->
+<section class="bg-navy-mid text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">What Friedman reported</p>
+    <h2 class="stat text-white reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.05; text-transform: uppercase;">The facts, stripped of theater</h2>
+
+    <div class="space-y-8 mt-12">
+      <div class="reveal s1">
+        <p class="font-body text-gray-300 text-lg leading-relaxed">Anthropic released a model called <strong class="text-white">Claude Mythos Preview</strong> to roughly 40 companies via a consortium called <strong class="text-white">Project Glasswing</strong>. Google, Apple, Amazon, Microsoft, JPMorgan, Palo Alto Networks, Nvidia.</p>
+      </div>
+      <div class="reveal s2">
+        <p class="font-body text-gray-300 text-lg leading-relaxed">The model can find software vulnerabilities at unprecedented scale. <strong class="text-white">Thousands of high-severity vulnerabilities</strong> discovered in every major operating system and web browser.</p>
+      </div>
+      <div class="reveal s3">
+        <p class="font-body text-gray-300 text-lg leading-relaxed">Anthropic is <strong class="text-white">not</strong> making it generally available. Controlled release only. Private conversations with the Trump administration preceded the announcement.</p>
+      </div>
+      <div class="reveal s4">
+        <p class="font-body text-gray-300 text-lg leading-relaxed">Friedman frames it as a <strong class="text-white">nuclear-nonproliferation-scale event</strong> and calls for US-China collaboration on AI cyber defense.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Stat Card -->
+<section class="bg-navy text-white" style="padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl reveal">
+    <p class="stat text-gold" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;">~40 companies</p>
+    <p class="font-body text-gray-400 text-lg mt-4" style="max-width: 32rem;">Received controlled access. Friedman frames this as restraint. It's also the most sophisticated enterprise sales channel in AI history.</p>
+  </div>
+</section>
+
+
+<!-- What He Got Right -->
+<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">What he got right</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-10 reveal s1">Two things</h2>
+
+    <div class="space-y-10">
+      <div class="reveal s1">
+        <p class="font-body text-ink text-lg font-semibold mb-3">Capability is outrunning governance</p>
+        <p class="font-body text-ink-soft text-lg leading-relaxed" style="max-width: 34rem;">Anthropic's own statement says they didn't anticipate getting this good this fast. If the company building the model is surprised by its capabilities, every governance framework built on assumed timelines is already obsolete. The gap between capability and regulation is widening, not closing. Friedman is right to flag this as urgent.</p>
+      </div>
+      <div class="reveal s2">
+        <p class="font-body text-ink text-lg font-semibold mb-3">Defense is now an AI product category</p>
+        <p class="font-body text-ink-soft text-lg leading-relaxed" style="max-width: 34rem;">If Mythos can find vulnerabilities faster than any human team, then every security company either integrates this capability or becomes obsolete. Palo Alto Networks is in the consortium for a reason. Cybersecurity just became AI-native, and that shift is permanent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- What He Missed -->
+<section class="bg-navy text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">What he missed</p>
+    <h2 class="stat text-white reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.05; text-transform: uppercase;">Six things</h2>
+
+    <div class="space-y-12 mt-12">
+
+      <div class="reveal s1">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">01 &mdash; The restraint IS the marketing</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">Anthropic is announcing a capability AND announcing they're withholding it. "We have something nobody else has, and we're choosing not to sell it to you." That positions them as the responsible actor while establishing they're ahead. Friedman takes the safety framing at face value. The restraint is real AND it's a business strategy. Both are true.</p>
+      </div>
+
+      <div class="reveal s2">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">02 &mdash; The consortium is the moat</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">40 companies getting early access isn't charity. It's lock-in. If your critical infrastructure depends on Anthropic's model to find and patch vulnerabilities, you're an Anthropic customer at a level that's very hard to switch from. Glasswing isn't nonproliferation. It's an enterprise sales channel dressed in safety language.</p>
+      </div>
+
+      <div class="reveal s3">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">03 &mdash; The China framing is naive</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">Friedman proposes US-China collaboration on AI cyber defense. China's APT groups (Volt Typhoon, Salt Typhoon) have been in US infrastructure for years. The idea that they'd join a defensive consortium that limits their offensive operations is geopolitically illiterate. What Friedman is actually making the case for is why the US needs to move faster, not cooperate.</p>
+      </div>
+
+      <div class="reveal s4">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">04 &mdash; The "kids could do it" framing</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">"Honey, what did you do after school today?" "We took down the power grid." This is designed for NYT readers who are afraid of technology. The real threat isn't kids. It's ransomware groups, state hackers, and intelligence services. The gap between "find vulnerabilities" and "exploit them at scale against hardened infrastructure" is enormous. Friedman collapses that gap for dramatic effect.</p>
+      </div>
+
+      <div class="reveal s5">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">05 &mdash; Nobody's asking who pays</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">If Mythos finds thousands of high-severity vulnerabilities in every major OS and browser, the patching cost across global infrastructure is tens of billions. Who pays? The consortium companies? Taxpayers? The hospitals and utilities running vulnerable legacy systems? Friedman mentions this in passing. It's actually the biggest practical question.</p>
+      </div>
+
+      <div class="reveal">
+        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-3">06 &mdash; The nonproliferation analogy is wrong</p>
+        <p class="font-body text-gray-300 text-lg leading-relaxed" style="max-width: 34rem;">Nuclear weapons need enriched uranium, centrifuges, and nation-state resources. AI models need compute and weights. Weights can be stolen, leaked, or independently reproduced. You can't bottle this the way you can (partially) limit uranium enrichment. The better analogy is encryption in the 1990s. Governments tried to control it (Clipper chip, export restrictions). They failed. The technology diffused. The question isn't whether these capabilities proliferate. It's how fast and to whom first.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- The Structural Forces -->
+<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">The structural forces</p>
+    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-10 reveal s1">What's actually happening underneath</h2>
+
+    <div class="space-y-8">
+      <div class="bg-paper rounded-2xl p-8 shadow-sm reveal s1">
+        <p class="font-body text-ink font-semibold text-lg mb-3">Capability is outrunning governance</p>
+        <p class="font-body text-ink-soft leading-relaxed">If the company building the model is surprised by what it can do, every governance timeline is already wrong. The frameworks being discussed in Washington were designed for capabilities that existed two years ago.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-8 shadow-sm reveal s2">
+        <p class="font-body text-ink font-semibold text-lg mb-3">Defense is now an AI-native market</p>
+        <p class="font-body text-ink-soft leading-relaxed">Every cybersecurity company either integrates this capability or gets disrupted by someone who does. Anthropic just claimed the platform position for the defensive AI layer of global infrastructure.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-8 shadow-sm reveal s3">
+        <p class="font-body text-ink font-semibold text-lg mb-3">Anthropic is building a regulatory moat</p>
+        <p class="font-body text-ink-soft leading-relaxed">By going to government first, creating a consortium of the biggest companies, and framing this as national security, they're making the case that frontier AI should be regulated in a way only well-resourced incumbents can comply with. Whether intentional or not, "responsible release" is regulatory capture dressed in safety language.</p>
+      </div>
+      <div class="bg-paper rounded-2xl p-8 shadow-sm reveal s4">
+        <p class="font-body text-ink font-semibold text-lg mb-3">Proliferation is inevitable</p>
+        <p class="font-body text-ink-soft leading-relaxed">The question isn't whether these capabilities spread. It's whether the 12-18 month head start Glasswing buys is enough to find and patch the critical vulnerabilities before the capability diffuses. History says the technology always diffuses. The race is between patching speed and proliferation speed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- What This Means For Regular People -->
+<section class="bg-navy text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">So what does this mean</p>
+    <h2 class="stat text-white reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.05; text-transform: uppercase;">For people building with AI</h2>
+
+    <div class="space-y-10 mt-12">
+      <div class="reveal s1">
+        <p class="font-body font-semibold text-white text-lg mb-3">The platform you build on can change the rules</p>
+        <p class="font-body text-gray-400 text-lg leading-relaxed" style="max-width: 34rem;">If you build products on top of AI models (and increasingly, everyone does), you're dependent on decisions made by a small number of companies about what capabilities to release and to whom. Today it's cybersecurity. Tomorrow it could be medical reasoning, legal analysis, or financial modeling. "Controlled release" means your product roadmap is subject to someone else's safety assessment.</p>
+      </div>
+      <div class="reveal s2">
+        <p class="font-body font-semibold text-white text-lg mb-3">The product layer gets more valuable</p>
+        <p class="font-body text-gray-400 text-lg leading-relaxed" style="max-width: 34rem;">Here's the counterintuitive take. When the model layer gets commoditized (everyone has access to powerful AI), what matters is what you build on top. The judgment layer. The user context. The domain expertise. The data relationships. The model is the electricity. Your product is the appliance. Nobody buys electricity. They buy what it powers.</p>
+      </div>
+      <div class="reveal s3">
+        <p class="font-body font-semibold text-white text-lg mb-3">The governance gap is your operating environment</p>
+        <p class="font-body text-gray-400 text-lg leading-relaxed" style="max-width: 34rem;">If you're building AI products today, you're operating in the gap between what the technology can do and what the rules say you can do with it. That gap is widening. The regulators will show up eventually, and they'll show up faster than expected. Building compliance infrastructure before you're forced to is an investment, not a cost.</p>
+      </div>
+      <div class="reveal s4">
+        <p class="font-body font-semibold text-white text-lg mb-3">The real question Friedman should have asked</p>
+        <p class="font-body text-gray-400 text-lg leading-relaxed" style="max-width: 34rem;">Not "should the US and China collaborate?" but: <strong class="text-gold">who is training the people who will oversee these systems?</strong> Mythos can find vulnerabilities. But someone has to decide which ones to fix first, how to prioritize resources, and what trade-offs to accept. That's a human judgment problem. And right now, almost nobody is training for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- The Takeaway -->
+<section class="bg-navy-mid text-white" style="padding: clamp(6rem, 12vw, 10rem) clamp(2rem, 6vw, 6rem);">
+  <div class="max-w-3xl">
+    <div class="gold-rule mb-10 reveal"></div>
+    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal s1">The takeaway</p>
+    <blockquote class="reveal s2" style="border-left: 3px solid #D4AF37; padding-left: 1.5rem;">
+      <p class="font-serif italic text-xl text-gray-300 leading-relaxed" style="max-width: 32rem;">Anthropic just executed the most sophisticated go-to-market strategy in AI history: announce a capability so powerful that governments pay attention, withhold it to create scarcity, distribute it to 40 enterprise customers as a "safety measure," and position yourself as the responsible actor while competitors look reckless by comparison.</p>
+    </blockquote>
+    <p class="font-body text-gray-400 text-lg leading-relaxed mt-10 reveal s3" style="max-width: 32rem;">
+      The safety framing is real. And it's a business strategy. Both things are true. Friedman only sees the first one.
+    </p>
+    <p class="font-body text-gray-400 text-lg leading-relaxed mt-8 reveal s4" style="max-width: 32rem;">
+      The structural bet: whoever controls the defensive AI layer for global infrastructure has the most durable business in technology. Whether the 12-18 month head start is enough depends on whether patching speed beats proliferation speed. History says the technology always diffuses. The question is whether the patch lands before the exploit does.
+    </p>
+    <p class="font-mono text-xs text-gray-600 mt-16 reveal s5">Andrew Deal &middot; April 8, 2026<br>In response to Thomas L. Friedman, "Anthropic's Restraint Is a Terrifying Warning Sign," NYT, April 7, 2026</p>
+  </div>
+</section>
+
+<script>
+const o = new IntersectionObserver(e => {
+  e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => o.observe(el));
+</script>
+
+</body>
+</html>
