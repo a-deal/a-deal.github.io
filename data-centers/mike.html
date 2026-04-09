@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Powered Shell Playbook | Austin Data Center Development</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -676,6 +679,51 @@
       <div class="callout-label">Key assumption to stress test</div>
       <p>These economics assume you can secure a tenant or LOI. The powered shell is worth nothing without a power commitment and a path to a lease. The development math is real. The tenant sourcing at this scale is the open question.</p>
     </div>
+
+    <h3>The call option play (lowest risk entry)</h3>
+    <p>There's a version of this that doesn't require committing to a data center outcome at all. Build industrial with DC-ready specs: 30 ft+ ceilings, 250 psf slab, 2.5 MW committed power via Austin Energy pre-app, substation proximity. Lease it as industrial. Hold the option on DC conversion.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Standard industrial</th>
+          <th>DC-ready industrial</th>
+          <th>Delta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Build cost (50K sf)</td>
+          <td class="num">$4-5M</td>
+          <td class="num">$5-6.5M</td>
+          <td class="num highlight">+15-25%</td>
+        </tr>
+        <tr>
+          <td>Annual rent (industrial tenant)</td>
+          <td class="num">$650K</td>
+          <td class="num">$650K-$800K</td>
+          <td class="num">Same or slight premium</td>
+        </tr>
+        <tr>
+          <td>Disposition value if DC thesis hits</td>
+          <td class="num">$5-7M</td>
+          <td class="num highlight">$15-25M</td>
+          <td class="num highlight">3-4x</td>
+        </tr>
+        <tr>
+          <td>Downside if DC thesis fails</td>
+          <td class="num">Standard industrial asset</td>
+          <td class="num">Industrial asset with better specs</td>
+          <td class="num">Minimal loss</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-green">
+      <div class="callout-label">The barbell structure</div>
+      <p>This is a barbell bet. One end: industrial rent cash flowing from day one (safe). Other end: DC conversion option worth 3-4x if tenant demand materializes (asymmetric upside). The premium you pay for DC-ready specs (15-25% over standard industrial) is the cost of the option. If the DC thesis fails, you still own a warehouse generating rent. If it hits, you convert or dispose at multiples. This maps directly to your renewable development model: develop the site, hold or dispose based on market conditions.</p>
+    </div>
   </div>
 
   <!-- 02: THE SMALL OPERATOR GAP -->
@@ -1028,10 +1076,15 @@
     <p>People, companies, and resources to pursue. Organized by what they help you solve.</p>
 
     <h3>Tenant demand validation</h3>
+    <p>Brokers won't help you find sub-10 MW tenants. They told you that directly. Tenant discovery at your scale requires non-traditional channels. Here's the specific playbook:</p>
     <ul>
-      <li><strong>Data Center Hawk / DC Byte.</strong> Market intelligence platforms. Track supply, demand, pricing, and absorption by market. Subscription-based but worth it for thesis validation.</li>
-      <li><strong>AFCOM / Data Center World.</strong> Industry association and conference. The conference floor is where you'll meet the managed hosting and colo operators who would be your tenants. Next event: check schedule for Austin/Dallas proximity.</li>
-      <li><strong>Local MSP/hosting companies.</strong> Rackspace (HQ in San Antonio), Hivelocity, Flexential. Call them directly. "I'm developing a powered shell in Austin. Would you take a meeting?" Their response is your demand signal.</li>
+      <li><strong>Austin Technology Council.</strong> Membership directory is your prospect list. 500+ member companies, many running on-premise infrastructure they'd love to move. Attend monthly events. The CTO who's complaining about their server closet is your tenant.</li>
+      <li><strong>Regional MSPs and hosting companies (direct outreach).</strong> Rackspace (HQ in San Antonio), Hivelocity, Flexential, TierPoint, DataBank, Stream Data Centers. Call expansion teams directly: "I'm developing a 2-5 MW powered shell in Austin. Would you take a meeting?" Their response is your demand signal. You need three warm responses to validate.</li>
+      <li><strong>AI inference startups.</strong> Companies running inference workloads (not training) need 1-5 MW of distributed capacity close to users. Austin's startup ecosystem is producing these. Check Capital Factory portfolio companies, Austin AI meetup organizers, and SXSW enterprise track attendees.</li>
+      <li><strong>DFW overflow tenants.</strong> Dallas brokers who turned you away for development may be willing to refer tenants they can't place. Different ask: "I'm not looking for help developing. I have capacity in Austin. Do you have tenants who can't find space in Dallas?" The broker gets a referral fee, you get a tenant lead.</li>
+      <li><strong>Local colo providers who are full.</strong> If Austin colo providers have waitlists, those waitlisted companies are your prospects. Shared Data Centers, DC74, and smaller Austin colos. Ask: "Are you at capacity? I'm developing powered shell space."</li>
+      <li><strong>Data Center Hawk / DC Byte.</strong> Market intelligence platforms. Track supply, demand, pricing, and absorption by market. Subscription-based but worth it for quantifying the demand signal you're getting from direct outreach.</li>
+      <li><strong>AFCOM / Data Center World.</strong> Industry conference. The conference floor is where managed hosting and colo operators congregate. Next event: check schedule for Austin/Dallas proximity.</li>
     </ul>
 
     <h3>Power and utility</h3>
@@ -1072,10 +1125,10 @@
 
     <div class="callout-dark">
       <div class="callout-label">Your 90-day checklist</div>
-      <p><strong>Week 1-2:</strong> Run Austin Energy pre-apps on your top 3 site candidates. Talk to Tommy's uncle about MEP costs and contractor referrals.</p>
-      <p><strong>Week 3-4:</strong> Reach out to 5 potential tenants (MSPs, hosting companies, AI inference startups). Get demand signal.</p>
-      <p><strong>Week 5-8:</strong> Structural assessment on the most promising site. Financial model for powered shell at that specific site and MW capacity.</p>
-      <p><strong>Week 9-12:</strong> Decision point. If demand signal + site + power path all check out, you have your thesis validated. If not, you know which piece is missing and whether it's solvable.</p>
+      <p><strong>Week 1-2:</strong> Tenant discovery sprint. Contact 10+ potential tenants across all channels above. You need three warm responses to validate demand. This is the critical unlock. Everything else is solvable with money and time. Do this first because it has the longest feedback loop and the highest information value.</p>
+      <p><strong>Week 3-4:</strong> Run Austin Energy pre-apps on your top 3 site candidates. Talk to Tommy's uncle about MEP costs and contractor referrals. Start building your shortlist of 10 properties.</p>
+      <p><strong>Week 5-8:</strong> Structural assessment on the most promising site. Financial model for both powered shell and call option (DC-ready industrial) at that specific site and MW capacity. Model both scenarios: full commitment vs. barbell.</p>
+      <p><strong>Week 9-12:</strong> Decision point. If demand signal + site + power path all check out, you have your thesis validated. If demand is warm but not hot, consider the call option play: build DC-ready industrial, cash flow as warehouse, hold the conversion option. If you can't get a single warm tenant response, the thesis doesn't die, but the timeline extends significantly.</p>
     </div>
   </div>
 
