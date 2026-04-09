@@ -1,0 +1,46 @@
+name: Proposal Change Alert
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'artifacts/learnair-partnership-proposal.html'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get commit info
+        id: info
+        run: |
+          MSG=$(git log -1 --pretty=format:'%s')
+          AUTHOR=$(git log -1 --pretty=format:'%an')
+          SHA=$(git log -1 --pretty=format:'%h')
+          echo "msg=$MSG" >> "$GITHUB_OUTPUT"
+          echo "author=$AUTHOR" >> "$GITHUB_OUTPUT"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Send email to Andrew
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "LearnAIR Proposal Updated — ${{ steps.info.outputs.sha }}"
+          to: deal.e.andrew@gmail.com, mkdeal@gmail.com
+          from: LearnAIR Proposals <${{ secrets.SMTP_USERNAME }}>
+          body: |
+            The LearnAIR partnership proposal was updated.
+
+            Commit: ${{ steps.info.outputs.sha }}
+            Author: ${{ steps.info.outputs.author }}
+            Message: ${{ steps.info.outputs.msg }}
+
+            View the proposal: https://andrewdeal.info/artifacts/learnair-partnership-proposal.html
+            View the diff: https://github.com/a-deal/a-deal.github.io/commit/${{ github.sha }}
