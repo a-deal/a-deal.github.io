@@ -19,61 +19,28 @@ jobs:
         run: |
           SUBJECT=$(git log -1 --pretty=format:'%s')
           BODY=$(git log -1 --pretty=format:'%b')
-          AUTHOR=$(git log -1 --pretty=format:'%an')
-          SHA=$(git log -1 --pretty=format:'%h')
-          DATE=$(git log -1 --pretty=format:'%ai')
-          STATS=$(git diff HEAD~1 HEAD --stat -- artifacts/learnair-partnership-proposal.html | tail -1)
-
           echo "subject=$SUBJECT" >> "$GITHUB_OUTPUT"
-          echo "author=$AUTHOR" >> "$GITHUB_OUTPUT"
-          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
-          echo "date=$DATE" >> "$GITHUB_OUTPUT"
-          echo "stats=$STATS" >> "$GITHUB_OUTPUT"
 
-          # Write multiline body to a file for the email template
-          echo "$BODY" > /tmp/commit-body.txt
-
-          # Extract text-only changes (added/removed lines, strip HTML tags)
-          git diff HEAD~1 HEAD -- artifacts/learnair-partnership-proposal.html \
-            | grep '^[+-]' \
-            | grep -v '^[+-][+-][+-]' \
-            | sed 's/<[^>]*>//g' \
-            | sed 's/^+/ADDED: /' \
-            | sed 's/^-/REMOVED: /' \
-            | grep -v '^\(ADDED\|REMOVED\): *$' \
-            | head -40 \
-            > /tmp/text-changes.txt
+          # Filter out Co-Authored-By lines from the body
+          CLEAN_BODY=$(echo "$BODY" | grep -v '^Co-Authored-By:' | sed '/^$/d')
+          echo "$CLEAN_BODY" > /tmp/commit-body.txt
 
       - name: Build email body
-        id: email
         run: |
-          cat > /tmp/email-body.txt << 'HEADER'
+          cat > /tmp/email-body.txt << 'EOF'
           The LearnAIR partnership proposal was updated.
+          EOF
 
-          HEADER
-
-          # Add the commit description as the plain-English explanation
           BODY=$(cat /tmp/commit-body.txt)
           if [ -n "$BODY" ]; then
-            echo "WHAT CHANGED:" >> /tmp/email-body.txt
-            echo "$BODY" >> /tmp/email-body.txt
             echo "" >> /tmp/email-body.txt
+            echo "What changed:" >> /tmp/email-body.txt
+            echo "$BODY" >> /tmp/email-body.txt
           fi
 
-          echo "---" >> /tmp/email-body.txt
-          echo "" >> /tmp/email-body.txt
-          echo "CONTENT CHANGES (text only, HTML stripped):" >> /tmp/email-body.txt
-          echo "" >> /tmp/email-body.txt
-          cat /tmp/text-changes.txt >> /tmp/email-body.txt
-          echo "" >> /tmp/email-body.txt
-          echo "---" >> /tmp/email-body.txt
-          echo "" >> /tmp/email-body.txt
-          echo "Commit: ${{ steps.info.outputs.sha }} by ${{ steps.info.outputs.author }}" >> /tmp/email-body.txt
-          echo "Date: ${{ steps.info.outputs.date }}" >> /tmp/email-body.txt
-          echo "Size: ${{ steps.info.outputs.stats }}" >> /tmp/email-body.txt
           echo "" >> /tmp/email-body.txt
           echo "View the proposal: https://andrewdeal.info/artifacts/learnair-partnership-proposal.html" >> /tmp/email-body.txt
-          echo "View the full diff: https://github.com/a-deal/a-deal.github.io/commit/${{ github.sha }}" >> /tmp/email-body.txt
+          echo "View the diff: https://github.com/a-deal/a-deal.github.io/commit/${{ github.sha }}" >> /tmp/email-body.txt
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
@@ -83,7 +50,7 @@ jobs:
           secure: true
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "LearnAIR Proposal Updated — ${{ steps.info.outputs.subject }}"
+          subject: "LearnAIR Proposal Updated"
           to: deal.e.andrew@gmail.com
           from: LearnAIR Proposals <${{ secrets.SMTP_USERNAME }}>
           body: file:///tmp/email-body.txt
