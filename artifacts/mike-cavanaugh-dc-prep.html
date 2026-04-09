@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike Cavanaugh: Meeting Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #F8F9FB;
+    --text: #2C3E50;
+    --text-light: #7B8A99;
+    --text-lighter: #A8B5C2;
+    --accent: #5B7FED;
+    --accent-light: #E8EDFB;
+    --border: #E2E6EC;
+    --white: #FFFFFF;
+    --section-gap: clamp(60px, 8vw, 100px);
+    --green: #2D8A4E;
+    --green-bg: #F0F7F4;
+    --amber: #B8860B;
+    --amber-bg: #FDF8F0;
+  }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 5vw, 48px) 120px;
+  }
+  .header { margin-bottom: var(--section-gap); }
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(32px, 4.5vw, 44px);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .header-date { font-size: 13px; color: var(--text-lighter); }
+  .section { margin-bottom: var(--section-gap); }
+  .section-num {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-lighter);
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 8px;
+  }
+  p {
+    font-size: 15px;
+    margin-bottom: 14px;
+    color: #4A5568;
+    max-width: 600px;
+  }
+  .key { color: var(--text); font-weight: 600; }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: var(--section-gap) 0;
+  }
+  .card {
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .card-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-lighter);
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .card-detail {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 4px 16px;
+    margin: 16px 0;
+  }
+  .bio-key {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 6px 0;
+  }
+  .bio-val {
+    font-size: 14px;
+    color: #4A5568;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+  .compare-col { background: var(--white); padding: 18px 20px; }
+  .compare-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .compare-row {
+    font-size: 13px;
+    color: #4A5568;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .compare-row-key {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-lighter);
+    margin-bottom: 2px;
+  }
+  .question {
+    border-left: 3px solid var(--accent);
+    padding: 0 0 0 20px;
+    margin: 16px 0;
+  }
+  .question p { font-size: 14px; margin-bottom: 6px; }
+  .question-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+  .rule-col { background: var(--white); padding: 18px 20px; }
+  .rule-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .rule-do .rule-label { color: #2D8A4E; }
+  .rule-dont .rule-label { color: #C0392B; }
+  .rule-item {
+    font-size: 13px;
+    color: #4A5568;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .tag-blue { background: var(--accent-light); color: var(--accent); }
+  .tag-gray { background: #EDF0F4; color: var(--text-light); }
+  .number-card {
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 20px 24px;
+    margin: 12px 0;
+  }
+  .number-big {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .number-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+  .number-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+  .number-grid .number-card { margin: 0; border: none; }
+  .timeline {
+    border-left: 2px solid var(--accent-light);
+    padding-left: 24px;
+    margin: 20px 0;
+  }
+  .timeline-step {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-step::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .timeline-time {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .timeline-content {
+    font-size: 14px;
+    color: #4A5568;
+    line-height: 1.6;
+  }
+  .timeline-content .key { font-size: 14px; }
+  .callout {
+    border: 1px solid var(--border);
+    background: var(--amber-bg);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .callout-green {
+    background: var(--green-bg);
+    border-color: #c6e4d0;
+  }
+  .callout p { font-size: 13px; margin-bottom: 0; }
+  .footer {
+    font-size: 11px;
+    color: var(--text-lighter);
+    margin-top: var(--section-gap);
+    letter-spacing: 0.5px;
+  }
+  @media (max-width: 640px) {
+    .compare { grid-template-columns: 1fr; }
+    .rules { grid-template-columns: 1fr; }
+    .bio-grid { grid-template-columns: 1fr; }
+    .number-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Meeting Prep</div>
+    <h1>Mike Cavanaugh</h1>
+    <div class="header-date">April 2026. 30 minutes. First meeting. Connected through mutual friend.</div>
+  </div>
+
+  <!-- BIO -->
+  <div class="section">
+    <div class="section-num">Who</div>
+    <h2>Co-owner, Austin Cleaning Crew</h2>
+
+    <div class="bio-grid">
+      <div class="bio-key">Business</div>
+      <div class="bio-val">Austin Cleaning Crew. Residential cleaning: routine, deep clean, move-in/out, Airbnb turnover, post-construction.</div>
+      <div class="bio-key">Co-founder</div>
+      <div class="bio-val">Tommy Hayes (co-owner). Small team, cleaners are W-2 or 1099 with fair wages + tips + bonuses.</div>
+      <div class="bio-key">Location</div>
+      <div class="bio-val">2305 Wilke Dr, Unit A, Austin, TX 78704. Serves Northwest Hills, Allandale, Downtown, Zilker, South Austin.</div>
+      <div class="bio-key">Stage</div>
+      <div class="bio-val">Young company. BBB file opened March 2024. A rating. Not yet BBB accredited. Growing.</div>
+      <div class="bio-key">Vibe</div>
+      <div class="bio-val">Operator, not a finance guy. Leads with fair treatment of workers. Company dogs on the About page. Approachable, informal brand.</div>
+      <div class="bio-key">Connection</div>
+      <div class="bio-val">Through mutual buddy interested in the warehouse-to-data-center conversion thesis.</div>
+    </div>
+
+    <div class="tag tag-blue">Small business owner</div>
+    <div class="tag tag-blue">Austin native</div>
+    <div class="tag tag-gray">Services business</div>
+    <div class="tag tag-gray">Operator mindset</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- THESIS TAILORED -->
+  <div class="section">
+    <div class="section-num">The Opportunity</div>
+    <h2>Why warehouse owners in Austin are sitting on something valuable</h2>
+
+    <p>Austin has a supply/demand mismatch that's creating a once-in-a-cycle opportunity for warehouse owners. The short version: AI companies need buildings with power, and there aren't enough.</p>
+
+    <div class="number-grid">
+      <div class="number-card">
+        <div class="number-big">21.9%</div>
+        <div class="number-label">Industrial warehouse vacancy in Austin. Up 860 bps YoY. Warehouses are struggling.</div>
+      </div>
+      <div class="number-card">
+        <div class="number-big">10-14x</div>
+        <div class="number-label">Value uplift converting a qualifying warehouse to data center use.</div>
+      </div>
+      <div class="number-card">
+        <div class="number-big">$196/kW</div>
+        <div class="number-label">Monthly colocation rate. Expected to breach $200 in 2026.</div>
+      </div>
+    </div>
+
+    <h3>The math in plain English</h3>
+    <p>A 200,000 sq ft warehouse in Austin generates about <span class="key">$2.6M/year in rent</span> and is worth roughly <span class="key">$38M</span>. That same building converted to a powered shell data center generates <span class="key">$29M/year</span> and is worth <span class="key">$364M</span>. Even at half that scale, a 100K sq ft building goes from a ~$15M asset to $150M+.</p>
+
+    <h3>Why now</h3>
+    <p>AI companies (Meta, Microsoft, Google) are spending $600B+ this year building compute infrastructure. Austin is the #2 market nationally for new data center construction. Dallas is running out of room, pushing demand south. There are 170,000+ tech workers in Austin generating baseline enterprise cloud demand.</p>
+
+    <h3>Why not everyone can do this</h3>
+    <p>The bottleneck is power, not buildings. <span class="key">225+ GW of large load requests</span> are queued at ERCOT (the Texas grid operator), and 73% are data centers. New applications enter a multi-year process. Realistic timeline for 75+ MW: 3-5 years from application to energized substation.</p>
+
+    <div class="callout callout-green">
+      <p><span class="key">The small operator advantage:</span> Projects under 75 MW bypass the ERCOT large load queue entirely. They go through Austin Energy's distribution planning instead, cutting 1-2 years off the timeline. A 50,000-100,000 sq ft warehouse converting to 5-15 MW is the sweet spot.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- WHAT QUALIFIES -->
+  <div class="section">
+    <div class="section-num">Qualification</div>
+    <h2>Does the building work?</h2>
+
+    <p>Not every warehouse qualifies. Six factors determine if a conversion is viable. A building needs to hit at least 4 of 6.</p>
+
+    <div class="card">
+      <div class="card-label">Physical requirements</div>
+      <div class="card-detail" style="line-height: 2.2;">
+        <span class="key">Ceiling height:</span> 24 ft minimum, 30-36 ft preferred<br>
+        <span class="key">Floor load:</span> 150 lbs/sq ft minimum, 250 preferred<br>
+        <span class="key">Column spacing:</span> 40x40 ft minimum, 50x50+ preferred<br>
+        <span class="key">Footprint:</span> 50,000 sq ft minimum, 150-500K preferred<br>
+        <span class="key">Power path:</span> Achievable within 36 months<br>
+        <span class="key">Year built:</span> Post-2000 (pre-2000 stock at 18-22 ft ceilings is generally a disqualifier)
+      </div>
+    </div>
+
+    <p>The first conversation with any warehouse owner should cover these specs. If the building doesn't qualify physically, the rest doesn't matter.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- OPTIONS -->
+  <div class="section">
+    <div class="section-num">Paths Forward</div>
+    <h2>A warehouse owner doesn't need to become a data center operator</h2>
+
+    <p>There are four paths. The right one depends on capital access, risk appetite, and how long Mike (or whoever owns the building) wants to stay involved.</p>
+
+    <div class="card">
+      <div class="card-label">Option 1: Joint Venture</div>
+      <div class="card-title">Contribute the building. Partner provides capital + expertise.</div>
+      <div class="card-detail">Building contributed at appraised value. Development partner (Skybox, Prologis, etc.) handles engineering, permitting, tenant leasing. Owner participates in upside with a 20-40% promote on stabilized value. Lowest risk, still significant upside.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Option 2: Sell at DC Premium</div>
+      <div class="card-title">Exit now at 3-6x replacement cost for power-committed sites.</div>
+      <div class="card-detail">Clean exit. Liquidity now. The 2025-2027 window is likely the strongest near-term seller's market. Best for owners who want proceeds, not a development project.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Option 3: Ground Lease</div>
+      <div class="card-title">Retain fee interest. 50-99 year lease. Participate in upside.</div>
+      <div class="card-detail">Keep the land, collect lease payments, participate in development economics. Long-term income stream without capital outlay.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Option 4: Convert (Owner-led)</div>
+      <div class="card-title">Retain ownership. Requires $50M+ capital and development expertise.</div>
+      <div class="card-detail">Highest upside, highest complexity. Requires long hold horizon, significant capital, and either in-house or contracted MEP/data center engineering. Not realistic for most small operators without a development partner.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MEETING STRUCTURE -->
+  <div class="section">
+    <div class="section-num">Meeting Plan</div>
+    <h2>30 minutes. His time, his value.</h2>
+
+    <p>This is a first meeting with someone you don't know, connected through a friend. The goal is not to pitch. The goal is to understand what Mike actually has, what he wants, and whether the thesis applies to his situation. If it does, the value you deliver is clarity he didn't have before.</p>
+
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-time">0:00 - 5:00 / Connect</div>
+        <div class="timeline-content">
+          <span class="key">Open with the mutual friend and genuine curiosity about his business.</span> "Tell me about Austin Cleaning Crew. How'd you and Tommy get that going?" He runs a services business. He understands hustle, margins, managing people. Meet him there. Don't jump to data centers.
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-time">5:00 - 12:00 / Discover</div>
+        <div class="timeline-content">
+          <span class="key">Understand what he actually has.</span> The buddy connected you because of the data center thesis. Find out why. Does Mike own a warehouse? Does he know someone who does? Is he looking at this as an investor, a broker, or an owner? Ask directly: "What's your connection to the warehouse side of this?" Then, if there's a specific property: "Tell me about the building."
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-time">12:00 - 22:00 / Deliver Value</div>
+        <div class="timeline-content">
+          <span class="key">Share the thesis at his level.</span> Not cap rates and development yields. The simple version: "Austin has a massive shortage of data center space. The bottleneck is power. If you have a warehouse with the right specs and a path to power, it's worth multiples of what it is as a warehouse. You don't need to build the data center yourself." If a specific building came up, run through the qualification criteria together. That's the most valuable thing you can give him in 30 minutes: a yes/no on whether his building qualifies.
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-time">22:00 - 28:00 / Orient</div>
+        <div class="timeline-content">
+          <span class="key">Help him see the paths.</span> If the building qualifies, walk through the four options briefly. JV and sell are the most relevant for a small operator. Be honest about what's realistic. "You don't need $50M. You need a building that qualifies and a development partner. There are firms that do exactly this."
+        </div>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-time">28:00 - 30:00 / Close</div>
+        <div class="timeline-content">
+          <span class="key">One clear next step.</span> If there's a real building: "Send me the specs and I'll run the qualification checklist. I'll tell you in 24 hours if this is worth pursuing." If it's exploratory: "I'll send you the full framework. If you come across a building that fits, you'll know what to look for." Either way, send the thesis link within an hour of hanging up.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- DISCOVERY QUESTIONS -->
+  <div class="section">
+    <div class="section-num">Ask</div>
+    <h2>Questions that move the conversation</h2>
+
+    <div class="question">
+      <div class="question-label">The situation question</div>
+      <p><span class="key">"What's your connection to the warehouse side of this? Do you own a building, or is this through someone you know?"</span></p>
+      <p>Establishes whether this is a real opportunity or exploratory. Changes everything about how you spend the next 20 minutes.</p>
+    </div>
+
+    <div class="question">
+      <div class="question-label">The spec question</div>
+      <p><span class="key">"How big is the building? When was it built? Do you know the ceiling height?"</span></p>
+      <p>If there's a building, start qualifying immediately. This is the most valuable thing you can do in the meeting: tell him whether it's viable.</p>
+    </div>
+
+    <div class="question">
+      <div class="question-label">The motivation question</div>
+      <p><span class="key">"What are you hoping to get out of this? Are you looking for an exit, ongoing income, or something else?"</span></p>
+      <p>Determines which of the four paths to emphasize. A guy who wants cash flow talks about ground leases. A guy who wants liquidity talks about selling at a premium.</p>
+    </div>
+
+    <div class="question">
+      <div class="question-label">The power question</div>
+      <p><span class="key">"Do you know what kind of electrical service the building has? Or who the utility provider is?"</span></p>
+      <p>He probably won't know the answer. That's fine. It signals that power is the key variable, not the building itself. Plants the seed for the sub-75 MW advantage.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- GUARDRAILS -->
+  <div class="section">
+    <div class="section-num">Guardrails</div>
+    <h2>Stay in his world</h2>
+
+    <div class="rules">
+      <div class="rule-col rule-do">
+        <div class="rule-label">Do</div>
+        <div class="rule-item">Lead with curiosity about him and his business</div>
+        <div class="rule-item">Reflect back what you hear before offering analysis</div>
+        <div class="rule-item">Use plain language: "worth more" not "value uplift"</div>
+        <div class="rule-item">Qualify a specific building if one comes up</div>
+        <div class="rule-item">Leave with one clear, named next step</div>
+        <div class="rule-item">Send the thesis link within an hour of hanging up</div>
+      </div>
+      <div class="rule-col rule-dont">
+        <div class="rule-label">Don't</div>
+        <div class="rule-item">Lead with the thesis. Discover first, then deliver.</div>
+        <div class="rule-item">Use finance jargon (cap rates, development yields, NOI)</div>
+        <div class="rule-item">Oversell the opportunity. Be honest about what disqualifies.</div>
+        <div class="rule-item">Promise introductions you haven't confirmed</div>
+        <div class="rule-item">Let it run past 30 minutes. Respect his time.</div>
+        <div class="rule-item">Talk about your other projects unless asked</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MOCHARY NOTES -->
+  <div class="section">
+    <div class="section-num">Operating Notes</div>
+    <h2>Running the meeting well</h2>
+
+    <div class="callout">
+      <p><span class="key">Mochary: Fundraising Relationship Method applies here.</span> Build trust before discussing the opportunity. Ask about his life, prove you heard him, prove you remembered. Appreciation before business. The data center thesis is not a pitch. It's a gift you give after you've earned the right.</p>
+    </div>
+
+    <h3>"Heard" before solutions</h3>
+    <p>When Mike describes his situation, reflect it back before analyzing. "What I'm hearing is you've got a building in [area] that's been sitting, and a friend told you there might be a better play. Is that right?" Don't jump to the qualification checklist until he confirms you understand his situation.</p>
+
+    <h3>Separate decision from implementation</h3>
+    <p>If the building qualifies, don't go down the rabbit hole of JV structures and ERCOT timelines. First question: "Does this interest you?" Second question (different meeting): "How do we do it?" Mixing them in 30 minutes overwhelms a first conversation.</p>
+
+    <h3>One DRI, one next step</h3>
+    <p>End with a named action and a named owner. "I'll run the qualification check and get back to you by [day]." Or "You'll send me the building specs and I'll tell you what I see." No "let's stay in touch." Impeccable agreements, even small ones, build trust.</p>
+
+    <h3>Above the line</h3>
+    <p>Check yourself before the call. Are you going in curious and open, or are you going in trying to close something? Mike will feel the difference. This is a 30-minute conversation where the best outcome is that he walks away thinking "that guy gave me something useful and didn't ask for anything."</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- REFERENCE -->
+  <div class="section">
+    <div class="section-num">Reference</div>
+    <h2>Key numbers to have ready</h2>
+
+    <div class="compare">
+      <div class="compare-col">
+        <div class="compare-label">Austin Market</div>
+        <div class="compare-row-key">Installed capacity</div>
+        <div class="compare-row">1.54 GW (2025), growing to 2.19 GW by 2031</div>
+        <div class="compare-row-key">Vacancy</div>
+        <div class="compare-row">Industrial: 21.9%. Data center: near zero.</div>
+        <div class="compare-row-key">ERCOT queue</div>
+        <div class="compare-row">225+ GW. 73% data centers. Multi-year wait.</div>
+        <div class="compare-row-key">Colo rate</div>
+        <div class="compare-row">$196/kW/month, rising</div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-label">Conversion Economics</div>
+        <div class="compare-row-key">Value uplift</div>
+        <div class="compare-row">10-14x from warehouse to DC</div>
+        <div class="compare-row-key">Powered shell cost</div>
+        <div class="compare-row">$4-8M per MW</div>
+        <div class="compare-row-key">Turnkey cost</div>
+        <div class="compare-row">$10-14M per MW</div>
+        <div class="compare-row-key">Sale premium</div>
+        <div class="compare-row">3-6x replacement cost for power-committed sites</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><span class="key">Active players in Austin:</span> Skybox Datacenters (600 MW campus in Hutto with Prologis, $548M Pflugerville commitment). Prologis ($25B DC division, proven warehouse conversion model). Tract (3,000 acres in Caldwell County, 4 GW potential). Digital Realty, CyrusOne/KKR. Capital from Blackstone, Brookfield, Blue Owl, KKR.</p>
+    </div>
+
+    <p style="font-size: 13px; color: var(--text-lighter);">Full thesis with 35 sources: <a href="https://andrewdeal.info/data-centers/" style="color: var(--accent);">andrewdeal.info/data-centers</a></p>
+  </div>
+
+  <div class="footer">Andrew Deal. Meeting prep for Mike Cavanaugh, Austin Cleaning Crew. April 2026.</div>
+
+</div>
+</body>
+</html>
