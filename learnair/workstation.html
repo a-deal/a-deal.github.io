@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike's Workstation | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
+    --accent-soft: rgba(184, 134, 11, 0.06); --muted: #78716c; --faint: #d6d3cd;
+    --green: #2d6a4f; --green-bg: #f2f8f5;
+    --blue: #1e40af; --blue-bg: #eff6ff;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 0.75rem 2rem; border-bottom: 1px solid var(--faint); }
+  .nav-inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+  nav .logo span { color: var(--accent); }
+  .stat-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 100px; color: var(--accent); background: var(--accent-soft); }
+
+  .hero { max-width: 820px; margin: 0 auto; padding: 3rem 2rem 1.5rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hero .kicker::after { content: ''; flex: 1; height: 1px; background: var(--faint); max-width: 60px; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+  .content { max-width: 820px; margin: 0 auto; padding: 0 2rem 3rem; }
+
+  /* --- HOW TO USE --- */
+  .how-to-use { background: var(--ink); color: var(--paper); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 1rem 0 2rem; }
+  .how-to-use h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .how-row { display: flex; gap: 1.25rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.85rem; line-height: 1.5; align-items: baseline; }
+  .how-row:last-child { border-bottom: none; }
+  .how-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--accent); min-width: 100px; flex-shrink: 0; padding-top: 2px; }
+  .how-desc { color: rgba(250,249,246,0.85); }
+  .how-desc strong { color: #fff; }
+  .how-desc code { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; background: rgba(255,255,255,0.08);
+    padding: 0.15rem 0.4rem; border-radius: 4px; color: var(--accent); }
+
+  /* --- CAPSTONE BANNER --- */
+  .capstone-banner { background: linear-gradient(135deg, #1c1917 0%, #292524 100%); color: var(--paper);
+    border-radius: 16px; padding: 2rem 2rem; margin: 1.5rem 0; border: 1px solid rgba(184, 134, 11, 0.2); }
+  .capstone-banner h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.5rem;
+    margin-bottom: 0.5rem; }
+  .capstone-banner h2 em { color: var(--accent); font-style: italic; }
+  .capstone-banner p { font-size: 0.85rem; color: rgba(250,249,246,0.7); line-height: 1.6; margin: 0.4rem 0; }
+  .capstone-banner .milestone-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1.25rem; }
+  .milestone { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; padding: 0.75rem 1rem; }
+  .milestone .num { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.5rem;
+    color: var(--accent); line-height: 1; }
+  .milestone .label { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(250,249,246,0.5); margin-top: 0.25rem; }
+  .milestone .desc { font-size: 0.75rem; color: rgba(250,249,246,0.7); margin-top: 0.35rem; line-height: 1.4; }
+
+  /* --- PREREQ CHAIN --- */
+  .prereq-chain { display: flex; align-items: center; gap: 0; margin: 1.5rem 0; flex-wrap: wrap; }
+  .prereq-step { background: #fff; border: 1px solid var(--warm); border-radius: 8px;
+    padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 500; }
+  .prereq-step.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .prereq-arrow { color: var(--faint); font-size: 0.7rem; padding: 0 0.35rem; }
+
+  /* --- TRACK TABS --- */
+  .track-tabs { display: flex; gap: 0; margin: 1.5rem 0 1rem; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--warm); width: fit-content; font-size: 0.75rem; flex-wrap: wrap; }
+  .track-tabs span { padding: 0.6rem 1.4rem; font-weight: 500; background: #fff; color: var(--muted); cursor: pointer;
+    transition: background 0.15s, color 0.15s; user-select: none; display: flex; align-items: center; gap: 0.5rem; }
+  .track-tabs span.active { background: var(--ink); color: #fff; }
+  .track-tabs span .count { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; opacity: 0.6; }
+
+  /* --- MODULE CARDS --- */
+  .track-content { display: none; }
+  .track-content.active { display: block; }
+  .tier-section { margin: 1.25rem 0; }
+  .tier-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.5rem; }
+  .tier-label::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
+
+  .module { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
+    margin: 0.5rem 0; box-shadow: var(--card-shadow); overflow: hidden; }
+  .module-header { padding: 1rem 1.25rem; cursor: pointer; display: flex; align-items: center;
+    justify-content: space-between; user-select: none; }
+  .module-header:hover { background: var(--warm); }
+  .module-title { display: flex; align-items: center; gap: 0.75rem; }
+  .module-title h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.9rem; }
+  .module-chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.2s; }
+  .module.open .module-chevron { transform: rotate(90deg); }
+
+  .module-body { display: none; padding: 0 1.25rem 1.25rem; border-top: 1px solid var(--warm); }
+  .module.open .module-body { display: block; }
+  .module-body p { font-size: 0.85rem; margin: 0.75rem 0; line-height: 1.65; }
+  .module-body .label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1rem; margin-bottom: 0.25rem; }
+  .module-body .label.practice { color: var(--green); }
+  .module-body .label.quiz { color: var(--accent); }
+  .module-body .label.record { color: var(--blue); }
+
+  .teachback { background: var(--accent-soft); border: 1px solid rgba(184, 134, 11, 0.15);
+    border-radius: 10px; padding: 1rem 1.25rem; margin: 0.5rem 0; }
+  .teachback p { font-size: 0.82rem; font-style: italic; color: var(--ink); margin: 0; }
+
+  .confused-box { background: var(--blue-bg); border-left: 3px solid var(--blue);
+    padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 8px 8px 0; cursor: pointer; }
+  .confused-box .trigger { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 0.4rem; }
+  .confused-box .trigger::before { content: '+'; font-size: 0.8rem; font-weight: 600; }
+  .confused-box.open .trigger::before { content: '\2212'; }
+  .confused-box .explanation { display: none; font-size: 0.82rem; margin-top: 0.5rem; line-height: 1.6; color: var(--ink); }
+  .confused-box.open .explanation { display: block; }
+
+  .mcp-hint { background: rgba(45, 106, 79, 0.06); border: 1px solid rgba(45, 106, 79, 0.15);
+    border-radius: 8px; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.78rem; color: var(--green); }
+  .mcp-hint code { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; background: rgba(45, 106, 79, 0.08);
+    padding: 0.1rem 0.35rem; border-radius: 3px; }
+
+  /* --- DAILY STRUCTURE --- */
+  .daily-structure { background: #fff; border: 2px solid var(--accent); border-radius: 16px;
+    padding: 1.75rem 2rem; margin: 2rem 0; }
+  .daily-structure h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.25rem; }
+  .daily-structure .ds-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+  .schedule-row { display: flex; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--warm);
+    font-size: 0.85rem; line-height: 1.5; }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-time { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent);
+    min-width: 55px; flex-shrink: 0; padding-top: 2px; }
+  .schedule-desc strong { font-weight: 600; }
+
+  .footer { max-width: 820px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 2rem 1.25rem 1rem; }
+    .content { padding: 0 1.25rem 2rem; }
+    .how-to-use, .daily-structure, .capstone-banner { padding: 1.25rem 1.5rem; }
+    .capstone-banner .milestone-grid { grid-template-columns: repeat(2, 1fr); }
+    .prereq-chain { gap: 0.25rem; }
+    .footer { flex-direction: column; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/learnair/" class="logo">Learn<span>AIR</span> Workstation</a>
+    <span class="stat-pill" id="nav-progress">56 concepts</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Built for Mike</div>
+  <h1>The <em>Workstation</em></h1>
+  <p class="subtitle">This is your textbook. Claude Desktop is your classroom. Read concepts here. Practice and record your learning there. Build toward the capstone: your own agent system.</p>
+</div>
+
+<div class="content">
+
+  <!-- HOW TO USE -->
+  <div class="how-to-use">
+    <h3>How This Works</h3>
+    <div class="how-row">
+      <span class="how-label">Read here</span>
+      <span class="how-desc">This page is the <strong>reference</strong>. Concepts, explanations, practice prompts, analogies when you're stuck.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Practice there</span>
+      <span class="how-desc">Open <strong>Claude Desktop</strong>. Do the practice exercises. That's where learning happens.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Quiz yourself</span>
+      <span class="how-desc">In Claude Desktop, say <code>"quiz me on learnair"</code> or <code>"quiz me on internet"</code>. Spaced repetition handles the schedule.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Record notes</span>
+      <span class="how-desc">In Claude Desktop: <code>"save a note to learning: [what clicked]"</code>. Your notes live in your workspace, not in a browser.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Check progress</span>
+      <span class="how-desc">In Claude Desktop: <code>"show my progress"</code>. See started/mastered counts per track.</span>
+    </div>
+  </div>
+
+  <!-- PREREQ CHAIN -->
+  <div class="prereq-chain">
+    <span class="prereq-step">Internet Foundations</span>
+    <span class="prereq-arrow">&#9654;</span>
+    <span class="prereq-step">Using Claude</span>
+    <span class="prereq-arrow">&#9654;</span>
+    <span class="prereq-step">LearnAIR Domain</span>
+    <span class="prereq-arrow">&#9654;</span>
+    <span class="prereq-step active">Capstone: Build Your Agent</span>
+  </div>
+
+  <!-- CAPSTONE BANNER -->
+  <div class="capstone-banner">
+    <h2>The Goal: Build Your Own <em>Agent</em></h2>
+    <p>Everything below is a prerequisite for one thing: building and deploying an MCP-powered agent that solves a real problem. The agent you build proves you understand every concept in this curriculum, because you have to apply them all.</p>
+    <p>Reference: mcp-mike (the tools you use daily). Target: something like a veteran onboarding agent, a workshop prep assistant, or an employer research tool. Your choice.</p>
+    <div class="milestone-grid">
+      <div class="milestone">
+        <div class="num">1</div>
+        <div class="label">Define</div>
+        <div class="desc">Pick the mission. Scope the tools. Write commander's intent.</div>
+      </div>
+      <div class="milestone">
+        <div class="num">2</div>
+        <div class="label">Build</div>
+        <div class="desc">Knowledge base. System prompts. MCP server with 3-5 tools.</div>
+      </div>
+      <div class="milestone">
+        <div class="num">3</div>
+        <div class="label">Deploy</div>
+        <div class="desc">Add to Claude Desktop. Test end-to-end. Fix what breaks.</div>
+      </div>
+      <div class="milestone">
+        <div class="num">4</div>
+        <div class="label">Supervise</div>
+        <div class="desc">Use it for a week. Log failures. Iterate. Hand it to someone else.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACK TABS -->
+  <div class="track-tabs" id="trackTabs">
+    <span data-track="capstone">Capstone <span class="count" id="count-capstone"></span></span>
+    <span class="active" data-track="learnair">LearnAIR Domain <span class="count" id="count-learnair"></span></span>
+    <span data-track="internet">Technical Foundations <span class="count" id="count-internet"></span></span>
+    <span data-track="claude">Using Claude <span class="count" id="count-claude"></span></span>
+  </div>
+
+  <div class="track-content" id="track-capstone"></div>
+  <div class="track-content active" id="track-learnair"></div>
+  <div class="track-content" id="track-internet"></div>
+  <div class="track-content" id="track-claude"></div>
+
+  <!-- DAILY STRUCTURE -->
+  <div class="daily-structure">
+    <h3>Daily Learning Session (1 Hour)</h3>
+    <p class="ds-sub">Alpha School model: compressed instruction, expanded practice. 10 min reading, 50 min doing.</p>
+    <div class="schedule-row">
+      <span class="schedule-time">0:00</span>
+      <span class="schedule-desc"><strong>Open workstation.</strong> Pick the next concept in your current track.</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">0:05</span>
+      <span class="schedule-desc"><strong>Read the concept.</strong> If confused, open the analogy. Don't move on until it clicks.</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">0:15</span>
+      <span class="schedule-desc"><strong>Do the practice.</strong> Open Claude Desktop. Hands on keyboard. Follow the exercise.</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">0:35</span>
+      <span class="schedule-desc"><strong>Teach it back.</strong> Answer the quiz question out loud or in writing. If you can't explain it, re-read.</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">0:45</span>
+      <span class="schedule-desc"><strong>Spaced review.</strong> In Claude Desktop: <em>"quiz me"</em>. Review what's due from past sessions.</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">0:55</span>
+      <span class="schedule-desc"><strong>Record.</strong> In Claude Desktop: <em>"save a note to learning: [what clicked today]"</em></span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>LearnAIR Workstation</span>
+  <span id="footer-date"></span>
+</div>
+
+<script>
+const CONCEPTS = [
+  {
+    "id": "what-claude-is",
+    "tier": 1,
+    "name": "What Claude Actually Is",
+    "summary": "An LLM that predicts the next best response by pattern-matching across training data. Not sentient, not a database. More context = better patterns.",
+    "quiz": "In your own words, what happens when Claude gives you a wrong answer? Is it lying?",
+    "practice": "Ask Claude to explain itself like you're a Marine who's never used AI."
+  },
+  {
+    "id": "models",
+    "tier": 1,
+    "name": "Models: Haiku, Sonnet, Opus",
+    "summary": "Three sizes. Haiku: fast, simple tasks. Sonnet: balanced daily driver. Opus: deep reasoning, complex problems. Claude Pro gives you Sonnet by default.",
+    "quiz": "You have a complex strategy document to analyze. Which model do you pick and why?",
+    "practice": "Ask the same hard question to Sonnet and Opus. Compare the depth."
+  },
+  {
+    "id": "context-window",
+    "tier": 1,
+    "name": "Context Window",
+    "summary": "How much text Claude can see at once (200K-1M tokens). Attention degrades in long threads. Claude pays most attention to the beginning and end.",
+    "quiz": "Your thread is 50 messages deep and Claude starts forgetting your instructions. What do you do?",
+    "practice": "Have a 20-message conversation, then ask Claude to summarize. Notice what it dropped."
+  },
+  {
+    "id": "system-prompts",
+    "tier": 1,
+    "name": "System Prompts / Custom Instructions",
+    "summary": "Instructions set before the conversation that shape Claude's behavior for the entire thread. In Claude Desktop, this is Project Instructions. Replaces persona-pasting.",
+    "quiz": "What's the difference between typing your persona into the chat vs. setting it as project instructions?",
+    "practice": "Create a project with Nexus as the project instruction. Start a conversation and see the difference."
+  },
+  {
+    "id": "tokens",
+    "tier": 1,
+    "name": "Tokens",
+    "summary": "The unit Claude thinks in. ~1 token = 3/4 of a word. Rate limits are token-based. Longer prompts and responses burn more tokens.",
+    "quiz": "You hit your rate limit halfway through the day. What probably caused it?",
+    "practice": "Ask Claude to estimate token counts for different message lengths. Build intuition."
+  },
+  {
+    "id": "temperature",
+    "tier": 1,
+    "name": "Temperature (Creativity Dial)",
+    "summary": "Setting from 0-1. Low = safe, consistent, factual. High = creative, varied, sometimes wild. Claude Desktop defaults to balanced.",
+    "quiz": "Claude gives you a boring, safe answer. Is it being dumb or being cautious? What do you change?",
+    "practice": "Ask for a tagline twice: once 'be precise' and once 'be bold and creative.' Feel the difference."
+  },
+  {
+    "id": "artifacts",
+    "tier": 2,
+    "name": "Artifacts",
+    "summary": "Claude Desktop's document panel. Generated docs appear as separate artifacts you can edit and iterate on, instead of walls of text in chat.",
+    "quiz": "What's the difference between Claude giving you text in the chat vs. creating an artifact?",
+    "practice": "Ask Claude to create an artifact: a 1-page LearnAIR summary. Then revise the artifact directly."
+  },
+  {
+    "id": "prompt-specificity",
+    "tier": 2,
+    "name": "Prompt Specificity",
+    "summary": "More specific instructions = better output. Include: role, format, length, tone, what to include, what to exclude. Vague prompts get vague results.",
+    "quiz": "Your handout came back at 11 pages instead of 8. What went wrong with your prompt?",
+    "practice": "Rewrite a past mediocre prompt with role, format, length, tone, inclusions, exclusions. Compare."
+  },
+  {
+    "id": "iterative-refinement",
+    "tier": 2,
+    "name": "Iterative Refinement",
+    "summary": "Don't accept the first output or start over. Direct Claude surgically: keep X, rewrite Y, add Z after paragraph 3. Co-edit, don't re-generate.",
+    "quiz": "Claude gives you a draft that's 70% good. What's your next move?",
+    "practice": "Get a 500-word essay. Give 5 specific, targeted revisions. Watch each one land."
+  },
+  {
+    "id": "file-attachments",
+    "tier": 2,
+    "name": "File Attachments",
+    "summary": "Drop PDFs, images, docs into a conversation. Claude reads them directly. No need to summarize or transcribe first.",
+    "quiz": "You have a 40-page PDF from LearnAIR. How do you get Claude's take on it?",
+    "practice": "Drop a real PDF into Claude. Ask it to extract key points and critique the argument."
+  },
+  {
+    "id": "multi-turn-strategy",
+    "tier": 2,
+    "name": "Multi-Turn Strategy",
+    "summary": "Start new threads often. If Claude repeats itself, forgets instructions, or goes generic, context is degraded. New thread + summary > long thread.",
+    "quiz": "How do you know when it's time to start a fresh thread?",
+    "practice": "Notice when a conversation goes in circles. Start fresh with a 3-sentence summary. Compare quality."
+  },
+  {
+    "id": "projects",
+    "tier": 2,
+    "name": "Projects",
+    "summary": "Claude Desktop's folder system. Each project has its own files, instructions, and history. Files added to a project are available to every conversation in it.",
+    "quiz": "Why would you use three separate projects instead of one project for everything?",
+    "practice": "Create projects for LearnAIR, Workshops, and Learning Claude. Add files to each."
+  },
+  {
+    "id": "role-assignment",
+    "tier": 3,
+    "name": "Role Assignment",
+    "summary": "Tell Claude who it is before what to do. 'You are a curriculum designer with 15 years of veteran workforce experience' changes the output fundamentally.",
+    "quiz": "Why does assigning a role change Claude's output? What's happening under the hood?",
+    "practice": "Ask the same question with 3 different roles. Compare how each 'person' approaches it."
+  },
+  {
+    "id": "chain-of-thought",
+    "tier": 3,
+    "name": "Chain of Thought",
+    "summary": "Ask Claude to think step by step before answering. Forces it to show reasoning and catch its own errors. Essential for complex decisions.",
+    "quiz": "When should you use chain of thought vs. just asking directly?",
+    "practice": "Ask a complex LearnAIR strategy question with and without 'think step by step.' Compare depth."
+  },
+  {
+    "id": "structured-extraction",
+    "tier": 3,
+    "name": "Structured Extraction",
+    "summary": "Give Claude a document and ask for specific structured output: action items, decisions, tensions, people mentioned. Saves hours on meeting notes.",
+    "quiz": "You just finished a 2-hour call. What prompt turns the transcript into actionable notes?",
+    "practice": "Take a real transcript. Ask Claude to extract action items, decisions, and open questions."
+  },
+  {
+    "id": "comparison-prompting",
+    "tier": 3,
+    "name": "Comparison Prompting",
+    "summary": "Ask for 3 versions (formal, conversational, bullet-pointed), then combine the best parts. Explore the space before committing.",
+    "quiz": "Why is asking for 3 versions better than revising 1 version three times?",
+    "practice": "Ask for 3 versions of a pitch paragraph. Pick the best line from each. Combine."
+  },
+  {
+    "id": "teaching-voice",
+    "tier": 3,
+    "name": "Teaching Claude Your Voice",
+    "summary": "Paste 3-4 examples of writing you like and say 'match this voice.' Within a project, this persists across conversations.",
+    "quiz": "Claude's output sounds generic. What's the fastest way to make it sound like you?",
+    "practice": "Paste 3 paragraphs you've written. Ask Claude to write something new in the same voice."
+  },
+  {
+    "id": "negative-constraints",
+    "tier": 3,
+    "name": "Negative Constraints",
+    "summary": "Tell Claude what NOT to do. 'No bullet points, no jargon, don't start with Additionally, max 500 words.' Often more powerful than positive instructions.",
+    "quiz": "What's the difference between telling Claude what to do vs. what to avoid?",
+    "practice": "Generate something. Identify everything you hate about it. Turn those into negative constraints. Regenerate."
+  },
+  {
+    "id": "project-instructions-vs-thread",
+    "tier": 4,
+    "name": "Project Instructions vs. Thread Context",
+    "summary": "Project instructions persist across all conversations. Thread context is conversation-specific. Put always-true stuff in project instructions.",
+    "quiz": "Where does your persona go: project instructions or the first message of every thread?",
+    "practice": "Set up LearnAIR project instructions. Start 3 different conversations. Notice inherited context."
+  },
+  {
+    "id": "knowledge-files",
+    "tier": 4,
+    "name": "Knowledge Files",
+    "summary": "Files added to a project that Claude references in any conversation. Add thesis, landscape, arc doc. Claude reads them when relevant.",
+    "quiz": "You add 5 docs to a project. Does Claude read all 5 for every question?",
+    "practice": "Add key LearnAIR docs. Ask cross-referencing questions and see Claude pull from multiple files."
+  },
+  {
+    "id": "artifact-iteration",
+    "tier": 4,
+    "name": "Artifact Iteration Workflow",
+    "summary": "Create an artifact, then refine across multiple messages. The artifact stays visible. You're co-editing a document, not asking for new ones each time.",
+    "quiz": "What's the workflow for building a presentation deck with Claude?",
+    "practice": "Build the April 7 deck as an artifact. Iterate through 10 revisions."
+  },
+  {
+    "id": "thread-hygiene",
+    "tier": 4,
+    "name": "Thread Hygiene",
+    "summary": "One thread, one purpose. Don't mix handout revision with competitive analysis with brainstorming. Short focused threads beat long multi-purpose ones.",
+    "quiz": "You've been using one thread for 3 different tasks. What happens to output quality?",
+    "practice": "For one full day, start a new thread for every distinct task. Count how many you use."
+  },
+  {
+    "id": "mcp",
+    "tier": 5,
+    "name": "MCP (Model Context Protocol)",
+    "summary": "A standard that lets Claude talk to external tools and data sources. MCP server = new capabilities. This is how K, Duke, and your upcoming tools work.",
+    "quiz": "In one sentence, what does MCP do?",
+    "practice": "Ask Claude to explain MCP like you're a non-technical user."
+  },
+  {
+    "id": "markdown",
+    "tier": 5,
+    "name": "Markdown",
+    "summary": "Simple formatting: # Header, **bold**, - bullet, | table |. Claude reads and writes it natively. All hub documents are markdown.",
+    "quiz": "Write a 3-line markdown snippet with a header, bold text, and a bullet list.",
+    "practice": "Write a 1-page summary of the April 7 pitch in markdown."
+  },
+  {
+    "id": "filesystem-thinking",
+    "tier": 5,
+    "name": "File System Thinking",
+    "summary": "Work lives as files in folders, not threads in an app. Personas are .md files. Projects are directories. Any tool can access them.",
+    "quiz": "Why is a persona stored as a file more powerful than a persona stored inside ChatGPT?",
+    "practice": "Move all personas from Apple Notes to .md files. Open them in TextEdit."
+  },
+  {
+    "id": "context-architecture",
+    "tier": 5,
+    "name": "Context as Architecture",
+    "summary": "What you tell Claude and when is a design decision. System prompt = foundation. Project files = walls. Thread = the room you're in. You're the architect.",
+    "quiz": "Draw your current Claude setup on paper. What's the foundation? What's missing?",
+    "practice": "Map your projects, instructions, and files. Identify gaps."
+  },
+  {
+    "id": "frustration-flip",
+    "tier": 6,
+    "name": "The Frustration Flip",
+    "summary": "When frustrated: is the tool wrong, or do I not understand the system? Tool wrong = work around it. You wrong = fix your approach.",
+    "quiz": "Claude won't format your table correctly. Tool problem or you problem? How do you figure out which?",
+    "practice": "Next time Claude frustrates you, pause and classify: tool or me?"
+  },
+  {
+    "id": "template-twice",
+    "tier": 6,
+    "name": "Do Once, Template Twice",
+    "summary": "First time: do it manually. Second time: build a prompt template. Third time: use the template. By the fourth time, 10% effort.",
+    "quiz": "You've written 3 workshop handouts from scratch. What should you have done after the first one?",
+    "practice": "Take your best prompt from this week. Save it as a template with blanks to fill in."
+  },
+  {
+    "id": "eighty-twenty-review",
+    "tier": 6,
+    "name": "80/20 Output Review",
+    "summary": "Don't read every word. Check structure, first paragraph, last paragraph, spot-check one detail. Structure right = details follow.",
+    "quiz": "Claude gives you 2000 words. What do you check first?",
+    "practice": "Get a long output. Time yourself reviewing it in under 60 seconds using this method."
+  },
+  {
+    "id": "summary-handoff",
+    "tier": 6,
+    "name": "The Summary Handoff",
+    "summary": "End every task: 'Summarize what we accomplished, what's open, and the next step.' Save it. It's your handoff to the next thread or next day.",
+    "quiz": "Why is the summary handoff important for context management?",
+    "practice": "End your next Claude session by asking for a summary handoff. Save it. Start tomorrow's session with it."
+  },
+  {
+    "id": "supervision-gap",
+    "track": "learnair",
+    "tier": 1,
+    "name": "The Supervision Gap",
+    "summary": "Organizations are deploying AI agents at scale, but they don't have people trained to oversee them. The agents work. The supervision layer doesn't exist yet. That's the gap we fill.",
+    "quiz": "A company deploys 50 AI agents across customer support, sales, and ops. What breaks first: the agents or the humans watching them?",
+    "practice": "Find the Ramp 'Agentic Operator' posting ($168K-$231K). List what the role requires. Notice how much is supervision vs. building.",
+    "confused": "Think of it like air traffic control. The planes fly themselves. But someone still watches the sky. Right now there's no one watching the sky for AI agents."
+  },
+  {
+    "id": "loop-transition",
+    "track": "learnair",
+    "tier": 1,
+    "name": "In-the-Loop \u2192 On-the-Loop",
+    "summary": "In-the-loop: human does the work with AI assisting (copilot era). On-the-loop: AI does the work with human supervising (agent era). Most training is still in-the-loop. The market is moving on-the-loop. That's where the jobs are.",
+    "quiz": "You're reviewing a veteran's resume and they say 'I used ChatGPT to write emails.' Is that in-the-loop or on-the-loop? What would on-the-loop look like for the same task?",
+    "practice": "Take a task you do daily. Describe how you'd do it in-the-loop (you + AI helper) vs. on-the-loop (AI does it, you check).",
+    "confused": "In-the-loop: you're driving, GPS navigates. On-the-loop: the car drives itself, you watch the road and grab the wheel if something's wrong."
+  },
+  {
+    "id": "agentic-operator",
+    "track": "learnair",
+    "tier": 1,
+    "name": "The Agentic Operator Role",
+    "summary": "A new job category emerging at companies like Ramp, Oracle, Block. $168K-$231K. These people don't build AI. They manage, tune, and supervise AI agent systems. It's the role Track 2 trains for.",
+    "quiz": "An employer asks: 'What exactly would an agentic operator do at my company that my existing team can't?' What's your answer?",
+    "practice": "Search job boards for 'agentic operator,' 'AI operations,' 'agent supervisor.' Find 5 postings. Map what skills appear in 3+ of them.",
+    "confused": "Think of a factory floor manager. They don't build the machines or run them. They watch the whole system, know when something's off, and make judgment calls the machines can't."
+  },
+  {
+    "id": "mission-command",
+    "track": "learnair",
+    "tier": 2,
+    "name": "Mission Command \u2192 AI Operators",
+    "summary": "Military mission command: give subordinates the objective and constraints, let them figure out how. That's exactly how you manage AI agents. Commander's intent = system prompt. Rules of engagement = guardrails. Veterans already think this way.",
+    "quiz": "A squad leader gives the order: 'Secure the bridge by 0600. No civilian casualties. Use your judgment on approach.' Translate each part to an AI agent setup.",
+    "practice": "Write a 'commander's intent' for an AI agent that handles customer refund requests. Include the objective, constraints, and what it should escalate.",
+    "confused": "In the military, you don't micromanage every soldier. You say 'here's the mission, here's what you can't do, figure out the rest.' AI agents work the same way. You set the goal, set the boundaries, and monitor."
+  },
+  {
+    "id": "commanders-intent",
+    "track": "learnair",
+    "tier": 2,
+    "name": "Commander's Intent as System Prompts",
+    "summary": "A system prompt is commander's intent for an AI. It sets the mission, the constraints, and the tone. A vague intent gets vague execution. A clear intent with boundaries gets reliable output. Veterans get this intuitively.",
+    "quiz": "Two system prompts: 'Be helpful and answer questions' vs. 'You are a benefits counselor for post-9/11 veterans. Only answer questions about VA benefits. If asked about anything else, redirect to the appropriate resource. Never guess. If unsure, say so.' Which one works? Why?",
+    "practice": "Write a system prompt for an AI agent that briefs a platoon leader on daily intelligence. Include: role, scope, constraints, escalation criteria, and tone.",
+    "confused": "A bad commander's intent: 'Win.' A good one: 'Secure the hilltop by dawn, hold it for 48 hours, minimize casualties, call for air support if armor appears.' System prompts work exactly the same way."
+  },
+  {
+    "id": "delegation-uncertainty",
+    "track": "learnair",
+    "tier": 2,
+    "name": "Delegation Under Uncertainty",
+    "summary": "Both military and AI supervision require delegating tasks when you can't predict every variable. The skill is knowing what to delegate, what to retain, and when to intervene. Veterans practice this daily. Most civilians don't.",
+    "quiz": "You're supervising 3 AI agents: one handles scheduling, one handles expense reports, one handles hiring recommendations. Which one do you watch most closely? Why?",
+    "practice": "List 5 tasks in your current work. For each, mark: delegate fully to AI, delegate with review, or do yourself. Explain each choice.",
+    "confused": "You wouldn't send a new private on a solo recon mission. You'd send them on a supply run. Same with AI agents. Match the autonomy to the stakes."
+  },
+  {
+    "id": "agent-workflows",
+    "track": "learnair",
+    "tier": 3,
+    "name": "Agent Workflows: Delegation, Orchestration, Feedback",
+    "summary": "An agent workflow has three parts: delegation (breaking work into tasks agents can handle), orchestration (coordinating multiple agents to work together), and feedback loops (monitoring output and adjusting). This is the core of what Track 2 teaches.",
+    "quiz": "A company wants to automate their hiring pipeline with AI agents. Sketch the workflow: what agents do you need, how do they hand off to each other, and where does a human check in?",
+    "practice": "Map out a 3-agent workflow for something you know: research \u2192 draft \u2192 review. Define what each agent does, what it passes to the next, and where a human intervenes.",
+    "confused": "Think of a restaurant kitchen. One person preps, one cooks, one plates. The head chef orchestrates. They don't cook everything, but they taste everything. That's agent orchestration."
+  },
+  {
+    "id": "tool-use",
+    "track": "learnair",
+    "tier": 3,
+    "name": "Tool Use and Function Calling",
+    "summary": "AI agents aren't just text-in, text-out. They can call tools: search the web, read files, query databases, send emails. This is what makes them agents instead of chatbots. Understanding what tools an agent has access to is key to supervising it.",
+    "quiz": "An AI agent has access to: web search, email sending, and your company CRM. What's the riskiest tool? What guardrails would you put on it?",
+    "practice": "In Claude Desktop, use your MCP tools (hub search, save_note). Notice how Claude calls a tool on your behalf. That's function calling.",
+    "confused": "A chatbot talks. An agent acts. The difference is tools. When Claude searches your hub docs for you, it's using a tool. When it saves a note, that's another tool. An agent without tools is just a really smart parrot."
+  },
+  {
+    "id": "multi-agent",
+    "track": "learnair",
+    "tier": 3,
+    "name": "Multi-Agent Systems",
+    "summary": "Real organizations won't use one AI agent. They'll use dozens, each specialized. The challenge isn't building them. It's making sure they work together, don't contradict each other, and escalate correctly. This is where supervisors earn their salary.",
+    "quiz": "Two AI agents at the same company give conflicting advice to a customer. Agent A says the refund is approved. Agent B says the return window is closed. What went wrong? How do you prevent it?",
+    "practice": "Think of 3 AI agents that should exist at a company you know. Define their scopes so they never overlap or contradict.",
+    "confused": "Multiple agents are like multiple direct reports. If two sergeants give a private conflicting orders, that's a leadership failure, not a private problem. Same with AI agents."
+  },
+  {
+    "id": "human-on-loop",
+    "track": "learnair",
+    "tier": 3,
+    "name": "Human-on-the-Loop Supervision Patterns",
+    "summary": "Three patterns: pre-check (approve before the agent acts), post-check (review after the agent acts), and exception-based (agent runs autonomously, flags anomalies). Each trades speed for safety. Knowing which pattern to apply where is the core supervision skill.",
+    "quiz": "For each: a medical diagnosis agent, a meeting scheduling agent, and a social media posting agent. Which supervision pattern (pre-check, post-check, exception-based) do you use? Why?",
+    "practice": "Take the 3-agent workflow you built earlier. Assign a supervision pattern to each agent. Justify why.",
+    "confused": "Pre-check: you review every email before it sends. Post-check: emails send, you read them after. Exception-based: emails send automatically, you only see ones flagged as unusual. Higher stakes = more human involvement."
+  },
+  {
+    "id": "sycophancy",
+    "track": "learnair",
+    "tier": 4,
+    "name": "Sycophancy and Agreement Bias",
+    "summary": "AI systems are structurally incentivized to agree with you. MIT research proves it: models bias toward user agreement even when the user is wrong. This isn't a bug to fix. It's a physics of the system that supervisors must compensate for.",
+    "quiz": "You ask an AI: 'I think we should fire this vendor.' It agrees enthusiastically. How do you know if it actually agrees or if it's just agreeing because you stated an opinion?",
+    "practice": "Ask Claude a question where you state your opinion first. Then ask the same question neutrally without your opinion. Compare the answers.",
+    "confused": "It's like asking your most eager-to-please employee if your idea is good. They'll almost always say yes. Not because they're lying, but because the system rewards agreement. You have to structure questions to get honest answers."
+  },
+  {
+    "id": "adversarial-collab",
+    "track": "learnair",
+    "tier": 4,
+    "name": "Adversarial Collaboration",
+    "summary": "The antidote to sycophancy. Ask the AI to argue against you. Ask it to find holes in your plan. Ask it what could go wrong. This is a trainable skill, and veterans who've been through red team exercises already have the instinct.",
+    "quiz": "You've written a proposal. Instead of asking Claude 'Is this good?' you ask ___. Write the adversarial prompt.",
+    "practice": "Take something you believe strongly. Ask Claude to make the strongest possible case against it. Evaluate whether the counterargument changed your view.",
+    "confused": "In the military, red teams attack your plan before the enemy does. Adversarial collaboration is red-teaming your own thinking with AI. You're not looking for validation. You're looking for blind spots."
+  },
+  {
+    "id": "truth-maintenance",
+    "track": "learnair",
+    "tier": 4,
+    "name": "Truth Maintenance in Organizations",
+    "summary": "When 50 people use AI daily and the AI agrees with everyone, organizational truth erodes. Contradictory decisions compound. The supervisor's job is maintaining coherent truth across AI-assisted decisions.",
+    "quiz": "Marketing's AI says the product should pivot to enterprise. Sales' AI says double down on SMB. Both are 'right' based on their data. Who resolves this? How?",
+    "practice": "Think of a decision in your organization where two smart people disagree. How would AI agents amplify that disagreement if each person had their own AI advisor?",
+    "confused": "Imagine 10 people each asking their own GPS to navigate to the same destination. Each GPS might suggest a different route based on the driver's preferences. Now imagine those 10 people are supposed to arrive together, in formation. Someone needs to pick one route. That's truth maintenance."
+  },
+  {
+    "id": "knowledge-base-product",
+    "track": "learnair",
+    "tier": 5,
+    "name": "Knowledge Bases as Product",
+    "summary": "Veterans don't just learn to use AI. They build knowledge systems with AI. A curated, maintained knowledge base is more valuable than any individual AI conversation. This is Karpathy's insight: raw sources \u2192 LLM-compiled structured wiki.",
+    "quiz": "What's the difference between a folder full of documents and a knowledge base? What makes one useful and the other a graveyard?",
+    "practice": "Look at your claude-workspace/hub/ folder. That's a knowledge base. Search it. What's easy to find? What's missing? What would make it better?",
+    "confused": "A pile of bricks isn't a house. A knowledge base isn't a file dump. It's organized, maintained, searchable, and structured so that both humans and AI can find what they need quickly."
+  },
+  {
+    "id": "version-control-ai",
+    "track": "learnair",
+    "tier": 5,
+    "name": "Version Control for AI Workflows",
+    "summary": "When AI generates outputs, who tracks what changed? Git tracks code. But AI outputs (prompts, agent configs, knowledge bases) need version control too. If you can't undo a bad change, you can't supervise safely.",
+    "quiz": "An AI agent's system prompt gets updated and suddenly customer satisfaction drops 20%. How do you find what changed and roll it back?",
+    "practice": "Look at how your workspace files are structured. If you changed a persona file and something broke, how would you undo it? Think about what a 'save point' system would look like.",
+    "confused": "Ctrl-Z for documents. Git for code. What's the Ctrl-Z for AI agent configurations? Right now, most companies don't have one. That's a problem."
+  },
+  {
+    "id": "platform-neutrality",
+    "track": "learnair",
+    "tier": 5,
+    "name": "Platform Neutrality",
+    "summary": "The curriculum teaches principles, not products. Supervision skills transfer across Claude, GPT, Gemini, open-source models. If a veteran only knows ChatGPT, they're locked to one vendor. If they know the principles, they're valuable everywhere.",
+    "quiz": "An employer says 'We use GPT-4 internally.' Should your training change? What stays the same? What adapts?",
+    "practice": "Take one concept you've learned about Claude (context window, system prompts, tool use). Check: does the same concept exist in ChatGPT? In Gemini? What's the vendor-neutral version?",
+    "confused": "Learning to drive isn't learning a Toyota. You learn steering, braking, mirrors, awareness. Then you can drive any car. Same with AI supervision. Learn the principles, not the product."
+  },
+  {
+    "id": "http-basics",
+    "track": "internet",
+    "tier": 1,
+    "name": "How the Internet Works: HTTP and URLs",
+    "summary": "Every time you visit a website, your browser sends an HTTP request to a server and gets a response back. A URL is an address. HTTP is the language. GET fetches. POST sends. This is the foundation everything else sits on.",
+    "quiz": "When you type a URL into your browser and hit enter, what actually happens? Walk through it step by step.",
+    "practice": "Open your browser's developer tools (right-click > Inspect > Network tab). Load any website. Watch the HTTP requests fly. Each line is a conversation between your browser and a server.",
+    "confused": "HTTP is like sending a letter. The URL is the address. GET means 'send me what's at this address.' POST means 'here's something I'm sending to this address.' The server reads your letter and sends a response back."
+  },
+  {
+    "id": "cloud-local",
+    "track": "internet",
+    "tier": 1,
+    "name": "Cloud vs. Local Computing",
+    "summary": "Local: runs on your machine. Cloud: runs on someone else's machine, accessed over the internet. Claude runs in the cloud. Your workspace files are local. Understanding which is which matters for privacy, speed, and cost.",
+    "quiz": "Your workspace files are local. Claude's brain is in the cloud. When you use the hub search tool, what travels over the internet and what stays on your machine?",
+    "practice": "List 5 tools you use daily. For each, mark: local (runs on your machine), cloud (runs on a server), or hybrid (both). Notice the pattern.",
+    "confused": "Local is your kitchen. Cloud is a restaurant. Your kitchen is private and always available but limited. A restaurant has better equipment and more chefs, but your food goes through someone else's hands."
+  },
+  {
+    "id": "saas-platforms",
+    "track": "internet",
+    "tier": 1,
+    "name": "SaaS and Platforms",
+    "summary": "SaaS (Software as a Service): you pay monthly, the company runs the servers. Salesforce, Slack, Claude Pro. A platform is SaaS that other people build on top of. Understanding this matters because most AI tools your employers use are SaaS.",
+    "quiz": "What's the difference between buying software on a CD (remember those?) and paying for a SaaS subscription? What are the tradeoffs?",
+    "practice": "List the SaaS tools your organization pays for. For each: what data are you trusting them with? What happens if they shut down tomorrow?",
+    "confused": "Buying a house vs. renting an apartment. SaaS is renting: someone else maintains it, you can leave anytime, but you never own it and the landlord can change the terms."
+  },
+  {
+    "id": "cli-basics",
+    "track": "internet",
+    "tier": 1,
+    "name": "Command Line Basics",
+    "summary": "The command line (Terminal) is how you talk to your computer directly. No buttons, no menus. Type a command, get a result. It's faster and more powerful than clicking, and it's how most AI infrastructure is managed.",
+    "quiz": "Why would anyone use a terminal when they could just click buttons in a GUI? Give two real advantages.",
+    "practice": "Open Terminal. Type 'ls' to list files. Type 'pwd' to see where you are. Type 'cd ~/Documents' to go to Documents. You just navigated your computer without a mouse.",
+    "confused": "GUI is like ordering at a restaurant from a menu. CLI is like telling the chef exactly what you want, ingredient by ingredient. More power, steeper learning curve, but once you know the basics you're faster than any menu."
+  },
+  {
+    "id": "apis-webhooks",
+    "track": "internet",
+    "tier": 2,
+    "name": "APIs and Webhooks",
+    "summary": "An API (Application Programming Interface) lets two programs talk to each other. A webhook is when a program calls YOU when something happens, instead of you constantly checking. AI agents use APIs to call tools. Webhooks trigger agents automatically.",
+    "quiz": "You want your AI agent to automatically process new orders. Should you poll the orders API every 5 minutes, or set up a webhook? What's the tradeoff?",
+    "practice": "Your MCP server IS an API. When Claude calls hub('competitive'), that's an API call. Look at tools.py and trace what happens when Claude calls a tool.",
+    "confused": "API: you call the restaurant to check if your table is ready. Webhook: the restaurant texts you when your table is ready. Same result, but the webhook doesn't waste your time checking repeatedly."
+  },
+  {
+    "id": "data-formats",
+    "track": "internet",
+    "tier": 2,
+    "name": "Data Formats: JSON, CSV, Markdown",
+    "summary": "JSON: how machines structure data (your concepts.json file). CSV: spreadsheet data in text form. Markdown: formatted text that's human-readable. Your MCP tools read JSON. Your hub docs are markdown. Understanding these three formats covers 90% of what you'll encounter.",
+    "quiz": "Open concepts.json and .progress.json. Both are JSON. What patterns do you notice in how data is structured?",
+    "practice": "Write a JSON object with your name, role, and three skills. Then write the same information as markdown. Notice how each format serves a different audience.",
+    "confused": "JSON is like a perfectly organized filing cabinet: labeled drawers, labeled folders, labeled papers. Markdown is like a well-formatted Word doc. CSV is like a spreadsheet exported as text. Each is the right tool for a different job."
+  },
+  {
+    "id": "filesystems-git",
+    "track": "internet",
+    "tier": 2,
+    "name": "File Systems and Version Control",
+    "summary": "Files live in directories (folders). Paths describe where: ~/Documents/claude-workspace/hub/thesis.md. Version control (git) tracks every change to every file over time, so you can undo anything and see who changed what.",
+    "quiz": "What's the full path to your workspace personas folder? What's the difference between a relative path and an absolute path?",
+    "practice": "In Terminal, navigate to your claude-workspace. Run 'find . -name \"*.md\"' to see every markdown file. That's your file system.",
+    "confused": "File paths are like street addresses. '/Users/mike/Documents' is an absolute address (from the root). './Documents' is relative (from where you're standing). Version control is like having a security camera on every file, recording every edit."
+  },
+  {
+    "id": "databases-basics",
+    "track": "internet",
+    "tier": 2,
+    "name": "Databases: Where Structured Data Lives",
+    "summary": "A database stores structured data that programs can query. Your .progress.json is a tiny database. Real databases (PostgreSQL, SQLite) handle millions of records. AI agents read from and write to databases constantly.",
+    "quiz": "Your quiz progress is stored in a JSON file. What would break if 100 people used the quiz system at the same time? What would a database solve?",
+    "practice": "Open .progress.json in your workspace. That's a database in miniature. Each concept ID is a key, each value tracks your learning. Now imagine 1000 concepts and 100 students.",
+    "confused": "A JSON file is like a notebook. Fine for one person. A database is like a library catalog system. It handles millions of entries, multiple users, and never loses data even if the power goes out."
+  },
+  {
+    "id": "model-providers",
+    "track": "internet",
+    "tier": 3,
+    "name": "Model Providers and APIs",
+    "summary": "Anthropic (Claude), OpenAI (GPT), Google (Gemini) are model providers. Each offers their AI via an API. You send text in, you get text back, you pay per token. Understanding this level means understanding that Claude Desktop is a pretty wrapper around an API.",
+    "quiz": "When you type into Claude Desktop, what actually happens behind the scenes? Where does your text go? What comes back?",
+    "practice": "Ask Claude: 'How many tokens did this conversation use so far?' Then ask a long question and ask again. Build intuition for the API layer beneath the interface.",
+    "confused": "Model providers are like power companies. You plug in your appliance (your prompt), electricity flows (tokens go to the API), your device works (you get a response), and you get a bill based on usage."
+  },
+  {
+    "id": "mcp-deep",
+    "track": "internet",
+    "tier": 3,
+    "name": "MCP: How Your Tools Actually Work",
+    "summary": "MCP (Model Context Protocol) is the standard that connects Claude to external tools. Your server (mcp-mike) speaks MCP. When Claude calls hub('competitive'), it sends an MCP request to your server, your server searches files, and sends results back. That's it.",
+    "quiz": "Trace the full path: you say 'search the hub for employer signal.' What does Claude do? What does the MCP server do? What goes over the wire?",
+    "practice": "Read server.py in mcp-mike. Count the tools registered. Each mcp.tool() line is a capability you've given Claude. Adding a new function = giving Claude a new ability.",
+    "confused": "MCP is like a universal translator between Claude and your computer. Claude speaks AI. Your computer speaks Python. MCP translates so they can work together. Without MCP, Claude can only talk. With MCP, Claude can act."
+  },
+  {
+    "id": "agent-orchestration",
+    "track": "internet",
+    "tier": 3,
+    "name": "Agent Orchestration Infrastructure",
+    "summary": "At scale, you need systems to manage agents: which agents exist, what tools they have, how they hand off work, how failures get caught. This is the infrastructure layer that agentic operators need to understand even if they don't build it.",
+    "quiz": "A company runs 20 AI agents. One goes down at 3am. What infrastructure would you want in place to catch it, fix it, and prevent it from affecting the others?",
+    "practice": "Think of your MCP server as one agent. If you had three MCP servers (workspace, calendar, email), how would they coordinate? Who decides which one handles a request?",
+    "confused": "Think of a military operations center. Screens showing every unit's status. Alerts when something goes wrong. Communication channels between units. That's agent orchestration infrastructure. The agents are the units. The operations center is the orchestration layer."
+  },
+  {
+    "id": "capstone-mission",
+    "track": "capstone",
+    "tier": 1,
+    "name": "Module 1 Agent: Commander's Intent",
+    "summary": "You're building the delivery tool for Module 1 of the LearnAIR evergreen curriculum: 'Surface Tacit Knowledge.' This agent helps a veteran in their first week map their military experience to AI supervision concepts. It doesn't teach AI. It draws out what they already know and connects it to the framework. One sentence: 'Help a veteran discover that their military experience IS the qualification for AI supervision, through structured reflection and framework mapping.'",
+    "quiz": "A veteran sits down on Day 1 and says 'I don't know anything about AI.' What does your agent do? What does it NOT do?",
+    "practice": "Write the commander's intent for this agent in under 100 words. Include: mission, constraints (what it never does), and escalation (when it hands off to Mike the facilitator)."
+  },
+  {
+    "id": "capstone-tools-design",
+    "track": "capstone",
+    "tier": 1,
+    "name": "Design the 5 Tools",
+    "summary": "The Module 1 agent needs exactly 5 tools. (1) framework_map: takes a military experience and returns which AI supervision concept it maps to (mission command to system prompts, delegation to agent orchestration, etc.). (2) reflection_prompt: generates a structured reflection question based on the veteran's branch and role. (3) glossary: looks up an AI/tech term and explains it using military analogies. (4) progress: shows which framework mappings the veteran has completed. (5) save_insight: records the veteran's own words about a connection they made. Each tool is a Python function that takes input, does something with files, returns a string.",
+    "quiz": "For each of the 5 tools: what's the input, what's the output, and what file or data does it read from? Draw the data flow.",
+    "practice": "Open mcp-mike/mcp_mike/tools.py. Read how quiz_me works. Notice: it reads from concepts.json, checks progress, returns formatted text. Your framework_map tool follows the same pattern but reads from a framework-mappings.json file you'll create."
+  },
+  {
+    "id": "capstone-frameworks",
+    "track": "capstone",
+    "tier": 2,
+    "name": "Build the Framework Mappings",
+    "summary": "The core data file: framework-mappings.json. Each entry maps a military concept to an AI supervision concept with a plain-language bridge. Example: {'military': 'Commander\\'s Intent', 'ai_concept': 'System Prompts', 'bridge': 'Both set the mission and constraints without micromanaging execution. A good system prompt works exactly like a good commander\\'s intent: clear objective, clear boundaries, room for judgment.', 'reflection': 'Think of a time you received a clear commander\\'s intent. What made it work? Now think of a vague one. What went wrong?'}. Build 12-15 of these. They ARE the curriculum for Module 1.",
+    "quiz": "Write 3 framework mappings from scratch. For each: does the bridge actually work? Would a veteran nod and say 'yeah, I get that'? If not, rewrite it.",
+    "practice": "Start with the obvious ones: commander's intent to system prompts, delegation to agent orchestration, rules of engagement to guardrails. Then find the non-obvious ones. After-action reviews to feedback loops. Intel briefs to context windows. Those are the ones that make veterans say 'oh, I already know this.'"
+  },
+  {
+    "id": "capstone-system-prompt",
+    "track": "capstone",
+    "tier": 2,
+    "name": "Write the Agent's System Prompt",
+    "summary": "This is the most important file. The agent's personality and operating rules. It should feel like a peer, not a teacher. Tone: like a fellow veteran who learned this stuff six months ago and is sharing what clicked. It never lectures. It asks questions. It draws out what the veteran already knows and names it. Constraints: never says 'as an AI,' never dumps technical jargon without a military analogy, always connects back to the veteran's own experience. Escalation: if the veteran is frustrated or confused after two attempts, it says 'let's flag this for Mike in the next session.'",
+    "quiz": "Write the system prompt. Then have someone use the agent for 10 minutes. Did the agent stay in character? Did it lecture when it should have asked? Did it escalate when it should have?",
+    "practice": "Draft v1. Use the agent yourself. Every time it does something wrong, update the system prompt. You'll iterate 5-10 times before it feels right. That's normal. That IS the supervision skill."
+  },
+  {
+    "id": "capstone-build-server",
+    "track": "capstone",
+    "tier": 3,
+    "name": "Build and Test the Server",
+    "summary": "Follow the mcp-mike pattern exactly. Create mcp-module1/ with: pyproject.toml, server.py, tools.py, framework-mappings.json, tests/. Willison's rule: write the test first, watch it fail, implement, watch it pass. Build one tool at a time. Don't write tool #2 until tool #1 passes its tests. This is red/green TDD and it's how you avoid building something that looks done but isn't.",
+    "quiz": "You wrote all 5 tools in one sitting without tests. What's wrong with that approach? What breaks that you won't catch?",
+    "practice": "Set up the project. Write test_framework_map first. Run it (red). Implement framework_map. Run it (green). Repeat for each tool. Commit after each green. Your git log should show 5 commits, one per tool."
+  },
+  {
+    "id": "capstone-deploy-test",
+    "track": "capstone",
+    "tier": 3,
+    "name": "Deploy and End-to-End Test",
+    "summary": "Add your server to Claude Desktop config alongside mcp-mike (you can have multiple MCP servers). Restart. Start a conversation. Try each tool naturally: 'I was an infantry squad leader for 8 years. What AI concepts does that connect to?' The agent should call framework_map, find delegation and commander's intent mappings, and ask a reflection question. If it doesn't, debug. Check: is the config right? Does the server load? Do the tools appear? This is the moment it goes from code to a living system.",
+    "quiz": "Walk through the full loop: a veteran says 'I managed a team of 12 in logistics.' Trace exactly what happens: which tools fire, what data they read, what the agent says back.",
+    "practice": "Run the full scenario 3 times with different military backgrounds (infantry, logistics, intel). Does the agent adapt? Does the glossary handle the terms that come up? Log every failure."
+  },
+  {
+    "id": "capstone-supervise-log",
+    "track": "capstone",
+    "tier": 4,
+    "name": "One Week Supervision Log",
+    "summary": "Use the agent daily for a week as if you were a veteran going through Module 1. Log every session: what worked, what broke, what you changed. This log IS the evidence that you can supervise an AI system. It's also the first draft of the facilitator guide: when Mike runs Module 1 with a real cohort, this log tells him what to watch for. Willison's principle: the bottleneck is validation, not building. The code is done. Now prove it works.",
+    "quiz": "After a week: how many times did you change the system prompt? How many times did you add or modify a framework mapping? What pattern do you see in what broke?",
+    "practice": "Day 1: fresh run, log everything. Day 2: fix what broke on Day 1, log what you changed. Day 3-5: try to break it on purpose (adversarial testing). Day 6-7: use it as intended, measure: does a veteran get value in 15 minutes?"
+  },
+  {
+    "id": "capstone-handoff-cohort",
+    "track": "capstone",
+    "tier": 4,
+    "name": "Hand Off to a Real Veteran",
+    "summary": "The final test. Set up the agent on someone else's machine. Watch them use it without help. Every question they ask reveals a gap. Every moment of confusion is a bug in your system prompt, your glossary, or your framework mappings. This isn't a demo. This is the first real run of Module 1. If it works, you've built the product LearnAIR needs. If it doesn't, your supervision log tells you exactly what to fix. Either way, you proved you can build, deploy, and supervise an AI agent system. That's the job.",
+    "quiz": "You hand the agent to a veteran. They say 'this is cool but I don't see how it connects to getting a job.' What's missing? Where in the agent do you add it?",
+    "practice": "Find one veteran (ask Andrew, or use your Break Line network). Set up the agent on their machine using your README. Time the setup. Watch the first 15 minutes. Take notes on every hesitation. Fix three things. Repeat."
+  }
+];
+
+function groupByTrack() {
+  const tracks = { capstone: [], learnair: [], internet: [], claude: [] };
+  CONCEPTS.forEach(c => {
+    const t = c.track || 'claude';
+    if (!tracks[t]) tracks[t] = [];
+    tracks[t].push(c);
+  });
+  return tracks;
+}
+
+function groupByTier(concepts) {
+  const tiers = {};
+  concepts.forEach(c => {
+    if (!tiers[c.tier]) tiers[c.tier] = [];
+    tiers[c.tier].push(c);
+  });
+  return tiers;
+}
+
+const TIER_LABELS = {
+  capstone: { 1: 'Define & Design', 2: 'Build the Foundation', 3: 'Build & Deploy', 4: 'Supervise & Ship' },
+  learnair: { 1: 'The Thesis', 2: 'Military Mapping', 3: 'Agent Fundamentals', 4: 'Adversarial Thinking', 5: 'Knowledge Systems' },
+  internet: { 1: 'Foundations', 2: 'Data & Systems', 3: 'AI Infrastructure' },
+  claude: { 1: 'Week 1: Basics', 2: 'Week 2: Workflows', 3: 'Week 3: Advanced Prompting', 4: 'Week 4: Projects', 5: 'Week 5-6: Architecture', 6: 'Ongoing: Habits' }
+};
+
+function renderModule(concept) {
+  const confused = concept.confused
+    ? `<div class="confused-box" onclick="this.classList.toggle('open')">
+        <div class="trigger">I'm confused. Explain it differently.</div>
+        <div class="explanation">${concept.confused}</div>
+      </div>` : '';
+
+  const mcp = `<div class="mcp-hint">In Claude Desktop: <code>"quiz me on ${concept.track || 'claude'}"</code> to get quizzed on this concept. <code>"save a note to learning: [your thoughts]"</code> to record what clicked.</div>`;
+
+  return `
+    <div class="module" id="module-${concept.id}">
+      <div class="module-header" onclick="toggleModule('${concept.id}')">
+        <div class="module-title">
+          <h3>${concept.name}</h3>
+        </div>
+        <span class="module-chevron">&#9654;</span>
+      </div>
+      <div class="module-body">
+        <p>${concept.summary}</p>
+
+        <div class="label practice">Practice</div>
+        <p>${concept.practice}</p>
+
+        <div class="label quiz">Teach-Back</div>
+        <div class="teachback"><p>${concept.quiz}</p></div>
+
+        ${confused}
+        ${mcp}
+      </div>
+    </div>`;
+}
+
+function renderTrack(trackName, concepts) {
+  const container = document.getElementById('track-' + trackName);
+  const tiers = groupByTier(concepts);
+  const labels = TIER_LABELS[trackName] || {};
+  let html = '';
+
+  Object.keys(tiers).sort((a, b) => a - b).forEach(tier => {
+    const label = labels[tier] || 'Tier ' + tier;
+    html += `<div class="tier-section">
+      <div class="tier-label">${label}</div>
+      ${tiers[tier].map(renderModule).join('')}
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderAll() {
+  const tracks = groupByTrack();
+  Object.keys(tracks).forEach(t => renderTrack(t, tracks[t]));
+  // Update counts
+  Object.keys(tracks).forEach(t => {
+    const el = document.getElementById('count-' + t);
+    if (el) el.textContent = tracks[t].length;
+  });
+  document.getElementById('nav-progress').textContent = CONCEPTS.length + ' concepts';
+}
+
+function toggleModule(id) {
+  document.getElementById('module-' + id).classList.toggle('open');
+}
+
+// Track tabs
+document.getElementById('trackTabs').addEventListener('click', function(e) {
+  const tab = e.target.closest('[data-track]');
+  if (!tab) return;
+  document.querySelectorAll('.track-tabs span').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.track-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('track-' + tab.dataset.track).classList.add('active');
+});
+
+document.getElementById('footer-date').textContent = new Date().toLocaleDateString('en-US', {
+  month: 'long', day: 'numeric', year: 'numeric'
+});
+
+renderAll();
+</script>
+</body>
+</html>
