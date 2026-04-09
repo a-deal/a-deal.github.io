@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Powered Shell Playbook | Austin Data Center Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --section-gap: 5rem;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  nav .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  nav .nav-links a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  .hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .hero .meta {
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    gap: 2rem;
+  }
+
+  .stat-bar {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .stat-item {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--faint);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .doc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    margin-top: var(--section-gap);
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--ink);
+  }
+
+  .content p {
+    margin-bottom: 1.2rem;
+    max-width: 680px;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content ul li {
+    position: relative;
+    margin-bottom: 0.6rem;
+    max-width: 680px;
+  }
+
+  .content ul li::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.85rem;
+    width: 0.6rem;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  strong { font-weight: 600; }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+
+  .data-table thead { border-bottom: 2px solid var(--ink); }
+
+  .data-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.6rem 1rem 0.6rem 0;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 0.7rem 1rem 0.7rem 0;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .data-table .highlight {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .callout {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout p { margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .callout-dark {
+    background: var(--ink);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--accent);
+  }
+
+  .callout-dark * { color: var(--paper) !important; }
+
+  .callout-dark .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent) !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .callout-green {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout-green .callout-label { color: var(--green); }
+  .callout-green p { margin-bottom: 0.5rem; }
+  .callout-green p:last-child { margin-bottom: 0; }
+
+  .callout-red {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout-red .callout-label { color: var(--red); }
+  .callout-red p { margin-bottom: 0.5rem; }
+  .callout-red p:last-child { margin-bottom: 0; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .workflow-steps {
+    display: flex;
+    gap: 0;
+    margin: 2rem 0;
+  }
+
+  .wf-step {
+    flex: 1;
+    background: var(--warm);
+    padding: 1.2rem;
+    position: relative;
+    margin-right: 1.5rem;
+  }
+
+  .wf-step::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left: 6px solid var(--accent);
+  }
+
+  .wf-step:last-child { margin-right: 0; }
+  .wf-step:last-child::after { display: none; }
+
+  .wf-step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .wf-step .step-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1rem;
+  }
+
+  .wf-step p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .squiggle {
+    width: 100%;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 Q15 12 20 6 Q25 0 30 6 Q35 12 40 6' fill='none' stroke='%23c9c3b8' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    margin: 0;
+  }
+
+  .toc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    background: var(--warm);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .toc {
+    columns: 2;
+    column-gap: 3rem;
+    list-style: none;
+  }
+
+  .toc li {
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+  }
+
+  .toc a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  .toc .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--faint);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .workflow-steps { flex-direction: column; }
+    .wf-step { margin-right: 0; margin-bottom: 0.5rem; }
+    .wf-step::after { display: none; }
+    .toc { columns: 1; }
+    footer { flex-direction: column; gap: 1rem; }
+    nav .nav-links { display: none; }
+  }
+
+  @media print {
+    nav { display: none; }
+    body { font-size: 10pt; background-image: none; }
+    .content { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">andrew deal <span>/</span> research</div>
+    <ul class="nav-links">
+      <li><a href="#economics">Economics</a></li>
+      <li><a href="#gap">The Gap</a></li>
+      <li><a href="#playbook">Playbook</a></li>
+      <li><a href="#site">Site Quals</a></li>
+      <li><a href="#power">Power</a></li>
+      <li><a href="#stress">Stress Tests</a></li>
+      <li><a href="#trailheads">Trailheads</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Powered Shell Development // April 2026</div>
+  <h1>The <em>Small Operator</em><br>Data Center<br>Playbook</h1>
+  <p class="subtitle">A development framework for the sub-75 MW powered shell market in Austin, TX. Built for operators with renewable energy or industrial development experience, $5-10M in deployable capital, and off-market sourcing capability.</p>
+  <div class="meta">
+    <span>Focus: Powered Shell / Edge</span>
+    <span>Capital Range: $5-15M</span>
+    <span>Market: Austin Metro</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">$4-8M</div>
+    <div class="stat-label">Cost per MW (Powered Shell)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0</div>
+    <div class="stat-label">Brokers serving sub-10 MW</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">&lt;75 MW</div>
+    <div class="stat-label">ERCOT Queue Bypass Threshold</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">3 mo</div>
+    <div class="stat-label">Your Thesis Validation Window</div>
+  </div>
+</div>
+
+<div class="squiggle"></div>
+
+<div class="toc-container">
+  <div class="toc-label">Contents</div>
+  <ol class="toc">
+    <li><a href="#economics"><span class="toc-num">01</span> Powered Shell Economics</a></li>
+    <li><a href="#gap"><span class="toc-num">02</span> The Small Operator Gap</a></li>
+    <li><a href="#playbook"><span class="toc-num">03</span> Development Playbook</a></li>
+    <li><a href="#site"><span class="toc-num">04</span> Site Qualification</a></li>
+    <li><a href="#power"><span class="toc-num">05</span> Power Pathway</a></li>
+    <li><a href="#stress"><span class="toc-num">06</span> Stress Tests</a></li>
+    <li><a href="#trailheads"><span class="toc-num">07</span> Trailheads</a></li>
+  </ol>
+</div>
+
+<div class="doc-container">
+
+  <!-- 01: POWERED SHELL ECONOMICS -->
+  <div class="section-header" id="economics">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Powered Shell Economics</h2>
+  </div>
+
+  <div class="content">
+    <p>The powered shell model is the smallest recognized tier of data center development. You provide the building envelope, the upgraded electrical service, and the substation interconnection. The tenant handles their own mechanical, electrical, and plumbing (MEP) systems: UPS, cooling, fire suppression, cabling, and rack infrastructure.</p>
+
+    <h3>What you're building</h3>
+    <p>A powered shell is not a functioning data center. It's a building with reliable, high-capacity power delivery and a structure that can support data center loads. Think of it like developing a pad-ready industrial site, but the "pad" is the power commitment and the structural envelope.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Powered Shell</th>
+          <th>Turnkey (for reference)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Build cost per MW</td>
+          <td class="num highlight">$4-8M</td>
+          <td class="num">$10-14M</td>
+        </tr>
+        <tr>
+          <td>Total capex (5 MW site)</td>
+          <td class="num highlight">$20-40M</td>
+          <td class="num">$50-70M</td>
+        </tr>
+        <tr>
+          <td>Monthly revenue per kW</td>
+          <td class="num">~$100-130/kW</td>
+          <td class="num">~$196/kW</td>
+        </tr>
+        <tr>
+          <td>Annual NOI (5 MW, stabilized)</td>
+          <td class="num highlight">$4-6M</td>
+          <td class="num">$8-12M</td>
+        </tr>
+        <tr>
+          <td>Development yield</td>
+          <td class="num">13-17%</td>
+          <td class="num">13-17%</td>
+        </tr>
+        <tr>
+          <td>You provide</td>
+          <td>Envelope + substation + power</td>
+          <td>Everything: UPS, cooling, cabling, racks</td>
+        </tr>
+        <tr>
+          <td>Tenant provides</td>
+          <td>All MEP systems</td>
+          <td>Just their servers</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The math at your scale</h3>
+    <p>At $5-10M deployed capital, you're looking at a <strong>2-5 MW powered shell</strong>. That's a 50,000-100,000 sq ft building with upgraded power. At the low end, a 2 MW shell generating $100/kW/month produces roughly <strong>$2.4M/year in revenue</strong>. At 5 MW, you're at <strong>$6-7.8M/year</strong>.</p>
+
+    <div class="callout">
+      <div class="callout-label">The comparison that matters</div>
+      <p>That same 50,000-100,000 sq ft building as pure industrial warehouse generates $650K-$1.3M/year in rent at current Austin rates ($13/sq ft NNN). As a powered shell, it generates 3-6x the revenue on the same footprint.</p>
+    </div>
+
+    <h3>Disposition economics (your model)</h3>
+    <p>If you develop and dispose pre-stabilization, like you did with renewable sites, the economics shift. A powered shell with committed power and a signed LOI from a tenant sells at a premium over raw development cost. Data center assets trade at 5-5.5% cap rates. A $5M development with $4M NOI potential is worth <strong>$70-80M stabilized</strong>. Even selling at 60% of stabilized value to account for lease-up risk, you're looking at a <strong>$40-48M exit on $5M in</strong>.</p>
+
+    <div class="callout-dark">
+      <div class="callout-label">Key assumption to stress test</div>
+      <p>These economics assume you can secure a tenant or LOI. The powered shell is worth nothing without a power commitment and a path to a lease. The development math is real. The tenant sourcing at this scale is the open question.</p>
+    </div>
+  </div>
+
+  <!-- 02: THE SMALL OPERATOR GAP -->
+  <div class="section-header" id="gap">
+    <span class="section-number">02</span>
+    <h2 class="section-title">The Small Operator Gap</h2>
+  </div>
+
+  <div class="content">
+    <p>Every broker you've talked to is whale hunting. Every conference panel is about 100+ MW campuses. Every headline is about hyperscaler capex. Nobody is serving the sub-10 MW market. This is the gap.</p>
+
+    <h3>Why the gap exists</h3>
+    <ul>
+      <li><strong>Commission structure.</strong> Brokers earn on deal size. A $500M hyperscaler lease pays 10-50x the commission of a 5 MW powered shell deal. The rational broker ignores you.</li>
+      <li><strong>Institutional capital minimums.</strong> Blackstone, Brookfield, KKR are deploying billions. A $20M powered shell project doesn't register. Their funds have minimum check sizes that exceed your entire project cost.</li>
+      <li><strong>ERCOT queue attention.</strong> Grid operators and utilities are focused on managing the 225+ GW queue of large load requests. Your 2-5 MW project flies under their radar, which is actually an advantage (see Section 05).</li>
+      <li><strong>Talent follows money.</strong> Data center engineers, project managers, and MEP designers gravitate to the large projects. Finding experienced people willing to work on a 5 MW shell requires different recruiting channels.</li>
+    </ul>
+
+    <h3>Why the gap is your opportunity</h3>
+    <p>The demand side doesn't care about your project size. It cares about available capacity with reliable power. Enterprise tenants, regional cloud providers, managed hosting companies, AI inference startups, and edge compute providers all need 1-10 MW of capacity. They can't get it from the hyperscalers (who don't sublease) and they can't afford to build their own. They're stuck waiting for colo providers to build out, and those providers are focused on 20+ MW facilities.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Demand: Enterprise IT</div>
+        <div class="card-title">On-premise to colo migration</div>
+        <p>Austin has 170,000+ tech workers. Companies running aging server rooms need 500kW-5MW of colo capacity. They're price-sensitive and want local providers.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Demand: AI Inference</div>
+        <div class="card-title">Latency-sensitive workloads</div>
+        <p>AI inference (running models, not training them) needs distributed capacity close to users. 1-5 MW edge sites in growing markets are the deployment target.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Demand: Managed Hosting</div>
+        <div class="card-title">Regional cloud and SaaS</div>
+        <p>Companies like Rackspace, Hivelocity, and regional MSPs need affordable shell space they can build out to their specs. They're the natural tenant for a powered shell.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Demand: DFW Overflow</div>
+        <div class="card-title">Dallas capacity constraints</div>
+        <p>Dallas-Fort Worth has 10x Austin's installed base but is hitting power constraints. Tenants priced out of DFW are looking south. Austin is the next stop.</p>
+      </div>
+    </div>
+
+    <div class="callout-green">
+      <div class="callout-label">The renewable energy parallel</div>
+      <p>You've seen this pattern before. When you were developing solar and wind sites, the institutional players were chasing utility-scale projects. The smaller community and commercial projects had fewer developers competing for them, which meant better terms and less competition for interconnection. The data center market has the same structure right now.</p>
+    </div>
+  </div>
+
+  <!-- 03: DEVELOPMENT PLAYBOOK -->
+  <div class="section-header" id="playbook">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Development Playbook</h2>
+  </div>
+
+  <div class="content">
+    <p>Your renewable development model: source site, do pre-construction work, dispose to someone better on the EPC side. That model maps directly to data center powered shells, with a few adaptations.</p>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Phase 1</div>
+        <div class="step-title">Source + qualify</div>
+        <p>Off-market land or existing industrial. Run the six-point qualification.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Phase 2</div>
+        <div class="step-title">Secure power</div>
+        <p>Austin Energy pre-app. Utility upgrade path. Substation proximity.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Phase 3</div>
+        <div class="step-title">Entitle + develop</div>
+        <p>Zoning, structural upgrades, envelope prep. Power commitment in hand.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Phase 4</div>
+        <div class="step-title">Dispose or operate</div>
+        <p>Sell to EPC/operator with power committed. Or JV with operator to stabilize.</p>
+      </div>
+    </div>
+
+    <h3>What's different from renewable development</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Renewable site</th>
+          <th>Powered shell</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Core asset</td>
+          <td>Land + interconnection agreement</td>
+          <td>Building + power commitment</td>
+        </tr>
+        <tr>
+          <td>Revenue driver</td>
+          <td>PPA (power purchase agreement)</td>
+          <td>Lease ($/kW/month)</td>
+        </tr>
+        <tr>
+          <td>Disposition buyer</td>
+          <td>EPC firm or utility</td>
+          <td>Data center operator, REIT, or colo provider</td>
+        </tr>
+        <tr>
+          <td>Key risk</td>
+          <td>Interconnection queue + PPA pricing</td>
+          <td>Power delivery timeline + tenant demand</td>
+        </tr>
+        <tr>
+          <td>Timeline to disposition</td>
+          <td>18-36 months</td>
+          <td>24-48 months</td>
+        </tr>
+        <tr>
+          <td>Regulatory complexity</td>
+          <td>High (environmental, land use, PUC)</td>
+          <td>Lower (LI/GI zoning permits by right in Austin)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Three exit strategies</h3>
+
+    <div class="callout">
+      <div class="callout-label">Exit 1: Pre-construction disposition</div>
+      <p><strong>Sell the entitled site with committed power.</strong> Lowest risk, lowest return. You've secured the land, the zoning, and the utility commitment. An operator or REIT buys the package and handles construction. This is closest to your renewable model. Expect 2-4x on invested capital if power is committed.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Exit 2: Shell-complete disposition</div>
+      <p><strong>Build the shell, sell before tenant lease-up.</strong> Higher return, more capital required. You've built the envelope and delivered power. Buyer takes over MEP buildout and tenant sourcing. Expect 4-8x if structure and power are in place.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Exit 3: JV with operator</div>
+      <p><strong>Contribute the developed site, partner with a DC operator.</strong> You bring the building and power. They bring the MEP expertise, tenant relationships, and operational capability. 20-40% promote on stabilized value. Longest hold, highest total return.</p>
+    </div>
+
+    <div class="callout-dark">
+      <div class="callout-label">The question to answer first</div>
+      <p>Which exit matches your risk tolerance and timeline? If you want to dispose in 18-24 months, Exit 1 is the play. If you can hold for 36-48 months and deploy more capital, Exit 2 or 3 produce significantly better returns. Your answer to this question determines how much capital you raise and what partners you need.</p>
+    </div>
+  </div>
+
+  <!-- 04: SITE QUALIFICATION -->
+  <div class="section-header" id="site">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Site Qualification</h2>
+  </div>
+
+  <div class="content">
+    <p>Not every industrial site works. These six factors determine viability. A site needs at least 4 of 6 to be worth pursuing. The first three are physical and can be assessed from building records or a site visit. The last three require utility research.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>Minimum</th>
+          <th>Preferred</th>
+          <th>Why it matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Ceiling height</strong></td>
+          <td class="num">24 ft</td>
+          <td class="num">30-36 ft</td>
+          <td>Cooling infrastructure (CRAC units, overhead cable trays, raised floor plenums) needs vertical space. Under 24 ft and you can't fit standard data center cooling.</td>
+        </tr>
+        <tr>
+          <td><strong>Floor load</strong></td>
+          <td class="num">150 psf</td>
+          <td class="num">250 psf</td>
+          <td>Server racks with dense compute are heavy. Standard warehouse slab at 100 psf won't support data center loads without reinforcement.</td>
+        </tr>
+        <tr>
+          <td><strong>Column spacing</strong></td>
+          <td class="num">40 x 40 ft</td>
+          <td class="num">50 x 50 ft+</td>
+          <td>Server rows need clear span. Tight column grids waste usable floor area and complicate cable routing.</td>
+        </tr>
+        <tr>
+          <td><strong>Footprint</strong></td>
+          <td class="num">50,000 sf</td>
+          <td class="num">150-500K sf</td>
+          <td>Below 50K sf, the fixed costs of power infrastructure don't pencil. The economics improve with scale up to about 500K sf.</td>
+        </tr>
+        <tr>
+          <td><strong>Power path</strong></td>
+          <td>Achievable in 36 mo</td>
+          <td>Existing substation nearby</td>
+          <td>Power delivery is the longest lead item. A substation half a mile up the road (like your last site) is a major advantage.</td>
+        </tr>
+        <tr>
+          <td><strong>Year built</strong></td>
+          <td>Post-2000</td>
+          <td>Post-2010</td>
+          <td>Pre-2000 industrial stock typically has 18-22 ft ceilings and lighter slab construction. Conversion is usually more expensive than new build.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>For new development (raw land)</h3>
+    <p>If you're sourcing raw land rather than converting existing structures, ceiling height, floor load, and column spacing become design choices rather than constraints. The critical factors narrow to three: <strong>power path, lot size, and zoning</strong>.</p>
+
+    <div class="callout">
+      <div class="callout-label">Zoning advantage in Austin</div>
+      <p>Austin's <strong>Land Intensive (LI)</strong> and <strong>General Industrial (GI)</strong> zoning districts permit data centers by right or via administrative change of use. No special use permit, no public hearing, no rezoning needed. This is significantly faster than most markets.</p>
+    </div>
+
+    <h3>What to look for when sourcing</h3>
+    <ul>
+      <li><strong>Substation proximity.</strong> Within 1 mile of an existing substation dramatically reduces interconnection cost and timeline. Your last site had one half a mile away.</li>
+      <li><strong>Utility provider.</strong> Austin Energy service territory gives you access to distribution-level planning (bypasses ERCOT large load queue). Pedernales Electric, Oncor, or other providers have different processes.</li>
+      <li><strong>Lot depth beyond the building.</strong> You need room for transformer pads, generator yards (if backup power is in scope), and truck access for equipment delivery. Minimum 2 acres of usable lot beyond the building footprint.</li>
+      <li><strong>Flood plain status.</strong> FEMA Zone A or AE is a disqualifier for most data center tenants. Zone X (minimal risk) required.</li>
+      <li><strong>Fiber access.</strong> Data centers need diverse fiber routes from at least two carriers. Urban and suburban Austin generally has this. Rural sites may not.</li>
+    </ul>
+  </div>
+
+  <!-- 05: POWER PATHWAY -->
+  <div class="section-header" id="power">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Power Pathway</h2>
+  </div>
+
+  <div class="content">
+    <p>Power is the bottleneck for the entire data center market. It's also where small operators have a structural advantage that large developers don't.</p>
+
+    <h3>The ERCOT queue problem</h3>
+    <p><strong>225+ GW of large load requests</strong> are queued at ERCOT as of early 2026, up from 63 GW just a year earlier. 73% are data centers. ERCOT hired McKinsey to sort through the backlog. Realistic timeline for a new 75+ MW interconnection: <strong>3-5 years from application to energized substation</strong>.</p>
+
+    <div class="callout-green">
+      <div class="callout-label">The sub-75 MW bypass</div>
+      <p>Projects under 75 MW bypass ERCOT's Large Load Interconnection queue entirely. They go through <strong>Austin Energy's distribution planning process</strong> instead, which operates on a 12-24 month timeline. At 2-5 MW, you're not even registering as a large load. You're a commercial service upgrade.</p>
+      <p>You already discovered this with your pre-app on the last site. Austin Energy can tell you quickly whether 2.5 MW is deliverable to a given address. That's the process. The pre-app is your first move on any new site.</p>
+    </div>
+
+    <h3>Your power playbook</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Action</th>
+          <th>Timeline</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1</td>
+          <td><strong>Pre-application inquiry</strong> with Austin Energy. Can this address support 2-5 MW?</td>
+          <td>2-4 weeks</td>
+          <td>Free</td>
+        </tr>
+        <tr>
+          <td class="num">2</td>
+          <td><strong>Formal service request.</strong> Engineering study for the specific load and delivery timeline.</td>
+          <td>4-8 weeks</td>
+          <td>$5-15K (study fee)</td>
+        </tr>
+        <tr>
+          <td class="num">3</td>
+          <td><strong>Distribution upgrade agreement.</strong> Commit to the upgrade. Pay for transformer and line work.</td>
+          <td>3-6 months</td>
+          <td>$500K-2M (depends on scope)</td>
+        </tr>
+        <tr>
+          <td class="num">4</td>
+          <td><strong>Energization.</strong> Substation and switchgear live. Power available at the site.</td>
+          <td>12-24 months from Step 2</td>
+          <td>Included in Step 3</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>On-site power and redundancy</h3>
+    <p>You mentioned battery and solar storage as on-site redundancy. That's the right instinct. Options at this scale:</p>
+    <ul>
+      <li><strong>Battery Energy Storage System (BESS).</strong> 1-4 hour backup at site load. Serves as both UPS (uninterruptible power) and grid arbitrage. Costs have dropped 97% in three decades. At 5 MW, a 2-hour BESS runs $3-5M installed.</li>
+      <li><strong>On-site solar.</strong> Texas makes this easy at sub-1 MW. Offsets grid draw during peak hours, reduces operating costs, and provides marketing value (green data center). Requires roof or adjacent acreage.</li>
+      <li><strong>Diesel/gas backup generators.</strong> Standard for Tier II+ data centers. Required by most tenants regardless of other backup systems. Budget $300-500/kW installed.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">Base Power and third-party energy</div>
+      <p><strong>Base Power</strong> and similar companies provide behind-the-meter power solutions for data centers. They install and operate on-site generation (typically natural gas) and sell power directly to the data center at a fixed rate, bypassing grid constraints entirely. Worth a conversation if grid delivery timelines are too long for a specific site.</p>
+    </div>
+  </div>
+
+  <!-- 06: STRESS TESTS -->
+  <div class="section-header" id="stress">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Stress Tests</h2>
+  </div>
+
+  <div class="content">
+    <p>The thesis is strong. These are the things that could break it. Work through each one before committing capital.</p>
+
+    <h3>1. Tenant demand at sub-10 MW</h3>
+    <div class="callout-red">
+      <div class="callout-label">Risk: High / Data: Low</div>
+      <p>The biggest open question. Hyperscaler demand is documented. Enterprise and edge demand at 1-5 MW in Austin is anecdotal. You need to validate this before committing. Talk to managed hosting providers, regional MSPs, and AI inference companies. Ask: "If I had 2-5 MW of powered shell space in Austin at $100-130/kW/month, would you take a call?" If you can't get three warm responses, the demand isn't there yet.</p>
+    </div>
+
+    <h3>2. ERCOT grid reliability</h3>
+    <div class="callout-red">
+      <div class="callout-label">Risk: Medium / Mitigation: Available</div>
+      <p>Winter Storm Uri (2021) exposed structural grid vulnerabilities. ERCOT's reserve margin has improved but extreme weather events can still cause 15+ GW shortfalls. For a data center, any outage is a tenant SLA violation. Mitigation: on-site backup generation (diesel/gas), BESS, and contractual grid priority for critical infrastructure. Your renewable energy background gives you an edge in designing hybrid power systems. Budget $1-2M for redundancy at 5 MW.</p>
+    </div>
+
+    <h3>3. Overbuilding / capex pullback</h3>
+    <div class="callout">
+      <div class="callout-label">Risk: Medium / Timeline: 2027-2029</div>
+      <p>US hyperscaler capex is projected at $700B in 2026. Moody's and others have flagged overbuilding concerns. If AI workloads don't monetize as fast as capital is deploying, there could be a capacity glut in 2027-2029. At your scale, this matters less: you're not competing for hyperscaler tenants. Enterprise and edge demand is driven by different economics (latency, compliance, cost) than AI training. But a broad market downturn could compress cap rates and slow disposition timelines.</p>
+    </div>
+
+    <h3>4. Construction cost inflation</h3>
+    <div class="callout">
+      <div class="callout-label">Risk: Medium / Trend: Rising</div>
+      <p>Data center construction costs rose 47% per square foot recently. Transformer lead times: 52-100+ weeks. This actually favors existing-building conversion over greenfield. If you're buying a building that already has structural capacity and some electrical infrastructure, you avoid the worst of the supply chain bottleneck. For new builds, lock in transformer orders early.</p>
+    </div>
+
+    <h3>5. Competition from larger players moving downstream</h3>
+    <div class="callout">
+      <div class="callout-label">Risk: Low-Medium / Timeline: 18-36 months</div>
+      <p>If the sub-10 MW market proves profitable, larger players will eventually move in. Prologis, Skybox, and Digital Realty have the capital and expertise to build powered shells at scale. Your advantage is time: you can move now while they're focused on 100+ MW projects. First mover with relationships and committed sites has 18-36 months before institutional competition arrives.</p>
+    </div>
+
+    <div class="callout-dark">
+      <div class="callout-label">The kill criterion</div>
+      <p>If you can't validate tenant demand at sub-10 MW in the next 60 days, the thesis doesn't die, but the timeline extends. Don't commit capital until you have at least one warm LOI or a credible tenant conversation. Everything else is solvable with money and time. Tenant demand is the one thing that has to be true.</p>
+    </div>
+  </div>
+
+  <!-- 07: TRAILHEADS -->
+  <div class="section-header" id="trailheads">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Trailheads</h2>
+  </div>
+
+  <div class="content">
+    <p>People, companies, and resources to pursue. Organized by what they help you solve.</p>
+
+    <h3>Tenant demand validation</h3>
+    <ul>
+      <li><strong>Data Center Hawk / DC Byte.</strong> Market intelligence platforms. Track supply, demand, pricing, and absorption by market. Subscription-based but worth it for thesis validation.</li>
+      <li><strong>AFCOM / Data Center World.</strong> Industry association and conference. The conference floor is where you'll meet the managed hosting and colo operators who would be your tenants. Next event: check schedule for Austin/Dallas proximity.</li>
+      <li><strong>Local MSP/hosting companies.</strong> Rackspace (HQ in San Antonio), Hivelocity, Flexential. Call them directly. "I'm developing a powered shell in Austin. Would you take a meeting?" Their response is your demand signal.</li>
+    </ul>
+
+    <h3>Power and utility</h3>
+    <ul>
+      <li><strong>Austin Energy Commercial Services.</strong> Your first call on any site. Pre-application inquiry for MW-scale service.</li>
+      <li><strong>Base Power.</strong> Behind-the-meter power provider for data centers. Alternative to grid-only delivery.</li>
+      <li><strong>Your old renewable energy contacts.</strong> Interconnection engineers, utility planners, PPA negotiators. Many of these skills transfer directly. The language is different but the physics is the same.</li>
+    </ul>
+
+    <h3>Development partners</h3>
+    <ul>
+      <li><strong>Tommy's uncle (NY tri-state DC buildouts).</strong> Your closest existing connection to actual data center construction. Even if he's in New York, he knows the MEP contractors, the equipment vendors, and the operational requirements. Start there.</li>
+      <li><strong>Skybox Datacenters.</strong> Austin-based. 600 MW campus in Hutto with Prologis. They're building at wholesale scale, but they know the Austin market intimately. A conversation about what they're seeing at the smaller end could be valuable.</li>
+      <li><strong>Prologis Data Center Division.</strong> $25B dedicated DC arm. They've already proven the warehouse-to-DC conversion model (32 MW in Illinois). They're a potential JV partner if your site is compelling enough.</li>
+      <li><strong>AQUILA Commercial / CBRE Austin.</strong> Local commercial real estate advisors with data center practice groups. Useful for disposition strategy even if they're focused on larger deals.</li>
+    </ul>
+
+    <h3>Structural and engineering</h3>
+    <ul>
+      <li><strong>Structural engineer with data center experience.</strong> The key hire/advisor. They need to assess floor load, column spacing, and roof load (for rooftop mechanical). Ask Tommy's uncle for a referral. A DC-experienced structural engineer in Texas will save you months of learning curve.</li>
+      <li><strong>Corgan / Page / HDR.</strong> Architecture and engineering firms with data center practices in Texas. Expensive for full engagement, but a scoping conversation to understand conversion feasibility for a specific site is usually free or low-cost.</li>
+    </ul>
+
+    <h3>Capital and legal</h3>
+    <ul>
+      <li><strong>Your lawyer friend doing DC sourcing deals.</strong> Already in your network. Have him walk you through a typical powered shell disposition structure.</li>
+      <li><strong>Texas Enterprise Fund / Sales Tax Exemption.</strong> Projects with $200M+ capital commitment qualify for 10-15 year exemption from 6.25% state sales tax. That's ~$18-22M savings on a $300M project. At your scale, you won't hit the threshold alone, but a JV partner might. Worth understanding the program.</li>
+      <li><strong>SBA 504 loan.</strong> For owner-occupied commercial real estate with energy improvements. Could apply to powered shell development. Fixed-rate, 20-25 year term, up to $5.5M. Worth exploring with your banker.</li>
+    </ul>
+
+    <h3>Market intelligence</h3>
+    <ul>
+      <li><strong>Full macro thesis:</strong> <a href="https://andrewdeal.info/data-centers/" style="color: var(--accent);">andrewdeal.info/data-centers</a> (35 sources, covers hyperscaler dynamics through local Austin market)</li>
+      <li><strong>Latitude Media:</strong> Best coverage of ERCOT queue dynamics and Texas energy policy.</li>
+      <li><strong>Data Center Dynamics (DCD):</strong> Industry trade publication. Good for tracking deals, new builds, and market intelligence.</li>
+      <li><strong>Cushman & Wakefield Austin-San Antonio corridor report:</strong> 7,823 MW planned vs. 1,154 MW operating. 70+ projects tracked between Temple and San Antonio.</li>
+    </ul>
+
+    <div class="callout-dark">
+      <div class="callout-label">Your 90-day checklist</div>
+      <p><strong>Week 1-2:</strong> Run Austin Energy pre-apps on your top 3 site candidates. Talk to Tommy's uncle about MEP costs and contractor referrals.</p>
+      <p><strong>Week 3-4:</strong> Reach out to 5 potential tenants (MSPs, hosting companies, AI inference startups). Get demand signal.</p>
+      <p><strong>Week 5-8:</strong> Structural assessment on the most promising site. Financial model for powered shell at that specific site and MW capacity.</p>
+      <p><strong>Week 9-12:</strong> Decision point. If demand signal + site + power path all check out, you have your thesis validated. If not, you know which piece is missing and whether it's solvable.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Andrew Deal // Data Center Research // April 2026</div>
+  <div class="footer-right"><a href="https://andrewdeal.info/data-centers/">Full Macro Thesis</a></div>
+</footer>
+
+</body>
+</html>
