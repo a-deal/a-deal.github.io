@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Company A: The Health Record | Kiso Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --section-gap: 5rem;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .nav-links {
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  nav .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  nav .nav-links a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  /* --- HERO --- */
+  .hero {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .hero .meta {
+    margin-top: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    gap: 2rem;
+  }
+
+  /* --- STAT BAR --- */
+  .stat-bar {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .stat-item {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid var(--faint);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* --- CONTENT --- */
+  .doc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    margin-top: var(--section-gap);
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--ink);
+  }
+
+  .content p {
+    margin-bottom: 1.2rem;
+    max-width: 680px;
+  }
+
+  .content ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content ul li {
+    position: relative;
+    margin-bottom: 0.6rem;
+    max-width: 680px;
+  }
+
+  .content ul li::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.85rem;
+    width: 0.6rem;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  /* --- TABLES --- */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0 2rem;
+    font-size: 0.88rem;
+  }
+
+  .data-table thead {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .data-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.6rem 1rem 0.6rem 0;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 0.7rem 1rem 0.7rem 0;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .data-table .highlight {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* --- CALLOUT --- */
+  .callout {
+    background: var(--warm);
+    border-left: 3px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout p { margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- DARK CALLOUT --- */
+  .callout-dark {
+    background: var(--ink);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-left: 3px solid var(--accent);
+  }
+
+  .callout-dark * { color: var(--paper) !important; }
+
+  .callout-dark .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent) !important;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- GREEN CALLOUT --- */
+  .callout-green {
+    background: var(--green-bg);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout-green .callout-label { color: var(--green); }
+  .callout-green p { margin-bottom: 0.5rem; }
+  .callout-green p:last-child { margin-bottom: 0; }
+
+  /* --- RED CALLOUT --- */
+  .callout-red {
+    background: var(--red-bg);
+    border-left: 3px solid var(--red);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .callout-red .callout-label { color: var(--red); }
+  .callout-red p { margin-bottom: 0.5rem; }
+  .callout-red p:last-child { margin-bottom: 0; }
+
+  /* --- CARD GRID --- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* --- DECISION GRID --- */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    margin: 2rem 0;
+  }
+
+  .decision-card {
+    background: var(--paper);
+    padding: 1.5rem;
+  }
+
+  .decision-card.recommended {
+    background: var(--accent-bg);
+    border-top: 3px solid var(--accent);
+  }
+
+  .decision-card h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .decision-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* --- WORKFLOW --- */
+  .workflow-steps {
+    display: flex;
+    gap: 0;
+    margin: 2rem 0;
+  }
+
+  .wf-step {
+    flex: 1;
+    background: var(--warm);
+    padding: 1.2rem;
+    position: relative;
+    margin-right: 1.5rem;
+  }
+
+  .wf-step::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left: 6px solid var(--accent);
+  }
+
+  .wf-step:last-child { margin-right: 0; }
+  .wf-step:last-child::after { display: none; }
+
+  .wf-step .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .wf-step .step-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1rem;
+  }
+
+  .wf-step p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* --- ECON BARS --- */
+  .econ-bars { margin: 2rem 0; }
+
+  .econ-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .econ-bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 140px;
+    flex-shrink: 0;
+  }
+
+  .econ-bar-track {
+    flex: 1;
+    height: 28px;
+    background: var(--warm);
+    position: relative;
+  }
+
+  .econ-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0.5rem;
+  }
+
+  .econ-bar-fill.dark { background: var(--ink); }
+
+  .econ-bar-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--paper);
+    font-weight: 500;
+  }
+
+  /* --- TOC --- */
+  .toc-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    background: var(--warm);
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .toc-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .toc {
+    columns: 2;
+    column-gap: 3rem;
+    list-style: none;
+  }
+
+  .toc li {
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+  }
+
+  .toc a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover { color: var(--accent); }
+
+  .toc .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* --- DIVIDERS --- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--faint);
+    margin: var(--section-gap) 0;
+  }
+
+  .thick-divider {
+    border: none;
+    border-top: 3px solid var(--ink);
+    margin: var(--section-gap) 0;
+  }
+
+  .squiggle {
+    width: 100%;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 Q15 12 20 6 Q25 0 30 6 Q35 12 40 6' fill='none' stroke='%23c9c3b8' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    margin: 0;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  footer .footer-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--faint);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* --- MOBILE --- */
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .decision-grid { grid-template-columns: 1fr; }
+    .workflow-steps { flex-direction: column; }
+    .wf-step { margin-right: 0; margin-bottom: 0.5rem; }
+    .wf-step::after { display: none; }
+    .toc { columns: 1; }
+    .econ-bar-label { width: 90px; font-size: 0.55rem; }
+    footer { flex-direction: column; gap: 1rem; }
+    nav .nav-links { display: none; }
+  }
+
+  @media print {
+    nav { display: none; }
+    body { font-size: 10pt; background-image: none; }
+    .content { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">kiso <span>/</span> research</div>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#score">Score</a></li>
+      <li><a href="#record">Record</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#market">Market</a></li>
+      <li><a href="#competitive">Competitive</a></li>
+      <li><a href="#financial">Financial</a></li>
+      <li><a href="#risks">Risks</a></li>
+      <li><a href="#validation">Validation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Company A // Observation Layer Thesis // April 2026</div>
+  <h1>The <em>Health<br>Record</em></h1>
+  <p class="subtitle">Your health data is everywhere and nowhere. Lab results in email attachments, wearable data in siloed apps, doctor notes in patient portals. Nobody has the complete picture. We build the structured, portable, AI-queryable health record that makes everything downstream better.</p>
+  <div class="meta">
+    <span>Kiso Research</span>
+    <span>April 2026</span>
+    <span>Baseline Product</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">20%</div>
+    <div class="stat-label">U.S. GDP Spent on Healthcare</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">85%</div>
+    <div class="stat-label">Goes to Chronic Disease</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">96M</div>
+    <div class="stat-label">Americans Prediabetic</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0</div>
+    <div class="stat-label">Products Answering "Am I Healthy?"</div>
+  </div>
+</div>
+
+<div class="squiggle"></div>
+
+<div class="toc-container">
+  <div class="toc-label">Contents</div>
+  <ol class="toc">
+    <li><a href="#problem"><span class="toc-num">01</span> The Problem</a></li>
+    <li><a href="#thesis"><span class="toc-num">02</span> The Thesis</a></li>
+    <li><a href="#score"><span class="toc-num">03</span> The Coverage Score</a></li>
+    <li><a href="#record"><span class="toc-num">04</span> Record + Loop</a></li>
+    <li><a href="#architecture"><span class="toc-num">05</span> Architecture</a></li>
+    <li><a href="#market"><span class="toc-num">06</span> Market</a></li>
+    <li><a href="#competitive"><span class="toc-num">07</span> Competitive Landscape</a></li>
+    <li><a href="#financial"><span class="toc-num">08</span> Financial Model</a></li>
+    <li><a href="#risks"><span class="toc-num">09</span> Risks + Kill Criteria</a></li>
+    <li><a href="#validation"><span class="toc-num">10</span> Validation Sequence</a></li>
+  </ol>
+</div>
+
+<div class="doc-container">
+
+  <!-- SECTION 01: THE PROBLEM -->
+  <div class="section-header" id="problem">
+    <span class="section-number">01</span>
+    <h2 class="section-title">The Problem</h2>
+  </div>
+
+  <div class="content">
+    <p>Health data is everywhere and nowhere. Lab results arrive as email attachments. Wearable data lives in siloed apps. Doctor notes sit in patient portals behind five-step logins. Supplement lists live in random notes. Prescriptions are in pharmacy apps. Blood pressure readings are on scraps of paper.</p>
+
+    <p>Nobody has a complete, structured, queryable picture of your health. Not you. Not your doctor. Not any AI. The person most motivated to understand their health, the person actually paying for labs, wearables, and supplements, has the worst data infrastructure of anyone in the chain.</p>
+
+    <p>The problem is not storage. Google Drive can hold every lab PDF you will ever generate. The problem is that every tool meant to help you is flying blind. Your doctor sees a 15-minute snapshot. Your wearable sees sleep and steps. Your health coach sees whatever you remember to tell them. Claude sees whatever you paste into a chat window.</p>
+
+    <h3>Why Google Drive + Claude doesn't work</h3>
+
+    <ul>
+      <li><strong>PDFs are opaque to LLMs.</strong> A lab report PDF is a rendered image of a table. Claude can OCR it, but the extraction is lossy, inconsistent, and non-repeatable. Every conversation starts from scratch.</li>
+      <li><strong>No temporal awareness.</strong> Dropping three lab reports into a folder gives you no trend lines, no deltas, no "your LDL went from 142 to 118 over six months." You get point-in-time snapshots with no connective tissue.</li>
+      <li><strong>No semantic normalization.</strong> LabCorp calls it "Cholesterol, Total." Quest calls it "Total Cholesterol." Both map to LOINC 2093-3, but an LLM has no way to know that without a normalization layer. Cross-lab comparisons are unreliable.</li>
+      <li><strong>No cross-source correlation.</strong> Your resting heart rate trend from your wearable, your fasting glucose from labs, and your sleep data from your watch all bear on metabolic health. No tool connects them into a single view.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">The Fundamental Gap</div>
+      <p>Health-forward people are spending $500/yr on Function Health labs, $300/yr on Whoop, $100/yr on supplements, and $20/mo on ChatGPT. They are generating more health data than at any point in human history. And they still cannot answer the question: "How do I know if I'm healthy?"</p>
+    </div>
+  </div>
+
+  <!-- SECTION 02: THE THESIS -->
+  <div class="section-header" id="thesis">
+    <span class="section-number">02</span>
+    <h2 class="section-title">The Thesis</h2>
+  </div>
+
+  <div class="content">
+    <p>Build the observation layer. Not coaching. Not intervention. Not action. Structured health data that makes everything downstream better. The health record that does not exist today.</p>
+
+    <p>Every health company picks an altitude and tries to own the full stack from there. We pick one altitude, nail it, and let everyone else build on top of it.</p>
+
+    <h3>The Altitude Framework</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Altitude</th>
+          <th>Function</th>
+          <th>Example</th>
+          <th>Our Position</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">10,000 ft</td>
+          <td>Signal detection</td>
+          <td>Landing page calculator, risk quiz</td>
+          <td>Table stakes</td>
+        </tr>
+        <tr>
+          <td class="num highlight">5,000 ft</td>
+          <td class="highlight">Measurement + Benchmarking</td>
+          <td class="highlight">Baseline. This is where we operate.</td>
+          <td class="highlight">WE ARE HERE</td>
+        </tr>
+        <tr>
+          <td class="num">1,000 ft</td>
+          <td>Protocol + Intervention</td>
+          <td>Partner integration, coaching layer</td>
+          <td>Partner, not feature</td>
+        </tr>
+        <tr>
+          <td class="num">500 ft</td>
+          <td>Personalized intelligence</td>
+          <td>6+ months longitudinal data, pattern detection</td>
+          <td>Future, requires data depth</td>
+        </tr>
+        <tr>
+          <td class="num">Ground</td>
+          <td>Clinical / Genomic</td>
+          <td>Clinical medicine, genetic testing, diagnostics</td>
+          <td>Out of scope</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The architectural position is simple: build your health record once, use it everywhere, take it with you forever. Your health data belongs to you. It should be structured, portable, and queryable by any tool you choose to use.</p>
+
+    <div class="callout-dark">
+      <div class="callout-label">Altitude Discipline</div>
+      <p>Everything below your altitude is a partner integration, not a feature. Everything above is table stakes you have to nail. The moment you start building coaching, meal planning, or workout programming, you are competing with every health app on earth. Stay at 5,000 ft.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 03: THE COVERAGE SCORE -->
+  <div class="section-header" id="score">
+    <span class="section-number">03</span>
+    <h2 class="section-title">The Coverage Score</h2>
+  </div>
+
+  <div class="content">
+    <p>The lead differentiator. Nobody tells you what is missing.</p>
+
+    <p>Function Health tells you your LDL is high. Apple Health shows your steps. Whoop tells you your HRV. Nobody says: "You have strong blood work coverage but zero cardiovascular monitoring. Connecting a wearable would take you from 55% to 70%."</p>
+
+    <p>The Coverage Score does two things:</p>
+
+    <ul>
+      <li><strong>Coverage (0-100%).</strong> How much of the health picture do we actually have data for? Weighted by evidence strength. A lipid panel contributes more to coverage than a step count because the clinical evidence base is deeper.</li>
+      <li><strong>Standing (~Xth percentile).</strong> Where do you fall relative to the population? Benchmarked against NHANES (National Health and Nutrition Examination Survey), the gold standard for population health data in the United States.</li>
+    </ul>
+
+    <h3>Core Metrics: The 15 That Matter</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Category</th>
+          <th>Weight</th>
+          <th>Source</th>
+          <th>NHANES Benchmark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Total Cholesterol</td><td>Lipids</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>LDL-C</td><td>Lipids</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>HDL-C</td><td>Lipids</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>Triglycerides</td><td>Lipids</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>ApoB</td><td>Lipids</td><td class="num">High</td><td>Lab</td><td>NHANES 2005-2016</td></tr>
+        <tr><td>Fasting Glucose</td><td>Metabolic</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>HbA1c</td><td>Metabolic</td><td class="num">High</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>Blood Pressure</td><td>Cardiovascular</td><td class="num">High</td><td>Device / Manual</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>Resting Heart Rate</td><td>Cardiovascular</td><td class="num">Medium</td><td>Wearable</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>HRV (RMSSD)</td><td>Cardiovascular</td><td class="num">Medium</td><td>Wearable</td><td>Literature norms</td></tr>
+        <tr><td>Body Composition</td><td>Anthropometric</td><td class="num">Medium</td><td>Scale / DEXA</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>VO2 Max (est.)</td><td>Fitness</td><td class="num">Medium</td><td>Wearable / Test</td><td>FRIEND registry</td></tr>
+        <tr><td>Sleep Duration</td><td>Recovery</td><td class="num">Medium</td><td>Wearable</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>Vitamin D</td><td>Nutrients</td><td class="num">Low</td><td>Lab</td><td>NHANES 2017-2020</td></tr>
+        <tr><td>hsCRP</td><td>Inflammation</td><td class="num">Medium</td><td>Lab</td><td>NHANES 2015-2020</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Why weights, not counts</h3>
+
+    <p>A lipid panel with five biomarkers tells you more about cardiovascular risk than connecting a wearable that tracks steps. Evidence strength matters. A study linking ApoB to all-cause mortality carries more weight than a correlation between daily step count and mood. The scoring system reflects this hierarchy.</p>
+
+    <div class="callout-red">
+      <div class="callout-label">Critical Framing</div>
+      <p>Average is not healthy. The average American is typical for a population where 96M are prediabetic, 47% have hypertension, and 42% are obese. "You're in the 50th percentile" is not reassuring. It means you look like the median member of a population with epidemic-level chronic disease. The Coverage Score benchmarks you against reality, not against an aspirational ideal.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 04: RECORD + LOOP -->
+  <div class="section-header" id="record">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Record + Loop</h2>
+  </div>
+
+  <div class="content">
+    <h3>The Record</h3>
+
+    <p>A structured, portable, user-owned health record. Labs, vitals, wearable data, and health history normalized into a single queryable index. Not a PDF folder. Not a patient portal. A living data structure that any AI can read via MCP (Model Context Protocol).</p>
+
+    <ul>
+      <li><strong>Labs:</strong> Parsed from PDFs, normalized to LOINC codes, stored with timestamps, reference ranges, and lab-specific metadata.</li>
+      <li><strong>Vitals:</strong> Blood pressure, resting heart rate, weight, body composition. From devices, manual entry, or wearable sync.</li>
+      <li><strong>Wearable data:</strong> Sleep, HRV, activity, recovery scores. Imported from Apple Health, Oura, Whoop, Garmin.</li>
+      <li><strong>History:</strong> Medications, supplements, conditions, family history. Manual entry, structured and queryable.</li>
+    </ul>
+
+    <h3>The Loop</h3>
+
+    <p>The post-score action sequence. You get your Coverage Score. It tells you what is missing. The Loop tells you what to do about it: "Track your blood pressure for two weeks. Order an ApoB test. Connect your wearable." Each action feeds data back into the Record. The Record gets richer. The Coverage Score updates. Coaching from any downstream tool gets more contextual. Value compounds.</p>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Validate</div>
+        <div class="step-title">Score works?</div>
+        <p>Users complete intake. Coverage Score is meaningful and actionable. Users understand what they have and what is missing.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Validate</div>
+        <div class="step-title">Loop works?</div>
+        <p>Users take the recommended action. They order a test, connect a wearable, or log a measurement. Data flows back into the Record.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Validate</div>
+        <div class="step-title">Record is deep?</div>
+        <p>After 30 days, does the average user have 5+ data sources? Is the Record meaningfully richer than day one?</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Validate</div>
+        <div class="step-title">Platform works?</div>
+        <p>Can a downstream tool (Claude, a coach, a doctor) query the Record via MCP and get useful, structured context?</p>
+      </div>
+    </div>
+
+    <div class="callout-dark">
+      <div class="callout-label">The Interdependence</div>
+      <p>Neither works alone. Record without Loop is a filing cabinet. You built a beautiful schema and nobody puts data into it. Loop without Record is a coaching app with no data moat. You tell people to track their blood pressure but you have nowhere to put the readings. The two are co-dependent. Both must work for either to have value.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 05: ARCHITECTURE -->
+  <div class="section-header" id="architecture">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Architecture</h2>
+  </div>
+
+  <div class="content">
+    <p>Local-first. SQLite + MCP server. No server, no cloud initially. Your health data lives on your machine, queryable by any AI that speaks MCP. This is a deliberate architectural choice: privacy by default, zero infrastructure cost at launch, and alignment with the "your data, your control" thesis.</p>
+
+    <h3>Phase Roadmap</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Phase 1: Desktop</div>
+        <div class="card-title">CLI + Local MCP</div>
+        <p>Lab PDF parsing (LabCorp, Quest, Function Health). Apple Health XML import. Manual entry for vitals, medications, supplements. Coverage scoring engine. Local MCP server exposing the Record to Claude Desktop, Cursor, or any MCP-compatible client.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Phase 2: Mobile</div>
+        <div class="card-title">iOS App + Cloud MCP</div>
+        <p>Share Sheet capture for lab PDFs directly from email. Encrypted cloud endpoint for mobile-to-Record sync. iCloud sync for cross-device access. Push notifications for Loop actions (reminder to log BP, test results ready to parse).</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Phase 3: Platform</div>
+        <div class="card-title">Watch for Apple MCP</div>
+        <p>If Apple ships MCP support in iOS/macOS, the local architecture becomes native. If not, the cloud relay from Phase 2 serves as the bridge. Either way, the Record schema and MCP interface are stable. Third-party integrations: lab ordering, telehealth, pharmacy APIs.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Regulatory</div>
+        <div class="card-title">MDDS Classification</div>
+        <p>Medical Device Data System. We display and structure data. We do not interpret, diagnose, or recommend treatment. FDA deregulated MDDS software as of 2022. Zero FDA regulatory burden. No 510(k). No clinical trials. This is intentional: the observation layer stays at observation.</p>
+      </div>
+    </div>
+
+    <div class="callout-green">
+      <div class="callout-label">Architectural Advantage</div>
+      <p>Local-first means zero cloud infrastructure cost at launch. A SQLite database and a Python MCP server. The entire product runs on the user's machine. This is not a limitation. It is a feature. Privacy-sensitive health data never leaves the device. The business model does not depend on storing user data in the cloud.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 06: MARKET -->
+  <div class="section-header" id="market">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Market</h2>
+  </div>
+
+  <div class="content">
+    <h3>Market Sizing</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Segment</th>
+          <th>Size</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TAM</td>
+          <td class="num">5-15M (US)</td>
+          <td>People actively tracking health data AND using AI tools. Intersection of health-forward and tech-forward.</td>
+        </tr>
+        <tr>
+          <td>SAM</td>
+          <td class="num">200-500K today</td>
+          <td>People who would install a local MCP tool for health data. Growing to 1-2M by 2028 as MCP adoption broadens.</td>
+        </tr>
+        <tr>
+          <td class="highlight">SOM Year 1</td>
+          <td class="num highlight">5K-15K</td>
+          <td class="highlight">Reachable through existing health + AI communities, content marketing, and word of mouth.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Primary Audience: Context Engineers</h3>
+
+    <p>100,000-300,000 people today. They curate structured data for AI tools. They use Claude Projects, Cursor rules files, Obsidian vaults. They understand that AI output quality is a function of input context quality. They already know their health data is unstructured. They just lack the tool to fix it.</p>
+
+    <h3>Secondary Audience: Health-Forward Families</h3>
+
+    <p>People paying for Function Health ($500/yr), wearing Whoop or Oura ($300/yr), subscribing to LLMs ($20/mo). They are already spending $1,000+/yr on health data generation. They just have no place to put it all together.</p>
+
+    <h3>Comparable Trajectories</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Year 1</th>
+          <th>Current</th>
+          <th>Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Obsidian</td>
+          <td class="num">50-100K users</td>
+          <td class="num">1.5M MAU</td>
+          <td>Free core + paid sync/publish. Local-first. No VC for 3 years.</td>
+        </tr>
+        <tr>
+          <td>1Password</td>
+          <td class="num">Bootstrapped</td>
+          <td class="num">$6.8B valuation</td>
+          <td>$50/yr subscription. Bootstrapped 14 years before taking VC. Privacy-first.</td>
+        </tr>
+        <tr>
+          <td>Function Health</td>
+          <td class="num">40K members</td>
+          <td class="num">200K, $100M ARR</td>
+          <td>$500/yr. Testing only. No integration, no AI, no structured record.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">The Obsidian Analogy</div>
+      <p>Obsidian proved that local-first, privacy-respecting tools can build massive user bases without VC funding or cloud infrastructure. The key: the product compounds in value the more you use it. Your vault gets richer over time. The same dynamic applies to the Health Record. Every lab result, every wearable sync, every manual entry makes the Record more valuable. Switching costs grow organically.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 07: COMPETITIVE LANDSCAPE -->
+  <div class="section-header" id="competitive">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Competitive Landscape</h2>
+  </div>
+
+  <div class="content">
+    <p>Every competitor owns a slice of health data. None of them structure ALL of it, make it portable, make it AI-queryable, or tell you what is missing.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Platform</div>
+        <div class="card-title">Apple Health</div>
+        <p>Best wearable data aggregation. But platform-locked (iOS only), no AI queryability, no lab integration, no coverage scoring. Apple Health is a data sink, not a data platform. You can put data in. You cannot get structured data out.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Abandoned</div>
+        <div class="card-title">Google Health</div>
+        <p>Pivoted twice, abandoned. Google Fit is maintenance mode. Google Health API was shut down. Even with infinite resources, health data aggregation is hard enough that big tech companies walk away from it.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Testing Only</div>
+        <div class="card-title">Function Health</div>
+        <p>$500/yr for 100+ biomarker tests. Excellent at generating data. Zero integration with wearables, no MCP, no external data sources, no portability. Your Function Health data lives in Function Health.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Doctor-Facing</div>
+        <div class="card-title">Epic MyChart</div>
+        <p>The dominant EHR. But designed for clinical workflows, not patient empowerment. Data export is painful (FHIR is technically possible, practically unusable). The patient portal is a view into the doctor's system, not a patient-owned record.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Measurement</div>
+        <div class="card-title">Whoop / Oura</div>
+        <p>Excellent at what they measure: HRV, sleep, recovery, strain. But they only see their own data. Whoop does not know your cholesterol. Oura does not know your blood pressure. Siloed measurement, no cross-source intelligence.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Generic AI</div>
+        <div class="card-title">ChatGPT Health</div>
+        <p>Can answer health questions with generic context. But has no structured access to YOUR health data. Every conversation starts from zero. No persistence, no normalization, no temporal awareness.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">The Moat: Parsing + Normalization</div>
+      <p>"Cholesterol, Total" (LabCorp) = "Total Cholesterol" (Quest) = "Cholesterol" (Function Health) = LOINC 2093-3. Done correctly across thousands of biomarkers, hundreds of lab formats, and dozens of naming conventions. This is tedious, unglamorous work that compounds with every format parsed. Every new lab format supported makes the Record more valuable. Every edge case handled makes the parsing engine more reliable. This is not a feature. It is the moat.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 08: FINANCIAL MODEL -->
+  <div class="section-header" id="financial">
+    <span class="section-number">08</span>
+    <h2 class="section-title">Financial Model</h2>
+  </div>
+
+  <div class="content">
+    <h3>Consumer Revenue</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Conservative</th>
+          <th>Base</th>
+          <th>Optimistic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Annual Subscription</td>
+          <td class="num">$50/yr</td>
+          <td class="num">$75/yr</td>
+          <td class="num">$100/yr</td>
+        </tr>
+        <tr>
+          <td>Year 1 Users</td>
+          <td class="num">5,000</td>
+          <td class="num">10,000</td>
+          <td class="num">15,000</td>
+        </tr>
+        <tr>
+          <td class="highlight">Year 1 ARR</td>
+          <td class="num highlight">$250K</td>
+          <td class="num highlight">$750K</td>
+          <td class="num highlight">$1.5M</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Revenue Scenarios</h3>
+
+    <div class="econ-bars">
+      <div class="econ-bar">
+        <div class="econ-bar-label">Conservative</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 17%;">
+            <span class="econ-bar-value">$250K</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Base Case</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 50%;">
+            <span class="econ-bar-value">$750K</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Optimistic</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill dark" style="width: 100%;">
+            <span class="econ-bar-value">$1.5M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>B2B Angle: Infrastructure</h3>
+
+    <p>The parsing and normalization engine has standalone value. Health AI companies (coaching apps, telehealth platforms, clinical decision support tools) all need structured health data. Selling the engine as an API or SDK creates a second revenue stream independent of the consumer product.</p>
+
+    <div class="callout-dark">
+      <div class="callout-label">Two Businesses</div>
+      <p>The consumer business (subscription, $50-100/yr) is a lifestyle business. It can sustain a small team indefinitely at 10K+ subscribers. The infrastructure business (parsing/normalization API sold to health AI companies) is a venture business. It scales with the number of companies building on health data. You can run both. The consumer product generates the parsing volume that makes the infrastructure product better.</p>
+    </div>
+
+    <h3>The 1Password Comparison</h3>
+
+    <p>1Password charged $50/yr. Bootstrapped for 14 years. Built a loyal, paying user base without VC funding. Eventually raised at a $6.8B valuation when the market was ready. The playbook: solve a real problem for a willing-to-pay audience, compound value over time, stay profitable, raise money only when it accelerates an already-working business.</p>
+  </div>
+
+  <!-- SECTION 09: RISKS + KILL CRITERIA -->
+  <div class="section-header" id="risks">
+    <span class="section-number">09</span>
+    <h2 class="section-title">Risks + Kill Criteria</h2>
+  </div>
+
+  <div class="content">
+    <h3>Risk Matrix</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Critical</div>
+        <div class="card-title">Apple Ships Health + MCP</div>
+        <p>If Apple ships native MCP integration with Apple Health in iOS 27 or macOS 27, the local-first health record becomes a platform feature. The window closes. You become a feature, not a product. Probability: low-medium in 2026, rising in 2027-2028.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Structural</div>
+        <div class="card-title">Parsing Accuracy Trust</div>
+        <p>Parsing accuracy below 98% destroys trust permanently. One wrong lab value, one mismatched unit, one swapped biomarker name. Health data has zero tolerance for errors. Users will not forgive "your cholesterol was displayed as 42 instead of 242."</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Market</div>
+        <div class="card-title">Willingness to Pay</div>
+        <p>The health-forward, data-literate segment may not pay for an invisible observation layer. They pay for tests (tangible). They pay for wearables (tangible). Will they pay for structured data infrastructure? The value is real but abstract.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Technical</div>
+        <div class="card-title">iOS Sandbox Blocks MCP</div>
+        <p>iOS sandboxing may block local MCP server architecture on mobile. The mobile story depends on either a cloud relay (privacy trade-off) or Apple shipping native MCP support (dependency on Apple's roadmap).</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Competitive</div>
+        <div class="card-title">ChatGPT Health Gets Good</div>
+        <p>If ChatGPT or Claude ships persistent health memory with structured data support, generic AI becomes "good enough" for most users. The observation layer value proposition shrinks to power users who need clinical-grade normalization.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Operational</div>
+        <div class="card-title">Lab Format Fragmentation</div>
+        <p>Thousands of labs, hundreds of PDF formats, constant format changes. The parsing engine is a treadmill. If the rate of format change exceeds the rate of parser development, coverage degrades over time instead of compounding.</p>
+      </div>
+    </div>
+
+    <h3>Kill Criteria</h3>
+
+    <div class="callout-dark">
+      <div class="callout-label">When to Stop</div>
+      <p><strong>1.</strong> If Apple ships Health + MCP integration, evaluate pivot to B2B infrastructure. The consumer product may be obsolete, but the parsing/normalization engine is not.</p>
+      <p><strong>2.</strong> If 80% of users stop after their initial Coverage Score, the Loop does not work. Without the Loop, the Record never gets deep enough to be valuable.</p>
+      <p><strong>3.</strong> If parsing accuracy cannot hit 98% on the top 5 lab formats (LabCorp, Quest, Function Health, Labcorp Oncology, hospital systems) within 2 weeks of focused work, the technical foundation is not there.</p>
+      <p><strong>4.</strong> If users will not pay $50/yr after 90 days of free use, the 1Password model fails. Consider pivoting to pure B2B infrastructure.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 10: VALIDATION SEQUENCE -->
+  <div class="section-header" id="validation">
+    <span class="section-number">10</span>
+    <h2 class="section-title">Validation Sequence</h2>
+  </div>
+
+  <div class="content">
+    <h3>30 / 60 / 90 Day Plan</h3>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Day 1-30</div>
+        <div class="step-title">Ship Baseline Clean</div>
+        <p>Lab PDF parsing, LOINC normalization, Apple Health import, manual entry, Coverage Score engine, local MCP server. Validate Record + Loop retention: do users come back after their initial score?</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Day 31-60</div>
+        <div class="step-title">Add Protocol Tracking</div>
+        <p>Peptide protocol tracking as a data source. Users log protocols. No attribution, no claims, no medical advice. Just structured tracking of what people are doing and measuring.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Day 61-90</div>
+        <div class="step-title">Measure Cohort Growth</div>
+        <p>If the peptide cohort grows faster than baseline and users opt to share anonymized data, that is the signal to invest in Company C. Protocol tracking becomes its own vertical.</p>
+      </div>
+    </div>
+
+    <h3>Success Metrics by Phase</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Metric</th>
+          <th>Target</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Day 30</td>
+          <td>Users who complete Coverage Score</td>
+          <td class="num">80%+ of signups</td>
+        </tr>
+        <tr>
+          <td>Day 30</td>
+          <td>Users who take a Loop action</td>
+          <td class="num">40%+ of scored users</td>
+        </tr>
+        <tr>
+          <td>Day 60</td>
+          <td>Users with 3+ data sources</td>
+          <td class="num">30%+ of active users</td>
+        </tr>
+        <tr>
+          <td>Day 60</td>
+          <td>Parsing accuracy (top 5 formats)</td>
+          <td class="num">98%+</td>
+        </tr>
+        <tr>
+          <td>Day 90</td>
+          <td>30-day retention</td>
+          <td class="num">25%+</td>
+        </tr>
+        <tr>
+          <td>Day 90</td>
+          <td>Willingness to pay ($50/yr)</td>
+          <td class="num">15%+ of active users</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-dark">
+      <div class="callout-label">The Discipline</div>
+      <p>The discipline is staying at 5,000 ft. The moment you add coaching, you are competing with every health app on earth. The moment you add meal planning, you are competing with MyFitnessPal. The moment you add workout programming, you are competing with Whoop. The observation layer is the product. The Record is the moat. Stay there.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Andrew Deal // Kiso Research // April 2026</div>
+  <div class="footer-right"><a href="peptides.html">Peptide Thesis</a></div>
+</footer>
+
+</body>
+</html>
