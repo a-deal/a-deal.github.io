@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "LearnAIR Proposal Updated — ${{ steps.info.outputs.sha }}"
-          to: deal.e.andrew@gmail.com, mkdeal@gmail.com
+          to: deal.e.andrew@gmail.com
           from: LearnAIR Proposals <${{ secrets.SMTP_USERNAME }}>
           body: |
             The LearnAIR partnership proposal was updated.
