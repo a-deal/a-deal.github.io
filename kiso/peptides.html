@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Company C: The Peptide Intelligence Platform | Kiso Research</title>
+<title>The Peptide Intelligence Gap | Kiso Research</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
@@ -669,15 +669,14 @@
 
 <nav>
   <div class="nav-inner">
-    <div class="logo">kiso research <span>/</span> company c</div>
+    <div class="logo">kiso research <span>/</span> peptides</div>
     <ul class="nav-links">
-      <li><a href="#problem">Problem</a></li>
       <li><a href="#structure">Structure</a></li>
-      <li><a href="#dataset">Dataset</a></li>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#landscape">Landscape</a></li>
+      <li><a href="#competitors">Competitors</a></li>
       <li><a href="#product">Product</a></li>
-      <li><a href="#monitoring">Monitoring</a></li>
       <li><a href="#market">Market</a></li>
-      <li><a href="#prerequisites">Prerequisites</a></li>
       <li><a href="#risks">Risks</a></li>
       <li><a href="#sequencing">Sequencing</a></li>
     </ul>
@@ -685,32 +684,32 @@
 </nav>
 
 <div class="hero">
-  <div class="kicker">Company C // Thesis Document // April 2026</div>
-  <h1>The <em>Peptide<br>Intelligence</em><br>Platform</h1>
-  <p class="subtitle">Building the outcome dataset that doesn't exist. Not in pharma, not in academia, not in any biohacker forum.</p>
+  <div class="kicker">Thesis Document // April 2026</div>
+  <h1>The <em>Peptide<br>Intelligence</em><br>Gap</h1>
+  <p class="subtitle">Non-patentable therapeutics, unregulated supply chains, and the data infrastructure that doesn't exist.</p>
   <div class="meta">
-    <span>Scope: Non-GLP-1 Peptide Therapeutics</span>
-    <span>April 2026</span>
     <span>Andrew Deal</span>
+    <span>Kiso Research</span>
+    <span>April 2026</span>
   </div>
 </div>
 
 <div class="stat-bar">
   <div class="stat-item">
     <div class="stat-number">$50B+</div>
-    <div class="stat-label">GLP-1 Market (2026)</div>
+    <div class="stat-label">GLP-1 Market 2026</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">$2-5B</div>
-    <div class="stat-label">Gray Market (Non-GLP-1 Peptides)</div>
+    <div class="stat-label">Gray Market Non-GLP-1 Peptides</div>
   </div>
   <div class="stat-item">
     <div class="stat-number">0</div>
-    <div class="stat-label">Clinical Outcome Datasets at Scale</div>
+    <div class="stat-label">Human Outcome Datasets at Scale</div>
   </div>
   <div class="stat-item">
-    <div class="stat-number">~2x</div>
-    <div class="stat-label">Peptide Approval Rate vs. Small Molecules</div>
+    <div class="stat-number">15-20%</div>
+    <div class="stat-label">Supplier COAs with Purity Discrepancies</div>
   </div>
 </div>
 
@@ -719,13 +718,13 @@
 <div class="toc-container">
   <div class="toc-label">Contents</div>
   <ol class="toc">
-    <li><a href="#problem"><span class="toc-num">01</span> The Problem</a></li>
-    <li><a href="#structure"><span class="toc-num">02</span> The Structural Force</a></li>
-    <li><a href="#dataset"><span class="toc-num">03</span> The Dataset Thesis</a></li>
-    <li><a href="#product"><span class="toc-num">04</span> Product Architecture</a></li>
-    <li><a href="#monitoring"><span class="toc-num">05</span> The Monitoring Argument</a></li>
-    <li><a href="#market"><span class="toc-num">06</span> Market</a></li>
-    <li><a href="#prerequisites"><span class="toc-num">07</span> Prerequisites (Non-Negotiable)</a></li>
+    <li><a href="#structure"><span class="toc-num">01</span> The Structural Force</a></li>
+    <li><a href="#problem"><span class="toc-num">02</span> The Problem (Four Problems, Not One)</a></li>
+    <li><a href="#landscape"><span class="toc-num">03</span> The Competitive Landscape</a></li>
+    <li><a href="#product"><span class="toc-num">04</span> The Product (Four Layers)</a></li>
+    <li><a href="#glp1"><span class="toc-num">05</span> The GLP-1 Precedent</a></li>
+    <li><a href="#arpah"><span class="toc-num">06</span> The ARPA-H Angle</a></li>
+    <li><a href="#market"><span class="toc-num">07</span> Market</a></li>
     <li><a href="#risks"><span class="toc-num">08</span> Risks + Kill Criteria</a></li>
     <li><a href="#sequencing"><span class="toc-num">09</span> Sequencing</a></li>
   </ol>
@@ -733,218 +732,435 @@
 
 <div class="doc-container">
 
-  <!-- SECTION 01: THE PROBLEM -->
-  <div class="section-header" id="problem">
-    <span class="section-number">01</span>
-    <h2 class="section-title">The Problem</h2>
-  </div>
-
-  <div class="content">
-    <h3>GLP-1 proved peptides work</h3>
-    <p>Semaglutide (Ozempic/Wegovy) is a modified version of a peptide the human body already produces. One amino acid substitution plus a fatty acid chain made it patentable, injectable weekly instead of daily, and commercially viable. Novo Nordisk briefly became Europe's most valuable company on this single compound. The GLP-1 market crossed $50B in 2026.</p>
-
-    <p>That success opened the Overton window for peptide therapeutics broadly. Dozens of other peptides now circulate in the health optimization community: BPC-157 for tissue repair, TB-500 for inflammation, CJC-1295 for growth hormone secretion, GHK-Cu for skin and wound healing, Semax for cognitive function. Many show real promise in preclinical research.</p>
-
-    <h3>The data vacuum</h3>
-    <p>The problem is simple. For non-GLP-1 peptides, there is zero rigorous human outcome data at scale. The evidence base is rodent studies, cell cultures, Soviet-era research papers, and biohacker anecdotes on Reddit.</p>
-
-    <ul>
-      <li><strong>No systematic tracking</strong> of what peptide, what dose, what duration, what biomarker changes, what outcomes.</li>
-      <li><strong>No correlation data</strong> linking specific protocols to measurable health improvements in humans.</li>
-      <li><strong>No quality-controlled supply chain</strong> ensuring that the compound being tracked is actually what it claims to be at the stated purity.</li>
-      <li><strong>No statistical infrastructure</strong> to distinguish real effects from placebo, regression to the mean, or confounding variables.</li>
-    </ul>
-
-    <p>People are already using these compounds. Millions of them. They're just doing it with no data infrastructure, no outcome tracking, and no way to learn from each other's experience at scale.</p>
-  </div>
-
-  <!-- SECTION 02: THE STRUCTURAL FORCE -->
+  <!-- SECTION 01: THE STRUCTURAL FORCE -->
   <div class="section-header" id="structure">
-    <span class="section-number">02</span>
+    <span class="section-number">01</span>
     <h2 class="section-title">The Structural Force</h2>
   </div>
 
   <div class="content">
-    <h3>Why pharma won't build this</h3>
-    <p>Drug development costs $2.6B per approved compound on average. The ROI equation requires patent exclusivity to recoup that investment over a 12-15 year window. You cannot patent what the body already makes.</p>
+    <p>The US pharmaceutical system structurally cannot develop non-patentable therapeutic compounds. This is not a market gap. It is a policy failure.</p>
 
-    <p>BPC-157 is a fragment of a protein found in human gastric juice. GLP-1 is produced by L-cells in the gut after eating. TB-500 is a synthetic fragment of thymosin beta-4, which exists in every human cell. The body already manufactures these compounds.</p>
+    <p>Three forces create the vacuum:</p>
 
-    <p>Semaglutide required a specific molecular modification (one amino acid swap plus a fatty acid chain attachment) to become patentable. Without that kind of novel chemical entity, there is no IP moat, and without an IP moat, no pharma company will spend $2.6B on a Phase III trial.</p>
+    <h3>Patent economics</h3>
+    <p>Drug development costs $2.6B per approved compound. Patent exclusivity is the ROI mechanism. Peptides the body naturally produces (BPC-157, GLP-1, TB-500) cannot be patented in their native form. No patent = no ROI = no investment. Semaglutide required just one amino acid swap + a fatty acid chain to become patentable. That minimal modification made Novo Nordisk briefly Europe's most valuable company.</p>
 
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Structural Barrier</div>
-        <div class="card-title">Patent economics</div>
-        <p>Natural peptides can't be patented. No patent means no exclusivity period. No exclusivity means no way to recoup $2.6B in development costs. The incentive structure is broken for these compounds.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Regulatory Shift</div>
-        <div class="card-title">FDA crackdown on compounding</div>
-        <p>FDA's 2023-2024 enforcement actions against compounding pharmacies pushed peptide supply further into the gray market. Quality control is getting worse, not better. Users are sourcing from unregulated overseas labs.</p>
-      </div>
-    </div>
+    <h3>Regulatory enforcement tightening</h3>
+    <p>FDA removed BPC-157 and TB-500 from the 503B bulk compounding list in 2024. The semaglutide compounding crackdown was the catalyst. "Research chemical" labeling does not create legal protection when products are packaged in dosage forms and sold to individuals. The gray market is larger now because legal channels got shut down.</p>
 
-    <h3>The supply chain reality</h3>
-    <p>The FDA crackdown on compounding pharmacies (particularly around semaglutide compounding) had cascading effects across the broader peptide market. Pharmacies that previously compounded BPC-157, TB-500, and other research peptides either shut down or stopped carrying them. Users migrated to gray market sources, primarily Chinese peptide synthesis labs selling direct to consumers.</p>
-
-    <p>This created a quality control crisis. Purity claims are unverified. Dosing is inconsistent. Third-party testing is rare. The compounds people are tracking outcomes for may not be what they think they are.</p>
+    <h3>Data vacuum</h3>
+    <p>BPC-157 has zero Phase 1 human trials. Most evidence is rodent studies, cell cultures, or Soviet-era research. The body of evidence for the most popular non-GLP-1 peptides is anecdotal, unstructured, and scientifically insufficient. Nobody is systematically tracking: what peptide, what dose, what duration, what biomarker changes, what outcomes.</p>
 
     <div class="callout-dark">
-      <div class="callout-label">Core Thesis</div>
-      <p>The structural opportunity isn't peptides themselves. It's the gap between pharmaceutical-grade compound supply and consumer demand that GLP-1 created. Whoever solves quality control and proper dosing protocols captures a market currently served by gray market Chinese labs.</p>
+      <div class="callout-label">The Vacuum</div>
+      <p>Millions of Americans self-administer peptides through a Chinese-supplied gray market with zero systematic outcome data. The data infrastructure to evaluate these compounds doesn't exist and the market won't build it.</p>
     </div>
-  </div>
 
-  <!-- SECTION 03: THE DATASET THESIS -->
-  <div class="section-header" id="dataset">
-    <span class="section-number">03</span>
-    <h2 class="section-title">The Dataset Thesis</h2>
-  </div>
-
-  <div class="content">
-    <h3>The asset that doesn't exist</h3>
-    <p>The first entity with 10,000+ tracked peptide protocols correlated to biomarker outcomes has something that doesn't exist anywhere. Not in any pharma company's clinical trial database. Not in any academic research institution. Not in any biohacker forum's self-reported threads.</p>
-
-    <p>The dataset is the business. Not the tracking tool, not the coaching layer, not the community. Those are distribution mechanisms for building the dataset. The dataset itself is the defensible asset.</p>
-
-    <h3>What gets tracked</h3>
+    <h3>Regulatory status of common peptides</h3>
 
     <table class="data-table">
       <thead>
         <tr>
-          <th>Category</th>
-          <th>Data Points</th>
-          <th>Source</th>
+          <th>Peptide</th>
+          <th>Status</th>
+          <th>Evidence Level</th>
+          <th>Notes</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Protocol</td>
-          <td>Peptide name, dose (mcg/mg), frequency, injection site, cycle length, stacking combinations</td>
-          <td>User input</td>
+          <td><strong>BPC-157</strong></td>
+          <td>Gray area, trending illegal for compounding</td>
+          <td>Rodent/cell culture only</td>
+          <td>Never FDA-approved. Removed from 503B list 2024. Angiogenesis concerns.</td>
         </tr>
         <tr>
-          <td>Supply chain</td>
-          <td>Source/supplier, batch number, third-party test results (if available), COA</td>
-          <td>User input + verification</td>
+          <td><strong>TB-500</strong></td>
+          <td>Same as BPC-157</td>
+          <td>Rodent/cell culture</td>
+          <td>Thymosin beta-4 fragment. Removed from 503B list.</td>
         </tr>
         <tr>
-          <td>Concurrent</td>
-          <td>Medications, supplements, other peptides, training regimen</td>
-          <td>User input</td>
+          <td><strong>CJC-1295</strong></td>
+          <td>Prescription via compounding (restricted)</td>
+          <td>Limited human data</td>
+          <td>GH releasing hormone analog. Under scrutiny.</td>
         </tr>
         <tr>
-          <td>Biomarkers</td>
-          <td>Blood panels before/during/after (CMP, CBC, CRP, IGF-1, hormones, lipids)</td>
-          <td>Function Health, InsideTracker, lab uploads</td>
+          <td><strong>Ipamorelin</strong></td>
+          <td>Prescription via compounding (restricted)</td>
+          <td>Limited human data</td>
+          <td>GH secretagogue. Often combined with CJC-1295.</td>
         </tr>
         <tr>
-          <td>Wearable data</td>
-          <td>HRV, resting heart rate, recovery scores, sleep quality, sleep stages</td>
-          <td>Whoop, Oura, Apple Watch, Garmin</td>
+          <td><strong>GHK-Cu</strong></td>
+          <td>Least restricted (topical unregulated)</td>
+          <td>Some human data for topical</td>
+          <td>Injectable form more restricted.</td>
         </tr>
         <tr>
-          <td>Self-reported</td>
-          <td>Pain (1-10), mobility, energy, cognitive function, mood, injury recovery</td>
-          <td>Structured surveys</td>
+          <td><strong>Semax</strong></td>
+          <td>Not FDA-approved, gray market only</td>
+          <td>Approved in Russia since 1990s</td>
+          <td>Russian clinical data doesn't meet FDA standards.</td>
+        </tr>
+        <tr>
+          <td><strong>PT-141</strong></td>
+          <td class="highlight">FDA-approved as Vyleesi (2019)</td>
+          <td>Full clinical program</td>
+          <td>Only common peptide with FDA approval. Proves path exists.</td>
+        </tr>
+        <tr>
+          <td><strong>Semaglutide</strong></td>
+          <td class="highlight">FDA-approved (2017-2021)</td>
+          <td>Extensive clinical data</td>
+          <td>Modified GLP-1. One amino acid swap + fatty acid chain. $50B+ market.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 02: THE PROBLEM -->
+  <div class="section-header" id="problem">
+    <span class="section-number">02</span>
+    <h2 class="section-title">The Problem (Four Problems, Not One)</h2>
+  </div>
+
+  <div class="content">
+    <p>Start from the user. A person considering or currently taking peptides faces four unsolved problems:</p>
+
+    <h3>Problem 1: "What am I actually injecting?"</h3>
+    <p><strong>Supply chain provenance.</strong> Gray market peptides from Chinese synthesis labs. Inconsistent dosing, unknown purity, no chain of custody.</p>
+    <ul>
+      <li>15-20% of supplier COAs show discrepancies when independently verified (ACS Labs data).</li>
+      <li>Example: discovering your "Eli Lilly" product is made-in-China counterfeit.</li>
+      <li>Finnrick (finnrick.com) tests purity (6,195 samples, 185 vendors) but doesn't connect testing to tracking or outcomes.</li>
+      <li>Nobody tells you: "This vendor's BPC-157 tested at 63% purity across 47 samples. Here's the data."</li>
+    </ul>
+
+    <h3>Problem 2: "What's my risk?"</h3>
+    <p><strong>Pre-protocol risk assessment.</strong> Before taking BPC-157: what are the known risks? What's your personal risk based on your health data?</p>
+    <ul>
+      <li>BPC-157 promotes angiogenesis. If you have family cancer history or undetected lesions, that's a specific, quantifiable risk factor.</li>
+      <li>The biohacker community says "the body makes it, so it's safe." The body also makes cortisol, adrenaline, and insulin. Exogenous administration disrupts feedback loops. Exogenous testosterone is bioidentical but still suppresses natural production.</li>
+      <li>No tool connects your health record to peptide risk profiles. Zero.</li>
+    </ul>
+
+    <h3>Problem 3: "Is it working?"</h3>
+    <p><strong>Outcome monitoring.</strong> During and after a protocol: are biomarkers moving? Is wearable data showing improvement? Is self-reported outcome tracking against the protocol timeline?</p>
+    <ul>
+      <li>Did the BPC-157 heal the tendon, or did 8 weeks of rest heal it? Attribution requires structured before/during/after comparison.</li>
+      <li>Emerging apps (PeptPro, PepMetrics) attempt this but neither is launched at scale.</li>
+    </ul>
+
+    <h3>Problem 4: "What works at scale?"</h3>
+    <p><strong>Aggregate intelligence.</strong> Across thousands of users: what protocols produce the best outcomes? What doses? What stacking? What vendors have the best quality track record?</p>
+    <ul>
+      <li>This is the dataset that doesn't exist anywhere. Not in pharma (no funding). Not in academia (no structured data). Not in the biohacker community (anecdotal only).</li>
+    </ul>
+
+    <div class="callout-dark">
+      <div class="callout-label">The Real Gap</div>
+      <p>The market has 15-20 apps that let you log injections. Zero that connect supply chain quality to protocols to outcomes to aggregate intelligence. The logging layer is commoditized. The intelligence layer is unbuilt.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 03: THE COMPETITIVE LANDSCAPE -->
+  <div class="section-header" id="landscape">
+    <span class="section-number">03</span>
+    <h2 class="section-title">The Competitive Landscape</h2>
+  </div>
+
+  <div class="content">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Players</th>
+          <th>What They Do</th>
+          <th>What They Don't Do</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dose Logging</strong><br><span style="font-size:0.75rem;color:var(--muted);">15-20+ apps</span></td>
+          <td>PeptIQ, SHOTLOG, PepTracker, Peptide Log, Dose, PeptideStack</td>
+          <td>Log doses, injection site rotation, calculators, reminders</td>
+          <td>No biomarker correlation, no supply chain, no outcome data</td>
+        </tr>
+        <tr>
+          <td><strong>Outcome Monitoring</strong><br><span style="font-size:0.75rem;color:var(--muted);">2-3 early</span></td>
+          <td>PeptPro (pept.pro), PepMetrics, Regimen</td>
+          <td>Wearable integration, AI protocol optimization, lab import</td>
+          <td>PeptPro also sells peptides (conflict of interest). PepMetrics not yet launched. All unproven at scale.</td>
+        </tr>
+        <tr>
+          <td><strong>Supply Chain Testing</strong></td>
+          <td>Finnrick (finnrick.com), ACS Labs</td>
+          <td>Third-party purity testing, vendor ratings, COA verification</td>
+          <td>No connection to tracking or outcomes. Testing only.</td>
+        </tr>
+        <tr>
+          <td><strong>Information / Education</strong></td>
+          <td>Peptide Protocol Wiki, PepDex, Peptide Database</td>
+          <td>130+ peptide profiles, dosing guides, protocol databases</td>
+          <td>Static information. No tracking, no intelligence, no personalization.</td>
+        </tr>
+        <tr>
+          <td><strong>Adjacent (Biohacking)</strong></td>
+          <td>Biohackr, Heads Up Health, Cronometer</td>
+          <td>General health/supplement tracking with some protocol logging</td>
+          <td>Not peptide-specific. No injection tracking, no pharmacokinetics.</td>
+        </tr>
+        <tr>
+          <td><strong>Compounding Pharmacies</strong></td>
+          <td>Empower, Promise, telehealth providers</td>
+          <td>Fulfill orders, follow-up telehealth visits</td>
+          <td>Zero patient-facing outcome monitoring. Zero data infrastructure.</td>
+        </tr>
+        <tr>
+          <td><strong>Clinical / Research</strong></td>
+          <td>None</td>
+          <td>--</td>
+          <td>No dedicated platform for systematic peptide outcome tracking exists in clinical or research settings.</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>The Lilly/Insilico parallel</h3>
-    <p>Eli Lilly paid $2.75B for Insilico Medicine's AI drug discovery platform. The value wasn't in any single molecule. It was the dataset, the training data, and the predictive engine built on top of it. A peptide outcome dataset with 50,000+ tracked protocols is the same asset class: structured real-world evidence that no one else has, with compounding network effects.</p>
-
-    <div class="callout">
-      <div class="callout-label">The Flywheel</div>
-      <p>Every user who tracks a protocol adds to the intelligence. Every correlation discovered makes the next recommendation better. Every new biomarker panel connected increases the resolution of the dataset. That's the flywheel. It compounds.</p>
+    <div class="callout-green">
+      <div class="callout-label">The Gap</div>
+      <p>The gap is not another logging app. The gap is: supply chain verification connected to protocol tracking connected to biomarker outcomes connected to aggregate intelligence. Nobody connects these four layers.</p>
     </div>
   </div>
 
-  <!-- SECTION 04: PRODUCT ARCHITECTURE -->
+  <!-- SECTION 04: THE PRODUCT -->
   <div class="section-header" id="product">
     <span class="section-number">04</span>
-    <h2 class="section-title">Product Architecture</h2>
+    <h2 class="section-title">The Product (Four Layers, Built Sequentially)</h2>
   </div>
 
   <div class="content">
-    <h3>Three layers, built sequentially</h3>
-    <p>Each layer depends on the previous one reaching critical mass. Ship in order. Don't skip ahead.</p>
+
+    <div class="workflow-steps">
+      <div class="wf-step">
+        <div class="step-num">Layer 1 // Wedge</div>
+        <div class="step-title">Supply Chain Intelligence</div>
+        <p>Ship first. Vendor quality database.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Layer 2</div>
+        <div class="step-title">Risk + Protocol Tracking</div>
+        <p>Health record substrate. Structured logging.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Layer 3</div>
+        <div class="step-title">Outcome Monitoring</div>
+        <p>Before/during/after biomarker comparison.</p>
+      </div>
+      <div class="wf-step">
+        <div class="step-num">Layer 4 // Moat</div>
+        <div class="step-title">Aggregate Intelligence</div>
+        <p>Community-sourced. Statistical rigor. The dataset.</p>
+      </div>
+    </div>
+
+    <h3>Layer 1: Supply Chain Intelligence (ship first)</h3>
+    <ul>
+      <li>Vendor quality database built on third-party testing data (Finnrick partnership or own testing).</li>
+      <li>"Before you buy from this vendor, here's their purity track record across N samples."</li>
+      <li>Batch COA verification. QR-code lookup.</li>
+      <li>This is a content/data product. No app required. Web resource. Launchable in 30 days.</li>
+      <li>Revenue: free tier drives traffic, premium vendor reports, B2B licensing to clinics.</li>
+    </ul>
+
+    <h3>Layer 2: Risk Assessment + Protocol Tracking</h3>
+    <ul>
+      <li>Import your health record (labs, wearable data, family history).</li>
+      <li>Get a pre-protocol risk assessment: "Given your health profile, here are the specific risk factors for BPC-157."</li>
+      <li>Structured protocol logging: peptide, dose, frequency, injection site, cycle length, stacking, source vendor (linked to Layer 1 quality data).</li>
+      <li>This is where the Baseline/Kiso architecture applies: parsing, normalization, health record as substrate.</li>
+    </ul>
+
+    <h3>Layer 3: Outcome Monitoring</h3>
+    <ul>
+      <li>Before/during/after biomarker comparison against your own baseline.</li>
+      <li>Wearable data correlation (HRV, recovery, sleep) mapped to protocol timeline.</li>
+      <li>Self-reported outcomes (pain, mobility, energy, cognition) structured and timestamped.</li>
+      <li>The "is it working?" answer, personalized to your data.</li>
+    </ul>
+
+    <h3>Layer 4: Aggregate Intelligence (requires scale)</h3>
+    <ul>
+      <li>Community-sourced protocol data across 500+ users minimum.</li>
+      <li>Statistical attribution: propensity score matching, interrupted time series, Bayesian methods.</li>
+      <li>"217 users ran BPC-157 at 250mcg 2x/day for rotator cuff. Median recovery improvement: X%. Users who used Vendor A (97% avg purity) saw Y% better outcomes than Vendor B (82% avg purity)."</li>
+      <li>This is the dataset. This is the moat. This is what pharma companies would acquire.</li>
+    </ul>
+
+    <div class="callout-dark">
+      <div class="callout-label">Technical Discipline</div>
+      <p>Use AI for data structuring (parsing, normalization). Use proper statistics for attribution. The attribution engine requires a biostatistician, not an LLM. Don't let the LLM do both.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 05: THE GLP-1 PRECEDENT -->
+  <div class="section-header" id="glp1">
+    <span class="section-number">05</span>
+    <h2 class="section-title">The GLP-1 Precedent</h2>
+  </div>
+
+  <div class="content">
+    <p>Why semaglutide matters as a case study.</p>
+
+    <h3>Timeline</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Event</th>
+          <th>Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">1983</td>
+          <td>GLP-1 discovered</td>
+          <td>Natural peptide, 2-minute half-life. Completely impractical as a drug.</td>
+        </tr>
+        <tr>
+          <td class="num">2005</td>
+          <td>Exenatide (Byetta) approved</td>
+          <td>First GLP-1 receptor agonist. Derived from Gila monster venom.</td>
+        </tr>
+        <tr>
+          <td class="num">2010</td>
+          <td>Liraglutide (Victoza) approved</td>
+          <td>97% homology to human GLP-1. Half-life: ~13 hours.</td>
+        </tr>
+        <tr>
+          <td class="num">2017</td>
+          <td>Semaglutide (Ozempic) approved for T2D</td>
+          <td>Half-life: ~7 days (weekly injection).</td>
+        </tr>
+        <tr>
+          <td class="num">2021</td>
+          <td>Semaglutide (Wegovy) approved for obesity</td>
+          <td>Same molecule, new indication. Massive market expansion.</td>
+        </tr>
+        <tr>
+          <td class="num">2026</td>
+          <td>GLP-1 market exceeds $50B</td>
+          <td class="highlight">30M+ Americans on GLP-1s.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>The modification strategy</h3>
+    <p>Natural GLP-1 has a 2-minute half-life. Completely impractical as a drug. Semaglutide: Aib substitution at position 8 (DPP-4 resistance) + C18 fatty diacid chain at position 26. Two changes. $50B market.</p>
+
+    <h3>What this tells us about other peptides</h3>
+    <ul>
+      <li><strong>Natural peptides have terrible pharmacokinetic profiles.</strong> Modification is required for practical therapeutics.</li>
+      <li><strong>The modification is what creates the patent.</strong> The patent is what funds the trials.</li>
+      <li><strong>BPC-157 in its native form will never get FDA approval.</strong> Not because it doesn't work. Because nobody will spend $1-2B on trials for an unpatentable molecule.</li>
+      <li><strong>Real-world outcome data at scale could do what trials can't:</strong> create an evidence base that informs regulatory frameworks, clinical practice, and eventually pharma investment in modified analogs.</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">The Overton Window</div>
+      <p>30M+ Americans now inject a peptide weekly. The Overton window is open. The question is whether the rest of the peptide market follows GLP-1 into rigor or stays in the gray market indefinitely.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 06: THE ARPA-H ANGLE -->
+  <div class="section-header" id="arpah">
+    <span class="section-number">06</span>
+    <h2 class="section-title">The ARPA-H Angle (Why This Is Infrastructure)</h2>
+  </div>
+
+  <div class="content">
+    <p>The peptide data gap is not a consumer app problem. It is a health infrastructure gap with national security dimensions.</p>
 
     <div class="card-grid">
       <div class="card">
-        <div class="card-label">Layer 1 // Ship First</div>
-        <div class="card-title">Protocol Tracking</div>
-        <p>Structured logging of peptide protocols. Dose, frequency, source, duration, stacking. No health claims, no outcome attribution. Pure data capture. This is the foundation. If nobody uses this, nothing else matters.</p>
+        <div class="card-label">Dimension 1</div>
+        <div class="card-title">Strategic Dependency</div>
+        <p>US peptide supply chain runs through Chinese synthesis labs. No domestic pharmaceutical-grade peptide manufacturing at scale for non-GLP-1 compounds. Same supply chain vulnerability pattern as semiconductors and rare earth minerals.</p>
       </div>
       <div class="card">
-        <div class="card-label">Layer 2 // Requires Layer 1 Data</div>
-        <div class="card-title">Biomarker Correlation</div>
-        <p>Connect protocols to blood panels (Function Health, InsideTracker), wearable data (HRV, recovery, sleep), and self-reported outcomes. Show before/during/after comparisons. Descriptive statistics only. No causal claims.</p>
+        <div class="card-label">Dimension 2</div>
+        <div class="card-title">Innovation Blind Spot</div>
+        <p>The patent system creates a structural blind spot for non-patentable therapeutics. An entire class of compounds with therapeutic potential is invisible to the pharmaceutical R&D engine.</p>
       </div>
       <div class="card">
-        <div class="card-label">Layer 3 // Requires Biostatistician</div>
-        <div class="card-title">Outcome Attribution</div>
-        <p>Community-sourced protocol intelligence. "217 users ran BPC-157 at 250mcg 2x/day for rotator cuff. Median recovery improvement: 34%. 95% CI: 22-46%." Statistical rigor. Propensity score matching. Interrupted time series. Not LLM pattern matching.</p>
+        <div class="card-label">Dimension 3</div>
+        <div class="card-title">Evidence Vacuum</div>
+        <p>Millions of Americans are running an uncontrolled experiment on themselves. The outcomes are not being captured. This is both a public health risk and a wasted data opportunity.</p>
       </div>
       <div class="card">
-        <div class="card-label">Output Format</div>
-        <div class="card-title">Protocol Reports</div>
-        <p>Individual: your protocol, your biomarkers, your trajectory. Community: what worked for people like you, with statistical confidence intervals. The individual report is the hook. The community intelligence is the retention.</p>
+        <div class="card-label">Dimension 4</div>
+        <div class="card-title">Regulatory Gap</div>
+        <p>FDA's framework handles patentable drugs (approval pathway) and dietary supplements (DSHEA). Non-patentable therapeutic peptides fit neither category. No framework exists.</p>
       </div>
     </div>
 
     <div class="callout-dark">
-      <div class="callout-label">Technical Discipline</div>
-      <p>Use AI for data structuring (parsing lab reports, normalizing dosage formats, extracting entities from unstructured text). Use proper statistics for attribution (propensity score matching, interrupted time series, Bayesian hierarchical models). Don't let the LLM do both. The temptation to let GPT-4 "find patterns" in outcome data is strong. Resist it. Statistical rigor is the entire value proposition.</p>
+      <div class="callout-label">Infrastructure, Not an App</div>
+      <p>ARPA-H exists to fund health research the market won't. The peptide evidence gap is a textbook case: high potential, structural market failure, no commercial path to the data. The first real-world evidence platform for peptide outcomes is infrastructure, not an app.</p>
     </div>
   </div>
 
-  <!-- SECTION 05: THE MONITORING ARGUMENT -->
-  <div class="section-header" id="monitoring">
-    <span class="section-number">05</span>
-    <h2 class="section-title">The Monitoring Argument</h2>
-  </div>
-
-  <div class="content">
-    <h3>Steelmanned</h3>
-    <p>Justin Mares' argument: continuous glucose monitors, quarterly biomarker panels, annual Prenuvo scans, and wearable data mean we can take "more risk on" with experimental compounds because we'll catch problems early. The monitoring infrastructure of 2026 is qualitatively different from what existed even five years ago.</p>
-
-    <p>What IS true about this: modern monitoring tools create a feedback loop that didn't exist a decade ago. If you can track comprehensive biomarkers before, during, and after a peptide protocol, you have outcome data. Real data. Not anecdotes, not forum posts. Structured, timestamped, biomarker-correlated outcome data. That's not a safety argument. It's a data argument. And the data argument is legitimate.</p>
-
-    <h3>Critiqued</h3>
-    <p>Detection is not prevention. A Prenuvo MRI detects a tumor. It does not prevent BPC-157 from promoting angiogenesis in a pre-existing lesion you didn't know about. You monitor because the risk exists, not because monitoring eliminates it. The monitoring reduces the consequence of certain risks (catching problems earlier), but it does not reduce the probability of those risks occurring.</p>
-
-    <div class="callout-red">
-      <div class="callout-label">The "Natural" Fallacy</div>
-      <p>The "your body already makes it" frame is a marketing argument, not a safety argument. The body also makes cortisol, adrenaline, and insulin. Exogenous administration of any hormone or peptide disrupts endogenous feedback loops. Exogenous testosterone is bioidentical to what the testes produce, but it still suppresses the HPT axis and shuts down natural production. "Natural" tells you nothing about the safety profile of supraphysiological dosing.</p>
-    </div>
-
-    <div class="callout-green">
-      <div class="callout-label">The Real Opportunity</div>
-      <p>The monitoring infrastructure argument works not because it makes peptide use safe, but because it makes peptide use measurable. Measurable use generates data. Data at scale generates knowledge. Knowledge creates a defensible business. That's the thesis. Not "peptides are safe because we can monitor." Rather: "monitoring generates the dataset that nobody else is building."</p>
-    </div>
-  </div>
-
-  <!-- SECTION 06: MARKET -->
+  <!-- SECTION 07: MARKET -->
   <div class="section-header" id="market">
-    <span class="section-number">06</span>
+    <span class="section-number">07</span>
     <h2 class="section-title">Market</h2>
   </div>
 
   <div class="content">
-    <h3>Primary users</h3>
-    <p>Peptide-curious health optimizers who have already rejected the "just see your doctor" paradigm. High intent, high data literacy, willing to self-experiment, willing to pay for better information. They're already sourcing peptides. They're already injecting. They just have no structured way to track what's working.</p>
-
-    <h3>Market signals</h3>
+    <h3>Consumer market</h3>
+    <p><strong>Primary users:</strong> peptide-curious health optimizers. Already rejected "just see your doctor." High intent, high data literacy, willing to self-experiment.</p>
     <ul>
-      <li><strong>Cultural normalization.</strong> Joe Rogan promotes BPC-157 regularly. Jennifer Aniston has discussed peptide use publicly. TikTok biohacker culture has millions of followers tracking peptide content.</li>
-      <li><strong>GLP-1 Overton window.</strong> 30M+ Americans on GLP-1s normalized the concept of injectable peptide therapeutics. The general public now understands that peptides are a category of medicine, not just a bodybuilding niche.</li>
-      <li><strong>Regulatory vacuum.</strong> The gap between demand and regulated supply is growing, not shrinking. FDA enforcement pushes users toward unregulated sources, increasing the need for independent quality and outcome tracking.</li>
-      <li><strong>B2B opportunity.</strong> Pharma companies entering the peptide space need real-world evidence data. Your dataset is their Phase IV equivalent. This is the monetization path that doesn't require selling to consumers at all.</li>
+      <li><strong>Market signals:</strong> 30M+ on GLP-1s (Overton window), Joe Rogan/Jennifer Aniston mainstream adoption, TikTok biohacker culture, NYT coverage.</li>
+      <li><strong>Comparable:</strong> Whoop raised $575M at $10.1B for measurement with no intervention.</li>
     </ul>
 
-    <h3>Market size</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Segment</th>
+          <th>Size</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TAM</td>
+          <td class="num highlight">5-10M</td>
+          <td>Americans currently using or considering non-GLP-1 peptides</td>
+        </tr>
+        <tr>
+          <td>SAM</td>
+          <td class="num">500K-1M</td>
+          <td>Actively tracking protocols (power users)</td>
+        </tr>
+        <tr>
+          <td>SOM Year 1</td>
+          <td class="num">10K-25K</td>
+          <td>Supply chain intelligence as wedge, free content drives traffic</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>B2B market (Phase 2)</h3>
+    <ul>
+      <li><strong>Compounding pharmacies:</strong> outcome data justifies prescribing decisions. No pharmacy currently has this.</li>
+      <li><strong>Telehealth peptide clinics:</strong> differentiation through data-driven protocols vs. "here's your BPC-157, good luck."</li>
+      <li><strong>Pharma companies:</strong> real-world evidence for modified peptide analogs. Your dataset is their Phase IV.</li>
+      <li><strong>Research institutions:</strong> structured outcome data for grant applications and study design.</li>
+    </ul>
+
+    <h3>Market layers</h3>
 
     <div class="econ-bars">
       <div class="econ-bar">
@@ -964,55 +1180,56 @@
         </div>
       </div>
       <div class="econ-bar">
-        <div class="econ-bar-label">Outcome Data</div>
+        <div class="econ-bar-label">Tracking Apps</div>
+        <div class="econ-bar-track">
+          <div class="econ-bar-fill" style="width: 3%; min-width: 80px; background: var(--faint);">
+            <span class="econ-bar-value" style="color: var(--ink);">&lt;$10M</span>
+          </div>
+        </div>
+      </div>
+      <div class="econ-bar">
+        <div class="econ-bar-label">Outcome Intelligence</div>
         <div class="econ-bar-track">
           <div class="econ-bar-fill" style="width: 3%; min-width: 130px; background: var(--faint);">
-            <span class="econ-bar-value" style="color: var(--ink);">Doesn't exist yet</span>
+            <span class="econ-bar-value" style="color: var(--ink);">$0 (doesn't exist)</span>
           </div>
         </div>
       </div>
     </div>
 
-    <h3>Comparable</h3>
-    <p>Whoop raised $575M at a $10.1B valuation for measurement with no intervention. Pure data capture from a wearable. No outcome attribution, no protocol intelligence, no community-sourced evidence. You would be building outcome intelligence for a specific, high-value, high-willingness-to-pay cohort that Whoop's general fitness tracking doesn't serve.</p>
-  </div>
+    <h3>Financial model</h3>
 
-  <!-- SECTION 07: PREREQUISITES -->
-  <div class="section-header" id="prerequisites">
-    <span class="section-number">07</span>
-    <h2 class="section-title">Prerequisites (Non-Negotiable)</h2>
-  </div>
-
-  <div class="content">
-    <p>These are not nice-to-haves. They are the difference between building knowledge infrastructure and building Medvi 2.0 (a peptide telehealth marketplace that adds no lasting value).</p>
-
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-label">Hire #1</div>
-        <div class="card-title">Biostatistician</div>
-        <p>Co-founder or senior advisor. The attribution engine requires propensity score matching, Bayesian hierarchical models, interrupted time series analysis, and careful handling of confounders. This cannot be built by prompting an LLM. If you can't find this person within 60 days, don't build Layer 3.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Day One</div>
-        <div class="card-title">Legal Counsel</div>
-        <p>Language matters. "Our data shows BPC-157 improves recovery" is an FDA-regulated health claim. "Here's what 217 users reported about their experience" is user-generated content. The line between them is thin, and getting it wrong is potentially terminal. Need counsel experienced in FDA, FTC, and DSHEA.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Credibility</div>
-        <div class="card-title">Medical Advisor</div>
-        <p>Not a biohacker MD selling peptides on Instagram. Someone published in peer-reviewed journals, willing to put their professional reputation next to your product. This person exists in the longevity medicine space but needs to be vetted carefully. Their presence is your credibility signal to both users and potential B2B partners.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Data Quality</div>
-        <div class="card-title">Supply Chain Quality Layer</div>
-        <p>If users track outcomes on garbage peptides with inconsistent dosing from unverified sources, your dataset is noise, not signal. Need batch testing, COA validation, or pharmaceutical-grade supplier partnership. Without this, every correlation in your data is suspect.</p>
-      </div>
-    </div>
-
-    <div class="callout-dark">
-      <div class="callout-label">Non-Negotiable</div>
-      <p>If a single adverse event gets publicly linked to your platform, the regulatory and reputational risk may be terminal. It doesn't matter whether you recommended the protocol or not. The association is the liability. Build the advisory structure, the legal framework, and the disclaimers before launch. Not after.</p>
-    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Model</th>
+          <th>Revenue</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Layer 1: Supply Chain</td>
+          <td>Free content + premium reports</td>
+          <td>$0 initially. Traffic/authority builder.</td>
+        </tr>
+        <tr>
+          <td>Layer 2: Risk + Tracking</td>
+          <td>$9.99-19.99/mo subscription</td>
+          <td class="num">5K users = $600K-$1.2M ARR</td>
+        </tr>
+        <tr>
+          <td>Layer 3: Outcome Monitoring</td>
+          <td>Premium tier $29.99/mo</td>
+          <td>Power users. Before/during/after analysis.</td>
+        </tr>
+        <tr>
+          <td>Layer 4: Aggregate Intelligence</td>
+          <td>B2B data licensing</td>
+          <td class="num highlight">$50K-500K/yr per pharma/research client</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- SECTION 08: RISKS + KILL CRITERIA -->
@@ -1027,33 +1244,33 @@
     <div class="card-grid">
       <div class="card">
         <div class="card-label">Critical</div>
-        <div class="card-title">Adverse Event Linked to Platform</div>
-        <p>Even if you didn't recommend the protocol, even if the user sourced the peptide independently, a hospitalization or death linked to "that peptide tracking app" is front-page news. The liability surface is real and potentially company-ending.</p>
+        <div class="card-title">Adverse Event Association</div>
+        <p>If a user experiences a serious adverse event while using the platform, reputational and legal risk is real even if you didn't recommend the protocol. Requires legal structure and medical advisory board before launch.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Critical</div>
+        <div class="card-title">Supply Chain Data Quality</div>
+        <p>If gray market peptides have inconsistent purity, outcome data based on those protocols is noise, not signal. Layer 1 (supply chain verification) must precede Layer 3 (outcome monitoring) or the dataset is worthless.</p>
       </div>
       <div class="card">
         <div class="card-label">Structural</div>
-        <div class="card-title">Gray Market Supply Chain</div>
-        <p>Inconsistent dosing, unknown purity, mislabeled compounds. If the input data is garbage, the output correlations are garbage. Your dataset may be measuring noise, not signal. This is the hardest risk to mitigate without controlling the supply chain directly.</p>
+        <div class="card-title">Regulatory Trajectory</div>
+        <p>FDA is tightening, not loosening. If BPC-157 becomes explicitly illegal (not just removed from compounding lists), the market could contract. Alternatively, regulation could create a framework that legitimizes the market.</p>
       </div>
       <div class="card">
-        <div class="card-label">Regulatory</div>
-        <div class="card-title">FDA Trajectory Unclear</div>
-        <p>Mares' thesis assumes "legalization is coming." Current FDA enforcement actions suggest otherwise. The 503A/503B compounding pathway remains under active restriction. Regulatory clarity is 3-5 years out, not imminent. Build for the current regime, not a hoped-for future one.</p>
+        <div class="card-label">Market</div>
+        <div class="card-title">PeptPro First Mover</div>
+        <p>PeptPro (EU-based) is attempting the full stack: marketplace + tracking + biomarker analysis + wearable integration. If they execute and scale, the intelligence gap may close before you enter. Their conflict of interest (selling peptides + rating outcomes) is a structural weakness but doesn't guarantee failure.</p>
       </div>
       <div class="card">
         <div class="card-label">Statistical</div>
         <div class="card-title">Data Density Requirements</div>
-        <p>Need n=200+ per protocol to distinguish a 20% effect size from noise at 80% power. For rare peptides or unusual stacking combinations, reaching statistical significance may take 12-18 months. Users may churn before the dataset reaches actionable density.</p>
+        <p>Need n=200+ per peptide-condition pair to distinguish a 20% effect from noise. At 5 peptides x 5 conditions = 25 cohorts x 200 users = 5,000 users minimum for meaningful aggregate intelligence. May take 12-18 months.</p>
       </div>
       <div class="card">
-        <div class="card-label">Competitive</div>
-        <div class="card-title">Incumbents Could Build Faster</div>
-        <p>Whoop (14M+ users), Function Health (growing biomarker database), or a pharma company with existing clinical trial infrastructure could build this faster with their existing user base and capital. Your advantage is focus and speed. Their advantage is distribution and trust.</p>
-      </div>
-      <div class="card">
-        <div class="card-label">Behavioral</div>
-        <div class="card-title">Data Sharing Reluctance</div>
-        <p>Users may track protocols individually but refuse to share anonymized data with the community. If sharing rates are low, you have individual tracking (low value, commodity) instead of community intelligence (high value, defensible). The social proof and incentive design must be right from day one.</p>
+        <div class="card-label">Engineering</div>
+        <div class="card-title">Attribution Complexity</div>
+        <p>"Did BPC-157 heal the tendon or did 8 weeks of rest?" requires controlled comparison methodology, not pattern matching. Requires a biostatistician. Cannot be approximated by an LLM.</p>
       </div>
     </div>
 
@@ -1061,10 +1278,11 @@
 
     <div class="callout-dark">
       <div class="callout-label">Walk Away If</div>
-      <p><strong>1.</strong> You can't get 500 users actively tracking protocols within 6 months of launch. Below this threshold, the dataset doesn't reach critical mass for any single peptide, and the flywheel never starts.</p>
-      <p><strong>2.</strong> Users won't share anonymized data. If sharing rates are below 40%, you have individual tracking (commodity, low defensibility) not community intelligence (high value, compounding returns).</p>
-      <p><strong>3.</strong> You can't find a biostatistician co-founder or senior advisor within 60 days. Without this person, don't build the attribution engine. You'll ship something that looks like science but isn't, and that's worse than shipping nothing.</p>
-      <p><strong>4.</strong> Synthetic data tests show the attribution algorithm can't distinguish a 20% effect size at n=200. If the statistical methods don't work on clean synthetic data, they won't work on noisy real-world data. You need 10x more users before making any claims.</p>
+      <p><strong>1.</strong> If you can't get 500 users tracking protocols within 6 months, the dataset thesis doesn't reach critical mass. Pivot to supply chain intelligence only (Layer 1 as standalone business).</p>
+      <p><strong>2.</strong> If users won't share anonymized protocol data, you have individual tracking (commodity) not community intelligence (moat). Test willingness to share before building aggregation.</p>
+      <p><strong>3.</strong> If you can't find a biostatistician co-founder or advisor within 60 days, don't build the attribution engine. Ship Layers 1-3 only and be explicit that you don't make outcome claims.</p>
+      <p><strong>4.</strong> If Finnrick or PeptPro ships aggregate outcome intelligence before you reach scale, evaluate whether to compete or partner. Don't fight a data network effect from behind.</p>
+      <p><strong>5.</strong> If a major adverse event in the peptide community triggers FDA enforcement that shrinks the market by 50%+, the consumer thesis contracts but the B2B/research thesis strengthens (more need for evidence, not less).</p>
     </div>
   </div>
 
@@ -1075,39 +1293,66 @@
   </div>
 
   <div class="content">
-    <h3>Build path from Company A to Company C</h3>
 
     <div class="workflow-steps">
       <div class="wf-step">
         <div class="step-num">Phase 1 // Day 1-30</div>
-        <div class="step-title">Ship Company A</div>
-        <p>The health record. Parsing, normalization, coverage score, MCP server.</p>
+        <div class="step-title">Supply Chain Wedge</div>
+        <p>Vendor quality database. Web resource. Content marketing. 1K monthly visitors.</p>
       </div>
       <div class="wf-step">
-        <div class="step-num">Phase 2 // Day 31-60</div>
-        <div class="step-title">Add Peptide Tracking</div>
-        <p>Peptide protocol tracking as a data source. Users log protocols. No attribution.</p>
+        <div class="step-num">Phase 2 // Day 31-90</div>
+        <div class="step-title">Risk + Protocol Tracking</div>
+        <p>Health record parsing. Risk profiles. Structured logging. 500 users.</p>
       </div>
       <div class="wf-step">
-        <div class="step-num">Phase 3 // Day 61-120</div>
-        <div class="step-title">Measure + Hire</div>
-        <p>Measure peptide cohort growth. If it grows faster, hire biostatistician. Build synthetic test harness.</p>
+        <div class="step-num">Phase 3 // Day 91-180</div>
+        <div class="step-title">Outcome Monitoring</div>
+        <p>Biomarker comparison. Wearable correlation. Hire biostatistician. First publishable data.</p>
       </div>
       <div class="wf-step">
-        <div class="step-num">Phase 4 // Day 121-180</div>
-        <div class="step-title">Attribution Engine</div>
-        <p>Launch outcome attribution with statistical rigor. Community-sourced protocol intelligence.</p>
+        <div class="step-num">Phase 4 // Day 181-365</div>
+        <div class="step-title">Aggregate Intelligence</div>
+        <p>Community data. Statistical attribution. B2B licensing. The dataset becomes the moat.</p>
       </div>
     </div>
 
-    <h3>The earning window</h3>
-    <p>Regulatory clarity for non-GLP-1 peptides is 3-5 years out. When regulation arrives, whoever has the outcome data becomes the reference. The pharma companies entering this space will need real-world evidence. The FDA will want safety data. The only entity that can provide either is the one that has been systematically tracking outcomes.</p>
+    <h3>Phase 1: Supply Chain Intelligence Wedge (Day 1-30)</h3>
+    <ul>
+      <li>Build vendor quality database from Finnrick data + own research.</li>
+      <li>Web resource, no app required.</li>
+      <li>Content marketing: "The 10 most-tested peptide vendors ranked by independent purity data."</li>
+      <li><strong>Goal:</strong> 1,000 monthly visitors, establish authority.</li>
+    </ul>
 
-    <p>The window is now. Not because regulation is imminent, but because the dataset takes years to build to actionable density. Starting later means arriving after the regulatory framework has already been shaped by whoever started first.</p>
+    <h3>Phase 2: Risk Assessment + Protocol Tracking (Day 31-90)</h3>
+    <ul>
+      <li>Build on Baseline/Kiso architecture: health record parsing, normalization.</li>
+      <li>Add peptide-specific risk profiles connected to user health data.</li>
+      <li>Structured protocol logging with source vendor linked to Layer 1 quality data.</li>
+      <li><strong>Goal:</strong> 500 users actively tracking protocols.</li>
+    </ul>
+
+    <h3>Phase 3: Outcome Monitoring (Day 91-180)</h3>
+    <ul>
+      <li>Before/during/after biomarker comparison.</li>
+      <li>Wearable data correlation.</li>
+      <li>Hire biostatistician.</li>
+      <li>Build synthetic test harness with known ground truth.</li>
+      <li><strong>Goal:</strong> first publishable outcome data on one peptide-condition pair.</li>
+    </ul>
+
+    <h3>Phase 4: Aggregate Intelligence (Day 181-365)</h3>
+    <ul>
+      <li>Community-sourced protocol data.</li>
+      <li>Statistical attribution with rigor.</li>
+      <li>B2B data licensing to clinics, telehealth providers, researchers.</li>
+      <li><strong>Goal:</strong> dataset becomes the moat.</li>
+    </ul>
 
     <div class="callout-dark">
       <div class="callout-label">Strategic Sequencing</div>
-      <p>A first. C as a validated escalation. B (generic health coaching) gets cut entirely. Company A is the health record infrastructure that makes C possible. Company C is the specific, high-value application of that infrastructure to a market with a structural data vacuum. Company B was a middle ground that serves neither thesis well. Kill it.</p>
+      <p>The wedge is supply chain intelligence. The product is outcome monitoring. The moat is the aggregate dataset. Don't skip layers. Each one generates the data and users the next layer requires.</p>
     </div>
   </div>
 
