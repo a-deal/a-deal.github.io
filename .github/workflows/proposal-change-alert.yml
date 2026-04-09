@@ -51,6 +51,6 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "LearnAIR Proposal Updated"
-          to: deal.e.andrew@gmail.com
+          to: deal.e.andrew@gmail.com, mkdeal@gmail.com
           from: LearnAIR Proposals <${{ secrets.SMTP_USERNAME }}>
           body: file:///tmp/email-body.txt
