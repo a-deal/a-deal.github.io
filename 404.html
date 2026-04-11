@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Redirecting...</title>
+<script>
+  // If the missing page was under /learnair/, redirect to the gate
+  if (window.location.pathname.startsWith('/learnair/')) {
+    // Clear the access token so they hit the password prompt
+    localStorage.removeItem('learnair_access');
+    window.location.href = '/learnair/gate.html';
+  } else {
+    // For any other 404, just go home
+    window.location.href = '/';
+  }
+</script>
+</head>
+<body></body>
+</html>
