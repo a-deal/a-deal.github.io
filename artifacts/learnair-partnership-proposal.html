@@ -4,777 +4,239 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Embed & Evolve — LearnAIR Partnership Proposal</title>
+<title>LearnAIR — Wednesday Prep</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Anybody:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        ink: { DEFAULT: '#1a1a1a', soft: '#4a4a4a', faint: '#8a8a8a' },
-        paper: '#ffffff',
-        cream: '#f5f2e9',
-        navy: { DEFAULT: '#0a1628', mid: '#152238', light: '#1e3354' },
-        gold: { DEFAULT: '#D4AF37', soft: 'rgba(212,175,55,0.12)', muted: '#b8962e' },
-        teal: { DEFAULT: '#0d9488', light: '#5eead4' },
-        ember: { DEFAULT: '#f59e0b', soft: 'rgba(245,158,11,0.12)' },
-      },
-      fontFamily: {
-        display: ['Anybody', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
-        body: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-      },
-    }
-  }
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Inter', sans-serif; color: #1a1a1a; background: #0a1628; }
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .s1 { transition-delay: 0.12s; } .s2 { transition-delay: 0.24s; }
-  .s3 { transition-delay: 0.36s; } .s4 { transition-delay: 0.48s; }
-  .s5 { transition-delay: 0.60s; } .s6 { transition-delay: 0.72s; }
-  .gold-rule { height: 2px; background: linear-gradient(90deg, #D4AF37 0%, transparent 100%); max-width: 80px; }
-  .stat { font-family: 'Anybody', sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+  :root {
+    --bg: #0a1628;
+    --card: #0f1d32;
+    --border: #1e3354;
+    --text: #c8d6e5;
+    --heading: #ffffff;
+    --accent: #D4AF37;
+    --accent-soft: rgba(212,175,55,0.1);
+    --red: #e74c3c;
+    --red-soft: rgba(231,76,60,0.08);
+    --green: #2ecc71;
+    --green-soft: rgba(46,204,113,0.08);
+    --muted: #5a6d82;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  .container { max-width: 680px; margin: 0 auto; }
+
+  .header {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+  h2 {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  p { margin-bottom: 0.75rem; font-size: 0.92rem; }
+
+  .priority-box {
+    background: var(--accent-soft);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .priority-box p {
+    color: var(--heading);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .priority-box p:last-child { margin-bottom: 0; }
+  .priority-box .script {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.88rem;
+  }
+
+  .red-box {
+    background: var(--red-soft);
+    border: 1px solid rgba(231,76,60,0.2);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .red-box p { color: #e8a09a; }
+  .red-box strong { color: var(--red); }
+
+  .green-box {
+    background: var(--green-soft);
+    border: 1px solid rgba(46,204,113,0.2);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .green-box p { color: #a3dab8; }
+  .green-box strong { color: var(--green); }
+
+  ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+  li {
+    font-size: 0.92rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
 </style>
 </head>
-<body class="min-h-screen">
+<body>
+<div class="container">
 
-<!-- ===== HERO ===== -->
-<header class="bg-navy text-white" style="padding: clamp(6rem, 14vw, 12rem) clamp(2rem, 6vw, 6rem) clamp(5rem, 12vw, 10rem);">
-  <div class="max-w-3xl">
-    <div class="gold-rule mb-10 reveal"></div>
-    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-10 reveal s1">LearnAIR + Andrew &amp; Mike Deal</p>
-    <h1 class="stat text-white reveal s2" style="font-size: clamp(3rem, 8vw, 5.5rem); line-height: 0.88; text-transform: uppercase;">
-      Embed<br>&amp; Evolve
-    </h1>
-    <p class="font-serif text-xl italic mt-10 text-gold reveal s3" style="max-width: 30rem; line-height: 1.6;">A 90-day partnership to embed into LearnAIR's existing program and evolve it toward an Evergreen agent workforce curriculum.</p>
-    <p class="font-mono text-xs text-gray-500 mt-12 reveal s4">April 2026 &middot; 90-day working agreement</p>
+  <div class="header">
+    <div class="kicker">Wednesday Prep</div>
+    <h1>LearnAIR: What to Say</h1>
+    <p class="subtitle">Verbal talking points only. No document leaves your hands.</p>
   </div>
-</header>
 
+  <!-- ===== STEP 1 ===== -->
+  <section>
+    <h2>Step 1: Ask the Question First</h2>
+    <div class="priority-box">
+      <p>Before presenting anything, get a number.</p>
+      <p class="script">"Before we walk through what we've been working on, I want to make sure we're aligned on something practical. What can LearnAIR spend per month on this engagement?"</p>
+    </div>
+    <p>If they deflect or give a non-answer:</p>
+    <div class="priority-box">
+      <p class="script">"Even a range is helpful. Are we talking $2K, $5K, $10K? I want to make sure what we've designed is realistic for where you are."</p>
+    </div>
+    <div class="red-box">
+      <p><strong>If they can't answer:</strong> Stop here. Don't present. Say: "That's okay. Why don't you and Teresa talk about it and get back to me? Once we have a number, I'll share the full scope."</p>
+    </div>
+  </section>
 
-<!-- ===== THE THESIS ===== -->
-<section class="bg-navy-mid text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">The thesis</p>
-    <blockquote class="reveal s1" style="border-left: 3px solid #D4AF37; padding-left: 1.5rem;">
-      <p class="font-serif italic text-2xl text-gray-200 leading-relaxed" style="max-width: 32rem;">"You're not training people to use AI. You're training leaders to command AI-enabled systems."</p>
-    </blockquote>
-    <p class="font-body text-gray-400 text-lg leading-relaxed mt-8 reveal s2" style="max-width: 34rem;">
-      Nobody is training the person who sits between the AI system and the business outcome and makes sure it actually works. That's the supervision gap. That's what mission command trained veterans for. That's the role employers are hiring for right now.
-    </p>
+  <!-- ===== STEP 2 ===== -->
+  <section>
+    <h2>Step 2: If They Give a Number</h2>
+
+    <h3>The shape of the engagement</h3>
+    <ul>
+      <li>90-day engagement, 1099 contractor</li>
+      <li>$100/hr billed monthly against actual hours</li>
+      <li>Mike embeds in existing program, gets reps with real cohorts</li>
+      <li>Andrew designs curriculum architecture, front-loaded then fading</li>
+      <li>By day 90, a LearnAIR trainer delivers the new modules independently</li>
+    </ul>
+
+    <h3>The approach</h3>
+    <ul>
+      <li>Not building from scratch. Hooking into what you already have.</li>
+      <li>Evolving existing curriculum toward agent workforce skills</li>
+      <li>Veterans join as a sub-group in current cohorts first</li>
+      <li>Standalone veteran cohort is a day-45 decision based on real data</li>
+    </ul>
+
+    <h3>What we need from LearnAIR</h3>
+    <ul>
+      <li>An upcoming cohort within 30 days for Mike to embed in</li>
+      <li>Justin opening employer network for validation conversations</li>
+      <li>Teresa providing a concrete accreditation artifact by week 4</li>
+    </ul>
+
+    <h3>What success looks like at day 90</h3>
+    <ul>
+      <li>Mike running sessions independently</li>
+      <li>At least one new module piloted with a real cohort</li>
+      <li>3+ employer conversations about graduate placement</li>
+      <li>Both sides know whether to continue, expand, or part ways</li>
+    </ul>
+  </section>
+
+  <!-- ===== WHAT NOT TO SHARE ===== -->
+  <section>
+    <h2>Do Not Share</h2>
+    <div class="red-box">
+      <p><strong>Do not hand over any document.</strong> The following stay internal until terms are agreed:</p>
+    </div>
+    <ul>
+      <li>The four-module curriculum design</li>
+      <li>The workstation toolkit concept</li>
+      <li>Competitive analysis or market research</li>
+      <li>Specific IP terms or ownership language</li>
+      <li>The full written proposal</li>
+    </ul>
+    <p>These are leverage. They get shared after a spend number is confirmed and engagement terms are agreed.</p>
+  </section>
+
+  <!-- ===== IF THEY PUSH ===== -->
+  <section>
+    <h2>If They Push for a Written Proposal</h2>
+    <div class="green-box">
+      <p class="script"><strong>Say:</strong> "We have a detailed scope of work ready. Once we're aligned on budget and engagement terms, I'll send it over for review. I want to make sure we're building something that works for both sides before we put it on paper."</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="footer">
+    Internal use only. Updated April 12, 2026.
   </div>
-</section>
 
-
-<!-- ===== STAT CARD ===== -->
-<section class="bg-navy text-white" style="padding: clamp(4rem, 8vw, 6rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <div class="reveal">
-      <p class="stat text-gold" style="font-size: clamp(3rem, 7vw, 5rem); line-height: 1;">$168K&ndash;$231K</p>
-      <p class="font-body text-gray-400 text-lg mt-4" style="max-width: 32rem;">Ramp is hiring "Agentic Operators" at this range plus equity. Justin sent us the posting hours after the call. That's the role. That's the market.</p>
-      <p class="font-mono text-xs text-gray-600 mt-4">Source: Ramp job posting, April 2026</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== THE APPROACH ===== -->
-<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">The approach</p>
-    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-6 reveal s1">We're not building from scratch</h2>
-    <p class="font-body text-ink-soft text-lg leading-relaxed reveal s1" style="max-width: 34rem;">
-      LearnAIR already has a working program with real cohorts. We don't have L&amp;D experience at scale. The smarter path: hook into the existing offering. Learn how it runs. Then evolve it from the inside.
-    </p>
-    <div class="bg-paper rounded-2xl p-7 mt-8 shadow-sm reveal s1">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-3">Veteran integration</p>
-      <p class="font-body text-ink-soft leading-relaxed">Rather than running a separate veteran-only cohort in parallel, we recruit 3-5 veterans into the existing cohort as a sub-group. This gives us real data on where the curriculum lands differently without splitting Mike's bandwidth. A standalone veteran cohort is a day-45 decision, informed by what we learn from the first run.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 mt-12">
-      <div class="bg-paper rounded-2xl p-7 shadow-sm reveal s2">
-        <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-3">Phase 1: Embed</p>
-        <p class="font-body text-ink-soft leading-relaxed">Mike gets reps in the current program. We learn the operational reality before we change anything.</p>
-      </div>
-      <div class="bg-paper rounded-2xl p-7 shadow-sm reveal s3">
-        <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-3">Phase 2: Evolve</p>
-        <p class="font-body text-ink-soft leading-relaxed">1-4 Evergreen modules introduced incrementally, replacing portions less relevant as the market shifts.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== WHY EMBED & EVOLVE ===== -->
-<section class="bg-paper" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">Why this de-risks everything</p>
-    <div class="space-y-10">
-      <div class="reveal s1"><p class="font-body text-ink text-lg leading-relaxed"><strong>We learn from what works</strong> instead of reinventing it.</p></div>
-      <div class="reveal s2"><p class="font-body text-ink text-lg leading-relaxed"><strong>Mike builds credibility with real cohorts</strong> before leading new content.</p></div>
-      <div class="reveal s3"><p class="font-body text-ink text-lg leading-relaxed"><strong>Modules ship incrementally,</strong> not all-or-nothing.</p></div>
-      <div class="reveal s4"><p class="font-body text-ink text-lg leading-relaxed"><strong>LearnAIR gets immediate value</strong> without betting on an unproven standalone track.</p></div>
-      <div class="reveal s5"><p class="font-body text-ink text-lg leading-relaxed"><strong>Over time, the Evergreen track becomes the core</strong> and Track 2 emerges organically.</p></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== THE CURRICULUM ===== -->
-<section class="bg-navy text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">The Evergreen curriculum</p>
-    <h2 class="stat text-white reveal s1" style="font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1; text-transform: uppercase;">From Oversight<br>to Orchestration</h2>
-    <p class="font-body text-gray-400 text-lg leading-relaxed mt-8 mb-6 reveal s2" style="max-width: 34rem;">
-      Topical, not tool-based. Model-agnostic by design. Whether someone uses ChatGPT, Claude, or Gemini is below the line. What we teach is above the line.
-    </p>
-    <div class="gold-rule mb-12 reveal s2"></div>
-
-    <!-- Topic: Mission Command -->
-    <div class="mb-12 reveal s3">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 1</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Mission Command &amp; Commander's Intent</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        Veterans already know this. They just don't know it transfers. Mission command, MCPP, BAMCIS: defining boundaries, validating outcomes, driving results through ambiguity. These are the same skills required to supervise AI systems. The curriculum surfaces this tacit knowledge and makes it explicit.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: defining agent intent, setting success criteria, structured execution frameworks</p>
-    </div>
-
-    <!-- Topic: In-the-Loop vs On-the-Loop -->
-    <div class="mb-12 reveal s3">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 2</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">In-the-Loop vs. On-the-Loop</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        In the loop: human required for every step. You are the bottleneck. On the loop: human can correct, but the system moves autonomously. Order of magnitude efficiency gain. This is THE curriculum gradient. We teach the transition from tool use to system oversight.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: delegation patterns, autonomy levels, when to intervene vs. when to let the system run</p>
-    </div>
-
-    <!-- Topic: Output Validation -->
-    <div class="mb-12 reveal s4">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 3</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Output Validation &amp; Structural Honesty</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        AI systems select which facts to present. They can climb the wrong hill without telling you. Your team feels productive. They don't realize the oxygen is running out because nobody trained them to check. The supervision layer: knowing when the system is optimizing for the wrong goal.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: verification frameworks, adversarial testing, distinguishing real progress from apparent progress</p>
-    </div>
-
-    <!-- Topic: Adversarial Collaboration -->
-    <div class="mb-12 reveal s4">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 4</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Adversarial Collaboration</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        "Sir, respectfully, I think we're on the wrong hill." Veterans are trained to challenge assumptions up the chain. That's the skill AI oversight requires. Not agreement. Not blind trust. Constructive challenge that improves the output. This is what separates a tool user from an operator.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: prompt refinement, red-teaming outputs, feedback loops that improve system quality over time</p>
-    </div>
-
-    <!-- Topic: Delegation & Feedback -->
-    <div class="mb-12 reveal s5">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 5</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Delegation &amp; Feedback Architecture</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        How to specify what you want without over-constraining execution. How to design correction loops that catch errors early. How to structure feedback so the system gets better, not just compliant. Decentralized execution philosophy: define the outcome, trust the execution layer.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: agent orchestration, multi-step workflows, human-in-the-loop design patterns</p>
-    </div>
-
-    <!-- Topic: Model Agnosticism -->
-    <div class="mb-12 reveal s5">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 6</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Model Evaluation &amp; Platform Agnosticism</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        We don't teach loyalty to a model. We teach evaluation as a skill. Which tool fits this task? How do you test that? What changes when the model changes, and what doesn't? The judgment layer is permanent. The tool layer is temporary. Graduates learn to navigate both.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: tool selection, capability assessment, building workflows that survive model transitions</p>
-    </div>
-
-    <!-- Topic: Ecosystem Thinking -->
-    <div class="reveal s6">
-      <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Topic 7</p>
-      <h3 class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Ecosystem Thinking</h3>
-      <p class="font-body text-gray-300 leading-relaxed" style="max-width: 34rem;">
-        Operating in systems of systems. Inputs, outputs, dependencies, feedback loops. Understanding how a change in one agent affects the rest of the workflow. This is where military systems thinking, managing logistics, comms, and personnel simultaneously, maps directly to managing AI-augmented organizations.
-      </p>
-      <p class="font-body text-gray-500 text-sm mt-4">Maps to: workflow design, dependency management, operating across multiple AI tools and teams simultaneously</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== EVERGREEN PHILOSOPHY ===== -->
-<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">Curriculum philosophy</p>
-    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-8 reveal s1">Evergreen by design</h2>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="reveal s1">
-        <p class="font-body text-ink text-lg font-semibold mb-2">Principles, not tools</p>
-        <p class="font-body text-ink-soft leading-relaxed">Commander's intent. Feedback loops. Output validation. Managing ambiguity. These transfer regardless of which platform is dominant in 6 months.</p>
-      </div>
-      <div class="reveal s2">
-        <p class="font-body text-ink text-lg font-semibold mb-2">Foundational, not just-in-time</p>
-        <p class="font-body text-ink-soft leading-relaxed">Two types of knowledge: what you internalize (judgment, critical thinking, systems reasoning) and what you look up (API docs, market research). We teach the first kind.</p>
-      </div>
-      <div class="reveal s3">
-        <p class="font-body text-ink text-lg font-semibold mb-2">The curriculum doesn't expire</p>
-        <p class="font-body text-ink-soft leading-relaxed">The tools change. The judgment doesn't. LearnAIR can run cohort after cohort without rebuilding from scratch when the next model drops.</p>
-      </div>
-      <div class="reveal s4">
-        <p class="font-body text-ink text-lg font-semibold mb-2">The identity shift</p>
-        <p class="font-body text-ink-soft leading-relaxed">The real outcome isn't the certificate. It's that veterans see themselves as capable of leading in AI-enabled ecosystems. Not AI literate. AI capable. That's the shift.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== OUTREACH & PARTNERSHIPS ===== -->
-<section class="bg-paper" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">Parallel stream</p>
-    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-8 reveal s1">Outreach &amp; Partnerships</h2>
-    <p class="font-body text-ink-soft text-lg leading-relaxed mb-10 reveal s1" style="max-width: 34rem;">
-      While the curriculum evolves, Mike drives a parallel outreach effort: exploring SEPs and TAPs feasibility, leaning on Teresa and Justin's network, and building the employer pipeline.
-    </p>
-    <div class="space-y-8">
-      <div class="bg-cream rounded-2xl p-7 reveal s2">
-        <p class="font-body text-ink font-semibold text-lg mb-2">SEPs and TAPs (exploration)</p>
-        <p class="font-body text-ink-soft leading-relaxed">Begin conversations with Teresa about what it takes to get into installation transition offices. Teresa's compliance expertise is the critical dependency. By week 4, we need a concrete feasibility assessment in writing. This is a conversation track, not a 90-day deliverable. Getting a 2-hour class placement would be a major win, but compliance overhead may push it beyond the window.</p>
-      </div>
-      <div class="bg-cream rounded-2xl p-7 reveal s3">
-        <p class="font-body text-ink font-semibold text-lg mb-2">Teresa and Justin's network</p>
-        <p class="font-body text-ink-soft leading-relaxed">Map existing relationships and turn them into pilot cohort candidates and employer validation conversations.</p>
-      </div>
-      <div class="bg-cream rounded-2xl p-7 reveal s4">
-        <p class="font-body text-ink font-semibold text-lg mb-2">Employer pipeline</p>
-        <p class="font-body text-ink-soft leading-relaxed">Every employer conversation is evidence for the 90-day review. Mike owns outreach, Andrew provides curriculum substance when employers want to see what graduates learn.</p>
-      </div>
-    </div>
-    <p class="font-body text-ink-faint mt-8 reveal s5" style="max-width: 34rem;">Curriculum architecture is Andrew's lane. Partnership development is Mike's.</p>
-  </div>
-</section>
-
-
-<!-- ===== ROLES ===== -->
-<section class="bg-navy text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">Who does what</p>
-    <h2 class="stat text-white reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase;">One unit, clear roles</h2>
-
-    <div class="grid md:grid-cols-2 gap-8 mt-12">
-      <div class="reveal s2">
-        <div class="bg-navy-mid rounded-2xl p-8" style="border: 1px solid rgba(212,175,55,0.2);">
-          <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Curriculum Architect</p>
-          <p class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Andrew</p>
-          <p class="font-body text-gray-300 leading-relaxed">Designs the Evergreen modules. Builds toolkits. Writes instructor documentation. Co-facilitates early sessions.</p>
-          <p class="font-body text-gray-500 text-sm mt-6">Front-loaded. Decreases by design.</p>
-        </div>
-      </div>
-      <div class="reveal s3">
-        <div class="bg-navy-mid rounded-2xl p-8" style="border: 1px solid rgba(212,175,55,0.2);">
-          <p class="font-mono text-xs tracking-widest uppercase text-gold mb-4">Program Lead</p>
-          <p class="font-display text-2xl font-bold uppercase tracking-tight mb-4">Mike</p>
-          <p class="font-body text-gray-300 leading-relaxed">Day-to-day contact. Embeds in existing program. Gets reps with real cohorts. Drives outreach and partnerships.</p>
-          <p class="font-body text-gray-500 text-sm mt-6">Increasingly leads through the 90 days.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== WHAT EACH SIDE BRINGS ===== -->
-<section class="bg-navy-mid text-white" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold mb-8 reveal">What each side brings</p>
-    <div class="grid md:grid-cols-2 gap-12 mt-4">
-      <div class="reveal s1">
-        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-6">We bring</p>
-        <div class="space-y-5">
-          <p class="font-body text-gray-300">Evergreen curriculum design and AI expertise</p>
-          <p class="font-body text-gray-300">Embedded program support and session delivery</p>
-          <p class="font-body text-gray-300">Agent workflow toolkit development</p>
-          <p class="font-body text-gray-300">Market research and emerging role analysis</p>
-        </div>
-      </div>
-      <div class="reveal s2">
-        <p class="font-mono text-xs tracking-widest uppercase text-gold mb-6">LearnAIR brings</p>
-        <div class="space-y-5">
-          <p class="font-body text-gray-300">Existing program structure and active cohorts</p>
-          <p class="font-body text-gray-300">Teresa's accreditation and compliance expertise</p>
-          <p class="font-body text-gray-300">Justin's employer network for placement</p>
-          <p class="font-body text-gray-300">Brand, SDVOSB status, and infrastructure</p>
-        </div>
-      </div>
-    </div>
-    <div class="mt-12 pt-8 reveal s3" style="border-top: 1px solid rgba(212,175,55,0.15);">
-      <p class="font-body text-gold italic text-lg">One question for Justin: Which upcoming cohort would be the right one for Mike to embed in?</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== STRUCTURE ===== -->
-<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">Structure</p>
-    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-12 reveal s1">The engagement</h2>
-    <div class="space-y-10">
-      <div class="reveal s1">
-        <p class="font-mono text-xs text-ink-faint tracking-widest uppercase mb-2">Type</p>
-        <p class="font-body text-ink text-lg font-semibold">1099 contractor relationship (single unit)</p>
-      </div>
-      <div class="reveal s2">
-        <p class="font-mono text-xs text-ink-faint tracking-widest uppercase mb-2">Duration</p>
-        <p class="font-body text-ink text-lg font-semibold">90 days</p>
-      </div>
-      <div class="reveal s3">
-        <p class="font-mono text-xs text-ink-faint tracking-widest uppercase mb-2">Rate</p>
-        <p class="font-body text-ink text-lg font-semibold">$100/hr, billed monthly against actual hours (non-negotiable)</p>
-        <p class="font-body text-ink-soft mt-2">Andrew: ~10 hrs/week. Mike: hours based on embed scope. Estimated combined: $6,000-$10,000/month.</p>
-      </div>
-      <div class="reveal s4">
-        <p class="font-mono text-xs text-ink-faint tracking-widest uppercase mb-2">IP</p>
-        <p class="font-body text-ink-soft text-lg leading-relaxed">Module 1 and supporting materials stay with LearnAIR if the engagement ends. Original architectural frameworks, proprietary tooling, and unreleased module designs remain with Andrew. Formal terms for ongoing work are part of the day-90 structure conversation.</p>
-      </div>
-      <div class="reveal s5">
-        <p class="font-mono text-xs text-ink-faint tracking-widest uppercase mb-2">Checkpoints</p>
-        <p class="font-body text-ink text-lg font-semibold">Week 4 Teresa deliverable. Day 45 check-in. Day 90 full review.</p>
-        <p class="font-body text-ink-soft mt-2">Either side can walk at 90 days with no obligations.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== SUCCESS ===== -->
-<section class="bg-paper" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">What success looks like</p>
-    <h2 class="font-display text-3xl font-bold uppercase tracking-tight mb-12 reveal s1">At 90 days</h2>
-    <div class="space-y-10">
-      <div class="flex items-start gap-6 reveal s1">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">1</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Mike embedded and leading</p>
-          <p class="font-body text-ink-soft mt-2">Running sessions, building credibility with real cohorts. Session leadership earned through demonstrated milestones: successful co-facilitation, positive cohort feedback, independent delivery.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s2">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">2</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Module 1 shipped with measurable outcomes</p>
-          <p class="font-body text-ink-soft mt-2">At least one Evergreen module designed, piloted, and evaluated. Exit criteria: can a participant articulate commander's intent as an AI delegation framework in their own words? Can they evaluate one agent output without Andrew in the room?</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s3">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">3</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Employer signal</p>
-          <p class="font-body text-ink-soft mt-2">At least 3 employer conversations about graduate placement.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s4">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">4</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Curriculum transfers</p>
-          <p class="font-body text-ink-soft mt-2">A LearnAIR trainer can deliver Module 1 without Andrew.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s5">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">5</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">SEPs and TAPs feasibility</p>
-          <p class="font-body text-ink-soft mt-2">Active conversation with Teresa on compliance pathway. Concrete feasibility assessment in writing by week 4. A 2-hour class placement is a stretch goal, not a requirement.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s5">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">6</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Teresa delivers by week 4</p>
-          <p class="font-body text-ink-soft mt-2">One concrete compliance or accreditation artifact in writing. A credential path, a compliance framework, or an accreditation timeline. Not a title.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s6">
-        <span class="stat text-gold-muted opacity-30 shrink-0" style="font-size: 2.5rem;">7</span>
-        <div>
-          <p class="font-body font-semibold text-ink text-lg">Relationship clarity</p>
-          <p class="font-body text-ink-soft mt-2">Both sides know whether to continue, expand, or part ways.</p>
-        </div>
-      </div>
-    </div>
-    <div class="mt-12 bg-cream rounded-2xl p-8 reveal s6">
-      <p class="font-body text-ink-soft"><strong class="text-ink">This works if</strong> LearnAIR has an upcoming cohort within 30 days for Mike to embed in.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== TWO PATHS ===== -->
-<section class="bg-cream" style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase text-gold-muted mb-8 reveal">What happens after</p>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-paper rounded-2xl p-8 reveal s1">
-        <p class="font-mono text-xs tracking-widest uppercase text-teal mb-4">If it works</p>
-        <p class="font-body text-ink-soft leading-relaxed">Modules 2-4 roll out. Evergreen becomes the core. Longer-term structure conversation: equity, partnership, scaling, Track 3 for employers.</p>
-      </div>
-      <div class="bg-paper rounded-2xl p-8 reveal s2">
-        <p class="font-mono text-xs tracking-widest uppercase text-ink-faint mb-4">If it doesn't</p>
-        <p class="font-body text-ink-soft leading-relaxed">Clean exit. Module 1 stays with LearnAIR. Lessons documented. No hard feelings.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===== CLOSER ===== -->
-<section class="bg-navy text-white" style="padding: clamp(6rem, 12vw, 10rem) clamp(2rem, 6vw, 6rem);">
-  <div class="max-w-3xl">
-    <div class="gold-rule mb-10 reveal"></div>
-    <p class="font-body text-gray-500 leading-relaxed mb-10 reveal s1" style="max-width: 34rem;">
-      Teresa asked: "Are you wanting to come underneath the LearnAIR umbrella to go ahead and really truly assess this entire program out, build alongside us and go? Or is this something that you're wanting to go and do on your own?"
-    </p>
-    <h2 class="stat text-gold reveal s2" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; text-transform: uppercase;">Build alongside you.</h2>
-    <p class="font-body text-gray-400 text-lg leading-relaxed mt-8 reveal s3" style="max-width: 30rem;">
-      Not a parallel track. Inside the existing program, evolving it together. The 90 days is how we prove that's the right call for both sides.
-    </p>
-    <p class="font-mono text-xs text-gray-600 mt-16 reveal s4">April 2026 &middot; v5.2 &middot; Andrew &amp; Mike Deal</p>
-  </div>
-</section>
-
-
-<!-- ============================================================= -->
-<!-- INTERNAL ONLY — DOES NOT GO TO JUSTIN OR TERESA               -->
-<!-- ============================================================= -->
-
-<section style="padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 6vw, 6rem); background: #dc2626;">
-  <div class="max-w-3xl">
-    <p class="font-mono text-white" style="font-weight: 700; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;">Internal Only &mdash; Andrew &amp; Mike</p>
-  </div>
-</section>
-
-<!-- Trust with Clarity -->
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #111;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #f59e0b;">Why this section exists</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase; color: #f59e0b;">Trust with clarity</h2>
-
-    <p class="font-body text-gray-300 text-lg leading-relaxed mt-10 reveal s1" style="max-width: 34rem;">
-      Mike, I know your instinct is going to be that this section is cynical. That asking hard questions about LearnAIR's structure is "fucking with the human element." I want to name that directly.
-    </p>
-    <p class="font-body text-gray-300 text-lg leading-relaxed mt-6 reveal s2" style="max-width: 34rem;">
-      Asking tough questions about a partner's business isn't negative energy. It's how you show up as a better partner. When we understand their real situation, we set expectations that don't lead to disappointment. We avoid overpromising. That's what actually protects relationships.
-    </p>
-    <p class="font-body text-gray-300 text-lg leading-relaxed mt-6 reveal s3" style="max-width: 34rem;">
-      What damages the human element is walking in blind, assuming everything is great, and getting surprised when reality doesn't match. That's when trust breaks. Not because someone asked a hard question early, but because nobody did.
-    </p>
-    <div class="mt-10 rounded-2xl p-8 reveal s4" style="background: #1a1a1a; border-left: 3px solid #f59e0b;">
-      <p class="font-body text-gray-200 text-lg leading-relaxed">
-        This isn't cynicism vs. trust. It's <strong style="color: #f59e0b;">trust with clarity.</strong> Both things at the same time. Holding that tension is a skill, and it's one that will make you a better program lead, a better partner, and a better negotiator.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- The 1099 Question -->
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #0a0a0a;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #f59e0b;">Reading the company</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase;">Everyone is 1099</h2>
-    <p class="font-body text-gray-400 text-lg leading-relaxed mt-8 mb-10 reveal s1" style="max-width: 34rem;">
-      Justin, Teresa, and now us. Three years in. That's a signal.
-    </p>
-
-    <div class="space-y-6">
-      <div class="rounded-2xl p-7 reveal s2" style="background: #151515;">
-        <p class="font-body font-semibold text-white text-lg mb-2">Deliberate and smart</p>
-        <p class="font-body text-gray-500 leading-relaxed">Lean, no overhead, scaling with contractors. Valid for early stage. But at year 3, early stage is a long time.</p>
-      </div>
-      <div class="rounded-2xl p-7 reveal s3" style="background: #151515;">
-        <p class="font-body font-semibold text-white text-lg mb-2">They can't afford payroll</p>
-        <p class="font-body text-gray-500 leading-relaxed">Revenue doesn't support W2s. At year 3 with SDVOSB status and government connections, that says something about the business model.</p>
-      </div>
-      <div class="rounded-2xl p-7 reveal s4" style="background: #151515;">
-        <p class="font-body font-semibold text-white text-lg mb-2">Nobody has fully committed</p>
-        <p class="font-body text-gray-500 leading-relaxed">Everyone is optionally participating. No vesting, no equity, no incentive alignment beyond the current invoice. Including us.</p>
-      </div>
-    </div>
-
-    <div class="mt-10 rounded-2xl p-8 reveal s5" style="background: #151515; border-left: 3px solid #f59e0b;">
-      <p class="font-body text-gray-300 leading-relaxed">Our success criteria depend on people with no contractual obligation to meet them. The fix: make every commitment impeccable. DRI + date + written deliverable. The 1099 structure demands more precision, not less.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Red Flags -->
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #111;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #f59e0b;">What to watch</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase;">Red flags</h2>
-    <p class="font-body text-gray-500 mt-4 mb-12 reveal s1" style="max-width: 34rem;">Not reasons to walk away. Things to monitor. Multiple flags red at day 45 = adjust or exit at 90.</p>
-
-    <div class="space-y-10">
-      <div class="flex items-start gap-6 reveal s1">
-        <span class="stat opacity-30 shrink-0" style="font-size: 2rem; color: #dc2626;">1</span>
-        <div>
-          <p class="font-body font-semibold text-white text-lg">No cohort within 30 days</p>
-          <p class="font-body text-gray-500 mt-2">No cohort = designing for an audience that doesn't exist yet.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s2">
-        <span class="stat opacity-30 shrink-0" style="font-size: 2rem; color: #dc2626;">2</span>
-        <div>
-          <p class="font-body font-semibold text-white text-lg">Justin's network stays closed</p>
-          <p class="font-body text-gray-500 mt-2">His employer network is the main thing LearnAIR brings that we can't replicate. If he's not opening doors by day 30, the partnership is one-sided.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s3">
-        <span class="stat opacity-30 shrink-0" style="font-size: 2rem; color: #dc2626;">3</span>
-        <div>
-          <p class="font-body font-semibold text-white text-lg">Revenue opacity</p>
-          <p class="font-body text-gray-500 mt-2">By day 45 we need a sense of whether this is a $200K project or a $1M business. The answer determines what "longer-term" means.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s4">
-        <span class="stat opacity-30 shrink-0" style="font-size: 2rem; color: #dc2626;">4</span>
-        <div>
-          <p class="font-body font-semibold text-white text-lg">Teresa's value stays theoretical</p>
-          <p class="font-body text-gray-500 mt-2">By week 4 (not day 45): one concrete artifact in writing. A credential path, a compliance framework, or an accreditation timeline. If it stays "Teresa handles compliance" by week 4, escalate immediately. This is also the critical dependency for SEPs and TAPs.</p>
-        </div>
-      </div>
-      <div class="flex items-start gap-6 reveal s5">
-        <span class="stat opacity-30 shrink-0" style="font-size: 2rem; color: #dc2626;">5</span>
-        <div>
-          <p class="font-body font-semibold text-white text-lg">Still all-1099 at day 90</p>
-          <p class="font-body text-gray-500 mt-2">If nobody will discuss W2, vesting, or real commitment, the business isn't ready to be a business. That's a retainer, not a partnership.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- For Mike -->
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #0a0a0a;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #f59e0b;">For Mike</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase;">How to read your own position</h2>
-
-    <div class="space-y-10 mt-12">
-      <div class="reveal s1">
-        <p class="font-body font-semibold text-white text-lg mb-3">Financial pressure distorts signal</p>
-        <p class="font-body text-gray-400 leading-relaxed" style="max-width: 34rem;">You need income. Every opportunity looks like the answer when you're under pressure. Test yourself: when Justin says something promising, ask "would I find this equally exciting with $50K in savings?" If yes, it's real. If no, it's relief.</p>
-      </div>
-      <div class="reveal s2">
-        <p class="font-body font-semibold text-white text-lg mb-3">The $100/hr rate protects you</p>
-        <p class="font-body text-gray-400 leading-relaxed" style="max-width: 34rem;">You're compensated regardless of where the company goes. Don't discount it out of gratitude. The opportunity is mutual.</p>
-      </div>
-      <div class="reveal s3" style="border-left: 3px solid #f59e0b; padding-left: 1.5rem;">
-        <p class="font-body font-semibold text-white text-lg mb-3">Clarity is not cynicism</p>
-        <p class="font-body text-gray-400 leading-relaxed" style="max-width: 34rem;">When I flag a red flag, I'm making sure we notice if the partnership is one-sided before we're too invested to course-correct. The human element gets damaged far more by unspoken disappointment at day 90 than by an honest conversation at day 30. Asking "is this working?" is how you protect relationships. Avoiding the question is how you lose them.</p>
-      </div>
-      <div class="reveal s4">
-        <p class="font-body font-semibold text-white text-lg mb-3">The best outcome isn't "LearnAIR works out"</p>
-        <p class="font-body text-gray-400 leading-relaxed" style="max-width: 34rem;">The best outcome: you build real skills, get paid fairly, and at day 90 you have evidence. If it's your thing, great. If not, you spent 90 days getting paid to learn.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Day 90 Checkpoint -->
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #111;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #f59e0b;">Before we talk to them</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase;">Day-90 checkpoint</h2>
-    <p class="font-body text-gray-500 mt-4 mb-12 reveal s1">We answer these privately before the review with Justin and Teresa.</p>
-
-    <div class="space-y-6">
-      <div class="flex items-start gap-4 reveal s1"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">01</span><p class="font-body text-gray-300">Did Justin open his network? How many real employer conversations?</p></div>
-      <div class="flex items-start gap-4 reveal s2"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">02</span><p class="font-body text-gray-300">Did Teresa deliver concrete accreditation value?</p></div>
-      <div class="flex items-start gap-4 reveal s3"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">03</span><p class="font-body text-gray-300">Can Mike run a session independently and confidently?</p></div>
-      <div class="flex items-start gap-4 reveal s4"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">04</span><p class="font-body text-gray-300">Is Module 1 transferable to a LearnAIR trainer?</p></div>
-      <div class="flex items-start gap-4 reveal s5"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">05</span><p class="font-body text-gray-300">What's our honest read on revenue and growth?</p></div>
-      <div class="flex items-start gap-4 reveal s6"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">06</span><p class="font-body text-gray-300">Is anyone ready to discuss real commitment?</p></div>
-      <div class="flex items-start gap-4 reveal"><span class="font-mono text-sm opacity-25 shrink-0" style="color:#f59e0b;">07</span><p class="font-body text-gray-300">Would we do another 90 days? At what rate?</p></div>
-    </div>
-
-    <div class="mt-12 rounded-2xl p-8 reveal" style="background: #1a1a1a; border-left: 3px solid #f59e0b;">
-      <p class="font-body text-gray-300">If we can't answer these clearly, we didn't run the pilot well enough.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================= -->
-<!-- TRANSCRIPT RECAP — APRIL 9 WORKSTATION BUILD CALL             -->
-<!-- ============================================================= -->
-
-<section style="padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 6vw, 6rem); background: #1e40af;">
-  <div class="max-w-3xl">
-    <p class="font-mono text-white" style="font-weight: 700; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;">April 9 Call Recap</p>
-  </div>
-</section>
-
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #0f172a;" class="text-white">
-  <div class="max-w-3xl">
-    <p class="font-mono text-xs tracking-widest uppercase mb-8 reveal" style="color: #60a5fa;">Workstation build session</p>
-    <h2 class="stat reveal s1" style="font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1; text-transform: uppercase; color: #60a5fa;">What Happened April 9</h2>
-    <p class="font-body text-gray-400 mt-4 mb-12 reveal s1">90-minute call. Andrew led the workstation setup and walkthrough. Mike's external monitor was down. Energy was tense coming off yesterday's exchange about the proposal.</p>
-
-    <div class="space-y-10">
-      <div class="reveal s1">
-        <p class="font-body font-semibold text-white text-lg mb-3">What shipped</p>
-        <div class="space-y-3">
-          <p class="font-body text-gray-400">MCP server connected and working. Mike can run spaced repetition quizzes from the CLI.</p>
-          <p class="font-body text-gray-400">GitHub account set up with SSH keys. Mike can pull from the mcp-mike repo.</p>
-          <p class="font-body text-gray-400">Persona loading working: Nexus and Orion merged into primary persona. Anchor (stress-testing) and Learner personas created as skills.</p>
-          <p class="font-body text-gray-400">Mike ran his first quiz session (supervision gap, in-the-loop vs. on-the-loop). Answers were directionally correct.</p>
-          <p class="font-body text-gray-400">File system scan initiated to map Mike's active projects for hub organization.</p>
-        </div>
-      </div>
-
-      <div class="reveal s2">
-        <p class="font-body font-semibold text-white text-lg mb-3">Key concepts introduced</p>
-        <div class="space-y-3">
-          <p class="font-body text-gray-400"><strong class="text-gray-200">Context as oil.</strong> Agents are only as good as the context you maintain. Hub structure, linting, gardening. This is the core discipline.</p>
-          <p class="font-body text-gray-400"><strong class="text-gray-200">Learned helplessness vs. growth mindset.</strong> When a concept doesn't land, the instinct is "I can't." The practice is to note it, sit with it, and ask what's assumed. The struggle is the myelination.</p>
-          <p class="font-body text-gray-400"><strong class="text-gray-200">Dog-fooding.</strong> Mike's learning journey IS the curriculum R&amp;D. His friction points become pre-readings. His concept gaps become modules. The log file is the data source.</p>
-          <p class="font-body text-gray-400"><strong class="text-gray-200">Capstone project.</strong> The workstation culminates in building an agent that delivers a learning module (mission command + commander's intent). One-week target. This becomes the basis for Module 1.</p>
-          <p class="font-body text-gray-400"><strong class="text-gray-200">Seam-finding.</strong> What does Mike need to learn (internet fundamentals, AI literacy, pedagogy) vs. what should be abstracted away (file system navigation, grep, code internals)? The seam is unknown and will be discovered through reps.</p>
-        </div>
-      </div>
-
-      <div class="reveal s3">
-        <p class="font-body font-semibold text-white text-lg mb-3">What Andrew laid out for Mike</p>
-        <div class="space-y-3">
-          <p class="font-body text-gray-400">90-day success: everybody in the cohort knows Mike by name, positive testimonials, demonstrated ability to educate.</p>
-          <p class="font-body text-gray-400">Two top-line responsibilities: teaching content (L&amp;D, curriculum building) and partnerships.</p>
-          <p class="font-body text-gray-400">If teaching and partnerships isn't his zone of genius, that's fine. The most important thing is what he learns and the expertise he builds.</p>
-          <p class="font-body text-gray-400">Dual track idea: shadow the existing 3-week cohort while recruiting 3-5 veterans for the program. Get a 2-hour class into SEPs and TAPs if compliance allows.</p>
-          <p class="font-body text-gray-400">Next steps: async alignment on the proposal before Wednesday. Read-ahead to Justin and Teresa 48 hours before the meeting.</p>
-        </div>
-      </div>
-
-      <div class="reveal s4">
-        <p class="font-body font-semibold text-white text-lg mb-3">Mike's state</p>
-        <div class="space-y-3">
-          <p class="font-body text-gray-400">Responses were mostly short: "makes sense," "sounds good," "lands good." Low engagement, likely residual frustration from yesterday.</p>
-          <p class="font-body text-gray-400">Didn't know what GitHub was. Needed password reset walkthrough. SSH keys set up for the first time.</p>
-          <p class="font-body text-gray-400">Quiz answers were directionally correct but lacked precise language. The spaced repetition system is the right tool for closing this gap.</p>
-          <p class="font-body text-gray-400">Said he has enough to work with and wants to prioritize async coordination on the read-ahead for Wednesday.</p>
-        </div>
-      </div>
-
-      <div class="reveal s5" style="border-left: 3px solid #60a5fa; padding-left: 1.5rem;">
-        <p class="font-body font-semibold text-white text-lg mb-3">Open items from this call</p>
-        <div class="space-y-2">
-          <p class="font-body text-gray-400">Mike: work through the readme, try all quiz modes, organize file system into hub structure</p>
-          <p class="font-body text-gray-400">Andrew: push permission boundaries and guardrails for shared Dropbox/BNW files, set up daily cron for syncing Mike's learning log</p>
-          <p class="font-body text-gray-400">Both: async iteration on 90-day proposal through Sunday. Sunday call to align before Wednesday.</p>
-          <p class="font-body text-gray-400">Restructure conversation: deferred to Sunday call, after proposal alignment.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============================================================= -->
-<!-- CHANGELOG                                                      -->
-<!-- ============================================================= -->
-
-<section style="padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 6vw, 6rem); background: #374151;">
-  <div class="max-w-3xl">
-    <p class="font-mono text-white" style="font-weight: 700; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase;">Changelog</p>
-  </div>
-</section>
-
-<section style="padding: clamp(5rem, 10vw, 8rem) clamp(2rem, 6vw, 6rem); background: #1f2937;" class="text-white">
-  <div class="max-w-3xl">
-
-    <!-- v5 -->
-    <div class="mb-16 reveal">
-      <p class="font-mono text-xs tracking-widest uppercase mb-4" style="color: #34d399;">v5 &mdash; April 9, 2026</p>
-      <p class="font-body text-gray-400 mb-6">Post-triad review (K/Willison/Taleb analysis). Source: April 9 workstation build call.</p>
-      <div class="space-y-4">
-        <div>
-          <p class="font-body font-semibold text-gray-200 mb-2">Changed</p>
-          <div class="space-y-2 pl-4" style="border-left: 2px solid #374151;">
-            <p class="font-body text-gray-400 text-sm">"InSets and TAPs" &rarr; "SEPs and TAPs" (spelling fix)</p>
-            <p class="font-body text-gray-400 text-sm">Veteran cohort: separate parallel track &rarr; sub-group within existing cohort. Standalone deferred to day 45.</p>
-            <p class="font-body text-gray-400 text-sm">SEPs and TAPs: 90-day deliverable &rarr; exploration track. Teresa is the compliance dependency.</p>
-            <p class="font-body text-gray-400 text-sm">Module 1: added measurable exit criteria (commander's intent as AI delegation framework, evaluate agent output independently).</p>
-            <p class="font-body text-gray-400 text-sm">Mike's progression: calendar-based &rarr; milestone-based (co-facilitation, cohort feedback, independent delivery).</p>
-            <p class="font-body text-gray-400 text-sm">Teresa checkpoint: day 45 &rarr; week 4. Concrete artifact in writing required.</p>
-            <p class="font-body text-gray-400 text-sm">IP terms: spelled out instead of deferred. Module 1 stays with LearnAIR; architectural frameworks stay with Andrew.</p>
-            <p class="font-body text-gray-400 text-sm">Rate: marked non-negotiable.</p>
-            <p class="font-body text-gray-400 text-sm">Red flag #4: Teresa timeline pulled from day 45 to week 4 with escalation guidance.</p>
-          </div>
-        </div>
-        <div>
-          <p class="font-body font-semibold text-gray-200 mb-2">Added</p>
-          <div class="space-y-2 pl-4" style="border-left: 2px solid #374151;">
-            <p class="font-body text-gray-400 text-sm">Veteran integration paragraph in Embed and Evolve section.</p>
-            <p class="font-body text-gray-400 text-sm">Week 4 Teresa checkpoint in Structure section.</p>
-            <p class="font-body text-gray-400 text-sm">Success criteria #5 (SEPs and TAPs feasibility) and #6 (Teresa deliverable by week 4).</p>
-            <p class="font-body text-gray-400 text-sm">April 9 transcript recap.</p>
-            <p class="font-body text-gray-400 text-sm">This changelog.</p>
-          </div>
-        </div>
-        <div>
-          <p class="font-body font-semibold text-gray-200 mb-2">Cut from 90-day scope</p>
-          <div class="space-y-2 pl-4" style="border-left: 2px solid #374151;">
-            <p class="font-body text-gray-400 text-sm">Life systems modules (personal finance, etc.) &mdash; deferred to Phase 2.</p>
-            <p class="font-body text-gray-400 text-sm">Standalone veteran cohort in first 45 days.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- v4 -->
-    <div class="mb-16 reveal s1">
-      <p class="font-mono text-xs tracking-widest uppercase mb-4" style="color: #9ca3af;">v4 &mdash; April 7, 2026</p>
-      <p class="font-body text-gray-500">Shifted from standalone 4-week intensive to embed-and-evolve approach. Added internal analysis section (1099 read, red flags, Mike guidance). 7-topic Evergreen curriculum consolidated to 4 incrementally shipped modules. "Trust with clarity" framing added.</p>
-    </div>
-
-    <!-- v3 -->
-    <div class="mb-16 reveal s2">
-      <p class="font-mono text-xs tracking-widest uppercase mb-4" style="color: #9ca3af;">v3 &mdash; April 6, 2026</p>
-      <p class="font-body text-gray-500">Initial partnership proposal draft.</p>
-    </div>
-
-    <!-- v2 -->
-    <div class="mb-16 reveal s3">
-      <p class="font-mono text-xs tracking-widest uppercase mb-4" style="color: #9ca3af;">v2 &mdash; April 5, 2026</p>
-      <p class="font-body text-gray-500">Role framing: Curriculum Architect + Program Lead.</p>
-    </div>
-
-    <!-- v1 -->
-    <div class="reveal s4">
-      <p class="font-mono text-xs tracking-widest uppercase mb-4" style="color: #9ca3af;">v1 &mdash; April 4, 2026</p>
-      <p class="font-body text-gray-500">First draft, standalone build approach.</p>
-    </div>
-
-  </div>
-</section>
-
-
-<script>
-const o = new IntersectionObserver(e => {
-  e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => o.observe(el));
-</script>
-
+</div>
 </body>
 </html>
