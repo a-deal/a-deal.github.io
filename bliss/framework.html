@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>The Peptide Evidence Gap | BLISS 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper); color: var(--ink); line-height: 1.7; min-height: 100vh;
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(240,235,225,0.94); border-bottom: 2px solid var(--ink); padding: 0.75rem 2rem; backdrop-filter: blur(14px); }
+  .nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+  nav .logo span { color: var(--accent); }
+  nav .nav-links { display: flex; gap: 1.2rem; list-style: none; flex-wrap: wrap; }
+  nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 0.3rem 0; border-bottom: 1px solid transparent; transition: all 0.2s; }
+  nav .nav-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+  .hero { max-width: 960px; margin: 0 auto; padding: 5rem 2rem 4rem; border-bottom: 3px solid var(--ink); }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(2.8rem, 7vw, 4.5rem); text-transform: uppercase; letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 1.5rem; color: var(--ink); }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .subtitle { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-style: italic; color: var(--muted); max-width: 680px; line-height: 1.5; }
+  .hero .meta { margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); display: flex; gap: 2rem; }
+  .stat-bar { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 2px solid var(--ink); }
+  .stat-item { padding: 1.5rem 2rem; border-right: 1px solid var(--faint); }
+  .stat-item:last-child { border-right: none; }
+  .stat-number { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .doc-container { max-width: 960px; margin: 0 auto; padding: 0 2rem 4rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 2rem; margin-top: 4rem; }
+  .section-number { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--accent); }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); }
+  h3 { font-family: 'Instrument Serif', serif; font-size: 1.3rem; margin: 2.5rem 0 1rem; color: var(--ink); }
+  .content p { margin-bottom: 1.2rem; max-width: 680px; }
+  .content ul { list-style: none; margin-bottom: 1.5rem; padding-left: 1.5rem; }
+  .content ul li { position: relative; margin-bottom: 0.6rem; max-width: 680px; }
+  .content ul li::before { content: ''; position: absolute; left: -1.5rem; top: 0.85rem; width: 0.6rem; height: 2px; background: var(--accent); }
+  .data-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: 0.88rem; }
+  .data-table thead { border-bottom: 2px solid var(--ink); }
+  .data-table th { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.6rem 1rem 0.6rem 0; white-space: nowrap; }
+  .data-table td { padding: 0.7rem 1rem 0.7rem 0; border-bottom: 1px solid var(--faint); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .num { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 500; }
+  .data-table .highlight { color: var(--accent); font-weight: 700; }
+  .data-table .score { font-family: 'JetBrains Mono', monospace; font-weight: 700; text-align: center; }
+  .score-high { color: var(--green); }
+  .score-mid { color: var(--accent); }
+  .score-low { color: var(--red); }
+  .callout { background: var(--warm); border-left: 3px solid var(--accent); padding: 1.5rem 2rem; margin: 2rem 0; }
+  .callout p { margin-bottom: 0.5rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .callout-dark { background: var(--ink); padding: 1.5rem 2rem; margin: 2rem 0; border-left: 3px solid var(--accent); }
+  .callout-dark * { color: var(--paper) !important; }
+  .callout-dark .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--accent) !important; margin-bottom: 0.5rem; }
+  .callout-ask { background: var(--ink); padding: 2rem 2.5rem; margin: 3rem 0 1rem; border-left: 6px solid var(--accent); }
+  .callout-ask * { color: var(--paper) !important; }
+  .callout-ask .callout-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent) !important; margin-bottom: 0.75rem; }
+  .callout-ask .ask-main { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; line-height: 1.2; margin-bottom: 1rem; text-transform: none; }
+  .callout-ask .ask-detail { font-size: 0.95rem; line-height: 1.6; max-width: 640px; }
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); margin: 2rem 0; }
+  .card-grid.three-col { grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--paper); padding: 1.5rem; }
+  .card-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .card-title { font-family: 'Instrument Serif', serif; font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--ink); border: 2px solid var(--ink); margin: 2rem 0; }
+  .phase { background: var(--paper); padding: 2rem; }
+  .phase-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .phase-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .phase-budget { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--ink); font-weight: 500; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--faint); }
+  .phase ul { list-style: none; padding-left: 1.2rem; margin: 0; }
+  .phase ul li { position: relative; margin-bottom: 0.5rem; font-size: 0.88rem; line-height: 1.5; }
+  .phase ul li::before { content: ''; position: absolute; left: -1.2rem; top: 0.7rem; width: 0.5rem; height: 2px; background: var(--accent); }
+  .timeline { margin: 2rem 0; border-left: 3px solid var(--accent); padding-left: 2rem; }
+  .timeline-item { margin-bottom: 2rem; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: -2.45rem; top: 0.5rem; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+  .timeline-year { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .timeline-event { font-size: 0.92rem; max-width: 640px; }
+  .timeline-metric { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+  .bar-chart { margin: 2rem 0; }
+  .bar-row { display: flex; align-items: center; margin-bottom: 0.6rem; gap: 1rem; }
+  .bar-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); width: 100px; text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; height: 28px; background: var(--warm); position: relative; }
+  .bar-fill { height: 100%; background: var(--accent); display: flex; align-items: center; padding-left: 0.8rem; transition: width 0.5s; }
+  .bar-value { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--paper); font-weight: 500; white-space: nowrap; }
+  .squiggle { width: 100%; height: 12px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q5 0 10 6 Q15 12 20 6 Q25 0 30 6 Q35 12 40 6' fill='none' stroke='%23c9c3b8' stroke-width='1'/%3E%3C/svg%3E"); background-repeat: repeat-x; margin: 0; }
+  footer { max-width: 960px; margin: 0 auto; padding: 3rem 2rem; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; }
+  footer .footer-left { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  footer .footer-right { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--faint); }
+  footer a { color: var(--accent); text-decoration: none; }
+  @media (max-width: 768px) {
+    .hero { padding: 3rem 1.5rem 2.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero .meta { flex-direction: column; gap: 0.5rem; }
+    .stat-bar { grid-template-columns: repeat(2, 1fr); }
+    .doc-container { padding: 0 1.5rem 3rem; }
+    .card-grid, .card-grid.three-col { grid-template-columns: 1fr; }
+    .phase-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; }
+    nav .nav-links { display: none; }
+    .bar-label { width: 70px; font-size: 0.55rem; }
+    .callout-ask .ask-main { font-size: 1.25rem; }
+  }
+  @media print {
+    nav { display: none; }
+    body { font-size: 10pt; background-image: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">andrew deal <span>/</span> research</div>
+    <ul class="nav-links">
+      <li><a href="#precedent">Precedent</a></li>
+      <li><a href="#demand">Demand</a></li>
+      <li><a href="#deadzone">Dead Zone</a></li>
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#program">Program</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="kicker">Bio Leadership Summit // Hoover Institution // April 14, 2026</div>
+  <h1>The <em>Peptide<br>Evidence</em><br>Gap</h1>
+  <p class="subtitle">10 million monthly searches. Millions of users. Zero systematic outcome data. The patent system can't fund the evidence. This is a defensible framework for which compounds to study first, and a phased program to produce the first real data.</p>
+  <div class="meta">
+    <span>Andrew Deal</span>
+    <span>BLISS 2026</span>
+    <span>April 2026</span>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">10.1M</div>
+    <div class="stat-label">Monthly peptide searches</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">0</div>
+    <div class="stat-label">Systematic outcome datasets</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">+/-80%</div>
+    <div class="stat-label">Dosage variance across 185 vendors</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">$2.6B</div>
+    <div class="stat-label">Cost per FDA approval</div>
+  </div>
+</div>
+
+<div class="squiggle"></div>
+
+<div class="doc-container">
+
+  <!-- SECTION 01: PRECEDENT -->
+  <div class="section-header" id="precedent">
+    <span class="section-number">01</span>
+    <h2 class="section-title">The Precedent</h2>
+  </div>
+
+  <div class="content">
+    <p>GLP-1 receptor agonists are a $45B+ market. Semaglutide produces 15-20% body weight loss. But this success required 80 years of publicly funded foundational science before pharma invested a dollar.</p>
+    <p>Three things had to be true before any company spent $2.6B: a <strong>known receptor</strong> (GLP-1R, identified 1986), a <strong>known mechanism</strong> (insulin secretion, appetite suppression), and <strong>decades of independent validation</strong> (2,158 papers from dozens of labs). Pharma entered at the last mile. Everything before that was public science.</p>
+
+    <div class="callout">
+      <div class="callout-label">The Template</div>
+      <p>GLP-1 is not an isolated success. It is a template: foundational science (public) &rarr; mechanism understood &rarr; rational modification (pharma) &rarr; patent &rarr; blockbuster drug. The question is what other compounds are stuck at an earlier stage, not because the science is impossible, but because the funding structure doesn't reach them.</p>
+    </div>
+
+    <h3>Where peptide families sit on the GLP-1 path</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Family</th>
+          <th>Receptor</th>
+          <th>FDA Status</th>
+          <th>Why It Stalled</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Metabolic (GLP-1)</strong></td>
+          <td class="num highlight">Known</td>
+          <td class="highlight">Approved</td>
+          <td>It didn't. 80 years of public science + massive market.</td>
+        </tr>
+        <tr>
+          <td><strong>GH Releasing</strong></td>
+          <td class="num highlight">Known</td>
+          <td>Some approved</td>
+          <td>Effects too subtle. Safe but not $2.6B-dramatic.</td>
+        </tr>
+        <tr>
+          <td><strong>Tissue Repair</strong></td>
+          <td class="num" style="color:var(--red);">Unknown (BPC-157)</td>
+          <td>None in US</td>
+          <td>No receptor. No mechanism. No independent replication.</td>
+        </tr>
+        <tr>
+          <td><strong>Antimicrobial</strong></td>
+          <td class="num">Various</td>
+          <td>Research stage</td>
+          <td>Antibiotic resistance pulling funding. May follow GLP-1.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 02: THE DEMAND WAVE -->
+  <div class="section-header" id="demand">
+    <span class="section-number">02</span>
+    <h2 class="section-title">The Demand Wave</h2>
+  </div>
+
+  <div class="content">
+    <p>GLP-1's success created a halo effect. Millions of people who discovered semaglutide started asking "what other peptides exist?" The demand curve is not speculative. It is measured.</p>
+
+    <h3>GLP-1 revenue: the catalyst</h3>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">2020</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4%"><div class="bar-value">~$2B</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2022</div>
+        <div class="bar-track"><div class="bar-fill" style="width:11%"><div class="bar-value">$5.5B</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2023</div>
+        <div class="bar-track"><div class="bar-fill" style="width:37%"><div class="bar-value">$18.4B</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2024</div>
+        <div class="bar-track"><div class="bar-fill" style="width:92%"><div class="bar-value">$45.8B</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">2026</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"><div class="bar-value">$50B+ projected</div></div></div>
+      </div>
+    </div>
+
+    <h3>Non-GLP-1 peptide interest: the halo</h3>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">BPC-157 Papers</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"><div class="bar-value">45/yr (2020)</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"><div class="bar-value">180+/yr (2025) &mdash; 4x growth</div></div></div>
+      </div>
+    </div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Monthly Searches</div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%"><div class="bar-value">~2M (2020 est)</div></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label"></div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"><div class="bar-value">10.1M (2026) &mdash; 5x growth</div></div></div>
+      </div>
+    </div>
+
+    <h3>The demand timeline</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-event">Semaglutide FDA-approved for obesity. "Peptide" enters mainstream vocabulary.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-event">Non-GLP-1 search interest explodes. Huberman, Rogan, Attia mention BPC-157. Biohacker community goes mainstream.</div>
+        <div class="timeline-metric">50M+ BPC-157 tagged views on TikTok/YouTube. 100K+ Reddit community members.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-event">BPC-157 Google search hits all-time high (June). Cash-pay telehealth clinics proliferate. FDA removes BPC-157 and TB-500 from compounding lists. Gray market expands.</div>
+        <div class="timeline-metric">GLP-1 revenue hits $45.8B. Eli Lilly launches LillyDirect. Amazon enters GLP-1 fulfillment.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-event">Injectable peptide therapy goes mainstream. 8-10 peptide tracker apps launch. All are logging tools. None connect to outcomes or quality data.</div>
+        <div class="timeline-metric">US peptide therapeutics retail market: $103.7B.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2026</div>
+        <div class="timeline-event">RFK Jr. announces ~14 peptides returning to legal compounding (Feb). Topol demands "show me the data." Federal charges reported against some vendors. Regulatory whiplash: the door is reopening without evidence to guide it.</div>
+        <div class="timeline-metric">10.1M monthly searches. YouTube peptide terms up 126-300%. Zero systematic outcome datasets.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 03: THE DEAD ZONE -->
+  <div class="section-header" id="deadzone">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Why the Evidence Doesn't Exist</h2>
+  </div>
+
+  <div class="content">
+    <p>Patent law (35 U.S.C. &sect; 101) prohibits patenting products of nature. Most therapeutic peptides are naturally occurring amino acid sequences. No patent means no ROI on clinical trials. No ROI means no investment. No investment means no evidence. The system produces silence.</p>
+
+    <div class="card-grid three-col">
+      <div class="card">
+        <div class="card-label">Question 1</div>
+        <div class="card-title">What's in them?</div>
+        <p>Finnrick tests 6,195 samples: +/-80% dosage variance, 8% endotoxin contamination. 57% of BPC-157 vendors score Poor or worse. Partially answered by one private company.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Question 2</div>
+        <div class="card-title">Do they work?</div>
+        <p>BPC-157: no identified receptor, no known mechanism, 80% of papers from one Croatian lab, zero Phase 1 trials. For most non-GLP-1 peptides: we genuinely don't know.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Question 3</div>
+        <div class="card-title">For whom, toward what?</div>
+        <p>Zero structured outcome tracking. Millions of users generating data that evaporates. A population-scale uncontrolled experiment with no observation.</p>
+      </div>
+    </div>
+
+    <p>The instinct is to fund foundational science first: identify receptors, map mechanisms, then decide. That takes 5-10 years per compound, and there are dozens of compounds. Meanwhile, millions of people are injecting them today. Epidemiology existed before molecular biology. John Snow mapped cholera without knowing what a bacterium was. Observe first. Investigate what the observations justify.</p>
+
+    <p>But observation at scale raises an immediate question: <strong>observe which compounds first?</strong> The list of non-patentable peptides in active use is long. A credible program cannot pick arbitrarily. It needs a framework.</p>
+  </div>
+
+  <!-- SECTION 04: THE SELECTION FRAMEWORK -->
+  <div class="section-header" id="framework">
+    <span class="section-number">04</span>
+    <h2 class="section-title">The Selection Framework</h2>
+  </div>
+
+  <div class="content">
+    <p>Before any cohort runs, candidate compounds are scored on three axes. The framework itself is the first public deliverable. The top-ranked compound becomes the first cohort. If the framework's weights are wrong, the argument is about the weights, not the compound.</p>
+
+    <h3>The three axes</h3>
+
+    <div class="card-grid three-col">
+      <div class="card">
+        <div class="card-label">Axis 1 // Demand</div>
+        <div class="card-title">Who is already using it?</div>
+        <p>Monthly search volume. Prescription and gray-market use estimates. Paper velocity (papers per year, year-over-year growth). Cultural gravity (podcast mentions, Reddit density). The question ARPA-H cares about: is this a population-scale phenomenon or a niche?</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Axis 2 // Benefit</div>
+        <div class="card-title">Could evidence move the needle?</div>
+        <p>Mechanistic plausibility: known receptor, known pathway. Existing human data: any trials, any registry. Claimed indications: narrow vs. broad, measurable vs. subjective. Comparable approved analogs that inform priors. Weaker mechanism = stronger need for observational data, but harder to interpret a null result.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Axis 3 // Risk</div>
+        <div class="card-title">How urgent is the evidence?</div>
+        <p>Known adverse events. Theoretical risks (angiogenesis, receptor desensitization, HPA suppression). Supply chain contamination failure rates. Vulnerable populations using it. Higher risk means the evidence gap is <em>more</em> urgent, not less. Compounds with known concerns move up the list.</p>
+      </div>
+    </div>
+
+    <h3>Candidate scoring (preliminary)</h3>
+
+    <p>Each compound is scored 1-5 on each axis. Scores below are preliminary and are intended to be refined with expert panel review (ARPA-H program staff, academic advisors, practitioner input) before Phase 1 deliverables are finalized.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Compound</th>
+          <th>Family</th>
+          <th>Demand</th>
+          <th>Benefit</th>
+          <th>Risk</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>BPC-157</strong></td>
+          <td>Tissue repair</td>
+          <td class="score score-high">5</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-high">5</td>
+          <td>Highest search volume. Zero Phase 1. Angiogenesis concern. No mechanism.</td>
+        </tr>
+        <tr>
+          <td><strong>TB-500</strong></td>
+          <td>Tissue repair</td>
+          <td class="score score-mid">4</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-mid">4</td>
+          <td>Thymosin-beta 4 fragment. RegeneRx Phase 3 just missed endpoint (precedent exists).</td>
+        </tr>
+        <tr>
+          <td><strong>CJC-1295 / Ipamorelin</strong></td>
+          <td>GH Releasing</td>
+          <td class="score score-mid">4</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-mid">3</td>
+          <td>Known receptor, known mechanism. Compounding access restricted. Stacking common.</td>
+        </tr>
+        <tr>
+          <td><strong>GHK-Cu</strong></td>
+          <td>Copper peptide</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-low">2</td>
+          <td>Topical unregulated. Injectable use growing. Some human data on skin/wound healing.</td>
+        </tr>
+        <tr>
+          <td><strong>Semax</strong></td>
+          <td>Neuropeptide</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-mid">3</td>
+          <td class="score score-mid">3</td>
+          <td>Russian approval since 1990s. Nootropic claims. Data doesn't meet FDA standards.</td>
+        </tr>
+        <tr>
+          <td><strong>Thymosin Alpha-1</strong></td>
+          <td>Immune</td>
+          <td class="score score-low">2</td>
+          <td class="score score-mid">4</td>
+          <td class="score score-mid">3</td>
+          <td>Immune modulation. Used off-label in oncology. Stronger mechanistic footing than most.</td>
+        </tr>
+        <tr>
+          <td><strong>PT-141</strong></td>
+          <td>Melanocortin</td>
+          <td class="score score-low">2</td>
+          <td class="score score-high">5</td>
+          <td class="score score-low">2</td>
+          <td>FDA-approved (Vyleesi, 2019). Control compound: proves the regulatory path exists.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Reading the Matrix</div>
+      <p><strong>BPC-157</strong> emerges as the leading Phase 2 candidate on preliminary scoring: highest demand signal, highest risk signal (angiogenesis concern, worst supply chain), moderate benefit potential. The combination of "millions of users" and "zero evidence and real theoretical risk" is exactly the profile ARPA-H is mandated to address.</p>
+      <p><strong>CJC-1295 / Ipamorelin</strong> is the secondary candidate: known receptor and mechanism make the benefit axis easier to evaluate, but lower risk means the urgency argument is weaker.</p>
+      <p>The scoring is not the thesis. The framework is the thesis. Phase 1 refines both the scoring criteria and the weights before any cohort begins.</p>
+    </div>
+
+    <h3>Why a framework beats a pick</h3>
+    <ul>
+      <li><strong>Defensibility.</strong> "Why this compound?" has a reproducible answer: because the framework ranked it first. The argument moves from personal conviction to methodology.</li>
+      <li><strong>Generalizability.</strong> Once the framework is public, it applies to future compounds, future peptide classes, and adjacent non-patentable therapeutic categories.</li>
+      <li><strong>Expert alignment.</strong> The framework gives ARPA-H program staff, academic advisors, and practitioner networks a shared artifact to debate before any money is spent on a cohort.</li>
+      <li><strong>Optionality.</strong> If the top-ranked compound proves infeasible for cohort design (IRB blockers, sourcing issues, low enrollment), the second-ranked compound is already defended.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 05: THE PROGRAM -->
+  <div class="section-header" id="program">
+    <span class="section-number">05</span>
+    <h2 class="section-title">The Program</h2>
+  </div>
+
+  <div class="content">
+    <p>The program is structured in two phases with an exercisable option between them. Phase 1 delivers the selection framework, refined scoring, and full cohort design. Phase 2 is the prospective observational cohort itself. ARPA-H exercises Phase 2 based on Phase 1 deliverables, not on a blind commitment upfront.</p>
+
+    <div class="phase-grid">
+      <div class="phase">
+        <div class="phase-label">Phase 1 // Months 0-6</div>
+        <div class="phase-title">Framework + Cohort Design</div>
+        <div class="phase-budget">$500K&nbsp;&nbsp;&middot;&nbsp;&nbsp;6 months&nbsp;&nbsp;&middot;&nbsp;&nbsp;Independently deliverable</div>
+        <ul>
+          <li>Refined selection framework with expert panel review (ARPA-H staff, academic advisors, practitioners)</li>
+          <li>Scoring of 10-15 candidate compounds with documented rationale</li>
+          <li>Full Phase 2 cohort design: enrollment criteria, biomarker panels, comparison group, IRB submission, pre-registered hypotheses</li>
+          <li>Supply chain verification partnership (Finnrick or equivalent) finalized</li>
+          <li>Biostatistician onboarded; attribution methodology published</li>
+          <li>Public methodology paper on observational evidence generation for non-patentable therapeutics</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Phase 2 // Months 7-18 (optional)</div>
+        <div class="phase-title">Prospective Cohort</div>
+        <div class="phase-budget">$2.5M&nbsp;&nbsp;&middot;&nbsp;&nbsp;12 months&nbsp;&nbsp;&middot;&nbsp;&nbsp;Exercisable based on Phase 1</div>
+        <ul>
+          <li>500-user enrollment on top-ranked compound from Phase 1 framework</li>
+          <li>Standardized biomarker panels at months 0, 6, and 12</li>
+          <li>Supply chain verification for all enrolled user sources</li>
+          <li>Matched comparison group (non-users from similar demographic profile)</li>
+          <li>Interim analysis at month 6 with pre-specified decision thresholds</li>
+          <li>Peer-reviewable outcome publication by month 18</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Why Phased</div>
+      <p><strong>Phase 1 is independently valuable.</strong> Even if Phase 2 never runs, ARPA-H gets a public methodology for compound prioritization and cohort design that generalizes across non-patentable therapeutic categories.</p>
+      <p><strong>Phase 2 is de-risked by Phase 1.</strong> No blind commitment to a compound or cohort design. The exercise decision is made with the framework, the scoring, the IRB path, and the biostatistical plan already in hand.</p>
+      <p><strong>Structured like a DARPA program.</strong> Exercisable options reduce funder commitment and create natural checkpoints. Phase 1 deliverables are the gate for Phase 2 capital.</p>
+    </div>
+
+    <h3>Kill criteria (structural options)</h3>
+
+    <p>A serious program names the conditions under which it stops. The program includes an explicit kill criterion, to be selected jointly with ARPA-H program staff during Phase 1 contracting. Four structural options are on the table:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Trigger</th>
+          <th>Response</th>
+          <th>Tradeoff</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A // Soft Pivot</strong></td>
+          <td>Enrollment &lt; 250 at month 6</td>
+          <td>Pivot to supply chain intelligence as standalone deliverable</td>
+          <td>Lowest risk to ARPA-H. Weakest credibility signal (&ldquo;we&rsquo;ll find something to publish&rdquo;).</td>
+        </tr>
+        <tr>
+          <td><strong>B // Hard Stop</strong></td>
+          <td>Enrollment &lt; 250 at month 6</td>
+          <td>Program closes. Unspent funds returned.</td>
+          <td>Strongest credibility signal. Loses framework value if Phase 2 stalls.</td>
+        </tr>
+        <tr>
+          <td><strong>C // Signal-Based</strong></td>
+          <td>Interim analysis shows no biomarker shift above pre-specified noise threshold</td>
+          <td>Cohort discontinues. Remaining budget redirects to second-ranked compound.</td>
+          <td>Most scientifically rigorous. Requires pre-specified analysis plan from biostatistician during Phase 1.</td>
+        </tr>
+        <tr>
+          <td><strong>D // Two-Phase Kill</strong></td>
+          <td>Phase 1 deliverables unaccepted, or Phase 2 enrollment &lt; 250 at month 6</td>
+          <td>Phase 2 not exercised, or Phase 2 closes with funds returned</td>
+          <td>Cleanest ARPA-H structure. Two independent go/no-go gates. Natural off-ramp between phases.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Recommendation</div>
+      <p>Option D (Two-Phase Kill) is structurally aligned with how ARPA and DARPA programs typically operate. It gives the funder two independent exit points, independently delivers value at Phase 1, and creates explicit quality gates before Phase 2 capital deploys. Options B and C are substitutes or add-ons inside Phase 2, not alternatives to the phased structure itself.</p>
+      <p>Final selection happens during Phase 1 contracting with ARPA-H program staff.</p>
+    </div>
+
+    <h3>What each outcome produces</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Outcome</th>
+          <th>What It Enables</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Signal detected</strong></td>
+          <td>Justifies government funding for foundational science (receptor identification, mechanism mapping) on the specific compound. Tells NIH and ARPA-H where to invest next.</td>
+        </tr>
+        <tr>
+          <td><strong>No signal</strong></td>
+          <td>Saves billions in research chasing compounds that don't work. Gives consumers data instead of anecdote. Equally valuable as a public health contribution.</td>
+        </tr>
+        <tr>
+          <td><strong>Safety signal</strong></td>
+          <td>Informs FDA regulatory action with evidence. ~14 compounds are being re-legalized in 2026 without it. A safety finding is the fastest path to evidence-based rulemaking.</td>
+        </tr>
+        <tr>
+          <td><strong>Framework-only (Phase 1 completes, Phase 2 not exercised)</strong></td>
+          <td>Public methodology for observational evidence generation across any non-patentable therapeutic category. Reusable by future researchers, future funders, and adjacent compound classes.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Why this, why now</h3>
+    <ul>
+      <li><strong>The cohort already exists.</strong> 10 million monthly searches. Millions of active users. They're looking for answers. An evidence program with a credible framework has a built-in enrollment population.</li>
+      <li><strong>The timing is now.</strong> Regulatory whiplash (FDA ban in 2024, RFK re-legalization in 2026) means compounds are re-entering the market without evidence to guide prescribing, dosing, or safety. The framework and cohort need to exist before the next wave of adoption, not after it.</li>
+      <li><strong>The cost is asymmetric.</strong> $500K for Phase 1 framework. $3M total if Phase 2 exercises. Compared to $2.6B and 10+ years for a single compound through traditional FDA trials. This is the cheapest defensible way to answer the question "do any of these work?"</li>
+      <li><strong>No one else is building this.</strong> 8-10 peptide apps launched in the last year. All are logging tools. None have a compound selection framework. None connect supply chain to outcomes. None are designed to produce publishable evidence. The program is the missing piece of infrastructure between a $100B consumer market and the scientific establishment.</li>
+    </ul>
+
+    <div class="callout-ask">
+      <div class="callout-label">The Ask</div>
+      <p class="ask-main">An ARPA-H partnership to fund Phase 1 ($500K, 6 months) to produce a public selection framework and full Phase 2 cohort design. Phase 2 ($2.5M, 12 months) exercisable based on Phase 1 deliverables.</p>
+      <p class="ask-detail">Total program, if fully exercised: $3M over 18 months. First systematic outcome data on any non-patentable therapeutic peptide. A public methodology that generalizes to other non-patentable compound classes. Two independent go/no-go gates that return unspent funds at either phase.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Andrew Deal // BLISS 2026</div>
+  <div class="footer-right"><a href="peptides.html">Full Thesis</a> &middot; <a href="mailto:deal.e.andrew@gmail.com">deal.e.andrew@gmail.com</a></div>
+</footer>
+
+</body>
+</html>
