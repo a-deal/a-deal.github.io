@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>BLISS Logistics — Pack & Plan | April 14, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .nav-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.3rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.5;
+  }
+
+  .hero .meta {
+    margin-top: 1.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  main.doc {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  main.doc h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.4rem;
+    margin-top: 3.2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  main.doc h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  main.doc h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-top: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  main.doc p {
+    margin-bottom: 1.05rem;
+    max-width: 720px;
+  }
+
+  main.doc strong { color: var(--ink); font-weight: 600; }
+  main.doc em { font-style: italic; }
+
+  main.doc ul, main.doc ol {
+    margin: 0.4rem 0 1.2rem 1.4rem;
+    max-width: 720px;
+  }
+
+  main.doc li {
+    margin-bottom: 0.45rem;
+    line-height: 1.6;
+  }
+
+  main.doc blockquote {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-bg);
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0 1.3rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    max-width: 720px;
+  }
+
+  main.doc table {
+    width: 100%;
+    max-width: 760px;
+    border-collapse: collapse;
+    margin: 1rem 0 1.6rem;
+    background: var(--white);
+    border: 1px solid var(--faint);
+    font-size: 0.92rem;
+  }
+
+  main.doc thead {
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  main.doc th, main.doc td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+
+  main.doc th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  main.doc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.86em;
+    background: var(--warm);
+    padding: 0.1rem 0.35rem;
+    border-radius: 2px;
+  }
+
+  main.doc hr {
+    border: none;
+    border-top: 1px solid var(--faint);
+    margin: 2.4rem 0;
+  }
+
+  main.doc a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    nav { padding: 0.6rem 1.3rem; }
+    .nav-inner { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .hero { padding: 3rem 1.4rem 2.4rem; }
+    main.doc { padding: 0 1.4rem 4rem; }
+    main.doc table { font-size: 0.82rem; }
+    main.doc th, main.doc td { padding: 0.45rem 0.55rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">BLISS<span>/</span>LOGISTICS</div>
+    <div class="nav-meta">Tue Apr 14 · Hoover Institution</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Logistics · Pack tonight · Carry tomorrow</div>
+  <h1>BLISS Logistics<br><em>· Pack & Plan</em></h1>
+  <p class="subtitle">Single-page reference for tomorrow: attire, bag, two-phone hygiene, food, full schedule, and night-before / morning-of checklists.</p>
+  <div class="meta">
+    <span>April 14, 2026</span>
+    <span>9:00 AM – 6:30 PM</span>
+    <span>Traitel Building, Stanford</span>
+  </div>
+</header>
+
+<main class="doc">
+
+  <div class="related" style="border:1px solid #c89b00;background:#fff8dc;padding:1rem 1.25rem;margin:1.5rem 0;font-size:0.95rem;">
+    <strong>Related BLISS artifacts:</strong>
+    <ul>
+      <li><a href="/bliss/prep-brief.html">Prep brief</a> — full day plan + anxiety game plan + external reading links</li>
+      <li><a href="/bliss/primer.html">Morning primer</a> — thesis, opener, target blocks (Palmer, Endy, Kuiken)</li>
+      <li><a href="/bliss/">Main BLISS artifact</a> — framework-first compound evaluation</li>
+    </ul>
+  </div>
+
+  <p><strong>Event:</strong> Hoover Bio Leadership Summit, Traitel Building, Stanford. April 14, 2026, 9:00 AM – 6:30 PM.</p>
+
+  <hr>
+
+  <h2>Attire — non-meathead business casual for bigger build</h2>
+
+  <h4>Wear:</h4>
+  <ul>
+    <li>Dark button-down shirt (navy, charcoal, forest green, deep burgundy). Regular/classic fit, NOT slim.</li>
+    <li>Dark pants — wool trouser, navy or charcoal chinos. Avoid stone/khaki.</li>
+    <li>Leather shoes or clean leather sneakers, darker tones.</li>
+    <li>Belt matches shoes.</li>
+    <li>Optional: soft unstructured blazer or dark quarter-zip over the shirt for the reception.</li>
+  </ul>
+
+  <h4>Avoid:</h4>
+  <ul>
+    <li>Tight polos (reads athletic/meathead)</li>
+    <li>Short sleeves entirely (this crowd is long-sleeve)</li>
+    <li>Bright white shirt (high contrast = looks larger)</li>
+    <li>Horizontal stripes or busy patterns</li>
+    <li>Anything athletic-cut, compression, or performance-fabric</li>
+  </ul>
+
+  <p><strong>The rule that carries most of it:</strong> monochromatic darker tones top-to-bottom. Visually unified = looks grounded, not bulky. Also matches Hoover's default (serious-academic, not startup-casual).</p>
+
+  <hr>
+
+  <h2>Bag</h2>
+
+  <p><strong>Dark, slim profile.</strong> Not gym, not hiking. Leather, waxed canvas, or clean nylon work backpack. Everything zipped.</p>
+
+  <p><strong>Do NOT assume bag check.</strong> Hoover Traitel is a small summit venue. Plan to carry it all day. Under your seat during panels. With you during breaks — a bag is also a prop. Carrying something reads less exposed than empty-handed.</p>
+
+  <h3>What goes in the bag</h3>
+  <ul>
+    <li>iPhone charger + Pixel charger</li>
+    <li>Battery pack (≥10,000 mAh, verify it can charge iPhone while Granola records)</li>
+    <li>All cables</li>
+    <li>Water bottle (refillable — Stanford is dry)</li>
+    <li>2–3 snacks: protein bar, nuts, apple, or whatever you prepped</li>
+    <li>Light layer for 55°F evening reception at Fairweather Courtyard</li>
+    <li>Wallet, ID, Clipper backup</li>
+    <li>Small notebook + pen (backup for hand notes; also signals "engaged" during panels)</li>
+    <li>Tissues + mints + hand sanitizer</li>
+  </ul>
+
+  <h3>What to LEAVE HOME</h3>
+  <p><strong>The laptop.</strong> You're not presenting. Granola is on iPhone, notes on Pixel, follow-ups wait until you're home. Laptop adds ~4 lbs, is another thing to worry about, and is a fidget-device that pulls you out of the room mentally. Leave it.</p>
+
+  <hr>
+
+  <h2>Two-phone hygiene</h2>
+
+  <p>Smart split. iPhone = Granola recording. Pixel = everything else.</p>
+
+  <h4>iPhone (Granola):</h4>
+  <ul>
+    <li>Do Not Disturb ON, all notifications suppressed during sessions</li>
+    <li>Airplane mode OFF (Granola may need connectivity)</li>
+    <li>Lock screen visible so you can see Granola is still recording</li>
+    <li>Keep battery pack connected throughout the day</li>
+  </ul>
+
+  <h4>Pixel (lifeline):</h4>
+  <ul>
+    <li>Primary for Uber, Clipper, maps, texts, web</li>
+    <li>Keep at 50%+ all day</li>
+    <li>Notifications normal</li>
+  </ul>
+
+  <p><strong>Battery pack priority:</strong> iPhone first (Granola drains fast), Pixel second.</p>
+
+  <hr>
+
+  <h2>Food</h2>
+
+  <p><strong>Breakfast at home.</strong> Protein-forward. Eggs, yogurt, protein shake — whatever your normal protein breakfast looks like.</p>
+
+  <p><strong>Avoid:</strong> Heavy carbs (bagel, pastry) — they crash at 10am right when Window 1 hits.</p>
+
+  <p><strong>Caffeine:</strong> Normal amount. Don't over-caffeinate — anxiety amplifier.</p>
+
+  <p><strong>Snacks in bag:</strong> for the 2:50 break or whenever blood sugar dips.</p>
+
+  <p><strong>Subway midday</strong> (if you decided to sneak out): use the 2:10–2:50 regional panel as cover. Walk out at 2:10, grab food, be back by 2:50 for the Kuiken panel at 3:20.</p>
+
+  <hr>
+
+  <h2>Schedule (quick reference)</h2>
+
+  <table>
+    <thead>
+      <tr><th>Time</th><th>What</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>5:45 AM</td><td>Alarm</td></tr>
+      <tr><td>5:45–6:00</td><td>Shower</td></tr>
+      <tr><td>6:00–6:25</td><td>Coffee, breakfast, final primer skim</td></tr>
+      <tr><td>6:25–6:40</td><td>Dressed, bag packed, final gear check</td></tr>
+      <tr><td><strong>6:45</strong></td><td><strong>OUT THE DOOR</strong></td></tr>
+      <tr><td>6:53</td><td>BART Red-S at 19th St (direction Millbrae)</td></tr>
+      <tr><td>7:46</td><td>Arrive Millbrae, walk to Caltrain platform</td></tr>
+      <tr><td>8:07</td><td>Caltrain Limited southbound</td></tr>
+      <tr><td>8:29</td><td>Arrive Palo Alto, open Uber</td></tr>
+      <tr><td>~8:40</td><td>Arrive Traitel, register, coffee, settle</td></tr>
+      <tr><td>9:00</td><td>Condoleezza Rice welcome</td></tr>
+      <tr><td>10:10</td><td>Coffee break — Window 1 (Palmer)</td></tr>
+      <tr><td>12:10</td><td>Lunch, Blount Hall — Window 2 (Endy)</td></tr>
+      <tr><td>12:15</td><td><strong>Send the "I'm at BLISS" text</strong></td></tr>
+      <tr><td>2:50</td><td>Rest break — leave building, sit on bench</td></tr>
+      <tr><td>3:20</td><td>Innovation/Investment panel (Kuiken moderates)</td></tr>
+      <tr><td>4:00</td><td>Endy + Kotkin fireside</td></tr>
+      <tr><td>4:50</td><td>Reception, Fairweather Courtyard — Window 3 (Kuiken)</td></tr>
+      <tr><td>~6:00</td><td>Home is fine. Don't have to close the reception.</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Night-before checklist (tonight)</h2>
+
+  <ul>
+    <li>[ ] <strong>Outfit laid out</strong> per the attire guide above</li>
+    <li>[ ] <strong>Bag packed</strong> per the bag section above</li>
+    <li>[ ] <strong>iPhone at 100%</strong> before bed</li>
+    <li>[ ] <strong>Pixel at 100%</strong> before bed</li>
+    <li>[ ] <strong>Battery pack at 100%</strong> before bed, with cables stowed</li>
+    <li>[ ] <strong>Google Images</strong> for Palmer, Endy, Kuiken, Abbott, Hie — 30 sec each, faces only</li>
+    <li>[ ] <strong>Pre-write the 12:15 text</strong> and save as draft. Sample: "I'm at BLISS. Made it to lunch. Aiming for one conversation today." To whoever you trust.</li>
+    <li>[ ] <strong>Clipper balance</strong> in Apple Wallet ≥$20</li>
+    <li>[ ] <strong>Uber app</strong> — payment confirmed, home + Hoover Institution saved as places</li>
+    <li>[ ] <strong>Granola app</strong> — updated, logged in, auto-transcribe on, quick test recording</li>
+    <li>[ ] <strong>Alarm: 5:45 AM</strong></li>
+    <li>[ ] <strong>Lights out by 10:15 PM</strong></li>
+  </ul>
+
+  <hr>
+
+  <h2>Morning-of checklist (tomorrow 5:45–6:45)</h2>
+
+  <ul>
+    <li>[ ] Shower</li>
+    <li>[ ] Protein breakfast (no heavy carbs)</li>
+    <li>[ ] Normal coffee (don't over-caffeinate)</li>
+    <li>[ ] Final primer skim — 5 min only, no new absorption</li>
+    <li>[ ] Dressed per the attire plan</li>
+    <li>[ ] Bag packed, final gear check:
+      <ul>
+        <li>[ ] Phone charger + cables</li>
+        <li>[ ] Battery pack fully charged</li>
+        <li>[ ] Water bottle filled</li>
+        <li>[ ] Snacks</li>
+        <li>[ ] Light layer for evening</li>
+        <li>[ ] Wallet, Clipper, ID</li>
+        <li>[ ] Notebook + pen</li>
+      </ul>
+    </li>
+    <li>[ ] Both phones at 100%</li>
+    <li>[ ] <strong>Out the door at 6:45</strong></li>
+  </ul>
+
+  <hr>
+
+  <h2>Win condition (from the prep brief, repeated for reference)</h2>
+
+  <p><strong>One real conversation is the win.</strong> Not three targets. If you get one — Palmer, Endy, Kuiken, Abbott, Hie, or someone at lunch — the day compounded. If zero but you saw Endy's opener and his 4:00 fireside live, you still won because you absorbed the room's language.</p>
+
+  <p><strong>The only failure mode is not going.</strong></p>
+
+  <p><strong>You are allowed to leave.</strong> Walk outside during any break. Come back for the next panel. That's pacing, not failing. You do not have to close the reception.</p>
+
+</main>
+
+<footer>
+  <div>Other artifacts: <a href="/bliss/">bliss</a> · <a href="prep-brief.html">prep-brief.html</a> · <a href="primer.html">primer.html</a> · <a href="peptides.html">peptides.html</a></div>
+  <div>Updated 2026-04-13 evening · Private · noindex · do not share</div>
+</footer>
+
+</body>
+</html>
