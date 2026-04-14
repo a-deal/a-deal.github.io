@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>BLISS Prep Brief | April 14, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --paper: #f0ebe1;
+    --warm: #e4ddd0;
+    --accent: #b8860b;
+    --accent-light: #d4a832;
+    --accent-bg: rgba(184, 134, 11, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --red: #8b2500;
+    --red-bg: #fdf2f0;
+    --grid-line: rgba(160, 150, 135, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240, 235, 225, 0.94);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.75rem 2rem;
+    backdrop-filter: blur(14px);
+  }
+
+  .nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .nav-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.3rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.5;
+  }
+
+  .hero .meta {
+    margin-top: 1.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  main.doc {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  main.doc h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.4rem;
+    margin-top: 3.2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  main.doc h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  main.doc h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-top: 1.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  main.doc p {
+    margin-bottom: 1.05rem;
+    max-width: 720px;
+  }
+
+  main.doc strong { color: var(--ink); font-weight: 600; }
+  main.doc em { font-style: italic; }
+
+  main.doc ul, main.doc ol {
+    margin: 0.4rem 0 1.2rem 1.4rem;
+    max-width: 720px;
+  }
+
+  main.doc li {
+    margin-bottom: 0.45rem;
+    line-height: 1.6;
+  }
+
+  main.doc blockquote {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-bg);
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0 1.3rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    max-width: 720px;
+  }
+
+  main.doc table {
+    width: 100%;
+    max-width: 760px;
+    border-collapse: collapse;
+    margin: 1rem 0 1.6rem;
+    background: var(--white);
+    border: 1px solid var(--faint);
+    font-size: 0.92rem;
+  }
+
+  main.doc thead {
+    background: var(--warm);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  main.doc th, main.doc td {
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+
+  main.doc th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  main.doc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.86em;
+    background: var(--warm);
+    padding: 0.1rem 0.35rem;
+    border-radius: 2px;
+  }
+
+  main.doc hr {
+    border: none;
+    border-top: 1px solid var(--faint);
+    margin: 2.4rem 0;
+  }
+
+  .external-reads {
+    border: 2px solid #c89b00;
+    background: #fff8dc;
+    padding: 1.4rem 1.6rem;
+    margin: 1.8rem 0 2.4rem;
+    max-width: 760px;
+  }
+
+  .external-reads strong {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8a6a00;
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  .external-reads strong:first-child { margin-top: 0; }
+
+  .external-reads ol, .external-reads ul {
+    margin: 0.2rem 0 0.6rem 1.4rem;
+  }
+
+  .external-reads li { margin-bottom: 0.35rem; }
+
+  .external-reads a {
+    color: #8a6a00;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  main.doc a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 2px solid var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    nav { padding: 0.6rem 1.3rem; }
+    .nav-inner { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+    .hero { padding: 3rem 1.4rem 2.4rem; }
+    main.doc { padding: 0 1.4rem 4rem; }
+    main.doc table { font-size: 0.82rem; }
+    main.doc th, main.doc td { padding: 0.45rem 0.55rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">BLISS<span>/</span>PREP BRIEF</div>
+    <div class="nav-meta">Tue Apr 14 · Hoover Institution</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Prep Brief · Read tonight · Re-read on BART</div>
+  <h1>BLISS Prep<br>Brief <em>· Apr 14</em></h1>
+  <p class="subtitle">Self-contained tactical brief for the Hoover Bio Leadership Summit. Complements (does not replace) the morning primer.</p>
+  <div class="meta">
+    <span>April 14, 2026</span>
+    <span>9:00 Welcome</span>
+    <span>Traitel Building</span>
+  </div>
+</header>
+
+<main class="doc">
+
+  <div class="external-reads">
+    <strong>Tier A — read tonight (~45 min)</strong>
+    <ol>
+      <li><a href="https://www.hoover.org/research/biosecurity-really-strategy-victory" target="_blank">Biosecurity Really: A Strategy for Victory</a> (Endy + Kuiken, Oct 2025) — ~25 min, highest leverage</li>
+      <li><a href="https://www.realclearworld.com/articles/2025/10/08/us_biotech_future_is_now_made_in_china_1139591.html" target="_blank">U.S. Biotech Future Is Now Made in China</a> (Kuiken, Oct 2025) — 8 min</li>
+      <li><a href="https://www.biotech.senate.gov/final-report/chapters/" target="_blank">NSCEB Final Report</a> (April 2025) — exec summary only, ~15 min</li>
+    </ol>
+    <strong>Other BLISS artifacts (local):</strong>
+    <ul>
+      <li><a href="/bliss/">BLISS main artifact (framework-first compound evaluation)</a></li>
+      <li><a href="/bliss/primer.html">Morning Primer — updated with Palmer + Kuiken</a></li>
+      <li><a href="/bliss/peptides.html">Peptide Intelligence Gap (supporting evidence)</a></li>
+      <li><a href="/baseline/thesis.html">Baseline: The Health Record thesis</a></li>
+    </ul>
+  </div>
+
+  <p>Read this tonight. Re-read on BART tomorrow morning. Self-contained. Complements (does not replace) <code>hub/plans/2026-04-14-bliss-morning-primer.md</code>.</p>
+
+  <hr>
+
+  <h2>1. Tomorrow at a glance</h2>
+
+  <p><strong>Event:</strong> Hoover Bio Leadership Summit, Traitel Building, Hoover Institution, Stanford.<br>
+  <strong>Start:</strong> 9:00 AM welcome (Condoleezza Rice). End: 6:30 PM reception.<br>
+  <strong>Attire:</strong> Business casual.</p>
+
+  <h3>Commute (Option B — BART + Caltrain + Uber, ~$31 total)</h3>
+
+  <table>
+    <thead>
+      <tr><th>Time</th><th>Where</th><th>What</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>6:45</strong></td><td>Leave 1889 Harrison</td><td>Walk to 19th St BART (~8 min)</td></tr>
+      <tr><td><strong>6:53</strong></td><td>19th St BART platform</td><td>Board Red-S (direction: Millbrae)</td></tr>
+      <tr><td>7:46</td><td>Millbrae station</td><td>Arrive BART. Walk to Caltrain platform (~2 min, same building)</td></tr>
+      <tr><td><strong>8:07</strong></td><td>Millbrae Caltrain</td><td>Board Caltrain LIMITED southbound. 19 min buffer absorbs up to ~15 min BART delay.</td></tr>
+      <tr><td>8:29</td><td>Palo Alto Caltrain</td><td>Arrive. Open Uber as you walk off train.</td></tr>
+      <tr><td>~8:32</td><td>Palo Alto station curb</td><td>Uber pickup (~7 min ride, ~$10)</td></tr>
+      <tr><td><strong>~8:40</strong></td><td>Traitel Building, Hoover</td><td>Arrive. 20 min buffer before 9:00 Welcome.</td></tr>
+      <tr><td>9:00</td><td>Hauck Auditorium</td><td>Condi Rice welcome remarks</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Clipper</strong> handles both BART and Caltrain via mobile Clipper in Apple Wallet. No pre-purchase needed.</p>
+
+  <p><strong>Abort threshold:</strong> If BART is running &gt;15 min late and you will miss the 8:07 Caltrain, pivot to Uber direct from wherever you are. Next Caltrain pushes arrival past 9:00.</p>
+
+  <h3>Venue (Traitel Building — all-in-one)</h3>
+
+  <p>Everything is inside the Traitel Building complex. Breakfast pavilion, Hauck Auditorium, Blount Hall (lunch), Fairweather Courtyard (reception) — all within the same footprint. You can step out of Hauck and be at coffee in &lt;60 seconds. No walking between sessions, no getting lost.</p>
+
+  <ul>
+    <li><strong>Hauck Auditorium:</strong> 400 fixed tiered theater seats. Formal-warm, walnut pillars, acoustically treated. Think new-federal-reserve auditorium, not university lecture hall.</li>
+    <li><strong>Fairweather Courtyard</strong> (reception) is outdoor, ~55°F after sunset. Bring a light layer.</li>
+    <li><strong>Room behavior:</strong> dignified and controlled. No standing room, no roaming. Acoustics let you speak conversationally in side conversations — don't over-project.</li>
+  </ul>
+
+  <hr>
+
+  <h2>2. The three memorized phrases</h2>
+
+  <p>These signal to each target that you've read their actual work. Memorize tonight.</p>
+
+  <p><strong>For Drew Endy (lunch, 12:10-1:10):</strong></p>
+  <blockquote>"The 'victory' framing from your October paper — the shift from biodefense to secure biology. My thesis is the therapeutic analog."</blockquote>
+
+  <p><strong>For Mike Kuiken (reception, 4:50-6:30, fresh off moderating the 3:20 panel):</strong></p>
+  <blockquote>"The peptide supply chain is your cisplatin problem, one layer deeper. 80% dosage deviation, same Chinese synthesis lab pattern."</blockquote>
+
+  <p><strong>For Megan Palmer (coffee break, 10:10-10:40):</strong></p>
+  <blockquote>"The NSCEB report flags regulatory modernization but leaves the evidence infrastructure plank unspecified. That's the gap I'm trying to close operationally."</blockquote>
+
+  <p>Each is ~15 words. Each proves you've read their output. Each hands them the conversational next move.</p>
+
+  <hr>
+
+  <h2>3. The core intel (three documents, compressed)</h2>
+
+  <h3>🥇 "Biosecurity Really: A Strategy for Victory" — Endy + Kuiken + Moront, Oct 2025</h3>
+  <p><strong>(Single highest-leverage read. Two birds, one doc.)</strong></p>
+
+  <p><strong>Core frame:</strong> Secure biology, not biodefense. <strong>"Victory-oriented"</strong> biosecurity — offense-flavored language in a historically defensive domain. Deliberate word choice.</p>
+
+  <p><strong>Tagline:</strong> <em>"We can make a world in which COVID-19 is the last pandemic humanity ever faces."</em> Not incremental. Civilizational.</p>
+
+  <p><strong>The 9 policy planks:</strong></p>
+  <ol>
+    <li>Sustained <strong>biological intelligence (BIOINT)</strong> program</li>
+    <li><strong>Private-sector bio-audits</strong> to manage mutual distrust</li>
+    <li>Tighter multilateral governance of <strong>pandemic-potential pathogen (PPP)</strong> research</li>
+    <li>De-escalation of nation-state bioweapons programs</li>
+    <li><strong>National Biosecurity Institute</strong></li>
+    <li>New public leadership + coordination offices</li>
+    <li>Lead on <strong>DNA synthesis screening</strong> and <strong>generative biology</strong></li>
+    <li><strong>Indoor air quality standards</strong></li>
+    <li><strong>Bio-literacy</strong> promotion</li>
+  </ol>
+
+  <p><strong>Why Kuiken is on this paper:</strong> bio-audits plank (private sector) and BIOINT plank are his sweet spot. DNA synthesis screening links directly to BIOSECURE Act from his China op-ed.</p>
+
+  <p><strong>Your thesis connection:</strong> Your compound-agnostic evidence infrastructure is the <strong>therapeutic analog of BIOINT</strong>. They have biological intelligence for pathogens. You're proposing the same architecture for therapeutic compounds the system can't evaluate. Same structural argument, different application domain.</p>
+
+  <p><strong>Vocabulary to adopt:</strong> secure biology, BIOINT, bio-audits, general-purpose technology, pandemic-potential pathogen (PPP), dual-use, DNA synthesis screening, generative biology, bio-literacy, victory, resilience.</p>
+
+  <p><strong>URL:</strong> hoover.org/research/biosecurity-really-strategy-victory<br>
+  <strong>Landing site:</strong> victory.stanford.edu (bookmark on phone tonight)</p>
+
+  <h3>🥈 Kuiken — "U.S. Biotech Future Is Now Made in China" (RealClearWorld, Oct 8, 2025)</h3>
+
+  <p><strong>Core argument:</strong> "Beijing didn't stumble into controlling 40 percent of the world's APIs by accident." Deliberate state-subsidy + predatory-pricing playbook. "All-of-the-above" rebuild needed.</p>
+
+  <p><strong>Numbers to have cold:</strong></p>
+  <ul>
+    <li><strong>40%</strong> of global APIs controlled by China (headline)</li>
+    <li><strong>30-40%</strong> offshore manufacturing cost advantage (structural gap)</li>
+    <li><strong>Cisplatin / carboplatin</strong> oncology shortages affecting hundreds of thousands of cancer patients (his lived example — use this)</li>
+    <li><strong>BIOSECURE Act</strong> as the fence against named Chinese biotech entities</li>
+    <li><strong>iGEM</strong> as talent pipeline warning (Chinese teams "frequently excelled")</li>
+  </ul>
+
+  <p><strong>Your thesis connection:</strong> 80% peptide dosage deviation from Chinese labs maps <em>directly</em> onto his cisplatin example. Same pattern, different molecule class.</p>
+
+  <p><strong>Vocabulary:</strong> dependency, strategic, supply chain, Beijing, APIs, pharmaceutical independence, next generation of innovators, all-of-the-above, BIOSECURE.</p>
+
+  <h3>🥉 NSCEB Final Report — April 8, 2025 (Palmer's work product)</h3>
+
+  <p><strong>Scale:</strong> 49 recommendations. <strong>$15B ask.</strong> Delivered 2025-04-08.</p>
+
+  <p><strong>Numbers Palmer will quote in her sleep:</strong></p>
+  <ul>
+    <li>Bioeconomy = <strong>$210B+ GDP, 640,000+ domestic jobs</strong></li>
+    <li><strong>National Biotechnology Coordination Office (NBCO)</strong> — proposed fix for interagency fragmentation</li>
+    <li><strong>Coordinated Framework (1986)</strong> — regulatory bottleneck, wants OIRA empowered to mediate</li>
+    <li><strong>"Valley of Death"</strong> — biomanufacturing scale-up financing gap</li>
+  </ul>
+
+  <p><strong>Six pillars:</strong> Prioritize / Mobilize / Defense / Out-Innovate / Workforce / Allies</p>
+
+  <p><strong>The seam for your pitch:</strong> The report proposes "regulatory science fellowships" and "public acceptance data collection" but leaves the evidence-production infrastructure plank <strong>unspecified</strong>. That's your opening. You're proposing the operational answer to a gap her own report flagged but didn't solve.</p>
+
+  <p><strong>Vocabulary:</strong> bioeconomy, Coordinated Framework, NBCO, out-innovate, regulatory modernization, biological data ecosystem, Valley of Death, advance market commitment.</p>
+
+  <hr>
+
+  <h2>4. Full-day agenda with tags</h2>
+
+  <p><strong>Legend:</strong></p>
+  <ul>
+    <li>🎯 Direct target | 🔗 Thesis-adjacent | 📚 Vocabulary-only | 🎨 Room-reading color</li>
+    <li>🔁 Replay on Granola | ⏭ Skim transcript | 🗑 Skip</li>
+  </ul>
+
+  <h3>Morning block</h3>
+
+  <p><strong>9:00-9:10 • Welcome • Condoleezza Rice</strong> 🎨 ⏭<br>
+  Ceremonial framing. National security language sets the day's permissible vocabulary. Calibration only. Be in your seat.</p>
+
+  <p><strong>9:10-9:20 • Flash: Biology as Strategic Domain • Drew Endy</strong> 🎯 🔁<br>
+  <strong>Most important 10 min of the day for you.</strong> Endy will frame biology like semiconductors in the 1970s — strategic, tool-driven, infrastructure-starved. Write down his 3 most striking phrases by hand (even though Granola is recording). Those are what you echo back at lunch.<br>
+  <strong>Listen for:</strong> Exact phrases for "infrastructure" and "tools vs applications." Any mention of non-patentable compounds, public-domain biology, or evidence gaps. His specific named examples.</p>
+
+  <p><strong>9:20-10:00 • Panel: Biology for Health</strong> 🎯 🔁<br>
+  <strong>Speakers:</strong> Megan Palmer (ARPA-H RI), Jennifer Cochran (Stanford bioeng / SLAC VP), Grey Frandsen (Flyttr CEO). Mod: Steve Quake.<br>
+  <strong>This is your Window 1 prep.</strong> Every phrase Palmer uses, be ready to echo back within 30 min at coffee.<br>
+  <strong>Listen for:</strong> Palmer's exact framing of what ARPA-H "should fund but doesn't" — that gap is your pitch. Whether she mentions evidence infrastructure, monitoring, or data loops.</p>
+
+  <p><strong>10:00-10:10 • Flash: AI &amp; Biology • Brian Hie</strong> 🔗 🔁<br>
+  <strong>Listen for:</strong> The distinction between "pattern-matching on bio data" vs "proper statistical attribution." If he uses <strong>attribution / causal / counterfactual</strong>, those are doors into your evidence-infrastructure argument.</p>
+
+  <p><strong>☕ 10:10-10:40 — WINDOW 1 — Coffee Break</strong> 🎯<br>
+  <strong>Target: Palmer.</strong> Post-her-panel, same room likely. Fallback: Brian Hie. Third fallback: listen and absorb.</p>
+
+  <p><strong>10:40-11:20 • Panel: Biosecurity Victory</strong> 📚 ⏭<br>
+  <strong>Speakers:</strong> McKnight (Perimeter), Parker (ex-WH biosec), Yassif (NTI). Mod: Lentzos (King's College).<br>
+  Vocabulary-building for Kuiken/Dugan conversations later. Listen for "surveillance" and "biosurveillance" (adjacent to "evidence infrastructure").</p>
+
+  <p><strong>11:20-11:30 • Flash: Synthetic Cells • Kate Adamala</strong> 🎨 🗑<br>
+  Skip. Hard science, no hook. Breathe.</p>
+
+  <p><strong>11:30-12:10 • Panel: Biology for National Security</strong> 🎯 🔁<br>
+  <strong>Speakers:</strong> Matt Pottinger (ex-Deputy NSA, China hawk), <strong>Kerri Dugan</strong> (ex-DARPA BTO), Padmini Pillai (current DARPA BTO). Mod: Schadlow.<br>
+  <strong>Prep for both Kuiken (3:20) and Dugan (reception).</strong><br>
+  <strong>Listen for:</strong> Dugan's specific supply chain examples. Pottinger's China framing (the room's default). Anything about peptides, small molecules, API dependencies, BIOSECURE Act.</p>
+
+  <p><strong>🍽 12:10-1:10 — WINDOW 2 — Lunch, Blount Hall</strong> 🎯<br>
+  <strong>Target: Drew Endy.</strong> Highest-leverage conversation of the day. 60 minutes.</p>
+
+  <h3>Afternoon block</h3>
+
+  <p><strong>1:10-1:20 • Flash: Biotechnology in Us • Zack Abbott (ZBiotics)</strong> 🔗 🔁<br>
+  Closest speaker to your world. Only other builder-from-outside-pharma in the room. Adjacent target for lunch or reception.<br>
+  <strong>Listen for:</strong> How he talks about regulatory pathway, consumer trust, evidence standards.</p>
+
+  <p><strong>1:20-2:00 • Panel: Sci &amp; Tech Competitiveness</strong> 📚 ⏭<br>
+  <strong>Speakers:</strong> Leproust (Twist — DNA synthesis), Rodriques (FutureHouse — AI-for-science), Levin (Neion Bio).<br>
+  Context building. Rodriques's AI-agents-running-experiments thesis is a potential <em>tool</em> for your evidence infrastructure.</p>
+
+  <p><strong>2:00-2:10 • Flash: Biotechnology Around Us • Keith Wood (Light Bio)</strong> 🎨 🗑<br>
+  Bioluminescent plants. Skip. Bathroom break.</p>
+
+  <p><strong>2:10-2:50 • Panel: Bio-Opportunities Across the Nation</strong> 📚 🗑<br>
+  Regional bioeconomy panel. <strong>This is your recovery panel.</strong> Step out, check phone, review notes for 3:20, have a short conversation with someone you met in the morning.</p>
+
+  <p><strong>☕ 2:50-3:20 — Break</strong><br>
+  <strong>Strategic rest.</strong> Not time-boxed for a target. Rest, re-center, or seek someone out. (Anxiety game plan for breaks: TBD in next session.)</p>
+
+  <h3>Afternoon closing</h3>
+
+  <p><strong>3:20-4:00 • Panel: Biotech Innovation, Investment, Industry</strong> 🎯 🔁<br>
+  <strong>Speakers:</strong> <strong>Christina Smolke</strong> (Antheia, Endy's wife), Matt Kaloupek (ADM), Jenny Rooke (Genoa Ventures). Mod: <strong>Mike Kuiken</strong>.<br>
+  <strong>Triple-target panel.</strong> Smolke + Rooke + Kuiken in one room.<br>
+  <strong>Listen for:</strong> Kuiken's questions reveal his current thinking (what's on his 2026 commission report). Smolke on supply-chain-constrained therapeutics (direct parallel). Rooke on what she's funding.<br>
+  <strong>Prep your Kuiken supply-chain line for the reception</strong> — he'll be highest-energy right after moderating this.</p>
+
+  <p><strong>4:00-4:20 • Flash Fireside: Biology for Freedom &amp; Democracy • Kotkin + Endy</strong> 🎯 🔁<br>
+  <strong>Endy closes the day unconstrained.</strong> Civilizational framing. Kotkin reaches for historical analogies (electricity, steel, chemistry) — vocabulary gold.<br>
+  <strong>Listen for:</strong> "Biotic citizenship" or "civilizational flourishing" (Endy-signature language). Replay this on Granola tonight — his closing framing is the language he'll use to remember you.</p>
+
+  <p><strong>4:20-4:30 • Flash: Biology, Nitrogen, Geopolitics • Tim Schnabel</strong> 📚 ⏭<br>
+  Engineered microbes for nitrogen fixation. Scale numbers useful for Kuiken-adjacent reception convo. No target.</p>
+
+  <p><strong>4:30-4:50 • Closing Remarks • Friedrichs + Covert</strong> 🎨 ⏭<br>
+  Friedrichs (RAND) + Covert (Stanford Bioeng chair). Non-actionable. Mentally prep for reception.</p>
+
+  <p><strong>🍷 4:50-6:30 — WINDOW 3 — Reception, Fairweather Courtyard</strong> 🎯<br>
+  <strong>100 minutes, outdoor, drinks.</strong> Priority: Kuiken (fresh off 3:20), Dugan, Smolke if she stays, Abbott, Hie.</p>
+
+  <h3>The day has three peaks, not one</h3>
+
+  <p>Morning peak = Palmer @ coffee. Midday peak = Endy @ lunch. Afternoon peak = Kuiken + Dugan @ reception. The middle (1:10-3:20) is preparation, recovery, and listening — not conversation. <strong>You don't need to be "on" for 8 straight hours. You need to be on during 3 specific windows.</strong></p>
+
+  <hr>
+
+  <h2>5. ELI5 glossary (the 12 terms to know)</h2>
+
+  <ol>
+    <li><strong>CRISPR</strong> — molecular "find and replace" for DNA. Cut, replace, or switch off specific sequences. Enables disease research, crop engineering, embryo editing.</li>
+    <li><strong>Genomics / DNA sequencing</strong> — reading the full instruction manual of an organism. Cost collapsed from $3B (2003) to $200 (2024). That's what made modern biotech possible. Next cost curve = <strong>synthesis</strong> (writing DNA).</li>
+    <li><strong>Synthetic biology ("synbio")</strong> — engineering biology like a circuit. Design DNA from scratch to make cells do new things. Endy is one of the field's founders.</li>
+    <li><strong>Bioeconomy / bioindustrial manufacturing</strong> — using living cells as factories. Yeast brewing insulin, bacteria making leather, engineered microbes producing jet fuel. Endy's thesis: could replace a meaningful fraction of petrochemicals.</li>
+    <li><strong>APIs (Active Pharmaceutical Ingredients)</strong> — the actual drug molecule inside a pill. <strong>~40% of global APIs come from China.</strong> Kuiken's central concern.</li>
+    <li><strong>Key Starting Materials (KSMs)</strong> — chemical precursors needed to make APIs. Even US-made APIs depend on Chinese KSMs. Kuiken's "dependency goes deeper than you think" argument.</li>
+    <li><strong>ARPA-H</strong> — health moonshot agency, created 2022, DARPA-modeled. Funds risky research too far-out for NIH. Palmer's "Responsible Innovation" role sits here. ~$1.5B/year.</li>
+    <li><strong>DARPA BTO</strong> — DARPA's bio office, created 2014. Military-relevant bio. Kerri Dugan used to run it. Invented some of the mRNA vaccine tech.</li>
+    <li><strong>NSCEB</strong> — Congressional commission (2022-2025). Final report April 2025. Chaired by Senator Todd Young. <strong>Palmer was staff designee to the chair.</strong> Probably the most-cited policy doc in the room.</li>
+    <li><strong>BIOSECURE Act</strong> — pending legislation to restrict federal contracts with Chinese biotech firms (BGI, WuXi, others). Kuiken supports.</li>
+    <li><strong>Biodefense / biosecurity</strong> — preventing biological threats. The 10:40 panel. Jaime Yassif ran NTI-Bio for years.</li>
+    <li><strong>"Misallocation" framework (Endy's)</strong> — NIH spends billions on biology <em>applications</em> and too little on biology <em>tools</em>. <strong>Your thesis mirrors this pattern</strong> in therapeutics. Lean on this term with Endy.</li>
+  </ol>
+
+  <hr>
+
+  <h2>6. Tonight's checklist</h2>
+
+  <h3>Reading (Tier A, ~45 min total)</h3>
+
+  <ul>
+    <li>[ ] <strong>"Biosecurity Really: A Strategy for Victory"</strong> — hoover.org/research/biosecurity-really-strategy-victory. Read exec summary + BIOINT and bio-audits planks in full. ~25 min. <strong>Read first.</strong></li>
+    <li>[ ] <strong>Kuiken RCW piece</strong> — realclearworld.com "US Biotech Future Is Now Made in China." 8 min. Memorize cisplatin line and 40% API number.</li>
+    <li>[ ] <strong>NSCEB Final Report exec summary</strong> — biotech.senate.gov/final-report/. ~15 min. Focus on Six Pillars + regulatory modernization plank.</li>
+  </ul>
+
+  <p><strong>If only 20 min tonight:</strong> "Biosecurity Really" exec summary + Kuiken op-ed. Skip NSCEB tonight, read on BART (plenty of time).</p>
+
+  <h3>Rehearsal</h3>
+
+  <ul>
+    <li>[ ] <strong>Opener out loud 5x</strong> (GLP-1 personal opener from <code>hub/plans/2026-04-14-bliss-morning-primer.md</code> section 06)</li>
+    <li>[ ] <strong>Three memorized phrases</strong> (section 2 above) — say each out loud 3x</li>
+    <li>[ ] <strong>Time the opener once</strong> — target ~45 seconds</li>
+  </ul>
+
+  <h3>Gear (critical — Granola will run all day)</h3>
+
+  <ul>
+    <li>[ ] <strong>Battery pack ≥10,000 mAh</strong>, verify it can charge iPhone WHILE Granola records</li>
+    <li>[ ] <strong>Granola app</strong> — updated, logged in, auto-transcribe on, test recording</li>
+    <li>[ ] <strong>Clipper balance</strong> — Apple Wallet, ≥$20 loaded</li>
+    <li>[ ] <strong>Phone charged to 100%</strong> before bed</li>
+    <li>[ ] <strong>Uber app</strong> — payment confirmed, home + Hoover Institution saved as places</li>
+  </ul>
+
+  <h3>Outfit + bag</h3>
+
+  <ul>
+    <li>[ ] <strong>Business casual</strong> laid out: button-down, pants, shoes</li>
+    <li>[ ] <strong>Light layer</strong> for 55°F evening reception (sweater or jacket)</li>
+    <li>[ ] <strong>Bag packed:</strong> battery pack + cable, notebook + pen (backup for hand notes), water bottle, phone charger for outlets, Clipper card backup</li>
+    <li>[ ] <strong>Contact-sharing method:</strong> phone notes / Notion / business cards — decide which, have it ready</li>
+  </ul>
+
+  <h3>Sleep</h3>
+
+  <ul>
+    <li>[ ] <strong>Alarm: 5:45 AM</strong></li>
+    <li>[ ] <strong>Lights out by 10:00 PM</strong> (you need rest more than one more read)</li>
+  </ul>
+
+  <hr>
+
+  <h2>7. Tomorrow morning checklist (5:45 → 6:45 out the door)</h2>
+
+  <ul>
+    <li>[ ] 5:45 alarm, shower</li>
+    <li>[ ] 6:00-6:25 coffee, breakfast at home, final primer skim (5 min only, no new absorption)</li>
+    <li>[ ] 6:25-6:40 dressed, bag packed, one last check: phone charged, battery pack in bag, Clipper in Wallet, Uber app logged in</li>
+    <li>[ ] <strong>6:45 OUT THE DOOR</strong> (not "finishing coffee")</li>
+    <li>[ ] 6:52 on 19th St BART platform</li>
+    <li>[ ] <strong>6:53 board BART Red-S</strong></li>
+  </ul>
+
+  <h3>On BART (53 min) — reading queue</h3>
+
+  <ul>
+    <li>[ ] <strong>Stanford ETR 2026 Biotech chapter p.39</strong> (~20 min) — Stanford's institutional view of bio</li>
+    <li>[ ] <strong>NSCEB "Creating Clear Regulatory Pathways"</strong> sub-doc (~20 min) — Palmer's regulatory-modernization territory</li>
+    <li>[ ] <strong>Final re-read of the three memorized phrases</strong> — say each in your head 3x</li>
+  </ul>
+
+  <h3>On Caltrain (22 min) — mental prep</h3>
+
+  <ul>
+    <li>[ ] Close the laptop/phone. Look out the window.</li>
+    <li>[ ] Breathe. Visualize walking into Traitel at 8:40.</li>
+    <li>[ ] Review the Palmer phrase one more time — this is your first conversation window.</li>
+  </ul>
+
+  <hr>
+
+  <h2>8. Reading plan tiers (ranked by ROI)</h2>
+
+  <p><strong>Tier A — tonight (45 min):</strong></p>
+  <ol>
+    <li>🥇 "Biosecurity Really" (Endy + Kuiken, two birds)</li>
+    <li>🥈 Kuiken RCW China piece</li>
+    <li>🥉 NSCEB Final Report exec summary</li>
+  </ol>
+
+  <p><strong>Tier B — BART tomorrow (50 min):</strong></p>
+  <ol start="4">
+    <li>Stanford ETR Biotech chapter p.39</li>
+    <li>NSCEB "Creating Clear Regulatory Pathways" sub-doc</li>
+  </ol>
+
+  <p><strong>Tier C — post-event follow-up fuel only:</strong></p>
+  <ul>
+    <li>NSCEB "Playbook for Accelerating American Innovation" (before Palmer follow-up)</li>
+    <li>NSCEB "Future of U.S.-China Biotechnology Competition" (Palmer + Kuiken joint follow-up)</li>
+    <li>USCC 2025 Annual Report, China biotech section (~30 min, before Kuiken follow-up)</li>
+  </ul>
+
+  <p><strong>Skip entirely:</strong></p>
+  <ul>
+    <li>Basic biology primers (the ELI5 glossary above covers everything you need)</li>
+    <li>2022 National Biodefense Strategy (superseded)</li>
+    <li>Feb 2025 USCC testimony, June 2025 House S&amp;T testimony (duplicative)</li>
+    <li>60 Minutes iGEM, Boston Globe op-ed, The Hill op-ed (derivative/condensed)</li>
+    <li>Endy "Ten Investments" Dec 2024 brief (most content captured in "Biosecurity Really")</li>
+  </ul>
+
+  <p><strong>The meta-point:</strong> The resources page looks overwhelming but it's really 4 substantive documents wrapped in 12 derivatives. You're reading 3 of the 4 before the event starts. <strong>90% covered.</strong></p>
+
+  <hr>
+
+  <h2>9. What we haven't done yet (for the next session)</h2>
+
+  <p>These are the open prep items we're going to tackle next, after you've had time to absorb this brief:</p>
+
+  <ol>
+    <li><strong>Palmer + Kuiken targeting rebuild</strong> — where to stand, how to open, how to exit, how to handle pushback. Uses everything in this brief plus the person-level research. ~30 min of work.</li>
+    <li><strong>Break anxiety game plan</strong> — specifically the 10:10, 12:10, 2:50, and 4:50 transitions. What to do when cold-approaching, what to do when you hit a wall, how to recover. ~20 min.</li>
+    <li><strong>Opener rehearsal</strong> — live, out loud, with timing. You do it, I listen for timing/pacing issues. ~15 min.</li>
+  </ol>
+
+  <p>Total remaining prep: ~65 min focused work. Plus your own read of Tier A docs (~45 min). <strong>Total tonight: ~1h50m of focused work</strong>, plus gear + outfit (~15 min). Lights out by 10 PM means starting focused work no later than 8 PM.</p>
+
+  <hr>
+
+  <h2>10. What changed since the primer was written</h2>
+
+  <p>The <code>2026-04-14-bliss-morning-primer.md</code> is still valid as your thesis foundation. Two things are now out of date:</p>
+
+  <ol>
+    <li><strong>Alicia Jackson is not attending.</strong> The "ARPA-H Director" slot is filled by <strong>Megan Palmer</strong> (Lead for Responsible Innovation at ARPA-H). Different person, different role. All Jackson-specific content in the primer should be read as obsolete. The Window 1 strategy is being rebuilt around Palmer (she's deeply Stanford-connected, knows Endy professionally, and staffed the NSCEB report — in many ways a better target than Jackson ever was).</li>
+    <li><strong>3:20 panel roster changed.</strong> Jenny Rooke is a panelist (not mod). <strong>Mike Kuiken</strong> is the new moderator. Ezhil Subbian dropped. <strong>Kuiken is now one of your top targets</strong> — he co-authored "Biosecurity Really" with Endy, and his China supply chain frame maps directly onto your peptide thesis.</li>
+  </ol>
+
+  <p><strong>Net effect:</strong> you lost one target (Jackson) and gained two (Palmer, Kuiken). Better trade than it sounds — both are more strategically positioned than Jackson was for your specific thesis.</p>
+
+  <p><em>Brief compiled 2026-04-13 evening.</em></p>
+
+</main>
+
+<footer>
+  <div>Other artifacts: <a href="/bliss/">bliss</a> · <a href="primer.html">primer.html</a> · <a href="peptides.html">peptides.html</a> · <a href="/baseline/thesis.html">baseline/thesis</a></div>
+  <div>Master doc: hub/plans/2026-04-14-bliss-prep-brief.md</div>
+  <div>Updated 2026-04-13 evening · Private · noindex · do not share</div>
+</footer>
+
+</body>
+</html>
