@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Wednesday Call — Slim Plan | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --green: #2d6a4f;
+    --green-bg: #f0f7f4;
+    --yellow: #b8860b;
+    --yellow-bg: #fdf8e7;
+    --red: #9b2226;
+    --red-bg: #fdf2f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .nav-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  nav .nav-links a { color: var(--muted); text-decoration: none; transition: color .15s; }
+  nav .nav-links a:hover { color: var(--accent); }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  header.doc-header {
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 1.85rem;
+    margin: 3.2rem 0 1rem;
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 0.8rem;
+    color: var(--ink);
+  }
+
+  p { margin-bottom: 1rem; }
+
+  ul, ol { margin: 0.5rem 0 1.2rem 1.4rem; }
+  li { margin-bottom: 0.5rem; }
+
+  strong { color: var(--ink); font-weight: 600; }
+
+  .lede {
+    font-size: 1.08rem;
+    color: var(--muted);
+    border-left: 2px solid var(--accent);
+    padding: 0.4rem 0 0.4rem 1.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0 1.8rem;
+    font-size: 0.92rem;
+    background: var(--white);
+    border: 1px solid var(--faint);
+  }
+  th, td {
+    text-align: left;
+    padding: 0.7rem 0.85rem;
+    border-bottom: 1px solid var(--faint);
+    vertical-align: top;
+  }
+  th {
+    background: var(--warm);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  td:first-child, th:first-child {
+    border-right: 1px solid var(--faint);
+    font-weight: 600;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .options-table th, .options-table td { font-size: 0.88rem; }
+  .options-table .anchor {
+    background: var(--accent-bg);
+  }
+  .options-table .anchor th, .options-table .anchor td {
+    color: var(--ink);
+  }
+
+  .kill-criteria {
+    display: grid;
+    gap: 0.7rem;
+    margin: 1rem 0 1.8rem;
+  }
+  .kill-row {
+    padding: 0.9rem 1.1rem;
+    border-radius: 4px;
+    border-left: 3px solid;
+  }
+  .kill-row.green { background: var(--green-bg); border-color: var(--green); }
+  .kill-row.yellow { background: var(--yellow-bg); border-color: var(--yellow); }
+  .kill-row.red { background: var(--red-bg); border-color: var(--red); }
+  .kill-row strong { display: block; margin-bottom: 0.2rem; font-size: 0.92rem; }
+
+  .protect-list {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.4rem 1.2rem 1.6rem;
+    margin: 1rem 0 1.8rem;
+  }
+  .protect-list ul { margin: 0; padding-left: 1.2rem; }
+  .protect-list li { font-size: 0.94rem; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    main { padding: 2rem 1.2rem 4rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.55rem; margin-top: 2.5rem; }
+    table { font-size: 0.82rem; }
+    th, td { padding: 0.55rem 0.6rem; }
+    .options-table th, .options-table td { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">← LearnAIR</a>
+    <ul class="nav-links">
+      <li><a href="wednesday-call.html">Slim Plan</a></li>
+      <li><a href="quarterback.html">Quarterback</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<header class="doc-header">
+  <div class="eyebrow">Wednesday Call · Slim Plan · v2</div>
+  <h1>Three options on the table.</h1>
+  <p class="subtitle">8:30 AM. ~60 minutes. Goal: force a real decision in the room. Each option is a real "yes" path. Justin picks. The choice is the data.</p>
+  <div class="meta">
+    <span>April 15, 2026</span>
+    <span>Supersedes addendum v1</span>
+    <span>Companion: Quarterback Script</span>
+  </div>
+</header>
+
+<h2>Frame</h2>
+<p class="lede">We're not negotiating against a hidden number. We're letting Justin reveal his real budget through which option he picks. Each of the three options is a real "yes" path for us — not an anchor, not a throwaway. Andrew quarterbacks Phases 3–8. Mike opens.</p>
+
+<h2>Arc</h2>
+<table>
+  <thead>
+    <tr><th>#</th><th>Phase</th><th>Who</th><th>Min</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Warm open</td><td>Mike</td><td>3</td></tr>
+    <tr><td>2</td><td>Architecture walkthrough (foundation + framing + evergreen)</td><td>Mike</td><td>12</td></tr>
+    <tr><td>3</td><td>What's already done (80–100 hrs, show artifact)</td><td>Andrew</td><td>3</td></tr>
+    <tr><td>4</td><td>The unanswered question (per contractor or total?)</td><td>Andrew</td><td>2</td></tr>
+    <tr><td>5</td><td>Three options on the table</td><td>Andrew</td><td>8</td></tr>
+    <tr><td>6</td><td>Honest reframe (why three, Friday proposal commit)</td><td>Andrew</td><td>2</td></tr>
+    <tr><td>7</td><td>Their reaction window</td><td>Both</td><td>10</td></tr>
+    <tr><td>8</td><td>Close (pick / date / walk)</td><td>Andrew</td><td>2</td></tr>
+  </tbody>
+</table>
+
+<h2>The three options</h2>
+<table class="options-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>A — Foundation Sprint</th>
+      <th>B — Two-Pillar Build ⭐</th>
+      <th>C — Full Bore Pilot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cost</td>
+      <td>$4K/mo total</td>
+      <td class="anchor"><strong>$8K/mo ($4K each)</strong></td>
+      <td>~$25K/mo</td>
+    </tr>
+    <tr>
+      <td>Hours</td>
+      <td>Mike 15h, Andrew 5h</td>
+      <td class="anchor">Mike 20h, Andrew 10h</td>
+      <td>Both ~32h</td>
+    </tr>
+    <tr>
+      <td>Scope</td>
+      <td>Foundation pillar only</td>
+      <td class="anchor">Foundation + framing, first cohort live</td>
+      <td>Full delivery + day-60 equity convo</td>
+    </tr>
+    <tr>
+      <td>Survives if</td>
+      <td>"$4K is total"</td>
+      <td class="anchor">"$4K per contractor"</td>
+      <td>They go big</td>
+    </tr>
+    <tr>
+      <td>Day-90 outcome</td>
+      <td>First cohort curriculum + system</td>
+      <td class="anchor">First cohort done, second teed up, partner pipeline</td>
+      <td>Flagship live, year-1 plan</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-size: 0.88rem; color: var(--muted); margin-top: -0.8rem;">⭐ = our anchor (if they ask which we'd pick)</p>
+
+<h2>Kill criteria</h2>
+<div class="kill-criteria">
+  <div class="kill-row green">
+    <strong>🟢 Green — Picks in the room + names a date for written confirmation</strong>
+    Friday proposal goes out. Yes-or-no required by April 22.
+  </div>
+  <div class="kill-row yellow">
+    <strong>🟡 Yellow — Picks but defers commit</strong>
+    7 days. April 22 deadline. After that, the answer is no.
+  </div>
+  <div class="kill-row red">
+    <strong>🔴 Red — Can't pick / asks for "more time on framing"</strong>
+    That IS the answer. Walk warm. No Friday proposal.
+  </div>
+</div>
+
+<h2>Things to protect</h2>
+<div class="protect-list">
+  <ul>
+    <li>No single hourly rate named — the options ARE the negotiation.</li>
+    <li>The 3 returned questions (starting point / first hurdle / ideal scenario) → punt to Friday proposal.</li>
+    <li>Don't agree to a 4th meeting in the room.</li>
+    <li>Don't custom-build Option D live with them.</li>
+    <li>Phases 1–2 are Mike's. Andrew stays quiet.</li>
+    <li>Don't name a single Andrew+Mike rate. The number lives inside the option, not as a separate line.</li>
+  </ul>
+</div>
+
+<h2>Mike risks to watch</h2>
+<ol>
+  <li><strong>Softens questions to make them feel better.</strong> If he qualifies Option B with "maybe" or "if you're up for it," he dilutes it. Don't correct him in the room — debrief tonight.</li>
+  <li><strong>Accepts "we'll think about it" without a date.</strong> Andrew steps in: <em>"What date works for you to come back with a pick?"</em></li>
+  <li><strong>Reads vibes over numbers.</strong> If his post-call read is 80% energy and 20% commitments, run the 8-item checklist on him before he editorializes.</li>
+</ol>
+
+<h2>After the call</h2>
+<ul>
+  <li>Don't editorialize with Mike on the way out.</li>
+  <li>Tonight: 8-item debrief checklist <strong>before</strong> he tells you how it felt.</li>
+  <li>If green: Thursday morning, draft the Friday proposal. Mike writes first, Andrew edits.</li>
+  <li>If yellow: hold for 4/22. No Thursday action.</li>
+  <li>If red: warm close. Run Mochary on Mike that night with <em>"What did today tell you about what this is actually going to be?"</em></li>
+</ul>
+
+<footer>
+  Slim v2 · April 15, 2026 · Three-options plan · Companion: <a href="quarterback.html" style="color: var(--accent);">Quarterback Script →</a>
+</footer>
+
+</main>
+
+</body>
+</html>

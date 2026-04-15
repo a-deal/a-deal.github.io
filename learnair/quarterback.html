@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Quarterback Script — Wednesday Call | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --stop: #9b2226;
+    --stop-bg: #fdf2f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .nav-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  nav .nav-links a { color: var(--muted); text-decoration: none; transition: color .15s; }
+  nav .nav-links a:hover { color: var(--accent); }
+  nav .nav-links a.active { color: var(--accent); }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  header.doc-header {
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  h2.phase {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 1.85rem;
+    margin: 3.2rem 0 0.4rem;
+    letter-spacing: -0.005em;
+  }
+  .phase-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 0.8rem;
+    color: var(--ink);
+  }
+
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: 0.5rem 0 1.2rem 1.4rem; }
+  li { margin-bottom: 0.5rem; }
+  strong { color: var(--ink); font-weight: 600; }
+  em { font-style: italic; }
+
+  blockquote.script {
+    background: var(--white);
+    border-left: 3px solid var(--accent);
+    padding: 1.3rem 1.6rem;
+    margin: 1rem 0 1.4rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.18rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--ink);
+  }
+  blockquote.script p { margin-bottom: 0.8rem; }
+  blockquote.script p:last-child { margin-bottom: 0; }
+
+  .stage-direction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0.5rem 0 1.2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--faint);
+  }
+
+  .stop {
+    background: var(--stop-bg);
+    border-left: 3px solid var(--stop);
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0 1.4rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--stop);
+  }
+
+  .branch-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin: 1.6rem 0 0.5rem;
+  }
+
+  .reminders {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    border-left: 3px solid var(--accent);
+    padding: 1.3rem 1.5rem 1.3rem 1.7rem;
+    margin: 1rem 0 1.8rem;
+  }
+  .reminders ul { margin: 0; padding-left: 1.2rem; }
+  .reminders li { font-size: 0.94rem; }
+
+  .private-read {
+    background: var(--accent-bg);
+    border: 1px dashed var(--accent);
+    padding: 1.4rem 1.6rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+  }
+  .private-read .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .private-read p { font-size: 0.95rem; color: var(--muted); margin-bottom: 0.8rem; }
+  .private-read p:last-child { margin-bottom: 0; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    main { padding: 2rem 1.2rem 4rem; }
+    h1 { font-size: 2rem; }
+    h2.phase { font-size: 1.55rem; margin-top: 2.5rem; }
+    blockquote.script { font-size: 1.05rem; padding: 1.1rem 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">← LearnAIR</a>
+    <ul class="nav-links">
+      <li><a href="wednesday-call.html">Slim Plan</a></li>
+      <li><a href="quarterback.html" class="active">Quarterback</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<header class="doc-header">
+  <div class="eyebrow">Wednesday Call · Quarterback Script · v1</div>
+  <h1>The in-room talk track.</h1>
+  <p class="subtitle">Andrew leads Phases 3–8 after Mike's architecture walkthrough. Verbatim language for the load-bearing moments. Glance-able in the room.</p>
+  <div class="meta">
+    <span>April 15, 2026</span>
+    <span>For Andrew only — not for Mike</span>
+    <span>Companion: Slim Plan</span>
+  </div>
+</header>
+
+<h2 class="phase">Handoff from Mike</h2>
+<div class="phase-meta">Phase 2 → 3 · Coach Mike to land this line</div>
+
+<blockquote class="script">
+  Before we get into how we'd structure this, I want Andrew to walk you through what we've already put on paper, because I think it'll change how you think about what we're proposing.
+</blockquote>
+
+<p>That's your cue. Take it from here.</p>
+
+<h2 class="phase">Phase 3 — What's already done</h2>
+<div class="phase-meta">~3 minutes · Andrew leads</div>
+
+<blockquote class="script">
+  <p>Thanks Mike. Justin, Teresa — before we get into structure, I want you to see the ground we've already covered. Mike and I have put 80 to 100 hours into this thinking before we asked you for a single dollar. That's not a sales line. It's how committed we are to the idea, and we want you to see what's already on paper.</p>
+  <p>[pull up artifact — proposal v2 or insights doc]</p>
+  <p>What you're looking at is [name it in one sentence — what it is, what it took to build]. The reason I'm showing you this isn't to impress you. It's so when we walk you through how we'd structure the next 90 days, you know we're not improvising. We've already done the architecture. What we're here today to figure out is the shape of partnership that lets us go execute it.</p>
+</blockquote>
+
+<div class="stage-direction">Brief pause. Read the room. If they're engaged, keep going.</div>
+
+<h2 class="phase">Phase 4 — The unanswered question</h2>
+<div class="phase-meta">~2 minutes · Surgical · Don't soften</div>
+
+<blockquote class="script">
+  Before I walk you through the options we've put together, I want to close the loop on the one piece from Monday that didn't get answered. When you shared the $0 to $4K range, I want to make sure we're working off the same number when we talk shape. Was that $0 to $4K per contractor per month, or total across the two of us? And does the same shape hold past the 90-day intro period?
+</blockquote>
+
+<div class="stop">🛑 STOP TALKING. Let him answer. Whatever he says next is load-bearing data.</div>
+
+<p class="branch-label">If he punts again ("good question, let's get into the structure first"):</p>
+<blockquote class="script">
+  Got it. Let's hold that — we'll come back to it when we get to the option you and Teresa want to pursue, because the answer shapes which one fits.
+</blockquote>
+<p style="font-size: 0.92rem; color: var(--muted);">That holds the thread without turning it into a fight.</p>
+
+<h2 class="phase">Phase 5 — The three options</h2>
+<div class="phase-meta">~8 minutes · Slow · Deliberate · No hedging between options</div>
+
+<blockquote class="script">
+  Okay. We've designed three real shapes this could take. Each one is a yes for us. I'm going to walk you through all three, and then we're going to ask you which one matches what you and Teresa are ready to commit to today.
+</blockquote>
+
+<h3>Option A — Foundation Sprint</h3>
+<blockquote class="script">
+  <p><strong>Option A — Foundation Sprint.</strong> Four thousand a month total, ninety days. Mike runs lead delivery at fifteen hours a week. I'm at five hours a week on advisory and curriculum architecture. The scope is the foundation pillar end-to-end — the curriculum architecture for your first cohort, the partner integration framework, and the evergreen instrumentation that lets cohort two run better than cohort one.</p>
+  <p>By day ninety, you have a deliverable first-cohort curriculum and the system to run the next cohort better than the first. If budget is the constraint, this is the option that meets you exactly where you said you are.</p>
+</blockquote>
+<div class="stage-direction">Pause. Don't over-explain. Move to B.</div>
+
+<h3>Option B — Two-Pillar Build (our anchor)</h3>
+<blockquote class="script">
+  <p><strong>Option B — Two-Pillar Build.</strong> Eight thousand a month total — that's four thousand each contractor, ninety days. Mike at twenty hours a week, me at ten. Combined, about a hundred and twenty hours a month on this. Scope is foundation and framing pillars in parallel — first cohort delivered live, second cohort designed, partner pipeline opened.</p>
+  <p>By day ninety, LearnAIR has executed one cohort, has the next one teed up, and has a real curriculum and partner system running.</p>
+  <p>This is the version Mike and I think the partnership actually needs to look like to give you something real on day ninety. Mike is the operational lead. I'm building the curriculum and partner architecture in parallel.</p>
+</blockquote>
+<div class="stage-direction">Pause. Move to C.</div>
+
+<h3>Option C — Full Bore Pilot</h3>
+<blockquote class="script">
+  <p><strong>Option C — Full Bore Pilot.</strong> Twenty-five thousand a month total, ninety days. Both of us full-time, about thirty-two hours a week each. Blended, that's about a hundred and fifty an hour, which is below what either of us bills in our other consulting work. We're naming that for transparency.</p>
+  <p>Scope is foundation and framing and the first cohort and the second cohort and the partnership pipeline and the evergreen system — and at day sixty, we open the equity and ongoing-role conversation explicitly.</p>
+  <p>Day ninety, LearnAIR has a flagship offering live, a working operating system, and a year-one plan.</p>
+  <p>The reason we're including this is because Justin, you asked in your email what an ideal scenario looks like for us. This is ours. We're not assuming it's where you are. We're telling you what it would look like if you and Teresa decided to go big on this.</p>
+</blockquote>
+
+<h2 class="phase">Phase 6 — The honest reframe</h2>
+<div class="phase-meta">~2 minutes · Andrew</div>
+
+<blockquote class="script">
+  <p>I want to name why we're putting it to you as three options instead of one number.</p>
+  <p>Frankly, we don't want to guess what you can fund and have all of us spend another two weeks bouncing emails. You and Teresa know your budget better than we do, and you know what level of bet you're ready to make on this. We like you, we like the problem, and we've already invested eighty plus hours of thinking — we're committed to finding a real shape here.</p>
+  <p>So we want you to tell us which option matches what you can actually commit to today, and then by Friday end of day we'll bring you a written proposal for that specific option with milestones, deliverables, and the kickoff timeline.</p>
+</blockquote>
+
+<h2 class="phase">Phase 7 — Their reaction window</h2>
+<div class="phase-meta">~10 minutes · Both · Listen, don't fill silence</div>
+
+<div class="stop">🛑 QUIET. Don't fill silence. Let Justin and Teresa talk to each other. Listen for: which option do they orient around, who reacts first, do they ask clarifying questions or do they go to feelings.</div>
+
+<p class="branch-label">If they ask the 3 returned questions live (starting point / first hurdle / ideal scenario):</p>
+<blockquote class="script">
+  Those are exactly the right questions, and we want to give them real answers, not fast ones in this room. Once we know which option you're picking, we'll bring all three answers back in the Friday proposal in the context of that specific shape. Fair?
+</blockquote>
+
+<p class="branch-label">If they ask which option you'd pick:</p>
+<blockquote class="script">
+  Honestly? B. We think it's the version that gives you something real on day ninety while staying inside what looks like a workable structure for you. But that's our read — the call is yours.
+</blockquote>
+
+<p class="branch-label">If they ask about per-contractor again (or you never got a clean answer in Phase 4):</p>
+<blockquote class="script">
+  Same question I asked earlier — was the $0–$4K per contractor or total? Because if it's per contractor, Option B is in range. If it's total, Option A is the one that fits. We need that one piece to know what's actually on the table.
+</blockquote>
+
+<p class="branch-label">If they try to negotiate a hybrid ("what about $5K/mo with these hours"):</p>
+<blockquote class="script">
+  Let's not custom-build it in the room. Pick the option that's closest to where you are, and we'll take the gap to the Friday proposal where we can actually show you the math on how the scope flexes. Which of the three is closest?
+</blockquote>
+
+<h2 class="phase">Phase 8 — The close</h2>
+<div class="phase-meta">~2 minutes · Andrew · Three branches</div>
+
+<p class="branch-label">If they pick in the room:</p>
+<blockquote class="script">
+  Great. Friday by end of day, you'll have a written proposal for [Option X] with milestones, deliverables, and the kickoff timeline. We'll need a yes-or-no from you by April 22nd to lock the start date.
+</blockquote>
+
+<p class="branch-label">If they want to think about it:</p>
+<blockquote class="script">
+  Totally fair. Here's what we'd ask: pick the option that fits by April 22nd, email is fine. We're holding our calendars to start the Monday after that, but we have other work that needs to either commit or release. Sound right?
+</blockquote>
+
+<p class="branch-label">If they punt entirely (the walk-away):</p>
+<blockquote class="script">
+  Okay. Take the time you need. Just so we're clear on our end — we're going to assume the timing isn't right unless we hear back from you with a specific option pick by April 22nd. No hard feelings either way, and we're glad we had the chance to walk through it with you today.
+</blockquote>
+<p style="font-size: 0.92rem; color: var(--muted);">Warm. Clean. No salvage attempt.</p>
+
+<h2 class="phase">In-the-room reminders</h2>
+
+<div class="reminders">
+  <ul>
+    <li>🛡️ Don't name a single hourly rate. The options ARE the negotiation.</li>
+    <li>🛡️ Don't answer the 3 returned questions live. Punt to Friday proposal.</li>
+    <li>🛡️ Don't agree to "let's get on another call." Push for option pick or a date.</li>
+    <li>🛡️ Don't custom-build a 4th option in the room.</li>
+    <li>🛡️ Watch the clock. Phases 3–8 are ~25 min of the 60. Mike has 15 min upfront. Leave 10 min for them to react.</li>
+    <li>🛡️ Mike-specific: if he qualifies Option B with "maybe" or "if you're up for it," let it be in the room. Debrief tonight, don't correct live.</li>
+    <li>🛡️ Phase 7 silence is load-bearing. Do not fill it.</li>
+  </ul>
+</div>
+
+<div class="private-read">
+  <div class="label">Private read · Don't say in room</div>
+  <p>This is a real partnership test AND reps + optionality for Mike. If Option C lands AND the funding is real AND the LearnAIR team rises to caliber in the first 30 days, you'd run it. If it doesn't, Option B is the test that buys you 90 days to find out. Option A is the survival floor. Hold all three as real, even though your private probability on Option C landing is low.</p>
+  <p>The "tough is not bad" frame from last night's close — this call is tough, not bad. Hold that.</p>
+</div>
+
+<footer>
+  Quarterback Script v1 · April 15, 2026 · Companion: <a href="wednesday-call.html">Slim Plan →</a>
+</footer>
+
+</main>
+
+</body>
+</html>
