@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Mike Talk Track — Phases 1 & 2 | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1eb;
+    --warm: #e8e3d9;
+    --accent: #b44a2d;
+    --accent-light: #d4714f;
+    --accent-bg: rgba(180, 74, 45, 0.06);
+    --muted: #6b6560;
+    --faint: #c9c3b8;
+    --white: #fefdfb;
+    --pointer-bg: #fdf8e7;
+    --pointer-border: #b8860b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(244, 241, 235, 0.92);
+    border-bottom: 1px solid var(--faint);
+    padding: 0.75rem 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .nav-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  nav .nav-links {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  nav .nav-links a { color: var(--muted); text-decoration: none; transition: color .15s; }
+  nav .nav-links a:hover { color: var(--accent); }
+  nav .nav-links a.active { color: var(--accent); }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  header.doc-header {
+    border-bottom: 1px solid var(--faint);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+  }
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .preamble {
+    background: var(--accent-bg);
+    border: 1px dashed var(--accent);
+    padding: 1.4rem 1.6rem;
+    margin: 0 0 2.5rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+  .preamble strong { color: var(--ink); }
+  .preamble p { margin-bottom: 0.6rem; }
+  .preamble p:last-child { margin-bottom: 0; }
+
+  h2.phase {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin: 3.5rem 0 0.4rem;
+    letter-spacing: -0.005em;
+  }
+  .phase-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+
+  h3.section {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2.2rem 0 0.4rem;
+    color: var(--ink);
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--faint);
+  }
+
+  .pointer {
+    background: var(--pointer-bg);
+    border-left: 3px solid var(--pointer-border);
+    padding: 0.7rem 1.1rem;
+    margin: 0.4rem 0 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: #6b5a08;
+    letter-spacing: 0.02em;
+  }
+  .pointer strong {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    color: #6b5a08;
+  }
+
+  blockquote.script {
+    background: var(--white);
+    border-left: 3px solid var(--accent);
+    padding: 1.3rem 1.6rem;
+    margin: 0.8rem 0 1.2rem;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--ink);
+  }
+  blockquote.script p { margin-bottom: 0.8rem; }
+  blockquote.script p:last-child { margin-bottom: 0; }
+
+  .stage-direction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0.5rem 0 1.2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--faint);
+  }
+
+  .handoff {
+    background: var(--accent);
+    color: var(--white);
+    padding: 1.6rem 1.8rem;
+    margin: 2.5rem 0 1.5rem;
+    border-radius: 4px;
+  }
+  .handoff .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0.6rem;
+  }
+  .handoff blockquote {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.18rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--white);
+  }
+
+  .reminders {
+    background: var(--white);
+    border: 1px solid var(--faint);
+    border-left: 3px solid var(--accent);
+    padding: 1.3rem 1.5rem 1.3rem 1.7rem;
+    margin: 1rem 0 1.8rem;
+  }
+  .reminders ul { margin: 0; padding-left: 1.2rem; }
+  .reminders li { font-size: 0.94rem; margin-bottom: 0.5rem; }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    main { padding: 2rem 1.2rem 4rem; }
+    h1 { font-size: 2rem; }
+    h2.phase { font-size: 1.6rem; margin-top: 2.5rem; }
+    blockquote.script { font-size: 1.02rem; padding: 1.1rem 1.3rem; }
+    .handoff blockquote { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">← LearnAIR</a>
+    <ul class="nav-links">
+      <li><a href="wednesday-call.html">Slim Plan</a></li>
+      <li><a href="mike-talk-track.html" class="active">Mike Track</a></li>
+      <li><a href="quarterback.html">Quarterback</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<header class="doc-header">
+  <div class="eyebrow">Wednesday Call · Mike Talk Track · Phases 1 & 2</div>
+  <h1>You open. You walk the brief.</h1>
+  <p class="subtitle">Phase 1 is warmth and framing. Phase 2 is walking Justin and Teresa through the slim concept brief, section by section, building excitement. Then you hand off to Andrew for Phase 3.</p>
+  <div class="meta">
+    <span>April 15, 2026 · 8:30 AM</span>
+    <span>Maps to <a href="one-pager.html" style="color: var(--accent);">one-pager.html</a></span>
+    <span>~15 minutes total</span>
+  </div>
+</header>
+
+<div class="preamble">
+  <p><strong>How to use this:</strong> These are not lines to recite. They're suggested language. Make them your own — the goal is your warmth and your clarity, not memorization.</p>
+  <p>Open <a href="one-pager.html" style="color: var(--accent); font-weight: 600;">one-pager.html</a> on the shared screen. Open this doc on your phone. As you scroll the one-pager through its six sections, this doc walks you through what to point at and what to say. The section headers below match the one-pager sections exactly so you can navigate fast.</p>
+  <p><strong>The North Star:</strong> By the end of Phase 2, Justin and Teresa should feel what you feel — that this is real, that we've already done the work, and that the next thing they're about to hear (Andrew on structure) is grounded in something concrete.</p>
+</div>
+
+<h2 class="phase">Phase 1 — Warm Open</h2>
+<div class="phase-meta">~3 minutes · No screen share yet · Just you, Justin, and Teresa</div>
+
+<p>You open. Reference the gap since the last call, ask about the move, set the tone. Don't rush into business. The first 90 seconds set the temperature of the whole call.</p>
+
+<blockquote class="script">
+  Justin, Teresa — really glad we're back at it. Feels like we've been doing this dance over email for a couple weeks now and I'm happy we're finally face to face. How's the move-prep going? You guys getting closer to a date?
+</blockquote>
+
+<div class="stage-direction">Brief listening pause. Let them share. Match their energy. Don't immediately pivot.</div>
+
+<p>When the small-talk lands and the room feels open, set the frame for the call:</p>
+
+<blockquote class="script">
+  Andrew and I have spent a lot of time the last few days really working through what this could look like, and we're walking in today with conviction about the shape of the partnership and how we want to spend this hour with you. So if you're up for it, here's what I'd love to do: I'm going to walk you through what we've been building — the concept, why we think the moment is right, what we've actually put on paper — and then Andrew is going to come in and take you through the structure side, including the question we left hanging from Monday. Sound good?
+</blockquote>
+
+<div class="stage-direction">Pause for affirmation. When they say yes, share your screen and pull up the one-pager.</div>
+
+<h2 class="phase">Phase 2 — Walk the Brief</h2>
+<div class="phase-meta">~12 minutes · Share screen on one-pager.html · You narrate, they react</div>
+
+<p>You're walking Justin and Teresa through the six sections of the slim brief. Don't read it word-for-word — that's death. You point, you summarize, you connect, you let the page do the visual work while you do the human work. Six sections, ~2 minutes each.</p>
+
+<h3 class="section">1. The Header — "Mission Command → AI Supervision"</h3>
+<div class="pointer"><strong>Point at:</strong> the title and subtitle at the top of the page.</div>
+
+<blockquote class="script">
+  Okay so this is the brief Andrew and I put together. The frame is "Mission Command → AI Supervision" — and that's the through-line for everything we're going to walk through. The skill set you and I both know veterans already have, applied to the role that's emerging across every industry deploying AI right now.
+</blockquote>
+
+<h3 class="section">2. The Gap</h3>
+<div class="pointer"><strong>Point at:</strong> the lead sentence ("AI has given every individual 10x leverage…") and then the body paragraph.</div>
+
+<blockquote class="script">
+  <p>The Gap is the why-this-matters part. You guys know this — AI has given individuals 10x leverage. Every organization that can't capture it is going to be outpaced by one that can. But here's the part I think matters most: this isn't a rupture, it's a decade of deferred organizational maintenance. Cloud migration without security governance. Remote work without coordination processes. Now AI without supervision.</p>
+  <p>And here's the kicker — previous waves were opt-in. You could hire a webmaster, you could hire a cloud architect. AI is different. It touches how every person thinks and works. You can't outsource your own judgment layer. So the role we're talking about — the human that sits between AI systems and business outcomes — every industry is trying to define it right now. We're betting LearnAIR can be one of the places that does.</p>
+</blockquote>
+
+<h3 class="section">3. The Concept (with the 4-element flywheel)</h3>
+<div class="pointer"><strong>Point at:</strong> the orange callout box, then walk the four flywheel cards in order (Veteran → Training Program → Employer → Funder).</div>
+
+<blockquote class="script">
+  <p>This is the core concept. An applied experiential training program that transitions veterans with mission command skill sets into AI ecosystem supervision roles. Built at the pace this moment demands.</p>
+  <p>The four elements you see here are the flywheel: the veteran, the training program, the employer, the funder. Each one feeds the next. Veterans bring a foundational skill set — in the military we call it mission command. Defining boundaries, setting the zone of autonomy, validating outcomes, driving results through ambiguity. That's exactly what supervising AI systems looks like.</p>
+  <p>The training program is where LearnAIR comes in. Andrew and I aren't proposing to reinvent your methodology — we want to inform and adapt what you've already built so it lands for the veteran population specifically. The employer side is every industry deploying AI at scale. And the funder side is DOL grants, GI Bill, SkillBridge, employer training budgets — veterans train at no cost.</p>
+  <p>The reason this works as a flywheel and not a one-shot is because each veteran who goes through proves the concept to the next employer, which opens the next funding source, which fills the next cohort. That's why this is a program and not a course.</p>
+</blockquote>
+
+<h3 class="section">4. Why Now</h3>
+<div class="pointer"><strong>Point at:</strong> each of the three bullets, then the orange pullquote at the bottom of the section.</div>
+
+<blockquote class="script">
+  <p>Why now is the urgency layer, and the data here matters. AI task capability is doubling every 4 to 7 months — that's the METR / Stanford AI Index data. The window to train supervisors is closing fast.</p>
+  <p>This second one I think about a lot — there's already a 13% employment decline for ages 22 to 25 in AI-exposed jobs since ChatGPT launched. Junior roles are disappearing first. That's not a prediction, that's Stanford research from last year.</p>
+  <p>And then the political layer — former Commerce Secretary Raimondo went on the record in March saying America cannot withstand the economic shock that's coming, and she called for outcomes-based, employer-driven training. That's the lane we're in. The gap between "AI literacy" and "AI ecosystem supervision" is exactly where veterans have a natural, immediate advantage.</p>
+</blockquote>
+
+<h3 class="section">5. Who We Are</h3>
+<div class="pointer"><strong>Point at:</strong> your bio first, then Andrew's. Don't read the whole thing — hit the highlights and let the page do the rest.</div>
+
+<blockquote class="script">
+  <p>Quick on us — and you've heard most of this from me, but let me set it up the way we framed it on paper. I bring the veteran perspective. Marine Corps infantry, two deployments to Fallujah, then Deloitte management consulting working with DOD, then EFT and Holotropic Breathwork facilitator, then Forest Service ranger. Bend, Oregon.</p>
+  <p>Andrew brings the technical and startup operator perspective. Two exits — Bear Flag Robotics into John Deere, and Over into GoDaddy. Identity systems at Twitch when they were 10 million daily active users. $39 million in autonomous operations funding under his belt. Since his last exit, product and technical leadership in construction, mining, and defense. Reforge, Oxford. And — important for this conversation — he upskilled into engineering through a boot camp, not academia, so he has firsthand experience in rapid skill transitions.</p>
+  <p>The collaboration started because I reached out to him to learn AI. In the process, we started building the exact thing this program needs.</p>
+</blockquote>
+
+<h3 class="section">6. What We've Built (the credibility moment — your last section)</h3>
+<div class="pointer"><strong>Point at:</strong> the dotted bullet list. Don't read every bullet — name 3 or 4 with conviction, then summarize.</div>
+
+<blockquote class="script">
+  <p>And this is where I want to land before I hand it to Andrew. This is what we've actually built so far — research and frameworks to inform how LearnAIR's established methodology could be adapted for veterans.</p>
+  <p>We've mapped the competitive landscape, 10 plus programs. We have a 4-week pilot curriculum design with validate-or-kill criteria. Policy alignment research grounded in Raimondo, Brynjolfsson, the Stanford HAI work. Oregon employer and funding landscape — concrete organizations, institutions, grant pathways. A field manual we're using to train ourselves through the curriculum we're designing — we are the first cohort. And curriculum stubs in development: persona frameworks, the glossary of AI ecosystem supervision terms, the applied experiential learning methodology.</p>
+  <p>The reason I'm walking you through all of this isn't to impress you. It's so when Andrew comes in next and walks you through the structure side, you know we're not improvising. We've already done the architecture. What we're here to figure out today is the shape of the partnership that lets us go execute it.</p>
+</blockquote>
+
+<div class="handoff">
+  <div class="label">The hand-off — end of Phase 2 → Andrew takes Phase 3</div>
+  <blockquote>
+    So Justin, Teresa — that's the concept and the work behind it. What I want to do now is hand it over to Andrew, because he's going to walk you through what we've already put on paper for the structure side, and he's going to bring up the one question we left hanging from Monday. Andrew, take it from here.
+  </blockquote>
+</div>
+
+<p>Andrew picks up at Phase 3 from here. The full Phases 3–8 quarterback script lives at <a href="quarterback.html" style="color: var(--accent);">quarterback.html</a>.</p>
+
+<h2 class="phase">Reminders for Mike</h2>
+
+<div class="reminders">
+  <ul>
+    <li>🛡️ <strong>Don't read the page word-for-word.</strong> Point, summarize, connect. Let the page do the visual work while you do the human work.</li>
+    <li>🛡️ <strong>Don't rush.</strong> Phase 1 is 3 minutes. Phase 2 is 12. If you're 5 minutes in and already on "Why Now," slow down.</li>
+    <li>🛡️ <strong>Watch their faces, not the screen.</strong> If Justin or Teresa lean in, slow down on that section. If they go quiet, ask "does this land?" and listen.</li>
+    <li>🛡️ <strong>Don't get into structure or money.</strong> That's Andrew's lane in Phases 3–8. Your job is to make them feel the concept and the work behind it. Numbers come after.</li>
+    <li>🛡️ <strong>Land the hand-off cleanly.</strong> The line in the orange box above is the bridge. Say it warmly, then go quiet and let Andrew take over.</li>
+    <li>🛡️ <strong>If they ask a structure question while you're in Phase 2</strong> ("so what would this cost?"), the move is: <em>"Great question — Andrew is about to walk you through exactly that. Let me finish the picture and then we'll get right to it."</em></li>
+  </ul>
+</div>
+
+<footer>
+  Mike Talk Track v1 · April 15, 2026 · Phases 1 & 2 · Companions: <a href="wednesday-call.html">Slim Plan</a> · <a href="quarterback.html">Quarterback Script</a> · <a href="one-pager.html">One-Pager</a>
+</footer>
+
+</main>
+
+</body>
+</html>
