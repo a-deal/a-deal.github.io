@@ -5,13 +5,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Redirecting...</title>
 <script>
-  // If the missing page was under /learnair/, redirect to the gate
+  // If the missing page was under /learnair/, send the user to the gate,
+  // preserving the originally requested filename as ?r= so they land on
+  // the right page after entering the password.
+  // We do NOT clear an existing token — a missing page is not an auth failure.
   if (window.location.pathname.startsWith('/learnair/')) {
-    // Clear the access token so they hit the password prompt
-    localStorage.removeItem('learnair_access');
-    window.location.href = '/learnair/gate.html';
+    var filename = window.location.pathname.split('/').pop() || 'index.html';
+    window.location.href = '/learnair/gate.html?r=' + encodeURIComponent(filename);
   } else {
-    // For any other 404, just go home
     window.location.href = '/';
   }
 </script>
