@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Veterans + AI Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface-2: #1e1e1e;
+    --border: #2a2a2a;
+    --text: #e8e4de;
+    --text-muted: #8a8580;
+    --accent: #c75a30;
+    --accent-light: #e07040;
+    --green: #4a9e6e;
+    --green-muted: #2d5a3f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,13,13,0.92);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  nav .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  nav .nav-links { display: flex; gap: 1rem; list-style: none; flex-wrap: wrap; }
+  nav .nav-links a {
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; color: var(--text-muted); font-weight: 500;
+    transition: color 0.2s; white-space: nowrap;
+  }
+  nav .nav-links a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* HERO */
+  .hero { padding: 5rem 0 3rem; }
+  .hero .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero .kicker::before {
+    content: ''; display: inline-block;
+    width: 2rem; height: 1px; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.1; font-weight: 400;
+    letter-spacing: -0.02em; margin-bottom: 1.2rem;
+  }
+  .hero .subtitle {
+    font-size: 1.05rem; color: var(--text-muted);
+    max-width: 540px; line-height: 1.65;
+  }
+
+  /* TYPOGRAPHY */
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.8rem; font-weight: 400;
+    margin-bottom: 1.2rem; letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  h3 {
+    font-size: 1.1rem; font-weight: 600;
+    margin: 2rem 0 0.6rem; color: var(--accent-light);
+  }
+  h4 {
+    font-size: 0.95rem; font-weight: 600;
+    margin: 1.5rem 0 0.4rem; color: var(--text);
+  }
+  p { margin: 0.6rem 0; }
+  strong { font-weight: 600; color: var(--text); }
+  a { color: var(--accent-light); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  /* LISTS */
+  ul, ol { margin: 0.6rem 0 0.6rem 1.4rem; }
+  li { margin: 0.3rem 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+  .card-accent {
+    border-left: 3px solid var(--accent);
+  }
+  .card-green {
+    border-left: 3px solid var(--green);
+  }
+  .card h4 { margin-top: 0; }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* TABLES */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 1rem 0; font-size: 0.88rem;
+  }
+  th {
+    text-align: left; padding: 0.6rem 0.8rem;
+    background: var(--surface); border-bottom: 2px solid var(--border);
+    font-weight: 600; font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+  td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* COLLAPSIBLE */
+  details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  details summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--accent-light);
+    list-style: none;
+  }
+  details summary::before {
+    content: '+ ';
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    margin-right: 0.5rem;
+  }
+  details[open] summary::before { content: '- '; }
+  details summary::-webkit-details-marker { display: none; }
+  details .details-body { padding: 0 1.25rem 1.25rem; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    margin-right: 0.5rem;
+  }
+  .badge-read { background: var(--surface-2); color: var(--accent-light); border: 1px solid var(--accent); }
+  .badge-do { background: var(--green-muted); color: var(--green); border: 1px solid var(--green); }
+  .badge-ref { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* MONO */
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+  }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    background: var(--surface);
+    border-radius: 0 6px 6px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  blockquote strong { color: var(--text); font-style: normal; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 1rem; }
+    section { padding: 2.5rem 0; }
+    .hero { padding: 3rem 0 2rem; }
+    nav .nav-links { gap: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="logo">Playbook</span>
+    <ul class="nav-links">
+      <li><a href="#plan">The Plan</a></li>
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#market">Market</a></li>
+      <li><a href="#targets">Targets</a></li>
+      <li><a href="#scripts">Scripts</a></li>
+      <li><a href="#oregon">Oregon</a></li>
+      <li><a href="#business">Business Model</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="kicker">April 2026</div>
+  <h1>Veterans + AI Playbook</h1>
+  <p class="subtitle">Three tracks. Two weeks. Everything you need to move from thesis to traction. LearnAIR is one piece of this. The thesis is bigger.</p>
+</div>
+
+<!-- ========== THE PLAN ========== -->
+<section id="plan">
+  <h2>The Plan: April 16-30</h2>
+
+  <p>You've got a strong thesis, a real network, and a window right now where the right moves compound. Three tracks running in parallel. All three matter. None of them wait on anyone.</p>
+
+  <!-- TRACK 1 -->
+  <h3>Track 1: Learn the Landscape</h3>
+
+  <p>Today proved you can build rapport and hold a room. Justin said the coffee was "critical." That's your strength. The next step is pairing that presence with the depth to walk someone through the thesis cold, on your feet, in your own words.</p>
+
+  <div class="card card-accent">
+    <h4>This week, start here:</h4>
+    <ul>
+      <li>Read the <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">Claude Code docs</a> end to end. Not skim. Read.</li>
+      <li>Subscribe to the <a href="https://every.to" target="_blank">Every newsletter</a>. They've been covering agent workflows, AI adoption, and the shift in how work gets done. That's the water you're swimming in.</li>
+      <li>Work through this playbook. The full research archive is below: competitive landscape, employer targeting, policy research, Oregon landscape, target contacts. This is the briefing book behind the decks.</li>
+    </ul>
+  </div>
+
+  <p><strong>Start with these three sections from this page:</strong></p>
+  <ol>
+    <li><span class="badge badge-read">Read</span> <a href="#thesis">The Thesis</a>. The hypothesis in one page. Internalize this first.</li>
+    <li><span class="badge badge-read">Read</span> <a href="#market">The Market</a>. 23 competitors mapped. Nobody owns the upper-right quadrant. 12-18 month window.</li>
+    <li><span class="badge badge-read">Read</span> <a href="#business">The Business Model</a>. How the consultancy flywheel works. Employer pain tiers. Veteran-to-role matching.</li>
+  </ol>
+
+  <p>Then go deeper:</p>
+  <ol start="4">
+    <li><span class="badge badge-read">Read</span> <a href="#oregon">Oregon Landscape</a>. WorkSource, state funding, local orgs, employer list.</li>
+    <li><span class="badge badge-read">Read</span> <a href="#curriculum">Curriculum Model</a>. Why Alpha School's 2.3x model matters. LearnAIR's gaps. What we build on top.</li>
+    <li><span class="badge badge-ref">Ref</span> <a href="#scripts">Conversation Scripts</a>. Pull these up before any employer, VSO, or veteran conversation.</li>
+    <li><span class="badge badge-ref">Ref</span> <a href="#targets">Target Contacts</a>. Five named Oregon employers with decision-maker profiles.</li>
+  </ol>
+
+  <p><strong>By end of week 2, the bar is:</strong> someone asks you "why veterans and AI, and what have you found?" and you give a 5-minute answer that hits the competitive gap, the funding landscape, the employer demand, and your network advantage. Your words, your conviction.</p>
+
+  <p>What from this list do you already feel strongest on? That's where you spend the least time. Go deep on the gaps.</p>
+
+  <!-- TRACK 2 -->
+  <h3>Track 2: Have Conversations and Find Warm Leads</h3>
+
+  <p>Your Rolodex is real. You've named Honor Foundation, BreakLine, Deloitte Veterans, BetterUp, Mission 22. Those aren't cold leads. Those are people who know you or are one degree away.</p>
+
+  <p>Two purposes here. First, these conversations sharpen the thesis. You learn what they're seeing, what's working, what's not. Second, some of these lead somewhere: a partnership, a role, a paid engagement. Both outcomes are good.</p>
+
+  <div class="card card-green">
+    <h4>This week: pick two, reach out.</h4>
+    <p>Not pitching. Not "we're doing a veteran program." Just: "I'm working on veterans and AI upskilling. Curious what you're seeing in your world." Let the conversation breathe.</p>
+    <p><strong>Suggested first two:</strong></p>
+    <ol>
+      <li><strong>Honor Foundation.</strong> Derek coached there. You have a warm intro. They work with transitioning senior military leaders.</li>
+      <li><strong>BreakLine.</strong> Tech career transitions for underrepresented groups including veterans. They'd have signal on what employers are actually asking for.</li>
+    </ol>
+  </div>
+
+  <h4>Next week: two more conversations, plus start the job search.</h4>
+  <p>Put feelers out for roles. Your background (Marine officer, Deloitte consulting, therapy/coaching, Forest Service) positions you for:</p>
+  <ul>
+    <li><strong>Veteran workforce program roles.</strong> Program management at orgs like Hire Heroes USA, American Corporate Partners, or similar.</li>
+    <li><strong>Defense/gov consulting.</strong> Your clearance background + consulting experience.</li>
+    <li><strong>Ed-tech / workforce development.</strong> Program leads at companies building AI training.</li>
+    <li><strong>Health/wellness coaching.</strong> Leveraging your therapy and holotropic background.</li>
+  </ul>
+  <p>LinkedIn, your network, direct outreach. The goal isn't to land something in two weeks. The goal is to have motion so you're not waiting by the phone.</p>
+
+  <p><strong>These conversations are yours regardless of what happens with LearnAIR.</strong> If they say yes, you walk in with fresh network intel and external validation. If they say no or stall, you already have momentum.</p>
+
+  <p>Which two from your network feel like the most natural first calls? Go with your gut there.</p>
+
+  <!-- TRACK 3 -->
+  <h3>Track 3: Push the Thesis Forward</h3>
+
+  <p>LearnAIR is one vehicle for the veterans + AI thesis. It might be the right one. It might not. Either way, the thesis gets sharper by working it.</p>
+
+  <div class="card">
+    <h4>Trailheads to pursue this week:</h4>
+    <ol>
+      <li><strong>WorkSource Oregon.</strong> Teresa confirmed state funding is unlocked for veterans transitioning. This is the fastest path to a funded cohort. You don't need anyone's permission to learn more. Start with the WorkSource Oregon website and see if there's a veteran services coordinator for Central Oregon. <a href="#oregon">See the Oregon section below</a> for the full picture.</li>
+      <li><strong>Mission 22.</strong> Justin mentioned Magnus and their prayer leader are interested in training. This is a lead that exists independent of any one company. What does Mission 22 actually need? What's their capacity?</li>
+      <li><strong>F3 Nation as a distribution channel.</strong> You're already embedded. 18-20 guys at Riverbend, 3-5 in Redmond. Some of them are veterans. Some of them know veterans. That's organic distribution for a pilot cohort that costs nothing to test. Just: "hey, I'm putting together a thing for vets getting into AI. Know anyone who'd be interested?"</li>
+      <li><strong>The "agentic curriculum" angle.</strong> Justin disclosed their existing build series (custom GPT, n8n, make.com) is already obsolete. The tools are moving so fast that anyone who built curriculum 18 months ago is behind. You learning Claude Code, agent workflows, MCP: that's not just personal development. That's building the muscle to design what comes next. When you can demo a working agent workflow and explain why it matters for a veteran transitioning into tech, that's the pitch no deck can deliver.</li>
+    </ol>
+  </div>
+
+  <p><strong>By end of week 2, the bar is:</strong> you've talked to at least one person at WorkSource or Mission 22, you've floated the idea to someone in your F3 network, and you've built or walked through at least one agent workflow yourself.</p>
+
+  <!-- LEARNAIR -->
+  <h3>Where LearnAIR Fits</h3>
+
+  <p>LearnAIR is on standby until next week. Here's the honest picture:</p>
+  <ul>
+    <li>Justin is warm, curious, and wants to move. He's also gated on bank paperwork (SBA loan), Teresa hasn't read the email, and the rest of the team doesn't know about the veteran pivot yet. Multiple things need to line up on their side before this moves.</li>
+    <li>The do-or-die disclosure from this morning is real. They need profit before Q4. That's urgency, and it's worth understanding what that means for how they'd resource this vertical. A startup investing in a new bet feels different than a startup that needs this bet to survive.</li>
+    <li>Justin sees you in a leadership role. That's genuine and it's earned. The question worth sitting with: does the current structure (contractor, no equity, no W2) match the role he's describing? If you're leading, what does leading actually look like inside their model?</li>
+    <li>Decision comes next week. If yes, you walk in stronger because you've been moving on all three tracks. If no or more delay, you already have momentum and you're not starting from zero.</li>
+  </ul>
+
+  <!-- WEEK AT A GLANCE -->
+  <h3>The Week at a Glance</h3>
+
+  <h4>April 16-18: Start here, one per track</h4>
+  <div class="card card-accent">
+    <ul>
+      <li><span class="badge badge-read">Learn</span> Read <a href="#thesis">The Thesis</a> and <a href="#market">The Market</a> sections below.</li>
+      <li><span class="badge badge-do">Do</span> Send one message to your Honor Foundation contact.</li>
+      <li><span class="badge badge-do">Do</span> Look up WorkSource Oregon veteran services for Central Oregon.</li>
+    </ul>
+  </div>
+
+  <h4>Then build from there:</h4>
+  <table>
+    <tr><th>Action</th><th>Track</th></tr>
+    <tr><td>Read Claude Code docs</td><td>Learn</td></tr>
+    <tr><td>Subscribe to Every newsletter</td><td>Learn</td></tr>
+    <tr><td>Read <a href="#business">Business Model</a> + <a href="#oregon">Oregon</a> sections</td><td>Learn</td></tr>
+    <tr><td>Reach out to BreakLine</td><td>Conversations</td></tr>
+    <tr><td>Float the idea to 1-2 guys in F3 network</td><td>Thesis</td></tr>
+  </table>
+
+  <h4>April 21-25 (next week)</h4>
+  <table>
+    <tr><th>Action</th><th>Track</th></tr>
+    <tr><td>Two more network conversations</td><td>Conversations</td></tr>
+    <tr><td>Start job search: LinkedIn, direct outreach</td><td>Conversations</td></tr>
+    <tr><td>Build or walk through first agent workflow</td><td>Thesis</td></tr>
+    <tr><td>Follow up with Mission 22</td><td>Thesis</td></tr>
+    <tr><td>Read <a href="#curriculum">Curriculum</a> + <a href="#scripts">Scripts</a> sections</td><td>Learn</td></tr>
+    <tr><td>LearnAIR decision expected</td><td>LearnAIR</td></tr>
+  </table>
+
+  <hr>
+
+  <blockquote>You have a strong thesis, a real network, and three months to make something happen. The worst thing you can do right now is wait. The best thing you can do is be in motion on all three tracks so that when the next conversation happens, whether it's with Justin, with Honor Foundation, or with a hiring manager, you're not presenting a deck. You're telling them what you've already started doing.<br><br>What feels like the highest energy move for you right now? Start there.<br><br><strong>Stay moving.</strong></blockquote>
+</section>
+
+<!-- ========== THE THESIS ========== -->
+<section id="thesis">
+  <h2>The Thesis</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Strategic clarity. Read this first.</p>
+
+  <div class="card card-accent">
+    <h4>The Hypothesis</h4>
+    <p><strong>Employers will pay for veterans trained in AI operations supervision.</strong></p>
+    <p>Not "veterans can learn AI." Not "mission command maps to AI supervision." Not "there's a gap in the competitive landscape." Those are supporting arguments. The load-bearing question is whether someone writes a check.</p>
+  </div>
+
+  <h3>The One Proof Point</h3>
+  <p>3 employer discovery conversations. The question isn't "would you hire an AI operations supervisor?" It's:</p>
+  <ol>
+    <li>Where are you at with AI adoption?</li>
+    <li>What's working, what's not?</li>
+    <li>Where's the gap between what your team can do and what you need them to do?</li>
+    <li>If that gap had a name, what would you call it?</li>
+    <li>What would it be worth to close it?</li>
+  </ol>
+  <p>If three different employers describe a problem that sounds like "my people are using AI but nobody's governing the outputs," we've validated demand. If they describe something different, the thesis adapts.</p>
+
+  <h3>The Consultancy Framing</h3>
+  <p>We are not employees. We are not volunteers. We are a consultancy that owns its IP.</p>
+  <ul>
+    <li>Protects the IP already built</li>
+    <li>Two-way doors with partners instead of one-way doors (employment)</li>
+    <li>Allows taking the same IP to other partners (Deloitte, BreakLine, direct to employers)</li>
+    <li>De-risks relationships while still in discovery</li>
+    <li>Positions as partners, not hires</li>
+  </ul>
+
+  <h3>Key People + Competencies</h3>
+
+  <table>
+    <tr><th>Person</th><th>What They Bring</th><th>Open Question</th></tr>
+    <tr><td>Mike Deal</td><td>Marine vet, Deloitte, USFS facilitator, BreakLine network</td><td>Technical depth (ramping)</td></tr>
+    <tr><td>Justin Coats</td><td>LearnAIR brand, SDVOSB, OpenAI partnership, 100+ clients</td><td>Is the vet program his priority or Teresa's?</td></tr>
+    <tr><td>Teresa Coats</td><td>Operations, sport science, passion for vet program</td><td>The execution gate. More aligned than Justin.</td></tr>
+    <tr><td>Trisha Sargent</td><td>L&D (Consumer Cellular), Easter Seals HVRP</td><td>Advisor/guide role, not operator</td></tr>
+    <tr><td>Bobby Napiltonia</td><td>AppExchange creator, Twilio first CRO, enterprise GTM</td><td>Not engaged directly yet. Massive if activated.</td></tr>
+  </table>
+
+  <h3>What the Program Needs That's Still Weak</h3>
+  <ul>
+    <li><strong>Sales.</strong> The biggest gap. The employer discovery calls are the first reps.</li>
+    <li><strong>Curriculum delivery.</strong> Can design it. Who teaches it? The natural candidate is the person who ramps on AI fastest.</li>
+    <li><strong>Veteran recruiting.</strong> Who finds the first cohort? Easter Seals HVRP connection and BreakLine network are the two leads.</li>
+  </ul>
+</section>
+
+<!-- ========== THE MARKET ========== -->
+<section id="market">
+  <h2>The Market</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">23 competitors mapped. The gap is real. The window is 12-18 months.</p>
+
+  <div class="card card-accent">
+    <h4>The Differentiation</h4>
+    <p>Every veteran AI program in 2026 does one of two things: it teaches veterans to <em>use</em> AI tools (Google certs, OpenAI sprints, VetsinTech workshops), or it helps veterans <em>get hired</em> (Hiring Our Heroes, BreakLine, FourBlock, ACP). <strong>None trains veterans to supervise AI-enabled workflows.</strong></p>
+    <p>This is the exact skill that enterprise AI adoption demands and that military service uniquely prepares people to deliver. Veterans already operate in mission command environments: decentralized execution under commander's intent, where human judgment governs semi-autonomous systems under uncertainty.</p>
+    <p>The market has AI literacy programs and veteran career programs. It has no veteran AI leadership program. That's the gap.</p>
+  </div>
+
+  <h3>Competitor Landscape (Key Players)</h3>
+
+  <details>
+    <summary>Veteran-Specific Programs</summary>
+    <div class="details-body">
+      <h4>Hiring Our Heroes (U.S. Chamber)</h4>
+      <p>Corporate Fellowship at Google, Microsoft, Salesforce, Amazon. Some rotations touch AI/data. Strong brand, weak AI depth. AI exposure is incidental to placements.</p>
+
+      <h4>BreakLine Education</h4>
+      <p>Free remote immersive sprints. Hiring partners include Anduril, Meta, Google, Palantir. Zero AI technical depth. Career accelerator, not a training program.</p>
+
+      <h4>VetsinTech / Vets in AI</h4>
+      <p>Dedicated "Vets in AI" program launched 2025. ML, data analytics, AI ethics. Events with Nvidia, Microsoft, Google. Closest veteran-specific competitor on AI depth. But focused on making veterans into AI practitioners, NOT training them to supervise workflows.</p>
+
+      <h4>OpenAI Academy + Veterans Forge</h4>
+      <p>Pilot: 4-hour hands-on AI sprint (Mar 2026, 100 cap). Free ChatGPT Plus for transitioning veterans. Tool literacy, not workflow supervision. Still in pilot phase, tiny scale.</p>
+
+      <h4>Accenture Veterans Initiative (2025) <span style="color: var(--accent);">HIGHEST THREAT</span></h4>
+      <p>New national initiative targeting Officers and Senior Enlisted. LearnVantage platform with "agentic AI" courses. White House AI Education Taskforce participant. <strong>But:</strong> it's a corporate hiring funnel, not an independent training program. Veterans become Accenture employees, not broadly skilled AI supervisors.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>General AI Upskilling Programs</summary>
+    <div class="details-body">
+      <h4>Google AI Professional Certificate</h4>
+      <p>Coursera-hosted, ~$200 total. Free for veterans via Google Launchpad. Covers AI fundamentals and prompt engineering. No workflow management or supervision framework.</p>
+
+      <h4>Code Platoon (GI Bill + VET TEC)</h4>
+      <p>AI + Fullstack Engineering bootcamp. VA-approved. Strongest current competitor combining veteran focus + AI content + government funding. But trains coders who use AI, not managers who supervise AI workflows.</p>
+
+      <h4>VET TEC 2.0</h4>
+      <p>Reauthorized Dec 2024, funded from Oct 2025. Still not operational. VA has not approved any providers yet. ~4,000 spots/year expected. Applications may open June 2026. <strong>When it reopens, approved providers will have a massive distribution advantage.</strong></p>
+    </div>
+  </details>
+
+  <h3>Positioning Matrix</h3>
+  <p>Two axes: veteran-specificity (horizontal) and AI depth (vertical).</p>
+  <ul>
+    <li><strong>Lower-right (saturated):</strong> Veteran career services, minimal AI content. Well-funded nonprofits.</li>
+    <li><strong>Left column (dominated):</strong> Deep AI training, generic audience. Tech giants with free/cheap certs.</li>
+    <li><strong>Upper-right (EMPTY):</strong> Deep AI workflow supervision, veteran-specific. This is the flag to plant.</li>
+  </ul>
+
+  <h3>Competitive Risks</h3>
+
+  <table>
+    <tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr>
+    <tr><td>Hiring Our Heroes adds "AI Management" track</td><td style="color: var(--accent);">HIGH</td><td>Move fast. Establish "mission command" as the recognized vocabulary. Build curriculum IP (case studies, simulations) that can't be replicated by bolting a webinar onto a fellowship.</td></tr>
+    <tr><td>Accenture scales its veteran AI initiative</td><td style="color: var(--accent);">HIGH</td><td>Accenture funnels to Accenture. Emphasize independence: "We don't train you for one employer, we train you to lead AI operations anywhere."</td></tr>
+    <tr><td>VET TEC 2.0 approval gatekeeping</td><td style="color: var(--text-muted);">MED</td><td>File VET TEC 2.0 provider application immediately. Simultaneously pursue GI Bill approval as parallel path.</td></tr>
+    <tr><td>"AI supervisor" role doesn't materialize as distinct job</td><td style="color: var(--text-muted);">MED</td><td>Frame credential as additive, not replacement. "AI Operations Leadership" is a skill overlay on existing management.</td></tr>
+    <tr><td>Google/OpenAI deepen free veteran AI training</td><td style="color: var(--text-muted);">MED</td><td>Depth beats breadth. Position as post-certification: "You got your Google AI cert. Now learn to lead AI operations."</td></tr>
+  </table>
+
+  <div class="card">
+    <p><strong>The window is 12-18 months.</strong> Accenture's veteran initiative and VET TEC 2.0 will reshape the landscape by late 2026 or early 2027. The advantage is being first to name the role (AI operations supervisor), first to connect it to a military framework (mission command), and first to build a credentialing program around it. Speed and curriculum depth are the moat.</p>
+  </div>
+</section>
+
+<!-- ========== TARGET CONTACTS ========== -->
+<section id="targets">
+  <h2>Target Contacts: First 5 Employers</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Real people at real companies. The contact phase starts here.</p>
+
+  <div class="card">
+    <h4>1. Les Schwab Tire Centers</h4>
+    <p><strong>Brian Buch</strong>, VP Information and Digital Services</p>
+    <p>35-year Les Schwab veteran who owns IT and digital strategy. Recently earned all 12 AWS certifications including AI Practitioner. Actively thinking about AI/data strategy at enterprise scale. HQ Bend, OR. ~8,000 employees, 500+ stores. <strong>Warmest lead.</strong></p>
+  </div>
+
+  <div class="card">
+    <h4>2. St. Charles Health System</h4>
+    <p><strong>Rebecca Berry, MBA</strong>, VP & Chief Human Resources Officer</p>
+    <p>At St. Charles since 2007. Led their workforce turnaround (reducing reliance on traveling nurses). AI workforce readiness lands squarely in her domain. HQ Bend, OR. Largest healthcare provider in Central Oregon, ~3,800 employees.</p>
+  </div>
+
+  <div class="card">
+    <h4>3. BASX Solutions / AAON</h4>
+    <p><strong>Mark Nordstrom</strong>, EVP Operations</p>
+    <p>15+ years driving operational excellence at a company that builds cooling infrastructure for hyperscale data centers (Meta, Apple). Based in Bend. HQ Redmond, OR.</p>
+  </div>
+
+  <div class="card">
+    <h4>4. Perkins & Co</h4>
+    <p><strong>Jared Holum, CPA</strong>, President</p>
+    <p>Largest locally-owned accounting firm in Oregon, 165+ employees. Professional services firms face the sharpest gap between individual AI usage and firm-wide coordination. Portland, OR.</p>
+  </div>
+
+  <div class="card">
+    <h4>5. Dutch Bros</h4>
+    <p><strong>Venki Krishnababu</strong>, Chief Technology and Information Officer</p>
+    <p>Joined Dec 2024 from lululemon (7 years as CTO). Nearly 30 years of enterprise technology leadership. A new CTIO building out tech strategy at a fast-growing company. 900+ locations. Grants Pass, OR (NYSE: BROS).</p>
+  </div>
+
+  <div class="card card-accent">
+    <h4>Outreach Template</h4>
+    <p>"I'm building a program that trains veterans to manage AI operations. I'm looking for employers feeling the gap between individual AI productivity and organizational coordination. Would you be open to a 15-minute call?"</p>
+    <p style="margin-top: 0.8rem;"><strong>Don't send all 5 at once.</strong> Start with the warmest (Brian Buch at Les Schwab) and iterate based on response.</p>
+  </div>
+</section>
+
+<!-- ========== CONVERSATION SCRIPTS ========== -->
+<section id="scripts">
+  <h2>Conversation Scripts</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Three scripts for three audiences. 25-35 minutes each. Signal extraction, not selling.</p>
+
+  <details>
+    <summary>Script A: Employer / Hiring Manager</summary>
+    <div class="details-body">
+      <p><strong>Target:</strong> VP of Operations, Program Manager, or HR Director. Prioritize orgs with existing veteran hiring commitments.</p>
+
+      <blockquote>"Thanks for making time. We're exploring a workforce training concept focused on veterans transitioning into AI-adjacent roles. Not building AI models, but supervising AI systems in operational settings: reviewing outputs, catching errors, managing workflows where AI is doing the first pass and a human makes the final call. We're early. We haven't built anything yet. And we're talking to people like you to understand whether this solves a real hiring problem. Nothing to buy, no pitch. I just want to learn from your experience."</blockquote>
+
+      <p><strong>Questions:</strong></p>
+      <ol>
+        <li>Where is AI showing up in your operations today, and where do you expect it in the next 12-18 months?</li>
+        <li>When you think about the people who'll sit between the AI system and the final decision, what does that role look like?</li>
+        <li>How hard has it been to hire for roles that require judgment under ambiguity?</li>
+        <li>Have you ever hired a veteran specifically because of their operational background? How did that work out?</li>
+        <li>If a training program produced candidates who could supervise AI-assisted workflows, and those candidates were veterans with security clearances, what would that pipeline be worth to you per hire?</li>
+        <li>What would you need to see from a program like this before you'd consider hiring from it?</li>
+      </ol>
+
+      <p><strong>Commitment test:</strong> "If we ran a pilot cohort of 10-15 veterans this summer, trained specifically on AI workflow supervision with a capstone project, would you be willing to interview the top graduates? No obligation to hire, just review their work and give us feedback on readiness."</p>
+
+      <h4>Green Flags</h4>
+      <ul>
+        <li>Names a specific AI use case already in production</li>
+        <li>Describes the "human in the loop" problem without you prompting it</li>
+        <li>Puts a dollar figure on hiring cost or pipeline value</li>
+        <li>Volunteers to introduce you to a colleague</li>
+        <li>Asks when the first cohort graduates</li>
+      </ul>
+
+      <h4>Red Flags</h4>
+      <ul>
+        <li>"AI is still a few years out for us"</li>
+        <li>Only talks about needing engineers or PhDs</li>
+        <li>Enthusiastic but won't commit to reviewing candidates</li>
+        <li>Defers everything to a hiring freeze or budget cycle</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>Script B: Veteran-Serving Organization Leader</summary>
+    <div class="details-body">
+      <p><strong>Target:</strong> Program Director or Executive at Hiring Our Heroes, BreakLine, a state workforce board, a Vet Center, or a VSO with a career transition program.</p>
+
+      <blockquote>"Appreciate you taking this. We're designing a training program that would prepare transitioning service members for AI workflow supervision roles. The jobs where a person reviews, validates, and manages AI system outputs in fields like healthcare operations, government services, and logistics. We're not trying to turn veterans into software engineers. We're focused on the oversight and judgment layer. Before we build anything, we want to learn from organizations like yours."</blockquote>
+
+      <p><strong>Questions:</strong></p>
+      <ol>
+        <li>What are the top three job categories your transitioning veterans are landing in today? Where do they struggle most in placement?</li>
+        <li>When employers come to you, what skills or qualities do they ask for most often? Has that changed in the past two years?</li>
+        <li>How do you evaluate new training programs before recommending them to your veterans?</li>
+        <li>Have you seen AI-specific training programs targeting veterans? What's worked and what's fallen short?</li>
+        <li>If a program could demonstrate 70%+ of graduates landed relevant roles within 90 days, what would a partnership look like from your side?</li>
+        <li>What's the typical timeline for your org to endorse or partner with a new workforce program?</li>
+      </ol>
+
+      <p><strong>Commitment test:</strong> "If we designed a 4-6 week pilot this summer and needed 10-15 veteran participants, would your organization help us recruit them? Even informally? And would you be open to a follow-up conversation once we have a curriculum outline?"</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Script C: Transitioning Veteran</summary>
+    <div class="details-body">
+      <p><strong>Target:</strong> E-5 to O-4, 6-15 years of service, within 12-24 months of transition. Any branch, especially operations, intelligence, logistics, medical, or maintenance backgrounds.</p>
+
+      <blockquote>"Thanks for your time. I know transition is a busy period. We're building a training program for veterans that focuses on AI workflow supervision. That means: jobs where AI does a first draft or a first pass, and a human reviews it, catches mistakes, and makes the final call. Think quality assurance for AI systems, not programming them. It maps pretty directly to the kind of process discipline and judgment you've been using in the military."</blockquote>
+
+      <p><strong>Questions:</strong></p>
+      <ol>
+        <li>What's your plan right now for your next career step? How's the search going?</li>
+        <li>When you hear "AI," what comes to mind? Do you see it as relevant to the kind of work you want to do?</li>
+        <li>In your military role, how often did you review someone else's work, validate information, or catch errors in a process?</li>
+        <li>If a program could help you land a role paying $65K-$85K in 90 days, what would that need to look like for you to invest 4-6 weeks?</li>
+        <li>What have you already tried for career transition? TAP, SkillBridge, bootcamps? What worked and what didn't?</li>
+        <li>If this program cost $2,000 out of pocket, or was free if covered by GI Bill, which path would you pursue?</li>
+      </ol>
+
+      <p><strong>Commitment test:</strong> "We're planning a pilot cohort this summer. If you qualified, would you apply? And, separate question, can you think of two or three people who'd also be interested?"</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>90-Day Timeline with Kill Criteria</summary>
+    <div class="details-body">
+      <h4>Month 1: Validate or Kill (Weeks 1-4)</h4>
+      <p>15-20 validation conversations across employers, VSOs, and veterans. Pattern analysis. Draft v0.1 curriculum outline. Identify pilot partners. Research funding (WIOA, SkillBridge, state workforce board).</p>
+
+      <div class="card card-accent">
+        <h4>Day 30 Kill Criteria</h4>
+        <p>Stop and reassess if:</p>
+        <ul>
+          <li>Fewer than 3 of 8+ employer conversations produced a concrete next step</li>
+          <li>No VSO expressed willingness to help recruit a pilot cohort</li>
+          <li>Veterans consistently said "I don't see how this is different"</li>
+          <li>Zero employers could name an AI-supervision-adjacent role they're hiring for</li>
+        </ul>
+      </div>
+
+      <h4>Month 2: Build and Launch Pilot (Weeks 5-8)</h4>
+      <p>10-15 participants, 4 weeks, remote-first. Screen applicants. Onboard. Teach. Collect feedback after every session. Adjust in real time. Submit first funding application.</p>
+
+      <h4>Month 3: Complete, Measure, Decide (Weeks 9-12)</h4>
+      <p>Capstone projects presented to employer panel. Compile results. Write the Pilot Results Brief (your primary credibility asset). Go/no-go on Cohort 2.</p>
+
+      <div class="card">
+        <h4>Day 90 Scale Decision</h4>
+        <table>
+          <tr><th>Signal</th><th>Strong (Scale)</th><th>Mixed (Iterate)</th><th>Weak (Pause)</th></tr>
+          <tr><td>Completion rate</td><td>80%+</td><td>60-79%</td><td>&lt;60%</td></tr>
+          <tr><td>Employer "would hire"</td><td>3+ employers</td><td>1-2</td><td>0</td></tr>
+          <tr><td>Participant NPS</td><td>50+</td><td>20-49</td><td>&lt;20</td></tr>
+          <tr><td>90-day placement</td><td>50%+</td><td>25-49%</td><td>&lt;25%</td></tr>
+          <tr><td>Funding for next cohort</td><td>Secured</td><td>Pending</td><td>No leads</td></tr>
+        </table>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- ========== OREGON ========== -->
+<section id="oregon">
+  <h2>Oregon Landscape</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Veterans, AI, employers, and funding in your backyard.</p>
+
+  <h3>Top Findings</h3>
+  <ol>
+    <li><strong>Oregon-NVIDIA $10M AI Partnership.</strong> Signed April 2025 by Gov. Kotek + Jensen Huang. AI Ambassador Program on campuses. An AI operations supervisor program aligns directly with the state's stated AI workforce priority.</li>
+    <li><strong>East Cascades Works is the local workforce board.</strong> WIOA-designated entity for Bend/Deschutes County (10 counties). The right partner for federal workforce funding. HQ in Bend.</li>
+    <li><strong>Health Elements AI is in Bend.</strong> AI-powered clinical data abstraction. Real AI company, BVC finalist. A concrete local employer for the "would you hire an AI-skilled veteran?" conversation.</li>
+    <li><strong>Prineville data centers are 35 min from Bend.</strong> Meta (3.2M sq ft, $2B+) + Apple (3.2M sq ft). ~300 permanent jobs. Infrastructure jobs that need supervision.</li>
+    <li><strong>COCC already has veteran infrastructure.</strong> STRIVE Program (free 8-week veteran entrepreneurship, Syracuse IVMF partnership). Justin won STRIVE there. Neither COCC nor OSU-Cascades offers AI operations training. Gap.</li>
+  </ol>
+
+  <h3>Veteran-Serving Organizations (Central Oregon)</h3>
+  <ul>
+    <li><strong>COVO (Central Oregon Veterans Outreach):</strong> 200+ veterans/month. Bend.</li>
+    <li><strong>WorkSource Bend:</strong> Nationally recognized for veteran services (NASWA award). Priority of Service for veterans.</li>
+    <li><strong>541VETS:</strong> Digital resource library for rural Oregon veterans.</li>
+    <li><strong>East Cascades Works:</strong> Local workforce board for Central Oregon. Bend HQ.</li>
+    <li><strong>Easterseals Oregon:</strong> HVRP across 8 cities. Contact: hvrpreferrals@or.easterseals.com</li>
+  </ul>
+
+  <details>
+    <summary>Employer Target List (30 companies)</summary>
+    <div class="details-body">
+      <h4>Central Oregon (Priority 1)</h4>
+      <table>
+        <tr><th>Company</th><th>Industry</th><th>Why</th></tr>
+        <tr><td>St. Charles Health System</td><td>Healthcare, ~4,500 emp</td><td>Largest employer in region. Clinical AI + compliance.</td></tr>
+        <tr><td>BASX Solutions</td><td>Mfg (data center cooling), ~500+ emp</td><td>Hyperscale clients demand process rigor.</td></tr>
+        <tr><td>Les Schwab</td><td>Auto services, 500+ locations</td><td>Already bought ChatGPT Team. Warmest lead.</td></tr>
+        <tr><td>Health Elements AI</td><td>AI/Healthcare, 10-30 emp</td><td>Actual AI company. Would hire veterans directly.</td></tr>
+        <tr><td>Dutchie</td><td>Cannabis tech, 100-300 emp</td><td>Fast-growing SaaS, heavy AI users.</td></tr>
+        <tr><td>Meta (Prineville)</td><td>Data center, ~150 permanent</td><td>3.2M sq ft, $2B+ invested.</td></tr>
+        <tr><td>Apple (Prineville)</td><td>Data center, ~150 permanent</td><td>3.2M sq ft campus.</td></tr>
+      </table>
+
+      <h4>Portland Metro (Priority 2)</h4>
+      <table>
+        <tr><th>Company</th><th>Industry</th><th>Why</th></tr>
+        <tr><td>Intel (Hillsboro)</td><td>Semiconductor/AI, 22,300 emp</td><td>Largest private employer in OR. AI at massive scale.</td></tr>
+        <tr><td>Nike (Beaverton)</td><td>Sportswear/tech, ~12,000 HQ</td><td>AI across design, supply chain, marketing.</td></tr>
+        <tr><td>Daimler Trucks NA</td><td>Manufacturing, 34,000 emp</td><td>Heavy manufacturing + AI in logistics.</td></tr>
+        <tr><td>Northrop Grumman</td><td>Defense R&D, 500+ emp</td><td>Defense contractor, hires veterans.</td></tr>
+        <tr><td>Dutch Bros Coffee</td><td>F&B, 16,500 emp</td><td>900+ locations. Same distributed challenge as Les Schwab.</td></tr>
+        <tr><td>Perkins & Co</td><td>Accounting, 200+ emp</td><td>Professional services = acute AI pain.</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>Funding Sources</summary>
+    <div class="details-body">
+      <h4>Active / Accessible</h4>
+      <table>
+        <tr><th>Source</th><th>Amount</th><th>Details</th></tr>
+        <tr><td>ODVA Veteran Services Grant</td><td>$972K (2025-27)</td><td>Competitive grants to nonprofits. Contact: Brenna Bandstra, brenna.bandstra@odva.oregon.gov</td></tr>
+        <tr><td>JVSG</td><td>$2.4M</td><td>100% federal (DOL-VETS). Funds LVERs/DVOPs.</td></tr>
+        <tr><td>Oregon WIOA Title I</td><td>Part of ~$2.9B national</td><td>Priority of service for veterans. Administered by OR Employment Dept.</td></tr>
+        <tr><td>Oregon-NVIDIA AI Partnership</td><td>$10M state</td><td>AI Ambassador Program, campus AI integration.</td></tr>
+      </table>
+
+      <h4>Closing / Limited</h4>
+      <table>
+        <tr><th>Source</th><th>Amount</th><th>Details</th></tr>
+        <tr><td>Future Ready Oregon</td><td>$200M total (nearly spent)</td><td>Must spend by end of 2026. Veterans explicitly listed as target.</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <h3>Key Stats</h3>
+  <ul>
+    <li>~266,000 veterans in Oregon. ~10,000-12,000 in Deschutes County.</li>
+    <li>~90,000 veterans statewide in the 35-55 age bracket (prime placement cohort).</li>
+    <li>Central Oregon tech employment grew 50% since 2018 (142% over past decade).</li>
+    <li>Milken Institute ranked Bend-Redmond top 6 Best Performing Small Cities (2024).</li>
+    <li>No active-duty bases. Veteran population is Guard/Reserve + post-service relocators.</li>
+  </ul>
+</section>
+
+<!-- ========== BUSINESS MODEL ========== -->
+<section id="business">
+  <h2>The Business Model</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Employer pain tiers, the consultancy flywheel, and veteran-to-role matching.</p>
+
+  <h3>The Core Problem</h3>
+  <p>Individual workers bought ChatGPT and got 10x more productive at their tasks. But the organization didn't change its processes, workflows, approval chains, or quality controls. Now you have powerful individuals operating in an organizational vacuum. <strong>Someone needs to supervise the AI ecosystem. That's the AI Ecosystem Supervisor.</strong></p>
+
+  <div class="card">
+    <p><strong>Key stats:</strong> 28% of workers currently use generative AI at work. More than half use AI without employer approval. 70% have never received AI training from their employer. 87% of healthcare workers say their employer lacks clear AI policies. 64% of workers have presented AI-generated work as their own.</p>
+  </div>
+
+  <h3>Employer Pain Tiers</h3>
+
+  <div class="card card-accent">
+    <h4>Tier 1: Acute Pain. Bought AI, don't know how to manage it.</h4>
+    <p>Companies with ChatGPT Team/Enterprise licenses but no governance. SMBs that did a workshop and now ask "now what?" Professional services firms with partners using AI for drafts, junior staff using it unsupervised. Healthcare organizations (87% lack AI policies. HIPAA + AI = liability).</p>
+  </div>
+
+  <div class="card">
+    <h4>Tier 2: Structural Pain. High process complexity + AI adoption pressure.</h4>
+    <p>Manufacturing (quality control, safety documentation). Healthcare systems (clinical documentation, billing). Construction (permitting, compliance). Logistics (distributed operations).</p>
+  </div>
+
+  <div class="card">
+    <h4>Tier 3: Growth Pain. Scaling with AI but struggling with coordination.</h4>
+    <p>Tech startups (small teams using AI heavily but no dedicated AI ops role). Data center adjacent companies. E-commerce/DTC brands.</p>
+  </div>
+
+  <div class="card">
+    <h4>Tier 4: Succession Pain. Baby boomer handoff + AI transition.</h4>
+    <p>Central Oregon trades (HVAC, plumbing, electrical). Professional practices (dental, veterinary, small law). Agriculture/ranching. Hospitality/tourism.</p>
+  </div>
+
+  <h3>The Consultancy Flywheel</h3>
+  <ol>
+    <li>LearnAIR (or similar) trains a company on ChatGPT Team</li>
+    <li>You do an AI Ecosystem Assessment</li>
+    <li>Build governance framework + workflows</li>
+    <li>Company realizes they need a full-time person to maintain it</li>
+    <li>Place a veteran as AI Ecosystem Supervisor</li>
+    <li>Provide 90-day transition support</li>
+    <li>Consulting transitions to quarterly retainer. Repeat at next company.</li>
+  </ol>
+
+  <p><strong>Every consulting engagement generates demand for a veteran placement. Every veteran placement demonstrates the model works, generating referrals for more consulting.</strong></p>
+
+  <h3>Engagement Pricing</h3>
+  <table>
+    <tr><th>Phase</th><th>What</th><th>Price</th></tr>
+    <tr><td>Phase 1: AI Readiness Assessment</td><td>Audit AI usage, map workflows, interview staff. 1-2 weeks.</td><td>$5,000-10,000</td></tr>
+    <tr><td>Phase 2: Ecosystem Build-Out</td><td>Governance policies, workflow templates, monitoring, training. 4-8 weeks.</td><td>$15,000-30,000</td></tr>
+    <tr><td>Phase 3: Ongoing Retainer</td><td>Monthly health check, new use cases, staff training, quarterly exec briefing.</td><td>$3,000-5,000/mo</td></tr>
+    <tr><td>Phase 4: Veteran Placement</td><td>Source from program, 90-day onboarding support.</td><td>15-20% first-year salary</td></tr>
+  </table>
+
+  <h3>Veteran-to-Employer Matching</h3>
+  <table>
+    <tr><th>Tier</th><th>Military Rank</th><th>Role</th><th>Salary Range</th></tr>
+    <tr><td>Tier 1</td><td>E4-E6 (Tactical NCOs)</td><td>AI Operations Coordinator</td><td>$55,000-75,000</td></tr>
+    <tr><td>Tier 2</td><td>E7-E9 + O1-O3</td><td>AI Ecosystem Manager</td><td>$80,000-120,000</td></tr>
+    <tr><td>Tier 3</td><td>O4+ (Senior Officers)</td><td>Chief AI Officer / VP AI Ops</td><td>$130,000-200,000+</td></tr>
+  </table>
+
+  <p><strong>The naming advantage:</strong> No one has standardized what to call this role. The program that names it owns the category. The military rank mapping gives employers an instant credibility signal.</p>
+</section>
+
+<!-- ========== CURRICULUM ========== -->
+<section id="curriculum">
+  <h2>The Curriculum Model</h2>
+  <p class="mono" style="color: var(--text-muted); margin-bottom: 1.5rem;">Why Alpha School's 2.3x model matters. LearnAIR's gaps. What gets built on top.</p>
+
+  <h3>Alpha School: The Load-Bearing Insight</h3>
+
+  <div class="card card-accent">
+    <h4>Software alone = zero acceleration.</h4>
+    <p>Alpha School's homeschool version uses the same software platform but without guides, incentives, or peers. It produces only 1x learning velocity, no acceleration at all. The load-bearing elements are: <strong>guide relationships + incentive system + peer effects + physical environment.</strong> The AI handles content delivery. The humans handle motivation, accountability, and judgment.</p>
+  </div>
+
+  <p>Alpha School puts students in the top 0.1% on standardized tests (97th-99th percentile MAP, 1535 average SAT) with ~2 hours of AI-personalized academics per day. The rest is project-based learning. Results: 2.3x-2.6x national average growth rate.</p>
+
+  <p><strong>For adults, the case is even stronger:</strong></p>
+  <ul>
+    <li>Better executive function. Adults can sustain focus without extensive motivation scaffolding.</li>
+    <li>Prior knowledge. AI can diagnostic-test and skip what's already known.</li>
+    <li>Intrinsic motivation. Career advancement, income, mission (especially veterans) replace gamification.</li>
+    <li>Less time available. A compressed model isn't nice-to-have, it's the only viable model for working adults.</li>
+  </ul>
+
+  <h3>LearnAIR's Foundation Series: What's Good, What's Missing</h3>
+
+  <p>LearnAIR's Foundation Series is 3 live sessions x 1.5 hours each. Groups of 5-20. It covers ChatGPT basics, interface, prompting (DIRECT framework), personas, Custom GPTs, and agent mode. It produces real results: "John completed 4-6 months of work in one week."</p>
+
+  <h4>Eight Gaps</h4>
+  <ol>
+    <li><strong>No organizational coordination layer.</strong> Everything is individual. Zero discussion of what happens when 50 people each build their own setup.</li>
+    <li><strong>ChatGPT-only, platform-locked.</strong> No model-agnostic thinking. No Claude, Gemini, or open-source.</li>
+    <li><strong>No file system / version control.</strong> No git, no version history.</li>
+    <li><strong>No CLI / terminal exposure.</strong> Everything is GUI.</li>
+    <li><strong>No security / governance depth.</strong> Privacy toggles, but no output review workflows or approval chains.</li>
+    <li><strong>No workforce transition framework.</strong> A skills course, not a transition program.</li>
+    <li><strong>No measurement / outcomes.</strong> No framework for measuring ROI.</li>
+    <li><strong>Troubleshooting is reactive, not systemic.</strong> Hallucinations treated as bugs, not architectural realities.</li>
+  </ol>
+
+  <h4>What We Build On Top</h4>
+  <table>
+    <tr><th>LearnAIR Teaches</th><th>We Add</th></tr>
+    <tr><td>Build a digital employee</td><td>Manage a team of digital employees</td></tr>
+    <tr><td>Personal productivity</td><td>Organizational productivity</td></tr>
+    <tr><td>ChatGPT-specific skills</td><td>Model-agnostic principles</td></tr>
+    <tr><td>GUI workflows</td><td>CLI + voice-first workflows</td></tr>
+    <tr><td>Individual personas</td><td>System-level governance</td></tr>
+    <tr><td>"Here's what AI can do"</td><td>"Here's how to be responsible for what AI does"</td></tr>
+    <tr><td>18 minutes of hands-on</td><td>Weeks of applied experiential learning</td></tr>
+    <tr><td>Certificate of completion</td><td>Job placement tied to outcomes</td></tr>
+  </table>
+
+  <h3>The Proposed Structure</h3>
+  <p><strong>Compress instruction. Expand practice. Never remove the guide.</strong></p>
+  <p>Based on Alpha's architecture, applied to a veteran learning AI supervision:</p>
+
+  <table>
+    <tr><th>Time</th><th>Activity</th></tr>
+    <tr><td>0:00-0:05</td><td>Daily Dash: review progress, today's targets, adaptive path</td></tr>
+    <tr><td>0:05-0:30</td><td>Concept Module: AI-personalized lesson, mastery-gated</td></tr>
+    <tr><td>0:30-0:50</td><td>Hands-On Lab: supervised practice in sandboxed AI environment</td></tr>
+    <tr><td>0:50-1:00</td><td>Break</td></tr>
+    <tr><td>1:00-1:20</td><td>Scenario Drill: branching decision trees, judgment checks</td></tr>
+    <tr><td>1:20-1:35</td><td>Spaced Review: quick-fire on material at risk of being forgotten</td></tr>
+    <tr><td>1:35-1:50</td><td>Mentor Check-in (2x/wk) or Peer Discussion (3x/wk)</td></tr>
+    <tr><td>1:50-2:00</td><td>Reflection + Tomorrow Preview</td></tr>
+  </table>
+
+  <p>After the 2-hour instruction block: hands-on practice with a guide present. Ratio: 1:2 or 1:3. For every hour of AI-delivered instruction, 2-3 hours of supervised practice. This maps to the 70-20-10 model: 70% experiential, 20% social, 10% formal.</p>
+
+  <div class="card card-green">
+    <p><strong>Don't build a 40-hour/week classroom program.</strong> Build a 10-hour/week AI-personalized instruction program with 20-30 hours/week of supervised hands-on practice. That's the Alpha model for adults.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="color: var(--text-muted);">Veterans + AI Playbook. April 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
