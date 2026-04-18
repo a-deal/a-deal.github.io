@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Manny's Program | Baseline</title>
+<title>Manny & Caylie's Program | Baseline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
@@ -13,11 +13,45 @@
     --ink: #1c1917; --paper: #faf9f6; --warm: #f3f0eb; --accent: #b8860b;
     --accent-soft: rgba(184, 134, 11, 0.06); --muted: #78716c; --faint: #d6d3cd;
     --green: #2d6a4f; --green-bg: #f2f8f5;
-    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --rose: #a94d6d; --rose-bg: #faf2f4; --rose-soft: rgba(169, 77, 109, 0.07);
+    --card-shadow:
+      0 1px 2px rgba(60, 40, 20, 0.05),
+      0 6px 18px rgba(60, 40, 20, 0.07),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.65);
+    --card-shadow-hover:
+      0 2px 4px rgba(60, 40, 20, 0.06),
+      0 14px 28px rgba(60, 40, 20, 0.10),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.78);
+    --card-shadow-rose:
+      0 1px 2px rgba(120, 60, 80, 0.06),
+      0 6px 18px rgba(120, 60, 80, 0.09),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.70);
+    --ease: cubic-bezier(0.075, 0.82, 0.165, 1);
+    --r-sm: 10px; --r-md: 14px; --r-lg: 20px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background:
+      radial-gradient(ellipse 70% 45% at 50% 0%, rgba(184, 134, 11, 0.09), transparent 65%),
+      radial-gradient(ellipse 40% 30% at 0% 30%, rgba(169, 77, 109, 0.04), transparent 70%),
+      var(--paper);
+    background-attachment: fixed;
+    color: var(--ink);
+    line-height: 1.7;
+    position: relative;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.36 0 0 0 0 0.2 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+  }
 
   /* --- NAV --- */
   nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 249, 246, 0.92);
@@ -30,15 +64,85 @@
     text-transform: uppercase; color: var(--green); background: var(--green-bg); padding: 0.25rem 0.6rem;
     border-radius: 100px; }
 
-  /* --- HERO --- */
-  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 1.5rem; }
-  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-  .hero .kicker::after { content: ''; flex: 1; height: 1px; background: var(--faint); max-width: 60px; }
-  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 5vw, 2.8rem);
-    line-height: 1.1; margin-bottom: 0.75rem; }
+  /* --- TAB BAR (TABLE OF CONTENTS) --- */
+  .tab-bar { position: sticky; top: 48px; z-index: 99;
+    background: rgba(250, 249, 246, 0.88);
+    backdrop-filter: blur(28px) saturate(1.25); -webkit-backdrop-filter: blur(28px) saturate(1.25);
+    border-bottom: 1px solid var(--faint);
+    overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-bar-inner { max-width: 720px; margin: 0 auto; display: flex; gap: 0.2rem;
+    padding: 0.65rem 2rem; }
+  .tab-btn { position: relative; display: inline-flex; align-items: baseline;
+    gap: 0.5rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.02em; color: var(--muted);
+    background: transparent; border: none;
+    padding: 0.55rem 0.95rem 0.65rem; cursor: pointer; white-space: nowrap;
+    transition: color 0.35s var(--ease); font-weight: 500; }
+  .tab-btn .tab-num { font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.85rem; opacity: 0.45; font-weight: 400; color: var(--accent);
+    transition: opacity 0.35s var(--ease); letter-spacing: 0; }
+  .tab-btn .tab-blurb { font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.78rem; opacity: 0; color: var(--muted); font-weight: 400;
+    margin-left: 0.3rem; transition: opacity 0.4s var(--ease); letter-spacing: 0; }
+  .tab-btn::after { content: ''; position: absolute; left: 0.95rem; right: 0.95rem;
+    bottom: 0.15rem; height: 1.5px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s var(--ease); }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn:hover .tab-num { opacity: 0.7; }
+  .tab-btn.active { color: var(--ink); font-weight: 600; }
+  .tab-btn.active .tab-num { opacity: 0.95; }
+  .tab-btn.active .tab-blurb { opacity: 0.6; }
+  .tab-btn.active::after { transform: scaleX(1); }
+  @media (max-width: 720px) {
+    .tab-btn .tab-blurb { display: none; }
+    .tab-bar-inner { padding: 0.55rem 1.25rem; gap: 0; }
+    .tab-btn { padding: 0.5rem 0.65rem 0.6rem; font-size: 0.72rem; }
+    .tab-btn::after { left: 0.65rem; right: 0.65rem; }
+  }
+
+  .tab-panel { display: none; position: relative; animation: fadeIn 0.2s ease; }
+  .tab-panel.active { display: block; }
+  .tab-panel::before { content: attr(data-chapter);
+    position: absolute; top: -1rem; right: -0.5rem;
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(8rem, 22vw, 14rem); line-height: 1;
+    color: var(--accent); opacity: 0.08;
+    pointer-events: none; z-index: 0; letter-spacing: -0.04em; }
+  .tab-panel > * { position: relative; z-index: 1; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* --- HERO (EDITORIAL MASTHEAD) --- */
+  .hero { max-width: 720px; margin: 0 auto; padding: 3.5rem 2rem 2.5rem;
+    position: relative; z-index: 2; }
+  .masthead { display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.56rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink);
+    padding-bottom: 1.1rem; margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--ink); gap: 0.75rem; flex-wrap: wrap; }
+  .masthead-left { opacity: 0.85; flex: 1; min-width: 0; }
+  .masthead-center { color: var(--accent); font-weight: 700; letter-spacing: 0.25em; }
+  .masthead-right { opacity: 0.7; text-align: right; }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(3rem, 9vw, 5.5rem); line-height: 0.94;
+    letter-spacing: -0.025em; margin-bottom: 1.5rem; }
   .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero .subtitle { font-size: 0.9rem; color: var(--muted); max-width: 480px; line-height: 1.6; }
+  .hero .subtitle { font-size: 1.05rem; color: var(--ink); opacity: 0.72;
+    max-width: 540px; line-height: 1.5; margin-bottom: 2rem; font-weight: 400; }
+  .byline { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline;
+    padding-top: 1.1rem; border-top: 1px solid var(--faint); }
+  .byline-sep { color: var(--accent); opacity: 0.5; }
+  @media (max-width: 640px) {
+    .hero { padding: 2.5rem 1.25rem 2rem; }
+    .hero h1 { font-size: clamp(2.6rem, 13vw, 3.4rem); }
+    .hero .subtitle { font-size: 0.95rem; }
+    .masthead { font-size: 0.5rem; letter-spacing: 0.18em; }
+    .masthead-right { text-align: left; width: 100%; }
+    .byline { font-size: 0.5rem; letter-spacing: 0.15em; }
+  }
 
   /* --- CONTENT --- */
   .content { max-width: 720px; margin: 0 auto; padding: 0 2rem 3rem; }
@@ -51,9 +155,10 @@
 
   /* --- WORKOUT CARDS --- */
   .workout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-  .workout-card { background: #fff; border: 1px solid var(--warm); border-radius: 12px;
-    padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow); transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .workout-card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04); }
+  .workout-card { background: #fff; border: 1px solid var(--warm); border-radius: var(--r-md);
+    padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow);
+    transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease); }
+  .workout-card:hover { transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
   .workout-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem;
     letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
     display: flex; align-items: center; gap: 0.5rem; }
@@ -73,6 +178,13 @@
   .exercise-name a:hover .video-badge { background: var(--accent); color: #fff; border-color: var(--accent); }
   .exercise-sets { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); }
 
+  /* Rose-accent variant for Caylie's cards */
+  .workout-card.rose h3 { color: var(--rose); }
+  .workout-card.rose h3 .day-dot { background: var(--rose); }
+  .workout-card.rose .exercise-name a { color: var(--rose); border-bottom-color: rgba(157, 75, 106, 0.3); }
+  .workout-card.rose .video-badge { background: var(--rose-soft); border-color: rgba(157, 75, 106, 0.15); color: var(--rose); }
+  .workout-card.rose .exercise-name a:hover .video-badge { background: var(--rose); color: #fff; border-color: var(--rose); }
+
   .week-toggle { display: flex; gap: 0; margin: 1rem 0; border-radius: 8px; overflow: hidden;
     border: 1px solid var(--warm); width: fit-content; font-size: 0.75rem; }
   .week-toggle span { padding: 0.4rem 1.2rem; font-weight: 500; background: #fff; color: var(--muted); cursor: pointer;
@@ -86,15 +198,31 @@
 
   /* --- TIP CARDS --- */
   .tip-card { background: var(--accent-soft); border-left: 3px solid var(--accent);
-    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 10px 10px 0; }
+    padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 0 var(--r-md) var(--r-md) 0;
+    box-shadow:
+      0 1px 2px rgba(60, 40, 20, 0.04),
+      0 4px 12px rgba(60, 40, 20, 0.05); }
   .tip-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
   .tip-card p { font-size: 0.85rem; margin: 0.3rem 0; line-height: 1.65; }
   .tip-card p + p { margin-top: 0.5rem; }
 
+  .tip-card.rose {
+    background: linear-gradient(180deg, var(--rose-bg) 0%, rgba(250, 242, 244, 0.4) 100%);
+    border-left: 4px solid var(--rose);
+    box-shadow:
+      0 1px 2px rgba(120, 60, 80, 0.06),
+      0 6px 18px rgba(120, 60, 80, 0.09);
+  }
+  .tip-card.rose h4 { color: var(--rose); }
+
   /* --- ROUTINE CARDS --- */
   .routine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-  .routine-card { background: var(--green-bg); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: var(--card-shadow); }
+  .routine-card { background: var(--green-bg); border-radius: var(--r-md); padding: 1rem 1.25rem;
+    box-shadow:
+      0 1px 2px rgba(45, 106, 79, 0.05),
+      0 6px 18px rgba(45, 106, 79, 0.07),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.65); }
   .routine-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem;
     letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
   .routine-item { font-size: 0.82rem; padding: 0.3rem 0; display: flex; gap: 0.5rem; line-height: 1.5; }
@@ -104,9 +232,18 @@
   .routine-time { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green);
     min-width: 42px; flex-shrink: 0; padding-top: 1px; }
 
+  .routine-card.rose { background: var(--rose-bg); }
+  .routine-card.rose h3, .routine-card.rose .routine-time { color: var(--rose); }
+  .routine-card.rose .routine-item a { color: var(--rose); border-bottom-color: rgba(157, 75, 106, 0.3); }
+
   /* --- RULES (CLOSER) --- */
-  .rules-card { background: var(--ink); color: var(--paper); border-radius: 16px;
-    padding: 1.75rem 2rem; margin: 1.5rem 0; }
+  .rules-card { background: var(--ink); color: var(--paper); border-radius: var(--r-lg);
+    padding: 1.75rem 2rem; margin: 1.5rem 0;
+    box-shadow:
+      0 2px 6px rgba(28, 25, 23, 0.18),
+      0 18px 40px rgba(28, 25, 23, 0.22),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05); }
   .rules-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.85rem;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
   .rule-item { padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; line-height: 1.6; }
@@ -114,18 +251,95 @@
   .rule-item strong { color: #fff; font-weight: 600; }
   .rule-item span { color: rgba(250,249,246,0.7); }
 
+  /* --- LAB TABLE --- */
+  .lab-table { background: #fff; border: 1px solid var(--warm); border-radius: var(--r-md);
+    overflow: hidden; margin: 1rem 0; box-shadow: var(--card-shadow); }
+  .lab-head { display: grid; grid-template-columns: 1.4fr 0.8fr 1.2fr; gap: 1rem;
+    padding: 0.65rem 1.25rem; background: var(--warm);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); }
+  .lab-row { display: grid; grid-template-columns: 1.4fr 0.8fr 1.2fr; gap: 1rem;
+    padding: 0.7rem 1.25rem; border-bottom: 1px solid var(--warm);
+    font-size: 0.82rem; align-items: baseline; }
+  .lab-row:last-child { border-bottom: none; }
+  .lab-row.highlight { position: relative;
+    background: linear-gradient(90deg, var(--green-bg) 0%, rgba(242, 248, 245, 0.5) 100%);
+    box-shadow: inset 3px 0 0 var(--green), inset 0 0 0 0.5px rgba(45, 106, 79, 0.08); }
+  .lab-marker { font-weight: 500; }
+  .lab-value { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--ink); }
+  .lab-read { font-size: 0.75rem; color: var(--muted); }
+  .lab-row.highlight .lab-read, .lab-row.highlight .lab-marker { color: var(--green); font-weight: 600; }
+  .lab-row.highlight .lab-value { color: var(--green); font-weight: 600; }
+
   /* --- CHECK-IN --- */
-  .checkin { background: #fff; border: 2px solid var(--accent); border-radius: 12px;
-    padding: 1.25rem 1.5rem; margin: 1.5rem 0; text-align: center; }
+  .checkin { background: #fff; border: 2px solid var(--accent); border-radius: var(--r-md);
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0; text-align: center;
+    box-shadow:
+      0 2px 6px rgba(184, 134, 11, 0.08),
+      0 10px 28px rgba(184, 134, 11, 0.10); }
   .checkin p { font-size: 0.88rem; color: var(--muted); margin: 0; }
   .checkin .cta { font-family: 'Instrument Serif', serif; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.25rem; }
 
-  /* --- WIFE SECTION --- */
+  /* --- WHAT'S NEW CARD --- */
+  .whats-new { position: relative; background: var(--accent-soft);
+    border: 1px solid rgba(184, 134, 11, 0.22);
+    border-radius: var(--r-md); padding: 1.6rem 1.5rem 1.25rem;
+    margin: 0 0 2.25rem 0;
+    box-shadow:
+      0 1px 2px rgba(184, 134, 11, 0.06),
+      0 8px 24px rgba(184, 134, 11, 0.08),
+      inset 0 0 0 0.5px rgba(255, 255, 255, 0.65); }
+  .whats-new::before { content: 'ISSUE 02'; position: absolute;
+    top: -0.65rem; left: 1.25rem;
+    background: var(--ink); color: var(--paper);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+    font-weight: 600; letter-spacing: 0.24em;
+    padding: 0.35rem 0.75rem; border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(28, 25, 23, 0.22); }
+  .whats-new h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.75rem; opacity: 0.85; }
+  .whats-new-item { font-size: 0.85rem; padding: 0.35rem 0; line-height: 1.55;
+    display: flex; gap: 0.6rem; }
+  .whats-new-arrow { color: var(--accent); font-family: 'JetBrains Mono', monospace;
+    font-weight: 500; flex-shrink: 0; }
+  .whats-new-item a { color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid rgba(184, 134, 11, 0.4); cursor: pointer; font-weight: 500;
+    transition: border-color 0.25s var(--ease), color 0.25s var(--ease); }
+  .whats-new-item a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* --- TIMELINE --- */
+  .timeline { position: relative; margin: 1.5rem 0 2rem; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute;
+    left: 4px; top: 0.75rem; bottom: 0.75rem;
+    width: 1px; background: linear-gradient(180deg,
+      rgba(184, 134, 11, 0.35) 0%,
+      rgba(184, 134, 11, 0.25) 70%,
+      var(--accent) 100%); }
+  .timeline-item { position: relative; display: grid; grid-template-columns: 65px 1fr;
+    gap: 1rem; padding: 0.65rem 0; font-size: 0.85rem; align-items: baseline; }
+  .timeline-item::before { content: ''; position: absolute;
+    left: -23px; top: 1.05rem; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--paper);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 0 3px var(--paper); }
+  .timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .timeline-entry { color: var(--ink); line-height: 1.55; }
+  .timeline-item.latest::before { background: var(--accent); border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--paper), 0 0 0 7px rgba(184, 134, 11, 0.18); }
+  .timeline-item.latest .timeline-date { color: var(--accent); opacity: 1; font-weight: 600; }
+  .timeline-item.latest .timeline-entry { font-weight: 500; }
+
+  /* --- WIFE / CAYLIE CALLOUT --- */
   .wife-note { display: flex; gap: 1rem; align-items: flex-start; background: #fff;
-    border: 1px solid var(--warm); border-radius: 12px; padding: 1.25rem 1.5rem;
+    border: 1px solid var(--warm); border-radius: var(--r-md); padding: 1.25rem 1.5rem;
     margin: 1rem 0; box-shadow: var(--card-shadow); }
   .wife-note .icon { font-size: 1.5rem; flex-shrink: 0; padding-top: 2px; }
   .wife-note p { font-size: 0.85rem; margin: 0; line-height: 1.65; }
+  .wife-note a { color: var(--rose); font-weight: 600; text-decoration: none;
+    border-bottom: 1px solid rgba(157, 75, 106, 0.3); cursor: pointer; }
+  .wife-note a:hover { border-bottom-color: var(--rose); }
 
   /* --- FOOTER --- */
   .footer { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; border-top: 1px solid var(--faint);
@@ -141,222 +355,1486 @@
     .workout-card { padding: 1rem 1.25rem; }
     .rules-card { padding: 1.25rem 1.5rem; }
     .footer { flex-direction: column; gap: 0.25rem; }
+    .lab-head, .lab-row { grid-template-columns: 1.2fr 0.8fr; }
+    .lab-head span:last-child, .lab-row .lab-read { display: none; }
+  }
+
+  /* =====================================================
+     v4: KINFOLK-STYLE MAGAZINE RESTRUCTURE
+     Cover page · Hamburger takeover · TOC · Chapter covers
+     Drop caps · Display pull quotes · Chapter-end handoffs
+     Per-chapter tonal shifts
+     ===================================================== */
+
+  /* Per-chapter tonal paper shift. Subtle. Kinfolk-restrained. */
+  body { transition: background-color 0.7s ease; }
+  body[data-chapter="I"]    { --chapter-tint: #f1f3f2; --chapter-accent: #5a6b6e; }       /* Sleep */
+  body[data-chapter="II"]   { --chapter-tint: #f1f6ee; --chapter-accent: var(--green); }   /* Nutrition & Labs */
+  body[data-chapter="III"]  { --chapter-tint: #faf6ed; --chapter-accent: var(--accent); }  /* Lifting */
+  body[data-chapter="NEXT"] { --chapter-tint: #f9f3f1; --chapter-accent: var(--rose); }    /* Coming Next (Issue 03 preview) */
+  body[data-chapter] {
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(184, 134, 11, 0.05), transparent 70%),
+      var(--chapter-tint, var(--paper));
+    background-attachment: fixed;
+  }
+
+  /* --- COVER PAGE --- */
+  .cover {
+    min-height: 100vh;
+    max-width: 1120px; margin: 0 auto;
+    padding: 2rem 2.5rem 3rem;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+    z-index: 2;
+  }
+  .cover-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 1rem;
+  }
+  .cover-masthead {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--ink); opacity: 0.75;
+  }
+  .menu-open {
+    background: none; border: none; cursor: pointer; padding: 0.5rem;
+    margin: -0.5rem;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: opacity 0.2s ease;
+  }
+  .menu-open:hover { opacity: 0.6; }
+  .menu-open span {
+    display: block; width: 26px; height: 1px; background: var(--ink);
+  }
+  .cover-body {
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center;
+    padding: 3rem 0;
+  }
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 2.5rem;
+  }
+  .cover-title {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(3.5rem, 11vw, 8.5rem); line-height: 0.92;
+    letter-spacing: -0.025em; color: var(--ink);
+    margin: 0 0 2rem; max-width: 14ch;
+  }
+  .cover-title em { font-style: italic; color: var(--accent); }
+  .cover-dek {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.45;
+    color: var(--muted); max-width: 42ch; margin: 0 auto 2.5rem;
+  }
+  .cover-byline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    max-width: 60ch; line-height: 1.9;
+  }
+  .cover-bottom {
+    text-align: center; padding-top: 1rem;
+  }
+  .scroll-cue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--muted);
+    animation: scrollHint 2.4s var(--ease) infinite;
+  }
+  @keyframes scrollHint {
+    0%, 100% { opacity: 0.5; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(3px); }
+  }
+  @media (max-width: 640px) {
+    .cover { padding: 1.5rem 1.5rem 2rem; }
+    .cover-body { padding: 2rem 0; }
+    .cover-title { font-size: clamp(2.75rem, 14vw, 4.5rem); max-width: 12ch; }
+    .cover-dek { font-size: 1rem; }
+    .cover-byline { font-size: 0.52rem; letter-spacing: 0.18em; }
+  }
+
+  /* --- HAMBURGER / MENU STICKY TRIGGER (after cover) --- */
+  .menu-sticky {
+    position: fixed; top: 1.25rem; right: 1.5rem; z-index: 120;
+    background: rgba(250, 249, 246, 0.7);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 100px;
+    padding: 0.55rem 0.85rem;
+    display: flex; flex-direction: column; gap: 4px;
+    cursor: pointer; transition: opacity 0.3s, transform 0.3s;
+    opacity: 0; pointer-events: none;
+  }
+  .menu-sticky.show { opacity: 1; pointer-events: auto; }
+  .menu-sticky span { display: block; width: 20px; height: 1px; background: var(--ink); }
+
+  /* --- MENU TAKEOVER (full-viewport overlay) --- */
+  .menu-takeover {
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--chapter-tint, #f1f3f2);
+    display: flex; flex-direction: column;
+    padding: 2rem 2.5rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .menu-takeover.open { opacity: 1; pointer-events: auto; }
+  .menu-takeover-top {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .menu-crest {
+    font-family: 'Instrument Serif', serif; font-size: 1.4rem;
+    letter-spacing: 0.02em; color: var(--ink);
+  }
+  .menu-close {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Instrument Serif', serif; font-size: 2rem;
+    line-height: 1; color: var(--ink); padding: 0.3rem 0.6rem;
+    margin: -0.3rem -0.6rem;
+    transition: opacity 0.2s;
+  }
+  .menu-close:hover { opacity: 0.55; }
+  .menu-inner {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center; justify-items: center;
+    padding: 2rem 0;
+  }
+  .menu-chapters {
+    display: flex; flex-direction: column; gap: 0.3rem;
+    text-align: center;
+  }
+  .menu-chapter {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.05;
+    color: var(--ink); padding: 0.35rem 1rem;
+    letter-spacing: -0.01em;
+    display: inline-flex; align-items: baseline; gap: 0.85rem;
+    transition: opacity 0.2s, color 0.3s;
+    opacity: 0.92;
+  }
+  .menu-chapter:hover { opacity: 1; color: var(--chapter-accent, var(--accent)); }
+  .menu-num {
+    font-family: 'JetBrains Mono', monospace; font-style: normal;
+    font-size: 0.62rem; letter-spacing: 0.2em;
+    text-transform: uppercase; opacity: 0.5;
+    align-self: center;
+  }
+  .menu-sub {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.95rem; opacity: 0.45; font-weight: 400;
+    margin-left: 0.3rem;
+  }
+  .menu-secondary {
+    display: flex; gap: 1.5rem; justify-content: center;
+    margin-top: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .menu-secondary a {
+    color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .menu-secondary a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .menu-colophon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    text-align: center; opacity: 0.6;
+  }
+  @media (max-width: 640px) {
+    .menu-takeover { padding: 1.5rem 1.5rem; }
+    .menu-chapter { font-size: clamp(1.8rem, 8vw, 2.6rem); gap: 0.5rem; }
+    .menu-sub { display: none; }
+  }
+
+  /* --- ISSUE NOTES (promoted from Chapter I — "What's New in This Issue") --- */
+  .issue-notes {
+    max-width: 880px; margin: 0 auto;
+    padding: 4rem 2.5rem 5rem;
+    position: relative; z-index: 2;
+  }
+  .issue-notes-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 0.9rem; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--faint);
+    display: flex; justify-content: space-between;
+  }
+  .issue-notes-eyebrow .right { color: var(--accent); }
+  .issue-notes h2 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.15;
+    color: var(--ink); margin: 0 0 2rem;
+    letter-spacing: -0.012em; max-width: 22ch;
+  }
+  .issue-notes h2 em { font-style: italic; color: var(--accent); }
+  .issue-notes-list { display: grid; gap: 1rem; }
+  .issue-notes-item {
+    display: grid; grid-template-columns: 24px 1fr;
+    gap: 0.75rem; align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--faint);
+    font-size: 0.95rem; line-height: 1.55;
+  }
+  .issue-notes-item:last-child { border-bottom: none; }
+  .issue-notes-item .arrow {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1.35rem; color: var(--accent); opacity: 0.7;
+    line-height: 1;
+  }
+  .issue-notes-item a {
+    color: var(--ink); font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184, 134, 11, 0.4);
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .issue-notes-item a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  @media (max-width: 640px) {
+    .issue-notes { padding: 2.5rem 1.5rem 3rem; }
+    .issue-notes h2 { font-size: 1.5rem; }
+    .issue-notes-item { font-size: 0.88rem; }
+  }
+
+  /* --- PERSISTENT CHAPTER RAIL (right-side magazine nav) --- */
+  .chapter-rail {
+    position: fixed;
+    top: 50%; right: 2rem;
+    transform: translateY(-50%);
+    z-index: 90;
+    width: 200px;
+    padding: 1.5rem 1.25rem;
+    background: rgba(250, 249, 246, 0.72);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .chapter-rail.show { opacity: 1; pointer-events: auto; }
+  .chapter-rail-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--faint);
+    margin-bottom: 0.75rem;
+    display: flex; justify-content: space-between;
+  }
+  .chapter-rail-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 0.6rem; align-items: baseline;
+    padding: 0.55rem 0.1rem;
+    border: none; background: none; cursor: pointer;
+    width: 100%; text-align: left;
+    color: var(--muted);
+    transition: color 0.3s ease, transform 0.35s var(--ease);
+    position: relative;
+  }
+  .chapter-rail-item:hover { color: var(--ink); transform: translateX(-2px); }
+  .chapter-rail-item .rail-num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.95rem; color: var(--accent); opacity: 0.65;
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .chapter-rail-item .rail-name {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: 0.95rem; line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+  .chapter-rail-item.active {
+    color: var(--ink);
+  }
+  .chapter-rail-item.active .rail-num {
+    color: var(--chapter-accent, var(--accent));
+    opacity: 1; font-size: 1.1rem;
+  }
+  .chapter-rail-item.active .rail-name {
+    font-style: italic; font-weight: 400;
+  }
+  .chapter-rail-item.active::before {
+    content: ''; position: absolute;
+    left: -1.25rem; top: 0.75rem; bottom: 0.75rem;
+    width: 2px; background: var(--chapter-accent, var(--accent));
+  }
+  .chapter-rail-foot {
+    margin-top: 0.75rem; padding-top: 0.8rem;
+    border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.52rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted); opacity: 0.7;
+    text-align: center;
+  }
+  .chapter-rail-divider {
+    height: 1px; background: var(--faint);
+    margin: 0.6rem 0 0.3rem;
+  }
+  .chapter-rail-item.rail-next .rail-num { color: var(--rose); opacity: 0.7; font-style: normal; }
+  .chapter-rail-item.rail-next .rail-name { font-style: italic; }
+  .chapter-rail-item.rail-next.active .rail-num { color: var(--rose); opacity: 1; font-size: 1.05rem; }
+  .chapter-rail-item.rail-next.active::before { background: var(--rose); }
+  .m-chapter-next { font-style: normal; color: var(--rose) !important; opacity: 0.7; }
+  .m-chapter-next.active { opacity: 1; background: rgba(169, 77, 109, 0.1); }
+  @media (max-width: 1100px) { .chapter-rail { display: none; } }
+
+  /* --- MOBILE CHAPTER RAIL (sticky top pill — shows after cover on <=1100px) --- */
+  .chapter-rail-mobile {
+    display: none;
+    position: fixed;
+    top: 0.75rem; left: 50%;
+    transform: translateX(-50%);
+    z-index: 95;
+    background: rgba(250, 249, 246, 0.88);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 100px;
+    padding: 0.3rem 0.45rem;
+    gap: 0.15rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+    box-shadow: 0 4px 18px rgba(40, 30, 15, 0.08);
+  }
+  .chapter-rail-mobile.show { opacity: 1; pointer-events: auto; }
+  .m-chapter {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.95rem; line-height: 1;
+    color: var(--muted);
+    padding: 0.45rem 0.8rem;
+    border-radius: 100px;
+    transition: color 0.25s, background 0.25s;
+  }
+  .m-chapter.active {
+    color: var(--chapter-accent, var(--accent));
+    background: rgba(184, 134, 11, 0.09);
+    font-weight: 500;
+  }
+  @media (max-width: 1100px) {
+    .chapter-rail-mobile { display: flex; }
+  }
+  @media (max-width: 380px) {
+    .m-chapter { padding: 0.4rem 0.55rem; font-size: 0.9rem; }
+  }
+
+  /* --- WHERE TO BEGIN / PRIORITY SECTION --- */
+  .priority {
+    max-width: 880px; margin: 0 auto;
+    padding: 2rem 2.5rem 5rem;
+    position: relative; z-index: 2;
+  }
+  .priority-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 0.9rem; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--faint);
+    display: flex; justify-content: space-between;
+  }
+  .priority-eyebrow .right { color: var(--accent); }
+  .priority-head {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.15;
+    color: var(--ink); margin: 0 0 2.5rem;
+    letter-spacing: -0.012em; max-width: 24ch;
+  }
+  .priority-head em { font-style: italic; color: var(--accent); }
+  .priority-list { display: grid; gap: 0; }
+  .priority-item {
+    display: grid;
+    grid-template-columns: 200px 160px 1fr;
+    gap: 1.5rem; align-items: baseline;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--faint);
+  }
+  .priority-item:last-child { border-bottom: none; }
+  .priority-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.22em;
+    color: var(--muted); text-transform: uppercase;
+    padding-top: 3px;
+    white-space: nowrap;
+  }
+  .priority-chap {
+    display: flex; align-items: baseline; gap: 0.55rem;
+    font-family: 'Instrument Serif', serif;
+  }
+  .priority-chap .pc-num {
+    font-style: italic; font-size: 1.25rem;
+    color: var(--accent); opacity: 0.75; line-height: 1;
+  }
+  .priority-chap .pc-name {
+    font-size: 1.15rem; color: var(--ink);
+  }
+  .priority-chap a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid rgba(184, 134, 11, 0.3);
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .priority-chap a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .priority-note {
+    font-size: 0.92rem; line-height: 1.65; color: var(--ink); opacity: 0.82;
+  }
+  .priority-note strong { font-weight: 600; color: var(--ink); opacity: 1; }
+  @media (max-width: 640px) {
+    .priority { padding: 1.5rem 1.5rem 3rem; }
+    .priority-head { font-size: 1.5rem; }
+    .priority-item { grid-template-columns: 1fr; gap: 0.35rem; padding: 1rem 0; }
+    .priority-rank { padding-top: 0; }
+  }
+
+  /* --- NEXT ISSUE TEASER (back-cover spread) --- */
+  .next-issue {
+    max-width: 880px; margin: 0 auto;
+    padding: 6rem 2.5rem 7rem;
+    position: relative; z-index: 2;
+    border-top: 1px solid var(--faint);
+  }
+  .next-issue-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    padding-bottom: 0.9rem; margin-bottom: 2rem;
+    border-bottom: 1px solid var(--faint);
+    display: flex; justify-content: space-between;
+  }
+  .next-issue-eyebrow .right { color: var(--accent); }
+  .next-issue-head {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1;
+    color: var(--ink); margin: 0 0 1.25rem;
+    letter-spacing: -0.015em; max-width: 20ch;
+  }
+  .next-issue-head em { font-style: italic; color: var(--accent); }
+  .next-issue-dek {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1.1rem; line-height: 1.55;
+    color: var(--muted); max-width: 52ch;
+    margin: 0 0 3rem;
+  }
+  .next-issue-list { display: grid; gap: 0; }
+  .next-issue-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem; align-items: baseline;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--faint);
+  }
+  .next-issue-item:last-of-type { border-bottom: none; }
+  .next-issue-item .ni-num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1.8rem; color: var(--accent); opacity: 0.75;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .next-issue-item .ni-body { display: flex; flex-direction: column; gap: 0.4rem; }
+  .next-issue-item .ni-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem; color: var(--ink); line-height: 1.15;
+  }
+  .next-issue-item .ni-blurb {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1rem; color: var(--muted); line-height: 1.5;
+    max-width: 52ch;
+  }
+  .next-issue-cta {
+    margin-top: 3rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--accent);
+    text-align: center;
+  }
+  @media (max-width: 640px) {
+    .next-issue { padding: 4rem 1.5rem 5rem; }
+    .next-issue-dek { font-size: 0.98rem; }
+    .next-issue-item { grid-template-columns: 40px 1fr; gap: 1rem; padding: 1.1rem 0; }
+    .next-issue-item .ni-num { font-size: 1.4rem; }
+    .next-issue-item .ni-name { font-size: 1.1rem; }
+    .next-issue-item .ni-blurb { font-size: 0.92rem; }
+  }
+
+  /* --- CHAPTER COVER PAGE (opening spread of each tab) --- */
+  .chapter-cover {
+    padding: 4.5rem 0 5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--faint);
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+  .chapter-cover .chapter-numeral {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(7rem, 16vw, 11rem); line-height: 0.95;
+    color: var(--chapter-accent, var(--accent));
+    opacity: 0.9; letter-spacing: -0.04em;
+    margin-bottom: 1rem;
+  }
+  .chapter-cover .chapter-title {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem); line-height: 1;
+    color: var(--ink); margin: 0 0 1.5rem;
+    letter-spacing: -0.015em;
+  }
+  .chapter-cover .chapter-abstract {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.55;
+    color: var(--muted); max-width: 44ch; margin: 0 auto;
+  }
+  @media (max-width: 640px) {
+    .chapter-cover { padding: 3rem 0 3rem; margin-bottom: 2.25rem; }
+  }
+
+  /* --- DROP CAP on opening paragraph of each chapter --- */
+  .drop-cap::first-letter {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    float: left; font-size: 4.2em; line-height: 0.85;
+    padding: 0.12em 0.12em 0 0;
+    color: var(--chapter-accent, var(--accent));
+    font-weight: 400;
+  }
+  .drop-cap {
+    font-size: 1rem; line-height: 1.75;
+    margin-top: 0.5rem;
+  }
+
+  /* --- DISPLAY PULL QUOTE (Kinfolk-scale) --- */
+  .pull-quote-xl {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4.2vw, 2.9rem); line-height: 1.2;
+    color: var(--ink); opacity: 0.88;
+    text-align: left; max-width: 22ch;
+    margin: 4rem auto 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--faint);
+    border-bottom: 1px solid var(--faint);
+    letter-spacing: -0.01em;
+  }
+  .pull-quote-xl .attribution {
+    display: block; margin-top: 1rem;
+    font-family: 'JetBrains Mono', monospace; font-style: normal;
+    font-size: 0.58rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  @media (max-width: 640px) {
+    .pull-quote-xl { margin: 2.5rem auto; padding: 1.5rem 0; }
+  }
+
+  /* --- TWO-COLUMN EDITORIAL (main 2/3, marginalia 1/3) --- */
+  .editorial {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin: 2rem 0;
+    align-items: start;
+  }
+  .editorial-main > :first-child { margin-top: 0; }
+  .editorial-aside {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 0.95rem; line-height: 1.55; color: var(--muted);
+    padding-top: 0.4rem;
+    border-top: 2px solid var(--chapter-accent, var(--accent));
+  }
+  .editorial-aside .aside-eyebrow {
+    display: block; margin-bottom: 0.6rem;
+    font-family: 'JetBrains Mono', monospace; font-style: normal;
+    font-size: 0.55rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--chapter-accent, var(--accent));
+  }
+  @media (max-width: 720px) {
+    .editorial { grid-template-columns: 1fr; gap: 1.5rem; }
+    .editorial-aside { border-top: 1px solid var(--faint); padding-top: 1rem; }
+  }
+
+  /* --- CHAPTER-END HANDOFF CARD --- */
+  .chapter-end {
+    margin-top: 5rem; padding: 3rem 0 2rem;
+    border-top: 1px solid var(--faint);
+    text-align: center;
+  }
+  .chapter-end-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .chapter-end-link {
+    display: inline-flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; cursor: pointer;
+    text-decoration: none; color: var(--ink);
+    padding: 0.75rem 1.5rem;
+    transition: opacity 0.25s, transform 0.4s var(--ease);
+  }
+  .chapter-end-link:hover { transform: translateY(-2px); }
+  .chapter-end-num {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 2.6rem; color: var(--chapter-accent, var(--accent));
+    line-height: 1; opacity: 0.9;
+  }
+  .chapter-end-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.9rem; color: var(--ink); line-height: 1;
+  }
+  .chapter-end-sub {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1rem; color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* Override: remove the ghost chapter numeral now that we have a real cover */
+  .tab-panel::before { display: none; }
+
+  /* Hide old hero & footer padding tweak for cover flow */
+  .content { padding-top: 0.5rem; }
+
+  /* Prose refinements for killed-card sections */
+  .prose-block { margin: 1.5rem 0; }
+  .prose-block p { font-size: 0.9rem; line-height: 1.75; margin: 0.7rem 0; }
+  .prose-block h3.micro-head {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--chapter-accent, var(--accent));
+    margin: 1.4rem 0 0.6rem;
+  }
+  .prose-rule {
+    border: none; height: 1px; background: var(--faint);
+    margin: 2.5rem 0;
+  }
+
+  /* --- FEATURED NUMBER (Meng To move #7: data viz for data-heavy chapters) --- */
+  .featured-number { margin: 4rem 0; text-align: center; }
+  .featured-number .big-number {
+    font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+    font-size: clamp(5.5rem, 14vw, 9.5rem); line-height: 0.9;
+    color: var(--chapter-accent, var(--accent));
+    letter-spacing: -0.03em;
+  }
+  .featured-number .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--muted);
+    margin-top: 0.8rem;
+  }
+  .featured-number .scale {
+    max-width: 480px; margin: 1.5rem auto 0.4rem;
+    height: 2px; background: var(--faint); position: relative;
+  }
+  .featured-number .scale::after {
+    content: ''; position: absolute;
+    left: 0; top: 0; height: 100%;
+    background: var(--chapter-accent, var(--accent)); opacity: 0.35;
+    width: 20%; /* 1.1 / 5.5 approx */
+  }
+  .featured-number .scale-dot {
+    position: absolute; top: -5px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--chapter-accent, var(--accent));
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 3px var(--chapter-tint, var(--paper));
+  }
+  .featured-number .scale-labels {
+    max-width: 480px; margin: 0.5rem auto;
+    display: flex; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .featured-number .caption {
+    margin-top: 1.25rem; max-width: 44ch; margin-left: auto; margin-right: auto;
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 1rem; color: var(--muted); line-height: 1.5;
   }
 </style>
 </head>
-<body>
+<body data-chapter="I"><!-- I = Sleep, II = Nutrition & Labs, III = Lifting -->
 
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="logo">Baseline<span>.</span></a>
-    <span class="badge">Personalized Program</span>
+<!-- ============ COVER PAGE ============ -->
+<section class="cover" id="cover">
+  <div class="cover-top">
+    <div class="cover-masthead">Baseline · A Personal Health Record</div>
+    <div class="cover-masthead" style="text-align: right; opacity: 0.6;">Issue 02 · April 2026</div>
   </div>
-</nav>
+  <div class="cover-body">
+    <div class="cover-eyebrow">Issue 02 · April 2026</div>
+    <h1 class="cover-title">Your Family<br>Health <em>Program</em></h1>
+    <p class="cover-dek">Sleep. Nutrition and labs. Lifting. Everything, in one place.</p>
+    <div class="cover-byline">For Manny &amp; Caylie</div>
+  </div>
+  <div class="cover-bottom">
+    <span class="scroll-cue">↓ Turn the page</span>
+  </div>
+</section>
 
-<div class="hero">
-  <div class="kicker">Built for Manny</div>
-  <h1>Your <em>3-Day</em> Strength Program</h1>
-  <p class="subtitle">Full body, 3x a week. Simple progression. Built for your home gym. Your wife runs the same program at her own weight.</p>
-</div>
+<!-- ============ ISSUE NOTES (promoted from Chapter I) ============ -->
+<section class="issue-notes" id="issue-notes">
+  <div class="issue-notes-eyebrow">
+    <span>Editor's note</span>
+    <span class="right">Issue 02 · April 17, 2026</span>
+  </div>
+  <h2>What's new, and <em>where to find it.</em></h2>
+
+  <div class="whats-new" style="margin-top: 2rem;">
+    <h4>New in this issue · April 17, 2026</h4>
+    <div class="whats-new-item"><span class="whats-new-arrow">→</span> <a data-goto="nutrition">Manny's labs read</a> in full, with the headline up top</div>
+    <div class="whats-new-item"><span class="whats-new-arrow">→</span> <a data-goto="sleep">Sleep protocol</a> with the phone-out-of-the-bedroom experiment</div>
+    <div class="whats-new-item"><span class="whats-new-arrow">→</span> Why lifting matters especially for Caylie, <a data-goto="lifting">plus her starting weights</a></div>
+    <div class="whats-new-item"><span class="whats-new-arrow">→</span> Three local PT clinics for the back, and the McGill Big 3 warm-up for every session</div>
+    <div class="whats-new-item"><span class="whats-new-arrow">→</span> Four optional follow-up labs and the nearest Quest locations in Concord and Pleasant Hill</div>
+  </div>
+</section>
+
+<!-- ============ WHERE TO BEGIN (priorities) ============ -->
+<section class="priority" id="priority">
+  <div class="priority-eyebrow">
+    <span>Where to begin</span>
+    <span class="right">In rough order of impact</span>
+  </div>
+  <h3 class="priority-head">If you only do one thing this issue, <em>do Sleep first.</em></h3>
+  <div class="priority-list">
+    <div class="priority-item">
+      <span class="priority-rank">Do now</span>
+      <div class="priority-chap">
+        <span class="pc-num">I</span>
+        <span class="pc-name"><a data-goto="sleep">Sleep</a></span>
+      </div>
+      <div class="priority-note"><strong>Phones in the kitchen, both of you. Two weeks, minimum.</strong> That's the one real ask, and it's the gate on everything else. The sleep will improve with or without a wearable. An Apple Watch just lets you see it in data, which makes the next round of coaching a lot sharper — call it a strong add-on, not a requirement.</div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-rank">When you want it</span>
+      <div class="priority-chap">
+        <span class="pc-num">II</span>
+        <span class="pc-name"><a data-goto="nutrition">Nutrition &amp; Labs</a></span>
+      </div>
+      <div class="priority-note"><strong>Your baseline is locked in.</strong> Four follow-up labs are optional, ~$130, whenever you want. Quest locations in Concord and Pleasant Hill.</div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-rank">Already running</span>
+      <div class="priority-chap">
+        <span class="pc-num">III</span>
+        <span class="pc-name"><a data-goto="lifting">Lifting</a></span>
+      </div>
+      <div class="priority-note"><strong>Keep lifting three days a week.</strong> The back-and-leg modifications are new this issue and matter. Read once, refer back when something changes.</div>
+    </div>
+    <div class="priority-item">
+      <span class="priority-rank">Up next after Sleep</span>
+      <div class="priority-chap">
+        <span class="pc-num" style="color: var(--rose);">✦</span>
+        <span class="pc-name"><a data-goto="next" style="border-bottom-color: rgba(169, 77, 109, 0.3);">Coming Next</a></span>
+      </div>
+      <div class="priority-note">Fertility workup for both of you. Screen time for the whole family, including Cairo. Pilates studios for Caylie. Journaling. All queued for Issue 03, shipping once the sleep experiment has a solid two weeks behind it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PERSISTENT CHAPTER RAIL (desktop) ============ -->
+<aside class="chapter-rail" id="chapterRail" aria-label="Chapter navigation">
+  <div class="chapter-rail-head">
+    <span>Chapters</span>
+    <span>I–III</span>
+  </div>
+  <button class="chapter-rail-item active" data-rail="sleep" data-goto-chapter="sleep">
+    <span class="rail-num">I</span><span class="rail-name">Sleep</span>
+  </button>
+  <button class="chapter-rail-item" data-rail="nutrition" data-goto-chapter="nutrition">
+    <span class="rail-num">II</span><span class="rail-name">Nutrition &amp; Labs</span>
+  </button>
+  <button class="chapter-rail-item" data-rail="lifting" data-goto-chapter="lifting">
+    <span class="rail-num">III</span><span class="rail-name">Lifting</span>
+  </button>
+  <div class="chapter-rail-divider"></div>
+  <button class="chapter-rail-item rail-next" data-rail="next" data-goto-chapter="next">
+    <span class="rail-num">✦</span><span class="rail-name">Coming Next</span>
+  </button>
+  <div class="chapter-rail-foot">Issue 02</div>
+</aside>
+
+<!-- ============ MOBILE CHAPTER RAIL (pill bar, fixed top) ============ -->
+<aside class="chapter-rail-mobile" id="chapterRailMobile" aria-label="Chapter navigation">
+  <button class="m-chapter active" data-rail="sleep" data-goto-chapter="sleep">I</button>
+  <button class="m-chapter" data-rail="nutrition" data-goto-chapter="nutrition">II</button>
+  <button class="m-chapter" data-rail="lifting" data-goto-chapter="lifting">III</button>
+  <button class="m-chapter m-chapter-next" data-rail="next" data-goto-chapter="next">✦</button>
+</aside>
+
 
 <div class="content">
 
-  <h2>The Program</h2>
-  <p>Two workouts, alternating. Train Monday, Wednesday, Friday. Add 5 lbs to each lift every session. When you stall, take 10% off and work back up. That's the whole system.</p>
+  <!-- ============ LIFTING TAB (Chapter III) ============ -->
+  <div class="tab-panel" id="panel-lifting" data-chapter="III">
 
-  <div class="week-toggle">
-    <span class="active">Week 1: A / B / A</span>
-    <span>Week 2: B / A / B</span>
-  </div>
+    <section class="chapter-cover">
+      <div class="chapter-numeral">III</div>
+      <h2 class="chapter-title">Lifting</h2>
+      <p class="chapter-abstract">Where we started. The three-day strength program, the back-and-leg modifications after the accident, and why lifting especially matters for Caylie.</p>
+    </section>
 
-  <div class="workout-grid">
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Day A</h3>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">3 x 5</span>
+    <h2>The Program</h2>
+    <p class="drop-cap">Two workouts, alternating. Train Monday, Wednesday, Friday. Add 5 lbs to each lift every session. When you stall, take 10% off and work back up. That's the whole system.</p>
+
+    <div class="week-toggle">
+      <span class="active">Week 1: A / B / A</span>
+      <span>Week 2: B / A / B</span>
+    </div>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Day A</h3>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">3 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=vcBig73ojpE" target="_blank">Bench Press<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">3 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=axoeDmW0oAY" target="_blank">Barbell Row<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">3 x 5</span>
+        </div>
       </div>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=vcBig73ojpE" target="_blank">Bench Press<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">3 x 5</span>
-      </div>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=axoeDmW0oAY" target="_blank">Barbell Row<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">3 x 5</span>
+
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Day B</h3>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">3 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wol7Hko8RhY" target="_blank">Overhead Press<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">3 x 5</span>
+        </div>
+        <div class="exercise">
+          <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wYREQkVtvEc" target="_blank">Deadlift<span class="video-badge">video</span></a></span>
+          <span class="exercise-sets">1 x 5</span>
+        </div>
       </div>
     </div>
 
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Day B</h3>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=bEv6CCg2BC8" target="_blank">Barbell Squat<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">3 x 5</span>
+    <blockquote class="pull-quote-xl">
+      The squat stays every session. It's the king of all lifts.
+      <span class="attribution">Rule I · The Program</span>
+    </blockquote>
+
+    <h2>Back &amp; Leg Recovery Notes</h2>
+    <div class="editorial">
+      <div class="editorial-main">
+        <p>Given the September car accident and the back pain and left-leg numbness, here's how we adjust the program to keep building strength while protecting your spine.</p>
+
+        <h3 class="micro-head">Squat Adjustments</h3>
+        <p><strong>Wear a belt for every working set.</strong> This isn't a crutch. It increases intra-abdominal pressure and stabilizes your spine under load. Get a basic leather lifting belt if you don't have one.</p>
+        <p><strong>Use a box or bench.</strong> <a href="https://www.youtube.com/watch?v=mcFMikOcDJo" target="_blank">Box squats</a> control your depth and teach you to sit back, which takes pressure off your lower back. Sit back to the box, pause one second, then drive up. Same weight, same progression.</p>
+        <p><strong>If numbness flares up mid-set,</strong> stop, drop weight 20%, try again. If it persists, switch to leg press for that session. Don't push through nerve symptoms.</p>
+
+        <h3 class="micro-head">Deadlift Adjustments</h3>
+        <p><strong>Swap conventional deadlift for <a href="https://www.youtube.com/watch?v=jEy_czb3RKA" target="_blank">dumbbell RDLs</a>.</strong> Heavy dumbbells, 3x8. Hits your entire posterior chain without the spinal compression of a barbell off the floor. Same progression: add 5 lbs when all 3 sets feel controlled. When your back is feeling strong, you can work back to conventional deadlifts. Start light (50% of what you'd normally pull) and build from there. No rush.</p>
       </div>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wol7Hko8RhY" target="_blank">Overhead Press<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">3 x 5</span>
-      </div>
-      <div class="exercise">
-        <span class="exercise-name"><a href="https://www.youtube.com/watch?v=wYREQkVtvEc" target="_blank">Deadlift<span class="video-badge">video</span></a></span>
-        <span class="exercise-sets">1 x 5</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="pull-quote">The squat stays every session. It's the king of all lifts.</div>
-
-  <h2>Back & Leg Recovery Notes</h2>
-  <p>Given the September car accident and the back pain / left leg numbness, here's how we adjust the program to keep building strength while protecting your spine.</p>
-
-  <div class="tip-card">
-    <h4>Squat Adjustments</h4>
-    <p><strong>Wear a belt for every working set.</strong> This isn't a crutch. It increases intra-abdominal pressure and stabilizes your spine under load. Get a basic leather lifting belt if you don't have one.</p>
-    <p><strong>Use a box or bench.</strong> <a href="https://www.youtube.com/watch?v=mcFMikOcDJo" target="_blank">Box squats</a> control your depth and teach you to sit back, which takes pressure off your lower back. Sit back to the box, pause one second, then drive up. Same weight, same progression.</p>
-    <p><strong>If numbness flares up mid-set:</strong> stop, drop weight 20%, try again. If it persists, switch to leg press for that session. Don't push through nerve symptoms.</p>
-  </div>
-
-  <div class="tip-card">
-    <h4>Deadlift Adjustments</h4>
-    <p><strong>Swap conventional deadlift for <a href="https://www.youtube.com/watch?v=jEy_czb3RKA" target="_blank">dumbbell RDLs</a>.</strong> Heavy dumbbells, 3x8. Hits your entire posterior chain without the spinal compression of a barbell off the floor. Same progression: add 5 lbs when all 3 sets feel controlled.</p>
-    <p><strong>When your back is feeling strong:</strong> you can work back to conventional deadlifts. Start light (50% of what you'd normally pull) and build from there. No rush.</p>
-  </div>
-
-  <div class="routine-card">
-    <h3>Spinal Stability Warm-Up (Every Session)</h3>
-    <p style="font-size:0.82rem; color: var(--green); margin-bottom: 0.5rem;">Add these before your regular warm-up. The McGill Big 3: gold standard for back rehab.</p>
-    <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=I6MOwlBQlNk" target="_blank">Bird Dogs</a> (10 each side, 5 sec hold)</div>
-    <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=6LqSeEbsEHs" target="_blank">McGill Curl-Ups</a> (10 reps, hands under lower back)</div>
-    <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=GBo4sQgi3m4" target="_blank">Side Planks</a> (20 sec each side)</div>
-  </div>
-
-  <div class="tip-card">
-    <h4>Important</h4>
-    <p><strong>See a physical therapist if you haven't already.</strong> Numbness in the leg after an accident usually means a nerve is getting compressed (disc herniation, piriformis, etc.). Getting imaging and a PT evaluation before loading heavier is worth it. The program will still be here. Your spine needs to be right first.</p>
-  </div>
-
-  <h2>Getting Lean and Muscular</h2>
-  <p>You don't need to bulk and cut. Eat enough protein (150g+ a day) and keep lifting heavier. Your body recomps naturally when the training signal is strong and protein is high. Especially if you're not super lean yet, you can build muscle and lose fat at the same time.</p>
-
-  <div class="tip-card">
-    <h4>Technique Tips</h4>
-    <p><strong>Keep 1-2 reps in reserve.</strong> Finish each set thinking "I could have done 1-2 more." Going to failure every set burns you out. Save it for the last set if you want to push.</p>
-    <p><strong>Control the lowering phase.</strong> Take 2-3 seconds on the way down. Muscle responds more to the stretch under load. Don't bounce out of the bottom.</p>
-    <p><strong>Want more size?</strong> Add one set of 8-12 reps at lighter weight after your 3x5 on bench and squat. That extra volume is where hypertrophy lives.</p>
-  </div>
-
-  <h2>Warm-Up & Cooldown</h2>
-  <p>5 minutes each, every session. Non-negotiable.</p>
-
-  <div class="routine-grid">
-    <div class="routine-card">
-      <h3>Before You Lift</h3>
-      <div class="routine-item"><span class="routine-time">2 min</span> Jump rope or jog in place</div>
-      <div class="routine-item"><span class="routine-time">30s</span> Arm circles each direction</div>
-      <div class="routine-item"><span class="routine-time">1 min</span> 10 bodyweight squats</div>
-      <div class="routine-item"><span class="routine-time">1 min</span> 10 hip hinges</div>
-      <div class="routine-item"><span class="routine-time">1 min</span> Warm-up set at 50% weight</div>
+      <aside class="editorial-aside">
+        <span class="aside-eyebrow">See a PT first</span>
+        Numbness in the leg after an accident usually means a nerve is getting compressed. Imaging and a PT evaluation before loading heavier is worth it. Local picks in Concord: <a href="https://www.goldenstateortho.com/concord-physical-therapy/" target="_blank">Golden State Ortho &amp; Spine</a> (spine specialty), <a href="https://backontrack-pt.com/contact/concord-clinic/" target="_blank">Back On Track</a> (2280 Diamond Blvd), <a href="https://www.selectphysicaltherapy.com/contact/find-a-location/ca/concord/concord-civic-court/" target="_blank">Select Physical Therapy</a> (in-network with most insurance).
+      </aside>
     </div>
 
     <div class="routine-card">
-      <h3>After You Lift</h3>
-      <div class="routine-item"><span class="routine-time">90s</span> <a href="https://www.youtube.com/watch?v=d9pOjXCKGN8" target="_blank">Couch stretch</a> (each leg)</div>
-      <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=xSdsjliJ5Ns" target="_blank">Doorway chest stretch</a></div>
-      <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=YSsUKckE5V0" target="_blank">Hang from bar or doorframe</a></div>
-      <div class="routine-item"><span class="routine-time">30s</span> 5 deep, slow breaths</div>
+      <h3>Spinal Stability Warm-Up (Every Session)</h3>
+      <p style="font-size:0.82rem; color: var(--green); margin-bottom: 0.5rem;">Add these before your regular warm-up. The McGill Big 3: gold standard for back rehab.</p>
+      <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=I6MOwlBQlNk" target="_blank">Bird Dogs</a> (10 each side, 5 sec hold)</div>
+      <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=6LqSeEbsEHs" target="_blank">McGill Curl-Ups</a> (10 reps, hands under lower back)</div>
+      <div class="routine-item"><span class="routine-time">1 min</span> <a href="https://www.youtube.com/watch?v=GBo4sQgi3m4" target="_blank">Side Planks</a> (20 sec each side)</div>
     </div>
-  </div>
 
-  <div class="wife-note">
-    <span class="icon">👫</span>
-    <p><strong>For your wife:</strong> Same exact program. Same lifts, same progression, same warm-up and cooldown. Start lighter, add 5 lbs per session. Compound lifts work the same for everyone. She'll build functional strength and lean out. There is no such thing as a separate "women's program."</p>
-  </div>
+    <hr class="prose-rule">
 
-  <div class="rules-card">
-    <h3>The Rules</h3>
-    <div class="rule-item"><strong>Never miss two in a row.</strong> <span>Miss one, that's life. Miss two, you're building a habit of not showing up.</span></div>
-    <div class="rule-item"><strong>150g protein a day.</strong> <span>Chicken, beef, eggs, shakes. This is the one nutrition thing that matters.</span></div>
-    <div class="rule-item"><strong>Add 5 lbs every session.</strong> <span>Small, consistent progression. Light to heavy without ever feeling overwhelmed.</span></div>
-    <div class="rule-item"><strong>Sleep > supplements.</strong> <span>7+ hours. Nothing you can buy will outwork bad sleep.</span></div>
-    <div class="rule-item"><strong>Train together.</strong> <span>You and your wife lifting is the accountability that works. Your kid sees parents who take care of themselves.</span></div>
-  </div>
-
-  <h2>Nutrition: Keep It Simple</h2>
-  <p>You don't need a meal plan. You need one rule: <strong>150g+ protein a day</strong>. That's the single thing that drives muscle growth and body recomp. Everything else is secondary.</p>
-
-  <p>The easiest way to hit it: front-load breakfast with 30-40g protein. That puts you on pace for the day without thinking about it.</p>
-
-  <h3 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 1.5rem 0 0.75rem;">Grab-and-Go Breakfasts (take to work)</h3>
-
-  <div class="workout-grid">
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Zero Effort</h3>
-      <div class="exercise"><span class="exercise-name">Greek yogurt (Fage 0%)</span><span class="exercise-sets">18g per cup</span></div>
-      <div class="exercise"><span class="exercise-name">Hard boiled eggs (batch Sunday)</span><span class="exercise-sets">6g each</span></div>
-      <div class="exercise"><span class="exercise-name">Premier Protein shake</span><span class="exercise-sets">30g per bottle</span></div>
-      <div class="exercise" style="border-bottom: none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Pick one. 30 seconds. Out the door.</span></div>
+    <h2>Getting Lean and Muscular</h2>
+    <div class="prose-block">
+      <p>You don't need to bulk and cut. Eat enough protein (150g+ a day) and keep lifting heavier. Your body recomps naturally when the training signal is strong and protein is high. Especially if you're not super lean yet, you can build muscle and lose fat at the same time.</p>
+      <h3 class="micro-head">Three Technique Notes</h3>
+      <p><strong>Keep 1–2 reps in reserve.</strong> Finish each set thinking "I could have done one or two more." Going to failure every set burns you out. Save it for the last set if you want to push.</p>
+      <p><strong>Control the lowering phase.</strong> Take 2–3 seconds on the way down. Muscle responds more to the stretch under load. Don't bounce out of the bottom.</p>
+      <p><strong>Want more size?</strong> Add one set of 8–12 reps at lighter weight after your 3x5 on bench and squat. That extra volume is where hypertrophy lives.</p>
     </div>
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> 10-Minute Prep (Sunday)</h3>
-      <div class="exercise"><span class="exercise-name">Egg muffins (eggs + meat + cheese)</span><span class="exercise-sets">25-30g for 3-4</span></div>
-      <div class="exercise"><span class="exercise-name">Overnight oats + protein powder</span><span class="exercise-sets">35-40g per jar</span></div>
-      <div class="exercise" style="border-bottom: none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Batch cook Sunday. Grab from the fridge all week.</span></div>
-    </div>
-  </div>
 
-  <div class="tip-card">
-    <h4>The Math</h4>
-    <p>Breakfast: 30-40g. Lunch: 40-50g. Dinner: 40-50g. Snack or shake: 20-30g. That's 150g+ without counting a single calorie. If you're short, add a protein shake after your workout.</p>
-  </div>
+    <h2>Warm-Up & Cooldown</h2>
+    <p>5 minutes each, every session. Non-negotiable.</p>
 
-  <h2>Gear You Need</h2>
-  <p>You can do everything with what you have, but these two additions will make a big difference for your back.</p>
+    <div class="routine-grid">
+      <div class="routine-card">
+        <h3>Before You Lift</h3>
+        <div class="routine-item"><span class="routine-time">2 min</span> Jump rope or jog in place</div>
+        <div class="routine-item"><span class="routine-time">30s</span> Arm circles each direction</div>
+        <div class="routine-item"><span class="routine-time">1 min</span> 10 bodyweight squats</div>
+        <div class="routine-item"><span class="routine-time">1 min</span> 10 hip hinges</div>
+        <div class="routine-item"><span class="routine-time">1 min</span> Warm-up set at 50% weight</div>
+      </div>
 
-  <div class="workout-grid">
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Lifting Belt</h3>
-      <div class="exercise"><span class="exercise-name">Protects your spine under load. Wear it for all squat and deadlift working sets.</span></div>
-      <div class="exercise" style="border-bottom: none;">
-        <span class="exercise-name"><a href="https://www.amazon.com/dp/B01B1UQ0AA" target="_blank">Dark Iron Fitness Belt<span class="video-badge">~$40</span></a></span>
+      <div class="routine-card">
+        <h3>After You Lift</h3>
+        <div class="routine-item"><span class="routine-time">90s</span> <a href="https://www.youtube.com/watch?v=d9pOjXCKGN8" target="_blank">Couch stretch</a> (each leg)</div>
+        <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=xSdsjliJ5Ns" target="_blank">Doorway chest stretch</a></div>
+        <div class="routine-item"><span class="routine-time">60s</span> <a href="https://www.youtube.com/watch?v=YSsUKckE5V0" target="_blank">Hang from bar or doorframe</a></div>
+        <div class="routine-item"><span class="routine-time">30s</span> 5 deep, slow breaths</div>
       </div>
     </div>
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Plyo Box or Bench</h3>
-      <div class="exercise"><span class="exercise-name">For box squats. A flat bench works too if you already have one. Seat height should put your thighs parallel to the floor.</span></div>
-      <div class="exercise" style="border-bottom: none;">
-        <span class="exercise-name"><a href="https://www.amazon.com/dp/B0CBR5CPMB" target="_blank">BalanceFrom 3-in-1 Plyo Box<span class="video-badge">~$45</span></a></span>
+
+    <div class="wife-note">
+      <span class="icon">👫</span>
+      <p><strong>For Caylie:</strong> I've got her on the same exact program, her own weights. Compound lifts work the same for everyone. There is no separate "women's program." Why I'm so bought-in on Caylie lifting is below, along with her starting weights.</p>
+    </div>
+
+    <h2>Why Lifting Matters Especially for Caylie</h2>
+
+    <blockquote class="pull-quote-xl" style="color: var(--rose); border-color: rgba(169, 77, 109, 0.35);">
+      What Caylie banks in the next few years is the reserve she draws against for the rest of her life.
+      <span class="attribution">On bone density, fertility, and the role-model effect</span>
+    </blockquote>
+
+    <div class="editorial">
+      <div class="editorial-main">
+        <p>Most conversations about women and strength training skip the "why." Here's my honest read on why I'm so pushy about Caylie lifting, not just "staying active."</p>
+
+        <h3 class="micro-head" style="color: var(--rose);">Bone density is a one-shot window</h3>
+        <p>Women hit peak bone mass around age 30. After that, it's slow decline, and it accelerates at menopause. Heavy compound lifts are the single most effective stimulus for building and maintaining bone density. No supplement, no cardio, no yoga does this the way squatting and deadlifting does.</p>
+
+        <h3 class="micro-head" style="color: var(--rose);">Pregnancy prep and postpartum recovery</h3>
+        <p>Stronger women have easier pregnancies and recover faster. Core and hip strength protect the back when the body's carrying extra load. Pelvic floor activation (trained directly by squats and dumbbell RDLs) matters a lot postpartum. I'd rather Caylie show up to a potential pregnancy with 6–12 months of strength work banked than not.</p>
+
+        <h3 class="micro-head" style="color: var(--rose);">Metabolic resilience</h3>
+        <p>Muscle is the body's biggest organ for insulin sensitivity. More muscle means better glucose handling, which correlates with better fertility, steadier energy, and slower aging. Cardio does not build this. Lifting does.</p>
+
+        <h3 class="micro-head" style="color: var(--rose);">The role-model effect</h3>
+        <p>Your son is 5. Whatever he sees Caylie doing with her body in the next 10 years becomes his model for "what women do." A mom who lifts isn't a small thing.</p>
+      </div>
+      <aside class="editorial-aside" style="border-top-color: var(--rose);">
+        <span class="aside-eyebrow" style="color: var(--rose);">The short version</span>
+        Bone density, fertility, metabolic health, and what your son sees modeled every day. Four different arguments, one answer: barbell. Cardio and yoga are complements. They are not substitutes.
+      </aside>
+    </div>
+
+    <div class="tip-card rose">
+      <h4>For Caylie: Starting Weights</h4>
+      <p>Caylie's running the same Day A / Day B alternation as Manny. Adding 2.5–5 lbs per session instead of 5. Slower progression, smaller plate jumps, same endpoint.</p>
+      <p><strong>Squat:</strong> empty barbell (45 lbs). If the bar feels heavy on day one, I'd have her start with goblet squats using a dumbbell for 2 weeks, then back to the bar.</p>
+      <p><strong>Bench:</strong> empty barbell (45 lbs). Dumbbell bench as a substitute if needed.</p>
+      <p><strong>Overhead Press:</strong> 25–30 lbs (empty short bar or dumbbells).</p>
+      <p><strong>Dumbbell RDL:</strong> 15–20 lb dumbbells (3x8 instead of deadlifts).</p>
+      <p><strong>Barbell Row:</strong> 45–55 lbs.</p>
+    </div>
+
+    <div class="rules-card">
+      <h3>The Rules</h3>
+      <div class="rule-item"><strong>Never miss two in a row.</strong> <span>Miss one, that's life. Miss two, you're building a habit of not showing up.</span></div>
+      <div class="rule-item"><strong>150g protein a day.</strong> <span>Chicken, beef, eggs, shakes. This is the one nutrition thing that matters.</span></div>
+      <div class="rule-item"><strong>Add 5 lbs every session.</strong> <span>Small, consistent progression. Light to heavy without ever feeling overwhelmed.</span></div>
+      <div class="rule-item"><strong>Sleep beats supplements.</strong> <span>7+ hours. Nothing you can buy will outwork bad sleep.</span></div>
+      <div class="rule-item"><strong>Train together.</strong> <span>You and Caylie lifting is the accountability that works. Your son sees parents who take care of themselves.</span></div>
+    </div>
+
+    <h2>Gear You Need</h2>
+    <p>You can do everything with what you have, but these two additions will make a big difference for your back.</p>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Lifting Belt</h3>
+        <div class="exercise"><span class="exercise-name">Protects your spine under load. Wear it for all squat and deadlift working sets.</span></div>
+        <div class="exercise" style="border-bottom: none;">
+          <span class="exercise-name"><a href="https://www.amazon.com/dp/B01B1UQ0AA" target="_blank">Dark Iron Fitness Belt<span class="video-badge">~$40</span></a></span>
+        </div>
+      </div>
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Plyo Box or Bench</h3>
+        <div class="exercise"><span class="exercise-name">For box squats. A flat bench works too if you already have one. Seat height should put your thighs parallel to the floor.</span></div>
+        <div class="exercise" style="border-bottom: none;">
+          <span class="exercise-name"><a href="https://www.amazon.com/dp/B0CBR5CPMB" target="_blank">BalanceFrom 3-in-1 Plyo Box<span class="video-badge">~$45</span></a></span>
+        </div>
       </div>
     </div>
+
+    <h2>Apple Watch (strong add-on)</h2>
+    <div class="prose-block">
+      <p>Not required, but once you have one, sleep and recovery data feed directly into your coaching and the program gets smarter every week.</p>
+      <p><strong>Budget:</strong> used Apple Watch SE 2 or Series 7 on <a href="https://swappa.com/buy/apple-watch" target="_blank">Swappa</a> or eBay, typically $120–150. Has all the health sensors that matter. Get a GPS model, not cellular.</p>
+      <p><strong>Recommended:</strong> <a href="https://www.apple.com/shop/buy-watch/apple-watch-se" target="_blank">Apple Watch SE 3</a>, $249 new. Sleep stages, heart rate, HRV, and wrist temperature sensing (useful for Caylie's cycle tracking too). This is the one I'd get.</p>
+    </div>
+
+    <section class="chapter-end">
+      <div class="chapter-end-eyebrow">What's queued next</div>
+      <a class="chapter-end-link" data-goto-chapter="next">
+        <span class="chapter-end-num" style="font-size: 2.2rem; color: var(--rose);">✦</span>
+        <span class="chapter-end-name">Coming Next</span>
+        <span class="chapter-end-sub">Fertility, Pilates, screen time, journaling. Issue 03. →</span>
+      </a>
+    </section>
+
+    <h2>Our Journey So Far</h2>
+    <p>A running log of the coaching relationship. Every update adds a line. Fun to see the arc over time.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-date">Mar 24</span>
+        <span class="timeline-entry">First meeting at the barbershop. Built rapport.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Mar 25</span>
+        <span class="timeline-entry">Program v1 live. Founding-member spot offered and accepted.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Mar 29</span>
+        <span class="timeline-entry">Home gym set up. Manny and Caylie starting the program together.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Apr 1</span>
+        <span class="timeline-entry">First session done. Both hitting 150g+ protein from week one.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Apr 8</span>
+        <span class="timeline-entry">Haircut conversation: Pilates, fertility, screen time, journaling.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Apr 10</span>
+        <span class="timeline-entry">First organic referrals. Brother and coworker asking about coaching.</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Apr 16</span>
+        <span class="timeline-entry">Labs received. TG/HDL ratio 1.1, metabolic panel clean across the board.</span>
+      </div>
+      <div class="timeline-item latest">
+        <span class="timeline-date">Apr 17</span>
+        <span class="timeline-entry">Issue 02 shipped. Three chapters: Sleep first, Nutrition &amp; Labs, Lifting. Caylie woven throughout.</span>
+      </div>
+    </div>
+
+    <div class="checkin">
+      <p class="cta">Every week, text me what's heavy, what's easy, what's sore.</p>
+      <p>We adjust from there. The program is a living thing, not a worksheet.</p>
+    </div>
+
   </div>
 
-  <h2>Apple Watch (Optional)</h2>
-  <p>Not required, but if you want recovery data (sleep, heart rate, HRV) feeding into your coaching, here are the options.</p>
+  <!-- ============ SLEEP TAB (Chapter I) ============ -->
+  <div class="tab-panel active" id="panel-sleep" data-chapter="I">
 
-  <div class="workout-grid">
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Budget</h3>
-      <div class="exercise"><span class="exercise-name">Used Apple Watch SE 2 or Series 7</span></div>
-      <div class="exercise"><span class="exercise-name">Check <a href="https://swappa.com/buy/apple-watch" target="_blank">Swappa<span class="video-badge">$120-150</span></a> or eBay</span></div>
-      <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Has all the health sensors you need. Just make sure it's GPS model, not cellular.</span></div>
+    <section class="chapter-cover">
+      <div class="chapter-numeral">I</div>
+      <h2 class="chapter-title">Sleep</h2>
+      <p class="chapter-abstract">The foundation. The phone-out-of-the-bedroom protocol, bedroom environment, and why this matters twice over for a family trying to conceive.</p>
+    </section>
+
+    <h2>Sleep &amp; Recovery</h2>
+    <p class="drop-cap">You mentioned both of you scroll social before bed and sleep quality is suffering. Based on what you told me, my bet is this is the biggest lever you've got right now, bigger than any supplement or protein tweak. Sleep is where the muscle you build in the garage actually gets built. It's also where testosterone is produced (for you) and where egg quality is protected (for Caylie). With you two trying for a second child, this matters twice over.</p>
+
+    <blockquote class="pull-quote-xl">
+      You can't out-train, out-eat, or out-supplement bad sleep.
+      <span class="attribution">Rule II · The Foundation</span>
+    </blockquote>
+
+    <h2>The Phone-Out-Of-The-Bedroom Protocol</h2>
+    <div class="editorial">
+      <div class="editorial-main">
+        <p>If you only do one thing from this page, do this one: <strong>phone charges in the kitchen, not on the nightstand.</strong> Buy a $20 alarm clock if you need one. That's it. That's the whole thing.</p>
+        <p><strong>Blue light isn't the main issue.</strong> The real issue is stimulation. A 2-minute doomscroll spikes cortisol and dopamine right when your body needs to be winding down. You stop producing melatonin. You delay sleep by 30–60 minutes without realizing it.</p>
+        <p><strong>The morning matters too.</strong> If your phone is next to you, the first thing your brain does is check it. That's a cortisol spike before your feet hit the floor. Phone in the kitchen means you start the day with 10 minutes of your own thoughts before the world loads in.</p>
+      </div>
+      <aside class="editorial-aside">
+        <span class="aside-eyebrow">The experiment</span>
+        Two weeks. Phone in the kitchen, $20 alarm clock, lights out by 10:30pm. Report back on how you both feel. Happy to hear "didn't work" just as much as "game changer," both tell me something.
+      </aside>
     </div>
-    <div class="workout-card">
-      <h3><span class="day-dot"></span> Recommended</h3>
-      <div class="exercise"><span class="exercise-name">Apple Watch SE 3 (new)</span></div>
-      <div class="exercise"><span class="exercise-name"><a href="https://www.apple.com/shop/buy-watch/apple-watch-se" target="_blank">Apple Store<span class="video-badge">$249</span></a></span></div>
-      <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Latest budget model. Sleep tracking, heart rate, workout detection, Apple Health sync. This is the one I'd get.</span></div>
+
+    <div class="routine-card">
+      <h3>Wind-Down Routine (Start 60 min before bed)</h3>
+      <div class="routine-item"><span class="routine-time">T-60</span> Phone plugs in outside the bedroom. Lights dim.</div>
+      <div class="routine-item"><span class="routine-time">T-45</span> Shower or bath. Warm water signals the body to drop core temp (which triggers sleep).</div>
+      <div class="routine-item"><span class="routine-time">T-30</span> 10-15 min with Caylie. Talk about the day. Or read a physical book.</div>
+      <div class="routine-item"><span class="routine-time">T-10</span> Brush teeth, set room to 65-68°F, blackout mode.</div>
+      <div class="routine-item"><span class="routine-time">T-0</span> Lights out. Same time every night, weekends included.</div>
     </div>
+
+    <hr class="prose-rule">
+
+    <h2>Bedroom Environment</h2>
+    <p>Three variables. Get all three right once and your sleep improves every night for free.</p>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Cool</h3>
+        <div class="exercise"><span class="exercise-name" style="font-weight: 400;">Room temperature: 65-68°F.</span></div>
+        <div class="exercise"><span class="exercise-name" style="font-weight: 400;">Body needs to drop core temp to fall asleep. A warm room fights you.</span></div>
+        <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">AC, fan, or crack a window. Cheapest upgrade on this page.</span></div>
+      </div>
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Dark</h3>
+        <div class="exercise"><span class="exercise-name" style="font-weight: 400;">Blackout curtains or sleep mask.</span></div>
+        <div class="exercise"><span class="exercise-name" style="font-weight: 400;">Any light (including the LED on your router) interrupts melatonin production.</span></div>
+        <div class="exercise" style="border-bottom:none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Tape a piece of black electrical tape over every LED in the room.</span></div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <h4>Quiet (Or Consistent)</h4>
+      <p><strong>A white noise machine is $30 and worth every penny.</strong> It won't silence noise, it will mask it. Your brain stops tracking sudden sounds (a dog barking, a car door) and settles deeper. Especially useful if your son wakes up at night or you live near traffic. Ours is a Hatch Rest or a basic Homedics for $25 on Amazon.</p>
+    </div>
+
+    <h2>Caffeine &amp; Alcohol</h2>
+    <div class="prose-block">
+      <p>Both disrupt sleep architecture even when you don't "feel" it. Two rules.</p>
+      <h3 class="micro-head">Caffeine, cut off by 2pm</h3>
+      <p>Half-life is 6 hours. A 3pm coffee is still in your system at 9pm, keeping you in lighter sleep stages even if you fall asleep fine. If you want an afternoon pick-me-up, go for a 10-minute walk outside instead. Sunlight does what coffee does, without the cost.</p>
+      <h3 class="micro-head">Alcohol knocks you out, but destroys recovery</h3>
+      <p>A drink makes you drowsy, but it crushes REM sleep, which is where the brain recovers and hormones get regulated. If you're going to drink, finish 3 hours before bed and hydrate. Don't use it as a sleep aid. It's the opposite.</p>
+    </div>
+
+    <h2>Why This Matters for Fertility</h2>
+    <p>You're trying for a second child. Sleep is the most underrated fertility lever for both of you.</p>
+
+    <div class="editorial">
+      <div class="editorial-main">
+        <h3 class="micro-head">For Manny</h3>
+        <p><strong>Testosterone is produced during deep sleep.</strong> One week of 5-hour sleep drops testosterone by 10–15%. That affects libido, recovery, and sperm quality. 7+ hours of quality sleep is the foundation of your T production.</p>
+        <h3 class="micro-head">For Caylie</h3>
+        <p><strong>Melatonin is a primary antioxidant in the ovaries.</strong> It protects egg quality. Phone light before bed suppresses melatonin. Getting her to 7–8 hours of dark, undisturbed sleep is one of the simplest, cheapest things you can do to support fertility.</p>
+      </div>
+      <aside class="editorial-aside">
+        <span class="aside-eyebrow">Cheapest fertility move</span>
+        Neither of these costs a dollar. Phones in the kitchen, curtains drawn, room at 65–68°F. Two weeks. Then we talk labs.
+      </aside>
+    </div>
+
+    <div class="checkin">
+      <p class="cta">Try it for two weeks.</p>
+      <p>Phone in the kitchen. 65-68°F. Lights out by 10:30pm. Report back on how you both feel.</p>
+    </div>
+
+    <section class="chapter-end">
+      <div class="chapter-end-eyebrow">Continue reading</div>
+      <a class="chapter-end-link" data-goto-chapter="nutrition">
+        <span class="chapter-end-num">II</span>
+        <span class="chapter-end-name">Nutrition &amp; Labs</span>
+        <span class="chapter-end-sub">The evidence. →</span>
+      </a>
+    </section>
+
   </div>
 
-  <div class="checkin">
-    <p class="cta">Give this a couple weeks, then check in.</p>
-    <p>What's heavy, what's easy, what's sore. We adjust from there. The first week might feel light. That's by design.</p>
+  <!-- ============ NUTRITION & LABS TAB (Chapter II) ============ -->
+  <div class="tab-panel" id="panel-nutrition" data-chapter="II">
+
+    <section class="chapter-cover">
+      <div class="chapter-numeral">II</div>
+      <h2 class="chapter-title">Nutrition &amp; Labs</h2>
+      <p class="chapter-abstract">The evidence. Manny's labs read in full, the 150g protein rule, and where to draw blood in Concord and Pleasant Hill.</p>
+    </section>
+
+    <h2>Manny's Labs: Foundation Is Locked In</h2>
+    <p class="drop-cap">Manny, I went through both panels you sent over. The headline: your numbers are excellent. Cleaner than most 35-year-olds I've seen, and your training and nutrition are already showing up in the bloodwork.</p>
+
+    <div class="featured-number">
+      <div class="big-number">1.1</div>
+      <div class="label">TG / HDL Ratio</div>
+      <div class="scale">
+        <span class="scale-dot" style="left: 20%;"></span>
+      </div>
+      <div class="scale-labels">
+        <span>Optimal · 1.0</span>
+        <span>Concerning · 3.5+</span>
+      </div>
+      <p class="caption">The single best metabolic health marker on a standard panel. Under 2 is excellent. You're at 1.1.</p>
+    </div>
+
+    <h3 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 1.5rem 0 0.75rem;">Lipid Panel</h3>
+
+    <div class="lab-table">
+      <div class="lab-head">
+        <span>Marker</span><span>Value</span><span>Read</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Total Cholesterol</span>
+        <span class="lab-value">151 mg/dL</span>
+        <span class="lab-read">Well below 200</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">LDL</span>
+        <span class="lab-value">75 mg/dL</span>
+        <span class="lab-read">Optimal (under 100)</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">HDL</span>
+        <span class="lab-value">62 mg/dL</span>
+        <span class="lab-read">Above 60 protective line</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Triglycerides</span>
+        <span class="lab-value">69 mg/dL</span>
+        <span class="lab-read">Well below 150</span>
+      </div>
+      <div class="lab-row highlight">
+        <span class="lab-marker">TG/HDL Ratio</span>
+        <span class="lab-value">1.1</span>
+        <span class="lab-read">Excellent (under 2)</span>
+      </div>
+    </div>
+
+    <h3 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 1.5rem 0 0.75rem;">Metabolic Panel</h3>
+
+    <div class="lab-table">
+      <div class="lab-head">
+        <span>Marker</span><span>Value</span><span>Read</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Fasting Glucose</span>
+        <span class="lab-value">83 mg/dL</span>
+        <span class="lab-read">Solid, under 90</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Albumin</span>
+        <span class="lab-value">4.8 g/dL</span>
+        <span class="lab-read">Protein intake showing up</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">AST / ALT (liver)</span>
+        <span class="lab-value">17 / 21</span>
+        <span class="lab-read">Clean</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Creatinine (kidney)</span>
+        <span class="lab-value">0.97 mg/dL</span>
+        <span class="lab-read">Normal</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Electrolytes</span>
+        <span class="lab-value">Normal</span>
+        <span class="lab-read">Na, K, Cl, CO2 all in range</span>
+      </div>
+    </div>
+
+    <h2>Manny's Follow-Up Labs (Optional, ~$130)</h2>
+    <div class="editorial">
+      <div class="editorial-main">
+        <p>Your doctor ran the baseline. Four add-ons give us the full picture, especially with you lifting consistently and trying for a second child. You don't need a doctor visit for these. <a href="https://www.discountedlabs.com/" target="_blank">discountedlabs.com</a> or <a href="https://www.ultalabtests.com/" target="_blank">ultalabtests.com</a> both use Quest. Order online, walk in, results in a few days.</p>
+      </div>
+      <aside class="editorial-aside">
+        <span class="aside-eyebrow">Closest Quest locations</span>
+        <strong style="font-style: normal;">Concord:</strong> 2425 E St, Ste 6 (Mon–Fri 7:30a–4:30p, Sat 8a–12p) · 4383 Clayton Rd.<br><br>
+        <strong style="font-style: normal;">Pleasant Hill:</strong> 401 Gregory Ln, Ste 146.<br><br>
+        <a href="https://appointment.questdiagnostics.com/" target="_blank" style="color: var(--chapter-accent, var(--accent));">Schedule through Quest</a> or walk in.
+      </aside>
+    </div>
+
+    <div class="lab-table">
+      <div class="lab-head">
+        <span>Marker</span><span>Cost</span><span>Why</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">HbA1c</span>
+        <span class="lab-value">~$21</span>
+        <span class="lab-read">3-month glucose avg (more useful than one fasting reading)</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Vitamin D</span>
+        <span class="lab-value">~$41</span>
+        <span class="lab-read">Most people low. Affects recovery, sleep, fertility.</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Testosterone (total + free)</span>
+        <span class="lab-value">~$49</span>
+        <span class="lab-read">Baseline for lifting + second child</span>
+      </div>
+      <div class="lab-row">
+        <span class="lab-marker">Ferritin</span>
+        <span class="lab-value">~$19</span>
+        <span class="lab-read">Iron stores. Training depletes these.</span>
+      </div>
+    </div>
+
+    <div class="prose-block">
+      <h3 class="micro-head">Stretch adds (if you want the full picture)</h3>
+      <p><strong>ApoB (~$30):</strong> gold-standard cardiovascular risk marker. More predictive than LDL alone.</p>
+      <p><strong>hsCRP (~$20):</strong> inflammation marker. Relevant given the car accident and ongoing back pain.</p>
+      <p><strong>Lp(a) (~$30):</strong> genetic cardiovascular risk. One-time lifetime test. Run it once, never again.</p>
+    </div>
+
+    <h2>Manny's Nutrition: Keep It Simple</h2>
+    <p>Manny, you're already hitting 150g+ protein from week 1. You don't need a meal plan. You need one rule: <strong>150g+ protein a day</strong>. That's the single thing that drives muscle growth and body recomp. Everything else is secondary.</p>
+
+    <p>The easiest way to hit it: front-load breakfast with 30-40g protein. That puts you on pace for the day without thinking about it.</p>
+
+    <h3 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 1.5rem 0 0.75rem;">Grab-and-Go Breakfasts (take to work)</h3>
+
+    <div class="workout-grid">
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> Zero Effort</h3>
+        <div class="exercise"><span class="exercise-name">Greek yogurt (Fage 0%)</span><span class="exercise-sets">18g per cup</span></div>
+        <div class="exercise"><span class="exercise-name">Hard boiled eggs (batch Sunday)</span><span class="exercise-sets">6g each</span></div>
+        <div class="exercise"><span class="exercise-name">Premier Protein shake</span><span class="exercise-sets">30g per bottle</span></div>
+        <div class="exercise" style="border-bottom: none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Pick one. 30 seconds. Out the door.</span></div>
+      </div>
+      <div class="workout-card">
+        <h3><span class="day-dot"></span> 10-Minute Prep (Sunday)</h3>
+        <div class="exercise"><span class="exercise-name">Egg muffins (eggs + meat + cheese)</span><span class="exercise-sets">25-30g for 3-4</span></div>
+        <div class="exercise"><span class="exercise-name">Overnight oats + protein powder</span><span class="exercise-sets">35-40g per jar</span></div>
+        <div class="exercise" style="border-bottom: none;"><span class="exercise-name" style="color:var(--muted); font-weight:400;">Batch cook Sunday. Grab from the fridge all week.</span></div>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <h4>The Math</h4>
+      <p>Breakfast: 30-40g. Lunch: 40-50g. Dinner: 40-50g. Snack or shake: 20-30g. That's 150g+ without counting a single calorie. If you're short, add a protein shake after your workout.</p>
+    </div>
+
+    <div class="tip-card rose">
+      <h4>For Caylie: Protein Target 100-120g</h4>
+      <p>Scaled to her bodyweight. Same playbook: front-load breakfast with 30-40g, coast the rest of the day. Greek yogurt, eggs, chicken, Premier Protein shakes. If she wants to match Manny's 150g, nothing wrong with that.</p>
+    </div>
+
+    <div class="tip-card rose">
+      <h4>For Caylie: Three Nutrients Worth Extra Attention</h4>
+      <p><strong>Folate (400-600 mcg/day):</strong> matters a lot for a healthy pregnancy. Leafy greens, lentils, fortified cereals, or a prenatal vitamin. Most OBs recommend starting a prenatal 3 months before trying to conceive.</p>
+      <p><strong>Iron:</strong> women lose iron monthly. Red meat 2-3x per week, or pair plant sources (spinach, beans) with vitamin C to absorb better. Ferritin lab check if energy drops.</p>
+      <p><strong>Vitamin D:</strong> affects hormone regulation and egg quality. 2,000-4,000 IU/day is a reasonable range unless she's getting a lot of sun. Both of you could probably stand to supplement.</p>
+    </div>
+
+    <section class="chapter-end">
+      <div class="chapter-end-eyebrow">Continue reading</div>
+      <a class="chapter-end-link" data-goto-chapter="lifting">
+        <span class="chapter-end-num">III</span>
+        <span class="chapter-end-name">Lifting</span>
+        <span class="chapter-end-sub">Where we started. →</span>
+      </a>
+    </section>
+
+  </div>
+
+  <!-- ============ COMING NEXT (its own TOC entry / panel) ============ -->
+  <div class="tab-panel" id="panel-next" data-chapter="NEXT">
+
+    <section class="chapter-cover">
+      <div class="chapter-numeral" style="font-style: normal;">✦</div>
+      <h2 class="chapter-title">Coming Next</h2>
+      <p class="chapter-abstract">Issue 03, whenever the sleep experiment is dialed in. Here's what's queued.</p>
+    </section>
+
+    <blockquote class="pull-quote-xl" style="color: var(--rose); border-color: rgba(169, 77, 109, 0.35);">
+      A few more things, queued for you.
+      <span class="attribution">Issue 03 ships after two solid weeks of sleep</span>
+    </blockquote>
+
+    <p class="next-issue-dek" style="max-width: 52ch; margin-bottom: 2.5rem;">These came up in our conversations and they matter, but they don't all need to happen this month. The gate is two weeks of the sleep experiment, phones in the kitchen, running clean. Apple Watches make it measurable but aren't required. Once the sleep is dialed in, the next issue ships with these.</p>
+
+    <div class="next-issue-list">
+      <div class="next-issue-item">
+        <span class="ni-num">I</span>
+        <div class="ni-body">
+          <span class="ni-name">Fertility, in full.</span>
+          <span class="ni-blurb">The semen analysis path for Manny, the any-day and cycle-timed labs for Caylie, LH surge kits, and when to see a specialist. The workup, the sequence, and why sleep comes first.</span>
+        </div>
+      </div>
+      <div class="next-issue-item">
+        <span class="ni-num">II</span>
+        <div class="ni-body">
+          <span class="ni-name">Screen time, as a family.</span>
+          <span class="ni-blurb">Not just the two of you. Cairo's exposure, phone-free dinners, and the small rituals that compound over a childhood. Same principle as the Sleep chapter, applied wider.</span>
+        </div>
+      </div>
+      <div class="next-issue-item">
+        <span class="ni-num">III</span>
+        <div class="ni-body">
+          <span class="ni-name">Pilates for Caylie.</span>
+          <span class="ni-blurb">Local studios in Concord ranked by cost, with a short read on why Pilates is the right complement to the barbell rather than a replacement for it.</span>
+        </div>
+      </div>
+      <div class="next-issue-item">
+        <span class="ni-num">IV</span>
+        <div class="ni-body">
+          <span class="ni-name">Journaling, as a practice.</span>
+          <span class="ni-blurb">Two or three minutes on paper most mornings. What to write. Why it matters more than you'd think, especially the week of a big decision or a hard week at the shop.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="next-issue-cta" style="margin-top: 3rem;">Run Sleep for two weeks. Then we reassess and ship Issue 03.</p>
+
   </div>
 
 </div>
 
 <div class="footer">
-  <span>Built for Manny by Andrew Deal</span>
-  <span>March 2026</span>
+  <span>A Personal Health Record · Manny &amp; Caylie</span>
+  <span>Issue 02 · April 17, 2026</span>
 </div>
+
+<script>
+  // --- Chapter-by-chapter switching (rail + chapter-end handoffs + legacy data-goto) ---
+  const CHAPTER_NUMERAL = { sleep: 'I', nutrition: 'II', lifting: 'III', next: 'NEXT' };
+  function gotoChapter(chapter, opts = {}) {
+    if (!CHAPTER_NUMERAL[chapter]) return;
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('panel-' + chapter);
+    if (!panel) return;
+    panel.classList.add('active');
+    document.body.setAttribute('data-chapter', CHAPTER_NUMERAL[chapter]);
+    document.querySelectorAll('[data-rail]').forEach(el => {
+      el.classList.toggle('active', el.dataset.rail === chapter);
+    });
+    if (history.replaceState) history.replaceState(null, '', '#' + chapter);
+    if (opts.scroll !== false) {
+      const content = document.querySelector('.content');
+      if (content) {
+        const top = content.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  }
+  document.querySelectorAll('[data-goto-chapter]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      gotoChapter(el.dataset.gotoChapter);
+    });
+  });
+  // Legacy in-content links like <a data-goto="fertility">
+  document.querySelectorAll('[data-goto]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      gotoChapter(link.dataset.goto);
+    });
+  });
+
+  // --- Right-rail + mobile pill rail fade in once user scrolls past the cover ---
+  const chapterRail = document.getElementById('chapterRail');
+  const chapterRailMobile = document.getElementById('chapterRailMobile');
+  const coverEl = document.getElementById('cover');
+  const showStickyAt = () => (coverEl ? coverEl.offsetHeight * 0.75 : 600);
+  function updateSticky() {
+    const past = window.scrollY > showStickyAt();
+    if (chapterRail) chapterRail.classList.toggle('show', past);
+    if (chapterRailMobile) chapterRailMobile.classList.toggle('show', past);
+  }
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  updateSticky();
+
+  // --- Initial hash handling ---
+  const initialHash = window.location.hash.slice(1);
+  if (initialHash && CHAPTER_NUMERAL[initialHash]) {
+    gotoChapter(initialHash, { scroll: true });
+  }
+
+  // --- Week toggle (kept) ---
+  document.querySelectorAll('.week-toggle span').forEach(span => {
+    span.addEventListener('click', () => {
+      const parent = span.parentElement;
+      parent.querySelectorAll('span').forEach(s => s.classList.remove('active'));
+      span.classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
