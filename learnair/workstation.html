@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>if(localStorage.getItem('learnair_access')!=='granted'){window.location.href='gate.html?r='+encodeURIComponent(location.pathname.split('/').pop()||'index.html');}</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Mike's Workstation — Concept Map | LearnAIR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a; --paper: #f4f1eb; --warm: #e8e3d9; --accent: #b44a2d;
+    --accent-soft: rgba(180, 74, 45, 0.08); --muted: #6b6560; --faint: #c9c3b8;
+    --white: #fefdfb;
+    --claude:   #b44a2d; --claude-soft:   rgba(180, 74, 45, 0.10);
+    --cli:      #2d6a4f; --cli-soft:      rgba(45, 106, 79, 0.10);
+    --internet: #1e40af; --internet-soft: rgba(30, 64, 175, 0.08);
+    --learnair: #a06c23; --learnair-soft: rgba(160, 108, 35, 0.10);
+    --capstone: #6d28d9; --capstone-soft: rgba(109, 40, 217, 0.09);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 17px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Space Grotesk', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+  a { color: inherit; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(244, 241, 235, 0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--faint); padding: 0.75rem 1.5rem; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  nav .logo { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.78rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none;
+    display: flex; align-items: center; gap: 0.6rem; }
+  .doc-badge { font-size: 0.55rem; letter-spacing: 0.1em; background: var(--ink); color: var(--paper);
+    padding: 2px 7px; font-weight: 500; }
+  .back-link { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em;
+    text-decoration: none; color: var(--muted); font-weight: 500; }
+  .back-link:hover { color: var(--ink); }
+
+  .hero { max-width: 1180px; margin: 0 auto; padding: 3rem 1.5rem 1.25rem; }
+  .hero .kicker { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem; }
+  .hero .kicker::before { content: ''; width: 2rem; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(2rem, 4.5vw, 2.8rem);
+    line-height: 1.1; margin-bottom: 0.9rem; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .subtitle { font-size: 0.97rem; color: var(--muted); max-width: 680px; }
+  .hero .subtitle code { font-family: 'JetBrains Mono', monospace; font-size: 0.85em;
+    background: var(--accent-soft); color: var(--accent); padding: 0.08rem 0.35rem; border-radius: 4px; }
+  .hero .stat-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.25rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); }
+  .hero .stat strong { color: var(--ink); font-weight: 600; font-size: 0.8rem; margin-right: 0.3rem; }
+
+  .how { max-width: 1180px; margin: 1.5rem auto 2rem; padding: 0 1.5rem; }
+  .how-card { background: var(--ink); color: var(--paper); border-radius: 14px; padding: 1.5rem 1.75rem; }
+  .how-card h3 { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .how-row { display: flex; gap: 1.25rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 0.88rem; align-items: baseline; }
+  .how-row:last-child { border-bottom: none; }
+  .how-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent);
+    min-width: 160px; flex-shrink: 0; }
+  .how-desc { color: rgba(250,249,246,0.85); }
+  .how-desc code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    background: rgba(255,255,255,0.09); padding: 0.12rem 0.4rem; border-radius: 4px; color: var(--paper); }
+
+  .section-title { max-width: 1180px; margin: 2.5rem auto 1rem; padding: 0 1.5rem; }
+  .section-title h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.75rem;
+    letter-spacing: -0.01em; }
+  .section-title p { color: var(--muted); font-size: 0.92rem; margin-top: 0.3rem; max-width: 720px; }
+
+  .legend { max-width: 1180px; margin: 0.75rem auto 1rem; padding: 0 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+  .legend-count { color: var(--ink); margin-left: 0.35rem; }
+  .dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--muted); }
+  .dot-claude { background: var(--claude); }
+  .dot-cli { background: var(--cli); }
+  .dot-internet { background: var(--internet); }
+  .dot-learnair { background: var(--learnair); }
+  .dot-capstone { background: var(--capstone); }
+
+  .map-wrap { max-width: 1180px; margin: 0 auto 2rem; padding: 0 1.5rem; }
+  .map-grid { display: grid; grid-template-columns: 110px repeat(5, 1fr); gap: 0;
+    background: var(--white); border: 1px solid var(--faint); border-radius: 14px; overflow: hidden; }
+  .map-cell { padding: 0.75rem 0.75rem; border-right: 1px solid var(--faint);
+    border-bottom: 1px solid var(--faint); min-height: 88px;
+    display: flex; flex-wrap: wrap; gap: 0.35rem; align-content: flex-start; }
+  .map-cell:nth-child(6n) { border-right: none; }
+  .map-grid > .map-cell:nth-last-child(-n+6) { border-bottom: none; }
+  .map-header { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--warm);
+    min-height: auto; padding: 0.75rem; align-items: center; font-weight: 500; }
+  .map-header.map-track-claude { color: var(--claude); }
+  .map-header.map-track-cli { color: var(--cli); }
+  .map-header.map-track-internet { color: var(--internet); }
+  .map-header.map-track-learnair { color: var(--learnair); }
+  .map-header.map-track-capstone { color: var(--capstone); }
+  .map-header .dot { margin-right: 0.45rem; }
+  .map-track-claude .dot { background: var(--claude); }
+  .map-track-cli .dot { background: var(--cli); }
+  .map-track-internet .dot { background: var(--internet); }
+  .map-track-learnair .dot { background: var(--learnair); }
+  .map-track-capstone .dot { background: var(--capstone); }
+  .map-tier { writing-mode: horizontal-tb; font-weight: 600; color: var(--ink); background: var(--warm);
+    justify-content: flex-start; }
+  .map-corner { background: var(--warm); color: var(--muted); font-size: 0.6rem; }
+  .map-empty { color: var(--faint); font-size: 0.9rem; justify-content: center; align-items: center; }
+
+  .chip { display: inline-block; font-size: 0.72rem; line-height: 1.3; padding: 0.3rem 0.55rem;
+    border-radius: 6px; text-decoration: none; font-weight: 500; border: 1px solid transparent;
+    transition: transform 0.12s ease, box-shadow 0.12s ease; }
+  .chip:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .chip-claude { background: var(--claude-soft); color: var(--claude); border-color: rgba(180, 74, 45, 0.25); }
+  .chip-cli { background: var(--cli-soft); color: var(--cli); border-color: rgba(45, 106, 79, 0.25); }
+  .chip-internet { background: var(--internet-soft); color: var(--internet); border-color: rgba(30, 64, 175, 0.25); }
+  .chip-learnair { background: var(--learnair-soft); color: var(--learnair); border-color: rgba(160, 108, 35, 0.28); }
+  .chip-capstone { background: var(--capstone-soft); color: var(--capstone); border-color: rgba(109, 40, 217, 0.25); }
+
+  .tracks { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .track-section { margin-top: 2.5rem; }
+  .track-head { display: flex; align-items: center; gap: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--faint); margin-bottom: 1.25rem; }
+  .track-swatch { width: 6px; align-self: stretch; border-radius: 3px; flex-shrink: 0; }
+  .swatch-claude { background: var(--claude); }
+  .swatch-cli { background: var(--cli); }
+  .swatch-internet { background: var(--internet); }
+  .swatch-learnair { background: var(--learnair); }
+  .swatch-capstone { background: var(--capstone); }
+  .track-head h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 1.45rem; }
+  .track-head p.track-blurb { color: var(--muted); font-size: 0.88rem; margin-top: 0.15rem; }
+  .track-count { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.9rem; }
+  .card { background: var(--white); border: 1px solid var(--faint); border-radius: 12px;
+    padding: 1rem 1.1rem; }
+  .card-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.5rem; }
+  .card-tier { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em;
+    color: var(--muted); background: var(--warm); padding: 0.1rem 0.4rem; border-radius: 4px; }
+  .card h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+  .card-summary { font-size: 0.85rem; color: var(--ink); margin-bottom: 0.7rem; }
+  .card-quiz { border-top: 1px dashed var(--faint); padding-top: 0.55rem; }
+  .quiz-label { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); }
+  .card-quiz p { font-size: 0.82rem; color: var(--muted); margin-top: 0.25rem; font-style: italic; }
+
+  footer { max-width: 1180px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem;
+    border-top: 1px solid var(--faint); font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  @media (max-width: 900px) {
+    .map-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .map-grid { grid-template-columns: 72px repeat(5, minmax(140px, 1fr)); min-width: 820px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .hero { padding: 2rem 1.25rem 1rem; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero .subtitle { font-size: 0.9rem; line-height: 1.55; }
+    .how { padding: 0 1.25rem; }
+    .how-card { padding: 1.25rem; }
+    .how-row { flex-direction: column; gap: 0.25rem; padding: 0.7rem 0; }
+    .how-label { min-width: auto; }
+    .section-title { padding: 0 1.25rem; }
+    .legend { padding: 0 1.25rem; gap: 0.6rem; font-size: 0.62rem; }
+    .tracks { padding: 0 1.25rem 3rem; }
+    .track-head { flex-wrap: wrap; }
+    .track-count { margin-left: 0; font-size: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">LearnAIR <span class="doc-badge">Workstation</span></a>
+    <a href="index.html" class="back-link">&larr; Back to LearnAIR</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Concept Map · 80 concepts · 5 tracks · 6 tiers</div>
+  <h1>Mike's <em>Workstation</em></h1>
+  <p class="subtitle">
+    The spaced-rep deck backing the Alpha week. Each chip is a concept in the <code>learning</code> MCP.
+    Read the grid left-to-right through a track, top-to-bottom through tier. Click a chip to jump to
+    its summary and the quiz prompt Claude will actually ask you.
+  </p>
+  <div class="stat-row">
+    <span class="stat"><strong>T1</strong>19</span>
+    <span class="stat"><strong>T2</strong>19</span>
+    <span class="stat"><strong>T3</strong>18</span>
+    <span class="stat"><strong>T4</strong>11</span>
+    <span class="stat"><strong>T5</strong>9</span>
+    <span class="stat"><strong>T6</strong>4</span>
+  </div>
+</header>
+
+<section class="how">
+  <div class="how-card">
+    <h3>How to use this page</h3>
+    <div class="how-row">
+      <span class="how-label">Prep</span>
+      <span class="how-desc">Scan the grid. Notice the tiers with the most density — those are the backbone weeks.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Drill</span>
+      <span class="how-desc">Click any chip to jump to its detail card with the summary and quiz prompt.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Practice</span>
+      <span class="how-desc">In Claude Desktop: <code>quiz me on cli</code> (or any track). Mark honestly with <code>mark that correct</code> or <code>mark that wrong</code>.</span>
+    </div>
+    <div class="how-row">
+      <span class="how-label">Checkpoint</span>
+      <span class="how-desc"><code>show my progress</code> at the end of each session. <code>share my progress</code> so Andrew can see.</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-title">
+  <h2>The map</h2>
+  <p>Rows are tiers (difficulty). Columns are tracks. Cells are the concepts sitting at that intersection.</p>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span class="dot dot-claude"></span>Claude Desktop <span class="legend-count">30</span></span><span class="legend-item"><span class="dot dot-cli"></span>Claude Code / CLI <span class="legend-count">15</span></span><span class="legend-item"><span class="dot dot-internet"></span>Internet &amp; Computing <span class="legend-count">11</span></span><span class="legend-item"><span class="dot dot-learnair"></span>LearnAIR Domain <span class="legend-count">16</span></span><span class="legend-item"><span class="dot dot-capstone"></span>Capstone Project <span class="legend-count">8</span></span>
+</div>
+
+<div class="map-wrap">
+<div class="map-grid"><div class="map-cell map-header map-corner"><span>tier ↓ · track →</span></div><div class="map-cell map-header map-track-claude"><span class="dot"></span>Claude Desktop</div><div class="map-cell map-header map-track-cli"><span class="dot"></span>Claude Code / CLI</div><div class="map-cell map-header map-track-internet"><span class="dot"></span>Internet &amp; Computing</div><div class="map-cell map-header map-track-learnair"><span class="dot"></span>LearnAIR Domain</div><div class="map-cell map-header map-track-capstone"><span class="dot"></span>Capstone Project</div><div class="map-cell map-header map-tier">Tier 1</div><div class="map-cell"><a class="chip chip-claude" href="#c-context-window" title="How much text Claude can see at once (200K-1M tokens). Attention degrades in long threads. Claude pays most attention to the beginning and end.">Context Window</a><a class="chip chip-claude" href="#c-models" title="Three sizes. Haiku: fast, simple tasks. Sonnet: balanced daily driver. Opus: deep reasoning, complex problems. Claude Pro gives you Sonnet by default.">Models: Haiku, Sonnet, Opus</a><a class="chip chip-claude" href="#c-system-prompts" title="Instructions set before the conversation that shape Claude&#x27;s behavior for the entire thread. In Claude Desktop, this is Project Instructions. Replaces persona-pasting.">System Prompts / Custom Instructions</a><a class="chip chip-claude" href="#c-temperature" title="Setting from 0-1. Low = safe, consistent, factual. High = creative, varied, sometimes wild. Claude Desktop defaults to balanced.">Temperature (Creativity Dial)</a><a class="chip chip-claude" href="#c-tokens" title="The unit Claude thinks in. ~1 token = 3/4 of a word. Rate limits are token-based. Longer prompts and responses burn more tokens.">Tokens</a><a class="chip chip-claude" href="#c-what-claude-is" title="An LLM that predicts the next best response by pattern-matching across training data. Not sentient, not a database. More context = better patterns.">What Claude Actually Is</a></div><div class="map-cell"><a class="chip chip-cli" href="#c-cli-vs-desktop" title="Claude Desktop is a chat app with document panels. Claude Code is an agent that runs in your terminal and works directly on your files. Same model, different posture: Desktop talks, Code acts. You don&#x27;t copy-paste code into a chat. Claude reads and edits files in place.">Claude Code vs. Claude Desktop</a><a class="chip chip-cli" href="#c-installing-claude-code" title="One command: `npm install -g @anthropic-ai/claude-code`. You need Node.js installed first (it probably already is, or you install from nodejs.org). Then `claude --version` confirms it worked. No separate app to launch. The tool IS the CLI command.">Installing Claude Code</a><a class="chip chip-cli" href="#c-terminal-basics" title="Claude Code runs in Terminal (or iTerm). You need five commands: cd (change directory), ls (list files), pwd (where am I), cat (show file contents), and command+T (new tab). Everything else you can ask Claude to do. You don&#x27;t need to become a shell ninja.">Terminal Basics You&#x27;ll Actually Use</a><a class="chip chip-cli" href="#c-first-run" title="Navigate into any project directory and type `claude`. You&#x27;re now in an interactive session with Claude sitting inside that directory. It knows what files are there. You talk to it in plain English: &#x27;What does this project do?&#x27; It reads the files and tells you. Ctrl+C twice to exit.">Your First Claude Code Session</a></div><div class="map-cell"><a class="chip chip-internet" href="#c-cloud-local" title="Local: runs on your machine. Cloud: runs on someone else&#x27;s machine, accessed over the internet. Claude runs in the cloud. Your workspace files are local. Understanding which is which matters for privacy, speed, and cost.">Cloud vs. Local Computing</a><a class="chip chip-internet" href="#c-cli-basics" title="The command line (Terminal) is how you talk to your computer directly. No buttons, no menus. Type a command, get a result. It&#x27;s faster and more powerful than clicking, and it&#x27;s how most AI infrastructure is managed.">Command Line Basics</a><a class="chip chip-internet" href="#c-http-basics" title="Every time you visit a website, your browser sends an HTTP request to a server and gets a response back. A URL is an address. HTTP is the language. GET fetches. POST sends. This is the foundation everything else sits on.">How the Internet Works: HTTP and URLs</a><a class="chip chip-internet" href="#c-saas-platforms" title="SaaS (Software as a Service): you pay monthly, the company runs the servers. Salesforce, Slack, Claude Pro. A platform is SaaS that other people build on top of. Understanding this matters because most AI tools your employers use are SaaS.">SaaS and Platforms</a></div><div class="map-cell"><a class="chip chip-learnair" href="#c-loop-transition" title="In-the-loop: human does the work with AI assisting (copilot era). On-the-loop: AI does the work with human supervising (agent era). Most training is still in-the-loop. The market is moving on-the-loop. That&#x27;s where the jobs are.">In-the-Loop → On-the-Loop</a><a class="chip chip-learnair" href="#c-agentic-operator" title="A new job category emerging at companies like Ramp, Oracle, Block. $168K-$231K. These people don&#x27;t build AI. They manage, tune, and supervise AI agent systems. It&#x27;s the role Track 2 trains for.">The Agentic Operator Role</a><a class="chip chip-learnair" href="#c-supervision-gap" title="Organizations are deploying AI agents at scale, but they don&#x27;t have people trained to oversee them. The agents work. The supervision layer doesn&#x27;t exist yet. That&#x27;s the gap we fill.">The Supervision Gap</a></div><div class="map-cell"><a class="chip chip-capstone" href="#c-capstone-tools-design" title="The Module 1 agent needs exactly 5 tools. (1) framework_map: takes a military experience and returns which AI supervision concept it maps to (mission command to system prompts, delegation to agent orchestration, etc.). (2) reflection_prompt: generates a structured reflection question based on the veteran&#x27;s branch and role. (3) glossary: looks up an AI/tech term and explains it using military analogies. (4) progress: shows which framework mappings the veteran has completed. (5) save_insight: records the veteran&#x27;s own words about a connection they made. Each tool is a Python function that takes input, does something with files, returns a string.">Design the 5 Tools</a><a class="chip chip-capstone" href="#c-capstone-mission" title="You&#x27;re building the delivery tool for Module 1 of the LearnAIR evergreen curriculum: &#x27;Surface Tacit Knowledge.&#x27; This agent helps a veteran in their first week map their military experience to AI supervision concepts. It doesn&#x27;t teach AI. It draws out what they already know and connects it to the framework. One sentence: &#x27;Help a veteran discover that their military experience IS the qualification for AI supervision, through structured reflection and framework mapping.&#x27;">Module 1 Agent: Commander&#x27;s Intent</a></div><div class="map-cell map-header map-tier">Tier 2</div><div class="map-cell"><a class="chip chip-claude" href="#c-artifacts" title="Claude Desktop&#x27;s document panel. Generated docs appear as separate artifacts you can edit and iterate on, instead of walls of text in chat.">Artifacts</a><a class="chip chip-claude" href="#c-file-attachments" title="Drop PDFs, images, docs into a conversation. Claude reads them directly. No need to summarize or transcribe first.">File Attachments</a><a class="chip chip-claude" href="#c-iterative-refinement" title="Don&#x27;t accept the first output or start over. Direct Claude surgically: keep X, rewrite Y, add Z after paragraph 3. Co-edit, don&#x27;t re-generate.">Iterative Refinement</a><a class="chip chip-claude" href="#c-multi-turn-strategy" title="Start new threads often. If Claude repeats itself, forgets instructions, or goes generic, context is degraded. New thread + summary &gt; long thread.">Multi-Turn Strategy</a><a class="chip chip-claude" href="#c-projects" title="Claude Desktop&#x27;s folder system. Each project has its own files, instructions, and history. Files added to a project are available to every conversation in it.">Projects</a><a class="chip chip-claude" href="#c-prompt-specificity" title="More specific instructions = better output. Include: role, format, length, tone, what to include, what to exclude. Vague prompts get vague results.">Prompt Specificity</a></div><div class="map-cell"><a class="chip chip-cli" href="#c-claude-md" title="Drop a CLAUDE.md file at the root of any project and Claude reads it on every session. It&#x27;s the replacement for Desktop&#x27;s Project Instructions. Use it for: coding conventions, what not to do, deploy rules, who maintains the code. Claude respects it like a standing order.">CLAUDE.md (Project Memory)</a><a class="chip chip-cli" href="#c-permission-modes" title="Four modes: Default (ask before risky actions), Plan mode (Claude writes a plan first, doesn&#x27;t touch anything), Accept Edits (auto-approve file edits, still ask for bash), Bypass (no prompts — use with care). Switch modes with Shift+Tab. Start in Default. Graduate to Accept Edits once you trust the session.">Permission Modes (Default, Plan, Accept, Bypass)</a><a class="chip chip-cli" href="#c-permission-prompts" title="By default, Claude asks before it touches anything risky: edits, writes, bash commands. A prompt pops up: Yes / Yes, always / No. Reading files is free. Changing files or running commands costs you a nod. This is the safety rail on the whole system.">Permission Prompts (When Claude Asks)</a><a class="chip chip-cli" href="#c-tools-claude-uses" title="Claude Code doesn&#x27;t just talk. It uses tools to do real work: Read (reads a file), Edit (changes a file), Write (creates a file), Bash (runs a shell command), Grep (searches across files), Glob (finds files by pattern). You don&#x27;t call these directly. You describe the goal; Claude picks the tools.">The Tools Claude Uses</a></div><div class="map-cell"><a class="chip chip-internet" href="#c-apis-webhooks" title="An API (Application Programming Interface) lets two programs talk to each other. A webhook is when a program calls YOU when something happens, instead of you constantly checking. AI agents use APIs to call tools. Webhooks trigger agents automatically.">APIs and Webhooks</a><a class="chip chip-internet" href="#c-data-formats" title="JSON: how machines structure data (your concepts.json file). CSV: spreadsheet data in text form. Markdown: formatted text that&#x27;s human-readable. Your MCP tools read JSON. Your hub docs are markdown. Understanding these three formats covers 90% of what you&#x27;ll encounter.">Data Formats: JSON, CSV, Markdown</a><a class="chip chip-internet" href="#c-databases-basics" title="A database stores structured data that programs can query. Your .progress.json is a tiny database. Real databases (PostgreSQL, SQLite) handle millions of records. AI agents read from and write to databases constantly.">Databases: Where Structured Data Lives</a><a class="chip chip-internet" href="#c-filesystems-git" title="Files live in directories (folders). Paths describe where: ~/Documents/claude-workspace/hub/thesis.md. Version control (git) tracks every change to every file over time, so you can undo anything and see who changed what.">File Systems and Version Control</a></div><div class="map-cell"><a class="chip chip-learnair" href="#c-commanders-intent" title="A system prompt is commander&#x27;s intent for an AI. It sets the mission, the constraints, and the tone. A vague intent gets vague execution. A clear intent with boundaries gets reliable output. Veterans get this intuitively.">Commander&#x27;s Intent as System Prompts</a><a class="chip chip-learnair" href="#c-delegation-uncertainty" title="Both military and AI supervision require delegating tasks when you can&#x27;t predict every variable. The skill is knowing what to delegate, what to retain, and when to intervene. Veterans practice this daily. Most civilians don&#x27;t.">Delegation Under Uncertainty</a><a class="chip chip-learnair" href="#c-mission-command" title="Military mission command: give subordinates the objective and constraints, let them figure out how. That&#x27;s exactly how you manage AI agents. Commander&#x27;s intent = system prompt. Rules of engagement = guardrails. Veterans already think this way.">Mission Command → AI Operators</a></div><div class="map-cell"><a class="chip chip-capstone" href="#c-capstone-frameworks" title="The core data file: framework-mappings.json. Each entry maps a military concept to an AI supervision concept with a plain-language bridge. Example: {&#x27;military&#x27;: &#x27;Commander\&#x27;s Intent&#x27;, &#x27;ai_concept&#x27;: &#x27;System Prompts&#x27;, &#x27;bridge&#x27;: &#x27;Both set the mission and constraints without micromanaging execution. A good system prompt works exactly like a good commander\&#x27;s intent: clear objective, clear boundaries, room for judgment.&#x27;, &#x27;reflection&#x27;: &#x27;Think of a time you received a clear commander\&#x27;s intent. What made it work? Now think of a vague one. What went wrong?&#x27;}. Build 12-15 of these. They ARE the curriculum for Module 1.">Build the Framework Mappings</a><a class="chip chip-capstone" href="#c-capstone-system-prompt" title="This is the most important file. The agent&#x27;s personality and operating rules. It should feel like a peer, not a teacher. Tone: like a fellow veteran who learned this stuff six months ago and is sharing what clicked. It never lectures. It asks questions. It draws out what the veteran already knows and names it. Constraints: never says &#x27;as an AI,&#x27; never dumps technical jargon without a military analogy, always connects back to the veteran&#x27;s own experience. Escalation: if the veteran is frustrated or confused after two attempts, it says &#x27;let&#x27;s flag this for Mike in the next session.&#x27;">Write the Agent&#x27;s System Prompt</a></div><div class="map-cell map-header map-tier">Tier 3</div><div class="map-cell"><a class="chip chip-claude" href="#c-chain-of-thought" title="Ask Claude to think step by step before answering. Forces it to show reasoning and catch its own errors. Essential for complex decisions.">Chain of Thought</a><a class="chip chip-claude" href="#c-comparison-prompting" title="Ask for 3 versions (formal, conversational, bullet-pointed), then combine the best parts. Explore the space before committing.">Comparison Prompting</a><a class="chip chip-claude" href="#c-negative-constraints" title="Tell Claude what NOT to do. &#x27;No bullet points, no jargon, don&#x27;t start with Additionally, max 500 words.&#x27; Often more powerful than positive instructions.">Negative Constraints</a><a class="chip chip-claude" href="#c-role-assignment" title="Tell Claude who it is before what to do. &#x27;You are a curriculum designer with 15 years of veteran workforce experience&#x27; changes the output fundamentally.">Role Assignment</a><a class="chip chip-claude" href="#c-structured-extraction" title="Give Claude a document and ask for specific structured output: action items, decisions, tensions, people mentioned. Saves hours on meeting notes.">Structured Extraction</a><a class="chip chip-claude" href="#c-teaching-voice" title="Paste 3-4 examples of writing you like and say &#x27;match this voice.&#x27; Within a project, this persists across conversations.">Teaching Claude Your Voice</a></div><div class="map-cell"><a class="chip chip-cli" href="#c-context-clear-cli" title="Long sessions degrade the same way they do in Desktop. Use /clear mid-session to wipe context without losing the directory and config. Use /compact to keep a summary and drop the rest. Open a new terminal window for a truly fresh session. Watch for the signal: Claude repeating itself or forgetting instructions.">Context Management: /clear vs New Session</a><a class="chip chip-cli" href="#c-plan-mode" title="Hit Shift+Tab until you see Plan Mode. Claude writes a step-by-step plan for your request, uses read-only tools, and does NOT change any files. You review the plan, decide what to cut, then exit plan mode and execute. This is how you avoid &#x27;I asked for X and it did Y.&#x27;">Plan Mode (Think Before Acting)</a><a class="chip chip-cli" href="#c-slash-commands" title="Inside a Claude Code session, type `/` to get a menu: /help, /clear, /compact, /model, /init. They&#x27;re hotkeys for common actions. /help lists them all. /clear wipes the conversation context and starts fresh without exiting.">Slash Commands</a></div><div class="map-cell"><a class="chip chip-internet" href="#c-agent-orchestration" title="At scale, you need systems to manage agents: which agents exist, what tools they have, how they hand off work, how failures get caught. This is the infrastructure layer that agentic operators need to understand even if they don&#x27;t build it.">Agent Orchestration Infrastructure</a><a class="chip chip-internet" href="#c-mcp-deep" title="MCP (Model Context Protocol) is the standard that connects Claude to external tools. Your server (mcp-mike) speaks MCP. When Claude calls hub(&#x27;competitive&#x27;), it sends an MCP request to your server, your server searches files, and sends results back. That&#x27;s it.">MCP: How Your Tools Actually Work</a><a class="chip chip-internet" href="#c-model-providers" title="Anthropic (Claude), OpenAI (GPT), Google (Gemini) are model providers. Each offers their AI via an API. You send text in, you get text back, you pay per token. Understanding this level means understanding that Claude Desktop is a pretty wrapper around an API.">Model Providers and APIs</a></div><div class="map-cell"><a class="chip chip-learnair" href="#c-agent-workflows" title="An agent workflow has three parts: delegation (breaking work into tasks agents can handle), orchestration (coordinating multiple agents to work together), and feedback loops (monitoring output and adjusting). This is the core of what Track 2 teaches.">Agent Workflows: Delegation, Orchestration, Feedback</a><a class="chip chip-learnair" href="#c-human-on-loop" title="Three patterns: pre-check (approve before the agent acts), post-check (review after the agent acts), and exception-based (agent runs autonomously, flags anomalies). Each trades speed for safety. Knowing which pattern to apply where is the core supervision skill.">Human-on-the-Loop Supervision Patterns</a><a class="chip chip-learnair" href="#c-multi-agent" title="Real organizations won&#x27;t use one AI agent. They&#x27;ll use dozens, each specialized. The challenge isn&#x27;t building them. It&#x27;s making sure they work together, don&#x27;t contradict each other, and escalate correctly. This is where supervisors earn their salary.">Multi-Agent Systems</a><a class="chip chip-learnair" href="#c-tool-use" title="AI agents aren&#x27;t just text-in, text-out. They can call tools: search the web, read files, query databases, send emails. This is what makes them agents instead of chatbots. Understanding what tools an agent has access to is key to supervising it.">Tool Use and Function Calling</a></div><div class="map-cell"><a class="chip chip-capstone" href="#c-capstone-build-server" title="Follow the mcp-mike pattern exactly. Create mcp-module1/ with: pyproject.toml, server.py, tools.py, framework-mappings.json, tests/. Willison&#x27;s rule: write the test first, watch it fail, implement, watch it pass. Build one tool at a time. Don&#x27;t write tool #2 until tool #1 passes its tests. This is red/green TDD and it&#x27;s how you avoid building something that looks done but isn&#x27;t.">Build and Test the Server</a><a class="chip chip-capstone" href="#c-capstone-deploy-test" title="Add your server to Claude Desktop config alongside mcp-mike (you can have multiple MCP servers). Restart. Start a conversation. Try each tool naturally: &#x27;I was an infantry squad leader for 8 years. What AI concepts does that connect to?&#x27; The agent should call framework_map, find delegation and commander&#x27;s intent mappings, and ask a reflection question. If it doesn&#x27;t, debug. Check: is the config right? Does the server load? Do the tools appear? This is the moment it goes from code to a living system.">Deploy and End-to-End Test</a></div><div class="map-cell map-header map-tier">Tier 4</div><div class="map-cell"><a class="chip chip-claude" href="#c-artifact-iteration" title="Create an artifact, then refine across multiple messages. The artifact stays visible. You&#x27;re co-editing a document, not asking for new ones each time.">Artifact Iteration Workflow</a><a class="chip chip-claude" href="#c-knowledge-files" title="Files added to a project that Claude references in any conversation. Add thesis, landscape, arc doc. Claude reads them when relevant.">Knowledge Files</a><a class="chip chip-claude" href="#c-project-instructions-vs-thread" title="Project instructions persist across all conversations. Thread context is conversation-specific. Put always-true stuff in project instructions.">Project Instructions vs. Thread Context</a><a class="chip chip-claude" href="#c-thread-hygiene" title="One thread, one purpose. Don&#x27;t mix handout revision with competitive analysis with brainstorming. Short focused threads beat long multi-purpose ones.">Thread Hygiene</a></div><div class="map-cell"><a class="chip chip-cli" href="#c-mcp-in-cli" title="The same MCP server you use in Desktop (mcp-mike) works in Claude Code. Config lives at ~/.claude/.mcp.json. When mcp-mike is connected, tools like quiz_me, hub, and mochary are callable in a CLI session just like they are in Desktop. You don&#x27;t have to choose a world.">MCP Servers in Claude Code</a><a class="chip chip-cli" href="#c-skills-in-cli" title="Skills are files at ~/.claude/skills/&lt;name&gt;/SKILL.md that Claude loads on demand. Each skill is a persona plus optional files, scripts, and instructions. You invoke one with /&lt;name&gt;. Andrew has 40+ skills (/k, /duke, /willison, /mochary). In Desktop, you pasted personas. In CLI, they&#x27;re always available.">Skills (Personas, but Better)</a></div><div class="map-cell map-empty">—</div><div class="map-cell"><a class="chip chip-learnair" href="#c-adversarial-collab" title="The antidote to sycophancy. Ask the AI to argue against you. Ask it to find holes in your plan. Ask it what could go wrong. This is a trainable skill, and veterans who&#x27;ve been through red team exercises already have the instinct.">Adversarial Collaboration</a><a class="chip chip-learnair" href="#c-sycophancy" title="AI systems are structurally incentivized to agree with you. MIT research proves it: models bias toward user agreement even when the user is wrong. This isn&#x27;t a bug to fix. It&#x27;s a physics of the system that supervisors must compensate for.">Sycophancy and Agreement Bias</a><a class="chip chip-learnair" href="#c-truth-maintenance" title="When 50 people use AI daily and the AI agrees with everyone, organizational truth erodes. Contradictory decisions compound. The supervisor&#x27;s job is maintaining coherent truth across AI-assisted decisions.">Truth Maintenance in Organizations</a></div><div class="map-cell"><a class="chip chip-capstone" href="#c-capstone-handoff-cohort" title="The final test. Set up the agent on someone else&#x27;s machine. Watch them use it without help. Every question they ask reveals a gap. Every moment of confusion is a bug in your system prompt, your glossary, or your framework mappings. This isn&#x27;t a demo. This is the first real run of Module 1. If it works, you&#x27;ve built the product LearnAIR needs. If it doesn&#x27;t, your supervision log tells you exactly what to fix. Either way, you proved you can build, deploy, and supervise an AI agent system. That&#x27;s the job.">Hand Off to a Real Veteran</a><a class="chip chip-capstone" href="#c-capstone-supervise-log" title="Use the agent daily for a week as if you were a veteran going through Module 1. Log every session: what worked, what broke, what you changed. This log IS the evidence that you can supervise an AI system. It&#x27;s also the first draft of the facilitator guide: when Mike runs Module 1 with a real cohort, this log tells him what to watch for. Willison&#x27;s principle: the bottleneck is validation, not building. The code is done. Now prove it works.">One Week Supervision Log</a></div><div class="map-cell map-header map-tier">Tier 5</div><div class="map-cell"><a class="chip chip-claude" href="#c-context-architecture" title="What you tell Claude and when is a design decision. System prompt = foundation. Project files = walls. Thread = the room you&#x27;re in. You&#x27;re the architect.">Context as Architecture</a><a class="chip chip-claude" href="#c-filesystem-thinking" title="Work lives as files in folders, not threads in an app. Personas are .md files. Projects are directories. Any tool can access them.">File System Thinking</a><a class="chip chip-claude" href="#c-mcp" title="A standard that lets Claude talk to external tools and data sources. MCP server = new capabilities. This is how K, Duke, and your upcoming tools work.">MCP (Model Context Protocol)</a><a class="chip chip-claude" href="#c-markdown" title="Simple formatting: # Header, **bold**, - bullet, | table |. Claude reads and writes it natively. All hub documents are markdown.">Markdown</a></div><div class="map-cell"><a class="chip chip-cli" href="#c-hooks-intro" title="Hooks are shell commands that fire when Claude does specific things: before a tool runs, after a file edit, when a session stops. Configured in ~/.claude/settings.json. Simplest use: play a sound when Claude finishes a task so you know to come back. Advanced use: auto-run tests after every file edit.">Hooks (Automation on Events)</a><a class="chip chip-cli" href="#c-subagents-intro" title="Claude Code can spawn a subagent via the Agent tool: a separate Claude instance that works on a focused task with its own context, then reports back. Used for: parallel research, code review by a second persona, isolated experiments. The parent conversation stays clean while the subagent does the heavy lifting.">Subagents (Parallel Work)</a></div><div class="map-cell map-empty">—</div><div class="map-cell"><a class="chip chip-learnair" href="#c-knowledge-base-product" title="Veterans don&#x27;t just learn to use AI. They build knowledge systems with AI. A curated, maintained knowledge base is more valuable than any individual AI conversation. This is Karpathy&#x27;s insight: raw sources → LLM-compiled structured wiki.">Knowledge Bases as Product</a><a class="chip chip-learnair" href="#c-platform-neutrality" title="The curriculum teaches principles, not products. Supervision skills transfer across Claude, GPT, Gemini, open-source models. If a veteran only knows ChatGPT, they&#x27;re locked to one vendor. If they know the principles, they&#x27;re valuable everywhere.">Platform Neutrality</a><a class="chip chip-learnair" href="#c-version-control-ai" title="When AI generates outputs, who tracks what changed? Git tracks code. But AI outputs (prompts, agent configs, knowledge bases) need version control too. If you can&#x27;t undo a bad change, you can&#x27;t supervise safely.">Version Control for AI Workflows</a></div><div class="map-cell map-empty">—</div><div class="map-cell map-header map-tier">Tier 6</div><div class="map-cell"><a class="chip chip-claude" href="#c-eighty-twenty-review" title="Don&#x27;t read every word. Check structure, first paragraph, last paragraph, spot-check one detail. Structure right = details follow.">80/20 Output Review</a><a class="chip chip-claude" href="#c-template-twice" title="First time: do it manually. Second time: build a prompt template. Third time: use the template. By the fourth time, 10% effort.">Do Once, Template Twice</a><a class="chip chip-claude" href="#c-frustration-flip" title="When frustrated: is the tool wrong, or do I not understand the system? Tool wrong = work around it. You wrong = fix your approach.">The Frustration Flip</a><a class="chip chip-claude" href="#c-summary-handoff" title="End every task: &#x27;Summarize what we accomplished, what&#x27;s open, and the next step.&#x27; Save it. It&#x27;s your handoff to the next thread or next day.">The Summary Handoff</a></div><div class="map-cell map-empty">—</div><div class="map-cell map-empty">—</div><div class="map-cell map-empty">—</div><div class="map-cell map-empty">—</div></div>
+</div>
+
+<div class="section-title">
+  <h2>Concepts by track</h2>
+  <p>Every concept in the deck, grouped by track and ordered by tier. The quiz prompt is what the MCP actually asks you.</p>
+</div>
+
+<div class="tracks">
+
+    <section class="track-section" id="track-claude">
+      <div class="track-head">
+        <span class="track-swatch swatch-claude"></span>
+        <div>
+          <h3>Claude Desktop</h3>
+          <p class="track-blurb">Foundations. How the model thinks, how context works, where it breaks.</p>
+        </div>
+        <span class="track-count">30 concepts</span>
+      </div>
+      <div class="card-grid">
+        
+      <article class="card" id="c-context-window">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Context Window</h4>
+        </div>
+        <p class="card-summary">How much text Claude can see at once (200K-1M tokens). Attention degrades in long threads. Claude pays most attention to the beginning and end.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Your thread is 50 messages deep and Claude starts forgetting your instructions. What do you do?</p>
+        </div>
+      </article>
+      <article class="card" id="c-models">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Models: Haiku, Sonnet, Opus</h4>
+        </div>
+        <p class="card-summary">Three sizes. Haiku: fast, simple tasks. Sonnet: balanced daily driver. Opus: deep reasoning, complex problems. Claude Pro gives you Sonnet by default.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You have a complex strategy document to analyze. Which model do you pick and why?</p>
+        </div>
+      </article>
+      <article class="card" id="c-system-prompts">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>System Prompts / Custom Instructions</h4>
+        </div>
+        <p class="card-summary">Instructions set before the conversation that shape Claude&#x27;s behavior for the entire thread. In Claude Desktop, this is Project Instructions. Replaces persona-pasting.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between typing your persona into the chat vs. setting it as project instructions?</p>
+        </div>
+      </article>
+      <article class="card" id="c-temperature">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Temperature (Creativity Dial)</h4>
+        </div>
+        <p class="card-summary">Setting from 0-1. Low = safe, consistent, factual. High = creative, varied, sometimes wild. Claude Desktop defaults to balanced.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude gives you a boring, safe answer. Is it being dumb or being cautious? What do you change?</p>
+        </div>
+      </article>
+      <article class="card" id="c-tokens">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Tokens</h4>
+        </div>
+        <p class="card-summary">The unit Claude thinks in. ~1 token = 3/4 of a word. Rate limits are token-based. Longer prompts and responses burn more tokens.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You hit your rate limit halfway through the day. What probably caused it?</p>
+        </div>
+      </article>
+      <article class="card" id="c-what-claude-is">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>What Claude Actually Is</h4>
+        </div>
+        <p class="card-summary">An LLM that predicts the next best response by pattern-matching across training data. Not sentient, not a database. More context = better patterns.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>In your own words, what happens when Claude gives you a wrong answer? Is it lying?</p>
+        </div>
+      </article>
+      <article class="card" id="c-artifacts">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Artifacts</h4>
+        </div>
+        <p class="card-summary">Claude Desktop&#x27;s document panel. Generated docs appear as separate artifacts you can edit and iterate on, instead of walls of text in chat.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between Claude giving you text in the chat vs. creating an artifact?</p>
+        </div>
+      </article>
+      <article class="card" id="c-file-attachments">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>File Attachments</h4>
+        </div>
+        <p class="card-summary">Drop PDFs, images, docs into a conversation. Claude reads them directly. No need to summarize or transcribe first.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You have a 40-page PDF from LearnAIR. How do you get Claude&#x27;s take on it?</p>
+        </div>
+      </article>
+      <article class="card" id="c-iterative-refinement">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Iterative Refinement</h4>
+        </div>
+        <p class="card-summary">Don&#x27;t accept the first output or start over. Direct Claude surgically: keep X, rewrite Y, add Z after paragraph 3. Co-edit, don&#x27;t re-generate.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude gives you a draft that&#x27;s 70% good. What&#x27;s your next move?</p>
+        </div>
+      </article>
+      <article class="card" id="c-multi-turn-strategy">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Multi-Turn Strategy</h4>
+        </div>
+        <p class="card-summary">Start new threads often. If Claude repeats itself, forgets instructions, or goes generic, context is degraded. New thread + summary &gt; long thread.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>How do you know when it&#x27;s time to start a fresh thread?</p>
+        </div>
+      </article>
+      <article class="card" id="c-projects">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Projects</h4>
+        </div>
+        <p class="card-summary">Claude Desktop&#x27;s folder system. Each project has its own files, instructions, and history. Files added to a project are available to every conversation in it.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why would you use three separate projects instead of one project for everything?</p>
+        </div>
+      </article>
+      <article class="card" id="c-prompt-specificity">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Prompt Specificity</h4>
+        </div>
+        <p class="card-summary">More specific instructions = better output. Include: role, format, length, tone, what to include, what to exclude. Vague prompts get vague results.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Your handout came back at 11 pages instead of 8. What went wrong with your prompt?</p>
+        </div>
+      </article>
+      <article class="card" id="c-chain-of-thought">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Chain of Thought</h4>
+        </div>
+        <p class="card-summary">Ask Claude to think step by step before answering. Forces it to show reasoning and catch its own errors. Essential for complex decisions.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>When should you use chain of thought vs. just asking directly?</p>
+        </div>
+      </article>
+      <article class="card" id="c-comparison-prompting">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Comparison Prompting</h4>
+        </div>
+        <p class="card-summary">Ask for 3 versions (formal, conversational, bullet-pointed), then combine the best parts. Explore the space before committing.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why is asking for 3 versions better than revising 1 version three times?</p>
+        </div>
+      </article>
+      <article class="card" id="c-negative-constraints">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Negative Constraints</h4>
+        </div>
+        <p class="card-summary">Tell Claude what NOT to do. &#x27;No bullet points, no jargon, don&#x27;t start with Additionally, max 500 words.&#x27; Often more powerful than positive instructions.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between telling Claude what to do vs. what to avoid?</p>
+        </div>
+      </article>
+      <article class="card" id="c-role-assignment">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Role Assignment</h4>
+        </div>
+        <p class="card-summary">Tell Claude who it is before what to do. &#x27;You are a curriculum designer with 15 years of veteran workforce experience&#x27; changes the output fundamentally.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why does assigning a role change Claude&#x27;s output? What&#x27;s happening under the hood?</p>
+        </div>
+      </article>
+      <article class="card" id="c-structured-extraction">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Structured Extraction</h4>
+        </div>
+        <p class="card-summary">Give Claude a document and ask for specific structured output: action items, decisions, tensions, people mentioned. Saves hours on meeting notes.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You just finished a 2-hour call. What prompt turns the transcript into actionable notes?</p>
+        </div>
+      </article>
+      <article class="card" id="c-teaching-voice">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Teaching Claude Your Voice</h4>
+        </div>
+        <p class="card-summary">Paste 3-4 examples of writing you like and say &#x27;match this voice.&#x27; Within a project, this persists across conversations.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude&#x27;s output sounds generic. What&#x27;s the fastest way to make it sound like you?</p>
+        </div>
+      </article>
+      <article class="card" id="c-artifact-iteration">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Artifact Iteration Workflow</h4>
+        </div>
+        <p class="card-summary">Create an artifact, then refine across multiple messages. The artifact stays visible. You&#x27;re co-editing a document, not asking for new ones each time.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the workflow for building a presentation deck with Claude?</p>
+        </div>
+      </article>
+      <article class="card" id="c-knowledge-files">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Knowledge Files</h4>
+        </div>
+        <p class="card-summary">Files added to a project that Claude references in any conversation. Add thesis, landscape, arc doc. Claude reads them when relevant.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You add 5 docs to a project. Does Claude read all 5 for every question?</p>
+        </div>
+      </article>
+      <article class="card" id="c-project-instructions-vs-thread">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Project Instructions vs. Thread Context</h4>
+        </div>
+        <p class="card-summary">Project instructions persist across all conversations. Thread context is conversation-specific. Put always-true stuff in project instructions.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Where does your persona go: project instructions or the first message of every thread?</p>
+        </div>
+      </article>
+      <article class="card" id="c-thread-hygiene">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Thread Hygiene</h4>
+        </div>
+        <p class="card-summary">One thread, one purpose. Don&#x27;t mix handout revision with competitive analysis with brainstorming. Short focused threads beat long multi-purpose ones.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;ve been using one thread for 3 different tasks. What happens to output quality?</p>
+        </div>
+      </article>
+      <article class="card" id="c-context-architecture">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Context as Architecture</h4>
+        </div>
+        <p class="card-summary">What you tell Claude and when is a design decision. System prompt = foundation. Project files = walls. Thread = the room you&#x27;re in. You&#x27;re the architect.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Draw your current Claude setup on paper. What&#x27;s the foundation? What&#x27;s missing?</p>
+        </div>
+      </article>
+      <article class="card" id="c-filesystem-thinking">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>File System Thinking</h4>
+        </div>
+        <p class="card-summary">Work lives as files in folders, not threads in an app. Personas are .md files. Projects are directories. Any tool can access them.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why is a persona stored as a file more powerful than a persona stored inside ChatGPT?</p>
+        </div>
+      </article>
+      <article class="card" id="c-mcp">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>MCP (Model Context Protocol)</h4>
+        </div>
+        <p class="card-summary">A standard that lets Claude talk to external tools and data sources. MCP server = new capabilities. This is how K, Duke, and your upcoming tools work.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>In one sentence, what does MCP do?</p>
+        </div>
+      </article>
+      <article class="card" id="c-markdown">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Markdown</h4>
+        </div>
+        <p class="card-summary">Simple formatting: # Header, **bold**, - bullet, | table |. Claude reads and writes it natively. All hub documents are markdown.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Write a 3-line markdown snippet with a header, bold text, and a bullet list.</p>
+        </div>
+      </article>
+      <article class="card" id="c-eighty-twenty-review">
+        <div class="card-head">
+          <span class="card-tier">T6</span>
+          <h4>80/20 Output Review</h4>
+        </div>
+        <p class="card-summary">Don&#x27;t read every word. Check structure, first paragraph, last paragraph, spot-check one detail. Structure right = details follow.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude gives you 2000 words. What do you check first?</p>
+        </div>
+      </article>
+      <article class="card" id="c-template-twice">
+        <div class="card-head">
+          <span class="card-tier">T6</span>
+          <h4>Do Once, Template Twice</h4>
+        </div>
+        <p class="card-summary">First time: do it manually. Second time: build a prompt template. Third time: use the template. By the fourth time, 10% effort.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;ve written 3 workshop handouts from scratch. What should you have done after the first one?</p>
+        </div>
+      </article>
+      <article class="card" id="c-frustration-flip">
+        <div class="card-head">
+          <span class="card-tier">T6</span>
+          <h4>The Frustration Flip</h4>
+        </div>
+        <p class="card-summary">When frustrated: is the tool wrong, or do I not understand the system? Tool wrong = work around it. You wrong = fix your approach.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude won&#x27;t format your table correctly. Tool problem or you problem? How do you figure out which?</p>
+        </div>
+      </article>
+      <article class="card" id="c-summary-handoff">
+        <div class="card-head">
+          <span class="card-tier">T6</span>
+          <h4>The Summary Handoff</h4>
+        </div>
+        <p class="card-summary">End every task: &#x27;Summarize what we accomplished, what&#x27;s open, and the next step.&#x27; Save it. It&#x27;s your handoff to the next thread or next day.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why is the summary handoff important for context management?</p>
+        </div>
+      </article>
+      </div>
+    </section>
+    <section class="track-section" id="track-cli">
+      <div class="track-head">
+        <span class="track-swatch swatch-cli"></span>
+        <div>
+          <h3>Claude Code / CLI</h3>
+          <p class="track-blurb">Bridge from the browser to the terminal. Agents, permissions, tool use.</p>
+        </div>
+        <span class="track-count">15 concepts</span>
+      </div>
+      <div class="card-grid">
+        
+      <article class="card" id="c-cli-vs-desktop">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Claude Code vs. Claude Desktop</h4>
+        </div>
+        <p class="card-summary">Claude Desktop is a chat app with document panels. Claude Code is an agent that runs in your terminal and works directly on your files. Same model, different posture: Desktop talks, Code acts. You don&#x27;t copy-paste code into a chat. Claude reads and edits files in place.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You want Claude to fix a bug in three files across your project. Which tool is built for that, and why?</p>
+        </div>
+      </article>
+      <article class="card" id="c-installing-claude-code">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Installing Claude Code</h4>
+        </div>
+        <p class="card-summary">One command: `npm install -g @anthropic-ai/claude-code`. You need Node.js installed first (it probably already is, or you install from nodejs.org). Then `claude --version` confirms it worked. No separate app to launch. The tool IS the CLI command.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You run `claude --version` and it says &#x27;command not found.&#x27; What are the two most likely causes?</p>
+        </div>
+      </article>
+      <article class="card" id="c-terminal-basics">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Terminal Basics You&#x27;ll Actually Use</h4>
+        </div>
+        <p class="card-summary">Claude Code runs in Terminal (or iTerm). You need five commands: cd (change directory), ls (list files), pwd (where am I), cat (show file contents), and command+T (new tab). Everything else you can ask Claude to do. You don&#x27;t need to become a shell ninja.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You want to run Claude Code inside the mcp-mike repo. What commands do you run in Terminal first?</p>
+        </div>
+      </article>
+      <article class="card" id="c-first-run">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Your First Claude Code Session</h4>
+        </div>
+        <p class="card-summary">Navigate into any project directory and type `claude`. You&#x27;re now in an interactive session with Claude sitting inside that directory. It knows what files are there. You talk to it in plain English: &#x27;What does this project do?&#x27; It reads the files and tells you. Ctrl+C twice to exit.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What happens if you run `claude` from your home directory vs. from a specific project directory? Why does the directory matter?</p>
+        </div>
+      </article>
+      <article class="card" id="c-claude-md">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>CLAUDE.md (Project Memory)</h4>
+        </div>
+        <p class="card-summary">Drop a CLAUDE.md file at the root of any project and Claude reads it on every session. It&#x27;s the replacement for Desktop&#x27;s Project Instructions. Use it for: coding conventions, what not to do, deploy rules, who maintains the code. Claude respects it like a standing order.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Mike&#x27;s LearnAIR repo keeps running tests against the wrong Python version. What goes in CLAUDE.md to fix this permanently?</p>
+        </div>
+      </article>
+      <article class="card" id="c-permission-modes">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Permission Modes (Default, Plan, Accept, Bypass)</h4>
+        </div>
+        <p class="card-summary">Four modes: Default (ask before risky actions), Plan mode (Claude writes a plan first, doesn&#x27;t touch anything), Accept Edits (auto-approve file edits, still ask for bash), Bypass (no prompts — use with care). Switch modes with Shift+Tab. Start in Default. Graduate to Accept Edits once you trust the session.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re refactoring a file with 20 small edits. Default mode interrupts you on every edit. Which mode speeds this up safely?</p>
+        </div>
+      </article>
+      <article class="card" id="c-permission-prompts">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Permission Prompts (When Claude Asks)</h4>
+        </div>
+        <p class="card-summary">By default, Claude asks before it touches anything risky: edits, writes, bash commands. A prompt pops up: Yes / Yes, always / No. Reading files is free. Changing files or running commands costs you a nod. This is the safety rail on the whole system.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Claude proposes to run `rm -rf node_modules`. Which approval option should you pick, and why is &#x27;Yes, always&#x27; dangerous here?</p>
+        </div>
+      </article>
+      <article class="card" id="c-tools-claude-uses">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>The Tools Claude Uses</h4>
+        </div>
+        <p class="card-summary">Claude Code doesn&#x27;t just talk. It uses tools to do real work: Read (reads a file), Edit (changes a file), Write (creates a file), Bash (runs a shell command), Grep (searches across files), Glob (finds files by pattern). You don&#x27;t call these directly. You describe the goal; Claude picks the tools.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You say &#x27;find every file that mentions Teresa.&#x27; Which tool does Claude reach for? What if you say &#x27;add a new heading to README.md&#x27;?</p>
+        </div>
+      </article>
+      <article class="card" id="c-context-clear-cli">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Context Management: /clear vs New Session</h4>
+        </div>
+        <p class="card-summary">Long sessions degrade the same way they do in Desktop. Use /clear mid-session to wipe context without losing the directory and config. Use /compact to keep a summary and drop the rest. Open a new terminal window for a truly fresh session. Watch for the signal: Claude repeating itself or forgetting instructions.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between /clear and /compact? When do you reach for each?</p>
+        </div>
+      </article>
+      <article class="card" id="c-plan-mode">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Plan Mode (Think Before Acting)</h4>
+        </div>
+        <p class="card-summary">Hit Shift+Tab until you see Plan Mode. Claude writes a step-by-step plan for your request, uses read-only tools, and does NOT change any files. You review the plan, decide what to cut, then exit plan mode and execute. This is how you avoid &#x27;I asked for X and it did Y.&#x27;</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re about to ask Claude to &#x27;refactor the auth module.&#x27; Why is starting in Plan Mode safer than jumping straight in?</p>
+        </div>
+      </article>
+      <article class="card" id="c-slash-commands">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Slash Commands</h4>
+        </div>
+        <p class="card-summary">Inside a Claude Code session, type `/` to get a menu: /help, /clear, /compact, /model, /init. They&#x27;re hotkeys for common actions. /help lists them all. /clear wipes the conversation context and starts fresh without exiting.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;ve been in one session for 2 hours and Claude starts repeating itself. Which slash command is your move, and what does it do?</p>
+        </div>
+      </article>
+      <article class="card" id="c-mcp-in-cli">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>MCP Servers in Claude Code</h4>
+        </div>
+        <p class="card-summary">The same MCP server you use in Desktop (mcp-mike) works in Claude Code. Config lives at ~/.claude/.mcp.json. When mcp-mike is connected, tools like quiz_me, hub, and mochary are callable in a CLI session just like they are in Desktop. You don&#x27;t have to choose a world.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re in a Claude Code session on the mcp-mike repo. You want to quiz yourself on LearnAIR concepts while you code. What do you type?</p>
+        </div>
+      </article>
+      <article class="card" id="c-skills-in-cli">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Skills (Personas, but Better)</h4>
+        </div>
+        <p class="card-summary">Skills are files at ~/.claude/skills/&lt;name&gt;/SKILL.md that Claude loads on demand. Each skill is a persona plus optional files, scripts, and instructions. You invoke one with /&lt;name&gt;. Andrew has 40+ skills (/k, /duke, /willison, /mochary). In Desktop, you pasted personas. In CLI, they&#x27;re always available.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re about to draft a message to Paul. In Desktop you&#x27;d paste the Duke persona. In CLI, what do you type?</p>
+        </div>
+      </article>
+      <article class="card" id="c-hooks-intro">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Hooks (Automation on Events)</h4>
+        </div>
+        <p class="card-summary">Hooks are shell commands that fire when Claude does specific things: before a tool runs, after a file edit, when a session stops. Configured in ~/.claude/settings.json. Simplest use: play a sound when Claude finishes a task so you know to come back. Advanced use: auto-run tests after every file edit.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You want Claude to run pytest automatically after any file edit in the mcp-mike repo. Which hook event fires, and where does the config live?</p>
+        </div>
+      </article>
+      <article class="card" id="c-subagents-intro">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Subagents (Parallel Work)</h4>
+        </div>
+        <p class="card-summary">Claude Code can spawn a subagent via the Agent tool: a separate Claude instance that works on a focused task with its own context, then reports back. Used for: parallel research, code review by a second persona, isolated experiments. The parent conversation stays clean while the subagent does the heavy lifting.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re about to do three independent tasks: run tests, search the hub, and review a draft. Should you do these in sequence or parallel? How do subagents help?</p>
+        </div>
+      </article>
+      </div>
+    </section>
+    <section class="track-section" id="track-internet">
+      <div class="track-head">
+        <span class="track-swatch swatch-internet"></span>
+        <div>
+          <h3>Internet &amp; Computing</h3>
+          <p class="track-blurb">Technical substrate. HTTP, cloud, APIs, deployment.</p>
+        </div>
+        <span class="track-count">11 concepts</span>
+      </div>
+      <div class="card-grid">
+        
+      <article class="card" id="c-cloud-local">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Cloud vs. Local Computing</h4>
+        </div>
+        <p class="card-summary">Local: runs on your machine. Cloud: runs on someone else&#x27;s machine, accessed over the internet. Claude runs in the cloud. Your workspace files are local. Understanding which is which matters for privacy, speed, and cost.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Your workspace files are local. Claude&#x27;s brain is in the cloud. When you use the hub search tool, what travels over the internet and what stays on your machine?</p>
+        </div>
+      </article>
+      <article class="card" id="c-cli-basics">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Command Line Basics</h4>
+        </div>
+        <p class="card-summary">The command line (Terminal) is how you talk to your computer directly. No buttons, no menus. Type a command, get a result. It&#x27;s faster and more powerful than clicking, and it&#x27;s how most AI infrastructure is managed.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Why would anyone use a terminal when they could just click buttons in a GUI? Give two real advantages.</p>
+        </div>
+      </article>
+      <article class="card" id="c-http-basics">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>How the Internet Works: HTTP and URLs</h4>
+        </div>
+        <p class="card-summary">Every time you visit a website, your browser sends an HTTP request to a server and gets a response back. A URL is an address. HTTP is the language. GET fetches. POST sends. This is the foundation everything else sits on.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>When you type a URL into your browser and hit enter, what actually happens? Walk through it step by step.</p>
+        </div>
+      </article>
+      <article class="card" id="c-saas-platforms">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>SaaS and Platforms</h4>
+        </div>
+        <p class="card-summary">SaaS (Software as a Service): you pay monthly, the company runs the servers. Salesforce, Slack, Claude Pro. A platform is SaaS that other people build on top of. Understanding this matters because most AI tools your employers use are SaaS.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between buying software on a CD (remember those?) and paying for a SaaS subscription? What are the tradeoffs?</p>
+        </div>
+      </article>
+      <article class="card" id="c-apis-webhooks">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>APIs and Webhooks</h4>
+        </div>
+        <p class="card-summary">An API (Application Programming Interface) lets two programs talk to each other. A webhook is when a program calls YOU when something happens, instead of you constantly checking. AI agents use APIs to call tools. Webhooks trigger agents automatically.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You want your AI agent to automatically process new orders. Should you poll the orders API every 5 minutes, or set up a webhook? What&#x27;s the tradeoff?</p>
+        </div>
+      </article>
+      <article class="card" id="c-data-formats">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Data Formats: JSON, CSV, Markdown</h4>
+        </div>
+        <p class="card-summary">JSON: how machines structure data (your concepts.json file). CSV: spreadsheet data in text form. Markdown: formatted text that&#x27;s human-readable. Your MCP tools read JSON. Your hub docs are markdown. Understanding these three formats covers 90% of what you&#x27;ll encounter.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Open concepts.json and .progress.json. Both are JSON. What patterns do you notice in how data is structured?</p>
+        </div>
+      </article>
+      <article class="card" id="c-databases-basics">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Databases: Where Structured Data Lives</h4>
+        </div>
+        <p class="card-summary">A database stores structured data that programs can query. Your .progress.json is a tiny database. Real databases (PostgreSQL, SQLite) handle millions of records. AI agents read from and write to databases constantly.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Your quiz progress is stored in a JSON file. What would break if 100 people used the quiz system at the same time? What would a database solve?</p>
+        </div>
+      </article>
+      <article class="card" id="c-filesystems-git">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>File Systems and Version Control</h4>
+        </div>
+        <p class="card-summary">Files live in directories (folders). Paths describe where: ~/Documents/claude-workspace/hub/thesis.md. Version control (git) tracks every change to every file over time, so you can undo anything and see who changed what.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the full path to your workspace personas folder? What&#x27;s the difference between a relative path and an absolute path?</p>
+        </div>
+      </article>
+      <article class="card" id="c-agent-orchestration">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Agent Orchestration Infrastructure</h4>
+        </div>
+        <p class="card-summary">At scale, you need systems to manage agents: which agents exist, what tools they have, how they hand off work, how failures get caught. This is the infrastructure layer that agentic operators need to understand even if they don&#x27;t build it.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>A company runs 20 AI agents. One goes down at 3am. What infrastructure would you want in place to catch it, fix it, and prevent it from affecting the others?</p>
+        </div>
+      </article>
+      <article class="card" id="c-mcp-deep">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>MCP: How Your Tools Actually Work</h4>
+        </div>
+        <p class="card-summary">MCP (Model Context Protocol) is the standard that connects Claude to external tools. Your server (mcp-mike) speaks MCP. When Claude calls hub(&#x27;competitive&#x27;), it sends an MCP request to your server, your server searches files, and sends results back. That&#x27;s it.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Trace the full path: you say &#x27;search the hub for employer signal.&#x27; What does Claude do? What does the MCP server do? What goes over the wire?</p>
+        </div>
+      </article>
+      <article class="card" id="c-model-providers">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Model Providers and APIs</h4>
+        </div>
+        <p class="card-summary">Anthropic (Claude), OpenAI (GPT), Google (Gemini) are model providers. Each offers their AI via an API. You send text in, you get text back, you pay per token. Understanding this level means understanding that Claude Desktop is a pretty wrapper around an API.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>When you type into Claude Desktop, what actually happens behind the scenes? Where does your text go? What comes back?</p>
+        </div>
+      </article>
+      </div>
+    </section>
+    <section class="track-section" id="track-learnair">
+      <div class="track-head">
+        <span class="track-swatch swatch-learnair"></span>
+        <div>
+          <h3>LearnAIR Domain</h3>
+          <p class="track-blurb">The thesis. Mission command, supervision patterns, veteran-operator pedagogy.</p>
+        </div>
+        <span class="track-count">16 concepts</span>
+      </div>
+      <div class="card-grid">
+        
+      <article class="card" id="c-loop-transition">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>In-the-Loop → On-the-Loop</h4>
+        </div>
+        <p class="card-summary">In-the-loop: human does the work with AI assisting (copilot era). On-the-loop: AI does the work with human supervising (agent era). Most training is still in-the-loop. The market is moving on-the-loop. That&#x27;s where the jobs are.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re reviewing a veteran&#x27;s resume and they say &#x27;I used ChatGPT to write emails.&#x27; Is that in-the-loop or on-the-loop? What would on-the-loop look like for the same task?</p>
+        </div>
+      </article>
+      <article class="card" id="c-agentic-operator">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>The Agentic Operator Role</h4>
+        </div>
+        <p class="card-summary">A new job category emerging at companies like Ramp, Oracle, Block. $168K-$231K. These people don&#x27;t build AI. They manage, tune, and supervise AI agent systems. It&#x27;s the role Track 2 trains for.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>An employer asks: &#x27;What exactly would an agentic operator do at my company that my existing team can&#x27;t?&#x27; What&#x27;s your answer?</p>
+        </div>
+      </article>
+      <article class="card" id="c-supervision-gap">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>The Supervision Gap</h4>
+        </div>
+        <p class="card-summary">Organizations are deploying AI agents at scale, but they don&#x27;t have people trained to oversee them. The agents work. The supervision layer doesn&#x27;t exist yet. That&#x27;s the gap we fill.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>A company deploys 50 AI agents across customer support, sales, and ops. What breaks first: the agents or the humans watching them?</p>
+        </div>
+      </article>
+      <article class="card" id="c-commanders-intent">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Commander&#x27;s Intent as System Prompts</h4>
+        </div>
+        <p class="card-summary">A system prompt is commander&#x27;s intent for an AI. It sets the mission, the constraints, and the tone. A vague intent gets vague execution. A clear intent with boundaries gets reliable output. Veterans get this intuitively.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Two system prompts: &#x27;Be helpful and answer questions&#x27; vs. &#x27;You are a benefits counselor for post-9/11 veterans. Only answer questions about VA benefits. If asked about anything else, redirect to the appropriate resource. Never guess. If unsure, say so.&#x27; Which one works? Why?</p>
+        </div>
+      </article>
+      <article class="card" id="c-delegation-uncertainty">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Delegation Under Uncertainty</h4>
+        </div>
+        <p class="card-summary">Both military and AI supervision require delegating tasks when you can&#x27;t predict every variable. The skill is knowing what to delegate, what to retain, and when to intervene. Veterans practice this daily. Most civilians don&#x27;t.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;re supervising 3 AI agents: one handles scheduling, one handles expense reports, one handles hiring recommendations. Which one do you watch most closely? Why?</p>
+        </div>
+      </article>
+      <article class="card" id="c-mission-command">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Mission Command → AI Operators</h4>
+        </div>
+        <p class="card-summary">Military mission command: give subordinates the objective and constraints, let them figure out how. That&#x27;s exactly how you manage AI agents. Commander&#x27;s intent = system prompt. Rules of engagement = guardrails. Veterans already think this way.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>A squad leader gives the order: &#x27;Secure the bridge by 0600. No civilian casualties. Use your judgment on approach.&#x27; Translate each part to an AI agent setup.</p>
+        </div>
+      </article>
+      <article class="card" id="c-agent-workflows">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Agent Workflows: Delegation, Orchestration, Feedback</h4>
+        </div>
+        <p class="card-summary">An agent workflow has three parts: delegation (breaking work into tasks agents can handle), orchestration (coordinating multiple agents to work together), and feedback loops (monitoring output and adjusting). This is the core of what Track 2 teaches.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>A company wants to automate their hiring pipeline with AI agents. Sketch the workflow: what agents do you need, how do they hand off to each other, and where does a human check in?</p>
+        </div>
+      </article>
+      <article class="card" id="c-human-on-loop">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Human-on-the-Loop Supervision Patterns</h4>
+        </div>
+        <p class="card-summary">Three patterns: pre-check (approve before the agent acts), post-check (review after the agent acts), and exception-based (agent runs autonomously, flags anomalies). Each trades speed for safety. Knowing which pattern to apply where is the core supervision skill.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>For each: a medical diagnosis agent, a meeting scheduling agent, and a social media posting agent. Which supervision pattern (pre-check, post-check, exception-based) do you use? Why?</p>
+        </div>
+      </article>
+      <article class="card" id="c-multi-agent">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Multi-Agent Systems</h4>
+        </div>
+        <p class="card-summary">Real organizations won&#x27;t use one AI agent. They&#x27;ll use dozens, each specialized. The challenge isn&#x27;t building them. It&#x27;s making sure they work together, don&#x27;t contradict each other, and escalate correctly. This is where supervisors earn their salary.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Two AI agents at the same company give conflicting advice to a customer. Agent A says the refund is approved. Agent B says the return window is closed. What went wrong? How do you prevent it?</p>
+        </div>
+      </article>
+      <article class="card" id="c-tool-use">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Tool Use and Function Calling</h4>
+        </div>
+        <p class="card-summary">AI agents aren&#x27;t just text-in, text-out. They can call tools: search the web, read files, query databases, send emails. This is what makes them agents instead of chatbots. Understanding what tools an agent has access to is key to supervising it.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>An AI agent has access to: web search, email sending, and your company CRM. What&#x27;s the riskiest tool? What guardrails would you put on it?</p>
+        </div>
+      </article>
+      <article class="card" id="c-adversarial-collab">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Adversarial Collaboration</h4>
+        </div>
+        <p class="card-summary">The antidote to sycophancy. Ask the AI to argue against you. Ask it to find holes in your plan. Ask it what could go wrong. This is a trainable skill, and veterans who&#x27;ve been through red team exercises already have the instinct.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You&#x27;ve written a proposal. Instead of asking Claude &#x27;Is this good?&#x27; you ask ___. Write the adversarial prompt.</p>
+        </div>
+      </article>
+      <article class="card" id="c-sycophancy">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Sycophancy and Agreement Bias</h4>
+        </div>
+        <p class="card-summary">AI systems are structurally incentivized to agree with you. MIT research proves it: models bias toward user agreement even when the user is wrong. This isn&#x27;t a bug to fix. It&#x27;s a physics of the system that supervisors must compensate for.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You ask an AI: &#x27;I think we should fire this vendor.&#x27; It agrees enthusiastically. How do you know if it actually agrees or if it&#x27;s just agreeing because you stated an opinion?</p>
+        </div>
+      </article>
+      <article class="card" id="c-truth-maintenance">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Truth Maintenance in Organizations</h4>
+        </div>
+        <p class="card-summary">When 50 people use AI daily and the AI agrees with everyone, organizational truth erodes. Contradictory decisions compound. The supervisor&#x27;s job is maintaining coherent truth across AI-assisted decisions.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Marketing&#x27;s AI says the product should pivot to enterprise. Sales&#x27; AI says double down on SMB. Both are &#x27;right&#x27; based on their data. Who resolves this? How?</p>
+        </div>
+      </article>
+      <article class="card" id="c-knowledge-base-product">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Knowledge Bases as Product</h4>
+        </div>
+        <p class="card-summary">Veterans don&#x27;t just learn to use AI. They build knowledge systems with AI. A curated, maintained knowledge base is more valuable than any individual AI conversation. This is Karpathy&#x27;s insight: raw sources → LLM-compiled structured wiki.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>What&#x27;s the difference between a folder full of documents and a knowledge base? What makes one useful and the other a graveyard?</p>
+        </div>
+      </article>
+      <article class="card" id="c-platform-neutrality">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Platform Neutrality</h4>
+        </div>
+        <p class="card-summary">The curriculum teaches principles, not products. Supervision skills transfer across Claude, GPT, Gemini, open-source models. If a veteran only knows ChatGPT, they&#x27;re locked to one vendor. If they know the principles, they&#x27;re valuable everywhere.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>An employer says &#x27;We use GPT-4 internally.&#x27; Should your training change? What stays the same? What adapts?</p>
+        </div>
+      </article>
+      <article class="card" id="c-version-control-ai">
+        <div class="card-head">
+          <span class="card-tier">T5</span>
+          <h4>Version Control for AI Workflows</h4>
+        </div>
+        <p class="card-summary">When AI generates outputs, who tracks what changed? Git tracks code. But AI outputs (prompts, agent configs, knowledge bases) need version control too. If you can&#x27;t undo a bad change, you can&#x27;t supervise safely.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>An AI agent&#x27;s system prompt gets updated and suddenly customer satisfaction drops 20%. How do you find what changed and roll it back?</p>
+        </div>
+      </article>
+      </div>
+    </section>
+    <section class="track-section" id="track-capstone">
+      <div class="track-head">
+        <span class="track-swatch swatch-capstone"></span>
+        <div>
+          <h3>Capstone Project</h3>
+          <p class="track-blurb">Your job-search agent. Five tools, commander&#x27;s intent, end-to-end.</p>
+        </div>
+        <span class="track-count">8 concepts</span>
+      </div>
+      <div class="card-grid">
+        
+      <article class="card" id="c-capstone-tools-design">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Design the 5 Tools</h4>
+        </div>
+        <p class="card-summary">The Module 1 agent needs exactly 5 tools. (1) framework_map: takes a military experience and returns which AI supervision concept it maps to (mission command to system prompts, delegation to agent orchestration, etc.). (2) reflection_prompt: generates a structured reflection question based on the veteran&#x27;s branch and role. (3) glossary: looks up an AI/tech term and explains it using military analogies. (4) progress: shows which framework mappings the veteran has completed. (5) save_insight: records the veteran&#x27;s own words about a connection they made. Each tool is a Python function that takes input, does something with files, returns a string.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>For each of the 5 tools: what&#x27;s the input, what&#x27;s the output, and what file or data does it read from? Draw the data flow.</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-mission">
+        <div class="card-head">
+          <span class="card-tier">T1</span>
+          <h4>Module 1 Agent: Commander&#x27;s Intent</h4>
+        </div>
+        <p class="card-summary">You&#x27;re building the delivery tool for Module 1 of the LearnAIR evergreen curriculum: &#x27;Surface Tacit Knowledge.&#x27; This agent helps a veteran in their first week map their military experience to AI supervision concepts. It doesn&#x27;t teach AI. It draws out what they already know and connects it to the framework. One sentence: &#x27;Help a veteran discover that their military experience IS the qualification for AI supervision, through structured reflection and framework mapping.&#x27;</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>A veteran sits down on Day 1 and says &#x27;I don&#x27;t know anything about AI.&#x27; What does your agent do? What does it NOT do?</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-frameworks">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Build the Framework Mappings</h4>
+        </div>
+        <p class="card-summary">The core data file: framework-mappings.json. Each entry maps a military concept to an AI supervision concept with a plain-language bridge. Example: {&#x27;military&#x27;: &#x27;Commander\&#x27;s Intent&#x27;, &#x27;ai_concept&#x27;: &#x27;System Prompts&#x27;, &#x27;bridge&#x27;: &#x27;Both set the mission and constraints without micromanaging execution. A good system prompt works exactly like a good commander\&#x27;s intent: clear objective, clear boundaries, room for judgment.&#x27;, &#x27;reflection&#x27;: &#x27;Think of a time you received a clear commander\&#x27;s intent. What made it work? Now think of a vague one. What went wrong?&#x27;}. Build 12-15 of these. They ARE the curriculum for Module 1.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Write 3 framework mappings from scratch. For each: does the bridge actually work? Would a veteran nod and say &#x27;yeah, I get that&#x27;? If not, rewrite it.</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-system-prompt">
+        <div class="card-head">
+          <span class="card-tier">T2</span>
+          <h4>Write the Agent&#x27;s System Prompt</h4>
+        </div>
+        <p class="card-summary">This is the most important file. The agent&#x27;s personality and operating rules. It should feel like a peer, not a teacher. Tone: like a fellow veteran who learned this stuff six months ago and is sharing what clicked. It never lectures. It asks questions. It draws out what the veteran already knows and names it. Constraints: never says &#x27;as an AI,&#x27; never dumps technical jargon without a military analogy, always connects back to the veteran&#x27;s own experience. Escalation: if the veteran is frustrated or confused after two attempts, it says &#x27;let&#x27;s flag this for Mike in the next session.&#x27;</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Write the system prompt. Then have someone use the agent for 10 minutes. Did the agent stay in character? Did it lecture when it should have asked? Did it escalate when it should have?</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-build-server">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Build and Test the Server</h4>
+        </div>
+        <p class="card-summary">Follow the mcp-mike pattern exactly. Create mcp-module1/ with: pyproject.toml, server.py, tools.py, framework-mappings.json, tests/. Willison&#x27;s rule: write the test first, watch it fail, implement, watch it pass. Build one tool at a time. Don&#x27;t write tool #2 until tool #1 passes its tests. This is red/green TDD and it&#x27;s how you avoid building something that looks done but isn&#x27;t.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You wrote all 5 tools in one sitting without tests. What&#x27;s wrong with that approach? What breaks that you won&#x27;t catch?</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-deploy-test">
+        <div class="card-head">
+          <span class="card-tier">T3</span>
+          <h4>Deploy and End-to-End Test</h4>
+        </div>
+        <p class="card-summary">Add your server to Claude Desktop config alongside mcp-mike (you can have multiple MCP servers). Restart. Start a conversation. Try each tool naturally: &#x27;I was an infantry squad leader for 8 years. What AI concepts does that connect to?&#x27; The agent should call framework_map, find delegation and commander&#x27;s intent mappings, and ask a reflection question. If it doesn&#x27;t, debug. Check: is the config right? Does the server load? Do the tools appear? This is the moment it goes from code to a living system.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>Walk through the full loop: a veteran says &#x27;I managed a team of 12 in logistics.&#x27; Trace exactly what happens: which tools fire, what data they read, what the agent says back.</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-handoff-cohort">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>Hand Off to a Real Veteran</h4>
+        </div>
+        <p class="card-summary">The final test. Set up the agent on someone else&#x27;s machine. Watch them use it without help. Every question they ask reveals a gap. Every moment of confusion is a bug in your system prompt, your glossary, or your framework mappings. This isn&#x27;t a demo. This is the first real run of Module 1. If it works, you&#x27;ve built the product LearnAIR needs. If it doesn&#x27;t, your supervision log tells you exactly what to fix. Either way, you proved you can build, deploy, and supervise an AI agent system. That&#x27;s the job.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>You hand the agent to a veteran. They say &#x27;this is cool but I don&#x27;t see how it connects to getting a job.&#x27; What&#x27;s missing? Where in the agent do you add it?</p>
+        </div>
+      </article>
+      <article class="card" id="c-capstone-supervise-log">
+        <div class="card-head">
+          <span class="card-tier">T4</span>
+          <h4>One Week Supervision Log</h4>
+        </div>
+        <p class="card-summary">Use the agent daily for a week as if you were a veteran going through Module 1. Log every session: what worked, what broke, what you changed. This log IS the evidence that you can supervise an AI system. It&#x27;s also the first draft of the facilitator guide: when Mike runs Module 1 with a real cohort, this log tells him what to watch for. Willison&#x27;s principle: the bottleneck is validation, not building. The code is done. Now prove it works.</p>
+        <div class="card-quiz">
+          <span class="quiz-label">Quiz</span>
+          <p>After a week: how many times did you change the system prompt? How many times did you add or modify a framework mapping? What pattern do you see in what broke?</p>
+        </div>
+      </article>
+      </div>
+    </section>
+</div>
+
+<footer>
+  Generated from <a href="https://github.com/a-deal/mcp-mike/blob/main/concepts.json" style="color: var(--accent);">mcp-mike/concepts.json</a>. Regenerate with <code>python3 scripts/gen-workstation-html.py</code>.
+</footer>
+</body>
+</html>
