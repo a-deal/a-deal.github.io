@@ -131,15 +131,21 @@
       writing-mode: vertical-rl;
     }
     .manifesto {
-      padding: clamp(5rem, 10vw, 9rem) 0;
+      position: relative;
+      padding: clamp(5rem, 10vw, 8rem) 0;
       border-bottom: 1px solid var(--line);
-      background: #090b0c;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(243, 237, 227, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(243, 237, 227, .035) 1px, transparent 1px),
+        #090b0c;
+      background-size: 72px 72px;
     }
     .manifesto-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
-      gap: clamp(3rem, 8vw, 8rem);
-      align-items: end;
+      grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: center;
     }
     .manifesto h2, .chapter-title, .work-title, .closing h2 {
       margin: 1.1rem 0 0;
@@ -151,6 +157,32 @@
     .manifesto h2 { max-width: 720px; font-size: clamp(4rem, 8vw, 7.4rem); line-height: .84; }
     .manifesto-note { color: var(--muted); font-size: .9rem; line-height: 1.8; }
     .manifesto-note strong { color: var(--bone); font-weight: 500; }
+    .system-rail { position: relative; margin-top: 2rem; }
+    .system-rail::before {
+      content: "";
+      position: absolute;
+      top: 1.15rem;
+      bottom: 1.15rem;
+      left: .37rem;
+      width: 1px;
+      background: linear-gradient(var(--amber), rgba(223, 160, 78, .18));
+    }
+    .system-node { position: relative; padding: 0 0 1.5rem 2rem; }
+    .system-node:last-child { padding-bottom: 0; }
+    .system-node::before {
+      content: "";
+      position: absolute;
+      top: .5rem;
+      left: 0;
+      width: .8rem;
+      height: .8rem;
+      border: 2px solid #090b0c;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 0 1px rgba(223, 160, 78, .48);
+    }
+    .system-node b { display: block; color: var(--bone); font-family: "Barlow Condensed", sans-serif; font-size: 1.5rem; line-height: 1; text-transform: uppercase; }
+    .system-node span { display: block; margin-top: .35rem; color: var(--muted); font-size: .72rem; line-height: 1.55; }
     .chapter {
       min-height: 86svh;
       position: relative;
@@ -162,13 +194,17 @@
       background-size: cover;
     }
     .chapter::before { content: ""; position: absolute; inset: 0; }
-    .chapter--abundance { background-image: url('/physical-abundance-v1.webp'); }
-    .chapter--abundance::before {
+    .chapter--storage { background-image: url('/physical-abundance-v1.webp'); }
+    .chapter--storage::before {
       background: linear-gradient(0deg, rgba(5, 7, 8, .97) 0%, rgba(5, 7, 8, .46) 48%, rgba(5, 7, 8, .12) 100%);
     }
-    .chapter--process { background-image: url('/watts-wafers-motion-v1.webp'); align-items: center; }
-    .chapter--process::before {
+    .chapter--cpu { background-image: url('/watts-wafers-motion-v1.webp'); align-items: center; }
+    .chapter--cpu::before {
       background: linear-gradient(90deg, rgba(5, 7, 8, .93) 0%, rgba(5, 7, 8, .6) 46%, rgba(5, 7, 8, .14) 100%);
+    }
+    .chapter--network { background-image: url('/atoms-network-v1.webp'); }
+    .chapter--network::before {
+      background: linear-gradient(0deg, rgba(5, 7, 8, .96) 0%, rgba(5, 7, 8, .44) 52%, rgba(5, 7, 8, .08) 100%);
     }
     .chapter-content { position: relative; z-index: 1; padding: clamp(4rem, 8vw, 7rem) 0; }
     .chapter-title { max-width: 950px; font-size: clamp(4.7rem, 10vw, 9rem); line-height: .82; text-wrap: balance; }
@@ -252,9 +288,10 @@
       .manifesto-grid, .closing-grid { grid-template-columns: 1fr; }
       .manifesto h2 { font-size: clamp(3.7rem, 19vw, 6rem); }
       .chapter { min-height: 72svh; }
-      .chapter--abundance { background-position: 58% center; }
-      .chapter--process { align-items: flex-end; background-position: 62% center; }
-      .chapter--process::before { background: linear-gradient(0deg, rgba(5, 7, 8, .97), rgba(5, 7, 8, .42) 68%, rgba(5, 7, 8, .18)); }
+      .chapter--storage { background-position: 58% center; }
+      .chapter--cpu { align-items: flex-end; background-position: 62% center; }
+      .chapter--cpu::before { background: linear-gradient(0deg, rgba(5, 7, 8, .97), rgba(5, 7, 8, .42) 68%, rgba(5, 7, 8, .18)); }
+      .chapter--network { background-position: 58% center; }
       .chapter-title { font-size: clamp(4rem, 20vw, 6.4rem); }
       .proof-head { display: block; }
       .proof-link { display: inline-block; margin-top: 1.5rem; }
@@ -291,27 +328,44 @@
     <section class="manifesto">
       <div class="frame manifesto-grid">
         <div>
-          <p class="kicker">The deployment age</p>
-          <h2>Software ate the world. Now it has to move it.</h2>
+          <p class="kicker">The physical computer</p>
+          <h2>A computer made of atoms.</h2>
         </div>
-        <p class="manifesto-note">The next bottlenecks are not abstract. They are <strong>watts, wafers, factories, logistics, and operating skill.</strong> The hard part is turning intelligence into reliable action.</p>
+        <div>
+          <p class="manifesto-note">The physical world has the same basic jobs as a computer: <strong>hold state, transform it, and move it.</strong> Scroll through the stack.</p>
+          <div class="system-rail" aria-label="Physical computing stack">
+            <div class="system-node"><b>Hold</b><span>land · buildings · inventory · infrastructure</span></div>
+            <div class="system-node"><b>Shape</b><span>factories · tools · machines · energy</span></div>
+            <div class="system-node"><b>Move</b><span>robotics · transport · logistics · networks</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="chapter chapter--abundance" aria-label="Physical abundance">
+    <section class="chapter chapter--storage" aria-label="Storage in the physical computer">
       <div class="frame chapter-content">
-        <p class="kicker">The promise</p>
-        <h2 class="chapter-title">Abundance runs on atoms.</h2>
-        <p class="chapter-line">Energy becomes materials. Materials become machines. Machines expand what people can build, grow, move, and repair.</p>
-        <div class="flow"><span>energy</span><i>→</i><span>materials</span><i>→</i><span>machines</span><i>→</i><span>abundance</span></div>
+        <p class="kicker">01 / Storage / Hold</p>
+        <h2 class="chapter-title">The world has memory.</h2>
+        <p class="chapter-line">Land, buildings, fields, materials, and installed infrastructure hold the physical state. Every useful machine starts with somewhere to stand and something worth acting on.</p>
+        <div class="flow"><span>land</span><i>·</i><span>buildings</span><i>·</i><span>inventory</span><i>·</i><span>infrastructure</span></div>
       </div>
     </section>
 
-    <section class="chapter chapter--process" aria-label="Watts to wafers to motion">
+    <section class="chapter chapter--cpu" aria-label="CPU in the physical computer">
       <div class="frame chapter-content">
-        <p class="kicker">The constraint moved</p>
-        <h2 class="chapter-title">Watts.<br>Wafers.<br>Motion.</h2>
-        <p class="chapter-line">I work at the seam: evaluation, data operations, observability, operator workflows, and full-stack tools that help learned systems survive contact with reality.</p>
+        <p class="kicker">02 / CPU / Shape</p>
+        <h2 class="chapter-title">Factories change the state.</h2>
+        <p class="chapter-line">Energy enters. Machines cut, cast, assemble, and refine. This is where software becomes capability and where manufacturing creates the innovation.</p>
+        <div class="flow"><span>watts</span><i>→</i><span>wafers</span><i>→</i><span>machines</span></div>
+      </div>
+    </section>
+
+    <section class="chapter chapter--network" aria-label="Network in the physical computer">
+      <div class="frame chapter-content">
+        <p class="kicker">03 / Network / Move</p>
+        <h2 class="chapter-title">Robots move the world.</h2>
+        <p class="chapter-line">Transportation and logistics carry matter from one state to the next. Learned machines observe the world, predict what comes next, and act inside it.</p>
+        <div class="flow"><span>observe</span><i>→</i><span>predict</span><i>→</i><span>control</span></div>
       </div>
     </section>
 
@@ -319,7 +373,7 @@
       <div class="frame">
         <header class="proof-head">
           <div>
-            <p class="kicker">Field record</p>
+            <p class="kicker">Across the stack / field record</p>
             <h2 class="work-title">Built where failure is visible.</h2>
           </div>
           <a class="proof-link" href="/Andrew_Deal_Resume.pdf">full record ↗</a>
