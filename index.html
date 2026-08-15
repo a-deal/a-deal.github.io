@@ -1,395 +1,374 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrew Deal | Software Engineer and Technical Generalist</title>
-    <meta name="description" content="Software engineer and technical generalist working across physical AI, applied AI, autonomous systems, and real-world operations.">
-    <link rel="canonical" href="https://andrewdeal.info/">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://andrewdeal.info/">
-    <meta property="og:title" content="Andrew Deal | Software Engineer and Technical Generalist">
-    <meta property="og:description" content="Software engineer and technical generalist working across physical AI, applied AI, autonomous systems, and real-world operations.">
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Andrew Deal",
-            "url": "https://andrewdeal.info/",
-            "sameAs": [
-                "https://www.linkedin.com/in/adeal/",
-                "https://github.com/a-deal",
-                "https://x.com/a_e_deal"
-            ],
-            "knowsAbout": [
-                "Software engineering",
-                "Physical AI",
-                "Applied AI",
-                "Autonomous systems",
-                "Product engineering"
-            ]
-        }
-    </script>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-        :root {
-            --ink: #080a0b;
-            --panel: rgba(10, 12, 13, 0.9);
-            --panel-soft: rgba(16, 18, 19, 0.78);
-            --bone: #f1eadf;
-            --muted: #aaa398;
-            --steel: #2d3031;
-            --amber: #c98a3d;
-            --amber-bright: #e3a451;
-        }
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; background: var(--ink); }
-        body {
-            min-height: 100vh;
-            margin: 0;
-            color: var(--bone);
-            background: var(--ink);
-            font-family: 'JetBrains Mono', monospace;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background: url('/industrial-frontier-hero-v1.webp') 58% top / cover no-repeat;
-            filter: saturate(0.78) contrast(1.08);
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                linear-gradient(90deg, rgba(5, 7, 8, 0.55) 0%, rgba(5, 7, 8, 0.2) 48%, rgba(5, 7, 8, 0.32) 100%),
-                linear-gradient(180deg, rgba(5, 7, 8, 0.2) 0%, rgba(5, 7, 8, 0.58) 62%, rgba(5, 7, 8, 0.96) 100%);
-        }
-        .site-shell { position: relative; z-index: 1; background: transparent; }
-        .display-font { font-family: 'Barlow Condensed', sans-serif; }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
-        .animate-slide-up { animation: slideUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-600 { animation-delay: 0.6s; }
-        .delay-800 { animation-delay: 0.8s; }
-        .delay-1000 { animation-delay: 1.0s; }
-        .hero {
-            min-height: 94vh;
-            display: flex;
-            align-items: center;
-            padding: clamp(7rem, 14vh, 11rem) clamp(1.5rem, 7vw, 7rem);
-            border-bottom: 1px solid rgba(227, 164, 81, 0.28);
-        }
-        .hero-inner { width: min(1180px, 100%); margin: 0 auto; }
-        .eyebrow, .section-kicker {
-            color: var(--amber-bright);
-            font-size: 0.7rem;
-            line-height: 1;
-            letter-spacing: 0.38em;
-            text-transform: uppercase;
-        }
-        .display-title {
-            max-width: 850px;
-            margin: 1.5rem 0 2rem;
-            color: var(--bone);
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(5rem, 11vw, 9.5rem);
-            font-weight: 700;
-            line-height: 0.79;
-            letter-spacing: -0.035em;
-            text-transform: uppercase;
-            text-wrap: balance;
-            text-shadow: 0 4px 36px rgba(0, 0, 0, 0.48);
-        }
-        .hero-lede {
-            max-width: 700px;
-            margin: 0 0 2.25rem;
-            color: #d0c8bc;
-            font-size: clamp(0.95rem, 1.6vw, 1.14rem);
-            line-height: 1.8;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
-        }
-        .social-nav { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
-        .social-link {
-            display: inline-flex;
-            width: 3rem;
-            height: 3rem;
-            align-items: center;
-            justify-content: center;
-            color: #d7d0c5;
-            border: 1px solid rgba(241, 234, 223, 0.24);
-            border-radius: 999px;
-            background: rgba(11, 13, 14, 0.62);
-            backdrop-filter: blur(8px);
-            transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, background 180ms ease;
-        }
-        .social-link:hover {
-            color: var(--bone);
-            border-color: var(--amber-bright);
-            background: rgba(201, 138, 61, 0.18);
-            transform: translateY(-2px);
-        }
-        .social-link--primary { color: #17130e; border-color: var(--amber-bright); background: var(--amber-bright); }
-        .social-link--primary:hover { color: #0a0b0c; background: #efb35f; }
-        .content-section {
-            padding: clamp(5rem, 9vw, 8rem) clamp(1.5rem, 7vw, 7rem);
-            border-bottom: 1px solid rgba(241, 234, 223, 0.12);
-            background: linear-gradient(180deg, rgba(8, 10, 11, 0.88), rgba(8, 10, 11, 0.95));
-            backdrop-filter: blur(3px);
-        }
-        .section-inner { width: min(980px, 100%); margin: 0 auto; }
-        .career-intro {
-            max-width: 860px;
-            margin: 1.8rem 0 5rem;
-            color: #d8d0c4 !important;
-            font-size: clamp(1.1rem, 2vw, 1.45rem) !important;
-            line-height: 1.75 !important;
-        }
-        .timeline { border-color: rgba(201, 138, 61, 0.38) !important; }
-        .career-section .bg-gray-900 { background: var(--amber-bright) !important; box-shadow: 0 0 0 5px rgba(201, 138, 61, 0.11); }
-        .career-section .bg-gray-300 { background: #4c4d49 !important; }
-        .career-section .text-gray-400 { color: var(--amber) !important; text-transform: uppercase; letter-spacing: 0.14em; }
-        .career-section h2 {
-            color: var(--bone) !important;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: clamp(1.55rem, 3vw, 2.15rem) !important;
-            line-height: 1.05;
-            letter-spacing: 0.01em;
-        }
-        .career-section .text-gray-600 { color: var(--muted) !important; }
-        .career-section a { color: var(--amber-bright) !important; }
-        .texture-section {
-            border-bottom: 1px solid rgba(241, 234, 223, 0.12);
-            background: rgba(7, 9, 10, 0.96);
-        }
-        .texture-card {
-            min-height: 25rem;
-            padding: clamp(2rem, 5vw, 4rem) !important;
-            border-color: rgba(241, 234, 223, 0.12) !important;
-            background: linear-gradient(150deg, rgba(28, 29, 28, 0.86), rgba(11, 13, 14, 0.96));
-            transition: background 220ms ease;
-        }
-        .texture-card:hover { background: linear-gradient(150deg, rgba(42, 37, 30, 0.9), rgba(13, 14, 15, 0.98)) !important; }
-        .texture-card .bg-gray-100 {
-            color: var(--amber-bright);
-            border-color: rgba(201, 138, 61, 0.32) !important;
-            background: rgba(201, 138, 61, 0.1) !important;
-        }
-        .texture-card h3 {
-            color: var(--bone) !important;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 2rem !important;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .texture-card .text-gray-600 { color: var(--muted) !important; }
-        .texture-card .text-gray-500 { color: var(--amber-bright) !important; }
-        .texture-card .text-gray-400 { color: #77756f !important; }
-        .texture-card .text-gray-900 { color: #d9d1c5 !important; }
-        .checklist-item { border-top: 1px solid rgba(241, 234, 223, 0.08); transition: color 180ms ease; }
-        .site-footer {
-            padding: 2rem clamp(1.5rem, 7vw, 7rem);
-            color: #77756f;
-            border-color: rgba(241, 234, 223, 0.1) !important;
-            background: #070809;
-        }
-        @media (max-width: 700px) {
-            body::before { background-position: 68% top; }
-            body::after { background: linear-gradient(180deg, rgba(5, 7, 8, 0.32), rgba(5, 7, 8, 0.72) 58%, rgba(5, 7, 8, 0.98)); }
-            .hero { min-height: 88svh; padding-top: 7rem; padding-bottom: 6rem; }
-            .display-title { font-size: clamp(4.3rem, 23vw, 6.5rem); }
-            .texture-card { min-height: auto; }
-        }
-    </style>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrew Deal | Physical AI and Real-World Systems</title>
+  <meta name="description" content="Software engineer and technical generalist building physical AI, applied AI, and real-world systems.">
+  <link rel="canonical" href="https://andrewdeal.info/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andrewdeal.info/">
+  <meta property="og:title" content="Andrew Deal | The Future Has Weight">
+  <meta property="og:description" content="Software for machines, energy, and the real world.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Andrew Deal",
+    "url": "https://andrewdeal.info/",
+    "sameAs": [
+      "https://www.linkedin.com/in/adeal/",
+      "https://github.com/a-deal",
+      "https://x.com/a_e_deal"
+    ],
+    "knowsAbout": [
+      "Software engineering",
+      "Physical AI",
+      "Applied AI",
+      "Autonomous systems",
+      "Product engineering"
+    ]
+  }
+  </script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root {
+      --ink: #07090a;
+      --bone: #f3ede3;
+      --muted: #aaa399;
+      --line: rgba(243, 237, 227, .14);
+      --amber: #dfa04e;
+      --amber-dim: #9a6b34;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--ink); }
+    body {
+      margin: 0;
+      color: var(--bone);
+      background: var(--ink);
+      font-family: "JetBrains Mono", monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .display { font-family: "Barlow Condensed", sans-serif; }
+    .frame { width: min(1240px, calc(100% - 3rem)); margin: 0 auto; }
+    .kicker {
+      margin: 0;
+      color: var(--amber);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+    }
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(223, 160, 78, .28);
+      background: #080a0b url('/industrial-frontier-hero-v1.webp') 58% center / cover no-repeat;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(5, 7, 8, .96) 0%, rgba(5, 7, 8, .78) 40%, rgba(5, 7, 8, .2) 74%, rgba(5, 7, 8, .36) 100%),
+        linear-gradient(0deg, rgba(5, 7, 8, .7), transparent 48%);
+    }
+    .hero-content { position: relative; z-index: 1; padding: 7rem 0 5rem; }
+    h1 {
+      max-width: 930px;
+      margin: 1.4rem 0 1.75rem;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(5.4rem, 12.5vw, 10.8rem);
+      font-weight: 700;
+      line-height: .78;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      text-wrap: balance;
+      text-shadow: 0 5px 38px rgba(0, 0, 0, .48);
+    }
+    .hero-copy {
+      max-width: 660px;
+      margin: 0 0 2rem;
+      color: #d8d0c4;
+      font-size: clamp(.92rem, 1.5vw, 1.08rem);
+      line-height: 1.75;
+    }
+    .socials { display: flex; flex-wrap: wrap; gap: .65rem; }
+    .social {
+      width: 3rem;
+      height: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(243, 237, 227, .25);
+      border-radius: 50%;
+      background: rgba(7, 9, 10, .62);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .social:hover { transform: translateY(-2px); border-color: var(--amber); background: rgba(223, 160, 78, .15); }
+    .social.primary { color: #17120c; border-color: var(--amber); background: var(--amber); }
+    .social svg { width: 1.15rem; height: 1.15rem; }
+    .scroll-cue {
+      position: absolute;
+      right: max(1.5rem, calc((100vw - 1240px) / 2));
+      bottom: 2rem;
+      z-index: 2;
+      color: #a79f94;
+      font-size: .62rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .manifesto {
+      padding: clamp(5rem, 10vw, 9rem) 0;
+      border-bottom: 1px solid var(--line);
+      background: #090b0c;
+    }
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+      gap: clamp(3rem, 8vw, 8rem);
+      align-items: end;
+    }
+    .manifesto h2, .chapter-title, .work-title, .closing h2 {
+      margin: 1.1rem 0 0;
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+    }
+    .manifesto h2 { max-width: 720px; font-size: clamp(4rem, 8vw, 7.4rem); line-height: .84; }
+    .manifesto-note { color: var(--muted); font-size: .9rem; line-height: 1.8; }
+    .manifesto-note strong { color: var(--bone); font-weight: 500; }
+    .chapter {
+      min-height: 86svh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background-position: center;
+      background-size: cover;
+    }
+    .chapter::before { content: ""; position: absolute; inset: 0; }
+    .chapter--abundance { background-image: url('/physical-abundance-v1.webp'); }
+    .chapter--abundance::before {
+      background: linear-gradient(0deg, rgba(5, 7, 8, .97) 0%, rgba(5, 7, 8, .46) 48%, rgba(5, 7, 8, .12) 100%);
+    }
+    .chapter--process { background-image: url('/watts-wafers-motion-v1.webp'); align-items: center; }
+    .chapter--process::before {
+      background: linear-gradient(90deg, rgba(5, 7, 8, .93) 0%, rgba(5, 7, 8, .6) 46%, rgba(5, 7, 8, .14) 100%);
+    }
+    .chapter-content { position: relative; z-index: 1; padding: clamp(4rem, 8vw, 7rem) 0; }
+    .chapter-title { max-width: 950px; font-size: clamp(4.7rem, 10vw, 9rem); line-height: .82; text-wrap: balance; }
+    .chapter-line {
+      max-width: 750px;
+      margin: 1.5rem 0 0;
+      color: #d8d0c4;
+      font-size: clamp(.9rem, 1.4vw, 1.05rem);
+      line-height: 1.75;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem 1rem;
+      align-items: center;
+      margin-top: 2rem;
+      color: var(--amber);
+      font-size: clamp(.76rem, 1.4vw, .95rem);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .flow i { color: rgba(243, 237, 227, .42); font-style: normal; }
+    .proof {
+      padding: clamp(5rem, 9vw, 8rem) 0;
+      border-bottom: 1px solid var(--line);
+      background: #0a0c0d;
+    }
+    .proof-head {
+      display: flex;
+      gap: 2rem;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
+    .work-title { max-width: 820px; font-size: clamp(3.7rem, 7vw, 6.3rem); line-height: .86; }
+    .proof-link {
+      flex: none;
+      color: var(--amber);
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .proof-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .proof-card {
+      min-height: 240px;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(22, 24, 25, .86), rgba(10, 12, 13, .98));
+    }
+    .proof-index { color: var(--amber-dim); font-size: .68rem; letter-spacing: .2em; }
+    .proof-card h3 {
+      margin: 2rem 0 .8rem;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(1.8rem, 3.8vw, 2.7rem);
+      line-height: .98;
+      text-transform: uppercase;
+    }
+    .proof-card p { max-width: 520px; margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.72; }
+    .proof-stat { display: block; color: var(--bone); font-family: "Barlow Condensed", sans-serif; font-size: 1.55rem; }
+    .closing {
+      padding: clamp(6rem, 11vw, 10rem) 0;
+      background:
+        radial-gradient(circle at 78% 42%, rgba(223, 160, 78, .12), transparent 30%),
+        #07090a;
+    }
+    .closing h2 { max-width: 1100px; font-size: clamp(4.5rem, 10vw, 8.8rem); line-height: .82; }
+    .closing-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: end; }
+    .closing-side { padding-bottom: .5rem; }
+    .closing-side p { color: var(--muted); font-size: .82rem; line-height: 1.75; }
+    .closing-side a { display: inline-flex; gap: .6rem; align-items: center; margin-top: 1.5rem; color: var(--amber); font-size: .72rem; letter-spacing: .15em; text-decoration: none; text-transform: uppercase; }
+    footer { padding: 1.5rem 0; color: #77736d; border-top: 1px solid var(--line); background: #07090a; font-size: .68rem; }
+    @media (max-width: 760px) {
+      .frame { width: min(100% - 2rem, 1240px); }
+      .hero { background-position: 67% center; }
+      .hero::before { background: linear-gradient(180deg, rgba(5, 7, 8, .32), rgba(5, 7, 8, .89) 70%, rgba(5, 7, 8, .98)); }
+      .hero-content { align-self: flex-end; padding: 7rem 0 4rem; }
+      h1 { font-size: clamp(4.4rem, 24vw, 7rem); }
+      .scroll-cue { display: none; }
+      .manifesto-grid, .closing-grid { grid-template-columns: 1fr; }
+      .manifesto h2 { font-size: clamp(3.7rem, 19vw, 6rem); }
+      .chapter { min-height: 72svh; }
+      .chapter--abundance { background-position: 58% center; }
+      .chapter--process { align-items: flex-end; background-position: 62% center; }
+      .chapter--process::before { background: linear-gradient(0deg, rgba(5, 7, 8, .97), rgba(5, 7, 8, .42) 68%, rgba(5, 7, 8, .18)); }
+      .chapter-title { font-size: clamp(4rem, 20vw, 6.4rem); }
+      .proof-head { display: block; }
+      .proof-link { display: inline-block; margin-top: 1.5rem; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-card { min-height: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  </style>
 </head>
-<body class="min-h-screen">
-    <!-- Main Content -->
-    <div class="site-shell animate-fade-in">
-        <!-- Hero Section -->
-        <section class="hero animate-slide-up delay-200">
-            <div class="hero-inner">
-                <p class="eyebrow">Andrew Deal / San Francisco</p>
-                <h1 class="display-title">software for the real world</h1>
-                <p class="hero-lede">Software engineer and technical generalist building physical-AI and applied-AI systems people can understand and trust.</p>
+<body>
+  <main>
+    <section class="hero">
+      <div class="frame hero-content">
+        <p class="kicker">Andrew Deal / San Francisco</p>
+        <h1>The future<br>has weight.</h1>
+        <p class="hero-copy">Software for machines, energy, and the real world. I build the systems between technical capability and dependable use.</p>
+        <nav class="socials" aria-label="Profile links">
+          <a href="/Andrew_Deal_Resume.pdf" class="social primary" aria-label="Resume" title="Resume"><i data-lucide="file-text"></i></a>
+          <a href="https://www.linkedin.com/in/adeal/" class="social" aria-label="LinkedIn" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+          </a>
+          <a href="https://github.com/a-deal" class="social" aria-label="GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.88c.6.11.82-.26.82-.58v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8a11.5 11.5 0 0 1 3 .4c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v2.79c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
+          </a>
+          <a href="https://x.com/a_e_deal" class="social" aria-label="X" title="X">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
+          </a>
+          <a href="mailto:deal.e.andrew@gmail.com" class="social" aria-label="Email" title="Email"><i data-lucide="mail"></i></a>
+        </nav>
+      </div>
+      <span class="scroll-cue">built in atoms ↓</span>
+    </section>
 
-                <div class="social-nav">
-                    <a href="/Andrew_Deal_Resume.pdf" aria-label="Resume" title="Resume" class="social-link social-link--primary">
-                        <i data-lucide="file-text" class="h-5 w-5" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/adeal/" aria-label="LinkedIn" title="LinkedIn" class="social-link">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/a-deal" aria-label="GitHub" title="GitHub" class="social-link">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 .5A12 12 0 0 0 8.2 23.88c.6.11.82-.26.82-.58v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8a11.5 11.5 0 0 1 3 .4c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v2.79c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://x.com/a_e_deal" aria-label="X" title="X" class="social-link">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"></path>
-                        </svg>
-                    </a>
-                    <a href="mailto:deal.e.andrew@gmail.com" aria-label="Email" title="Email" class="social-link">
-                        <i data-lucide="mail" class="h-5 w-5" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
+    <section class="manifesto">
+      <div class="frame manifesto-grid">
+        <div>
+          <p class="kicker">The deployment age</p>
+          <h2>Software ate the world. Now it has to move it.</h2>
+        </div>
+        <p class="manifesto-note">The next bottlenecks are not abstract. They are <strong>watts, wafers, factories, logistics, and operating skill.</strong> The hard part is turning intelligence into reliable action.</p>
+      </div>
+    </section>
 
-        <!-- Career Arc -->
-        <section class="content-section career-section animate-slide-up delay-400">
-            <div class="section-inner">
-                <p class="section-kicker">career.log / field record</p>
-                <div class="career-intro space-y-5">
-                    <p>My work keeps taking me to places where software has to survive contact with the world: identity systems used by millions, autonomous tractors moving through fields, sensor data from industrial equipment, edge ML without reliable cloud connectivity, and health data that has to become action.</p>
-                    <p>I build the integration layer between technical capability and dependable use: full-stack products, evaluation, data operations, operator workflows, and the evidence people need before they trust a system.</p>
-                </div>
-                <div class="timeline relative ml-3 border-l space-y-12">
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[6px] top-1.5 h-3 w-3 rounded-full bg-gray-900"></div>
-                        <div class="text-xs text-gray-400 mb-2">current / physical AI</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Independent physical-AI lab</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Training and evaluating robot policies, bringing up a SO-ARM101 system, and building toward a complete teleoperation, data-collection, deployment, and failure-analysis loop. The focus is evaluation, observability, recovery, and operator trust.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">2026 / health intelligence</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Baseline</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600 mb-4">Built a personal health intelligence system that reconciled wearables, labs, habits, and research into concrete decisions. The work sharpened a recurring theme: important systems need evidence, clear reasoning, and a usable path from signal to action.</p>
-                        <a href="https://mybaseline.health" class="text-xs text-gray-500 hover:text-gray-700 transition-colors flex items-center space-x-1">
-                            <span>visit Baseline</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m9 18 6-6-6-6"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">critical systems</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Defense, construction, mining, and industrial equipment</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Worked beside early-stage deep-tech teams including Pixel Foundry, OmenAI, and TurbineOne, where software had to survive machines, field conditions, constrained connectivity, and real operator workflows.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">autonomous machines</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Bear Flag Robotics, acquired by John Deere</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Shipped full-stack systems for autonomous tractors, helped support more than 80,000 autonomously tilled acres, and worked across product, engineering, and field operations through acquisition. Later helped shape Carver, a $39 million electrification and autonomy program for a new agricultural market.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">creative tools</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Over, acquired by GoDaddy</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Helped a fast-moving creative-tools company mature through cross-platform product work, enterprise growth, and engineering standards that made the team stronger.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">identity at scale</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Twitch identity systems</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Worked on identity systems at Twitch, where small product choices had to hold up for more than 10 million daily active users.</p>
-                    </div>
-                    <div class="relative pl-10">
-                        <div class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-gray-300"></div>
-                        <div class="text-xs text-gray-400 mb-2">health as lived infrastructure</div>
-                        <h2 class="text-lg font-semibold text-gray-900 mb-3">Gym operation and coaching</h2>
-                        <p class="leading-relaxed text-sm sm:text-base text-gray-600">Built a functional-fitness coaching practice serving corporate executives, senior government officials, students, and everyone in between. It taught me that health is infrastructure: something lived first, then built around.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="chapter chapter--abundance" aria-label="Physical abundance">
+      <div class="frame chapter-content">
+        <p class="kicker">The promise</p>
+        <h2 class="chapter-title">Abundance runs on atoms.</h2>
+        <p class="chapter-line">Energy becomes materials. Materials become machines. Machines expand what people can build, grow, move, and repair.</p>
+        <div class="flow"><span>energy</span><i>→</i><span>materials</span><i>→</i><span>machines</span><i>→</i><span>abundance</span></div>
+      </div>
+    </section>
 
-        <!-- Texture -->
-        <section class="texture-section grid grid-cols-1 md:grid-cols-2">
-            <!-- Column 1: Writings -->
-            <div class="texture-card animate-slide-up delay-400 border-r">
-                <div class="h-8 w-8 flex bg-gray-100 rounded mb-6 border border-gray-200 items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pen-tool" class="lucide lucide-pen-tool w-4 h-4 text-gray-700"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"></path><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"></path><path d="m2.3 2.3 7.286 7.286"></path><circle cx="11" cy="11" r="2"></circle></svg>
-                </div>
-                <h3 class="text-xl font-semibold text-custom-heading mb-4">writings</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                    notes on technology, health, philosophy, and building products that matter
-                </p>
-                
-                <!-- Archive Link -->
-                <div class="pt-2">
-                    <a href="https://raiseyourdots.substack.com" class="text-xs text-gray-500 hover:text-gray-700 transition-colors flex items-center space-x-1">
-                        <span>view all essays</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m9 18 6-6-6-6"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+    <section class="chapter chapter--process" aria-label="Watts to wafers to motion">
+      <div class="frame chapter-content">
+        <p class="kicker">The constraint moved</p>
+        <h2 class="chapter-title">Watts.<br>Wafers.<br>Motion.</h2>
+        <p class="chapter-line">I work at the seam: evaluation, data operations, observability, operator workflows, and full-stack tools that help learned systems survive contact with reality.</p>
+      </div>
+    </section>
 
-            <!-- Column 2: Personal Texture -->
-            <div class="texture-card animate-slide-up delay-800">
-                <div class="h-8 w-8 flex bg-gray-100 rounded mb-6 border border-gray-200 items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" class="lucide lucide-compass w-4 h-4 text-gray-700"></svg>
-                </div>
-                <h3 class="text-custom-heading text-xl font-semibold mb-4">signal</h3>
-                <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                    a few of the things shaping my taste and direction
-                </p>
-                <div class="space-y-3">
-                    <div class="checklist-item flex items-start space-x-3 py-2">
-                        <span class="text-xs text-gray-400 pt-1 w-14">taste</span>
-                        <div class="flex-1">
-                            <div class="text-sm font-medium text-gray-900">Plato, Montaigne, Orwell, Taleb, Perez</div>
-                        </div>
-                    </div>
-                    <div class="checklist-item flex items-start space-x-3 py-2">
-                        <span class="text-xs text-gray-400 pt-1 w-14">health</span>
-                        <div class="flex-1">
-                            <div class="text-sm font-medium text-gray-900">lifting, HYROX, health as lived infrastructure</div>
-                        </div>
-                    </div>
-                    <div class="checklist-item flex items-start space-x-3 py-2">
-                        <span class="text-xs text-gray-400 pt-1 w-14">craft</span>
-                        <div class="flex-1">
-                            <div class="text-sm font-medium text-gray-900">software, systems, guitar, useful artifacts</div>
-                        </div>
-                    </div>
-                    <div class="checklist-item flex items-start space-x-3 py-2">
-                        <span class="text-xs text-gray-400 pt-1 w-14">north</span>
-                        <div class="flex-1">
-                            <div class="text-sm font-medium text-gray-900">skydiving, art, Latin roots, one better set point</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="proof" id="work">
+      <div class="frame">
+        <header class="proof-head">
+          <div>
+            <p class="kicker">Field record</p>
+            <h2 class="work-title">Built where failure is visible.</h2>
+          </div>
+          <a class="proof-link" href="/Andrew_Deal_Resume.pdf">full record ↗</a>
+        </header>
+        <div class="proof-grid">
+          <article class="proof-card">
+            <span class="proof-index">01 / AUTONOMY</span>
+            <h3>Machines in the field</h3>
+            <p><span class="proof-stat">80,000+ autonomous acres</span>Full-stack product, engineering, and field operations at Bear Flag Robotics through its acquisition by John Deere.</p>
+          </article>
+          <article class="proof-card">
+            <span class="proof-index">02 / SCALE</span>
+            <h3>Systems people depend on</h3>
+            <p><span class="proof-stat">10M+ daily users</span>Identity systems at Twitch and cross-platform product engineering at Over, acquired by GoDaddy.</p>
+          </article>
+          <article class="proof-card">
+            <span class="proof-index">03 / DEPLOYMENT</span>
+            <h3>AI off the happy path</h3>
+            <p>Edge ML, predictive maintenance, contested connectivity, sensor-driven diagnostics, and operator workflows across defense and industrial teams.</p>
+          </article>
+          <article class="proof-card">
+            <span class="proof-index">04 / CURRENT</span>
+            <h3>Physical-AI lab</h3>
+            <p>Training and evaluating robot policies; building teleoperation, data collection, failure analysis, and recovery around a SO-ARM101 system.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        <!-- Footer -->
-        <footer class="site-footer border-t animate-slide-up delay-1000">
-            <div class="flex text-sm text-gray-500 items-center justify-between">
-                <div class="">© <span id="currentYear">2026</span> • <em>contrast is the mother of clarity</em></div>
-            </div>
-        </footer>
-    </div>
+    <section class="closing">
+      <div class="frame closing-grid">
+        <div>
+          <p class="kicker">Next essay / Raise Your Dots</p>
+          <h2>Hardware is eating the world.</h2>
+        </div>
+        <div class="closing-side">
+          <p>The atoms sequel to “Software Is Eating the World”: why the moat moved to energy, wafers, installed capability, and the operators who can make all of it work.</p>
+          <a href="https://raiseyourdots.substack.com">read the writing <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        lucide.createIcons();
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentYear = new Date().getFullYear();
-            document.getElementById("currentYear").textContent = currentYear;
-        });
-    </script>
-
-</body></html>
+  <footer>
+    <div class="frame">© <span id="currentYear">2026</span> · optimism with calluses</div>
+  </footer>
+  <script>
+    lucide.createIcons();
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
