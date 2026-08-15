@@ -35,11 +35,50 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        * { font-family: 'JetBrains Mono', monospace; }
+        :root {
+            --ink: #080a0b;
+            --panel: rgba(10, 12, 13, 0.9);
+            --panel-soft: rgba(16, 18, 19, 0.78);
+            --bone: #f1eadf;
+            --muted: #aaa398;
+            --steel: #2d3031;
+            --amber: #c98a3d;
+            --amber-bright: #e3a451;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; background: var(--ink); }
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--bone);
+            background: var(--ink);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: url('/industrial-frontier-hero-v1.webp') 58% top / cover no-repeat;
+            filter: saturate(0.78) contrast(1.08);
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(5, 7, 8, 0.55) 0%, rgba(5, 7, 8, 0.2) 48%, rgba(5, 7, 8, 0.32) 100%),
+                linear-gradient(180deg, rgba(5, 7, 8, 0.2) 0%, rgba(5, 7, 8, 0.58) 62%, rgba(5, 7, 8, 0.96) 100%);
+        }
+        .site-shell { position: relative; z-index: 1; background: transparent; }
+        .display-font { font-family: 'Barlow Condensed', sans-serif; }
         .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
         .animate-slide-up { animation: slideUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
         @keyframes fadeIn { to { opacity: 1; } }
@@ -49,78 +88,165 @@
         .delay-600 { animation-delay: 0.6s; }
         .delay-800 { animation-delay: 0.8s; }
         .delay-1000 { animation-delay: 1.0s; }
-        .bg-custom { background-color: #f2f2f2; }
-        .text-custom-heading { color: #222222; }
-        .influence-card { transition: all 0.3s ease; }
-        .influence-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .writing-card { transition: all 0.3s ease; }
-        .writing-card:hover { transform: translateY(-2px); background-color: #f9fafb; }
-        .expand-btn { transition: all 0.2s ease; }
-        .expand-btn:hover { background-color: #f3f4f6; }
-        .expandable-content { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: max-height 0.3s ease-out;
+        .hero {
+            min-height: 94vh;
+            display: flex;
+            align-items: center;
+            padding: clamp(7rem, 14vh, 11rem) clamp(1.5rem, 7vw, 7rem);
+            border-bottom: 1px solid rgba(227, 164, 81, 0.28);
         }
-        .expandable-content.expanded { 
-            max-height: 500px; 
+        .hero-inner { width: min(1180px, 100%); margin: 0 auto; }
+        .eyebrow, .section-kicker {
+            color: var(--amber-bright);
+            font-size: 0.7rem;
+            line-height: 1;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
         }
-        .bucket-item { transition: all 0.3s ease; }
-        .bucket-item:hover { background-color: #f8fafc; border-color: #e2e8f0; }
-        .checklist-item { transition: all 0.3s ease; }
-        .checklist-item:hover { background-color: #f8fafc; }
-        .completed { text-decoration: line-through; opacity: 0.7; }
-        .completed .checkbox { background-color: #10b981; border-color: #10b981; }
-        .checkbox { 
-            width: 16px; 
-            height: 16px; 
-            border: 2px solid #d1d5db; 
-            border-radius: 3px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transition: all 0.2s ease;
+        .display-title {
+            max-width: 850px;
+            margin: 1.5rem 0 2rem;
+            color: var(--bone);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(5rem, 11vw, 9.5rem);
+            font-weight: 700;
+            line-height: 0.79;
+            letter-spacing: -0.035em;
+            text-transform: uppercase;
+            text-wrap: balance;
+            text-shadow: 0 4px 36px rgba(0, 0, 0, 0.48);
         }
-        .checkbox svg { 
-            width: 10px; 
-            height: 10px; 
-            color: white; 
-            opacity: 0; 
-            transition: opacity 0.2s ease;
+        .hero-lede {
+            max-width: 700px;
+            margin: 0 0 2.25rem;
+            color: #d0c8bc;
+            font-size: clamp(0.95rem, 1.6vw, 1.14rem);
+            line-height: 1.8;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
         }
-        .completed .checkbox svg { opacity: 1; }
+        .social-nav { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+        .social-link {
+            display: inline-flex;
+            width: 3rem;
+            height: 3rem;
+            align-items: center;
+            justify-content: center;
+            color: #d7d0c5;
+            border: 1px solid rgba(241, 234, 223, 0.24);
+            border-radius: 999px;
+            background: rgba(11, 13, 14, 0.62);
+            backdrop-filter: blur(8px);
+            transition: transform 180ms ease, color 180ms ease, border-color 180ms ease, background 180ms ease;
+        }
+        .social-link:hover {
+            color: var(--bone);
+            border-color: var(--amber-bright);
+            background: rgba(201, 138, 61, 0.18);
+            transform: translateY(-2px);
+        }
+        .social-link--primary { color: #17130e; border-color: var(--amber-bright); background: var(--amber-bright); }
+        .social-link--primary:hover { color: #0a0b0c; background: #efb35f; }
+        .content-section {
+            padding: clamp(5rem, 9vw, 8rem) clamp(1.5rem, 7vw, 7rem);
+            border-bottom: 1px solid rgba(241, 234, 223, 0.12);
+            background: linear-gradient(180deg, rgba(8, 10, 11, 0.88), rgba(8, 10, 11, 0.95));
+            backdrop-filter: blur(3px);
+        }
+        .section-inner { width: min(980px, 100%); margin: 0 auto; }
+        .career-intro {
+            max-width: 860px;
+            margin: 1.8rem 0 5rem;
+            color: #d8d0c4 !important;
+            font-size: clamp(1.1rem, 2vw, 1.45rem) !important;
+            line-height: 1.75 !important;
+        }
+        .timeline { border-color: rgba(201, 138, 61, 0.38) !important; }
+        .career-section .bg-gray-900 { background: var(--amber-bright) !important; box-shadow: 0 0 0 5px rgba(201, 138, 61, 0.11); }
+        .career-section .bg-gray-300 { background: #4c4d49 !important; }
+        .career-section .text-gray-400 { color: var(--amber) !important; text-transform: uppercase; letter-spacing: 0.14em; }
+        .career-section h2 {
+            color: var(--bone) !important;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.55rem, 3vw, 2.15rem) !important;
+            line-height: 1.05;
+            letter-spacing: 0.01em;
+        }
+        .career-section .text-gray-600 { color: var(--muted) !important; }
+        .career-section a { color: var(--amber-bright) !important; }
+        .texture-section {
+            border-bottom: 1px solid rgba(241, 234, 223, 0.12);
+            background: rgba(7, 9, 10, 0.96);
+        }
+        .texture-card {
+            min-height: 25rem;
+            padding: clamp(2rem, 5vw, 4rem) !important;
+            border-color: rgba(241, 234, 223, 0.12) !important;
+            background: linear-gradient(150deg, rgba(28, 29, 28, 0.86), rgba(11, 13, 14, 0.96));
+            transition: background 220ms ease;
+        }
+        .texture-card:hover { background: linear-gradient(150deg, rgba(42, 37, 30, 0.9), rgba(13, 14, 15, 0.98)) !important; }
+        .texture-card .bg-gray-100 {
+            color: var(--amber-bright);
+            border-color: rgba(201, 138, 61, 0.32) !important;
+            background: rgba(201, 138, 61, 0.1) !important;
+        }
+        .texture-card h3 {
+            color: var(--bone) !important;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 2rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .texture-card .text-gray-600 { color: var(--muted) !important; }
+        .texture-card .text-gray-500 { color: var(--amber-bright) !important; }
+        .texture-card .text-gray-400 { color: #77756f !important; }
+        .texture-card .text-gray-900 { color: #d9d1c5 !important; }
+        .checklist-item { border-top: 1px solid rgba(241, 234, 223, 0.08); transition: color 180ms ease; }
+        .site-footer {
+            padding: 2rem clamp(1.5rem, 7vw, 7rem);
+            color: #77756f;
+            border-color: rgba(241, 234, 223, 0.1) !important;
+            background: #070809;
+        }
+        @media (max-width: 700px) {
+            body::before { background-position: 68% top; }
+            body::after { background: linear-gradient(180deg, rgba(5, 7, 8, 0.32), rgba(5, 7, 8, 0.72) 58%, rgba(5, 7, 8, 0.98)); }
+            .hero { min-height: 88svh; padding-top: 7rem; padding-bottom: 6rem; }
+            .display-title { font-size: clamp(4.3rem, 23vw, 6.5rem); }
+            .texture-card { min-height: auto; }
+        }
     </style>
 </head>
-<body class="min-h-screen bg-white">
+<body class="min-h-screen">
     <!-- Main Content -->
-    <div class="relative z-10 bg-white animate-fade-in">
+    <div class="site-shell animate-fade-in">
         <!-- Hero Section -->
-        <section class="animate-slide-up delay-200 border-gray-100 border-b pt-24 px-8 pb-24 sm:px-12">
-            <div class="max-w-4xl text-center mr-auto ml-auto">
-                <p class="text-xs uppercase tracking-[0.35em] text-gray-400 mb-5">Andrew Deal</p>
-                <h1 class="text-custom-heading leading-tight text-5xl sm:text-7xl font-bold text-[#222222] tracking-normal mb-8">software for the real world</h1>
-                <p class="max-w-3xl leading-relaxed text-lg text-gray-600 mr-auto mb-10 ml-auto">Software engineer and technical generalist building physical-AI and applied-AI systems people can understand and trust.</p>
+        <section class="hero animate-slide-up delay-200">
+            <div class="hero-inner">
+                <p class="eyebrow">Andrew Deal / San Francisco</p>
+                <h1 class="display-title">software for the real world</h1>
+                <p class="hero-lede">Software engineer and technical generalist building physical-AI and applied-AI systems people can understand and trust.</p>
 
-                <div class="flex flex-wrap gap-3 items-center justify-center">
-                    <a href="/Andrew_Deal_Resume.pdf" aria-label="Resume" title="Resume" class="inline-flex h-12 w-12 items-center justify-center text-white bg-gray-900 hover:bg-gray-700 rounded-full transition-colors">
+                <div class="social-nav">
+                    <a href="/Andrew_Deal_Resume.pdf" aria-label="Resume" title="Resume" class="social-link social-link--primary">
                         <i data-lucide="file-text" class="h-5 w-5" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/adeal/" aria-label="LinkedIn" title="LinkedIn" class="inline-flex h-12 w-12 items-center justify-center text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">
+                    <a href="https://www.linkedin.com/in/adeal/" aria-label="LinkedIn" title="LinkedIn" class="social-link">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"></path>
                         </svg>
                     </a>
-                    <a href="https://github.com/a-deal" aria-label="GitHub" title="GitHub" class="inline-flex h-12 w-12 items-center justify-center text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">
+                    <a href="https://github.com/a-deal" aria-label="GitHub" title="GitHub" class="social-link">
                         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 .5A12 12 0 0 0 8.2 23.88c.6.11.82-.26.82-.58v-2.24c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.3 1.23A11.5 11.5 0 0 1 12 6.8a11.5 11.5 0 0 1 3 .4c2.29-1.55 3.29-1.23 3.29-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.81 1.1.81 2.22v2.79c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"></path>
                         </svg>
                     </a>
-                    <a href="https://x.com/a_e_deal" aria-label="X" title="X" class="inline-flex h-12 w-12 items-center justify-center text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">
+                    <a href="https://x.com/a_e_deal" aria-label="X" title="X" class="social-link">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"></path>
                         </svg>
                     </a>
-                    <a href="mailto:deal.e.andrew@gmail.com" aria-label="Email" title="Email" class="inline-flex h-12 w-12 items-center justify-center text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors">
+                    <a href="mailto:deal.e.andrew@gmail.com" aria-label="Email" title="Email" class="social-link">
                         <i data-lucide="mail" class="h-5 w-5" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -128,14 +254,14 @@
         </section>
 
         <!-- Career Arc -->
-        <section class="animate-slide-up delay-400 border-gray-100 border-b pt-24 px-8 pb-24 sm:px-12">
-            <div class="max-w-4xl mr-auto ml-auto">
-                <p class="text-xs uppercase tracking-[0.35em] text-gray-400 mb-5">career.log</p>
-                <div class="max-w-3xl space-y-5 text-lg sm:text-xl leading-relaxed text-gray-800 mb-14">
+        <section class="content-section career-section animate-slide-up delay-400">
+            <div class="section-inner">
+                <p class="section-kicker">career.log / field record</p>
+                <div class="career-intro space-y-5">
                     <p>My work keeps taking me to places where software has to survive contact with the world: identity systems used by millions, autonomous tractors moving through fields, sensor data from industrial equipment, edge ML without reliable cloud connectivity, and health data that has to become action.</p>
                     <p>I build the integration layer between technical capability and dependable use: full-stack products, evaluation, data operations, operator workflows, and the evidence people need before they trust a system.</p>
                 </div>
-                <div class="relative ml-3 border-l border-gray-200 space-y-12">
+                <div class="timeline relative ml-3 border-l space-y-12">
                     <div class="relative pl-10">
                         <div class="absolute -left-[6px] top-1.5 h-3 w-3 rounded-full bg-gray-900"></div>
                         <div class="text-xs text-gray-400 mb-2">current / physical AI</div>
@@ -189,9 +315,9 @@
         </section>
 
         <!-- Texture -->
-        <section class="grid grid-cols-1 md:grid-cols-2">
+        <section class="texture-section grid grid-cols-1 md:grid-cols-2">
             <!-- Column 1: Writings -->
-            <div class="hover:bg-gray-50 transition-colors duration-300 animate-slide-up delay-400 border-gray-100 border-r pt-12 pr-12 pb-12 pl-12">
+            <div class="texture-card animate-slide-up delay-400 border-r">
                 <div class="h-8 w-8 flex bg-gray-100 rounded mb-6 border border-gray-200 items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pen-tool" class="lucide lucide-pen-tool w-4 h-4 text-gray-700"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"></path><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"></path><path d="m2.3 2.3 7.286 7.286"></path><circle cx="11" cy="11" r="2"></circle></svg>
                 </div>
@@ -212,7 +338,7 @@
             </div>
 
             <!-- Column 2: Personal Texture -->
-            <div class="p-12 hover:bg-gray-50 transition-colors duration-300 animate-slide-up delay-800">
+            <div class="texture-card animate-slide-up delay-800">
                 <div class="h-8 w-8 flex bg-gray-100 rounded mb-6 border border-gray-200 items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="compass" class="lucide lucide-compass w-4 h-4 text-gray-700"></svg>
                 </div>
@@ -250,7 +376,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="px-12 py-8 border-t border-gray-100 animate-slide-up delay-1000">
+        <footer class="site-footer border-t animate-slide-up delay-1000">
             <div class="flex text-sm text-gray-500 items-center justify-between">
                 <div class="">© <span id="currentYear">2026</span> • <em>contrast is the mother of clarity</em></div>
             </div>
