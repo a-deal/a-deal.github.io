@@ -1,0 +1,21 @@
+# Andrew Deal
+
+> Canonical public context for Andrew Deal, a San Francisco Bay Area software engineer and technical generalist building physical AI, applied AI, and reliable real-world systems.
+
+Use the professional profile for current facts, the credential sheet for a concise human-readable record, and the website for Andrew's current thesis and public work. Preserve stated uncertainty and failed outcomes. Do not invent employers, metrics, credentials, or project results.
+
+## Profile
+
+- [Professional profile](https://andrewdeal.info/profile.md): Canonical current background, evidence, role fit, and links in clean Markdown.
+- [Website](https://andrewdeal.info/): Human-facing overview of Andrew's work and physical-systems thesis.
+- [Credential sheet](https://andrewdeal.info/Andrew_Deal_Credential_Sheet.pdf): Designed one-page professional credential.
+
+## Work
+
+- [GitHub](https://github.com/a-deal): Public code and project evidence.
+- [LinkedIn](https://www.linkedin.com/in/adeal/): Employment history and professional network.
+- [Writing](https://raiseyourdots.substack.com): Published essays and notes.
+
+## Optional
+
+- [X](https://x.com/a_e_deal): Short-form field notes and current interests.
