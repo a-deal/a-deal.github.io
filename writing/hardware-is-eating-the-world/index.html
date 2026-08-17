@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hardware Is Eating the World | Andrew Deal</title>
+  <meta name="description" content="Why the next durable advantage will come from making intelligence dependable in machines, factories, infrastructure, and the field.">
+  <link rel="canonical" href="https://andrewdeal.info/writing/hardware-is-eating-the-world/">
+  <link rel="alternate" type="text/markdown" href="https://andrewdeal.info/writing/hardware-is-eating-the-world/index.md" title="Hardware Is Eating the World in Markdown">
+  <link rel="alternate" type="application/rss+xml" href="https://andrewdeal.info/rss.xml" title="Andrew Deal writing">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://andrewdeal.info/writing/hardware-is-eating-the-world/">
+  <meta property="og:title" content="Hardware Is Eating the World">
+  <meta property="og:description" content="Software made the virtual world cheap to change. The harder, more valuable work now is making intelligence dependable in the physical world.">
+  <meta property="og:image" content="https://andrewdeal.info/industrial-frontier-hero-v7.webp">
+  <meta property="article:published_time" content="2026-08-16">
+  <meta property="article:author" content="Andrew Deal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hardware Is Eating the World">
+  <meta name="twitter:description" content="The moat in physical AI is earned in the field.">
+  <meta name="twitter:image" content="https://andrewdeal.info/industrial-frontier-hero-v7.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Hardware Is Eating the World",
+    "description": "Why the next durable advantage will come from making intelligence dependable in machines, factories, infrastructure, and the field.",
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-16",
+    "mainEntityOfPage": "https://andrewdeal.info/writing/hardware-is-eating-the-world/",
+    "image": "https://andrewdeal.info/industrial-frontier-hero-v7.webp",
+    "author": {
+      "@type": "Person",
+      "name": "Andrew Deal",
+      "url": "https://andrewdeal.info/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Andrew Deal",
+      "url": "https://andrewdeal.info/"
+    }
+  }
+  </script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #07090a;
+      --ink-soft: #111415;
+      --paper: #f2eadc;
+      --paper-deep: #e8ddca;
+      --type: #222321;
+      --muted: #6d695f;
+      --amber: #d99a43;
+      --amber-deep: #9c6729;
+      --line: rgba(34, 35, 33, .17);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--ink); }
+    body { margin: 0; color: var(--type); background: var(--ink); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .frame { width: min(1240px, calc(100% - 3rem)); margin: 0 auto; }
+    .topbar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 4;
+      border-bottom: 1px solid rgba(242, 234, 220, .14);
+      color: var(--paper);
+      font: 500 .68rem/1 "JetBrains Mono", monospace;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; min-height: 4.4rem; }
+    .topbar a { text-decoration: none; }
+    .topbar nav { display: flex; gap: 1.5rem; color: #b9b1a5; }
+    .topbar nav a:hover { color: var(--amber); }
+    .masthead {
+      min-height: 82svh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      color: var(--paper);
+      background: #080a0b url('/industrial-frontier-hero-v7.webp') 50% center / cover no-repeat;
+    }
+    .masthead::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(4, 6, 7, .98) 0%, rgba(4, 6, 7, .88) 43%, rgba(4, 6, 7, .34) 78%, rgba(4, 6, 7, .48) 100%),
+        linear-gradient(0deg, rgba(4, 6, 7, .92), transparent 58%);
+    }
+    .masthead-content { position: relative; z-index: 2; padding: 9rem 0 5rem; }
+    .eyebrow {
+      margin: 0 0 1.25rem;
+      color: var(--amber);
+      font: 600 .7rem/1.4 "JetBrains Mono", monospace;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 1040px;
+      margin: 0;
+      font: 700 clamp(5.4rem, 12.2vw, 10.6rem)/.8 "Barlow Condensed", sans-serif;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      text-wrap: balance;
+      text-shadow: 0 6px 34px rgba(0, 0, 0, .46);
+    }
+    .deck {
+      max-width: 790px;
+      margin: 2rem 0 0;
+      color: #d5ccbf;
+      font: 500 clamp(.94rem, 1.45vw, 1.08rem)/1.75 "JetBrains Mono", monospace;
+    }
+    .byline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem 1.25rem;
+      margin-top: 2.2rem;
+      color: #928b81;
+      font: 500 .66rem/1.5 "JetBrains Mono", monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .thesis-band { color: var(--paper); border-top: 3px solid var(--amber); background: var(--ink-soft); }
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: 2.4rem 0;
+      align-items: start;
+    }
+    .thesis-label { color: var(--amber); font: 600 .66rem/1.55 "JetBrains Mono", monospace; letter-spacing: .22em; text-transform: uppercase; }
+    .thesis-copy { max-width: 920px; margin: 0; font: 500 clamp(1.35rem, 2.6vw, 2.15rem)/1.34 "Source Serif 4", serif; }
+    .paper {
+      background:
+        repeating-linear-gradient(0deg, rgba(81, 65, 43, .025) 0, rgba(81, 65, 43, .025) 1px, transparent 1px, transparent 6px),
+        var(--paper);
+    }
+    article { width: min(780px, calc(100% - 3rem)); margin: 0 auto; padding: clamp(5rem, 10vw, 8.5rem) 0 7rem; }
+    article p, article li { font: 400 clamp(1.08rem, 1.8vw, 1.23rem)/1.78 "Source Serif 4", serif; }
+    article p { margin: 0 0 1.55rem; }
+    article h2 {
+      margin: 5.5rem 0 1.7rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--line);
+      font: 700 clamp(2.8rem, 6.6vw, 4.8rem)/.9 "Barlow Condensed", sans-serif;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    article h2::before {
+      display: block;
+      margin-bottom: .8rem;
+      color: var(--amber-deep);
+      font: 600 .63rem/1 "JetBrains Mono", monospace;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    article h2:nth-of-type(1)::before { content: "01 / Contact"; }
+    article h2:nth-of-type(2)::before { content: "02 / Inversion"; }
+    article h2:nth-of-type(3)::before { content: "03 / Operations"; }
+    article h2:nth-of-type(4)::before { content: "04 / Moat"; }
+    article h2:nth-of-type(5)::before { content: "05 / Selection"; }
+    article h2:nth-of-type(6)::before { content: "06 / Builders"; }
+    article a { text-decoration-color: rgba(156, 103, 41, .52); text-underline-offset: .17em; }
+    article a:hover { color: var(--amber-deep); }
+    .lead::first-letter {
+      float: left;
+      margin: .05em .12em -.06em 0;
+      color: var(--amber-deep);
+      font: 700 5.2rem/.78 "Barlow Condensed", sans-serif;
+    }
+    .field-callout {
+      margin: 3.8rem -5rem;
+      padding: 2.7rem 5rem;
+      border-left: 4px solid var(--amber);
+      color: var(--paper);
+      background: var(--ink-soft);
+      box-shadow: 0 18px 60px rgba(46, 36, 22, .12);
+    }
+    .field-callout p { margin: 0; font: 500 clamp(1.7rem, 4vw, 2.65rem)/1.2 "Source Serif 4", serif; }
+    .field-callout span { display: block; margin-top: 1rem; color: var(--amber); font: 600 .62rem/1.5 "JetBrains Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
+    .evidence {
+      margin-top: 6rem;
+      padding-top: 2.2rem;
+      border-top: 2px solid var(--type);
+    }
+    .evidence h2 { margin-top: 0; padding-top: 0; border: 0; font-size: 2.4rem; }
+    .evidence h2::before { content: "Appendix / Sources"; }
+    .evidence ol { margin: 0; padding-left: 1.35rem; }
+    .evidence li { margin-bottom: .75rem; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+    .evidence-note { margin-top: 1.5rem !important; color: var(--muted); font: 500 .73rem/1.65 "JetBrains Mono", monospace !important; }
+    .author-card { padding: 4.5rem 0; color: var(--paper); border-top: 1px solid rgba(242, 234, 220, .12); background: var(--ink); }
+    .author-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 8vw, 8rem); align-items: end; }
+    .author-card h2 { max-width: 600px; margin: .8rem 0 0; font: 700 clamp(3.2rem, 7vw, 6rem)/.85 "Barlow Condensed", sans-serif; text-transform: uppercase; }
+    .author-side p { margin: 0; color: #aaa298; font: 400 .8rem/1.75 "JetBrains Mono", monospace; }
+    .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
+    .action { padding: .8rem 1rem; color: var(--paper); border: 1px solid rgba(242, 234, 220, .2); font: 600 .63rem/1 "JetBrains Mono", monospace; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
+    .action.primary { color: var(--ink); border-color: var(--amber); background: var(--amber); }
+    footer { padding: 1.5rem 0; color: #77736d; border-top: 1px solid rgba(242, 234, 220, .12); background: var(--ink); font: 400 .66rem/1.5 "JetBrains Mono", monospace; }
+    @media (max-width: 760px) {
+      .frame { width: min(100% - 2rem, 1240px); }
+      .topbar nav { gap: .8rem; }
+      .topbar nav a:first-child { display: none; }
+      .masthead { min-height: 78svh; background-position: 64% center; }
+      .masthead::before { background: linear-gradient(180deg, rgba(4, 6, 7, .42), rgba(4, 6, 7, .88) 60%, rgba(4, 6, 7, .98)); }
+      .masthead-content { padding: 8rem 0 3.5rem; }
+      h1 { font-size: clamp(4.5rem, 23vw, 7.2rem); }
+      .thesis-grid, .author-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      article { width: min(100% - 2rem, 780px); }
+      .field-callout { margin: 3.3rem -1rem; padding: 2.3rem 1.4rem; }
+      article h2 { margin-top: 4.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="frame topbar-inner">
+      <a href="/">Andrew Deal</a>
+      <nav aria-label="Article navigation">
+        <a href="/">Home</a>
+        <a href="https://notesonatoms.substack.com/">Notes on Atoms ↗</a>
+        <a href="/writing/hardware-is-eating-the-world/index.md">Markdown</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="masthead">
+      <div class="frame masthead-content">
+        <p class="eyebrow">Field note / 001 / August 16, 2026</p>
+        <h1>Hardware Is<br> Eating the World</h1>
+        <p class="deck">Software made the virtual world cheap to change. The harder, more valuable work now is making intelligence dependable in machines, factories, infrastructure, and the field.</p>
+        <div class="byline"><span>Andrew Deal</span><span>12 minute read</span><span>Physical AI</span></div>
+      </div>
+    </section>
+
+    <section class="thesis-band" aria-label="Essay thesis">
+      <div class="frame thesis-grid">
+        <div class="thesis-label">Field thesis<br>/ 001</div>
+        <p class="thesis-copy">The moat in physical AI is earned through customer trust, remembered failures, operator judgment, and the systems that make machinery recoverable.</p>
+      </div>
+    </section>
+
+    <div class="paper">
+      <article>
+        <h2>I followed software into the field</h2>
+
+        <p class="lead">I built the interface remotely. Then I climbed into the cab of an autonomous tractor and thought: fuck, this is not going to be good enough.</p>
+
+        <p>The screen showed activity, but it obscured fuel, productive progress, and the condition of systems checked before departure. Under the glare and pressure of an industrial environment, its light-mode display felt less like an instrument and more like a demo.</p>
+
+        <p>I had designed around the information available to someone sitting remotely. Inside the tractor, responsibility was much broader. A safety driver tracked the machine, its surroundings, the remaining operating window, and whether the system was behaving safely. The day began with physical checks, logistical friction, changing conditions, and incomplete information. Attention was divided before the software asked for any of it.</p>
+
+        <p>We rebuilt the interface around the operating journey: preflight, active operation, and postflight. Operators could rearrange components, switch into dark mode, and create their own view of the machine. State from the tractor's electronic control units augmented what they could already hear and feel inside the cab. Structured checks reduced cognitive load and created an auditable record. When something failed, we could eliminate whole classes of possible causes instead of beginning from scratch.</p>
+
+        <p>The result resembled developer tooling for machinery. Experienced operators could inspect the signals that mattered to them while remote teams retained enough history to diagnose what happened. Better observability, configuration profiles, and operating workflows increased mean time between failures and reduced mean time to recovery. Eventually, one remote operator could supervise as many as five tractors.</p>
+
+        <div class="field-callout">
+          <p>Capability becomes utility when people can understand a machine, recover it, and operate it repeatedly under real conditions.</p>
+          <span>Lesson from the cab</span>
+        </div>
+
+        <h2>The constraint moved</h2>
+
+        <p><a href="https://a16z.com/why-software-is-eating-the-world/">Marc Andreessen's 2011 essay</a> argued that software companies were poised to transform broad sectors of the economy. The central opportunity was digitization. Communication, commerce, media, finance, and knowledge work were moving from analog systems into networks of bits. Software could be reproduced at almost no marginal cost and distributed globally.</p>
+
+        <p>Capital and talent followed those economics. The Bay Area became exceptionally good at finding products that could grow quickly and support successive venture rounds. Those advantages also narrowed the field of view. The cleanest opportunity was often another layer of software coordinating people, information, or existing physical activity indirectly.</p>
+
+        <p>Over time, that distance began to bother me. Many unresolved problems still live outside the screen: producing energy, building housing, moving materials, operating machinery, manufacturing goods, transporting people, and caring for bodies.</p>
+
+        <p>Large language models accelerate this inversion, although the evidence remains uneven. <a href="https://www.anthropic.com/research/impact-software-development">Anthropic analyzed 500,000 coding-related interactions</a> and classified 79 percent of Claude Code conversations as automation. The study measured what developers delegated to AI, not whether the output improved productivity or code quality. <a href="https://www.nber.org/papers/w33795">A six-month field experiment across 66 firms and 7,137 knowledge workers</a> found that workers who used the integrated generative AI tool spent two fewer hours per week on email. <a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">A randomized controlled trial of 16 experienced open-source developers</a> found that, with AI tools available from February through June 2025, 246 tasks took 19 percent longer on average. The cost and shape of software work are changing before the tools reliably improve every task.</p>
+
+        <p>My inference is strategic rather than universal: another SaaS interface is becoming harder to defend while software is becoming a more powerful entry point into fields that were previously too expensive, specialized, or operationally difficult for small teams to attack.</p>
+
+        <p>The physical world operates under different economics. Machines break. Materials have lead times. Every site differs. Safety, energy, maintenance, regulation, and human behavior impose constraints that resist abstraction. AI can still reduce the distance between an idea and a functioning physical system by helping teams learn unfamiliar domains, reconcile sensor data, diagnose failures, generate tools, and improve operations.</p>
+
+        <p>Software first converted large parts of life into bits. Those bits are returning to the physical world as intelligence embedded in machines, factories, infrastructure, and logistics. Software is becoming leverage for the world of atoms, where larger problems remain.</p>
+
+        <h2>Field judgment becomes infrastructure</h2>
+
+        <p>Deploying autonomy required us to examine every existing workflow. Some deserved to be preserved. Others needed to be revised, augmented, or discarded. Many had never been designed deliberately. They were adaptations to the labor, machinery, and information previously available.</p>
+
+        <p>The best operators had spent years in the field and could size up a job quickly: the character of the land, the implement it required, what might fail, what could make the work faster, and which redundant equipment should remain nearby.</p>
+
+        <p>That judgment mattered because agricultural operations rarely followed a pristine plan. Conditions changed between scheduling the work and arriving that morning. Equipment had to move between fields, sometimes across commercial roads. On larger farms, tractors, implements, transportation, labor, and operating windows all had to arrive in the right sequence. Much of the work consisted of game-time decisions.</p>
+
+        <p>Our job was to determine which parts of that intuition could be encoded into software and hardware. Checks made operating state explicit. Configuration profiles captured the behavior of different tractor and implement combinations. Telemetry and failure histories made diagnosis faster. Scheduling and fleet tools helped move machines and people together.</p>
+
+        <p>We captured repeated judgment in a form that was predictable, inspectable, and available beyond a handful of experienced operators without reducing it to rigid procedure. Each deployment could then improve the operating system for the next one.</p>
+
+        <div class="field-callout">
+          <p>Eventually, the work became boring.</p>
+          <span>That was the milestone</span>
+        </div>
+
+        <p>Autonomy no longer demanded constant attention. Common failures were legible, recovery followed known paths, and trust accumulated through repetition.</p>
+
+        <p>Then the constraint moved again. Once one machine could perform useful work reliably, the problems became fleet coordination, logistics, service, and scale. A successful deployment converts uncertain problems into known ones, then creates the capacity to solve the next set.</p>
+
+        <h2>The moat is earned in the field</h2>
+
+        <p>Imagine a well-funded competitor received our codebase and model weights. They could reproduce much of the visible system, rebuild its features, hire a logistics team, and learn the common tractor and implement configurations.</p>
+
+        <p>The missing asset would be the graveyard: which reasonable ideas had already failed, which edge cases mattered enough to design around, and which jobs the system was unready to perform. They would lack the intuition to distinguish an ordinary failure from the beginning of a dangerous one. They would also begin without the trust required to put an unfinished autonomous system onto someone else's farm.</p>
+
+        <p>That trust was the deepest moat.</p>
+
+        <p>A farmer is buying productive work inside a narrow operating window. A failed deployment can cost fuel, labor, time, and potentially part of a season. Earning another deployment required an honest account of what the machine could do that day, where it was likely to fail, and why participating would still create value for both companies.</p>
+
+        <p>That demanded a particular kind of humility.</p>
+
+        <p>AgTech has no shortage of highly credentialed people carrying pristine systems out of controlled environments. Some underestimate the knowledge already present in the field and discover that an elegant machine can fall apart under dust, weather, vibration, changing soil, unusual implements, and the improvisation of a real workday.</p>
+
+        <p>The strongest teams respond differently. They treat the field as the source of truth.</p>
+
+        <p>A system that succeeds 20 percent of the time can be useful if the previous capability was zero and every failure teaches you how to reach 40 percent. That requires the gumption to remain in the field, the instrumentation to understand what happened, and the willingness to ship something imperfect when it produces the next valuable observation.</p>
+
+        <p>Over time, failures accumulate into capability. The team learns which work to accept, how to configure the system, what expectations to establish, and when to tell a customer the machine is unready. Operators develop intuition about conditions the software cannot fully describe. Engineers learn which anomalies demand a redesign and which can be managed through procedure.</p>
+
+        <p>Each part strengthens the others. Trust earns access to another deployment. Deployment exposes another class of failures. Those failures sharpen the product, the operating model, and the team's judgment. Better judgment makes the next customer conversation more credible.</p>
+
+        <p>A competitor can inspect the finished system. The sequence of mistakes that made it dependable remains inside the team. Judgment, credibility, and recovery discipline are earned one field at a time.</p>
+
+        <h2>Pick atoms that can learn</h2>
+
+        <p>Hardware becomes dead weight when its design prevents the team from learning.</p>
+
+        <p>Software teams assume that a product can be versioned, configured, observed, and upgraded after release. Physical systems need as much of that flexibility as their components allow. A machine should expose its operating state, preserve compatibility across known configurations, and permit software to change its behavior after entering the field. Every capability frozen permanently into analog components raises the cost of a mistaken assumption.</p>
+
+        <p>Early hardware should often look unfinished. A team that optimizes for pristine, marketable machinery before understanding the operating environment can lock its ignorance into an expensive asset. Something held together with bubblegum and shrink wrap may be more valuable if it reaches the field quickly and reveals what the next version must become. At that stage, elegance is the distance between failure and correction.</p>
+
+        <p>Generality creates another trap. A general-purpose form factor inherits too many jobs, environments, and failure modes at once. A task-specific machine can begin with one painful and economically valuable problem. Its performance can be measured, its conditions bounded, and its design revised around evidence.</p>
+
+        <p>The task should be narrow enough to learn from and important enough that a customer wants to help solve it. Those field partners expose the real workflow, identify where the pain is greatest, and show whether the proposed solution fits the way work gets done. Building in isolation compounds assumptions without testing them.</p>
+
+        <p>Models will improve, and many capabilities will become widely available. Durable value accumulates in the harness around them: rules-based software, telemetry, evaluations, state management, fallbacks, guardrails, operator controls, and recovery systems that make a model dependable inside a machine.</p>
+
+        <p>The right atoms can be modified after deployment, improve through repeated use, solve an urgent task, and accumulate operational knowledge even as the underlying models become cheaper. Every deployment should make the next machine, workflow, and customer relationship better.</p>
+
+        <h2>What builders do now</h2>
+
+        <p>Start by making software answer to a machine.</p>
+
+        <p>Put a robot in the corner of your apartment, join a hardware lab, or find a team that will let you work beside operators. Learn perception, control, teleoperation, data collection, evaluation, deployment, and vision-language-action systems that translate sensory input into physical behavior.</p>
+
+        <p>Study industries through their work. Look for expensive labor, dangerous tasks, persistent shortages, costly downtime, and operations that depend on people moving information or material through a predictable sequence. Trace the workflow upstream and downstream. Find the constraint that makes the operation slow, unreliable, or difficult to scale. Determine whether a machine would remove it or add another expensive object to maintain.</p>
+
+        <p>Read technical work alongside deployment reports, operating manuals, failure analyses, and the roles strong robotics companies repeatedly hire for. Study what remains difficult after the model performs well in a demonstration.</p>
+
+        <p>Most importantly, stay through the failure. Watch how an operator recognizes trouble, how the system communicates uncertainty, and how the team recovers. Build the telemetry, evaluations, controls, and workflows that make the next attempt better.</p>
+
+        <div class="field-callout">
+          <p>The opportunity is to give intelligence useful work, dependable machinery, and a place in the world.</p>
+          <span>Hardware is eating the world</span>
+        </div>
+
+        <section class="evidence" aria-labelledby="evidence-title">
+          <h2 id="evidence-title">References</h2>
+          <ol>
+            <li><a href="https://a16z.com/why-software-is-eating-the-world/">Marc Andreessen, “Why Software Is Eating the World”</a></li>
+            <li><a href="https://www.anthropic.com/research/impact-software-development">Anthropic Economic Index: AI's impact on software development</a></li>
+            <li><a href="https://www.nber.org/papers/w33795">Dillon, Jaffe, Immorlica, and Stanton, “Shifting Work Patterns with Generative AI”</a></li>
+            <li><a href="https://metr.org/Early_2025_AI_Experienced_OS_Devs_Study-paper.pdf">Becker et al., “Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity”</a></li>
+          </ol>
+          <p class="evidence-note">Field-operating examples are drawn from my direct experience at Bear Flag Robotics. Claims about where durable value will accumulate are my thesis.</p>
+        </section>
+      </article>
+    </div>
+
+    <section class="author-card">
+      <div class="frame author-grid">
+        <div>
+          <p class="eyebrow">Field notes / Andrew Deal</p>
+          <h2>I make software leave the screen</h2>
+        </div>
+        <div class="author-side">
+          <p>Software engineer and technical generalist working across physical AI, applied AI, full-stack systems, product, and field operations.</p>
+          <div class="actions">
+            <a class="action primary" href="https://notesonatoms.substack.com/">Notes on Atoms ↗</a>
+            <a class="action" href="/Andrew_Deal_Credential_Sheet.pdf">Credential sheet</a>
+            <a class="action" href="/">Home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="frame">© 2026 Andrew Deal &middot; optimism with calluses</div>
+  </footer>
+</body>
+</html>

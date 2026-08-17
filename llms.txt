@@ -14,7 +14,8 @@ Use the professional profile for current facts, the credential sheet for a conci
 
 - [GitHub](https://github.com/a-deal): Public code and project evidence.
 - [LinkedIn](https://www.linkedin.com/in/adeal/): Employment history and professional network.
-- [Writing](https://raiseyourdots.substack.com): Published essays and notes.
+- [Hardware Is Eating the World](https://andrewdeal.info/writing/hardware-is-eating-the-world/index.md): Andrew's field thesis on physical AI, deployment, operator judgment, and durable advantage.
+- [Notes on Atoms](https://notesonatoms.substack.com/): Published essays and field notes.
 
 ## Optional
 

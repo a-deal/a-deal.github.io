@@ -11,6 +11,7 @@
   <meta property="og:title" content="Andrew Deal | The Future Has Weight">
   <meta property="og:description" content="Software for machines, energy, and the real world.">
   <link rel="alternate" type="text/markdown" href="https://andrewdeal.info/profile.md" title="Andrew Deal professional profile">
+  <link rel="alternate" type="application/rss+xml" href="https://andrewdeal.info/rss.xml" title="Andrew Deal writing">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,7 +29,7 @@
       "https://www.linkedin.com/in/adeal/",
       "https://github.com/a-deal",
       "https://x.com/a_e_deal",
-      "https://raiseyourdots.substack.com"
+      "https://notesonatoms.substack.com/"
     ],
     "knowsAbout": [
       "Software engineering",
@@ -300,7 +301,9 @@
     .closing-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: end; }
     .closing-side { padding-bottom: .5rem; }
     .closing-side p { color: var(--muted); font-size: .82rem; line-height: 1.75; }
-    .closing-side a { display: inline-flex; gap: .6rem; align-items: center; margin-top: 1.5rem; color: var(--amber); font-size: .72rem; letter-spacing: .15em; text-decoration: none; text-transform: uppercase; }
+    .closing-links { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: 1.5rem; }
+    .closing-side a { display: inline-flex; gap: .6rem; align-items: center; color: var(--amber); font-size: .72rem; letter-spacing: .15em; text-decoration: none; text-transform: uppercase; }
+    .closing-side a.secondary { color: var(--bone); }
     footer { padding: 1.5rem 0; color: #77736d; border-top: 1px solid var(--line); background: #07090a; font-size: .68rem; }
     @media (max-width: 760px) {
       .frame { width: min(100% - 2rem, 1240px); }
@@ -340,6 +343,7 @@
           <a href="https://x.com/a_e_deal" class="social" aria-label="X" title="X">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/></svg>
           </a>
+          <a href="https://notesonatoms.substack.com/" class="social" aria-label="Notes on Atoms" title="Notes on Atoms"><i data-lucide="notebook-pen"></i></a>
           <a href="mailto:deal.e.andrew@gmail.com" class="social" aria-label="Email" title="Email"><i data-lucide="mail"></i></a>
         </nav>
       </div>
@@ -393,12 +397,15 @@
     <section class="closing" id="writing">
       <div class="frame closing-grid">
         <div>
-          <p class="kicker">Forthcoming essay / August 16</p>
+          <p class="kicker">Field note / 001 / August 16</p>
           <h2>Hardware is eating the world</h2>
         </div>
         <div class="closing-side">
-          <p>The atoms sequel to “Software Is Eating the World”: why the moat moved to energy, wafers, installed capability, and the operators who can make all of it work.</p>
-          <a href="https://raiseyourdots.substack.com">Raise Your Dots / writing <span>↗</span></a>
+          <p>Software made the virtual world cheap to change. The harder, more valuable work now is making intelligence dependable in machines, factories, infrastructure, and the field.</p>
+          <div class="closing-links">
+            <a href="/writing/hardware-is-eating-the-world/">Read the field note <span>↗</span></a>
+            <a class="secondary" href="https://notesonatoms.substack.com/">Notes on Atoms <span>↗</span></a>
+          </div>
         </div>
       </div>
     </section>
