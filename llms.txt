@@ -12,7 +12,7 @@ Use the professional profile for current facts, the credential sheet for a conci
 
 ## Work
 
-- [Pixel Foundry](https://andrewdeal.info/pixel-foundry/): Independent software engineering and product strategy practice.
+- [Pixel Foundry](https://andrewdeal.info/pixel-foundry/): Independent engineering consultancy for industrial technology: systems architecture, integration, deployment readiness and product strategy.
 
 - [GitHub](https://github.com/a-deal): Public code and project evidence.
 - [LinkedIn](https://www.linkedin.com/in/adeal/): Employment history and professional network.
