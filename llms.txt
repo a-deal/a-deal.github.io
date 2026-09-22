@@ -8,9 +8,11 @@ Use the professional profile for current facts, the credential sheet for a conci
 
 - [Professional profile](https://andrewdeal.info/profile.md): Canonical current background, evidence, role fit, and links in clean Markdown.
 - [Website](https://andrewdeal.info/): Human-facing overview of Andrew's work and physical-systems thesis.
-- [Credential sheet](https://andrewdeal.info/Andrew_Deal_Credential_Sheet.pdf): Designed one-page professional credential.
+- [Credential sheet](https://andrewdeal.info/Andrew_Deal_Credential_Sheet.pdf): Current one-page résumé with a consolidated Pixel Foundry chapter.
 
 ## Work
+
+- [Pixel Foundry](https://andrewdeal.info/pixel-foundry/): Independent software engineering and product strategy practice.
 
 - [GitHub](https://github.com/a-deal): Public code and project evidence.
 - [LinkedIn](https://www.linkedin.com/in/adeal/): Employment history and professional network.
