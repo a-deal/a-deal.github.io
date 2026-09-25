@@ -22,15 +22,15 @@ beforeAll(() => {
 
 describe('public homepage', () => {
   it('publishes the current positioning', () => {
-    expect(document.title).toBe('Andrew Deal | Physical AI and Real-World Systems');
+    expect(document.title).toBe('Andrew Deal | Product / FDE | Industrial Software');
     const heading = document.querySelector('h1');
     const headingText = heading?.innerHTML
       .replace(/<br\s*\/?>/gi, ' ')
       .replace(/<[^>]+>/g, '')
       .replace(/\s+/g, ' ')
       .trim();
-    expect(headingText).toBe('The future has weight');
-    expect(html).toContain('Software for machines, energy, and the real world.');
+    expect(headingText).toBe('I build software for the people running the physical world.');
+    expect(html).toContain('Product / FDE');
   });
 
   it('uses the current industrial-frontier hero asset', () => {
@@ -42,7 +42,7 @@ describe('public homepage', () => {
   it('exposes the credential sheet and public profile links', () => {
     const links = [...document.querySelectorAll('a')].map((link) => link.href);
 
-    expect(links).toContain('https://andrewdeal.info/Andrew_Deal_Credential_Sheet.pdf');
+    expect(links).toContain('https://andrewdeal.info/Andrew_Deal_Resume.pdf');
     expect(links).toContain('https://www.linkedin.com/in/adeal/');
     expect(links).toContain('https://github.com/a-deal');
     expect(links).toContain('https://x.com/a_e_deal');
@@ -84,7 +84,7 @@ describe('machine-readable profile', () => {
     expect(profile.name).toBe('Andrew Deal');
     expect(profile.url).toBe('https://andrewdeal.info/');
     expect(profile.subjectOf.url).toBe(
-      'https://andrewdeal.info/Andrew_Deal_Credential_Sheet.pdf',
+      'https://andrewdeal.info/Andrew_Deal_Resume.pdf',
     );
   });
 
