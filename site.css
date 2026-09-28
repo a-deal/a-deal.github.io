@@ -6,11 +6,11 @@
   --sand:#f3efe6; --sand-2:#e9e3d6;
   --white:#fbf8ef; --grey:#b9b4a7; --grey-2:#6f6a5f; --line:rgba(255,255,255,.12);
   /* The AD mark supplies the base colors; text uses contrast-safe shades. */
-  --red:#99676b; --blue:#71849b; --ivory:#c1b8a5;
-  --red-on-dark:#c29396; --red-on-light:#8b535b;
+  --red:#b24735; --blue:#71849b; --ivory:#c1b8a5;
+  --red-on-dark:#da7a5f; --red-on-light:#983e2e;
   --blue-on-dark:#98abc1; --blue-on-light:#4d627c;
   --accent:var(--blue-on-dark); --emphasis:var(--red-on-dark);
-  --bar-1:var(--red); --bar-2:#b68284; --bar-3:#d0a5a1;
+  --bar-1:var(--red); --bar-2:#bf513c; --bar-3:#ce6044;
   --grot:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
   --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --gutter:clamp(20px,5vw,96px); --max:1600px;
