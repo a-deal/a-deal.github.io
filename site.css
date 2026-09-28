@@ -31,8 +31,13 @@ img{display:block;max-width:100%;height:auto}
 .rise.in{opacity:1;transform:none}
 
 /* band */
-.band{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#cfcabd;padding:18px var(--gutter);border-bottom:1px solid var(--line)}
-.band span{color:var(--white);font-weight:500}
+.band{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 24px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#cfcabd;padding:18px var(--gutter);border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:14px;flex-shrink:0;color:var(--white)}
+.brand img{width:68px;height:24px}
+.brand span{font-family:var(--grot);font-size:13px;font-weight:800;letter-spacing:.12em;white-space:nowrap}
+.band-tagline{line-height:1.6}
+.colophon-identity{display:inline-flex;align-items:center;gap:16px}
+.colophon-identity a{flex-shrink:0}
 
 /* pill nav */
 .pill-nav{position:fixed;top:22px;left:0;right:0;z-index:40;display:flex;justify-content:center;pointer-events:none;transform:translateY(-140px);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
@@ -157,7 +162,7 @@ body.is-sand .pill{background:rgba(15,10,8,.08);color:var(--ink)}
 }
 @media(max-width:560px){
   .hero h1{font-size:clamp(56px,15.5vw,92px)}
-  .band{font-size:9px;padding:12px var(--gutter)}
+  .band{font-size:9px;padding:16px var(--gutter);gap:12px}.band-tagline{flex-basis:100%;letter-spacing:.035em}
   .pill{height:46px;padding:0 14px}.pill button{height:46px}.pill .lbl{font-size:13px}
   .stat{flex-direction:column;align-items:stretch}.bar-wrap{width:100%}.stat .bar{height:96px!important}
 }
