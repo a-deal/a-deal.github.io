@@ -69,8 +69,9 @@ body.is-sand .pill{--accent:var(--blue-on-light);background:rgba(15,10,8,.08);co
 .stats-head{text-align:center;margin-bottom:clamp(56px,8vw,120px)}
 .stats-head h2{font-size:15px;font-weight:600;color:var(--grey);margin-bottom:18px}
 .stats-head h3{font-size:clamp(44px,7.4vw,124px);line-height:.95;letter-spacing:-.045em;font-weight:700}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);align-items:end}
-.stat{display:grid;grid-template-rows:1fr auto;height:clamp(380px,40vw,620px)}
+/* Equal plot rows keep the baseline independent of caption length. */
+.stats-grid{--plot-height:clamp(300px,32vw,500px);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px);align-items:start}
+.stat{display:grid;grid-template-rows:var(--plot-height) auto;height:auto}
 .bar-wrap{display:flex;align-items:flex-end;height:100%}
 .bar{width:100%}
 .bar{background:var(--c);height:0;position:relative;transition:none;will-change:height}
