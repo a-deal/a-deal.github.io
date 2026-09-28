@@ -39,10 +39,10 @@ describe('public homepage', () => {
     expect(fs.existsSync(path.join(ROOT, heroAsset))).toBe(true);
   });
 
-  it('exposes the credential sheet and public profile links', () => {
+  it('keeps public contact links while the outdated resume is unlinked', () => {
     const links = [...document.querySelectorAll('a')].map((link) => link.href);
 
-    expect(links).toContain('https://andrewdeal.info/Andrew_Deal_Resume.pdf');
+    expect(links).not.toContain('https://andrewdeal.info/Andrew_Deal_Resume.pdf');
     expect(links).toContain('https://www.linkedin.com/in/adeal/');
     expect(links).toContain('https://github.com/a-deal');
     expect(links).toContain('https://x.com/a_e_deal');
@@ -83,9 +83,7 @@ describe('machine-readable profile', () => {
     expect(profile['@type']).toBe('Person');
     expect(profile.name).toBe('Andrew Deal');
     expect(profile.url).toBe('https://andrewdeal.info/');
-    expect(profile.subjectOf.url).toBe(
-      'https://andrewdeal.info/Andrew_Deal_Resume.pdf',
-    );
+    expect(profile.subjectOf).toBeUndefined();
   });
 
   it.each(['profile.md', 'llms.txt', 'robots.txt', 'sitemap.xml', 'rss.xml'])(

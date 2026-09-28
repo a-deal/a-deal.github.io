@@ -46,7 +46,6 @@ Carver's $40M is project scale, not funding secured, money spent or a completed 
 
 ## Links
 
-- [Current resume](https://andrewdeal.info/Andrew_Deal_Resume.pdf)
 - [Pixel Foundry](https://andrewdeal.info/pixel-foundry/)
 - [Personal website](https://andrewdeal.info/)
 - [LinkedIn](https://www.linkedin.com/in/adeal/)
