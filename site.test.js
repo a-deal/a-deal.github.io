@@ -22,27 +22,29 @@ beforeAll(() => {
 
 describe('public homepage', () => {
   it('publishes the current positioning', () => {
-    expect(document.title).toBe('Andrew Deal | Product / FDE | Industrial Software');
+    expect(document.title).toBe('Andrew Deal | Software for the physical world.');
     const heading = document.querySelector('h1');
     const headingText = heading?.innerHTML
       .replace(/<br\s*\/?>/gi, ' ')
       .replace(/<[^>]+>/g, '')
       .replace(/\s+/g, ' ')
       .trim();
-    expect(headingText).toBe('I build software for the people running the physical world.');
-    expect(html).toContain('Product / FDE');
+    expect(headingText).toBe('Software for the physical world.');
+    expect(html).toContain('Six years in physical AI. Two exits. Prototype to paying customer, every time.');
   });
 
   it('uses the current industrial-frontier hero asset', () => {
     const heroAsset = 'industrial-frontier-hero-v7.webp';
-    expect(html).toContain(`url('/${heroAsset}')`);
+    expect(html).toContain(`src="/${heroAsset}"`);
     expect(fs.existsSync(path.join(ROOT, heroAsset))).toBe(true);
   });
 
   it('keeps public contact links while the outdated resume is unlinked', () => {
     const links = [...document.querySelectorAll('a')].map((link) => link.href);
 
-    expect(links).not.toContain('https://andrewdeal.info/Andrew_Deal_Resume.pdf');
+    for (const filename of ['Andrew_Deal_Resume.pdf', 'Andrew_Deal_ATS_Resume.pdf', 'Andrew_Deal_Credential_Sheet.pdf']) {
+      expect(html).not.toContain(filename);
+    }
     expect(links).toContain('https://www.linkedin.com/in/adeal/');
     expect(links).toContain('https://github.com/a-deal');
     expect(links).toContain('https://x.com/a_e_deal');
