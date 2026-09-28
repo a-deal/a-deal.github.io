@@ -74,19 +74,19 @@ body.is-sand .pill{background:rgba(15,10,8,.08);color:var(--ink)}
 .stat p{margin-top:18px;font-size:clamp(17px,1.5vw,24px);font-weight:600;letter-spacing:-.02em;line-height:1.25;color:var(--white)}
 .stat p em{font-style:normal;color:var(--orange)}
 
-/* pinned plate: the workbook sketch, inverted to white ink on black, wiped in by scroll */
-.pin{height:200vh;position:relative}
-.pin-stage{overflow:clip;position:sticky;top:0;height:100vh;display:grid;place-items:center;padding:0 var(--gutter);max-width:var(--max);margin:0 auto}
-.plate{position:relative;margin:0;width:min(100%,1400px)}
-.plate-glow{position:absolute;inset:-12% -6%;background:radial-gradient(60% 60% at 50% 55%,rgba(255,92,0,.28),rgba(255,92,0,0) 70%);filter:blur(30px);opacity:0;pointer-events:none}
-.plate img{position:relative;width:100%;height:auto;border-radius:18px;filter:invert(1) grayscale(1) contrast(1.35) brightness(1.05);mix-blend-mode:screen}
-.plate{aspect-ratio:2153/730}
-.plate img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;border-radius:18px;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.08) 22%,rgba(0,0,0,.55) 42%,#000 58%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.08) 22%,rgba(0,0,0,.55) 42%,#000 58%)}
-.plate-arm{left:calc(990/2153*100%)!important;top:calc(100/730*100%)!important;width:calc(440/2153*100%)!important;height:calc(305/730*100%)!important;inset:auto;object-fit:fill;transform-origin:calc(75/440*100%) calc(235/305*100%);mask-image:none;-webkit-mask-image:none}
-
-.plate-text{position:absolute;left:clamp(24px,4vw,64px);top:50%;transform:translateY(-50%);z-index:2;display:block;max-width:min(40%,520px);font-size:clamp(18px,2vw,32px);line-height:1.12;letter-spacing:-.03em;font-weight:700;margin:0}
-.plate-text .w{color:rgba(251,248,239,.18);transition:color .18s linear}
+/* Copy leads; the assembly scene builds beneath it as the page scrolls. */
+.pin{height:250vh;position:relative}
+.pin-stage{overflow:clip;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:clamp(24px,3vh,40px);padding:88px var(--gutter) 32px;max-width:var(--max);margin:0 auto}
+.plate-text{position:relative;z-index:2;max-width:940px;font-size:clamp(24px,2.45vw,38px);line-height:1.15;letter-spacing:-.03em;font-weight:700;margin:0}
+.plate-text .w{color:#969188;transition:color .18s linear}
 .plate-text .w.on{color:var(--white)}
+.plate{position:relative;flex:none;margin:0 auto;width:min(100%,calc((100vh - 360px)*2.45));aspect-ratio:2.45;border-radius:18px;isolation:isolate;transform-origin:center;will-change:transform,clip-path}
+.plate-scene{position:absolute;left:-20%;top:0;width:120%;height:100%}
+.plate-glow{position:absolute;inset:0 -3%;background:radial-gradient(60% 70% at 52% 48%,rgba(255,92,0,.22),rgba(255,92,0,0) 75%);filter:blur(24px);opacity:.45;pointer-events:none}
+.plate img{position:absolute;display:block;filter:invert(1) grayscale(1) contrast(1.35) brightness(1.05);mix-blend-mode:screen}
+.plate-base{inset:0;width:100%;height:100%;object-fit:fill}
+.plate-arm{left:calc(990/2153*100%);top:calc(100/730*100%);width:calc(440/2153*100%);height:calc(305/730*100%);object-fit:fill;transform-origin:calc(75/440*100%) calc(235/305*100%);will-change:transform}
+.plate-scan{position:absolute;z-index:3;top:8%;bottom:10%;left:0;width:1px;background:linear-gradient(transparent,rgba(255,155,96,.6),transparent);box-shadow:0 0 24px 4px rgba(255,92,0,.1);opacity:0;pointer-events:none}
 
 /* char reveal */
 .solve{padding:clamp(96px,14vw,220px) var(--gutter);text-align:center}
@@ -156,7 +156,6 @@ body.is-sand .pill{background:rgba(15,10,8,.08);color:var(--ink)}
   .stat{min-height:0}.bar{height:0}.stat .bar{min-height:0}
   .stat{display:flex;flex-direction:row;align-items:flex-end;gap:16px;height:auto}.bar-wrap{height:auto;flex:none;width:var(--w,40%)}
   .stat .bar{width:100%;height:120px!important}
-  .pin{height:auto}.pin-stage{position:static;height:auto;padding:64px var(--gutter)}.plate{clip-path:none!important;transform:none!important;aspect-ratio:auto;min-height:0}.plate-base{position:relative;height:auto}.plate-text{position:static;transform:none;max-width:none;margin-top:20px;color:var(--white)}.plate-text .w{color:var(--white)}.plate-glow{opacity:1!important}
   .work-head{display:block}.work-head p{margin-top:12px}
   .links{flex-wrap:wrap;gap:14px 20px}
 }
@@ -179,7 +178,9 @@ body.is-sand .pill{background:rgba(15,10,8,.08);color:var(--ink)}
 :is(html:not(.enhanced),html.static-page) .num{opacity:1}
 :is(html:not(.enhanced),html.static-page) .pin{height:auto}
 :is(html:not(.enhanced),html.static-page) .pin-stage{position:static;height:auto;padding:64px var(--gutter)}
-:is(html:not(.enhanced),html.static-page) .plate{clip-path:none;transform:none}
+:is(html:not(.enhanced),html.static-page) .plate{width:100%;clip-path:none;transform:none;opacity:1;will-change:auto}
+:is(html:not(.enhanced),html.static-page) .plate-arm{transform:none;will-change:auto}
+:is(html:not(.enhanced),html.static-page) .plate-scan{display:none}
 :is(html:not(.enhanced),html.static-page) .plate-text .w{color:var(--white)}
 :is(html:not(.enhanced),html.static-page) .chars .c{opacity:1;transform:none}
 :is(html:not(.enhanced),html.static-page) .work{height:auto}
@@ -189,5 +190,10 @@ body.is-sand .pill{background:rgba(15,10,8,.08);color:var(--ink)}
 :is(html:not(.enhanced),html.static-page) .big.strike s::after{transform:scaleX(1);transition:none}
 :is(html:not(.enhanced),html.static-page) .big.strike .new{opacity:1;transform:none;transition:none}
 button:focus-visible,a:focus-visible{outline:2px solid var(--orange);outline-offset:5px}
-@media(max-width:900px){.plate .plate-base{position:relative;height:auto}}
+@media(max-width:900px),(max-height:699px){
+  .pin{height:auto}.pin-stage{position:static;height:auto;gap:28px;padding:104px var(--gutter) 64px}
+  .plate{width:100%;clip-path:none!important;transform:none!important;opacity:1!important;will-change:auto}
+  .plate-arm{transform:none!important;will-change:auto}.plate-scan{display:none}
+  .plate-text{max-width:940px;font-size:clamp(23px,3.2vw,32px)}.plate-text .w{color:var(--white)}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

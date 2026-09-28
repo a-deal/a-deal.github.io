@@ -37,6 +37,7 @@
   var pin = document.querySelector('.pin');
   var plate = document.querySelector('.plate');
   var plateGlow = document.querySelector('.plate-glow');
+  var plateScan = document.querySelector('.plate-scan');
   var arm = document.querySelector('.plate-arm');
   var words = Array.prototype.slice.call(document.querySelectorAll('.plate-text .w'));
   var solve = document.querySelector('.solve');
@@ -74,18 +75,40 @@
       s.querySelector('.n').textContent = fmt(Math.round(target * e));
     });
 
-    /* pinned plate: wipe in from the left, scale up, glow */
-    if (pin && plate && !isMobile()) {
-      var pr = pin.getBoundingClientRect();
-      var total = pr.height - vh;
-      var p2 = clamp(-pr.top / total, 0, 1);
-      var wipe = ease(clamp(p2 / 0.6, 0, 1));
-      var grow = ease(clamp((p2 - 0.1) / 0.7, 0, 1));
-      plate.style.clipPath = 'inset(0 ' + ((1 - wipe) * 100) + '% 0 0 round 18px)';
-      plateGlow.style.opacity = String(grow);
-      if (arm) { var ang = -9 + 16 * ease(clamp((p2 - 0.15) / 0.75, 0, 1)); arm.style.transform = 'rotate(' + ang + 'deg)'; }
-      var lit = Math.floor(clamp((p2 - 0.3) / 0.6, 0, 1) * 1.05 * words.length);
-      words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
+    /* Assembly sequence: reveal the scene, sweep the work area, reach, then settle. */
+    if (pin && plate) {
+      if (!isMobile() && vh >= 700) {
+        var pr = pin.getBoundingClientRect();
+        var total = Math.max(1, pr.height - vh);
+        var p2 = clamp(-pr.top / total, 0, 1);
+        var reveal = ease(clamp((p2 + 0.08) / 0.48, 0, 1));
+        var approach = ease(clamp(p2 / 0.75, 0, 1));
+        plate.style.clipPath = 'inset(0 ' + ((1 - reveal) * 72) + '% 0 0 round 18px)';
+        plate.style.transform = 'translate3d(0,' + ((1 - reveal) * 36) + 'px,0) scale(' + (0.94 + 0.06 * approach) + ')';
+        plate.style.opacity = String(0.45 + 0.55 * reveal);
+        plateGlow.style.opacity = String(0.25 + 0.65 * approach);
+        if (arm) {
+          var reach = ease(clamp((p2 - 0.12) / 0.4, 0, 1));
+          var settle = ease(clamp((p2 - 0.57) / 0.32, 0, 1));
+          var ang = -14 + 22 * reach - 8 * settle;
+          arm.style.transform = 'rotate(' + ang + 'deg)';
+        }
+        if (plateScan) {
+          var scan = clamp((p2 - 0.12) / 0.65, 0, 1);
+          plateScan.style.left = (scan * 100) + '%';
+          plateScan.style.opacity = String(Math.sin(scan * Math.PI) * 0.7);
+        }
+        var lit = Math.floor((0.24 + 0.81 * clamp(p2 / 0.65, 0, 1)) * words.length);
+        words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
+      } else {
+        plate.style.clipPath = 'none';
+        plate.style.transform = 'none';
+        plate.style.opacity = '1';
+        plateGlow.style.opacity = '0.45';
+        if (arm) arm.style.transform = 'none';
+        if (plateScan) plateScan.style.opacity = '0';
+        words.forEach(function (w) { w.classList.add('on'); });
+      }
     }
 
     /* char reveal */
