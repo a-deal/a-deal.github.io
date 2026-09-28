@@ -50,14 +50,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #07090a;
-      --ink-soft: #111415;
-      --paper: #f2eadc;
-      --paper-deep: #e8ddca;
+      --ink: #0f0a08;
+      --ink-soft: #17110d;
+      --paper: #f3efe6;
+      --paper-deep: #e9e3d6;
       --type: #222321;
       --muted: #6d695f;
-      --amber: #d99a43;
-      --amber-deep: #9c6729;
+      --accent: #98abc1;
+      --red: #99676b;
+      --emphasis: #c29396;
+      --accent-deep: #4d627c;
       --line: rgba(34, 35, 33, .17);
     }
     * { box-sizing: border-box; }
@@ -80,7 +82,7 @@
     .topbar-inner { display: flex; align-items: center; justify-content: space-between; min-height: 4.4rem; }
     .topbar a { text-decoration: none; }
     .topbar nav { display: flex; gap: 1.5rem; color: #b9b1a5; }
-    .topbar nav a:hover { color: var(--amber); }
+    .topbar nav a:hover { color: var(--accent); }
     .masthead {
       min-height: 82svh;
       position: relative;
@@ -101,7 +103,7 @@
     .masthead-content { position: relative; z-index: 2; padding: 9rem 0 5rem; }
     .eyebrow {
       margin: 0 0 1.25rem;
-      color: var(--amber);
+      color: var(--accent);
       font: 600 .7rem/1.4 "JetBrains Mono", monospace;
       letter-spacing: .3em;
       text-transform: uppercase;
@@ -131,7 +133,7 @@
       letter-spacing: .12em;
       text-transform: uppercase;
     }
-    .thesis-band { color: var(--paper); border-top: 3px solid var(--amber); background: var(--ink-soft); }
+    .thesis-band { color: var(--paper); border-top: 3px solid var(--red); background: var(--ink-soft); }
     .thesis-grid {
       display: grid;
       grid-template-columns: 160px minmax(0, 1fr);
@@ -139,7 +141,7 @@
       padding: 2.4rem 0;
       align-items: start;
     }
-    .thesis-label { color: var(--amber); font: 600 .66rem/1.55 "JetBrains Mono", monospace; letter-spacing: .22em; text-transform: uppercase; }
+    .thesis-label { color: var(--emphasis); font: 600 .66rem/1.55 "JetBrains Mono", monospace; letter-spacing: .22em; text-transform: uppercase; }
     .thesis-copy { max-width: 920px; margin: 0; font: 500 clamp(1.35rem, 2.6vw, 2.15rem)/1.34 "Source Serif 4", serif; }
     .paper {
       background:
@@ -161,7 +163,7 @@
     article h2::before {
       display: block;
       margin-bottom: .8rem;
-      color: var(--amber-deep);
+      color: var(--accent-deep);
       font: 600 .63rem/1 "JetBrains Mono", monospace;
       letter-spacing: .22em;
       text-transform: uppercase;
@@ -172,28 +174,28 @@
     article h2:nth-of-type(4)::before { content: "04 / Deployment"; }
     article h2:nth-of-type(5)::before { content: "05 / Learning"; }
     article h2:nth-of-type(6)::before { content: "06 / Action"; }
-    article a { text-decoration-color: rgba(156, 103, 41, .52); text-underline-offset: .17em; }
-    article a:hover { color: var(--amber-deep); }
+    article a { text-decoration-color: rgba(77, 98, 124, .65); text-underline-offset: .17em; }
+    article a:hover { color: var(--accent-deep); }
     .lead::first-letter {
       float: left;
       margin: .05em .12em -.06em 0;
-      color: var(--amber-deep);
+      color: var(--accent-deep);
       font: 700 5.2rem/.78 "Barlow Condensed", sans-serif;
     }
     .field-callout {
       margin: 3.8rem -5rem;
       padding: 2.7rem 5rem;
-      border-left: 4px solid var(--amber);
+      border-left: 4px solid var(--red);
       color: var(--paper);
       background: var(--ink-soft);
       box-shadow: 0 18px 60px rgba(46, 36, 22, .12);
     }
     .field-callout p { margin: 0; font: 500 clamp(1.7rem, 4vw, 2.65rem)/1.2 "Source Serif 4", serif; }
-    .field-callout span { display: block; margin-top: 1rem; color: var(--amber); font: 600 .62rem/1.5 "JetBrains Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
+    .field-callout span { display: block; margin-top: 1rem; color: var(--emphasis); font: 600 .62rem/1.5 "JetBrains Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
     .section-turn {
       margin: 2.6rem 0 0 !important;
       padding: .95rem 0 .95rem 1.25rem;
-      border-left: 3px solid var(--amber);
+      border-left: 3px solid var(--red);
       color: #3f3b34;
       font-weight: 600 !important;
     }
@@ -213,7 +215,7 @@
     .author-side p { margin: 0; color: #aaa298; font: 400 .8rem/1.75 "JetBrains Mono", monospace; }
     .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
     .action { padding: .8rem 1rem; color: var(--paper); border: 1px solid rgba(242, 234, 220, .2); font: 600 .63rem/1 "JetBrains Mono", monospace; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; }
-    .action.primary { color: var(--ink); border-color: var(--amber); background: var(--amber); }
+    .action.primary { color: var(--ink); border-color: var(--accent); background: var(--accent); }
     footer { padding: 1.5rem 0; color: #77736d; border-top: 1px solid rgba(242, 234, 220, .12); background: var(--ink); font: 400 .66rem/1.5 "JetBrains Mono", monospace; }
     @media (max-width: 760px) {
       .frame { width: min(100% - 2rem, 1240px); }
