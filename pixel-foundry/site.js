@@ -79,7 +79,7 @@
       panels.forEach(panel => {
         panel.inert = false;
         panel.style.removeProperty('--overview-shift');
-        panel.style.removeProperty('--proof-shift');
+        panel.style.removeProperty('--scene-drift');
       });
     }
     modeButton.firstChild.textContent = horizontal ? 'Read vertically ' : 'Explore horizontally ';
@@ -118,7 +118,7 @@
         const offset = Math.max(-1, Math.min(1, index - position));
         const direction = index % 2 ? -1 : 1;
         panel.style.setProperty('--overview-shift', `${offset * 42 * direction}px`);
-        panel.style.setProperty('--proof-shift', `${offset * -26 * direction}px`);
+        panel.style.setProperty('--scene-drift', `${offset * -12 * direction}px`);
       });
       select(Math.round(position));
     } else {

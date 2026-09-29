@@ -97,3 +97,78 @@ h1,h2,h3,p,figure{margin:0}a{color:inherit;text-decoration:none}button,summary{f
 @media print{#agriculture .sector-overview,#defense .sector-overview{background:white;color:#222}#agriculture .sector-label,#agriculture .sector-overview>p{color:#444}}
 
 @media(min-width:1180px) and (max-height:850px){.is-horizontal .sector-evidence{padding-top:90px;padding-bottom:32px}.is-horizontal .sector-overview{padding-top:45px;padding-bottom:45px}}
+
+/* V21: landscapes carry the industry; evidence stays on its own reading surface. */
+.sector-panel{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);min-height:850px}
+.sector-panel.sector-reverse{grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr)}
+.sector-overview{padding:65px clamp(32px,4.4vw,84px)}
+.sector-overview h2{font-size:clamp(42px,4.2vw,72px);line-height:1.01}
+.sector-overview>p{font-size:17px;max-width:330px}
+.sector-evidence{display:flex;flex-direction:column;align-items:stretch;padding:0!important;overflow:hidden;background:#162b3d;min-height:0}
+.sector-photo{position:relative;inset:auto;z-index:auto;background:none;filter:none;flex:1;min-height:300px;overflow:hidden;isolation:isolate}
+.sector-photo img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:var(--scene-focus,50% 50%);filter:saturate(.64) contrast(1.08);transform:scale(1.035) translate3d(var(--scene-drift,0px),0,0);transform-origin:center;transition:filter .35s}
+.sector-photo::after{content:"";position:absolute;inset:65% 0 0;background:linear-gradient(transparent,rgba(12,26,35,.7));pointer-events:none}
+.sector-photo figcaption{position:absolute;bottom:22px;left:32px;right:32px;display:flex;justify-content:flex-end;gap:20px;z-index:1;font:9px/1.5 var(--mono);letter-spacing:.025em;color:#f2ecdf}
+.sector-photo figcaption span:last-child{opacity:.7}
+.sector-proof{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:28px;align-content:start;padding:28px 32px 22px;border-top:1px solid rgba(242,236,223,.15)}
+.sector-proof>*{grid-column:1;min-width:0}
+.sector-proof h3{font-size:clamp(26px,2.15vw,36px);line-height:1.08;margin-top:12px;letter-spacing:-.04em}
+.sector-proof>p:not(.outcome):not(.proof-context){font-size:13px;line-height:1.6;margin-top:14px;max-width:400px}
+.sector-proof .outcome{grid-column:2;grid-row:1/5;align-self:start;display:block;border:0;border-left:1px solid var(--line);padding:4px 0 0 24px;margin:0;max-width:165px}
+.outcome strong{display:block;font-size:clamp(45px,4.6vw,68px);font-weight:400;line-height:1.05}
+.outcome>span{display:block;font-size:11px;line-height:1.5;margin-top:12px;max-width:145px}
+.proof-context{font-size:10px;line-height:1.6;margin-top:12px}
+.case-details{grid-column:1/-1;max-width:none;margin-top:8px}
+.case-details summary{font-size:11px;min-height:40px;padding:9px 0}
+.details-body{max-width:560px;font-size:13px}
+.sector-label{margin-bottom:32px}
+.is-horizontal .sector-panel{min-height:0;overflow:hidden}
+.is-horizontal .sector-photo{min-height:200px}
+.is-horizontal .sector-proof{transform:none}
+@media(min-width:1180px) and (max-height:850px){
+ .is-horizontal .sector-overview{padding:35px}
+ .is-horizontal .sector-overview h2{font-size:clamp(39px,3.8vw,58px)}
+ .is-horizontal .sector-overview>p{font-size:15px;margin-top:24px}
+ .is-horizontal .sector-proof{padding:20px 26px 14px;column-gap:22px}
+ .is-horizontal .sector-proof h3{font-size:27px}
+ .is-horizontal .sector-proof>p:not(.outcome):not(.proof-context){font-size:12px;margin-top:11px}
+ .is-horizontal .outcome strong{font-size:48px}
+ .is-horizontal .outcome>span{font-size:10px}
+}
+@media(max-width:1179px){
+ .sector-panel,.sector-panel.sector-reverse{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);min-height:740px}
+ .sector-overview{padding:50px 32px}.sector-overview h2{font-size:42px}
+ .sector-photo{min-height:330px}.sector-proof{padding:26px;grid-template-columns:1fr}
+ .sector-proof .outcome{grid-column:1;grid-row:auto;display:flex;align-items:center;border-left:0;border-top:1px solid var(--line);padding:18px 0 0;margin-top:20px;max-width:none;gap:22px}
+ .outcome>span{margin-top:0;max-width:200px}.sector-proof h3{font-size:30px}
+}
+@media(max-width:760px){
+ .sector-panel,.sector-panel.sector-reverse{display:flex;min-height:0}
+ .sector-overview{padding:65px 24px 55px}.sector-overview h2{font-size:clamp(40px,10vw,62px)}
+ .sector-overview>p{max-width:340px}
+ .sector-evidence{min-height:0;display:block}
+ .sector-photo{aspect-ratio:4/3;min-height:0;width:100%}
+ .sector-photo img{transform:none;object-position:var(--scene-focus,50% 50%)}
+ .sector-photo figcaption{left:24px;right:24px;bottom:16px;font-size:8px}
+ .sector-proof{padding:28px 24px 34px;display:grid}
+ .sector-proof h3{font-size:31px;max-width:400px}
+ .sector-proof>p:not(.outcome):not(.proof-context){font-size:14px;max-width:400px}
+ .sector-proof .outcome{gap:24px}.outcome strong{font-size:49px}.outcome>span{font-size:11px}
+ .proof-context{font-size:11px}.case-details summary{min-height:44px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.sector-photo img{transform:none!important}}
+@media print{
+ .sector-photo{display:none!important}.sector-evidence{display:block;background:white}
+ .sector-proof{display:block;padding:10px 0}.sector-proof h3{font-size:24px}
+ .sector-proof .outcome{border:0;padding:0;display:flex;max-width:none;gap:15px}
+ .sector-proof .outcome strong{font-size:32px}.sector-proof .outcome>span{margin:0}
+ .sector-panel,.sector-panel.sector-reverse{min-height:0}.sector-overview{padding:10px 0}
+}
+
+/* The way to begin stays visible, as it does on a useful service page. */
+.engagement-process{margin-top:45px;border-top:1px solid rgba(32,52,72,.22)}
+.engagement-process>h3{font-size:13px;font-weight:400;margin:24px 0 26px;color:var(--ink-muted)}
+.engagement-process .engagement-steps h4{font-size:20px;font-weight:500;letter-spacing:-.025em;margin:0}
+.engagement-process .engagement-steps li{padding:25px 0 30px;gap:20px}
+.engagement-process .engagement-steps p{margin-top:11px;max-width:370px}
+@media(max-width:760px){.engagement-process{margin-top:35px}.engagement-process .engagement-steps h4{font-size:19px}}
