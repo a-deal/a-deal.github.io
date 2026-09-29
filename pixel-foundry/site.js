@@ -3,6 +3,7 @@
 (() => {
   const sectors = document.querySelector('.sectors');
   const stage = document.querySelector('.sector-stage');
+  const toolbar = document.querySelector('.sector-toolbar');
   const track = document.querySelector('.sector-track');
   const viewport = document.querySelector('.sector-viewport');
   const panels = [...document.querySelectorAll('.sector-panel')];
@@ -42,6 +43,7 @@
   }
 
   function measure() {
+    sectors.style.setProperty('--sector-toolbar-height', `${toolbar.offsetHeight}px`);
     geometry = {
       top:topOf(sectors),
       segment:innerHeight * 1.1,
@@ -133,7 +135,7 @@
 
   function visit(index, {focus = false, history = false} = {}) {
     if (index < 0 || index >= panels.length) return;
-    jump(horizontal ? geometry.top + index * geometry.segment : topOf(panels[index]));
+    jump(horizontal ? geometry.top + index * geometry.segment : topOf(panels[index]) - toolbar.offsetHeight);
     render();
     if (history && location.hash !== `#${panels[index].id}`) window.history.pushState(null, '', `#${panels[index].id}`);
     if (focus) panels[index].querySelector('h2').focus({preventScroll:true});
@@ -191,4 +193,32 @@
   configureReveals();
   configure();
   document.fonts.ready.then(() => { measure(); followHash(); });
+})();
+
+/* Progressive enhancement: a fictional reading, review and follow-up. */
+
+(() => {
+ document.querySelectorAll('[data-pfw]').forEach(root => {
+  const tabs=[...root.querySelectorAll('[data-pfw-tab]')];
+  const panels=[...root.querySelectorAll('[data-pfw-panel]')];
+  const select=(index,focus=false)=>{
+   tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;});
+   panels.forEach((panel,i)=>{panel.hidden=i!==index;});
+   if(focus)tabs[index].focus();
+  };
+  panels.forEach((panel,i)=>{panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',tabs[i].id);panel.tabIndex=0;});
+  tabs.forEach((tab,i)=>{
+   tab.addEventListener('click',()=>select(i));
+   tab.addEventListener('keydown',event=>{
+    let next=i;
+    if(event.key==='ArrowRight')next=(i+1)%tabs.length;
+    else if(event.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;
+    else if(event.key==='Home')next=0;
+    else if(event.key==='End')next=tabs.length-1;
+    else return;
+    event.preventDefault();select(next,true);
+   });
+  });
+  select(0);root.querySelector('.pfw-tabs').hidden=false;
+ });
 })();
